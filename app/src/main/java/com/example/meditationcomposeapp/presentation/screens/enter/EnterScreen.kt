@@ -30,7 +30,7 @@ fun EnterScreen(
 ) {
     Box {
         Image(
-            painter = painterResource(id = R.mipmap.background_login),
+            painter = painterResource(id = R.drawable.background_login),
             contentDescription = "Background image",
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize()
