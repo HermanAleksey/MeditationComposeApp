@@ -42,47 +42,10 @@ fun MyApp() {
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colors.background
         ) {
-            NavHost(navController = navController, startDestination = Screen.ENTER) {
-                composable(Screen.SPLASH) {
-                    SplashScreen()
-                }
-                composable(Screen.ENTER) {
-                    EnterScreen(
-                        viewModel = EnterScreenViewModel(),
-                        navController
-                    )
-                }
-                composable(Screen.LOGIN) {
-                    LoginScreen(
-                        viewModel = LoginScreenViewModel(),
-                        navController
-                    )
-                }
-                composable(Screen.REGISTRATION) {
-                    RegistrationScreen(
-                        viewModel = RegistrationScreenViewModel(),
-                        navController
-                    )
-                }
-                composable(Screen.RESTORE_PASSWORD) {
-                    RestorePasswordScreen(
-                        viewModel = RestorePasswordScreenViewModel(),
-                        navController
-                    )
-                }
-            }
+
         }
     }
 }
-
-object Screen {
-    const val SPLASH = "com.example.meditationcomposeapp.screens.SPLASH_SCREEN"
-    const val ENTER = "com.example.meditationcomposeapp.screens.ENTER_SCREEN"
-    const val LOGIN = "com.example.meditationcomposeapp.screens.LOGIN_SCREEN"
-    const val REGISTRATION = "com.example.meditationcomposeapp.screens.REGISTRATION_SCREEN"
-    const val RESTORE_PASSWORD = "com.example.meditationcomposeapp.screens.RESTORE_PASSWORD_SCREEN"
-}
-
 
 @Preview(showBackground = true)
 @Composable
