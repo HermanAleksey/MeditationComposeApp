@@ -1,4 +1,4 @@
-package com.example.meditationcomposeapp.view.login
+package com.example.meditationcomposeapp.presentation.screens.login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -24,20 +24,24 @@ import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.meditationcomposeapp.R
 import com.example.meditationcomposeapp.ui.theme.Alegreya
 import com.example.meditationcomposeapp.ui.theme.ColorBackground
 import com.example.meditationcomposeapp.ui.theme.ColorTextHint
 import com.example.meditationcomposeapp.ui.theme.MeditationComposeAppTheme
-import com.example.meditationcomposeapp.view.enter.composable.DontHaveAccountText
-import com.example.meditationcomposeapp.view.enter.composable.LoginMainButton
-import com.example.meditationcomposeapp.view.login.composable.LoginTextInputField
+import com.example.meditationcomposeapp.presentation.screens.enter.composable.DontHaveAccountText
+import com.example.meditationcomposeapp.presentation.screens.enter.composable.LoginMainButton
+import com.example.meditationcomposeapp.presentation.screens.login.composable.LoginTextInputField
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun LoginScreen(viewModel: LoginScreenViewModel) {
+fun LoginScreen(
+    viewModel: LoginScreenViewModel,
+    navController: NavController
+) {
     val focusManager = LocalFocusManager.current
-    val passwordFocusRequester =  FocusRequester()
+    val passwordFocusRequester = FocusRequester()
     Box(
         modifier = Modifier
             .background(color = ColorBackground)
@@ -120,7 +124,7 @@ fun LoginScreen(viewModel: LoginScreenViewModel) {
                     fontWeight = FontWeight.W400,
                     modifier = Modifier
                         .padding(top = 9.dp)
-                        .clickable { viewModel.onForgotPasswordClicked() }
+                        .clickable { viewModel.onForgotPasswordClicked(navController) }
                 )
             }
             LoginMainButton(
@@ -130,7 +134,7 @@ fun LoginScreen(viewModel: LoginScreenViewModel) {
                     .wrapContentHeight()
                     .padding(top = 28.dp)
             ) {
-                viewModel.onLoginClicked()
+                viewModel.onLoginClicked(navController)
             }
             Box(
                 modifier = Modifier
@@ -142,17 +146,17 @@ fun LoginScreen(viewModel: LoginScreenViewModel) {
                 DontHaveAccountText(modifier = Modifier
                     .padding(top = 18.dp)
                     .clickable {
-                        viewModel.onSignUpClicked()
+                        viewModel.onSignUpClicked(navController)
                     })
             }
         }
     }
 }
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    MeditationComposeAppTheme {
-        LoginScreen(LoginScreenViewModel())
-    }
-}
+//
+//@Preview(showBackground = true)
+//@Composable
+//fun DefaultPreview() {
+//    MeditationComposeAppTheme {
+//        LoginScreen(LoginScreenViewModel())
+//    }
+//}

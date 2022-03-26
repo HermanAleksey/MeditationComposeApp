@@ -1,4 +1,4 @@
-package com.example.meditationcomposeapp.view.login.composable
+package com.example.meditationcomposeapp.presentation.screens.login.composable
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding

@@ -1,7 +1,9 @@
-package com.example.meditationcomposeapp.view.login
+package com.example.meditationcomposeapp.presentation.screens.login
 
 import androidx.compose.runtime.*
 import androidx.lifecycle.ViewModel
+import androidx.navigation.NavController
+import com.example.meditationcomposeapp.presentation.Screen
 
 class LoginScreenViewModel : ViewModel() {
 
@@ -30,16 +32,17 @@ class LoginScreenViewModel : ViewModel() {
     }
 
 
-    fun onForgotPasswordClicked() {
-
+    fun onForgotPasswordClicked(navController: NavController) {
+        navController.navigate(Screen.RESTORE_PASSWORD)
     }
 
-    fun onLoginClicked() {
-
+    fun onLoginClicked(navController: NavController) {
+        //process input data , send request and etc.
+//        navController.navigate(Screen.LOGIN)
     }
 
-    fun onSignUpClicked() {
-
+    fun onSignUpClicked(navController: NavController) {
+        navController.navigate(Screen.REGISTRATION)
     }
 
 }

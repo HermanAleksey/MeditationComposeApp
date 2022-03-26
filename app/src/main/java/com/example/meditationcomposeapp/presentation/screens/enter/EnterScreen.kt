@@ -1,12 +1,8 @@
-package com.example.meditationcomposeapp.view.enter
+package com.example.meditationcomposeapp.presentation.screens.enter
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -15,23 +11,23 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.ParagraphStyle
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.*
+import androidx.navigation.NavController
 import com.example.meditationcomposeapp.R
 import com.example.meditationcomposeapp.ui.theme.Alegreya
 import com.example.meditationcomposeapp.ui.theme.MeditationComposeAppTheme
-import com.example.meditationcomposeapp.view.enter.composable.DontHaveAccountText
-import com.example.meditationcomposeapp.view.enter.composable.LoginMainButton
+import com.example.meditationcomposeapp.presentation.screens.enter.composable.DontHaveAccountText
+import com.example.meditationcomposeapp.presentation.screens.enter.composable.LoginMainButton
 
 @OptIn(ExperimentalUnitApi::class)
 @Composable
-fun EnterScreen(viewModel: EnterScreenViewModel) {
+fun EnterScreen(
+    viewModel: EnterScreenViewModel,
+    navController: NavController
+) {
     Box {
         Image(
             painter = painterResource(id = R.mipmap.background_login),
@@ -78,20 +74,12 @@ fun EnterScreen(viewModel: EnterScreenViewModel) {
                 modifier = Modifier
                     .fillMaxWidth(0.8F)
                     .wrapContentHeight()
-            ) { viewModel.onLoginButtonClicked() }
+            ) { viewModel.onLoginButtonClicked(navController) }
             DontHaveAccountText(modifier = Modifier
                 .padding(top = 18.dp)
                 .clickable {
-                    viewModel.onSignUpClicked()
+                    viewModel.onSignUpClicked(navController)
                 })
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    MeditationComposeAppTheme {
-        EnterScreen(EnterScreenViewModel())
     }
 }
