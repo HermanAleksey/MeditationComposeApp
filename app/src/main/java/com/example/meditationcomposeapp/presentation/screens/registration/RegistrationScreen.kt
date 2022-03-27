@@ -1,8 +1,6 @@
 package com.example.meditationcomposeapp.presentation.screens.registration
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Text
@@ -65,6 +63,7 @@ fun RegistrationScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(start = 35.dp, end = 34.dp)
+                .verticalScroll(rememberScrollState())
         ) {
             Image(
                 painter = painterResource(id = R.drawable.ic_logo_white),
@@ -139,6 +138,7 @@ fun RegistrationScreen(
                         viewModel.onSignInClicked(navController)
                     })
             }
+            Spacer(modifier = Modifier.padding(top = 80.dp))
         }
     }
 }

@@ -3,6 +3,8 @@ package com.example.meditationcomposeapp.presentation.screens.enter
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -37,7 +39,9 @@ fun EnterScreen(
         )
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
         ) {
             Column(
                 verticalArrangement = Arrangement.Bottom,
@@ -80,6 +84,7 @@ fun EnterScreen(
                 .clickable {
                     viewModel.onSignUpClicked(navController)
                 })
+            Spacer(modifier = Modifier.padding(top = 80.dp))
         }
     }
 }

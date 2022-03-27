@@ -1,8 +1,9 @@
 package com.example.meditationcomposeapp.presentation.screens.login
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.ScrollableState
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Text
@@ -67,6 +68,7 @@ fun LoginScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(start = 35.dp, end = 34.dp)
+                .verticalScroll(rememberScrollState())
         ) {
             Image(
                 painter = painterResource(id = R.drawable.ic_logo_white),
@@ -149,6 +151,7 @@ fun LoginScreen(
                         viewModel.onSignUpClicked(navController)
                     })
             }
+            Spacer(modifier = Modifier.padding(top = 80.dp))
         }
     }
 }
