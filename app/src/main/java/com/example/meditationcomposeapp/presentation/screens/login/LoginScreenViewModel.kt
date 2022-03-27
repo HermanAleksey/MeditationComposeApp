@@ -39,7 +39,6 @@ class LoginScreenViewModel : ViewModel() {
 
     fun onLoginClicked(navController: NavController) {
         //process input data , send request and etc.
-//        navController.navigate(Screen.LOGIN)
     }
 
     fun onSignUpClicked(navController: NavController) {
