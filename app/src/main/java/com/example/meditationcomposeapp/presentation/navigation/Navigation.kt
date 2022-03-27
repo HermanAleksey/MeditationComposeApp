@@ -13,7 +13,7 @@ import com.example.meditationcomposeapp.presentation.screens.splash.SplashScreen
 
 @Composable
 fun SetupNavGraph(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = Screen.Enter.route) {
+    NavHost(navController = navController, startDestination = Screen.RestorePassword.route) {
         composable(Screen.Splash.route) {
             SplashScreen(navController = navController)
         }
@@ -41,7 +41,6 @@ fun SetupNavGraph(navController: NavHostController) {
         composable(Screen.RestorePassword.route) {
             RestorePasswordScreen(
                 viewModel = viewModel(),
-                navController
             )
         }
     }

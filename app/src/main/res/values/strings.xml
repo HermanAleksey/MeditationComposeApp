@@ -13,4 +13,6 @@
     <string name="password">Password</string>
     <string name="name">Name</string>
     <string name="already_have_account">Already have an account?</string>
+    <string name="password_recovery">Password Recovery</string>
+    <string name="password_recovery_desc">An email with a code has been sent to you. Enter the code you received to recover your password.</string>
 </resources>
