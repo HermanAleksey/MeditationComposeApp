@@ -20,19 +20,22 @@ fun SetupNavGraph(navController: NavHostController) {
         composable(Screen.Enter.route) {
             EnterScreen(
                 viewModel = viewModel(),
-                navController
+                navigateToLoginScreen = { navController.navigate(Screen.Login.route) },
+                navigateToRegistrationScreen = { navController.navigate(Screen.Registration.route) }
             )
         }
         composable(Screen.Login.route) {
             LoginScreen(
                 viewModel = viewModel(),
-                navController
+                navigateToMainScreen = {},
+                navigateToRegistrationScreen = { navController.navigate(Screen.Registration.route) },
+                navigateToRestorePasswordScreen = { navController.navigate(Screen.RestorePassword.route) }
             )
         }
         composable(Screen.Registration.route) {
             RegistrationScreen(
                 viewModel = viewModel(),
-                navController
+                navigateToLoginScreen = { navController.navigate(Screen.Login.route) }
             )
         }
         composable(Screen.RestorePassword.route) {

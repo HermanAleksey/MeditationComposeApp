@@ -20,20 +20,17 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import com.example.meditationcomposeapp.R
-import com.example.meditationcomposeapp.presentation.screens.enter.composable.DontHaveAccountText
 import com.example.meditationcomposeapp.presentation.screens.enter.composable.LoginMainButton
 import com.example.meditationcomposeapp.presentation.screens.login.composable.LoginTextInputField
 import com.example.meditationcomposeapp.presentation.screens.registration.composable.AlreadyHaveAccountText
 import com.example.meditationcomposeapp.ui.theme.Alegreya
 import com.example.meditationcomposeapp.ui.theme.ColorBackground
-import com.example.meditationcomposeapp.ui.theme.ColorTextHint
 
 @Composable
 fun RegistrationScreen(
     viewModel: RegistrationScreenViewModel,
-    navController: NavController
+    navigateToLoginScreen: () -> Unit
 ) {
     val focusManager = LocalFocusManager.current
     val passwordFocusRequester = FocusRequester()
@@ -74,7 +71,7 @@ fun RegistrationScreen(
                     .height(40.dp)
             )
             Text(
-                text = stringResource(id = R.string.sign_in),
+                text = stringResource(id = R.string.sign_up),
                 color = Color.White,
                 fontSize = 30.sp,
                 fontFamily = Alegreya,
@@ -123,7 +120,7 @@ fun RegistrationScreen(
                     .wrapContentHeight()
                     .padding(top = 28.dp)
             ) {
-                viewModel.onSignUpClicked(navController)
+                viewModel.onSignUpClicked(navigateToLoginScreen)
             }
             Box(
                 modifier = Modifier
@@ -135,7 +132,7 @@ fun RegistrationScreen(
                 AlreadyHaveAccountText(modifier = Modifier
                     .padding(top = 18.dp)
                     .clickable {
-                        viewModel.onSignInClicked(navController)
+                        navigateToLoginScreen()
                     })
             }
             Spacer(modifier = Modifier.padding(top = 80.dp))

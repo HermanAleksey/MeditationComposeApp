@@ -37,7 +37,7 @@ class LoginScreenViewModel : ViewModel() {
         navController.navigate(Screen.RestorePassword.route)
     }
 
-    fun onLoginClicked(navController: NavController) {
+    fun onLoginClicked(navigateToMainScreen: () -> Unit) {
         //process input data , send request and etc.
     }
 

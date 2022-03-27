@@ -44,7 +44,7 @@ class RegistrationScreenViewModel : ViewModel() {
         setPassword(value)
     }
 
-    fun onSignUpClicked(navController: NavController) {
+    fun onSignUpClicked(navigateToLoginScreen: () -> Unit) {
         //registration logic
         // show screen with registration result?
     }

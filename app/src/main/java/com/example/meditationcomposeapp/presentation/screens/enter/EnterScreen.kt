@@ -28,7 +28,8 @@ import com.example.meditationcomposeapp.presentation.screens.enter.composable.Lo
 @Composable
 fun EnterScreen(
     viewModel: EnterScreenViewModel,
-    navController: NavController
+    navigateToLoginScreen: () -> Unit,
+    navigateToRegistrationScreen: () -> Unit,
 ) {
     Box {
         Image(
@@ -41,7 +42,6 @@ fun EnterScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxSize()
-                .verticalScroll(rememberScrollState())
         ) {
             Column(
                 verticalArrangement = Arrangement.Bottom,
@@ -78,13 +78,12 @@ fun EnterScreen(
                 modifier = Modifier
                     .fillMaxWidth(0.8F)
                     .wrapContentHeight()
-            ) { viewModel.onLoginButtonClicked(navController) }
+            ) { navigateToLoginScreen() }
             DontHaveAccountText(modifier = Modifier
                 .padding(top = 18.dp)
                 .clickable {
-                    viewModel.onSignUpClicked(navController)
+                    navigateToRegistrationScreen()
                 })
-            Spacer(modifier = Modifier.padding(top = 80.dp))
         }
     }
 }

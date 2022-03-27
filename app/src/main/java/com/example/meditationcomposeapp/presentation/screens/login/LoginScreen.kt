@@ -39,7 +39,9 @@ import com.example.meditationcomposeapp.presentation.screens.login.composable.Lo
 @Composable
 fun LoginScreen(
     viewModel: LoginScreenViewModel,
-    navController: NavController
+    navigateToRestorePasswordScreen: () -> Unit,
+    navigateToMainScreen: () -> Unit,
+    navigateToRegistrationScreen: () -> Unit,
 ) {
     val focusManager = LocalFocusManager.current
     val passwordFocusRequester = FocusRequester()
@@ -126,7 +128,7 @@ fun LoginScreen(
                     fontWeight = FontWeight.W400,
                     modifier = Modifier
                         .padding(top = 9.dp)
-                        .clickable { viewModel.onForgotPasswordClicked(navController) }
+                        .clickable { navigateToRestorePasswordScreen() }
                 )
             }
             LoginMainButton(
@@ -136,7 +138,7 @@ fun LoginScreen(
                     .wrapContentHeight()
                     .padding(top = 28.dp)
             ) {
-                viewModel.onLoginClicked(navController)
+                viewModel.onLoginClicked(navigateToMainScreen)
             }
             Box(
                 modifier = Modifier
@@ -148,7 +150,7 @@ fun LoginScreen(
                 DontHaveAccountText(modifier = Modifier
                     .padding(top = 18.dp)
                     .clickable {
-                        viewModel.onSignUpClicked(navController)
+                        navigateToRegistrationScreen()
                     })
             }
             Spacer(modifier = Modifier.padding(top = 80.dp))
