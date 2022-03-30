@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.meditationcomposeapp.R
 import com.example.meditationcomposeapp.presentation.screens.enter.composable.LoginMainButton
+import com.example.meditationcomposeapp.presentation.screens.login.composable.LoginFlowBackground
 import com.example.meditationcomposeapp.presentation.screens.login.composable.LoginTextInputField
 import com.example.meditationcomposeapp.presentation.screens.registration.composable.AlreadyHaveAccountText
 import com.example.meditationcomposeapp.ui.theme.Alegreya
@@ -35,26 +36,8 @@ fun RegistrationScreen(
     val focusManager = LocalFocusManager.current
     val passwordFocusRequester = FocusRequester()
     val emailFocusRequester = FocusRequester()
-    Box(
-        modifier = Modifier
-            .background(color = ColorBackground)
-            .fillMaxSize()
-    ) {
-        Box(
-            contentAlignment = Alignment.BottomCenter,
-            modifier = Modifier
-                .fillMaxSize()
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.background_login_leaves),
-                contentDescription = "Background image",
-                contentScale = ContentScale.FillWidth,
-                modifier = Modifier
-                    .fillMaxWidth(1.2f)
-                    .wrapContentHeight()
-            )
-        }
 
+    LoginFlowBackground {
         Column(
             horizontalAlignment = Alignment.Start,
             modifier = Modifier

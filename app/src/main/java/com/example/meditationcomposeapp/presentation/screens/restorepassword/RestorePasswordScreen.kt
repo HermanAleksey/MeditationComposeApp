@@ -21,6 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.meditationcomposeapp.R
+import com.example.meditationcomposeapp.presentation.screens.login.composable.LoginFlowBackground
 import com.example.meditationcomposeapp.presentation.screens.restorepassword.composable.CodePanel
 import com.example.meditationcomposeapp.ui.theme.Alegreya
 import com.example.meditationcomposeapp.ui.theme.ColorBackground
@@ -30,28 +31,7 @@ import com.example.meditationcomposeapp.ui.theme.MeditationComposeAppTheme
 fun RestorePasswordScreen(
     viewModel: RestorePasswordScreenViewModel
 ) {
-    val focusManager = LocalFocusManager.current
-    val passwordFocusRequester = FocusRequester()
-    Box(
-        modifier = Modifier
-            .background(color = ColorBackground)
-            .fillMaxSize()
-    ) {
-        Box(
-            contentAlignment = Alignment.BottomCenter,
-            modifier = Modifier
-                .fillMaxSize()
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.background_login_leaves),
-                contentDescription = "Background image",
-                contentScale = ContentScale.FillWidth,
-                modifier = Modifier
-                    .fillMaxWidth(1.2f)
-                    .wrapContentHeight()
-            )
-        }
-
+    LoginFlowBackground {
         Column(
             horizontalAlignment = Alignment.Start,
             modifier = Modifier
