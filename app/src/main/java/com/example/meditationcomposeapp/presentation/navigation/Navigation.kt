@@ -7,13 +7,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.meditationcomposeapp.presentation.screens.enter.EnterScreen
 import com.example.meditationcomposeapp.presentation.screens.login.LoginScreen
+import com.example.meditationcomposeapp.presentation.screens.newpassword.NewPasswordScreen
 import com.example.meditationcomposeapp.presentation.screens.registration.RegistrationScreen
 import com.example.meditationcomposeapp.presentation.screens.restorepassword.RestorePasswordScreen
 import com.example.meditationcomposeapp.presentation.screens.splash.SplashScreen
 
 @Composable
 fun SetupNavGraph(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = Screen.Login.route) {
+    NavHost(navController = navController, startDestination = Screen.NewPassword.route) {
         composable(Screen.Splash.route) {
             SplashScreen(navController = navController)
         }
@@ -41,18 +42,14 @@ fun SetupNavGraph(navController: NavHostController) {
         composable(Screen.RestorePassword.route) {
             RestorePasswordScreen(
                 viewModel = viewModel(),
+                navigateToNewPasswordScreen = { navController.navigate(Screen.NewPassword.route) }
+            )
+        }
+        composable(Screen.NewPassword.route) {
+            NewPasswordScreen(
+                viewModel = viewModel(),
+                navigateToLoginScreen = { navController.navigate(Screen.Login.route) }
             )
         }
     }
-//    NavHost(
-//        navController = navController,
-//        startDestination = Screen.Splash.route
-//    ) {
-//        composable(route = Screen.Splash.route) {
-//            AnimatedSplashScreen(navController = navController)
-//        }
-//        composable(route = Screen.Home.route) {
-//            Box(modifier = Modifier.fillMaxSize())
-//        }
-//    }
 }

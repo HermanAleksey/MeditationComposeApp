@@ -15,4 +15,8 @@
     <string name="already_have_account">Already have an account?</string>
     <string name="password_recovery">Password Recovery</string>
     <string name="password_recovery_desc">An email with a code has been sent to you. Enter the code you received to recover your password.</string>
+    <string name="new_password">New Password</string>
+    <string name="repeat_new_password">Repeat new Password</string>
+    <string name="confirm">Confirm</string>
+    <string name="new_password_desc">Enter a new password and repeat it. The password must contain letters in both cases and at least one number.</string>
 </resources>
