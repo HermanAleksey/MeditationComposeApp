@@ -5,6 +5,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.meditationcomposeapp.presentation.main_screen.MainScreen
 import com.example.meditationcomposeapp.presentation.screens.enter.EnterScreen
 import com.example.meditationcomposeapp.presentation.screens.login.LoginScreen
 import com.example.meditationcomposeapp.presentation.screens.newpassword.NewPasswordScreen
@@ -50,6 +51,11 @@ fun SetupNavGraph(navController: NavHostController) {
                 viewModel = viewModel(),
                 navigateToLoginScreen = { navController.navigate(Screen.Login.route) }
             )
+        }
+
+        //TODO separate navigation of modules into different graphs; add integration with bottom nav bar in main screen
+        composable(Screen.Main.route) {
+            MainScreen()
         }
     }
 }
