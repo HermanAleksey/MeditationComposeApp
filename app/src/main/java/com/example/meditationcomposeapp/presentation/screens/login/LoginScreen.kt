@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
@@ -40,10 +41,13 @@ import com.example.meditationcomposeapp.presentation.screens.login.composable.Lo
 @Composable
 fun LoginScreen(
     viewModel: LoginScreenViewModel,
+    setStatusBarColor: (Int) -> Unit,
     navigateToRestorePasswordScreen: () -> Unit,
     navigateToMainScreen: () -> Unit,
     navigateToRegistrationScreen: () -> Unit,
 ) {
+    setStatusBarColor(ColorBackground.toArgb())
+
     val focusManager = LocalFocusManager.current
     val passwordFocusRequester = FocusRequester()
 
@@ -141,10 +145,10 @@ fun LoginScreen(
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    MeditationComposeAppTheme {
-        LoginScreen(LoginScreenViewModel(),{},{},{})
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun DefaultPreview() {
+//    MeditationComposeAppTheme {
+//        LoginScreen(LoginScreenViewModel(),{},{},{})
+//    }
+//}

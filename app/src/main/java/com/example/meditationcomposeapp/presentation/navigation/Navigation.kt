@@ -14,42 +14,53 @@ import com.example.meditationcomposeapp.presentation.screens.restorepassword.Res
 import com.example.meditationcomposeapp.presentation.screens.splash.SplashScreen
 
 @Composable
-fun SetupNavGraph(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = Screen.Login.route) {
+fun SetupNavGraph(
+    setStatusBarColor: (Int) -> Unit,
+    navController: NavHostController
+) {
+
+    fun navigateTo(screen: Screen){
+        navController.navigate(screen.route)
+    }
+
+    NavHost(navController = navController, startDestination = Screen.Enter.route) {
         composable(Screen.Splash.route) {
-            SplashScreen(navController = navController)
+            SplashScreen()
         }
         composable(Screen.Enter.route) {
             EnterScreen(
                 viewModel = viewModel(),
-                navigateToLoginScreen = { navController.navigate(Screen.Login.route) },
-                navigateToRegistrationScreen = { navController.navigate(Screen.Registration.route) }
+                setStatusBarColor = setStatusBarColor,
+                navigateToLoginScreen = { navigateTo(Screen.Login) },
+                navigateToRegistrationScreen = { navigateTo(Screen.Registration) }
             )
         }
         composable(Screen.Login.route) {
             LoginScreen(
                 viewModel = viewModel(),
-                navigateToMainScreen = {navController.navigate(Screen.Main.route)},
-                navigateToRegistrationScreen = { navController.navigate(Screen.Registration.route) },
-                navigateToRestorePasswordScreen = { navController.navigate(Screen.RestorePassword.route) }
+                setStatusBarColor = setStatusBarColor,
+                navigateToMainScreen = { navigateTo(Screen.Main) },
+                navigateToRegistrationScreen = { navigateTo(Screen.Registration) },
+                navigateToRestorePasswordScreen = { navigateTo(Screen.RestorePassword) }
             )
         }
         composable(Screen.Registration.route) {
             RegistrationScreen(
                 viewModel = viewModel(),
-                navigateToLoginScreen = { navController.navigate(Screen.Login.route) }
+                setStatusBarColor = setStatusBarColor,
+                navigateToLoginScreen = { navigateTo(Screen.Login) }
             )
         }
         composable(Screen.RestorePassword.route) {
             RestorePasswordScreen(
                 viewModel = viewModel(),
-                navigateToNewPasswordScreen = { navController.navigate(Screen.NewPassword.route) }
+                navigateToNewPasswordScreen = { navigateTo(Screen.NewPassword) }
             )
         }
         composable(Screen.NewPassword.route) {
             NewPasswordScreen(
                 viewModel = viewModel(),
-                navigateToLoginScreen = { navController.navigate(Screen.Login.route) }
+                navigateToLoginScreen = { navigateTo(Screen.Login) }
             )
         }
 

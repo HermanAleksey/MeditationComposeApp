@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
@@ -31,8 +32,11 @@ import com.example.meditationcomposeapp.ui.theme.ColorBackground
 @Composable
 fun RegistrationScreen(
     viewModel: RegistrationScreenViewModel,
+    setStatusBarColor: (Int) -> Unit,
     navigateToLoginScreen: () -> Unit
 ) {
+    setStatusBarColor(ColorBackground.toArgb())
+
     val focusManager = LocalFocusManager.current
     val passwordFocusRequester = FocusRequester()
     val emailFocusRequester = FocusRequester()

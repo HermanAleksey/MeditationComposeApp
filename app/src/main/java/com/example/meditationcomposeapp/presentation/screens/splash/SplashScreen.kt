@@ -30,22 +30,22 @@ import com.example.meditationcomposeapp.ui.theme.Purple700
 import kotlinx.coroutines.delay
 
 @Composable
-fun SplashScreen(navController: NavHostController) {
-    var startAnimation by remember { mutableStateOf(false) }
-    val alphaAnim = animateFloatAsState(
-        targetValue = if (startAnimation) 1f else 0f,
-        animationSpec = tween(
-            durationMillis = 3000
-        )
-    )
-
-    LaunchedEffect(key1 = true) {
-        startAnimation = true
-        delay(4000)
-        navController.popBackStack()
-        navController.navigate(Screen.Enter.route)
-    }
-    Splash(alpha = alphaAnim.value)
+fun SplashScreen(/*navController: NavHostController*/) {
+//    var startAnimation by remember { mutableStateOf(false) }
+//    val alphaAnim = animateFloatAsState(
+//        targetValue = if (startAnimation) 1f else 0f,
+//        animationSpec = tween(
+//            durationMillis = 3000
+//        )
+//    )
+//
+//    LaunchedEffect(key1 = true) {
+//        startAnimation = true
+//        delay(4000)
+//        navController.popBackStack()
+//        navController.navigate(Screen.Enter.route)
+//    }
+//    Splash(alpha = alphaAnim.value)
 }
 
 //@Composable

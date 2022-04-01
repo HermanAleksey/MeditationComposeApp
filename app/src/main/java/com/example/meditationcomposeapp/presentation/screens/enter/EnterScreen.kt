@@ -5,11 +5,15 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Colors
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -23,14 +27,19 @@ import com.example.meditationcomposeapp.ui.theme.Alegreya
 import com.example.meditationcomposeapp.ui.theme.MeditationComposeAppTheme
 import com.example.meditationcomposeapp.presentation.screens.enter.composable.DontHaveAccountText
 import com.example.meditationcomposeapp.presentation.screens.enter.composable.LoginMainButton
+import com.example.meditationcomposeapp.ui.theme.ColorBackground
+import com.example.meditationcomposeapp.ui.theme.ColorBrightToolBar
 
 @OptIn(ExperimentalUnitApi::class)
 @Composable
 fun EnterScreen(
     viewModel: EnterScreenViewModel,
+    setStatusBarColor: (Int) -> Unit,
     navigateToLoginScreen: () -> Unit,
     navigateToRegistrationScreen: () -> Unit,
 ) {
+    setStatusBarColor(ColorBrightToolBar.toArgb())
+
     Box {
         Image(
             painter = painterResource(id = R.drawable.background_login),

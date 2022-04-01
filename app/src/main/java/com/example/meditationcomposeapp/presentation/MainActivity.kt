@@ -3,13 +3,18 @@ package com.example.meditationcomposeapp.presentation
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.Window
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.NavHost
@@ -26,6 +31,7 @@ import com.example.meditationcomposeapp.presentation.screens.registration.Regist
 import com.example.meditationcomposeapp.presentation.screens.restorepassword.RestorePasswordScreen
 import com.example.meditationcomposeapp.presentation.screens.restorepassword.RestorePasswordScreenViewModel
 import com.example.meditationcomposeapp.presentation.screens.splash.SplashScreen
+import com.example.meditationcomposeapp.ui.theme.ColorBackground
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,22 +39,29 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            MyApp()
+            MyApp(window)
         }
     }
 }
 
 @Composable
-fun MyApp() {
+fun MyApp(windows: Window) {
     val navController = rememberNavController()
+    var statusBarColor = ColorBackground.toArgb()
+
+    fun setStatusBarColor(color: Int){
+        windows.statusBarColor = color
+    }
 
     MeditationComposeAppTheme {
+        windows.statusBarColor = statusBarColor
+        windows.navigationBarColor = ColorBackground.toArgb()
         // A surface container using the 'background' color from the theme
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colors.background
         ) {
-            SetupNavGraph(navController = navController)
+            SetupNavGraph(::setStatusBarColor, navController)
         }
     }
 }
