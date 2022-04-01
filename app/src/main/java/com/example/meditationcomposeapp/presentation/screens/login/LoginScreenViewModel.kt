@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import com.example.meditationcomposeapp.presentation.navigation.Screen
 
-class LoginScreenViewModel : ViewModel() {
+class LoginScreenViewModel constructor() : ViewModel() {
 
     private var _email = mutableStateOf("")
 
@@ -38,11 +38,35 @@ class LoginScreenViewModel : ViewModel() {
     }
 
     fun onLoginClicked(navigateToMainScreen: () -> Unit) {
-        //process input data , send request and etc.
+        val email = _email.value
+        val password = _password.value
+
+        //todo replace with real logic
+        if (isValidLogin(email) || isValidPassword(password)) {
+            //        loginUseCase(email, password)
+            // on success
+            navigateToMainScreen()
+            //on error show pop-up
+        }
+
     }
 
-    fun onSignUpClicked(navController: NavController) {
-        navController.navigate(Screen.Registration.route)
+    fun onSignUpClicked(navigateToRegistrationScreen: () -> Unit) {
+        navigateToRegistrationScreen()
     }
 
+    private fun isValidLogin(login: String): Boolean {
+        val regexp = Regex(LOGIN_REGEX)
+        return regexp.matches(login)
+    }
+
+    private fun isValidPassword(password: String): Boolean {
+        val regexp = Regex(PASSWORD_REGEX)
+        return password.matches(regexp)
+    }
+
+    companion object {
+        private const val LOGIN_REGEX = """[a-zA-Z0-9._%+-]+@[a-zA-Z0-9-]+.+.[a-zA-Z]{2,4}"""
+        private const val PASSWORD_REGEX = """^(?=.*[A-Z].*[A-Z])(?=.*[!@#${'$'}&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8,}${'$'}"""
+    }
 }
