@@ -3,11 +3,15 @@ package com.example.meditationcomposeapp.presentation.screens.login
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import androidx.navigation.NavController
-import com.example.meditationcomposeapp.model.utils.Validator
-import com.example.meditationcomposeapp.presentation.navigation.Screen
+import com.example.meditationcomposeapp.model.utils.FieldType
+import com.example.meditationcomposeapp.model.utils.FieldValidator
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class LoginScreenViewModel constructor() : ViewModel() {
+@HiltViewModel
+class LoginScreenViewModel @Inject constructor(
+    private val fieldValidator: FieldValidator
+) : ViewModel() {
 
     private var _email = mutableStateOf("")
 
@@ -34,7 +38,7 @@ class LoginScreenViewModel constructor() : ViewModel() {
     }
 
 
-    fun onForgotPasswordClicked(navigateToRestorePasswordScreen: ()->Unit) {
+    fun onForgotPasswordClicked(navigateToRestorePasswordScreen: () -> Unit) {
         navigateToRestorePasswordScreen()
     }
 
@@ -43,8 +47,8 @@ class LoginScreenViewModel constructor() : ViewModel() {
         val password = _password.value
 
         //todo replace with real logic
-        if (Validator().validate(Validator.FieldType.Login, email)
-            || Validator().validate(Validator.FieldType.Password, password)
+        if (fieldValidator.validate(FieldType.Login, email)
+            || fieldValidator.validate(FieldType.Password, password)
         ) {
             //        loginUseCase(email, password)
             // on success
