@@ -4,6 +4,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
+import com.example.meditationcomposeapp.model.utils.Validator
 import com.example.meditationcomposeapp.presentation.navigation.Screen
 
 class LoginScreenViewModel constructor() : ViewModel() {
@@ -33,8 +34,8 @@ class LoginScreenViewModel constructor() : ViewModel() {
     }
 
 
-    fun onForgotPasswordClicked(navController: NavController) {
-        navController.navigate(Screen.RestorePassword.route)
+    fun onForgotPasswordClicked(navigateToRestorePasswordScreen: ()->Unit) {
+        navigateToRestorePasswordScreen()
     }
 
     fun onLoginClicked(navigateToMainScreen: () -> Unit) {
@@ -42,7 +43,9 @@ class LoginScreenViewModel constructor() : ViewModel() {
         val password = _password.value
 
         //todo replace with real logic
-        if (isValidLogin(email) || isValidPassword(password)) {
+        if (Validator().validate(Validator.FieldType.Login, email)
+            || Validator().validate(Validator.FieldType.Password, password)
+        ) {
             //        loginUseCase(email, password)
             // on success
             navigateToMainScreen()
@@ -53,20 +56,5 @@ class LoginScreenViewModel constructor() : ViewModel() {
 
     fun onSignUpClicked(navigateToRegistrationScreen: () -> Unit) {
         navigateToRegistrationScreen()
-    }
-
-    private fun isValidLogin(login: String): Boolean {
-        val regexp = Regex(LOGIN_REGEX)
-        return regexp.matches(login)
-    }
-
-    private fun isValidPassword(password: String): Boolean {
-        val regexp = Regex(PASSWORD_REGEX)
-        return password.matches(regexp)
-    }
-
-    companion object {
-        private const val LOGIN_REGEX = """[a-zA-Z0-9._%+-]+@[a-zA-Z0-9-]+.+.[a-zA-Z]{2,4}"""
-        private const val PASSWORD_REGEX = """^(?=.*[A-Z].*[A-Z])(?=.*[!@#${'$'}&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8,}${'$'}"""
     }
 }

@@ -115,7 +115,7 @@ fun LoginScreen(
                     fontWeight = FontWeight.W400,
                     modifier = Modifier
                         .padding(top = 9.dp)
-                        .clickable { navigateToRestorePasswordScreen() }
+                        .clickable { viewModel.onForgotPasswordClicked(navigateToRestorePasswordScreen) }
                 )
             }
             LoginMainButton(

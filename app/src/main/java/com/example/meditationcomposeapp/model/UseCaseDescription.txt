@@ -1,0 +1,23 @@
+For login flow:
+    1) request to log in user
+    Contains login and password,
+        return token if user logged in successfully
+        return ??? on error
+
+    2) request to restore password
+    Contains token
+        return true on success
+        return false on error
+
+    3) request to verify code from mail
+    Contains code and token
+        return UserProfile on success
+        return ??? on error
+
+    4) request to set new password
+    Contains new password and token
+        return success info
+
+    5) request registration new user
+    Contains Name, Login and Password
+        return success info
