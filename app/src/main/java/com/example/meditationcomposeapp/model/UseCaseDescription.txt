@@ -1,18 +1,16 @@
 For login flow:
     1) request to log in user
     Contains login and password,
-        return token if user logged in successfully
-        return ??? on error
+        return UserProfile
 
     2) request to restore password
-    Contains token
+    Contains login
         return true on success
         return false on error
 
     3) request to verify code from mail
-    Contains code and token
-        return UserProfile on success
-        return ??? on error
+    Contains code and login
+        return token
 
     4) request to set new password
     Contains new password and token
@@ -21,3 +19,7 @@ For login flow:
     5) request registration new user
     Contains Name, Login and Password
         return success info
+
+
+error 401 should be returned when performed action requires user to be logged in
+but request was made with invalid credentials: login/pass/token
