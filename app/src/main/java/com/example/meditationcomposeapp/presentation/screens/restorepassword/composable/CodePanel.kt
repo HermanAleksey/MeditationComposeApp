@@ -16,7 +16,8 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun CodePanel(
     code: Array<State<Int>>,
-    setDigit: (Int, Int) -> Unit
+    setDigit: (Int, Int) -> Unit,
+    onLastDigitFilled: () -> Unit
 ) {
     val focusManager = LocalFocusManager.current
     val firstDigitFocusRequester = FocusRequester()
@@ -75,7 +76,8 @@ fun CodePanel(
             focusManager = focusManager,
             focusRequester = fivesDigitFocusRequester,
             nextFocusRequester = null,
-            previousFocusRequester = fourthDigitFocusRequester
+            previousFocusRequester = fourthDigitFocusRequester,
+            onLastDigitFilled = onLastDigitFilled
         )
     }
 }

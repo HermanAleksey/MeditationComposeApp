@@ -35,6 +35,10 @@ class RestorePasswordScreenViewModel : ViewModel() {
         _codeNumbers[index].value = value
     }
 
+    fun onLastDigitFilled(navigateToNewPasswordScreen: () -> Unit) {
+        navigateToNewPasswordScreen()
+    }
+
     companion object {
         const val EMPTY_NUMBER = -1
     }

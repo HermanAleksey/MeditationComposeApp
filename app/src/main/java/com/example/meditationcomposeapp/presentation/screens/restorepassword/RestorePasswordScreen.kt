@@ -32,6 +32,15 @@ fun RestorePasswordScreen(
     viewModel: RestorePasswordScreenViewModel,
     navigateToNewPasswordScreen: () -> Unit
 ) {
+    /**
+     * Use to transmit navigation method and
+     * also serve as callback for event when
+     * last digit on CodePanel was filled
+     * */
+    fun onLastDigitFilled(){
+        viewModel.onLastDigitFilled(navigateToNewPasswordScreen)
+    }
+
     LoginFlowBackground {
         Column(
             horizontalAlignment = Alignment.Start,
@@ -66,9 +75,10 @@ fun RestorePasswordScreen(
                     .padding(top = 4.dp)
                     .alpha(0.7F)
             )
-            CodePanel(viewModel.getCode(), viewModel::setDigit)
+            CodePanel(viewModel.getCode(), viewModel::setDigit, ::onLastDigitFilled)
             Spacer(modifier = Modifier.padding(top = 80.dp))
         }
+
     }
 }
 
@@ -76,6 +86,6 @@ fun RestorePasswordScreen(
 @Composable
 fun DefaultPreview() {
     MeditationComposeAppTheme {
-        RestorePasswordScreen(viewModel = RestorePasswordScreenViewModel(),{})
+        RestorePasswordScreen(viewModel = RestorePasswordScreenViewModel()) {}
     }
 }
