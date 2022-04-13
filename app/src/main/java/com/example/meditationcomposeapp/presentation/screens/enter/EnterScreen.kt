@@ -87,11 +87,13 @@ fun EnterScreen(
                 modifier = Modifier
                     .fillMaxWidth(0.8F)
                     .wrapContentHeight()
-            ) { navigateToLoginScreen() }
+            ) {
+                viewModel.onEnterClick(navigateToLoginScreen)
+            }
             DontHaveAccountText(modifier = Modifier
                 .padding(top = 18.dp)
                 .clickable {
-                    navigateToRegistrationScreen()
+                    viewModel.onDontHaveAccountClick(navigateToRegistrationScreen)
                 })
         }
     }

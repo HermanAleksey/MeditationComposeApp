@@ -49,7 +49,7 @@ class RegistrationScreenViewModel : ViewModel() {
         // show screen with registration result?
     }
 
-    fun onSignInClicked(navController: NavController) {
-        navController.navigate(Screen.Login.route)
+    fun onSignInClicked(navigateToLoginScreen: () -> Unit) {
+        navigateToLoginScreen()
     }
 }

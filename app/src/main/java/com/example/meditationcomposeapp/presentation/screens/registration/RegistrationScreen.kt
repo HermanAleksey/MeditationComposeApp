@@ -119,7 +119,7 @@ fun RegistrationScreen(
                 AlreadyHaveAccountText(modifier = Modifier
                     .padding(top = 18.dp)
                     .clickable {
-                        navigateToLoginScreen()
+                        viewModel.onSignInClicked(navigateToLoginScreen)
                     })
             }
             Spacer(modifier = Modifier.padding(top = 80.dp))
