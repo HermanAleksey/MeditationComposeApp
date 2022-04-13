@@ -1,11 +1,11 @@
 package com.example.meditationcomposeapp.presentation.screens.login
 
-import androidx.compose.foundation.*
-import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.gestures.ScrollableState
-import androidx.compose.foundation.gestures.scrollable
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -23,19 +23,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toUpperCase
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import com.example.meditationcomposeapp.R
-import com.example.meditationcomposeapp.ui.theme.Alegreya
-import com.example.meditationcomposeapp.ui.theme.ColorBackground
-import com.example.meditationcomposeapp.ui.theme.ColorTextHint
-import com.example.meditationcomposeapp.ui.theme.MeditationComposeAppTheme
 import com.example.meditationcomposeapp.presentation.screens.enter.composable.DontHaveAccountText
 import com.example.meditationcomposeapp.presentation.screens.enter.composable.LoginMainButton
 import com.example.meditationcomposeapp.presentation.screens.login.composable.LoginFlowBackground
 import com.example.meditationcomposeapp.presentation.screens.login.composable.LoginTextInputField
+import com.example.meditationcomposeapp.ui.theme.Alegreya
+import com.example.meditationcomposeapp.ui.theme.ColorBackground
+import com.example.meditationcomposeapp.ui.theme.ColorTextHint
+
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -115,7 +113,11 @@ fun LoginScreen(
                     fontWeight = FontWeight.W400,
                     modifier = Modifier
                         .padding(top = 9.dp)
-                        .clickable { viewModel.onForgotPasswordClicked(navigateToRestorePasswordScreen) }
+                        .clickable {
+                            viewModel.onForgotPasswordClicked(
+                                navigateToRestorePasswordScreen
+                            )
+                        }
                 )
             }
             LoginMainButton(
