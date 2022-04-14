@@ -1,6 +1,7 @@
 package com.example.meditationcomposeapp.di
 
 import com.example.meditationcomposeapp.BuildConfig
+import com.example.meditationcomposeapp.data_source.network.AuthenticationApi
 import com.example.meditationcomposeapp.data_source.utils.LoggingInterceptor
 import dagger.Module
 import dagger.Provides
@@ -15,6 +16,11 @@ import java.util.concurrent.TimeUnit
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
+
+    @Provides
+    fun provideAuthenticationApi(
+        retrofit: Retrofit
+    ): AuthenticationApi = retrofit.create(AuthenticationApi::class.java)
 
     @Provides
     fun provideRetrofit(
