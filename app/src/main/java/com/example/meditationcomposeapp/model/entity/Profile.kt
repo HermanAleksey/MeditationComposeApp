@@ -4,7 +4,7 @@ import java.util.*
 
 data class Profile(
     val userName: String,
-    val photo: Int,
+    val photo: String,
     val placeOfResidence: String,
     val sleepStatistic: List<SleepDetails>
 ){

@@ -1,7 +1,7 @@
 package com.example.meditationcomposeapp.data_source.network
 
-import com.example.meditationcomposeapp.model.network.RegistrationRequest
-import com.example.meditationcomposeapp.model.network.UpdatePasswordRequest
+import com.example.meditationcomposeapp.data_source.entity.RegistrationRequest
+import com.example.meditationcomposeapp.data_source.entity.UpdatePasswordRequest
 import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.GET
