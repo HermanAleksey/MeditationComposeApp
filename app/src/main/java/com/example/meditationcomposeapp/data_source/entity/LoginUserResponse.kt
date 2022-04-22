@@ -1,6 +1,5 @@
 package com.example.meditationcomposeapp.data_source.entity
 
-import com.example.meditationcomposeapp.model.entity.Profile
 import com.google.gson.annotations.SerializedName
 import java.util.*
 
@@ -16,7 +15,7 @@ data class LoginUserResponse(
 ) {
     data class SleepDetailsResponse(
         @SerializedName("date")
-        val date: Date,
+        val date: String,
         @SerializedName("sleep_time")
         val sleepTime: Int,
         @SerializedName("deep")

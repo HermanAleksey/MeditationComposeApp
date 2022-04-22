@@ -1,5 +1,6 @@
 package com.example.meditationcomposeapp.model.entity
 
+import java.time.LocalDate
 import java.util.*
 
 data class Profile(
@@ -7,9 +8,9 @@ data class Profile(
     val photo: String,
     val placeOfResidence: String,
     val sleepStatistic: List<SleepDetails>
-){
+) {
     data class SleepDetails(
-        val date: Date,
+        val date: LocalDate,
         val sleepTime: Int,
         val deepSleepTime: Int,
         val fastSleepTime: Int,

@@ -1,7 +1,8 @@
 package com.example.meditationcomposeapp.data_source.network
 
+import com.example.meditationcomposeapp.data_source.entity.LoginUserResponse
 import com.example.meditationcomposeapp.data_source.entity.RegistrationRequest
-import com.example.meditationcomposeapp.data_source.entity.UpdatePasswordRequest
+import com.example.meditationcomposeapp.model.entity.SuccessInfo
 import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.GET
@@ -13,26 +14,27 @@ interface AuthenticationApi {
     fun login(
         @Field("login") login: String,
         @Field("password") password: String
-    ): Unit
+    ): LoginUserResponse
 
     @POST("user/registration")
     fun registration(
         @Body registrationRequest: RegistrationRequest
-    ): Unit
+    ): SuccessInfo
 
     @GET("user/request_password_restore")
     fun requestPasswordRestore(
         @Field("login") login: String
-    )
+    ): SuccessInfo
 
     @GET("user/verify_code")
     fun verifyCode(
-        @Field("first_name") login: String, code: String
-    ): Unit
+        @Field("first_name") login: String,
+        @Field("code") code: String
+    ): SuccessInfo
 
     @POST("user/reset_password")
     fun setNewPassword(
-        @Field("token") token: String,
-        @Body updatePasswordRequest: UpdatePasswordRequest
-    )
+        @Field("login") login: String,
+        @Body newPassword: String
+    ): SuccessInfo
 }

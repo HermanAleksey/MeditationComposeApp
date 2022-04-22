@@ -1,8 +1,9 @@
 package com.example.meditationcomposeapp.data_source.repository.authentication
 
 import com.example.meditationcomposeapp.data_source.entity.LoginUserResponse
-import com.example.meditationcomposeapp.data_source.entity.SuccessInfo
+import com.example.meditationcomposeapp.model.entity.SuccessInfo
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
+import com.example.meditationcomposeapp.model.entity.Profile
 import kotlinx.coroutines.flow.Flow
 
 interface AuthenticationRepository {
@@ -12,7 +13,7 @@ interface AuthenticationRepository {
      * @return [LoginUserResponse] of logged user if success
      * @return error message if signing in was failed
      * */
-    fun login(login: String, password: String): Flow<NetworkResponse<LoginUserResponse>>
+    fun login(login: String, password: String): Flow<NetworkResponse<Profile>>
 
     /**
      * @param [name] the name of user

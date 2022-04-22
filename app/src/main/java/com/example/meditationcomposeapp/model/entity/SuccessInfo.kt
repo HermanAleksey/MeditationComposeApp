@@ -1,4 +1,4 @@
-package com.example.meditationcomposeapp.data_source.entity
+package com.example.meditationcomposeapp.model.entity
 
 import com.google.gson.annotations.SerializedName
 
