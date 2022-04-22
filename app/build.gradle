@@ -73,6 +73,7 @@ dependencies {
     implementation 'androidx.core:core-splashscreen:1.0.0-beta02'
 
     //hilt
+    implementation "androidx.hilt:hilt-navigation-compose:$hilt_navigation_version"
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
 

@@ -1,6 +1,7 @@
 package com.example.meditationcomposeapp.presentation.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -29,7 +30,7 @@ fun SetupNavGraph(
         }
         composable(Screen.Enter.route) {
             EnterScreen(
-                viewModel = viewModel(),
+                viewModel = hiltViewModel(),
                 setStatusBarColor = setStatusBarColor,
                 navigateToLoginScreen = { navigateTo(Screen.Login) },
                 navigateToRegistrationScreen = { navigateTo(Screen.Registration) }
@@ -37,7 +38,7 @@ fun SetupNavGraph(
         }
         composable(Screen.Login.route) {
             LoginScreen(
-                viewModel = viewModel(),
+                viewModel = hiltViewModel(),
                 setStatusBarColor = setStatusBarColor,
                 navigateToMainScreen = { navigateTo(Screen.Main) },
                 navigateToRegistrationScreen = { navigateTo(Screen.Registration) },
@@ -46,20 +47,20 @@ fun SetupNavGraph(
         }
         composable(Screen.Registration.route) {
             RegistrationScreen(
-                viewModel = viewModel(),
+                viewModel = hiltViewModel(),
                 setStatusBarColor = setStatusBarColor,
                 navigateToLoginScreen = { navigateTo(Screen.Login) }
             )
         }
         composable(Screen.RestorePassword.route) {
             RestorePasswordScreen(
-                viewModel = viewModel(),
+                viewModel = hiltViewModel(),
                 navigateToNewPasswordScreen = { navigateTo(Screen.NewPassword) }
             )
         }
         composable(Screen.NewPassword.route) {
             NewPasswordScreen(
-                viewModel = viewModel(),
+                viewModel = hiltViewModel(),
                 navigateToLoginScreen = { navigateTo(Screen.Login) }
             )
         }

@@ -23,8 +23,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toUpperCase
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.meditationcomposeapp.R
 import com.example.meditationcomposeapp.presentation.screens.enter.composable.DontHaveAccountText
 import com.example.meditationcomposeapp.presentation.screens.enter.composable.LoginMainButton
@@ -33,6 +35,7 @@ import com.example.meditationcomposeapp.presentation.screens.login.composable.Lo
 import com.example.meditationcomposeapp.ui.theme.Alegreya
 import com.example.meditationcomposeapp.ui.theme.ColorBackground
 import com.example.meditationcomposeapp.ui.theme.ColorTextHint
+import com.example.meditationcomposeapp.ui.theme.MeditationComposeAppTheme
 
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -147,10 +150,15 @@ fun LoginScreen(
     }
 }
 
-//@Preview(showBackground = true)
-//@Composable
-//fun DefaultPreview() {
-//    MeditationComposeAppTheme {
-//        LoginScreen(LoginScreenViewModel(),{},{},{})
-//    }
-//}
+@Preview(showBackground = true)
+@Composable
+fun DefaultPreview() {
+    MeditationComposeAppTheme {
+        LoginScreen(
+            viewModel = viewModel(),
+            setStatusBarColor = {},
+            navigateToRestorePasswordScreen = { },
+            navigateToMainScreen = { },
+            navigateToRegistrationScreen = {})
+    }
+}

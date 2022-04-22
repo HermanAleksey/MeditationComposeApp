@@ -32,7 +32,9 @@ import com.example.meditationcomposeapp.presentation.screens.restorepassword.Res
 import com.example.meditationcomposeapp.presentation.screens.restorepassword.RestorePasswordScreenViewModel
 import com.example.meditationcomposeapp.presentation.screens.splash.SplashScreen
 import com.example.meditationcomposeapp.ui.theme.ColorBackground
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
@@ -47,7 +49,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MyApp(windows: Window) {
     val navController = rememberNavController()
-    var statusBarColor = ColorBackground.toArgb()
+    val statusBarColor = ColorBackground.toArgb()
 
     fun setStatusBarColor(color: Int){
         windows.statusBarColor = color
