@@ -3,6 +3,7 @@ package com.example.meditationcomposeapp.presentation.screens.login
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import com.example.meditationcomposeapp.model.usecase.authentication.LoginUseCase
 import com.example.meditationcomposeapp.model.utils.FieldType
 import com.example.meditationcomposeapp.model.utils.FieldValidator
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -10,6 +11,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginScreenViewModel @Inject constructor(
+    private val loginUseCase: LoginUseCase,
     private val fieldValidator: FieldValidator
 ) : ViewModel() {
 
