@@ -48,7 +48,7 @@ class AuthenticationRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun registrate(
+    override fun register(
         name: String,
         login: String,
         password: String

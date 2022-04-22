@@ -21,7 +21,7 @@ interface AuthenticationRepository {
      * @param [password] the password of account
      * @return returns the [SuccessInfo] value of success or failure
      * */
-    fun registrate(name: String, login: String, password: String): Flow<NetworkResponse<SuccessInfo>>
+    fun register(name: String, login: String, password: String): Flow<NetworkResponse<SuccessInfo>>
 
     /**
      * @param [login] the value of the account whose password you want to recover
