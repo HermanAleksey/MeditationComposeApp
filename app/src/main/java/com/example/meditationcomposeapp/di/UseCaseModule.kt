@@ -1,6 +1,7 @@
 package com.example.meditationcomposeapp.di
 
 import com.example.meditationcomposeapp.model.usecase.authentication.*
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -10,27 +11,27 @@ import dagger.hilt.components.SingletonComponent
 @InstallIn(SingletonComponent::class)
 abstract class UseCaseModule {
 
-    @Provides
+    @Binds
     abstract fun provideLoginUseCase(
         implementation: LoginUseCaseImpl
     ): LoginUseCase
 
-    @Provides
+    @Binds
     abstract fun provideRegisterUseCase(
         implementation: RegisterUseCaseImpl
     ): RegisterUseCase
 
-    @Provides
+    @Binds
     abstract fun provideVerifyCodeUseCase(
         implementation: VerifyCodeUseCaseImpl
     ): VerifyCodeUseCase
 
-    @Provides
+    @Binds
     abstract fun provideRequestPasswordRestorationUseCase(
         implementation: RequestPasswordRestorationUseCaseImpl
     ): RequestPasswordRestorationUseCase
 
-    @Provides
+    @Binds
     abstract fun provideSetNewPasswordUseCase(
         implementation: SetNewPasswordUseCaseImpl
     ): SetNewPasswordUseCase
