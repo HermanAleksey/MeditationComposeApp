@@ -23,6 +23,7 @@ class AuthenticationRepositoryImpl @Inject constructor(
         return flow {
             emit(NetworkResponse.Loading(true))
             try {
+                kotlinx.coroutines.delay(4000)
                 //todo FIX: mock getting data from web
 //               val response = authApi.login(login, password)
                 if (login != "login" && password != "password") {
