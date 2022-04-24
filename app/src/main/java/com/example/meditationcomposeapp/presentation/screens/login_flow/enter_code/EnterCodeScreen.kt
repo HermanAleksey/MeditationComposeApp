@@ -17,6 +17,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.meditationcomposeapp.R
 import com.example.meditationcomposeapp.presentation.screens.login_flow.login.composable.LoginFlowBackground
 import com.example.meditationcomposeapp.presentation.screens.login_flow.enter_code.composable.CodePanel
@@ -33,7 +34,7 @@ fun EnterCodeScreen(
      * also serve as callback for event when
      * last digit on CodePanel was filled
      * */
-    fun onLastDigitFilled(){
+    fun onLastDigitFilled() {
         viewModel.onLastDigitFilled(navigateToNewPasswordScreen)
     }
 
@@ -84,6 +85,6 @@ fun EnterCodeScreen(
 @Composable
 fun DefaultPreview() {
     MeditationComposeAppTheme {
-        EnterCodeScreen(viewModel = EnterCodeScreenViewModel()) {}
+        EnterCodeScreen(viewModel = EnterCodeScreenViewModel(hiltViewModel())) {}
     }
 }

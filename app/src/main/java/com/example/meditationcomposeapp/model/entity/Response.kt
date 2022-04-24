@@ -1,7 +1,5 @@
 package com.example.meditationcomposeapp.model.entity
 
-import retrofit2.Response
-
 sealed class NetworkResponse<T>(
     val data: T? = null,
     val error: String? = null

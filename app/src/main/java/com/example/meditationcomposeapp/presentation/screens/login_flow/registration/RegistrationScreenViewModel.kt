@@ -1,17 +1,24 @@
 package com.example.meditationcomposeapp.presentation.screens.login_flow.registration
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.meditationcomposeapp.model.entity.NetworkResponse
+import com.example.meditationcomposeapp.model.usecase.authentication.RegisterUseCase
 import com.example.meditationcomposeapp.model.utils.FieldValidator
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class RegistrationScreenViewModel @Inject constructor(
+    private val registerUseCase: RegisterUseCase,
     private val fieldValidator: FieldValidator
-): ViewModel() {
+) : ViewModel() {
 
     private var state by mutableStateOf(RegistrationScreenState())
 
@@ -60,9 +67,31 @@ class RegistrationScreenViewModel @Inject constructor(
     }
 
     fun onSignUpClicked(navigateToLoginScreen: () -> Unit) {
-        //registration logic
-        // show screen with registration result?
+        viewModelScope.launch {
+            registerUseCase.invoke(state.name, state.email, state.password).collect {
+                when (it) {
+                    is NetworkResponse.Success<*> -> {
+                        Log.e(TAG, "${javaClass.canonicalName}: Success")
+                        if (it.data!!.success)
+                            navigateToLoginScreen()
+                        else {
+                            //displayError()
+                        }
+                    }
+                    is NetworkResponse.Failure<*> -> {
+                        //on error show pop-up
+                        Log.e(TAG, "${javaClass.canonicalName}: Error")
+                    }
+                    is NetworkResponse.Loading<*> -> {
+                        setLoading(it.isLoading)
+                        Log.e(TAG, "${javaClass.canonicalName}: Loading:${it.isLoading}")
+                    }
+                }
+            }
+        }
     }
+
+    private val TAG = "TAGG"
 
     fun onSignInClicked(navigateToLoginScreen: () -> Unit) {
         navigateToLoginScreen()

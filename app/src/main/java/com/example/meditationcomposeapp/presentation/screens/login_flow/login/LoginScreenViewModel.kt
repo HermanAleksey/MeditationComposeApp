@@ -62,20 +62,19 @@ class LoginScreenViewModel @Inject constructor(
 //            || fieldValidator.validate(FieldType.Password, password)
         ) {
             viewModelScope.launch {
-                Log.e(TAG, "onLoginClicked: login:$email, password:$password")
                 loginUseCase.invoke(email, password).collect {
                     when (it) {
                         is NetworkResponse.Success<*> -> {
-                            Log.e(TAG, "onLoginClicked: Success")
+                            Log.e(TAG, "${javaClass.canonicalName}: Success")
                             navigateToMainScreen()
                         }
                         is NetworkResponse.Failure<*> -> {
                             //on error show pop-up
-                            Log.e(TAG, "onLoginClicked: Error")
+                            Log.e(TAG, "${javaClass.canonicalName}: Error")
                         }
                         is NetworkResponse.Loading<*> -> {
                             setLoading(it.isLoading)
-                            Log.e(TAG, "onLoginClicked: Loading:${it.isLoading}")
+                            Log.e(TAG, "${javaClass.canonicalName}: Loading:${it.isLoading}")
                         }
                     }
                 }

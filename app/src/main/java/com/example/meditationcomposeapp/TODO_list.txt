@@ -6,6 +6,8 @@
 2. Passing values between screens:
     When navigating from LoginScreen into EnterLoginScreen
     pass entered email value if it's not empty
+    &
+    Login value to enterCodeScreen
 
 3. Animated transitions between screens
 
