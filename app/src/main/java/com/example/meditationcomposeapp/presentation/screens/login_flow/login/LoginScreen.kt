@@ -56,7 +56,7 @@ fun LoginScreen(
     val passwordFocusRequester = FocusRequester()
 
     LoginFlowBackground(
-        isLoading = viewModel.state.isLoading
+        isLoading = viewModel.isLoading()
     ) {
         Column(
             horizontalAlignment = Alignment.Start,
@@ -93,7 +93,7 @@ fun LoginScreen(
                     .alpha(0.7F)
             )
             LoginTextInputField(
-                textFieldValue = viewModel.state.password,
+                textFieldValue = viewModel.getEmail(),
                 label = stringResource(id = R.string.email_address),
                 onValueChanged = { viewModel.onLoginTextChanged(it) },
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
@@ -101,7 +101,7 @@ fun LoginScreen(
                 nextFocusRequester = passwordFocusRequester
             )
             LoginTextInputField(
-                textFieldValue = viewModel.state.password,
+                textFieldValue = viewModel.getPassword(),
                 label = stringResource(id = R.string.password),
                 onValueChanged = { viewModel.onPasswordTextChanged(it) },
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),

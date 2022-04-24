@@ -36,7 +36,9 @@ fun NewPasswordScreen(
     val focusManager = LocalFocusManager.current
     val repeatPasswordFocusRequester = FocusRequester()
 
-    LoginFlowBackground {
+    LoginFlowBackground(
+        isLoading = viewModel.isLoading()
+    ) {
         Column(
             horizontalAlignment = Alignment.Start,
             modifier = Modifier
@@ -71,7 +73,7 @@ fun NewPasswordScreen(
                     .alpha(0.7F)
             )
             LoginTextInputField(
-                textFieldValue = viewModel.newPassword.value,
+                textFieldValue = viewModel.getNewPassword(),
                 label = stringResource(id = R.string.new_password),
                 onValueChanged = { viewModel.onNewPasswordTextChanged(it) },
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
@@ -79,7 +81,7 @@ fun NewPasswordScreen(
                 nextFocusRequester = repeatPasswordFocusRequester
             )
             LoginTextInputField(
-                textFieldValue = viewModel.repeatPassword.value,
+                textFieldValue = viewModel.getRepeatPassword(),
                 label = stringResource(id = R.string.repeat_new_password),
                 onValueChanged = { viewModel.onRepeatPasswordTextChanged(it) },
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),

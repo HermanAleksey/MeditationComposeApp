@@ -41,7 +41,9 @@ fun RegistrationScreen(
     val passwordFocusRequester = FocusRequester()
     val emailFocusRequester = FocusRequester()
 
-    LoginFlowBackground {
+    LoginFlowBackground(
+        isLoading = viewModel.isLoading()
+    ) {
         Column(
             horizontalAlignment = Alignment.Start,
             modifier = Modifier
@@ -76,7 +78,7 @@ fun RegistrationScreen(
                     .alpha(0.7F)
             )
             LoginTextInputField(
-                textFieldValue = viewModel.name.value,
+                textFieldValue = viewModel.getName(),
                 label = stringResource(id = R.string.name),
                 onValueChanged = { viewModel.onNameTextChanged(it) },
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
@@ -84,7 +86,7 @@ fun RegistrationScreen(
                 nextFocusRequester = emailFocusRequester
             )
             LoginTextInputField(
-                textFieldValue = viewModel.email.value,
+                textFieldValue = viewModel.getEmail(),
                 label = stringResource(id = R.string.email_address),
                 onValueChanged = { viewModel.onLoginTextChanged(it) },
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
@@ -93,7 +95,7 @@ fun RegistrationScreen(
                 nextFocusRequester = passwordFocusRequester
             )
             LoginTextInputField(
-                textFieldValue = viewModel.password.value,
+                textFieldValue = viewModel.getPassword(),
                 label = stringResource(id = R.string.password),
                 onValueChanged = { viewModel.onPasswordTextChanged(it) },
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),

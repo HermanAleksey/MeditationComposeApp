@@ -37,7 +37,9 @@ fun RestorePasswordScreen(
         viewModel.onLastDigitFilled(navigateToNewPasswordScreen)
     }
 
-    LoginFlowBackground {
+    LoginFlowBackground(
+        isLoading = viewModel.isLoading()
+    ) {
         Column(
             horizontalAlignment = Alignment.Start,
             modifier = Modifier

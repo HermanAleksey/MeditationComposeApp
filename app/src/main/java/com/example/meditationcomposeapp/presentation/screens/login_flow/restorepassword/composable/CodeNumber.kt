@@ -40,7 +40,7 @@ import com.example.meditationcomposeapp.ui.theme.ColorTextHint
 
 @Composable
 fun CodeNumber(
-    value: State<Int>,
+    value: Int,
     position: Int,
     setDigit: (Int, Int) -> Unit,
     focusManager: FocusManager,
@@ -65,7 +65,7 @@ fun CodeNumber(
 
     TextField(
         value = value.let {
-            if (it.value == -1) "" else it.value.toString()
+            if (it == -1) "" else it.toString()
         },
         textStyle = TextStyle(
             color = Color.White,

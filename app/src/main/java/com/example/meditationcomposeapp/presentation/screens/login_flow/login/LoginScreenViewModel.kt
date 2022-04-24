@@ -20,7 +20,7 @@ class LoginScreenViewModel @Inject constructor(
     private val fieldValidator: FieldValidator
 ) : ViewModel() {
 
-    var state by mutableStateOf(LoginScreenState())
+    private var state by mutableStateOf(LoginScreenState())
 
     private fun setLoading(isLoading: Boolean) {
         state = state.copy(isLoading = isLoading)
@@ -32,6 +32,8 @@ class LoginScreenViewModel @Inject constructor(
         state = state.copy(email = value)
     }
 
+    fun getEmail() = state.email
+
     fun onLoginTextChanged(value: String) {
         setEmail(value)
     }
@@ -39,6 +41,8 @@ class LoginScreenViewModel @Inject constructor(
     private fun setPassword(value: String) {
         state = state.copy(password = value)
     }
+
+    fun getPassword() = state.password
 
     fun onPasswordTextChanged(value: String) {
         setPassword(value)

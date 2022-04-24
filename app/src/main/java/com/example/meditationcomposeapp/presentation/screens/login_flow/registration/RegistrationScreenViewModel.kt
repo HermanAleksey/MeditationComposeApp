@@ -1,42 +1,53 @@
 package com.example.meditationcomposeapp.presentation.screens.login_flow.registration
 
-import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 
 class RegistrationScreenViewModel : ViewModel() {
 
-    private var _name = mutableStateOf("")
+    private var state by mutableStateOf(RegistrationScreenState())
 
-    val name: State<String> = _name
-
-    fun setName(value: String) {
-        _name.value = value
+    private fun setLoading(isLoading: Boolean) {
+        state = state.copy(isLoading = isLoading)
     }
+
+    fun isLoading() = state.isLoading
+
+    private fun setName(value: String) {
+        state = state.copy(
+            name = value
+        )
+    }
+
+    fun getName() = state.name
 
     fun onNameTextChanged(value: String) {
         setName(value)
     }
 
-    private var _email = mutableStateOf("")
 
-    val email: State<String> = _email
-
-    fun setEmail(value: String) {
-        _email.value = value
+    private fun setEmail(value: String) {
+        state = state.copy(
+            email = value
+        )
     }
+
+    fun getEmail() = state.email
 
     fun onLoginTextChanged(value: String) {
         setEmail(value)
     }
 
-    private val _password = mutableStateOf("")
 
-    val password: State<String> = _password
-
-    fun setPassword(value: String) {
-        _password.value = value
+    private fun setPassword(value: String) {
+        state = state.copy(
+            password = value
+        )
     }
+
+    fun getPassword() = state.password
 
     fun onPasswordTextChanged(value: String) {
         setPassword(value)

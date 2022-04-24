@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun CodePanel(
-    code: Array<State<Int>>,
+    code: Array<Int>,
     setDigit: (Int, Int) -> Unit,
     onLastDigitFilled: () -> Unit
 ) {
