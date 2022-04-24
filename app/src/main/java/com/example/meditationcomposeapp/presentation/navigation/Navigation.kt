@@ -55,7 +55,7 @@ fun SetupNavGraph(
         composable(Screen.EnterLogin.route) {
             EnterLoginScreen(
                 viewModel = hiltViewModel(),
-                navigateToRestorePasswordScreen = { navigateTo(Screen.EnterCode) }
+                navigateToEnterCodeScreen = { navigateTo(Screen.EnterCode) }
             )
         }
         composable(Screen.EnterCode.route) {

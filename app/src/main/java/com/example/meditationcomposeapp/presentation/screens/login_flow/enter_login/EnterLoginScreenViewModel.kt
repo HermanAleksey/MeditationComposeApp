@@ -4,8 +4,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import com.example.meditationcomposeapp.model.usecase.authentication.RequestPasswordRestorationUseCase
+import com.example.meditationcomposeapp.model.utils.FieldValidator
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class EnterLoginScreenViewModel : ViewModel() {
+@HiltViewModel
+class EnterLoginScreenViewModel @Inject constructor(
+    private val requestPasswordRestorationUseCase: RequestPasswordRestorationUseCase,
+    private val fieldValidator: FieldValidator
+) : ViewModel() {
 
     private var state by mutableStateOf(EnterLoginScreenState())
 

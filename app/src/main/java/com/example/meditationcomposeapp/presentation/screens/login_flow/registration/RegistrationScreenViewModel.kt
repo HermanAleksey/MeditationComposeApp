@@ -4,8 +4,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import com.example.meditationcomposeapp.model.utils.FieldValidator
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class RegistrationScreenViewModel : ViewModel() {
+@HiltViewModel
+class RegistrationScreenViewModel @Inject constructor(
+    private val fieldValidator: FieldValidator
+): ViewModel() {
 
     private var state by mutableStateOf(RegistrationScreenState())
 
