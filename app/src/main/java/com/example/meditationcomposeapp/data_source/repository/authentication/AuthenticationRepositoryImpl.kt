@@ -23,20 +23,24 @@ class AuthenticationRepositoryImpl @Inject constructor(
         return flow {
             emit(NetworkResponse.Loading(true))
             try {
-                kotlinx.coroutines.delay(4000)
+                kotlinx.coroutines.delay(3000)
                 //todo FIX: mock getting data from web
 //               val response = authApi.login(login, password)
-                if (login != "login" || password != "pass") {
-                    emit(NetworkResponse.Failure(error = "Incorrect login or password"))
-                } else {
-                    val response = LoginUserResponse(
-                        "User Name",
-                        "https://static.vecteezy.com/packs/media/components/global/search-explore-nav/img/vectors/term-bg-1-666de2d941529c25aa511dc18d727160.jpg",
-                        "London",
-                        listOf()
-                    )
-                    emit(NetworkResponse.Success(data = profileMapper.mapFrom(response)))
+                when {
+                    login != "login" || password != "pass" -> {
+                        emit(NetworkResponse.Failure(error = "Invalid login or password!"))
+                    }
+                    else -> {
+                        val response = LoginUserResponse(
+                            "User Name",
+                            "https://static.vecteezy.com/packs/media/components/global/search-explore-nav/img/vectors/term-bg-1-666de2d941529c25aa511dc18d727160.jpg",
+                            "London",
+                            listOf()
+                        )
+                        emit(NetworkResponse.Success(data = profileMapper.mapFrom(response)))
+                    }
                 }
+
             } catch (e: IOException) {
                 e.printStackTrace()
                 emit(NetworkResponse.Failure(error = "Couldn't load data"))
@@ -56,12 +60,25 @@ class AuthenticationRepositoryImpl @Inject constructor(
         return flow {
             emit(NetworkResponse.Loading(true))
             try {
+                kotlinx.coroutines.delay(2000)
                 //todo FIX: mock getting data from web
-//                val response = authApi.registration(
-//                    RegistrationRequest(name = name, email = login, password = password)
-//                )
-                val response = SuccessInfo(true, null)
-                emit(NetworkResponse.Success(response))
+                when {
+                    login == "login" -> {
+                        emit(
+                            NetworkResponse.Success(
+                                SuccessInfo(
+                                    false,
+                                    "User with this email already exist! Try to log in"
+                                )
+                            )
+                        )
+                    }
+                    else -> {
+                        val response = SuccessInfo(true, null)
+                        emit(NetworkResponse.Success(response))
+                    }
+                }
+
             } catch (e: IOException) {
                 e.printStackTrace()
                 emit(NetworkResponse.Failure(error = "Couldn't load data"))
@@ -79,14 +96,26 @@ class AuthenticationRepositoryImpl @Inject constructor(
         return flow {
             emit(NetworkResponse.Loading(true))
             try {
+                kotlinx.coroutines.delay(2000)
                 //todo FIX: mock getting data from web
 //                val response = authApi.requestPasswordRestore(login = login)
-                if (login != "login") {
-                    emit(NetworkResponse.Failure(error = "ERROR"))
-                } else {
-                    val response = SuccessInfo(true, null)
-                    emit(NetworkResponse.Success(response))
+                when {
+                    login != "login" -> {
+                        emit(
+                            NetworkResponse.Success(
+                                SuccessInfo(
+                                    false,
+                                    "Account with such login doesn't exist."
+                                )
+                            )
+                        )
+                    }
+                    else -> {
+                        val response = SuccessInfo(true, null)
+                        emit(NetworkResponse.Success(response))
+                    }
                 }
+
             } catch (e: IOException) {
                 e.printStackTrace()
                 emit(NetworkResponse.Failure(error = "Couldn't load data"))
@@ -105,13 +134,25 @@ class AuthenticationRepositoryImpl @Inject constructor(
         return flow {
             emit(NetworkResponse.Loading(true))
             try {
-                //todo FIX: mock getting data from web
-//                val response = authApi.setNewPassword(
-//                    login = login,
-//                    newPassword = newPassword
-//                )
-                val response = SuccessInfo(true, null)
-                emit(NetworkResponse.Success(response))
+                kotlinx.coroutines.delay(2000)
+
+                when {
+                    newPassword == "error" -> {
+                        emit(
+                            NetworkResponse.Success(
+                                SuccessInfo(
+                                    false,
+                                    "Internal server error"
+                                )
+                            )
+                        )
+                    }
+                    else -> {
+                        val response = SuccessInfo(true, null)
+                        emit(NetworkResponse.Success(response))
+                    }
+                }
+
             } catch (e: IOException) {
                 e.printStackTrace()
                 emit(NetworkResponse.Failure(error = "Couldn't load data"))
@@ -130,14 +171,24 @@ class AuthenticationRepositoryImpl @Inject constructor(
         return flow {
             emit(NetworkResponse.Loading(true))
             try {
+                kotlinx.coroutines.delay(2000)
+
                 //todo FIX: mock getting data from web
 //                val response = authApi.verifyCode(login = login, code = code)
-                if (code == "11111") {
-                    emit(NetworkResponse.Failure(error = "Wrong code"))
-                } else {
-                    val response = SuccessInfo(true, null)
-                    emit(NetworkResponse.Success(response))
+                when {
+                    code == "11111" -> {
+                        emit(
+                            NetworkResponse.Success(
+                                SuccessInfo(false, "Incorrect code.")
+                            )
+                        )
+                    }
+                    else -> {
+                        val response = SuccessInfo(true, null)
+                        emit(NetworkResponse.Success(response))
+                    }
                 }
+
             } catch (e: IOException) {
                 e.printStackTrace()
                 emit(NetworkResponse.Failure(error = "Couldn't load data"))
