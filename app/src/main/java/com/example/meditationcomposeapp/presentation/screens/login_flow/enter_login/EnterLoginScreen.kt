@@ -31,7 +31,7 @@ import com.example.meditationcomposeapp.ui.theme.Alegreya
 @Composable
 fun EnterLoginScreen(
     viewModel: EnterLoginScreenViewModel,
-    navigateToRestorePasswordScreen: () -> Unit
+    navigateToEnterCodeScreen: () -> Unit
 ) {
     val focusManager = LocalFocusManager.current
     val repeatPasswordFocusRequester = FocusRequester()
@@ -87,7 +87,7 @@ fun EnterLoginScreen(
                     .wrapContentHeight()
                     .padding(top = 28.dp)
             ) {
-                viewModel.onConfirmClick(navigateToRestorePasswordScreen)
+                viewModel.onConfirmClick(navigateToEnterCodeScreen)
             }
         }
     }

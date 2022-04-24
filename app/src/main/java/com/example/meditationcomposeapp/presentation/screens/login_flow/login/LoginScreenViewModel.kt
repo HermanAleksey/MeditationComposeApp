@@ -67,7 +67,7 @@ class LoginScreenViewModel @Inject constructor(
                     when (it) {
                         is NetworkResponse.Success<*> -> {
                             Log.e(TAG, "onLoginClicked: Success")
-//                            navigateToMainScreen()
+                            navigateToMainScreen()
                         }
                         is NetworkResponse.Failure<*> -> {
                             //on error show pop-up

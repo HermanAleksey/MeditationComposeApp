@@ -1,4 +1,4 @@
-package com.example.meditationcomposeapp.presentation.screens.login_flow.restore_password
+package com.example.meditationcomposeapp.presentation.screens.login_flow.enter_code
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -19,13 +19,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.meditationcomposeapp.R
 import com.example.meditationcomposeapp.presentation.screens.login_flow.login.composable.LoginFlowBackground
-import com.example.meditationcomposeapp.presentation.screens.login_flow.restore_password.composable.CodePanel
+import com.example.meditationcomposeapp.presentation.screens.login_flow.enter_code.composable.CodePanel
 import com.example.meditationcomposeapp.ui.theme.Alegreya
 import com.example.meditationcomposeapp.ui.theme.MeditationComposeAppTheme
 
 @Composable
-fun RestorePasswordScreen(
-    viewModel: RestorePasswordScreenViewModel,
+fun EnterCodeScreen(
+    viewModel: EnterCodeScreenViewModel,
     navigateToNewPasswordScreen: () -> Unit
 ) {
     /**
@@ -84,6 +84,6 @@ fun RestorePasswordScreen(
 @Composable
 fun DefaultPreview() {
     MeditationComposeAppTheme {
-        RestorePasswordScreen(viewModel = RestorePasswordScreenViewModel()) {}
+        EnterCodeScreen(viewModel = EnterCodeScreenViewModel()) {}
     }
 }

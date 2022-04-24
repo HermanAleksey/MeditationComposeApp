@@ -1,13 +1,13 @@
-package com.example.meditationcomposeapp.presentation.screens.login_flow.restore_password
+package com.example.meditationcomposeapp.presentation.screens.login_flow.enter_code
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 
-class RestorePasswordScreenViewModel : ViewModel() {
+class EnterCodeScreenViewModel : ViewModel() {
 
-    private var state by mutableStateOf(RestorePasswordScreenState())
+    private var state by mutableStateOf(EnterCodeScreenState())
 
     private fun setLoading(isLoading: Boolean) {
         state = state.copy(isLoading = isLoading)

@@ -1,6 +1,6 @@
-package com.example.meditationcomposeapp.presentation.screens.login_flow.restore_password
+package com.example.meditationcomposeapp.presentation.screens.login_flow.enter_code
 
-data class RestorePasswordScreenState(
+data class EnterCodeScreenState(
     val isLoading: Boolean = false,
     val code: Array<Int> = arrayOf(
         EMPTY_NUMBER,
@@ -14,7 +14,7 @@ data class RestorePasswordScreenState(
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
 
-        other as RestorePasswordScreenState
+        other as EnterCodeScreenState
 
         if (isLoading != other.isLoading) return false
         if (!code.contentEquals(other.code)) return false

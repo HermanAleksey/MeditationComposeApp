@@ -11,7 +11,7 @@ import com.example.meditationcomposeapp.presentation.screens.login_flow.enter_lo
 import com.example.meditationcomposeapp.presentation.screens.login_flow.login.LoginScreen
 import com.example.meditationcomposeapp.presentation.screens.login_flow.new_password.NewPasswordScreen
 import com.example.meditationcomposeapp.presentation.screens.login_flow.registration.RegistrationScreen
-import com.example.meditationcomposeapp.presentation.screens.login_flow.restore_password.RestorePasswordScreen
+import com.example.meditationcomposeapp.presentation.screens.login_flow.enter_code.EnterCodeScreen
 import com.example.meditationcomposeapp.presentation.screens.login_flow.splash.SplashScreen
 
 @Composable
@@ -55,11 +55,11 @@ fun SetupNavGraph(
         composable(Screen.EnterLogin.route) {
             EnterLoginScreen(
                 viewModel = hiltViewModel(),
-                navigateToRestorePasswordScreen = { navigateTo(Screen.RestorePassword) }
+                navigateToRestorePasswordScreen = { navigateTo(Screen.EnterCode) }
             )
         }
-        composable(Screen.RestorePassword.route) {
-            RestorePasswordScreen(
+        composable(Screen.EnterCode.route) {
+            EnterCodeScreen(
                 viewModel = hiltViewModel(),
                 navigateToNewPasswordScreen = { navigateTo(Screen.NewPassword) }
             )

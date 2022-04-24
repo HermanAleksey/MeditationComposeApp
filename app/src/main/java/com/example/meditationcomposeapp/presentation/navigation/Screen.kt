@@ -8,7 +8,7 @@ sealed class Screen(val route: String) {
     object Registration : Screen("com.example.meditationcomposeapp.screens.REGISTRATION_SCREEN")
 
     object EnterLogin : Screen("com.example.meditationcomposeapp.screens.ENTER_LOGIN_SCREEN")
-    object RestorePassword : Screen("com.example.meditationcomposeapp.screens.RESTORE_PASSWORD_SCREEN")
+    object EnterCode : Screen("com.example.meditationcomposeapp.screens.ENTER_CODE_SCREEN")
     object NewPassword : Screen("com.example.meditationcomposeapp.screens.NEW_PASSWORD_SCREEN")
 
 

@@ -25,8 +25,8 @@ class EnterLoginScreenViewModel : ViewModel() {
         setEmail(value)
     }
 
-    fun onConfirmClick(navigateToRestorePasswordScreen: () -> Unit) {
+    fun onConfirmClick(navigateToEnterCodeScreen: () -> Unit) {
         //move into enter code screen
-        navigateToRestorePasswordScreen()
+        navigateToEnterCodeScreen()
     }
 }
