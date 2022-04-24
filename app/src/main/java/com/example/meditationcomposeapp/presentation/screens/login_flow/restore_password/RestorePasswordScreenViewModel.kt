@@ -1,4 +1,4 @@
-package com.example.meditationcomposeapp.presentation.screens.login_flow.restorepassword
+package com.example.meditationcomposeapp.presentation.screens.login_flow.restore_password
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

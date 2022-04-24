@@ -1,4 +1,4 @@
-package com.example.meditationcomposeapp.presentation.screens.login_flow.restorepassword
+package com.example.meditationcomposeapp.presentation.screens.login_flow.restore_password
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.meditationcomposeapp.R
 import com.example.meditationcomposeapp.presentation.screens.login_flow.login.composable.LoginFlowBackground
-import com.example.meditationcomposeapp.presentation.screens.login_flow.restorepassword.composable.CodePanel
+import com.example.meditationcomposeapp.presentation.screens.login_flow.restore_password.composable.CodePanel
 import com.example.meditationcomposeapp.ui.theme.Alegreya
 import com.example.meditationcomposeapp.ui.theme.MeditationComposeAppTheme
 

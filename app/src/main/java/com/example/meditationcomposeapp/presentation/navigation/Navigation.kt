@@ -8,9 +8,9 @@ import androidx.navigation.compose.composable
 import com.example.meditationcomposeapp.presentation.screens.main_flow.main_screen.MainScreen
 import com.example.meditationcomposeapp.presentation.screens.login_flow.enter.EnterScreen
 import com.example.meditationcomposeapp.presentation.screens.login_flow.login.LoginScreen
-import com.example.meditationcomposeapp.presentation.screens.login_flow.newpassword.NewPasswordScreen
+import com.example.meditationcomposeapp.presentation.screens.login_flow.new_password.NewPasswordScreen
 import com.example.meditationcomposeapp.presentation.screens.login_flow.registration.RegistrationScreen
-import com.example.meditationcomposeapp.presentation.screens.login_flow.restorepassword.RestorePasswordScreen
+import com.example.meditationcomposeapp.presentation.screens.login_flow.restore_password.RestorePasswordScreen
 import com.example.meditationcomposeapp.presentation.screens.login_flow.splash.SplashScreen
 
 @Composable

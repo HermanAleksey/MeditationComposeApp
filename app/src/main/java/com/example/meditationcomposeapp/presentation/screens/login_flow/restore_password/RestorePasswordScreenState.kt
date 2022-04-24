@@ -1,4 +1,4 @@
-package com.example.meditationcomposeapp.presentation.screens.login_flow.restorepassword
+package com.example.meditationcomposeapp.presentation.screens.login_flow.restore_password
 
 data class RestorePasswordScreenState(
     val isLoading: Boolean = false,

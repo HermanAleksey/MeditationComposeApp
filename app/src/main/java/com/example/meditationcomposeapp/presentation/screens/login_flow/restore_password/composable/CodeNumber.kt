@@ -1,4 +1,4 @@
-package com.example.meditationcomposeapp.presentation.screens.login_flow.restorepassword.composable
+package com.example.meditationcomposeapp.presentation.screens.login_flow.restore_password.composable
 
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardActions
@@ -6,7 +6,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.focus.FocusRequester

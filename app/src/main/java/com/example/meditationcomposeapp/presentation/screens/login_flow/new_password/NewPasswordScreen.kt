@@ -1,4 +1,4 @@
-package com.example.meditationcomposeapp.presentation.screens.login_flow.newpassword
+package com.example.meditationcomposeapp.presentation.screens.login_flow.new_password
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*

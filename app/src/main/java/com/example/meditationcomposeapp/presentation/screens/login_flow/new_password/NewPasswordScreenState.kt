@@ -1,4 +1,4 @@
-package com.example.meditationcomposeapp.presentation.screens.login_flow.newpassword
+package com.example.meditationcomposeapp.presentation.screens.login_flow.new_password
 
 data class NewPasswordScreenState(
     val isLoading: Boolean = false,

@@ -1,11 +1,10 @@
-package com.example.meditationcomposeapp.presentation.screens.login_flow.restorepassword.composable
+package com.example.meditationcomposeapp.presentation.screens.login_flow.restore_password.composable
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.platform.LocalFocusManager
