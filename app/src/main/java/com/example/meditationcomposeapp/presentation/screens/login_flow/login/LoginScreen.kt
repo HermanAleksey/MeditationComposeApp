@@ -46,7 +46,7 @@ import com.example.meditationcomposeapp.ui.theme.MeditationComposeAppTheme
 fun LoginScreen(
     viewModel: LoginScreenViewModel,
     setStatusBarColor: (Int) -> Unit,
-    navigateToRestorePasswordScreen: () -> Unit,
+    navigateToEnterLoginScreen: () -> Unit,
     navigateToMainScreen: () -> Unit,
     navigateToRegistrationScreen: () -> Unit,
 ) {
@@ -124,7 +124,7 @@ fun LoginScreen(
                         .padding(top = 9.dp)
                         .clickable {
                             viewModel.onForgotPasswordClicked(
-                                navigateToRestorePasswordScreen
+                                navigateToEnterLoginScreen
                             )
                         }
                 )
@@ -163,7 +163,7 @@ fun DefaultPreview() {
         LoginScreen(
             viewModel = viewModel(),
             setStatusBarColor = {},
-            navigateToRestorePasswordScreen = { },
+            navigateToEnterLoginScreen = { },
             navigateToMainScreen = { },
             navigateToRegistrationScreen = {})
     }

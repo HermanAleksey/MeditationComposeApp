@@ -83,9 +83,9 @@ class LoginScreenViewModel @Inject constructor(
         }
     }
 
-    val TAG = "TAGG"
+    private val TAG = "TAGG"
 
-    fun onSignUpClicked(navigateToRegistrationScreen: () -> Unit) {
-        navigateToRegistrationScreen()
+    fun onSignUpClicked(navigateToEnterLoginScreen: () -> Unit) {
+        navigateToEnterLoginScreen()
     }
 }

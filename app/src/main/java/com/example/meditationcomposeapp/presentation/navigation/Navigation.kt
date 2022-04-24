@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.meditationcomposeapp.presentation.screens.main_flow.main_screen.MainScreen
 import com.example.meditationcomposeapp.presentation.screens.login_flow.enter.EnterScreen
+import com.example.meditationcomposeapp.presentation.screens.login_flow.enter_login.EnterLoginScreen
 import com.example.meditationcomposeapp.presentation.screens.login_flow.login.LoginScreen
 import com.example.meditationcomposeapp.presentation.screens.login_flow.new_password.NewPasswordScreen
 import com.example.meditationcomposeapp.presentation.screens.login_flow.registration.RegistrationScreen
@@ -40,8 +41,8 @@ fun SetupNavGraph(
                 viewModel = hiltViewModel(),
                 setStatusBarColor = setStatusBarColor,
                 navigateToMainScreen = { navigateTo(Screen.Main) },
-                navigateToRegistrationScreen = { navigateTo(Screen.Registration) },
-                navigateToRestorePasswordScreen = { navigateTo(Screen.RestorePassword) }
+                navigateToEnterLoginScreen = { navigateTo(Screen.EnterLogin) },
+                navigateToRegistrationScreen = { navigateTo(Screen.Registration) }
             )
         }
         composable(Screen.Registration.route) {
@@ -49,6 +50,12 @@ fun SetupNavGraph(
                 viewModel = hiltViewModel(),
                 setStatusBarColor = setStatusBarColor,
                 navigateToLoginScreen = { navigateTo(Screen.Login) }
+            )
+        }
+        composable(Screen.EnterLogin.route) {
+            EnterLoginScreen(
+                viewModel = hiltViewModel(),
+                navigateToRestorePasswordScreen = { navigateTo(Screen.RestorePassword) }
             )
         }
         composable(Screen.RestorePassword.route) {
