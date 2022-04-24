@@ -2,17 +2,16 @@ package com.example.meditationcomposeapp.presentation.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.meditationcomposeapp.presentation.main_screen.MainScreen
-import com.example.meditationcomposeapp.presentation.screens.enter.EnterScreen
-import com.example.meditationcomposeapp.presentation.screens.login.LoginScreen
-import com.example.meditationcomposeapp.presentation.screens.newpassword.NewPasswordScreen
-import com.example.meditationcomposeapp.presentation.screens.registration.RegistrationScreen
-import com.example.meditationcomposeapp.presentation.screens.restorepassword.RestorePasswordScreen
-import com.example.meditationcomposeapp.presentation.screens.splash.SplashScreen
+import com.example.meditationcomposeapp.presentation.screens.main_flow.main_screen.MainScreen
+import com.example.meditationcomposeapp.presentation.screens.login_flow.enter.EnterScreen
+import com.example.meditationcomposeapp.presentation.screens.login_flow.login.LoginScreen
+import com.example.meditationcomposeapp.presentation.screens.login_flow.newpassword.NewPasswordScreen
+import com.example.meditationcomposeapp.presentation.screens.login_flow.registration.RegistrationScreen
+import com.example.meditationcomposeapp.presentation.screens.login_flow.restorepassword.RestorePasswordScreen
+import com.example.meditationcomposeapp.presentation.screens.login_flow.splash.SplashScreen
 
 @Composable
 fun SetupNavGraph(
