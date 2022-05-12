@@ -1,4 +1,4 @@
-0. Mock web responses and process them
+DONE 0. Mock web responses and process them
 
 1. Field validation visibility: error states
 
