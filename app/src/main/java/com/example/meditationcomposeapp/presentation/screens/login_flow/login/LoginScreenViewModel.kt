@@ -8,6 +8,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.usecase.authentication.LoginUseCase
+import com.example.meditationcomposeapp.model.utils.validation.LoginField
+import com.example.meditationcomposeapp.model.utils.validation.PasswordField
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -24,20 +26,12 @@ class LoginScreenViewModel @Inject constructor(
         state = state.copy(isLoading = isLoading)
     }
 
-    private fun setEmail(value: String) {
+    fun onLoginTextChanged(value: String) {
         state = state.copy(email = value)
     }
 
-    fun onLoginTextChanged(value: String) {
-        setEmail(value)
-    }
-
-    private fun setPassword(value: String) {
-        state = state.copy(password = value)
-    }
-
     fun onPasswordTextChanged(value: String) {
-        setPassword(value)
+        state = state.copy(password = value)
     }
 
     fun onForgotPasswordClicked(navigateToRestorePasswordScreen: () -> Unit) {
@@ -48,12 +42,7 @@ class LoginScreenViewModel @Inject constructor(
         val email = state.email
         val password = state.password
 
-
-        //todo replace with real logic
-        if (true
-//            fieldValidator.validate(FieldType.Login, email)
-//            || fieldValidator.validate(FieldType.Password, password)
-        ) {
+        if (validateEmailField(email) && validatePasswordField(password)) {
             viewModelScope.launch {
                 loginUseCase.invoke(email, password).collect {
                     when (it) {
@@ -72,6 +61,24 @@ class LoginScreenViewModel @Inject constructor(
                     }
                 }
             }
+        }
+    }
+
+    private fun validatePasswordField(password: String): Boolean {
+        PasswordField(password).validate().let {
+            if (!it.successful) {
+                state = state.copy(passwordError = it.errorMessage)
+            }
+            return it.successful
+        }
+    }
+
+    private fun validateEmailField(email: String): Boolean {
+        LoginField(email).validate().let {
+            if (!it.successful) {
+                state = state.copy(emailError = it.errorMessage)
+            }
+            return it.successful
         }
     }
 

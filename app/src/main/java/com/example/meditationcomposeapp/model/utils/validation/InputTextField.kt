@@ -17,7 +17,7 @@ abstract class InputTextField(
                 errorMessage = UiText.StringResource(R.string.error_field_is_blank)
             )
 
-        if (value.length < MINIMAL_FIELD_LENGTH)
+        if (value.length > MAX_FIELD_LENGTH)
             return ValidationResult(
                 successful = false,
                 errorMessage = UiText.StringResource(R.string.error_field_is_long)
@@ -27,6 +27,6 @@ abstract class InputTextField(
     }
 
     companion object {
-        private const val MINIMAL_FIELD_LENGTH = 10
+        private const val MAX_FIELD_LENGTH = 10
     }
 }

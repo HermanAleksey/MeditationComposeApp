@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
@@ -27,6 +28,9 @@ fun LoginTextInputField(
     textFieldValue: String,
     label: String,
     onValueChanged: (String) -> Unit,
+    //TODO remove default values
+    isError: Boolean = true,
+    errorValue: String? = "hello error",
     focusManager: FocusManager,
     focusRequester: FocusRequester? = null,
     keyboardOptions: KeyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
@@ -44,6 +48,7 @@ fun LoginTextInputField(
         onValueChange = {
             onValueChanged(it)
         },
+        isError = isError,
         textStyle = TextStyle(
             color = Color.White,
             fontSize = 18.sp,
@@ -89,4 +94,11 @@ fun LoginTextInputField(
                 }
             }
     )
+    if (errorValue != null) {
+        Text(
+            text = errorValue,
+            color = MaterialTheme.colors.error,
+//            modifier = Modifier.align(Alignment.End)
+        )
+    }
 }
