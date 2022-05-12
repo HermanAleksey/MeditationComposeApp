@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.usecase.authentication.RequestPasswordRestorationUseCase
-import com.example.meditationcomposeapp.model.utils.FieldValidator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -16,9 +15,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class EnterLoginScreenViewModel @Inject constructor(
-    private val requestPasswordRestorationUseCase: RequestPasswordRestorationUseCase,
-    private val fieldValidator: FieldValidator
-) : ViewModel() {
+    private val requestPasswordRestorationUseCase: RequestPasswordRestorationUseCase
+    ) : ViewModel() {
 
     private var state by mutableStateOf(EnterLoginScreenState())
 

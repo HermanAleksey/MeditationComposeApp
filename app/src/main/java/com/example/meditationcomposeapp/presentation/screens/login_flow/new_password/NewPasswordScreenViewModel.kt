@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.usecase.authentication.SetNewPasswordUseCase
-import com.example.meditationcomposeapp.model.utils.FieldValidator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -16,9 +15,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NewPasswordScreenViewModel @Inject constructor(
-    private val setNewPasswordUseCase: SetNewPasswordUseCase,
-    private val fieldValidator: FieldValidator
-) : ViewModel() {
+    private val setNewPasswordUseCase: SetNewPasswordUseCase
+    ) : ViewModel() {
 
     private var state by mutableStateOf(NewPasswordScreenState())
 

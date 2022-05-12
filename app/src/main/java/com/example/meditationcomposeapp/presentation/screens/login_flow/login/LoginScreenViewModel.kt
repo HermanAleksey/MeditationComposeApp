@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.usecase.authentication.LoginUseCase
-import com.example.meditationcomposeapp.model.utils.FieldValidator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -16,23 +15,18 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginScreenViewModel @Inject constructor(
-    private val loginUseCase: LoginUseCase,
-    private val fieldValidator: FieldValidator
+    private val loginUseCase: LoginUseCase
 ) : ViewModel() {
 
-    private var state by mutableStateOf(LoginScreenState())
+    var state by mutableStateOf(LoginScreenState())
 
     private fun setLoading(isLoading: Boolean) {
         state = state.copy(isLoading = isLoading)
     }
 
-    fun isLoading() = state.isLoading
-
     private fun setEmail(value: String) {
         state = state.copy(email = value)
     }
-
-    fun getEmail() = state.email
 
     fun onLoginTextChanged(value: String) {
         setEmail(value)
@@ -41,8 +35,6 @@ class LoginScreenViewModel @Inject constructor(
     private fun setPassword(value: String) {
         state = state.copy(password = value)
     }
-
-    fun getPassword() = state.password
 
     fun onPasswordTextChanged(value: String) {
         setPassword(value)
@@ -55,6 +47,7 @@ class LoginScreenViewModel @Inject constructor(
     fun onLoginClicked(navigateToMainScreen: () -> Unit) {
         val email = state.email
         val password = state.password
+
 
         //todo replace with real logic
         if (true
