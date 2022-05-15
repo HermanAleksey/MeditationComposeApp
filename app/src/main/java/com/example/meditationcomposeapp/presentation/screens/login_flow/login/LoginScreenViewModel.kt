@@ -66,18 +66,14 @@ class LoginScreenViewModel @Inject constructor(
 
     private fun validatePasswordField(password: String): Boolean {
         PasswordField(password).validate().let {
-            if (!it.successful) {
-                state = state.copy(passwordError = it.errorMessage)
-            }
+            state = state.copy(passwordError = it.errorMessage)
             return it.successful
         }
     }
 
     private fun validateEmailField(email: String): Boolean {
         LoginField(email).validate().let {
-            if (!it.successful) {
-                state = state.copy(emailError = it.errorMessage)
-            }
+            state = state.copy(emailError = it.errorMessage)
             return it.successful
         }
     }

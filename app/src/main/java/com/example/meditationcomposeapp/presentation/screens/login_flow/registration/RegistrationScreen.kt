@@ -78,7 +78,9 @@ fun RegistrationScreen(
                     .alpha(0.7F)
             )
             LoginTextInputField(
-                textFieldValue = viewModel.getName(),
+                textFieldValue = viewModel.state.name,
+                isError = viewModel.state.nameError != null,
+                errorValue = viewModel.state.nameError?.asString(),
                 label = stringResource(id = R.string.name),
                 onValueChanged = { viewModel.onNameTextChanged(it) },
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
@@ -86,7 +88,9 @@ fun RegistrationScreen(
                 nextFocusRequester = emailFocusRequester
             )
             LoginTextInputField(
-                textFieldValue = viewModel.getEmail(),
+                textFieldValue = viewModel.state.email,
+                isError = viewModel.state.emailError != null,
+                errorValue = viewModel.state.emailError?.asString(),
                 label = stringResource(id = R.string.email_address),
                 onValueChanged = { viewModel.onLoginTextChanged(it) },
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
@@ -95,7 +99,9 @@ fun RegistrationScreen(
                 nextFocusRequester = passwordFocusRequester
             )
             LoginTextInputField(
-                textFieldValue = viewModel.getPassword(),
+                textFieldValue = viewModel.state.password,
+                isError = viewModel.state.passwordError != null,
+                errorValue = viewModel.state.passwordError?.asString(),
                 label = stringResource(id = R.string.password),
                 onValueChanged = { viewModel.onPasswordTextChanged(it) },
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
