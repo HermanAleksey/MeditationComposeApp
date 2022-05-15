@@ -73,7 +73,7 @@ fun EnterLoginScreen(
                     .alpha(0.7F)
             )
             LoginTextInputField(
-                textFieldValue = viewModel.getEmail(),
+                textFieldValue = viewModel.state.email,
                 label = stringResource(id = R.string.email_address),
                 isError = viewModel.state.emailError != null,
                 errorValue = viewModel.state.emailError?.asString(),
