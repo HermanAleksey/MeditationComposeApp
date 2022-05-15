@@ -75,6 +75,8 @@ fun EnterLoginScreen(
             LoginTextInputField(
                 textFieldValue = viewModel.getEmail(),
                 label = stringResource(id = R.string.email_address),
+                isError = viewModel.state.emailError != null,
+                errorValue = viewModel.state.emailError?.asString(),
                 onValueChanged = { viewModel.onEmailTextChanged(it) },
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
                 focusManager = focusManager,
