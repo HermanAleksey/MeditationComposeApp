@@ -11,7 +11,6 @@ import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.usecase.authentication.SetNewPasswordUseCase
 import com.example.meditationcomposeapp.model.utils.resources.UiText
 import com.example.meditationcomposeapp.model.utils.validation.PasswordField
-import com.example.meditationcomposeapp.presentation.util.ResourceProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
