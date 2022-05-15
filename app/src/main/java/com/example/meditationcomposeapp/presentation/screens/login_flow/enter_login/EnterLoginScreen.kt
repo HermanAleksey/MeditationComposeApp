@@ -30,11 +30,13 @@ import com.example.meditationcomposeapp.ui.theme.Alegreya
 
 @Composable
 fun EnterLoginScreen(
+    initialLoginValue: String?,
     viewModel: EnterLoginScreenViewModel,
     navigateToEnterCodeScreen: () -> Unit
 ) {
     val focusManager = LocalFocusManager.current
     val repeatPasswordFocusRequester = FocusRequester()
+    viewModel.onEmailTextChanged(initialLoginValue?:"")
 
     LoginFlowBackground(
         isLoading = viewModel.isLoading()

@@ -34,8 +34,8 @@ class LoginScreenViewModel @Inject constructor(
         state = state.copy(password = value)
     }
 
-    fun onForgotPasswordClicked(navigateToRestorePasswordScreen: () -> Unit) {
-        navigateToRestorePasswordScreen()
+    fun onForgotPasswordClicked(navigateToRestorePasswordScreen: (String) -> Unit) {
+        navigateToRestorePasswordScreen(state.email)
     }
 
     fun onLoginClicked(navigateToMainScreen: () -> Unit) {

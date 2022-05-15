@@ -46,7 +46,7 @@ import com.example.meditationcomposeapp.ui.theme.MeditationComposeAppTheme
 fun LoginScreen(
     viewModel: LoginScreenViewModel,
     setStatusBarColor: (Int) -> Unit,
-    navigateToEnterLoginScreen: () -> Unit,
+    navigateToEnterLoginScreen: (String) -> Unit,
     navigateToMainScreen: () -> Unit,
     navigateToRegistrationScreen: () -> Unit,
 ) {
