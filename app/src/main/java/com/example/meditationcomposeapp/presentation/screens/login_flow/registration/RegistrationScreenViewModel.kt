@@ -79,7 +79,7 @@ class RegistrationScreenViewModel @Inject constructor(
 
     private fun isNameFieldValid(): Boolean {
         NameField(state.name).validate().let {
-                state = state.copy(nameError = it.errorMessage)
+            state = state.copy(nameError = it.errorMessage)
             return it.successful
         }
     }

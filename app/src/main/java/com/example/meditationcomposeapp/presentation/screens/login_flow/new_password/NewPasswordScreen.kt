@@ -73,16 +73,20 @@ fun NewPasswordScreen(
                     .alpha(0.7F)
             )
             LoginTextInputField(
-                textFieldValue = viewModel.getNewPassword(),
+                textFieldValue = viewModel.state.newPassword,
                 label = stringResource(id = R.string.new_password),
+                isError = viewModel.state.newPasswordError != null,
+                errorValue = viewModel.state.newPasswordError?.asString(),
                 onValueChanged = { viewModel.onNewPasswordTextChanged(it) },
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
                 focusManager = focusManager,
                 nextFocusRequester = repeatPasswordFocusRequester
             )
             LoginTextInputField(
-                textFieldValue = viewModel.getRepeatPassword(),
+                textFieldValue = viewModel.state.repeatPassword,
                 label = stringResource(id = R.string.repeat_new_password),
+                isError = viewModel.state.repeatPasswordError != null,
+                errorValue = viewModel.state.repeatPasswordError?.asString(),
                 onValueChanged = { viewModel.onRepeatPasswordTextChanged(it) },
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
                 focusManager = focusManager,
