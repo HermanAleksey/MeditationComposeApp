@@ -23,7 +23,10 @@ fun SetupNavGraph(
 ) {
 
     fun navigateTo(screen: Screen) {
-        navController.navigate(screen.route)
+        navController.navigate(screen.route) {
+            if (screen.route == Screen.NewPassword.route)
+                popUpTo(Screen.Login.route)
+        }
     }
 
     NavHost(navController = navController, startDestination = Screen.Enter.route) {
