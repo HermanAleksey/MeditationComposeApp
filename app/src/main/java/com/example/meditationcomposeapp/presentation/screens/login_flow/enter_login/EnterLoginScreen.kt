@@ -1,5 +1,6 @@
 package com.example.meditationcomposeapp.presentation.screens.login_flow.enter_login
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -7,6 +8,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -36,7 +38,10 @@ fun EnterLoginScreen(
 ) {
     val focusManager = LocalFocusManager.current
     val repeatPasswordFocusRequester = FocusRequester()
-    viewModel.onEmailTextChanged(initialLoginValue?:"")
+
+    LaunchedEffect(key1 = null, block = {
+        viewModel.onEmailTextChanged(initialLoginValue?:"")
+    })
 
     LoginFlowBackground(
         isLoading = viewModel.isLoading()
