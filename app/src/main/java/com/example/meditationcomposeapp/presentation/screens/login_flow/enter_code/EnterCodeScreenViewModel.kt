@@ -28,7 +28,7 @@ class EnterCodeScreenViewModel @Inject constructor(
 
     fun getCode() = state.code
 
-    fun setDigit(index: Int, value: Int) {
+    fun onCodeDigitChanged(index: Int, value: Int) {
         val newCodeState = state.code.copyOf()
         newCodeState[index] = value
 
