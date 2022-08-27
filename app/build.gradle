@@ -37,6 +37,18 @@ android {
             buildConfigField "String", "SERVER_URL", '"https://192.168.0.1:5000/"'
         }
     }
+
+    flavorDimensions "default"
+
+    productFlavors {
+        demo {
+            buildConfigField "boolean", "ENABLE_VALIDATION", "false"
+        }
+        full {
+            buildConfigField "boolean", "ENABLE_VALIDATION", "true"
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -58,7 +70,7 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation "androidx.core:core-ktx:$ktx_version"
     implementation "androidx.compose.ui:ui:$compose_version"
     implementation "androidx.compose.material:material:$compose_version"
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
@@ -70,7 +82,7 @@ dependencies {
     implementation "androidx.navigation:navigation-compose:$nav_version"
 
     //splash screen
-    implementation 'androidx.core:core-splashscreen:1.0.0-beta02'
+    implementation "androidx.core:core-splashscreen:$splashscreen_version"
 
     //hilt
     implementation "androidx.hilt:hilt-navigation-compose:$hilt_navigation_version"
