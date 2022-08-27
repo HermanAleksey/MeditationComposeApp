@@ -20,6 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.text.isDigitsOnly
+import com.example.meditationcomposeapp.presentation.screens.login_flow.enter_code.EnterCodeScreenState.Companion.EMPTY_NUMBER
 import com.example.meditationcomposeapp.ui.theme.Alegreya
 import com.example.meditationcomposeapp.ui.theme.ColorBackground
 import com.example.meditationcomposeapp.ui.theme.ColorTextHint
@@ -44,7 +45,6 @@ fun CodeNumber(
     value: Int,
     position: Int,
     onCodeDigitChanged: (Int, Int) -> Unit,
-    focusManager: FocusManager,
     focusRequester: FocusRequester,
     nextFocusRequester: FocusRequester? = null,
     previousFocusRequester: FocusRequester? = null,
@@ -56,7 +56,6 @@ fun CodeNumber(
             nextFocusRequester.requestFocus()
         else {
             onLastDigitFilled?.invoke()
-            focusManager.clearFocus()
         }
     }
 
@@ -73,7 +72,7 @@ fun CodeNumber(
     fun onValueChanged(newValue: String){
         //when input is cleared or value is not digit - set emmit [-1]
         if (newValue.isEmpty() || !newValue.isDigitsOnly()) {
-            onCodeDigitChanged(position, -1)
+            onCodeDigitChanged(position, EMPTY_NUMBER)
             return
         }
         processInputtedNumber(newValue)
@@ -81,7 +80,7 @@ fun CodeNumber(
 
     TextField(
         value = value.let {
-            if (it == -1) "" else it.toString()
+            if (it == EMPTY_NUMBER) "" else it.toString()
         },
         textStyle = TextStyle(
             color = Color.White,
@@ -112,7 +111,6 @@ fun CodeNumber(
             .width(55.dp)
             .focusRequester(focusRequester)
     )
-
 }
 
 @Composable
@@ -122,7 +120,6 @@ fun CodeNumberPreview(){
         value = 3,
         position = 1,
         onCodeDigitChanged = { q, w -> },
-        focusManager = LocalFocusManager.current,
         focusRequester = FocusRequester()
     )
 }

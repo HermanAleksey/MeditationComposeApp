@@ -8,9 +8,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
-import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.meditationcomposeapp.presentation.screens.login_flow.enter_code.EnterCodeScreenState.Companion.EMPTY_NUMBER
 
 @Composable
 fun CodePanel(
@@ -18,15 +18,29 @@ fun CodePanel(
     onCodeDigitChanged: (Int, Int) -> Unit,
     onLastDigitFilled: () -> Unit
 ) {
-    val focusManager = LocalFocusManager.current
-    val firstDigitFocusRequester = FocusRequester()
-    val secondDigitFocusRequester = FocusRequester()
-    val thirdDigitFocusRequester = FocusRequester()
-    val fourthDigitFocusRequester = FocusRequester()
-    val fivesDigitFocusRequester = FocusRequester()
+    val focusRequesters = mapOf(
+        0 to FocusRequester(),
+        1 to FocusRequester(),
+        2 to FocusRequester(),
+        3 to FocusRequester(),
+        4 to FocusRequester(),
+    )
+
+    fun setFocusToFirstNotFilledCell() {
+        val notFilledCellIndex = code.indexOfFirst { it == EMPTY_NUMBER }
+        focusRequesters[notFilledCellIndex]?.requestFocus()
+    }
+
+    fun doOnLastDigitFilled() {
+        if (code.all { it != EMPTY_NUMBER }) {
+            onLastDigitFilled()
+        } else {
+            setFocusToFirstNotFilledCell()
+        }
+    }
 
     LaunchedEffect(key1 = true, block = {
-        firstDigitFocusRequester.requestFocus()
+        focusRequesters[0]?.requestFocus()
     })
 
     Row(
@@ -39,47 +53,42 @@ fun CodePanel(
             value = code[0],
             position = 0,
             onCodeDigitChanged = onCodeDigitChanged,
-            focusManager = focusManager,
-            focusRequester = firstDigitFocusRequester,
-            nextFocusRequester = secondDigitFocusRequester,
+            focusRequester = focusRequesters[0]!!,
+            nextFocusRequester = focusRequesters[1],
             previousFocusRequester = null
         )
         CodeNumber(
             value = code[1],
             1,
             onCodeDigitChanged,
-            focusManager = focusManager,
-            focusRequester = secondDigitFocusRequester,
-            nextFocusRequester = thirdDigitFocusRequester,
-            previousFocusRequester = firstDigitFocusRequester
+            focusRequester = focusRequesters[1]!!,
+            nextFocusRequester = focusRequesters[2],
+            previousFocusRequester = focusRequesters[0]
         )
         CodeNumber(
             value = code[2],
             2,
             onCodeDigitChanged,
-            focusManager = focusManager,
-            focusRequester = thirdDigitFocusRequester,
-            nextFocusRequester = fourthDigitFocusRequester,
-            previousFocusRequester = secondDigitFocusRequester
+            focusRequester = focusRequesters[2]!!,
+            nextFocusRequester = focusRequesters[3],
+            previousFocusRequester = focusRequesters[1]
         )
         CodeNumber(
             value = code[3],
             3,
             onCodeDigitChanged,
-            focusManager = focusManager,
-            focusRequester = fourthDigitFocusRequester,
-            nextFocusRequester = fivesDigitFocusRequester,
-            previousFocusRequester = thirdDigitFocusRequester
+            focusRequester = focusRequesters[3]!!,
+            nextFocusRequester = focusRequesters[4],
+            previousFocusRequester = focusRequesters[2]
         )
         CodeNumber(
             value = code[4],
             4,
             onCodeDigitChanged,
-            focusManager = focusManager,
-            focusRequester = fivesDigitFocusRequester,
+            focusRequester = focusRequesters[4]!!,
             nextFocusRequester = null,
-            previousFocusRequester = fourthDigitFocusRequester,
-            onLastDigitFilled = onLastDigitFilled
+            previousFocusRequester = focusRequesters[3],
+            onLastDigitFilled = ::doOnLastDigitFilled
         )
     }
 }
@@ -87,7 +96,7 @@ fun CodePanel(
 @Composable
 @Preview
 fun CodePanelPreview() {
-    CodePanel(code = arrayOf(1, 3, 2, 3, -1), onCodeDigitChanged = { q, w -> }) {
-
-    }
+    CodePanel(
+        code = arrayOf(1, 3, 2, 3, EMPTY_NUMBER),
+        onCodeDigitChanged = { q, w -> }) { }
 }
