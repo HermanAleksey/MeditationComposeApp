@@ -21,8 +21,11 @@ import com.example.meditationcomposeapp.R
 fun AlreadyHaveAccountText(
     modifier: Modifier
 ) {
+
     Text(
         text = buildAnnotatedString {
+            val alreadyHaveAccountLabel = stringResource(id = R.string.already_have_account)
+            val signInLabel = stringResource(id = R.string.sign_in)
             withStyle(
                 style = ParagraphStyle(lineHeight = 20.sp),
             ) {
@@ -32,7 +35,7 @@ fun AlreadyHaveAccountText(
                         fontWeight = FontWeight.W200
                     )
                 ) {
-                    append(stringResource(id = R.string.already_have_account))
+                    alreadyHaveAccountLabel
                 }
                 append(" ")
                 withStyle(
@@ -41,7 +44,7 @@ fun AlreadyHaveAccountText(
                         color = Color.White
                     )
                 ) {
-                    append(stringResource(id = R.string.sign_in))
+                    append(signInLabel)
                 }
             }
         },

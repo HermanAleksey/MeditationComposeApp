@@ -20,6 +20,8 @@ fun DontHaveAccountText(
 ) {
     Text(
         text = buildAnnotatedString {
+            val dontHaveAccountLabel = stringResource(id = R.string.dont_have_account)
+            val signUpLabel = stringResource(id = R.string.sign_up)
             withStyle(
                 style = ParagraphStyle(lineHeight = 20.sp),
             ) {
@@ -29,7 +31,7 @@ fun DontHaveAccountText(
                         fontWeight = FontWeight.W200
                     )
                 ) {
-                    append(stringResource(id = R.string.dont_have_account))
+                    append(dontHaveAccountLabel)
                 }
                 append(" ")
                 withStyle(
@@ -38,7 +40,7 @@ fun DontHaveAccountText(
                         color = Color.White
                     )
                 ) {
-                    append(stringResource(id = R.string.sign_up))
+                    append(signUpLabel)
                 }
             }
         },
