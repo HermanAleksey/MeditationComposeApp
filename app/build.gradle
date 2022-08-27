@@ -48,7 +48,9 @@ android {
             buildConfigField "boolean", "ENABLE_VALIDATION", "true"
         }
     }
-
+    kapt {
+        correctErrorTypes true
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -60,7 +62,7 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion compose_version
+        kotlinCompilerExtensionVersion compose_compiler_version
     }
     packagingOptions {
         resources {
