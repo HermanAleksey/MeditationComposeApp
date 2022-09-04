@@ -21,6 +21,7 @@ fun SetupNavGraph(
         composable(Screen.Splash.route) {
             SplashScreen(
                 viewModel = hiltViewModel(),
+                setStatusBarColor = setStatusBarColor,
                 navigateToEnterScreen = {
                     navController.navigate(Screen.Enter.route) {
                             popUpTo(Screen.Splash.route){

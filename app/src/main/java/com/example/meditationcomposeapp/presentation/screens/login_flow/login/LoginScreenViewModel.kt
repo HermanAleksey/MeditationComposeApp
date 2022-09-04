@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.meditationcomposeapp.data_source.utils.TAG
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.usecase.authentication.LoginUseCase
 import com.example.meditationcomposeapp.model.utils.validation.LoginField
@@ -47,16 +48,16 @@ class LoginScreenViewModel @Inject constructor(
                 loginUseCase.invoke(email, password).collect {
                     when (it) {
                         is NetworkResponse.Success<*> -> {
-                            Log.e(TAG, "${javaClass.canonicalName}: Success")
+                            Log.d(TAG.TAG_D, "${javaClass.canonicalName}: Success")
                             navigateToMainScreen()
                         }
                         is NetworkResponse.Failure<*> -> {
                             //on error show pop-up
-                            Log.e(TAG, "${javaClass.canonicalName}: Error")
+                            Log.d(TAG.TAG_D, "${javaClass.canonicalName}: Error")
                         }
                         is NetworkResponse.Loading<*> -> {
                             setLoading(it.isLoading)
-                            Log.e(TAG, "${javaClass.canonicalName}: Loading:${it.isLoading}")
+                            Log.d(TAG.TAG_D, "${javaClass.canonicalName}: Loading:${it.isLoading}")
                         }
                     }
                 }
@@ -77,8 +78,6 @@ class LoginScreenViewModel @Inject constructor(
             return it.successful
         }
     }
-
-    private val TAG = "TAGG"
 
     fun onSignUpClicked(navigateToEnterLoginScreen: () -> Unit) {
         navigateToEnterLoginScreen()

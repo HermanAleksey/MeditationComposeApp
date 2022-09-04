@@ -1,6 +1,5 @@
 package com.example.meditationcomposeapp.presentation.screens.login_flow.enter_login
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState

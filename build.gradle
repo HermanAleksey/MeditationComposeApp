@@ -8,6 +8,7 @@ buildscript {
         hilt_version = '2.42'
         hilt_navigation_version = '1.0.0'
         splashscreen_version = '1.0.0'
+        data_store_version = '1.0.0'
 
         retrofit_version = '2.9.0'
         okhttp_version = '4.9.3'
