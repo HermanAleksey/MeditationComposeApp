@@ -4,8 +4,8 @@ import com.example.meditationcomposeapp.model.utils.resources.UiText
 
 data class LoginScreenState(
     val isLoading: Boolean = false,
-    val email: String = "",
-    val emailError: UiText? = null,
+    val login: String = "",
+    val loginError: UiText? = null,
     val password: String = "",
     val passwordError: UiText? = null,
 )

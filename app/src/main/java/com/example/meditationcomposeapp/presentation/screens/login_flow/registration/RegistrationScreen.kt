@@ -88,7 +88,7 @@ fun RegistrationScreen(
                 nextFocusRequester = emailFocusRequester
             )
             LoginTextInputField(
-                textFieldValue = viewModel.state.email,
+                textFieldValue = viewModel.state.login,
                 isError = viewModel.state.emailError != null,
                 errorValue = viewModel.state.emailError?.asString(),
                 label = stringResource(id = R.string.email_address),

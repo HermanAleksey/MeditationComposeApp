@@ -26,14 +26,14 @@ class EnterLoginScreenViewModel @Inject constructor(
 
     fun isLoading() = state.isLoading
 
-    fun onEmailTextChanged(value: String) {
-        state = state.copy(email = value)
+    fun onLoginTextChanged(value: String) {
+        state = state.copy(login = value)
     }
 
     fun onConfirmClick(navigateToEnterCodeScreen: () -> Unit) {
         viewModelScope.launch {
             if (isEmailValid())
-                requestPasswordRestorationUseCase.invoke(state.email).collect {
+                requestPasswordRestorationUseCase.invoke(state.login).collect {
                     when (it) {
                         is NetworkResponse.Success<*> -> {
                             printEventLog("EnterLoginScreen", "Success")
@@ -57,7 +57,7 @@ class EnterLoginScreenViewModel @Inject constructor(
     }
 
     private fun isEmailValid(): Boolean {
-        LoginField(state.email).validate().let {
+        LoginField(state.login).validate().let {
             state = state.copy(emailError = it.errorMessage)
             return it.successful
         }

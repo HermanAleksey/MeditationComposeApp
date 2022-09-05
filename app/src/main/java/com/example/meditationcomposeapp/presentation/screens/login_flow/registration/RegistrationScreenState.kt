@@ -6,7 +6,7 @@ data class RegistrationScreenState(
     val isLoading: Boolean = false,
     val name: String = "",
     val nameError: UiText? = null,
-    val email: String = "",
+    val login: String = "",
     val emailError: UiText? = null,
     val password: String = "",
     val passwordError: UiText? = null

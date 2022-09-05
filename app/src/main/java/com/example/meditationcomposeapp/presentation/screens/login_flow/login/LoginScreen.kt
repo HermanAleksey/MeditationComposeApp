@@ -6,8 +6,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Card
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -93,10 +91,10 @@ fun LoginScreen(
                     .alpha(0.7F)
             )
             LoginTextInputField(
-                textFieldValue = viewModel.state.email,
+                textFieldValue = viewModel.state.login,
                 label = stringResource(id = R.string.email_address),
-                isError = viewModel.state.emailError != null,
-                errorValue = viewModel.state.emailError?.asString(),
+                isError = viewModel.state.loginError != null,
+                errorValue = viewModel.state.loginError?.asString(),
                 onValueChanged = { viewModel.onLoginTextChanged(it) },
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
                 focusManager = focusManager,

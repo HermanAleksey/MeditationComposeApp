@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.meditationcomposeapp.data_source.data_store.UserDataStore
 import com.example.meditationcomposeapp.data_source.utils.printEventLog
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.usecase.authentication.LoginUseCase
@@ -16,6 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginScreenViewModel @Inject constructor(
+    private val userDataStore: UserDataStore,
     private val loginUseCase: LoginUseCase
 ) : ViewModel() {
 
@@ -26,7 +28,7 @@ class LoginScreenViewModel @Inject constructor(
     }
 
     fun onLoginTextChanged(value: String) {
-        state = state.copy(email = value)
+        state = state.copy(login = value)
     }
 
     fun onPasswordTextChanged(value: String) {
@@ -34,19 +36,20 @@ class LoginScreenViewModel @Inject constructor(
     }
 
     fun onForgotPasswordClicked(navigateToRestorePasswordScreen: (String) -> Unit) {
-        navigateToRestorePasswordScreen(state.email)
+        navigateToRestorePasswordScreen(state.login)
     }
 
     fun onLoginClicked(navigateToMainScreen: () -> Unit) {
-        val email = state.email
+        val login = state.login
         val password = state.password
 
-        if (validateEmailField(email) && validatePasswordField(password)) {
+        if (validateEmailField(login) && validatePasswordField(password)) {
             viewModelScope.launch {
-                loginUseCase.invoke(email, password).collect {
+                loginUseCase.invoke(login, password).collect {
                     when (it) {
                         is NetworkResponse.Success<*> -> {
                             printEventLog("LoginScreen", "Success")
+                            saveCreditsOnDataStore(login, password)
                             navigateToMainScreen()
                         }
                         is NetworkResponse.Failure<*> -> {
@@ -63,6 +66,13 @@ class LoginScreenViewModel @Inject constructor(
         }
     }
 
+    private suspend fun saveCreditsOnDataStore(login: String, password: String) {
+        with(userDataStore){
+            writeLogin(login)
+            writePassword(password)
+        }
+    }
+
     private fun validatePasswordField(password: String): Boolean {
         PasswordField(password).validate().let {
             state = state.copy(passwordError = it.errorMessage)
@@ -72,7 +82,7 @@ class LoginScreenViewModel @Inject constructor(
 
     private fun validateEmailField(email: String): Boolean {
         LoginField(email).validate().let {
-            state = state.copy(emailError = it.errorMessage)
+            state = state.copy(loginError = it.errorMessage)
             return it.successful
         }
     }

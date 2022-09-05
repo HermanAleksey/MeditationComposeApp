@@ -36,7 +36,7 @@ class RegistrationScreenViewModel @Inject constructor(
 
     fun onLoginTextChanged(value: String) {
         state = state.copy(
-            email = value
+            login = value
         )
     }
 
@@ -53,7 +53,7 @@ class RegistrationScreenViewModel @Inject constructor(
                 isLoginFieldValid() &&
                 isPasswordFieldValid()
             )
-                registerUseCase.invoke(state.name, state.email, state.password).collect {
+                registerUseCase.invoke(state.name, state.login, state.password).collect {
                     when (it) {
                         is NetworkResponse.Success<*> -> {
                             printEventLog("RegistrationScreen","Success")
@@ -84,6 +84,7 @@ class RegistrationScreenViewModel @Inject constructor(
     }
 
     private fun isLoginFieldValid(): Boolean {
+        //todo validate login
         LoginField(state.name).validate().let {
             state = state.copy(emailError = it.errorMessage)
             return it.successful
@@ -91,6 +92,7 @@ class RegistrationScreenViewModel @Inject constructor(
     }
 
     private fun isPasswordFieldValid(): Boolean {
+        //todo validate password
         PasswordField(state.name).validate().let {
             state = state.copy(passwordError = it.errorMessage)
             return it.successful

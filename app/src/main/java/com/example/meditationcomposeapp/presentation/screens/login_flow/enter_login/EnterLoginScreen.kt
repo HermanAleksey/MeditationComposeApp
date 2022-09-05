@@ -39,7 +39,7 @@ fun EnterLoginScreen(
     val repeatPasswordFocusRequester = FocusRequester()
 
     LaunchedEffect(key1 = null, block = {
-        viewModel.onEmailTextChanged(initialLoginValue?:"")
+        viewModel.onLoginTextChanged(initialLoginValue?:"")
     })
 
     LoginFlowBackground(
@@ -79,11 +79,11 @@ fun EnterLoginScreen(
                     .alpha(0.7F)
             )
             LoginTextInputField(
-                textFieldValue = viewModel.state.email,
+                textFieldValue = viewModel.state.login,
                 label = stringResource(id = R.string.email_address),
                 isError = viewModel.state.emailError != null,
                 errorValue = viewModel.state.emailError?.asString(),
-                onValueChanged = { viewModel.onEmailTextChanged(it) },
+                onValueChanged = { viewModel.onLoginTextChanged(it) },
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
                 focusManager = focusManager,
                 focusRequester = repeatPasswordFocusRequester
