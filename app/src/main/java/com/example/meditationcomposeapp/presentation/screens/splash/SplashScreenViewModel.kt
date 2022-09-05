@@ -38,17 +38,17 @@ class SplashScreenViewModel @Inject constructor(
         loginUseCase(login, password).collect {
             when (it) {
                 is NetworkResponse.Success<*> -> {
-                    this.javaClass.printEventLog("Success")
+                    printEventLog("SplashScreen", "Success")
                     navigateToHomeScreen()
                 }
                 is NetworkResponse.Failure<*> -> {
                     //on error show pop-up
-                    this.javaClass.printEventLog("Error")
+                    printEventLog("SplashScreen", "Error")
                 }
                 is NetworkResponse.Loading<*> -> {
                     //todo splash screen loading
 //                    setLoading(it.isLoading)
-                    this.javaClass.printEventLog("Loading:${it.isLoading}")
+                    printEventLog("SplashScreen", "Loading:${it.isLoading}")
                 }
             }
         }

@@ -56,7 +56,7 @@ class RegistrationScreenViewModel @Inject constructor(
                 registerUseCase.invoke(state.name, state.email, state.password).collect {
                     when (it) {
                         is NetworkResponse.Success<*> -> {
-                            this.javaClass.printEventLog("Success")
+                            printEventLog("RegistrationScreen","Success")
                             if (it.data!!.success)
                                 navigateToLoginScreen()
                             else {
@@ -65,10 +65,10 @@ class RegistrationScreenViewModel @Inject constructor(
                         }
                         is NetworkResponse.Failure<*> -> {
                             //on error show pop-up
-                            this.javaClass.printEventLog("Error")
+                            printEventLog("RegistrationScreen","Error")
                         }
                         is NetworkResponse.Loading<*> -> {
-                            this.javaClass.printEventLog("Loading:${it.isLoading}")
+                            printEventLog("RegistrationScreen","Loading:${it.isLoading}")
                             setLoading(it.isLoading)
                         }
                     }

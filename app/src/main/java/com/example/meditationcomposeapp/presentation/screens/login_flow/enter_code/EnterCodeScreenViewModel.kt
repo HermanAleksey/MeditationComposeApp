@@ -1,6 +1,5 @@
 package com.example.meditationcomposeapp.presentation.screens.login_flow.enter_code
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -10,7 +9,6 @@ import com.example.meditationcomposeapp.data_source.utils.printEventLog
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.usecase.authentication.VerifyCodeUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -44,7 +42,7 @@ class EnterCodeScreenViewModel @Inject constructor(
             verifyCodeUseCase.invoke("login", getCodeAsString()).collect {
                 when (it) {
                     is NetworkResponse.Success<*> -> {
-                        this.javaClass.printEventLog("Success")
+                        printEventLog("EnterCodeScreen", "Success")
                         if (it.data!!.success)
                             navigateToNewPasswordScreen()
                         else {
@@ -53,10 +51,10 @@ class EnterCodeScreenViewModel @Inject constructor(
                     }
                     is NetworkResponse.Failure<*> -> {
                         //on error show pop-up
-                        this.javaClass.printEventLog("Error")
+                        printEventLog("EnterCodeScreen", "Error")
                     }
                     is NetworkResponse.Loading<*> -> {
-                        this.javaClass.printEventLog("Loading:${it.isLoading}")
+                        printEventLog("EnterCodeScreen", "Loading:${it.isLoading}")
                         setLoading(it.isLoading)
                     }
                 }

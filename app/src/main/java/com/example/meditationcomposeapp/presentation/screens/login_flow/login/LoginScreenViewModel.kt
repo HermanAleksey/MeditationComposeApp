@@ -46,15 +46,15 @@ class LoginScreenViewModel @Inject constructor(
                 loginUseCase.invoke(email, password).collect {
                     when (it) {
                         is NetworkResponse.Success<*> -> {
-                            this.javaClass.printEventLog("Success")
+                            printEventLog("LoginScreen", "Success")
                             navigateToMainScreen()
                         }
                         is NetworkResponse.Failure<*> -> {
                             //on error show pop-up
-                            this.javaClass.printEventLog("Error")
+                            printEventLog("LoginScreen", "Error")
                         }
                         is NetworkResponse.Loading<*> -> {
-                            this.javaClass.printEventLog("Loading:${it.isLoading}")
+                            printEventLog("LoginScreen", "Loading:${it.isLoading}")
                             setLoading(it.isLoading)
                         }
                     }

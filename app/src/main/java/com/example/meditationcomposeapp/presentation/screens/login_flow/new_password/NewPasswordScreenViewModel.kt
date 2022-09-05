@@ -42,7 +42,7 @@ class NewPasswordScreenViewModel @Inject constructor(
                 setNewPasswordUseCase.invoke("login", state.newPassword).collect {
                     when (it) {
                         is NetworkResponse.Success<*> -> {
-                            this.javaClass.printEventLog("Success")
+                            printEventLog("NewPasswordScreen", "Success")
                             if (it.data!!.success)
                                 navigateToLoginScreen()
                             else {
@@ -51,10 +51,10 @@ class NewPasswordScreenViewModel @Inject constructor(
                         }
                         is NetworkResponse.Failure<*> -> {
                             //on error show pop-up
-                            this.javaClass.printEventLog("Error")
+                            printEventLog("NewPasswordScreen", "Error")
                         }
                         is NetworkResponse.Loading<*> -> {
-                            this.javaClass.printEventLog("Loading:${it.isLoading}")
+                            printEventLog("NewPasswordScreen", "Loading:${it.isLoading}")
                             setLoading(it.isLoading)
                         }
                     }

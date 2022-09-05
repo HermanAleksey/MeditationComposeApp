@@ -19,7 +19,7 @@ fun SplashScreen(
     setStatusBarColor(ColorBrightToolBar.toArgb())
 
     LaunchedEffect(key1 = true, block = {
-        this.javaClass.printEventLog("Launching splash screen")
+        printEventLog("SplashScreen","Launching splash screen")
         viewModel.onLaunchSplashScreen(
             navigateToEnterScreen, navigateToHomeScreen
         )

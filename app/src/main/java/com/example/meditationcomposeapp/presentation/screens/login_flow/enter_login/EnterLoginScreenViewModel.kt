@@ -36,7 +36,7 @@ class EnterLoginScreenViewModel @Inject constructor(
                 requestPasswordRestorationUseCase.invoke(state.email).collect {
                     when (it) {
                         is NetworkResponse.Success<*> -> {
-                            this.javaClass.printEventLog("Success")
+                            printEventLog("EnterLoginScreen", "Success")
                             if (it.data!!.success)
                                 navigateToEnterCodeScreen()
                             else {
@@ -45,10 +45,10 @@ class EnterLoginScreenViewModel @Inject constructor(
                         }
                         is NetworkResponse.Failure<*> -> {
                             //on error show pop-up
-                            this.javaClass.printEventLog("Error")
+                            printEventLog("EnterLoginScreen", "Error")
                         }
                         is NetworkResponse.Loading<*> -> {
-                            this.javaClass.printEventLog("Loading:${it.isLoading}")
+                            printEventLog("EnterLoginScreen", "Loading:${it.isLoading}")
                             setLoading(it.isLoading)
                         }
                     }
