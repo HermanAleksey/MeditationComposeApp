@@ -1,10 +1,9 @@
 package com.example.meditationcomposeapp.presentation.screens.splash
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.meditationcomposeapp.data_source.data_store.UserDataStore
-import com.example.meditationcomposeapp.data_source.utils.TAG
+import com.example.meditationcomposeapp.data_source.utils.printEventLog
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.usecase.authentication.LoginUseCase
 import com.example.meditationcomposeapp.presentation.navigation.navigateFunc
@@ -39,17 +38,17 @@ class SplashScreenViewModel @Inject constructor(
         loginUseCase(login, password).collect {
             when (it) {
                 is NetworkResponse.Success<*> -> {
-                    Log.d(TAG.TAG_D, "${javaClass.canonicalName}: Success")
+                    this.javaClass.printEventLog("Success")
                     navigateToHomeScreen()
                 }
                 is NetworkResponse.Failure<*> -> {
                     //on error show pop-up
-                    Log.d(TAG.TAG_D, "${javaClass.canonicalName}: Error")
+                    this.javaClass.printEventLog("Error")
                 }
                 is NetworkResponse.Loading<*> -> {
                     //todo splash screen loading
 //                    setLoading(it.isLoading)
-                    Log.d(TAG.TAG_D, "${javaClass.canonicalName}: Loading:${it.isLoading}")
+                    this.javaClass.printEventLog("Loading:${it.isLoading}")
                 }
             }
         }

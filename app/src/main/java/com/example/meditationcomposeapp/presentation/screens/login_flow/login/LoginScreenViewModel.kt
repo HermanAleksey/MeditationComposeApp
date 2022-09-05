@@ -1,18 +1,16 @@
 package com.example.meditationcomposeapp.presentation.screens.login_flow.login
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.meditationcomposeapp.data_source.utils.TAG
+import com.example.meditationcomposeapp.data_source.utils.printEventLog
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.usecase.authentication.LoginUseCase
 import com.example.meditationcomposeapp.model.utils.validation.LoginField
 import com.example.meditationcomposeapp.model.utils.validation.PasswordField
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -48,16 +46,16 @@ class LoginScreenViewModel @Inject constructor(
                 loginUseCase.invoke(email, password).collect {
                     when (it) {
                         is NetworkResponse.Success<*> -> {
-                            Log.d(TAG.TAG_D, "${javaClass.canonicalName}: Success")
+                            this.javaClass.printEventLog("Success")
                             navigateToMainScreen()
                         }
                         is NetworkResponse.Failure<*> -> {
                             //on error show pop-up
-                            Log.d(TAG.TAG_D, "${javaClass.canonicalName}: Error")
+                            this.javaClass.printEventLog("Error")
                         }
                         is NetworkResponse.Loading<*> -> {
+                            this.javaClass.printEventLog("Loading:${it.isLoading}")
                             setLoading(it.isLoading)
-                            Log.d(TAG.TAG_D, "${javaClass.canonicalName}: Loading:${it.isLoading}")
                         }
                     }
                 }

@@ -1,18 +1,17 @@
 package com.example.meditationcomposeapp.presentation.screens.login_flow.registration
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.meditationcomposeapp.data_source.utils.printEventLog
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.usecase.authentication.RegisterUseCase
 import com.example.meditationcomposeapp.model.utils.validation.LoginField
 import com.example.meditationcomposeapp.model.utils.validation.NameField
 import com.example.meditationcomposeapp.model.utils.validation.PasswordField
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -57,7 +56,7 @@ class RegistrationScreenViewModel @Inject constructor(
                 registerUseCase.invoke(state.name, state.email, state.password).collect {
                     when (it) {
                         is NetworkResponse.Success<*> -> {
-                            Log.e(TAG, "${javaClass.canonicalName}: Success")
+                            this.javaClass.printEventLog("Success")
                             if (it.data!!.success)
                                 navigateToLoginScreen()
                             else {
@@ -66,11 +65,11 @@ class RegistrationScreenViewModel @Inject constructor(
                         }
                         is NetworkResponse.Failure<*> -> {
                             //on error show pop-up
-                            Log.e(TAG, "${javaClass.canonicalName}: Error")
+                            this.javaClass.printEventLog("Error")
                         }
                         is NetworkResponse.Loading<*> -> {
+                            this.javaClass.printEventLog("Loading:${it.isLoading}")
                             setLoading(it.isLoading)
-                            Log.e(TAG, "${javaClass.canonicalName}: Loading:${it.isLoading}")
                         }
                     }
                 }
@@ -97,8 +96,6 @@ class RegistrationScreenViewModel @Inject constructor(
             return it.successful
         }
     }
-
-    private val TAG = "TAGG"
 
     fun onSignInClicked(navigateToLoginScreen: () -> Unit) {
         navigateToLoginScreen()

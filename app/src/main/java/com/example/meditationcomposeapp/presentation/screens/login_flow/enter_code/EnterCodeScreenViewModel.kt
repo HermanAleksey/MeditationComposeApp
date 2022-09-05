@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.meditationcomposeapp.data_source.utils.printEventLog
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.usecase.authentication.VerifyCodeUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -43,7 +44,7 @@ class EnterCodeScreenViewModel @Inject constructor(
             verifyCodeUseCase.invoke("login", getCodeAsString()).collect {
                 when (it) {
                     is NetworkResponse.Success<*> -> {
-                        Log.e(TAG, "${javaClass.canonicalName}: Success")
+                        this.javaClass.printEventLog("Success")
                         if (it.data!!.success)
                             navigateToNewPasswordScreen()
                         else {
@@ -52,18 +53,16 @@ class EnterCodeScreenViewModel @Inject constructor(
                     }
                     is NetworkResponse.Failure<*> -> {
                         //on error show pop-up
-                        Log.e(TAG, "${javaClass.canonicalName}: Error")
+                        this.javaClass.printEventLog("Error")
                     }
                     is NetworkResponse.Loading<*> -> {
+                        this.javaClass.printEventLog("Loading:${it.isLoading}")
                         setLoading(it.isLoading)
-                        Log.e(TAG, "${javaClass.canonicalName}: Loading:${it.isLoading}")
                     }
                 }
             }
         }
     }
-
-    private val TAG = "TAGG"
 
     private fun getCodeAsString(): String {
         val code = StringBuilder("")

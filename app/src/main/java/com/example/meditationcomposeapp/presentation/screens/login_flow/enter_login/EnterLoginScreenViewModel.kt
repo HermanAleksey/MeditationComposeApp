@@ -1,16 +1,15 @@
 package com.example.meditationcomposeapp.presentation.screens.login_flow.enter_login
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.meditationcomposeapp.data_source.utils.printEventLog
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.usecase.authentication.RequestPasswordRestorationUseCase
 import com.example.meditationcomposeapp.model.utils.validation.LoginField
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -37,7 +36,7 @@ class EnterLoginScreenViewModel @Inject constructor(
                 requestPasswordRestorationUseCase.invoke(state.email).collect {
                     when (it) {
                         is NetworkResponse.Success<*> -> {
-                            Log.e(TAG, "${javaClass.canonicalName}: Success")
+                            this.javaClass.printEventLog("Success")
                             if (it.data!!.success)
                                 navigateToEnterCodeScreen()
                             else {
@@ -46,11 +45,11 @@ class EnterLoginScreenViewModel @Inject constructor(
                         }
                         is NetworkResponse.Failure<*> -> {
                             //on error show pop-up
-                            Log.e(TAG, "${javaClass.canonicalName}: Error")
+                            this.javaClass.printEventLog("Error")
                         }
                         is NetworkResponse.Loading<*> -> {
+                            this.javaClass.printEventLog("Loading:${it.isLoading}")
                             setLoading(it.isLoading)
-                            Log.e(TAG, "${javaClass.canonicalName}: Loading:${it.isLoading}")
                         }
                     }
                 }
@@ -63,6 +62,4 @@ class EnterLoginScreenViewModel @Inject constructor(
             return it.successful
         }
     }
-
-    private val TAG = "TAGG"
 }
