@@ -2,8 +2,9 @@ package com.example.meditationcomposeapp.presentation.screens.main_flow.main_scr
 
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
 
 @Composable
-fun MainScreen() {
-    Text(text = "DUMMY MAIN SCREEN")
+fun MainScreen(navController: NavHostController) {
+    Text(text = "MAIN")
 }

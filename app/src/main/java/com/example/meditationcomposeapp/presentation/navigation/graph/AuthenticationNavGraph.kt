@@ -1,8 +1,10 @@
-package com.example.meditationcomposeapp.presentation.navigation
+package com.example.meditationcomposeapp.presentation.navigation.graph
 
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.*
 import androidx.navigation.compose.composable
+import com.example.meditationcomposeapp.presentation.navigation.Route
+import com.example.meditationcomposeapp.presentation.navigation.Screen
 import com.example.meditationcomposeapp.presentation.screens.login_flow.enter.EnterScreen
 import com.example.meditationcomposeapp.presentation.screens.login_flow.enter_code.EnterCodeScreen
 import com.example.meditationcomposeapp.presentation.screens.login_flow.enter_login.EnterLoginScreen

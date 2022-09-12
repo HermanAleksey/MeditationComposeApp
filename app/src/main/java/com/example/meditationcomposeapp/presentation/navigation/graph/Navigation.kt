@@ -1,4 +1,4 @@
-package com.example.meditationcomposeapp.presentation.navigation
+package com.example.meditationcomposeapp.presentation.navigation.graph
 
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -6,11 +6,14 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.meditationcomposeapp.presentation.navigation.Route
+import com.example.meditationcomposeapp.presentation.navigation.Screen
 import com.example.meditationcomposeapp.presentation.screens.splash.SplashScreen
 
 @Composable
 fun SetupNavGraph(
     setStatusBarColor: (Int) -> Unit,
+    setNavBarVisibility: (Boolean) -> Unit,
     navController: NavHostController
 ) {
     NavHost(
@@ -39,7 +42,7 @@ fun SetupNavGraph(
             )
         }
         authNavGraph(setStatusBarColor, navController)
-        homeNagGraph(navController)
+        homeNavGraph(setNavBarVisibility, navController)
     }
 }
 

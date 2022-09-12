@@ -36,4 +36,9 @@ abstract class UseCaseModule {
         implementation: SetNewPasswordUseCaseImpl
     ): SetNewPasswordUseCase
 
+    @Binds
+    abstract fun  provideClearAuthDataUseCase(
+        implementation: ClearAuthDataUseCaseImpl
+    ): ClearAuthDataUseCase
+
 }

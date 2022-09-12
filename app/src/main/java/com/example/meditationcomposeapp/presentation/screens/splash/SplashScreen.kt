@@ -6,7 +6,7 @@ import androidx.compose.ui.graphics.toArgb
 import com.example.meditationcomposeapp.R
 import com.example.meditationcomposeapp.data_source.utils.printEventLog
 import com.example.meditationcomposeapp.presentation.common_composables.ImageBackground
-import com.example.meditationcomposeapp.presentation.navigation.navigateFunc
+import com.example.meditationcomposeapp.presentation.navigation.graph.navigateFunc
 import com.example.meditationcomposeapp.ui.theme.ColorBrightToolBar
 
 @Composable
