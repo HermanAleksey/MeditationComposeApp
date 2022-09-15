@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="padding_horizontal_main_content">24dp</dimen>
+    <dimen name="height_toolbar">55dp</dimen>
+    //main menu
+    <dimen name="height_menu_item">115dp</dimen>
+    <dimen name="radius_menu_item_corner">26dp</dimen>
+    <dimen name="padding_top_screen_title">46dp</dimen>
+    <dimen name="padding_spacing_menu_item">20dp</dimen>
+</resources>

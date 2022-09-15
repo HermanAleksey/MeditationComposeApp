@@ -13,14 +13,10 @@ import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.ExperimentalUnitApi
-import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.TextUnitType
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.*
 import com.example.meditationcomposeapp.R
 import com.example.meditationcomposeapp.ui.theme.Alegreya
 
@@ -34,12 +30,10 @@ data class MenuItemModel(
 
 @OptIn(ExperimentalUnitApi::class)
 @Composable
-fun MenuItem(model: MenuItemModel) {
+fun MenuItem(modifier: Modifier, model: MenuItemModel) {
     Card(
-        shape = RoundedCornerShape(26.dp),
-        modifier = Modifier
-            .height(115.dp)
-            .width(153.dp)
+        shape = RoundedCornerShape(dimensionResource(id = R.dimen.radius_menu_item_corner)),
+        modifier = modifier
     ) {
         MenuItemBackground(model.backgroundColor, model.foregroundColor)
         Column {
@@ -47,7 +41,7 @@ fun MenuItem(model: MenuItemModel) {
             Row {
                 Spacer(modifier = Modifier.width(12.dp))
                 Image(
-                    painter = painterResource( id = model.painterRes),
+                    painter = painterResource(id = model.painterRes),
                     contentDescription = "",
                     alignment = Alignment.BottomCenter,
                     modifier = Modifier
@@ -59,7 +53,7 @@ fun MenuItem(model: MenuItemModel) {
                 Spacer(modifier = Modifier.width(9.dp))
                 Text(
                     text = model.title,
-                    fontSize = TextUnit(20f, TextUnitType.Sp),
+                    fontSize = 20.sp,
                     color = Color.White,
                     fontFamily = Alegreya,
                     fontWeight = FontWeight.W500

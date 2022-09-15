@@ -3,15 +3,16 @@ package com.example.meditationcomposeapp.presentation.screens.main_flow.main_scr
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.ExperimentalUnitApi
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.meditationcomposeapp.R
 import com.example.meditationcomposeapp.presentation.common_composables.ColorBackground
@@ -63,15 +64,18 @@ fun MainScreen(viewModel: MainViewModel, navController: NavHostController) {
                 modifier = Modifier.fillMaxSize()
             ) {
                 Text(
-                    text = "Tools",
-                    fontSize = TextUnit(35F, TextUnitType.Sp),
+                    text = stringResource(id = R.string.features),
+                    fontSize = 34.sp,
                     color = Color.White,
                     textAlign = TextAlign.Center,
                     fontFamily = Alegreya,
                     fontWeight = FontWeight.W500,
-                    modifier = Modifier.padding(top = 50.dp, start = 24.dp)
+                    modifier = Modifier.padding(
+                        top = dimensionResource(id = R.dimen.padding_top_screen_title),
+                        start = dimensionResource(id = R.dimen.padding_horizontal_main_content)
+                    )
                 )
-                Spacer(modifier = Modifier.height(20.dp))
+                Spacer(modifier = Modifier.padding(top = dimensionResource(id = R.dimen.padding_spacing_menu_item)))
                 MainMenu(menuItems = menuItems)
             }
         }
@@ -82,24 +86,36 @@ fun MainScreen(viewModel: MainViewModel, navController: NavHostController) {
 fun MainMenu(menuItems: List<MenuItemModel>) {
     for (item in menuItems.indices step 2) {
         val rowHasTwoItems = item + 1 < menuItems.size
+        val spacingMenuItem = dimensionResource(R.dimen.padding_spacing_menu_item)
 
         Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(dimensionResource(id = R.dimen.height_menu_item))
+                .padding(horizontal = dimensionResource(R.dimen.padding_horizontal_main_content)),
+            horizontalArrangement = if (rowHasTwoItems)
+                Arrangement.Center else Arrangement.Start
         ) {
             MenuItem(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxHeight(),
                 menuItems[item]
             )
+
+            Spacer(modifier = Modifier.width(spacingMenuItem))
+
             if (rowHasTwoItems) {
-                Spacer(modifier = Modifier.width(20.dp))
                 MenuItem(
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxHeight(),
                     menuItems[item + 1]
                 )
             } else {
-                //todo replace with some resource
-                Spacer(modifier = Modifier.width(20.dp + 153.dp))
+                Spacer(modifier = Modifier.weight(1f))
             }
         }
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(spacingMenuItem))
     }
 }

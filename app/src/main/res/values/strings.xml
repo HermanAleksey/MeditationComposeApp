@@ -23,4 +23,5 @@
     <string name="error_field_is_blank">Field can\'t be empty</string>
     <string name="error_field_is_long">Field is too long</string>
     <string name="passwords_dont_match">Passwords doesn\'t match!</string>
+    <string name="features">Features</string>
 </resources>

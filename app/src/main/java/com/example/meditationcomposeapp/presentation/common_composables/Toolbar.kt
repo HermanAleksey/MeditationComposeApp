@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.meditationcomposeapp.R
@@ -15,11 +16,11 @@ fun Toolbar() {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .height(55.dp)
-            .background(color = com.example.meditationcomposeapp.ui.theme.ColorBackground),
+            .height(dimensionResource(id = R.dimen.height_toolbar))
+            .background(color = com.example.meditationcomposeapp.ui.theme.ColorBackground)
+            .padding(horizontal = dimensionResource(id = R.dimen.padding_horizontal_main_content)),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Spacer(modifier = Modifier.width(25.dp))
         Image(
             painter = painterResource(id = R.drawable.ic_hamburger),
             contentDescription = "ic_hamburger image",
@@ -37,6 +38,5 @@ fun Toolbar() {
             contentDescription = "profile picture image",
             modifier = Modifier.size(22.dp)
         )
-        Spacer(modifier = Modifier.width(25.dp))
     }
 }

@@ -56,14 +56,14 @@ fun EnterScreen(
             }
             Text(
                 text = stringResource(id = R.string.welcome),
-                fontSize = TextUnit(34F, TextUnitType.Sp),
+                fontSize = 34.sp,
                 color = Color.White,
                 fontFamily = Alegreya,
                 fontWeight = FontWeight.W700
             )
             Text(
                 text = stringResource(id = R.string.welcome_text),
-                fontSize = TextUnit(20F, TextUnitType.Sp),
+                fontSize = 20.sp,
                 color = Color.White,
                 textAlign = TextAlign.Center,
                 fontFamily = Alegreya,
