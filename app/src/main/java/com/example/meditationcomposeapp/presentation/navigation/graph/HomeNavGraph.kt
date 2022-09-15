@@ -1,6 +1,7 @@
 package com.example.meditationcomposeapp.presentation.navigation.graph
 
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
@@ -18,10 +19,10 @@ fun NavGraphBuilder.homeNavGraph(
     navigation(
         startDestination = Screen.Main.route,
         route = Route.MAIN.name
-    ){
+    ) {
         composable(Screen.Main.route) {
             setNavBarVisibility(true)
-            MainScreen(navController)
+            MainScreen(viewModel(), navController)
         }
         composable(Screen.Screen2.route) {
             screen2()
