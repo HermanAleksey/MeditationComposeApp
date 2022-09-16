@@ -1,9 +1,9 @@
 package com.example.meditationcomposeapp.di
 
 import com.example.meditationcomposeapp.model.usecase.authentication.*
+import com.example.meditationcomposeapp.model.usecase.random_data.*
 import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 
@@ -41,4 +41,13 @@ abstract class UseCaseModule {
         implementation: ClearAuthDataUseCaseImpl
     ): ClearAuthDataUseCase
 
+    @Binds
+    abstract fun provideGetBeerListUseCase(
+        implementation: GetBeerListUseCaseImpl
+    ): GetBeerListUseCase
+
+    @Binds
+    abstract fun provideGetBeerListUseCase(
+        implementation: GetRandomBeerUseCaseImpl
+    ): GetRandomBeerUseCase
 }

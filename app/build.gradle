@@ -27,6 +27,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 
             buildConfigField "String", "SERVER_URL", '"https://192.168.0.1:5000/"'
+            buildConfigField "String", "RANDOM_DATA_URL", '"https://random-data-api.com/"'
         }
         debug {
             minifyEnabled false
@@ -35,6 +36,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 
             buildConfigField "String", "SERVER_URL", '"https://192.168.0.1:5000/"'
+            buildConfigField "String", "RANDOM_DATA_URL", '"https://random-data-api.com/"'
         }
     }
 
