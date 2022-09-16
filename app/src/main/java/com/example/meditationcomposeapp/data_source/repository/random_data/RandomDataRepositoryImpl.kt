@@ -14,8 +14,8 @@ import javax.inject.Inject
 class RandomDataRepositoryImpl @Inject constructor(
     private val randomDataApi: RandomDataApi,
     private val beerMapper: Mapper<Beer, BeerResponse>
-) {
-    suspend fun getRandomBeer(): Flow<NetworkResponse<Beer>> {
+) : RandomDataRepository{
+    override fun getRandomBeer(): Flow<NetworkResponse<Beer>> {
         return flow {
             emit(NetworkResponse.Loading(true))
             try {
@@ -32,7 +32,7 @@ class RandomDataRepositoryImpl @Inject constructor(
         }
     }
 
-    suspend fun getBeerList(size: Int): Flow<NetworkResponse<List<Beer>>> {
+    override fun getBeerList(size: Int): Flow<NetworkResponse<List<Beer>>> {
         return flow {
             emit(NetworkResponse.Loading(true))
             try {

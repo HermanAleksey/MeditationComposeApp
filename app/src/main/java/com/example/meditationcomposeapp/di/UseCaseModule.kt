@@ -47,7 +47,7 @@ abstract class UseCaseModule {
     ): GetBeerListUseCase
 
     @Binds
-    abstract fun provideGetBeerListUseCase(
+    abstract fun provideGetRandomBeerUseCase(
         implementation: GetRandomBeerUseCaseImpl
     ): GetRandomBeerUseCase
 }
