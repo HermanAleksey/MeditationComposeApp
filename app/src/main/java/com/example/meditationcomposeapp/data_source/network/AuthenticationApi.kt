@@ -11,29 +11,29 @@ import retrofit2.http.POST
 interface AuthenticationApi {
 
     @GET("user/login")
-    fun login(
+    suspend fun login(
         @Field("login") login: String,
         @Field("password") password: String
     ): LoginUserResponse
 
     @POST("user/registration")
-    fun registration(
+    suspend fun registration(
         @Body registrationRequest: RegistrationRequest
     ): SuccessInfo
 
     @GET("user/request_password_restore")
-    fun requestPasswordRestore(
+    suspend fun requestPasswordRestore(
         @Field("login") login: String
     ): SuccessInfo
 
     @GET("user/verify_code")
-    fun verifyCode(
+    suspend fun verifyCode(
         @Field("first_name") login: String,
         @Field("code") code: String
     ): SuccessInfo
 
     @POST("user/reset_password")
-    fun setNewPassword(
+    suspend fun setNewPassword(
         @Field("login") login: String,
         @Body newPassword: String
     ): SuccessInfo

@@ -22,7 +22,7 @@ fun NavGraphBuilder.homeNavGraph(
     ) {
         composable(Screen.Main.route) {
             setNavBarVisibility(true)
-            MainScreen(viewModel(), navController)
+            MainScreen(hiltViewModel(), navController)
         }
         composable(Screen.Screen2.route) {
             screen2()
