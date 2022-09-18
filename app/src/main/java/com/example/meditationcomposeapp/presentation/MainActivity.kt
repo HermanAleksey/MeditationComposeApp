@@ -6,7 +6,9 @@ import android.view.Window
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.*
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -71,13 +73,14 @@ fun MyApp(windows: Window) {
                 }
             },
             modifier = Modifier.fillMaxSize()
-        ) { innerPaddings ->
-            SetupNavGraph(
-                ::setStatusBarColor,
-                ::setBottomBarVisibility,
-                navController = navController,
-                //todo pass paddings and set them [innerPaddings]
-            )
+        ) { innerPadding ->
+            Box(modifier = Modifier.padding(innerPadding)) {
+                SetupNavGraph(
+                    ::setStatusBarColor,
+                    ::setBottomBarVisibility,
+                    navController = navController,
+                )
+            }
         }
     }
 }
