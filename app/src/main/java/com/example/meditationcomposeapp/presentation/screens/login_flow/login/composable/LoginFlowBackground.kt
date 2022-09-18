@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -12,6 +13,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import com.example.meditationcomposeapp.R
 import com.example.meditationcomposeapp.presentation.common_composables.ColorBackground
+import com.example.meditationcomposeapp.ui.theme.colorBackground
 
 @Composable
 fun LoginFlowBackground(
@@ -24,7 +26,7 @@ fun LoginFlowBackground(
             DecorationLeavesBottom()
             content()
         },
-        color = com.example.meditationcomposeapp.ui.theme.ColorBackground,
+        color = MaterialTheme.colors.colorBackground,
         isLoading = isLoading
     )
 }

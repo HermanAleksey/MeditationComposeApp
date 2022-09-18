@@ -1,15 +1,14 @@
 package com.example.meditationcomposeapp.presentation.navigation.graph
 
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.example.meditationcomposeapp.presentation.navigation.Route
 import com.example.meditationcomposeapp.presentation.navigation.Screen
+import com.example.meditationcomposeapp.presentation.screens.main_flow.beer_list.BeerListScreen
 import com.example.meditationcomposeapp.presentation.screens.main_flow.main_screen.MainScreen
-import com.example.meditationcomposeapp.presentation.screens.main_flow.test_screens.screen2
 import com.example.meditationcomposeapp.presentation.screens.main_flow.test_screens.screen3
 
 fun NavGraphBuilder.homeNavGraph(
@@ -24,8 +23,8 @@ fun NavGraphBuilder.homeNavGraph(
             setNavBarVisibility(true)
             MainScreen(hiltViewModel(), navController)
         }
-        composable(Screen.Screen2.route) {
-            screen2()
+        composable(Screen.BeerList.route) {
+            BeerListScreen(hiltViewModel())
         }
         composable(Screen.Screen3.route) {
             screen3(

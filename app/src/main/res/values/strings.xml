@@ -24,4 +24,10 @@
     <string name="error_field_is_long">Field is too long</string>
     <string name="passwords_dont_match">Passwords doesn\'t match!</string>
     <string name="features">Features</string>
+
+    <string name="style_is">Style:</string>
+    <string name="malts_is">Malts:</string>
+    <string name="blg_is">BLG:</string>
+    <string name="alcohol_is">Alcohol:</string>
+    <string name="try_now">Try now</string>
 </resources>

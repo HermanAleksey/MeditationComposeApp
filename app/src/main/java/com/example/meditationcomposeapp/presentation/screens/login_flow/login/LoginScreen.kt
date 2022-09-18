@@ -39,7 +39,6 @@ import com.example.meditationcomposeapp.ui.theme.ColorTextHint
 import com.example.meditationcomposeapp.ui.theme.MeditationComposeAppTheme
 
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun LoginScreen(
     viewModel: LoginScreenViewModel,

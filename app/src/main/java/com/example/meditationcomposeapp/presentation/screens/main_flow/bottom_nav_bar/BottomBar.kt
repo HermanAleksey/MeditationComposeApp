@@ -17,7 +17,7 @@ import com.example.meditationcomposeapp.ui.theme.ColorTextHint
 fun BottomBar(navController: NavHostController) {
     val screens: List<Screen.BottomNavBarScreenItem> = listOf(
         Screen.Main,
-        Screen.Screen2,
+        Screen.BeerList,
         Screen.Screen3
     )
     val navBackStackEntry by navController.currentBackStackEntryAsState()

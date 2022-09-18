@@ -3,8 +3,11 @@ package com.example.meditationcomposeapp.presentation.navigation
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
+import com.example.meditationcomposeapp.R
 
 sealed class Screen(val route: String) {
     open class BottomNavBarScreenItem(
@@ -28,10 +31,10 @@ sealed class Screen(val route: String) {
         title = "Main",
         icon = Icons.Default.Warning
     )
-    object Screen2 : BottomNavBarScreenItem(
-        route = "com.example.meditationcomposeapp.screens.SCREEN_2TEST",
-        title = "Screen_2",
-        icon = Icons.Default.AccountBox
+    object BeerList : BottomNavBarScreenItem(
+        route = "com.example.meditationcomposeapp.screens.BeerList",
+        title = "Beers",
+        icon = Icons.Default.Star
     )
     object Screen3 : BottomNavBarScreenItem(
         route = "com.example.meditationcomposeapp.screens.SCREEN_3TEST",

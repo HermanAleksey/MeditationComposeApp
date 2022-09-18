@@ -17,11 +17,6 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @Composable
-fun screen2() {
-    Text(text = "screen 2")
-}
-
-@Composable
 fun screen3(
     viewModel: testScreenViewModel,
     navigateToEnterScreen: navigateFunc

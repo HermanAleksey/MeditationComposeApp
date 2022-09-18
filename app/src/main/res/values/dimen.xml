@@ -2,9 +2,14 @@
 <resources>
     <dimen name="padding_horizontal_main_content">24dp</dimen>
     <dimen name="height_toolbar">55dp</dimen>
-    //main menu
+
     <dimen name="height_menu_item">115dp</dimen>
     <dimen name="radius_menu_item_corner">26dp</dimen>
     <dimen name="padding_top_screen_title">46dp</dimen>
     <dimen name="padding_spacing_menu_item">20dp</dimen>
+
+    <dimen name="radius_list_item_corner">20dp</dimen>
+    <dimen name="padding_horizontal_list">18dp</dimen>
+    <dimen name="padding_horizontal_list_item">22dp</dimen>
+    <dimen name="padding_vertical_list_item">16dp</dimen>
 </resources>
