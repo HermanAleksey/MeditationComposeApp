@@ -1,6 +1,5 @@
 package com.example.meditationcomposeapp.presentation.screens.main_flow.beer_list.composable
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -23,8 +22,8 @@ fun BeerItem(beer: Beer) {
     Card(
         shape = RoundedCornerShape(dimensionResource(id = R.dimen.radius_list_item_corner)),
         modifier = Modifier
-            .fillMaxWidth()
-            .background(color = MaterialTheme.colors.colorListItemBackground),
+            .fillMaxWidth(),
+        backgroundColor = MaterialTheme.colors.colorListItemBackground
     ) {
         Column(
             modifier = Modifier
@@ -86,7 +85,6 @@ fun BeerItem(beer: Beer) {
             TryNowButton()
         }
     }
-
 }
 
 @Preview
