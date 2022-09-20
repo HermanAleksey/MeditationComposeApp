@@ -11,6 +11,8 @@ import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.usecase.authentication.SetNewPasswordUseCase
 import com.example.meditationcomposeapp.model.utils.resources.UiText
 import com.example.meditationcomposeapp.model.utils.validation.PasswordField
+import com.example.meditationcomposeapp.presentation.screens.destinations.LoginScreenDestination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -36,7 +38,7 @@ class NewPasswordScreenViewModel @Inject constructor(
         state = state.copy(repeatPassword = value)
     }
 
-    fun onConfirmClick(navigateToLoginScreen: () -> Unit) {
+    fun onConfirmClick(navigator: DestinationsNavigator) {
         viewModelScope.launch {
             if (isNewPasswordValid())
                 setNewPasswordUseCase.invoke("login", state.newPassword).collect {
@@ -44,7 +46,9 @@ class NewPasswordScreenViewModel @Inject constructor(
                         is NetworkResponse.Success<*> -> {
                             printEventLog("NewPasswordScreen", "Success")
                             if (it.data!!.success)
-                                navigateToLoginScreen()
+                                navigator.navigate(
+                                    LoginScreenDestination()
+                                )
                             else {
                                 //displayError()
                             }

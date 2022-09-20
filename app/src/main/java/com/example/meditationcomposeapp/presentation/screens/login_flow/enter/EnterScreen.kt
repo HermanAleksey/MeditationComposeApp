@@ -8,33 +8,33 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.*
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.meditationcomposeapp.R
 import com.example.meditationcomposeapp.presentation.common_composables.ImageBackground
-import com.example.meditationcomposeapp.ui.theme.Alegreya
 import com.example.meditationcomposeapp.presentation.screens.login_flow.enter.composable.DontHaveAccountText
 import com.example.meditationcomposeapp.presentation.screens.login_flow.enter.composable.LoginMainButton
-import com.example.meditationcomposeapp.ui.theme.ColorBrightToolBar
+import com.example.meditationcomposeapp.ui.theme.Alegreya
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
-@OptIn(ExperimentalUnitApi::class)
+@Destination
 @Composable
 fun EnterScreen(
     viewModel: EnterScreenViewModel,
-    setStatusBarColor: (Int) -> Unit,
-    navigateToLoginScreen: () -> Unit,
-    navigateToRegistrationScreen: () -> Unit,
+//    setStatusBarColor: (Int) -> Unit,
+    navigator: DestinationsNavigator
 ) {
-    setStatusBarColor(ColorBrightToolBar.toArgb())
+//    setStatusBarColor(ColorBrightToolBar.toArgb())
 
     ImageBackground(
         imageRes = R.drawable.background_login
-    ){
+    ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
@@ -76,12 +76,12 @@ fun EnterScreen(
                     .fillMaxWidth(0.8F)
                     .wrapContentHeight()
             ) {
-                viewModel.onEnterClick(navigateToLoginScreen)
+                viewModel.onEnterClick(navigator)
             }
             DontHaveAccountText(modifier = Modifier
                 .padding(top = 18.dp)
                 .clickable {
-                    viewModel.onDontHaveAccountClick(navigateToRegistrationScreen)
+                    viewModel.onDontHaveAccountClick(navigator)
                 })
         }
     }

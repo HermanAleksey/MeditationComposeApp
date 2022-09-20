@@ -2,31 +2,31 @@ package com.example.meditationcomposeapp.presentation.screens.splash
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.graphics.toArgb
 import com.example.meditationcomposeapp.R
 import com.example.meditationcomposeapp.data_source.utils.printEventLog
 import com.example.meditationcomposeapp.presentation.common_composables.ImageBackground
-import com.example.meditationcomposeapp.presentation.navigation.graph.navigateFunc
-import com.example.meditationcomposeapp.ui.theme.ColorBrightToolBar
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.annotation.RootNavGraph
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
+@RootNavGraph(start = true)
+@Destination
 @Composable
 fun SplashScreen(
     viewModel: SplashScreenViewModel,
-    setStatusBarColor: (Int) -> Unit,
-    navigateToEnterScreen: navigateFunc,
-    navigateToHomeScreen: navigateFunc
+//    setStatusBarColor: (Int) -> Unit,
+    navigator: DestinationsNavigator
 ) {
-    setStatusBarColor(ColorBrightToolBar.toArgb())
+//    setStatusBarColor(ColorBrightToolBar.toArgb())
 
     LaunchedEffect(key1 = true, block = {
-        printEventLog("SplashScreen","Launching splash screen")
+        printEventLog("SplashScreen", "Launching splash screen")
         viewModel.onLaunchSplashScreen(
-            navigateToEnterScreen, navigateToHomeScreen
+            navigator
         )
     })
 
-
     ImageBackground(
         imageRes = R.drawable.background_login
-    ){}
+    ) {}
 }

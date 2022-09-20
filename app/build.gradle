@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'com.google.devtools.ksp' version "$kps_version" // Depends on your kotlin version
 }
 
 android {
@@ -71,6 +72,13 @@ android {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
+    applicationVariants.all { variant ->
+        kotlin.sourceSets {
+            getByName(variant.name) {
+                kotlin.srcDir("build/generated/ksp/${variant.name}/kotlin")
+            }
+        }
+    }
 }
 
 dependencies {
@@ -83,7 +91,10 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     //navigation
-    implementation "androidx.navigation:navigation-compose:$nav_version"
+//    implementation "androidx.navigation:navigation-compose:$nav_version"
+    //raamcosta navigation
+    implementation "io.github.raamcosta.compose-destinations:core:$compose_destination_version"
+    ksp "io.github.raamcosta.compose-destinations:ksp:$compose_destination_version"
 
     //splash screen
     implementation "androidx.core:core-splashscreen:$splashscreen_version"

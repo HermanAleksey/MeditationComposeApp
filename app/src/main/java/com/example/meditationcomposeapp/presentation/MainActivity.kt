@@ -15,10 +15,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.rememberNavController
-import com.example.meditationcomposeapp.presentation.navigation.graph.SetupNavGraph
+import com.example.meditationcomposeapp.presentation.screens.NavGraphs
 import com.example.meditationcomposeapp.presentation.screens.main_flow.bottom_nav_bar.BottomBar
 import com.example.meditationcomposeapp.ui.theme.ColorBackground
 import com.example.meditationcomposeapp.ui.theme.MeditationComposeAppTheme
+import com.ramcosta.composedestinations.DestinationsNavHost
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -75,11 +76,12 @@ fun MyApp(windows: Window) {
             modifier = Modifier.fillMaxSize()
         ) { innerPadding ->
             Box(modifier = Modifier.padding(innerPadding)) {
-                SetupNavGraph(
-                    ::setStatusBarColor,
-                    ::setBottomBarVisibility,
-                    navController = navController,
-                )
+                DestinationsNavHost(navGraph = NavGraphs.root)
+//                SetupNavGraph(
+//                    ::setStatusBarColor,
+//                    ::setBottomBarVisibility,
+//                    navController = navController,
+//                )
             }
         }
     }

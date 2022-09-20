@@ -18,10 +18,14 @@ import com.example.meditationcomposeapp.presentation.common_composables.ColorBac
 import com.example.meditationcomposeapp.presentation.common_composables.Toolbar
 import com.example.meditationcomposeapp.presentation.screens.main_flow.beer_list.composable.BeerItem
 import com.example.meditationcomposeapp.ui.theme.colorBackground
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
+@Destination
 @Composable
 fun BeerListScreen(
-    viewModel: BeerListViewModel
+    viewModel: BeerListViewModel,
+    navigator: DestinationsNavigator
 ) {
     LaunchedEffect(key1 = true, block = {
         viewModel.onFirstLaunch()

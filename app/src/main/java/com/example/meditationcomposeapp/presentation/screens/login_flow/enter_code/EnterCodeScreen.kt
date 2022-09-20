@@ -23,11 +23,14 @@ import com.example.meditationcomposeapp.presentation.screens.login_flow.login.co
 import com.example.meditationcomposeapp.presentation.screens.login_flow.enter_code.composable.CodePanel
 import com.example.meditationcomposeapp.ui.theme.Alegreya
 import com.example.meditationcomposeapp.ui.theme.MeditationComposeAppTheme
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
+@Destination
 @Composable
 fun EnterCodeScreen(
     viewModel: EnterCodeScreenViewModel,
-    navigateToNewPasswordScreen: () -> Unit
+    navigator: DestinationsNavigator
 ) {
     /**
      * Use to transmit navigation method and
@@ -35,7 +38,7 @@ fun EnterCodeScreen(
      * last digit on CodePanel was filled
      * */
     fun onLastDigitFilled() {
-        viewModel.onLastDigitFilled(navigateToNewPasswordScreen)
+        viewModel.onLastDigitFilled(navigator)
     }
 
     LoginFlowBackground(
@@ -77,14 +80,5 @@ fun EnterCodeScreen(
             CodePanel(viewModel.getCode(), viewModel::onCodeDigitChanged, ::onLastDigitFilled)
             Spacer(modifier = Modifier.padding(top = 80.dp))
         }
-
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    MeditationComposeAppTheme {
-        EnterCodeScreen(viewModel = EnterCodeScreenViewModel(hiltViewModel())) {}
     }
 }
