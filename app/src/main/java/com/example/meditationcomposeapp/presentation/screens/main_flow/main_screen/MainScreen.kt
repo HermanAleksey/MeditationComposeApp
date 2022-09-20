@@ -22,7 +22,7 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 @Destination
 @Composable
 fun MainScreen(
-    viewModel: MainViewModel,
+    viewModel: MainScreenViewModel,
     navigator: DestinationsNavigator
 ) {
 

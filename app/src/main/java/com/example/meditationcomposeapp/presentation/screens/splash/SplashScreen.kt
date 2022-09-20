@@ -14,7 +14,6 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 @Composable
 fun SplashScreen(
     viewModel: SplashScreenViewModel,
-//    setStatusBarColor: (Int) -> Unit,
     navigator: DestinationsNavigator
 ) {
 //    setStatusBarColor(ColorBrightToolBar.toArgb())

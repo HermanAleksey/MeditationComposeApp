@@ -16,8 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SplashScreenViewModel @Inject constructor(
-    private val userDataStore: UserDataStore,
-    private val loginUseCase: LoginUseCase
+    val userDataStore: UserDataStore,
+    val loginUseCase: LoginUseCase
 ) : ViewModel() {
 
     fun onLaunchSplashScreen(
