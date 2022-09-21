@@ -60,7 +60,7 @@ fun MyApp(windows: Window) {
         windows.statusBarColor = statusBarColor
         windows.navigationBarColor = ColorBackground.toArgb()
         var bottomBarIsVisible by remember {
-            mutableStateOf(false)
+            mutableStateOf(true)
         }
 
         fun setBottomBarVisibility(isVisible: Boolean) {

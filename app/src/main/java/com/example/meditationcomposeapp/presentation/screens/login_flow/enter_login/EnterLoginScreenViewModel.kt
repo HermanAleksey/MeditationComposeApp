@@ -41,7 +41,7 @@ class EnterLoginScreenViewModel @Inject constructor(
                             printEventLog("EnterLoginScreen", "Success")
                             if (it.data!!.success)
                                 navigator.navigate(
-                                    EnterCodeScreenDestination()
+                                    EnterCodeScreenDestination(state.login)
                                 )
                             else {
                                 //displayError()

@@ -29,6 +29,7 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 @Destination
 @Composable
 fun EnterCodeScreen(
+    login: String,
     viewModel: EnterCodeScreenViewModel,
     navigator: DestinationsNavigator
 ) {
@@ -38,7 +39,7 @@ fun EnterCodeScreen(
      * last digit on CodePanel was filled
      * */
     fun onLastDigitFilled() {
-        viewModel.onLastDigitFilled(navigator)
+        viewModel.onLastDigitFilled(login, navigator)
     }
 
     LoginFlowBackground(
