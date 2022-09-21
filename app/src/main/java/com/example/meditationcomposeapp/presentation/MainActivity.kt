@@ -27,6 +27,7 @@ import com.example.meditationcomposeapp.presentation.screens.login_flow.registra
 import com.example.meditationcomposeapp.presentation.screens.main_flow.beer_list.BeerListScreenViewModel
 import com.example.meditationcomposeapp.presentation.screens.main_flow.bottom_nav_bar.BottomBar
 import com.example.meditationcomposeapp.presentation.screens.main_flow.main_screen.MainScreenViewModel
+import com.example.meditationcomposeapp.presentation.screens.main_flow.test_screens.TestScreenViewModel
 import com.example.meditationcomposeapp.presentation.screens.splash.SplashScreenViewModel
 import com.example.meditationcomposeapp.ui.theme.ColorBackground
 import com.example.meditationcomposeapp.ui.theme.MeditationComposeAppTheme
@@ -88,7 +89,10 @@ fun MyApp(windows: Window) {
             modifier = Modifier.fillMaxSize()
         ) { innerPadding ->
             Box(modifier = Modifier.padding(innerPadding)) {
-                DestinationsNavHost(navGraph = NavGraphs.root, dependenciesContainerBuilder = {
+                DestinationsNavHost(
+                    navGraph = NavGraphs.root,
+                    navController = navController,
+                    dependenciesContainerBuilder = {
                     dependency(SplashScreenDestination) { hiltViewModel<SplashScreenViewModel>() }
                     dependency(EnterScreenDestination) { hiltViewModel<EnterScreenViewModel>() }
                     dependency(EnterCodeScreenDestination) { hiltViewModel<EnterCodeScreenViewModel>() }
@@ -99,6 +103,7 @@ fun MyApp(windows: Window) {
 
                     dependency(BeerListScreenDestination) { hiltViewModel<BeerListScreenViewModel>() }
                     dependency(MainScreenDestination) { hiltViewModel<MainScreenViewModel>() }
+                    dependency(TestScreenDestination) { hiltViewModel<TestScreenViewModel>() }
                 })
             }
         }

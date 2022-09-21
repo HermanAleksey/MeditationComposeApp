@@ -20,8 +20,8 @@ import javax.inject.Inject
 
 @Destination
 @Composable
-fun screen3(
-    viewModel: testScreenViewModel,
+fun TestScreen(
+    viewModel: TestScreenViewModel,
     navigator: DestinationsNavigator
 ) {
     Column(
@@ -40,7 +40,7 @@ fun screen3(
 
 
 @HiltViewModel
-class testScreenViewModel @Inject constructor(
+class TestScreenViewModel @Inject constructor(
     private val clearAuthDataUseCase: ClearAuthDataUseCase
 ) : ViewModel() {
 
