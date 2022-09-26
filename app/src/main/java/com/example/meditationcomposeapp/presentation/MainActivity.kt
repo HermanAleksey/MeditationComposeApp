@@ -17,6 +17,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import com.example.meditationcomposeapp.presentation.screens.NavGraphs
 import com.example.meditationcomposeapp.presentation.screens.destinations.*
 import com.example.meditationcomposeapp.presentation.screens.login_flow.enter.EnterScreenViewModel
@@ -68,7 +70,7 @@ fun MyApp(windows: Window) {
         windows.statusBarColor = statusBarColor
         windows.navigationBarColor = ColorBackground.toArgb()
         var bottomBarIsVisible by remember {
-            mutableStateOf(true)
+            mutableStateOf(false)
         }
 
         fun setBottomBarVisibility(isVisible: Boolean) {
@@ -89,7 +91,19 @@ fun MyApp(windows: Window) {
                         targetOffsetX = { 1000 },
                         animationSpec = tween(700)
                     )
-                }
+                },
+                popEnterTransition = {
+                    slideInHorizontally(
+                        initialOffsetX = { 1000 },
+                        animationSpec = tween(700)
+                    )
+                },
+                popExitTransition = {
+                    slideOutHorizontally(
+                        targetOffsetX = { -1000 },
+                        animationSpec = tween(700)
+                    )
+                },
             )
         )
 
@@ -98,14 +112,10 @@ fun MyApp(windows: Window) {
                 AnimatedVisibility(
                     visible = bottomBarIsVisible,
                     enter = slideInVertically(
-                        initialOffsetY = {
-                            it
-                        }
+                        initialOffsetY = { it }
                     ),
                     exit = slideOutVertically(
-                        targetOffsetY = {
-                            it
-                        }
+                        targetOffsetY = { it }
                     ),
                 ) {
                     BottomBar(navController = navController)
@@ -120,6 +130,7 @@ fun MyApp(windows: Window) {
                     engine = navHostEngine,
                     dependenciesContainerBuilder = {
                         dependency(SplashScreenDestination) { hiltViewModel<SplashScreenViewModel>() }
+                        dependency(EnterScreenDestination) { ::setBottomBarVisibility }
                         dependency(EnterScreenDestination) { hiltViewModel<EnterScreenViewModel>() }
                         dependency(EnterCodeScreenDestination) { hiltViewModel<EnterCodeScreenViewModel>() }
                         dependency(EnterLoginScreenDestination) { hiltViewModel<EnterLoginScreenViewModel>() }
@@ -127,10 +138,12 @@ fun MyApp(windows: Window) {
                         dependency(NewPasswordScreenDestination) { hiltViewModel<NewPasswordScreenViewModel>() }
                         dependency(RegistrationScreenDestination) { hiltViewModel<RegistrationScreenViewModel>() }
 
-                        dependency(BeerListScreenDestination) { hiltViewModel<BeerListScreenViewModel>() }
                         dependency(MainScreenDestination) { hiltViewModel<MainScreenViewModel>() }
+                        dependency(MainScreenDestination) { ::setBottomBarVisibility }
+                        dependency(BeerListScreenDestination) { hiltViewModel<BeerListScreenViewModel>() }
                         dependency(TestScreenDestination) { hiltViewModel<TestScreenViewModel>() }
-                    })
+                    }
+                )
             }
         }
     }

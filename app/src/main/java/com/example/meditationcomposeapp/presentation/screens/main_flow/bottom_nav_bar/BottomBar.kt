@@ -4,12 +4,15 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import com.example.meditationcomposeapp.presentation.screens.NavGraphs
 import com.example.meditationcomposeapp.presentation.screens.appCurrentDestinationAsState
+import com.example.meditationcomposeapp.presentation.screens.destinations.MainScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.TypedDestination
 import com.example.meditationcomposeapp.presentation.screens.startAppDestination
 import com.example.meditationcomposeapp.ui.theme.ColorBackground
 import com.example.meditationcomposeapp.ui.theme.ColorTextHint
+import com.ramcosta.composedestinations.navigation.navigate
 import com.ramcosta.composedestinations.navigation.navigateTo
 
 @Composable
@@ -50,12 +53,14 @@ fun RowScope.AddItem(
         selected = currentDestination == screen.direction,
         unselectedContentColor = LocalContentColor.current.copy(alpha = ContentAlpha.disabled),
         onClick = {
-            navController.navigateTo(screen.direction) {
-                launchSingleTop = true
+            with(navController) {
+                navigate(screen.direction){
+                    popUpTo(MainScreenDestination.route) {
+                        saveState = true
+                    }
+                    launchSingleTop = true
+                }
             }
-//            navigate(screen.direction) {
-//                launchSingleTop = true
-//            }
         }
     )
 }

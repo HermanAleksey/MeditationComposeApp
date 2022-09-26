@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.meditationcomposeapp.model.usecase.authentication.ClearAuthDataUseCase
 import com.example.meditationcomposeapp.presentation.screens.destinations.EnterScreenDestination
+import com.example.meditationcomposeapp.presentation.screens.destinations.SplashScreenDestination
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,7 +23,7 @@ import javax.inject.Inject
 @Composable
 fun TestScreen(
     viewModel: TestScreenViewModel,
-    navigator: DestinationsNavigator
+    navigator: DestinationsNavigator,
 ) {
     Column(
         verticalArrangement = Arrangement.Center,
@@ -41,7 +42,7 @@ fun TestScreen(
 
 @HiltViewModel
 class TestScreenViewModel @Inject constructor(
-    private val clearAuthDataUseCase: ClearAuthDataUseCase
+    private val clearAuthDataUseCase: ClearAuthDataUseCase,
 ) : ViewModel() {
 
     fun onLogOutClicked(navigator: DestinationsNavigator) {
@@ -49,7 +50,9 @@ class TestScreenViewModel @Inject constructor(
             clearAuthDataUseCase()
             navigator.navigate(
                 EnterScreenDestination()
-            )
+            ) {
+                popUpTo(SplashScreenDestination().route)
+            }
         }
     }
 }

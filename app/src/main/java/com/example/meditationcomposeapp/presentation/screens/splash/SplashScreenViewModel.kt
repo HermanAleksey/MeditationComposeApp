@@ -9,6 +9,7 @@ import com.example.meditationcomposeapp.model.usecase.authentication.LoginUseCas
 import com.example.meditationcomposeapp.presentation.screens.destinations.EnterScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.MainScreenDestination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator.popBackStack
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -30,9 +31,11 @@ class SplashScreenViewModel @Inject constructor(
             if (login.isNotEmpty() && password.isNotEmpty()) {
                 logIn(login, password, navigator)
             } else {
-                navigator.navigate(
-                    EnterScreenDestination()
-                )
+                with(navigator) {
+                    navigate(
+                        EnterScreenDestination()
+                    )
+                }
             }
         }
     }
@@ -42,9 +45,11 @@ class SplashScreenViewModel @Inject constructor(
             when (it) {
                 is NetworkResponse.Success<*> -> {
                     printEventLog("SplashScreen", "Success")
-                    navigator.navigate(
-                        MainScreenDestination()
-                    )
+                    with(navigator){
+                        navigate(
+                            MainScreenDestination()
+                        )
+                    }
                 }
                 is NetworkResponse.Failure<*> -> {
                     //on error show pop-up

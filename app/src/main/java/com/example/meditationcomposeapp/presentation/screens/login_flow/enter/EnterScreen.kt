@@ -1,5 +1,7 @@
 package com.example.meditationcomposeapp.presentation.screens.login_flow.enter
 
+import android.app.Activity
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -9,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -26,11 +29,17 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 @Destination
 @Composable
 fun EnterScreen(
+    setBottomNavBarVisible: (Boolean) -> Unit,
     viewModel: EnterScreenViewModel,
 //    setStatusBarColor: (Int) -> Unit,
-    navigator: DestinationsNavigator
+    navigator: DestinationsNavigator,
 ) {
+    setBottomNavBarVisible(false)
 //    setStatusBarColor(ColorBrightToolBar.toArgb())
+    val activity = LocalContext.current as? Activity
+    BackHandler(enabled = true, onBack = {
+        activity?.finish()
+    })
 
     ImageBackground(
         imageRes = R.drawable.background_login
