@@ -11,6 +11,11 @@ import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.usecase.authentication.LoginUseCase
 import com.example.meditationcomposeapp.model.utils.validation.LoginField
 import com.example.meditationcomposeapp.model.utils.validation.PasswordField
+import com.example.meditationcomposeapp.presentation.screens.destinations.EnterLoginScreenDestination
+import com.example.meditationcomposeapp.presentation.screens.destinations.EnterScreenDestination
+import com.example.meditationcomposeapp.presentation.screens.destinations.MainScreenDestination
+import com.example.meditationcomposeapp.presentation.screens.destinations.NewPasswordScreenDestination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -35,11 +40,13 @@ class LoginScreenViewModel @Inject constructor(
         state = state.copy(password = value)
     }
 
-    fun onForgotPasswordClicked(navigateToRestorePasswordScreen: (String) -> Unit) {
-        navigateToRestorePasswordScreen(state.login)
+    fun onForgotPasswordClicked(navigator: DestinationsNavigator) {
+        navigator.navigate(
+            EnterLoginScreenDestination(state.login)
+        )
     }
 
-    fun onLoginClicked(navigateToMainScreen: () -> Unit) {
+    fun onLoginClicked(navigator: DestinationsNavigator) {
         val login = state.login
         val password = state.password
 
@@ -50,7 +57,9 @@ class LoginScreenViewModel @Inject constructor(
                         is NetworkResponse.Success<*> -> {
                             printEventLog("LoginScreen", "Success")
                             saveCreditsOnDataStore(login, password)
-                            navigateToMainScreen()
+                            navigator.navigate(
+                                MainScreenDestination()
+                            )
                         }
                         is NetworkResponse.Failure<*> -> {
                             //on error show pop-up
@@ -87,7 +96,9 @@ class LoginScreenViewModel @Inject constructor(
         }
     }
 
-    fun onSignUpClicked(navigateToEnterLoginScreen: () -> Unit) {
-        navigateToEnterLoginScreen()
+    fun onSignUpClicked(navigator: DestinationsNavigator) {
+        navigator.navigate(
+            EnterScreenDestination()
+        )
     }
 }

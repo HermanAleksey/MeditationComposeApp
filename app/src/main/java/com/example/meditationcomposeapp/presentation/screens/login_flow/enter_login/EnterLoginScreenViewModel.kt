@@ -9,6 +9,8 @@ import com.example.meditationcomposeapp.data_source.utils.printEventLog
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.usecase.authentication.RequestPasswordRestorationUseCase
 import com.example.meditationcomposeapp.model.utils.validation.LoginField
+import com.example.meditationcomposeapp.presentation.screens.destinations.EnterCodeScreenDestination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -30,7 +32,7 @@ class EnterLoginScreenViewModel @Inject constructor(
         state = state.copy(login = value)
     }
 
-    fun onConfirmClick(navigateToEnterCodeScreen: () -> Unit) {
+    fun onConfirmClick(navigator: DestinationsNavigator) {
         viewModelScope.launch {
             if (isEmailValid())
                 requestPasswordRestorationUseCase.invoke(state.login).collect {
@@ -38,7 +40,9 @@ class EnterLoginScreenViewModel @Inject constructor(
                         is NetworkResponse.Success<*> -> {
                             printEventLog("EnterLoginScreen", "Success")
                             if (it.data!!.success)
-                                navigateToEnterCodeScreen()
+                                navigator.navigate(
+                                    EnterCodeScreenDestination(state.login)
+                                )
                             else {
                                 //displayError()
                             }

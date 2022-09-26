@@ -28,12 +28,15 @@ import com.example.meditationcomposeapp.presentation.screens.login_flow.enter.co
 import com.example.meditationcomposeapp.presentation.screens.login_flow.login.composable.LoginFlowBackground
 import com.example.meditationcomposeapp.presentation.screens.login_flow.login.composable.LoginTextInputField
 import com.example.meditationcomposeapp.ui.theme.Alegreya
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
+@Destination
 @Composable
 fun EnterLoginScreen(
     initialLoginValue: String?,
     viewModel: EnterLoginScreenViewModel,
-    navigateToEnterCodeScreen: () -> Unit
+    navigator: DestinationsNavigator
 ) {
     val focusManager = LocalFocusManager.current
     val repeatPasswordFocusRequester = FocusRequester()
@@ -95,7 +98,7 @@ fun EnterLoginScreen(
                     .wrapContentHeight()
                     .padding(top = 28.dp)
             ) {
-                viewModel.onConfirmClick(navigateToEnterCodeScreen)
+                viewModel.onConfirmClick(navigator)
             }
         }
     }

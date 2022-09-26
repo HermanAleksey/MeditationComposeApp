@@ -11,6 +11,8 @@ import com.example.meditationcomposeapp.model.usecase.authentication.RegisterUse
 import com.example.meditationcomposeapp.model.utils.validation.LoginField
 import com.example.meditationcomposeapp.model.utils.validation.NameField
 import com.example.meditationcomposeapp.model.utils.validation.PasswordField
+import com.example.meditationcomposeapp.presentation.screens.destinations.LoginScreenDestination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -46,7 +48,7 @@ class RegistrationScreenViewModel @Inject constructor(
         )
     }
 
-    fun onSignUpClicked(navigateToLoginScreen: () -> Unit) {
+    fun onSignUpClicked(navigator: DestinationsNavigator) {
         viewModelScope.launch {
             if (
                 isNameFieldValid() &&
@@ -58,7 +60,9 @@ class RegistrationScreenViewModel @Inject constructor(
                         is NetworkResponse.Success<*> -> {
                             printEventLog("RegistrationScreen","Success")
                             if (it.data!!.success)
-                                navigateToLoginScreen()
+                                navigator.navigate(
+                                    LoginScreenDestination()
+                                )
                             else {
                                 //displayError()
                             }
@@ -99,7 +103,9 @@ class RegistrationScreenViewModel @Inject constructor(
         }
     }
 
-    fun onSignInClicked(navigateToLoginScreen: () -> Unit) {
-        navigateToLoginScreen()
+    fun onSignInClicked(navigator: DestinationsNavigator) {
+        navigator.navigate(
+            LoginScreenDestination()
+        )
     }
 }

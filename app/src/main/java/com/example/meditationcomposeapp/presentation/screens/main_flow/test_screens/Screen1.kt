@@ -11,15 +11,19 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.meditationcomposeapp.model.usecase.authentication.ClearAuthDataUseCase
-import com.example.meditationcomposeapp.presentation.navigation.graph.navigateFunc
+import com.example.meditationcomposeapp.presentation.screens.destinations.EnterScreenDestination
+import com.example.meditationcomposeapp.presentation.screens.destinations.SplashScreenDestination
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@Destination
 @Composable
-fun screen3(
-    viewModel: testScreenViewModel,
-    navigateToEnterScreen: navigateFunc
+fun TestScreen(
+    viewModel: TestScreenViewModel,
+    navigator: DestinationsNavigator,
 ) {
     Column(
         verticalArrangement = Arrangement.Center,
@@ -28,7 +32,7 @@ fun screen3(
     ) {
         Text(text = "screen  3")
         Button(onClick = {
-            viewModel.logOut(navigateToEnterScreen)
+            viewModel.onLogOutClicked(navigator)
         }) {
             Text(text = "Log out")
         }
@@ -37,14 +41,18 @@ fun screen3(
 
 
 @HiltViewModel
-class testScreenViewModel @Inject constructor(
-    private val clearAuthDataUseCase: ClearAuthDataUseCase
+class TestScreenViewModel @Inject constructor(
+    private val clearAuthDataUseCase: ClearAuthDataUseCase,
 ) : ViewModel() {
 
-    fun logOut(navigateToEnterScreen: navigateFunc) {
+    fun onLogOutClicked(navigator: DestinationsNavigator) {
         viewModelScope.launch {
             clearAuthDataUseCase()
-            navigateToEnterScreen()
+            navigator.navigate(
+                EnterScreenDestination()
+            ) {
+                popUpTo(SplashScreenDestination().route)
+            }
         }
     }
 }

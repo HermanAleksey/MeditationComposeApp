@@ -8,13 +8,16 @@ import androidx.lifecycle.viewModelScope
 import com.example.meditationcomposeapp.data_source.utils.printEventLog
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.usecase.authentication.VerifyCodeUseCase
+import com.example.meditationcomposeapp.presentation.screens.destinations.LoginScreenDestination
+import com.example.meditationcomposeapp.presentation.screens.destinations.NewPasswordScreenDestination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class EnterCodeScreenViewModel @Inject constructor(
-    private val verifyCodeUseCase: VerifyCodeUseCase
+    private val verifyCodeUseCase: VerifyCodeUseCase,
 ) : ViewModel() {
 
     private var state by mutableStateOf(EnterCodeScreenState())
@@ -36,15 +39,21 @@ class EnterCodeScreenViewModel @Inject constructor(
         )
     }
 
-    fun onLastDigitFilled(navigateToNewPasswordScreen: () -> Unit) {
+    fun onLastDigitFilled(login: String, navigator: DestinationsNavigator) {
         //TODO login has to be passed from previous screen
         viewModelScope.launch {
-            verifyCodeUseCase.invoke("login", getCodeAsString()).collect {
+            verifyCodeUseCase.invoke(login, getCodeAsString()).collect {
                 when (it) {
                     is NetworkResponse.Success<*> -> {
                         printEventLog("EnterCodeScreen", "Success")
                         if (it.data!!.success)
-                            navigateToNewPasswordScreen()
+                            navigator.navigate(
+                                route = NewPasswordScreenDestination().route,
+                                onlyIfResumed = false,
+                                builder = {
+                                    popUpTo(LoginScreenDestination().route)
+                                }
+                            )
                         else {
                             //displayError()
                         }

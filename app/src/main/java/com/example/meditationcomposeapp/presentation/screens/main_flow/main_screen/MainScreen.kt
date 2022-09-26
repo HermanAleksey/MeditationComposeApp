@@ -1,30 +1,40 @@
 package com.example.meditationcomposeapp.presentation.screens.main_flow.main_screen
 
+import android.app.Activity
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.ExperimentalUnitApi
-import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
 import com.example.meditationcomposeapp.R
 import com.example.meditationcomposeapp.presentation.common_composables.ColorBackground
 import com.example.meditationcomposeapp.presentation.common_composables.Toolbar
 import com.example.meditationcomposeapp.presentation.screens.main_flow.main_screen.composable.MenuItem
 import com.example.meditationcomposeapp.presentation.screens.main_flow.main_screen.composable.MenuItemModel
 import com.example.meditationcomposeapp.ui.theme.Alegreya
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
-@OptIn(ExperimentalUnitApi::class)
+@Destination
 @Composable
-fun MainScreen(viewModel: MainViewModel, navController: NavHostController) {
+fun MainScreen(
+    setBottomNavBarVisible: (Boolean) -> Unit,
+    viewModel: MainScreenViewModel,
+    navigator: DestinationsNavigator,
+) {
+    setBottomNavBarVisible(true)
+    val activity = LocalContext.current as? Activity
+    BackHandler(enabled = true, onBack = {
+        activity?.finish()
+    })
+
     val menuItems = listOf(
         MenuItemModel(
             title = "Super Title",

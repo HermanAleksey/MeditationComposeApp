@@ -9,13 +9,11 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
@@ -24,30 +22,26 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toUpperCase
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.meditationcomposeapp.R
 import com.example.meditationcomposeapp.presentation.screens.login_flow.enter.composable.DontHaveAccountText
 import com.example.meditationcomposeapp.presentation.screens.login_flow.enter.composable.LoginMainButton
 import com.example.meditationcomposeapp.presentation.screens.login_flow.login.composable.LoginFlowBackground
 import com.example.meditationcomposeapp.presentation.screens.login_flow.login.composable.LoginTextInputField
 import com.example.meditationcomposeapp.ui.theme.Alegreya
-import com.example.meditationcomposeapp.ui.theme.ColorBackground
 import com.example.meditationcomposeapp.ui.theme.ColorTextHint
-import com.example.meditationcomposeapp.ui.theme.MeditationComposeAppTheme
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
-
+@Destination
 @Composable
 fun LoginScreen(
     viewModel: LoginScreenViewModel,
-    setStatusBarColor: (Int) -> Unit,
-    navigateToEnterLoginScreen: (String) -> Unit,
-    navigateToMainScreen: () -> Unit,
-    navigateToRegistrationScreen: () -> Unit,
+//    setStatusBarColor: (Int) -> Unit,
+    navigator: DestinationsNavigator
 ) {
-    setStatusBarColor(ColorBackground.toArgb())
+//    setStatusBarColor(ColorBackground.toArgb())
 
     val focusManager = LocalFocusManager.current
     val passwordFocusRequester = FocusRequester()
@@ -124,9 +118,7 @@ fun LoginScreen(
                     modifier = Modifier
                         .padding(top = 9.dp)
                         .clickable {
-                            viewModel.onForgotPasswordClicked(
-                                navigateToEnterLoginScreen
-                            )
+                            viewModel.onForgotPasswordClicked(navigator)
                         }
                 )
             }
@@ -137,7 +129,7 @@ fun LoginScreen(
                     .wrapContentHeight()
                     .padding(top = 28.dp)
             ) {
-                viewModel.onLoginClicked(navigateToMainScreen)
+                viewModel.onLoginClicked(navigator)
             }
             Box(
                 modifier = Modifier
@@ -149,23 +141,10 @@ fun LoginScreen(
                 DontHaveAccountText(modifier = Modifier
                     .padding(top = 18.dp)
                     .clickable {
-                        viewModel.onSignUpClicked(navigateToRegistrationScreen)
+                        viewModel.onSignUpClicked(navigator)
                     })
             }
             Spacer(modifier = Modifier.padding(top = 80.dp))
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    MeditationComposeAppTheme {
-        LoginScreen(
-            viewModel = viewModel(),
-            setStatusBarColor = {},
-            navigateToEnterLoginScreen = { },
-            navigateToMainScreen = { },
-            navigateToRegistrationScreen = {})
     }
 }

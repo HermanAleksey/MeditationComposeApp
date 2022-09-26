@@ -4,8 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -18,10 +16,14 @@ import com.example.meditationcomposeapp.presentation.common_composables.ColorBac
 import com.example.meditationcomposeapp.presentation.common_composables.Toolbar
 import com.example.meditationcomposeapp.presentation.screens.main_flow.beer_list.composable.BeerItem
 import com.example.meditationcomposeapp.ui.theme.colorBackground
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
+@Destination
 @Composable
 fun BeerListScreen(
-    viewModel: BeerListViewModel
+    viewModel: BeerListScreenViewModel,
+    navigator: DestinationsNavigator
 ) {
     LaunchedEffect(key1 = true, block = {
         viewModel.onFirstLaunch()

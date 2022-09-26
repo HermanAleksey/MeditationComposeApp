@@ -10,7 +10,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
@@ -27,15 +26,17 @@ import com.example.meditationcomposeapp.presentation.screens.login_flow.login.co
 import com.example.meditationcomposeapp.presentation.screens.login_flow.login.composable.LoginTextInputField
 import com.example.meditationcomposeapp.presentation.screens.login_flow.registration.composable.AlreadyHaveAccountText
 import com.example.meditationcomposeapp.ui.theme.Alegreya
-import com.example.meditationcomposeapp.ui.theme.ColorBackground
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
+@Destination
 @Composable
 fun RegistrationScreen(
     viewModel: RegistrationScreenViewModel,
-    setStatusBarColor: (Int) -> Unit,
-    navigateToLoginScreen: () -> Unit
+//    setStatusBarColor: (Int) -> Unit,
+    navigator: DestinationsNavigator
 ) {
-    setStatusBarColor(ColorBackground.toArgb())
+//    setStatusBarColor(ColorBackground.toArgb())
 
     val focusManager = LocalFocusManager.current
     val passwordFocusRequester = FocusRequester()
@@ -115,7 +116,7 @@ fun RegistrationScreen(
                     .wrapContentHeight()
                     .padding(top = 28.dp)
             ) {
-                viewModel.onSignUpClicked(navigateToLoginScreen)
+                viewModel.onSignUpClicked(navigator)
             }
             Box(
                 modifier = Modifier
@@ -127,7 +128,7 @@ fun RegistrationScreen(
                 AlreadyHaveAccountText(modifier = Modifier
                     .padding(top = 18.dp)
                     .clickable {
-                        viewModel.onSignInClicked(navigateToLoginScreen)
+                        viewModel.onSignInClicked(navigator)
                     })
             }
             Spacer(modifier = Modifier.padding(top = 80.dp))

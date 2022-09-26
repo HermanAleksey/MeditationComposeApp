@@ -3,31 +3,28 @@ package com.example.meditationcomposeapp.presentation.screens.main_flow.bottom_n
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.navigation.NavDestination
-import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.currentBackStackEntryAsState
-import com.example.meditationcomposeapp.presentation.navigation.Screen
+import com.example.meditationcomposeapp.presentation.screens.NavGraphs
+import com.example.meditationcomposeapp.presentation.screens.appCurrentDestinationAsState
+import com.example.meditationcomposeapp.presentation.screens.destinations.MainScreenDestination
+import com.example.meditationcomposeapp.presentation.screens.destinations.TypedDestination
+import com.example.meditationcomposeapp.presentation.screens.startAppDestination
 import com.example.meditationcomposeapp.ui.theme.ColorBackground
 import com.example.meditationcomposeapp.ui.theme.ColorTextHint
+import com.ramcosta.composedestinations.navigation.navigate
+import com.ramcosta.composedestinations.navigation.navigateTo
 
 @Composable
-fun BottomBar(navController: NavHostController) {
-    val screens: List<Screen.BottomNavBarScreenItem> = listOf(
-        Screen.Main,
-        Screen.BeerList,
-        Screen.Screen3
-    )
-    val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentDestination = navBackStackEntry?.destination
+fun BottomBar(navController: NavController) {
+    val currentDestination = navController.appCurrentDestinationAsState().value
+        ?: NavGraphs.root.startAppDestination
 
     BottomNavigation(
         backgroundColor = ColorBackground,
         contentColor = ColorTextHint
     ) {
-        screens.forEach { screen ->
+        BottomBarDestinations.values().forEach { screen ->
             AddItem(
                 screen = screen,
                 currentDestination = currentDestination,
@@ -39,9 +36,9 @@ fun BottomBar(navController: NavHostController) {
 
 @Composable
 fun RowScope.AddItem(
-    screen: Screen.BottomNavBarScreenItem,
-    currentDestination: NavDestination?,
-    navController: NavHostController
+    screen: BottomBarDestinations,
+    currentDestination: TypedDestination<*>?,
+    navController: NavController,
 ) {
     BottomNavigationItem(
         label = {
@@ -53,14 +50,16 @@ fun RowScope.AddItem(
                 contentDescription = "${screen.title} navigation icon"
             )
         },
-        selected = currentDestination?.hierarchy?.any {
-            it.route == screen.route
-        } == true,
+        selected = currentDestination == screen.direction,
         unselectedContentColor = LocalContentColor.current.copy(alpha = ContentAlpha.disabled),
         onClick = {
-            navController.navigate(screen.route) {
-                popUpTo(navController.graph.findStartDestination().id)
-                launchSingleTop = true
+            with(navController) {
+                navigate(screen.direction){
+                    popUpTo(MainScreenDestination.route) {
+                        saveState = true
+                    }
+                    launchSingleTop = true
+                }
             }
         }
     )
