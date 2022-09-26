@@ -2,6 +2,7 @@ package com.example.meditationcomposeapp.presentation
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.Window
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -58,10 +59,13 @@ class MainActivity : ComponentActivity() {
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun MyApp(windows: Window) {
+    val displayMetrics = DisplayMetrics()
+    windows.windowManager.defaultDisplay.getMetrics(displayMetrics)
+    val screenWidth = displayMetrics.widthPixels
+
     val navController = rememberAnimatedNavController()
 
     val statusBarColor = ColorBackground.toArgb()
-
     fun setStatusBarColor(color: Int) {
         windows.statusBarColor = color
     }
@@ -82,25 +86,25 @@ fun MyApp(windows: Window) {
             rootDefaultAnimations = RootNavGraphDefaultAnimations(
                 enterTransition = {
                     slideInHorizontally(
-                        initialOffsetX = { -1000 },
+                        initialOffsetX = { -screenWidth },
                         animationSpec = tween(700)
                     )
                 },
                 exitTransition = {
                     slideOutHorizontally(
-                        targetOffsetX = { 1000 },
+                        targetOffsetX = { screenWidth },
                         animationSpec = tween(700)
                     )
                 },
                 popEnterTransition = {
                     slideInHorizontally(
-                        initialOffsetX = { 1000 },
+                        initialOffsetX = { screenWidth },
                         animationSpec = tween(700)
                     )
                 },
                 popExitTransition = {
                     slideOutHorizontally(
-                        targetOffsetX = { -1000 },
+                        targetOffsetX = { -screenWidth },
                         animationSpec = tween(700)
                     )
                 },
