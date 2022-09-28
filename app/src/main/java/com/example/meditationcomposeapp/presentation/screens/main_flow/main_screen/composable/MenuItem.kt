@@ -5,6 +5,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -16,7 +17,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.*
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.meditationcomposeapp.R
 import com.example.meditationcomposeapp.ui.theme.Alegreya
 
@@ -24,16 +26,17 @@ data class MenuItemModel(
     val title: String,
     val painterRes: Int,
     val backgroundColor: Color,
-    val foregroundColor: Color
-    //todo add navigation to screen params
+    val foregroundColor: Color,
+    val onClick: () -> Unit = {},
 )
 
-@OptIn(ExperimentalUnitApi::class)
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun MenuItem(modifier: Modifier, model: MenuItemModel) {
     Card(
         shape = RoundedCornerShape(dimensionResource(id = R.dimen.radius_menu_item_corner)),
-        modifier = modifier
+        modifier = modifier,
+        onClick = { model.onClick() }
     ) {
         MenuItemBackground(model.backgroundColor, model.foregroundColor)
         Column {

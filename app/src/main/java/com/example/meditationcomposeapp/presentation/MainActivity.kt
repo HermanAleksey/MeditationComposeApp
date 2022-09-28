@@ -18,8 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
-import androidx.navigation.NavDestination
 import com.example.meditationcomposeapp.presentation.screens.NavGraphs
 import com.example.meditationcomposeapp.presentation.screens.destinations.*
 import com.example.meditationcomposeapp.presentation.screens.login_flow.enter.EnterScreenViewModel
@@ -31,6 +29,8 @@ import com.example.meditationcomposeapp.presentation.screens.login_flow.registra
 import com.example.meditationcomposeapp.presentation.screens.main_flow.beer_list.BeerListScreenViewModel
 import com.example.meditationcomposeapp.presentation.screens.main_flow.bottom_nav_bar.BottomBar
 import com.example.meditationcomposeapp.presentation.screens.main_flow.main_screen.MainScreenViewModel
+import com.example.meditationcomposeapp.presentation.screens.main_flow.shuffle_puzzle.ShufflePuzzleScreen
+import com.example.meditationcomposeapp.presentation.screens.main_flow.shuffle_puzzle.ShufflePuzzleScreenViewModel
 import com.example.meditationcomposeapp.presentation.screens.main_flow.test_screens.TestScreenViewModel
 import com.example.meditationcomposeapp.presentation.screens.splash.SplashScreenViewModel
 import com.example.meditationcomposeapp.ui.theme.ColorBackground
@@ -42,6 +42,7 @@ import com.ramcosta.composedestinations.animations.defaults.RootNavGraphDefaultA
 import com.ramcosta.composedestinations.animations.rememberAnimatedNavHostEngine
 import com.ramcosta.composedestinations.navigation.dependency
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -145,6 +146,7 @@ fun MyApp(windows: Window) {
                         dependency(MainScreenDestination) { hiltViewModel<MainScreenViewModel>() }
                         dependency(MainScreenDestination) { ::setBottomBarVisibility }
                         dependency(BeerListScreenDestination) { hiltViewModel<BeerListScreenViewModel>() }
+                        dependency(ShufflePuzzleScreenDestination) { hiltViewModel<ShufflePuzzleScreenViewModel>() }
                         dependency(TestScreenDestination) { hiltViewModel<TestScreenViewModel>() }
                     }
                 )

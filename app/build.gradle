@@ -83,6 +83,8 @@ android {
 }
 
 dependencies {
+    implementation project(':shuffle_puzzle')
+
     implementation "androidx.core:core-ktx:$ktx_version"
     implementation "androidx.compose.ui:ui:$compose_version"
     implementation "androidx.compose.material:material:$compose_version"

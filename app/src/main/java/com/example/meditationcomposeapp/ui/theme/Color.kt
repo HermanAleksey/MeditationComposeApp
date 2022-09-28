@@ -29,3 +29,7 @@ val Colors.colorListItemBackground: Color
 val Colors.colorText: Color
     @Composable
     get() = Color(0xFF253334)
+
+val Colors.colorPopUpBackground
+    @Composable
+    get() = Color(0xFFE5E5E5)

@@ -13,4 +13,7 @@
     <dimen name="padding_vertical_list_item">16dp</dimen>
 
     <dimen name="padding_horizontal_list">16dp</dimen>
+
+    <dimen name="radius_pop_up_corner">20dp</dimen>
+
 </resources>
