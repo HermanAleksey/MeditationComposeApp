@@ -5,7 +5,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import com.example.shuffle_puzzle.model.Piece
 import com.example.shuffle_puzzle.model.Puzzle
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -13,13 +12,15 @@ import javax.inject.Inject
 @HiltViewModel
 class ShufflePuzzleScreenViewModel @Inject constructor() : ViewModel() {
 
+    private var _puzzle: Puzzle? by mutableStateOf(null)
+
+    fun getPuzzle() = _puzzle
+
     private var state by mutableStateOf(ShufflePuzzleState())
 
     fun isLoading() = state.isLoading
 
     fun getMovesDone() = state.movesDone
-
-    fun getPuzzle() = state.puzzle
 
     fun isPuzzleSolved() = state.isPuzzleSolved
 
@@ -29,14 +30,12 @@ class ShufflePuzzleScreenViewModel @Inject constructor() : ViewModel() {
     }
 
     private fun setPuzzleImage(puzzleBitmap: Bitmap) {
-        state.puzzle = Puzzle(4, 4, puzzleBitmap)
+        _puzzle = Puzzle(3, 3, puzzleBitmap)
         state = state.copy(isLoading = false)
     }
 
-    fun onMovePerformed(row: Int, column: Int) {
-        state.puzzle?.apply {
-            val movePerformedSuccessfully = switchPieces(Piece.Position(row, column))
-
+    fun onMovePerformed(movePerformedSuccessfully: Boolean) {
+        _puzzle?.apply {
             if (movePerformedSuccessfully) {
                 state = state.copy(movesDone = state.movesDone + 1)
                 if (checkPuzzleSolved()) onPuzzleSolved()

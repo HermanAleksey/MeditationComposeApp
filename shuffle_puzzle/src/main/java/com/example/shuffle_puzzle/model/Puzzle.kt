@@ -4,7 +4,8 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
-import android.util.Log
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 
 
 data class Puzzle(
@@ -15,7 +16,7 @@ data class Puzzle(
     private var pieceImageWidthPx: Int = 0
     private var pieceImageHeightPx: Int = 0
 
-    val board: Array<Array<Piece>>
+    val board: Array<Array<MutableState<Piece>>>
     private var emptyPiecePosition: Piece.Position =
         Piece.Position(rowsAmount - 1, columnsAmount - 1)
 
@@ -29,7 +30,7 @@ data class Puzzle(
                 val pieceBitmap = if (row == rowsAmount - 1 && column == columnsAmount - 1) {
                     drawEmptyPieceBitmap()
                 } else chopImage(position)
-                Piece(position, pieceBitmap)
+                mutableStateOf(Piece(position, pieceBitmap))
             }
         }
     }
@@ -92,29 +93,11 @@ data class Puzzle(
     fun checkPuzzleSolved(): Boolean {
         board.forEachIndexed { row, array ->
             array.forEachIndexed { column, piece ->
-                if (piece.initialPosition.row != row || piece.initialPosition.column != column) return false
+                with(piece.value) {
+                    if (initialPosition.row != row || initialPosition.column != column) return false
+                }
             }
         }
         return true
     }
-
-    //test purposes
-    private val currentBitmap: Bitmap
-        get() {
-            val fullBitmap =
-                Bitmap.createBitmap(imageBitmap.width, imageBitmap.height, Bitmap.Config.ARGB_8888)
-            val canvas = Canvas(fullBitmap)
-
-            board.forEachIndexed { row, array ->
-                array.forEachIndexed { column, piece ->
-                    val startX: Int = row * pieceImageWidthPx
-                    val startY: Int = column * pieceImageHeightPx
-
-                    canvas.drawBitmap(piece.imageBitmap, startX.toFloat(), startY.toFloat(), null)
-                }
-            }
-            val solved = checkPuzzleSolved()
-            Log.d("TAGG", "printImageBitmap: ")
-            return fullBitmap
-        }
 }
