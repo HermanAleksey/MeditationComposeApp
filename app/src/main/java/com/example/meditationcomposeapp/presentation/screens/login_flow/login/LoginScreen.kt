@@ -55,7 +55,6 @@ fun LoginScreen(
                 .fillMaxSize()
                 .padding(start = 35.dp, end = 34.dp)
                 .verticalScroll(rememberScrollState())
-                .blur(16.dp)
         ) {
             Image(
                 painter = painterResource(id = R.drawable.ic_logo_white),

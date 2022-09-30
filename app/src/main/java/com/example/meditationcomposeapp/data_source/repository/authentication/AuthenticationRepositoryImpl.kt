@@ -21,7 +21,7 @@ class AuthenticationRepositoryImpl @Inject constructor(
 ) : AuthenticationRepository {
     override fun login(
         login: String,
-        password: String
+        password: String,
     ): Flow<NetworkResponse<Profile>> {
         return flow {
             emit(NetworkResponse.Loading(true))
@@ -55,7 +55,7 @@ class AuthenticationRepositoryImpl @Inject constructor(
     override fun register(
         name: String,
         login: String,
-        password: String
+        password: String,
     ): Flow<NetworkResponse<SuccessInfo>> {
         return flow {
             emit(NetworkResponse.Loading(true))
@@ -97,7 +97,7 @@ class AuthenticationRepositoryImpl @Inject constructor(
     }
 
     override fun requestPasswordRestoration(
-        login: String
+        login: String,
     ): Flow<NetworkResponse<SuccessInfo>> {
         return flow {
             emit(NetworkResponse.Loading(true))
@@ -125,7 +125,7 @@ class AuthenticationRepositoryImpl @Inject constructor(
 
     override fun setNewPassword(
         login: String,
-        newPassword: String
+        newPassword: String,
     ): Flow<NetworkResponse<SuccessInfo>> {
         return flow {
             emit(NetworkResponse.Loading(true))
@@ -153,7 +153,7 @@ class AuthenticationRepositoryImpl @Inject constructor(
 
     override fun verifyCode(
         login: String,
-        code: String
+        code: String,
     ): Flow<NetworkResponse<SuccessInfo>> {
         return flow {
             emit(NetworkResponse.Loading(true))
@@ -164,7 +164,7 @@ class AuthenticationRepositoryImpl @Inject constructor(
                     val response = SuccessInfo(true, null)
                     emit(NetworkResponse.Success(response))
                 } else {
-                val response = authApi.verifyCode(login = login, code = code)
+                    val response = authApi.verifyCode(login = login, code = code)
                     emit(NetworkResponse.Success(response))
                 }
 
