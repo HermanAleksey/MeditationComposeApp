@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="no_puzzle_loaded">No puzzle loaded yet</string>
+    <string name="completed_puzzle">completed puzzle</string>
+    <string name="moves_done">Moves done</string>
 </resources>
