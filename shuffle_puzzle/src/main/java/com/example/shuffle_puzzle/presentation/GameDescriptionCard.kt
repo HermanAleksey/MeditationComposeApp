@@ -44,6 +44,22 @@ fun PuzzleGameDescriptionCard(movesDone: Int, modifier: Modifier) {
                         Text(text = "Refresh")
                     }
                 }
+                Button(onClick = { }) {
+                    Text(text = "Default collection")
+                }
+                Row {
+                    Button(onClick = { }) {
+                        Text(text = "3х3")
+                    }
+                    Spacer(modifier = Modifier.width(10.dp))
+                    Button(onClick = { }) {
+                        Text(text = "4х4")
+                    }
+                    Spacer(modifier = Modifier.width(10.dp))
+                    Button(onClick = { }) {
+                        Text(text = "5х5")
+                    }
+                }
             }
         }
     }
