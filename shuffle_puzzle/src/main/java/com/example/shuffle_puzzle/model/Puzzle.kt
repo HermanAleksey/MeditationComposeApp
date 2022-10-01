@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
+import kotlin.math.roundToInt
 
 
 data class Puzzle(
@@ -33,6 +34,7 @@ data class Puzzle(
                 mutableStateOf(Piece(position, pieceBitmap))
             }
         }
+        shufflePuzzle(10)
     }
 
     private fun drawEmptyPieceBitmap(): Bitmap {
@@ -88,6 +90,44 @@ data class Puzzle(
         }
 
         return true
+    }
+
+    fun shufflePuzzle(times: Int) {
+        repeat(times) {
+            performRandomMove()
+        }
+        if (checkPuzzleSolved()) {
+            shufflePuzzle(times)
+        }
+    }
+
+    private fun performRandomMove() {
+        val allowedPositions = mutableListOf<Piece.Position>()
+        if (emptyPiecePosition.row + 1 < rowsAmount)
+            allowedPositions.add(Piece.Position(
+                emptyPiecePosition.row + 1,
+                emptyPiecePosition.column
+            ))
+        if (emptyPiecePosition.column + 1 < columnsAmount)
+            allowedPositions.add(Piece.Position(
+                emptyPiecePosition.row,
+                emptyPiecePosition.column + 1
+            ))
+        if (emptyPiecePosition.row > 0)
+            allowedPositions.add(Piece.Position(
+                emptyPiecePosition.row - 1,
+                emptyPiecePosition.column
+            ))
+        if (emptyPiecePosition.column > 0)
+            allowedPositions.add(Piece.Position(
+                emptyPiecePosition.row,
+                emptyPiecePosition.column - 1
+            ))
+
+        val moveToPerform =
+            allowedPositions[(Math.random() * (allowedPositions.size - 1)).roundToInt()]
+
+        switchPieces(moveToPerform)
     }
 
     fun checkPuzzleSolved(): Boolean {
