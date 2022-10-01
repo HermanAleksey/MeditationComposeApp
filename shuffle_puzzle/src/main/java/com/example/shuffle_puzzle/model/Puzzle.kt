@@ -34,7 +34,7 @@ data class Puzzle(
                 mutableStateOf(Piece(position, pieceBitmap))
             }
         }
-        shufflePuzzle(10)
+        shufflePuzzle(2)
     }
 
     private fun drawEmptyPieceBitmap(): Bitmap {
