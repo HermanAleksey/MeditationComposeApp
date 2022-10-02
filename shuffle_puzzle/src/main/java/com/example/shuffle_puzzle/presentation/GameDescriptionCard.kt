@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import com.example.shuffle_puzzle.R
 
 @Composable
-fun PuzzleGameDescriptionCard(movesDone: Int, modifier: Modifier) {
+fun PuzzleGameDescriptionCard(puzzleImageDrawableRes: Int?, movesDone: Int, modifier: Modifier) {
     Card(
         modifier = modifier,
         shape = RoundedCornerShape(8.dp)
@@ -23,7 +23,7 @@ fun PuzzleGameDescriptionCard(movesDone: Int, modifier: Modifier) {
             .fillMaxSize()
             .padding(10.dp)) {
             Image(
-                painter = painterResource(id = R.drawable.image),
+                painter = painterResource(id = puzzleImageDrawableRes ?: R.drawable.empty_puzzle_image),
                 contentDescription = stringResource(id = R.string.completed_puzzle),
                 modifier = Modifier.fillMaxHeight(),
                 contentScale = ContentScale.FillHeight,
@@ -44,18 +44,16 @@ fun PuzzleGameDescriptionCard(movesDone: Int, modifier: Modifier) {
                         Text(text = "Refresh")
                     }
                 }
-                Button(onClick = { }) {
-                    Text(text = "Default collection")
-                }
+
                 Row {
                     Button(onClick = { }) {
                         Text(text = "3х3")
                     }
-                    Spacer(modifier = Modifier.width(10.dp))
+                    Spacer(modifier = Modifier.width(5.dp))
                     Button(onClick = { }) {
                         Text(text = "4х4")
                     }
-                    Spacer(modifier = Modifier.width(10.dp))
+                    Spacer(modifier = Modifier.width(5.dp))
                     Button(onClick = { }) {
                         Text(text = "5х5")
                     }

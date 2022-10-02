@@ -12,7 +12,7 @@ import com.example.shuffle_puzzle.model.Puzzle
 import com.example.shuffle_puzzle.presentation.PuzzlePiece
 
 @Composable
-fun FilledStatePuzzleBoard(puzzle: Puzzle, onMovePerformed: (Boolean) -> Unit, modifier: Modifier) {
+fun FilledStatePuzzleBoard(puzzle: Puzzle, onPieceClicked: (Int, Int) -> Unit) {
     var puzzleBoardHeight by remember {
         mutableStateOf(0.dp)
     }
@@ -27,11 +27,9 @@ fun FilledStatePuzzleBoard(puzzle: Puzzle, onMovePerformed: (Boolean) -> Unit, m
             .onGloballyPositioned {
                 puzzleBoardHeight = with(localDensity) { it.size.height.toDp() }
                 puzzleBoardWidth = with(localDensity) { it.size.width.toDp() }
-                Log.e("TAGG",
-                    "FilledStatePuzzleBoard: height:${it.size.height.dp} width:${it.size.width.dp}")
             }
+            .aspectRatio(1f)
     ) {
-
         val pieceHeight = puzzleBoardHeight / puzzle.board.size + 1.dp
         val pieceWidth = puzzleBoardWidth / puzzle.board[0].size + 1.dp
         Log.e("TAGG", "FilledStatePuzzleBoard: pieceHeight:$pieceHeight pieceWidth:$pieceWidth")
@@ -43,8 +41,7 @@ fun FilledStatePuzzleBoard(puzzle: Puzzle, onMovePerformed: (Boolean) -> Unit, m
                 array.forEachIndexed { column, piece ->
                     Spacer(modifier = Modifier.height(1.dp))
                     PuzzlePiece(piece = piece.value, height = pieceHeight, width = pieceWidth) {
-                        val result = puzzle.switchPieces(Piece.Position(row, column))
-                        onMovePerformed(result)
+                        onPieceClicked(row, column)
                     }
                 }
 

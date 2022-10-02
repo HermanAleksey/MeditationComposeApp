@@ -1,22 +1,22 @@
 package com.example.shuffle_puzzle.presentation.puzzle_board
 
-import android.graphics.BitmapFactory
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.example.shuffle_puzzle.R
+import com.example.shuffle_puzzle.model.Piece
 import com.example.shuffle_puzzle.model.Puzzle
+import kotlin.reflect.KFunction1
 
 @Composable
-fun PuzzleBoard(onMovePerformed: (Boolean) -> Unit, modifier: Modifier) {
-    var puzzle: Puzzle? by remember {
-        mutableStateOf(null)
-    }
-
-
+fun PuzzleBoard(
+    puzzle: Puzzle?,
+    onPuzzleImageSelected: KFunction1<Int, Unit>,
+    onMovePerformed: (Boolean) -> Unit,
+    modifier: Modifier,
+) {
     Card(
         modifier = modifier,
         shape = RoundedCornerShape(8.dp)
@@ -28,19 +28,19 @@ fun PuzzleBoard(onMovePerformed: (Boolean) -> Unit, modifier: Modifier) {
                 R.drawable.shuffle_puzzle_template_3,
             )
 
-
-            val resources = LocalContext.current.resources
-            fun onTemplateSelected(index: Int) {
-                val bitmap = BitmapFactory.decodeResource(
-                    resources,
-                    templatePainters[index]
-                )
-
-                puzzle = Puzzle(3, 3, bitmap)
+            fun onTemplateSelected(drawableRes: Int) {
+                onPuzzleImageSelected(drawableRes)
             }
 
-            EmptyStatePuzzleBoard(templatePainters, ::onTemplateSelected)
+            SelectPuzzleBoard(templatePainters, ::onTemplateSelected)
         } else
-            FilledStatePuzzleBoard(puzzle!!, onMovePerformed, modifier)
+            FilledStatePuzzleBoard(
+                puzzle = puzzle,
+                onPieceClicked = { row, column ->
+                    val result = puzzle.switchPieces(Piece.Position(row, column))
+                    onMovePerformed(result)
+                }
+            )
+
     }
 }

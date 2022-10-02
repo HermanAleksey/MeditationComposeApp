@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.lerp
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -21,26 +22,27 @@ import com.google.accompanist.pager.calculateCurrentOffsetForPage
 import com.google.accompanist.pager.rememberPagerState
 import kotlin.math.absoluteValue
 import kotlin.reflect.KFunction1
+import com.example.shuffle_puzzle.R
 
 @Composable
-fun EmptyStatePuzzleBoard(puzzleTemplates: List<Int>, onTemplateSelected: (Int) -> Unit) {
+fun SelectPuzzleBoard(puzzleTemplates: List<Int>, onTemplateSelected: (Int) -> Unit) {
     Column(modifier = Modifier.fillMaxSize()) {
         var currentPage = remember { 0 }
         fun onCurrentPageChanged(index: Int) {
             currentPage = index
         }
 
-        ImagePager(puzzleTemplates, ::onCurrentPageChanged)
+        PuzzleImagePager(puzzleTemplates, ::onCurrentPageChanged)
 
         Box(contentAlignment = Alignment.Center,
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight()) {
             Button(
-                onClick = { onTemplateSelected(currentPage) },
+                onClick = { onTemplateSelected(puzzleTemplates[currentPage]) },
                 modifier = Modifier.padding(horizontal = 32.dp, vertical = 10.dp),
             ) {
-                Text(text = "Select")
+                Text(text = stringResource(id = R.string.select_puzzle))
             }
         }
     }
@@ -48,7 +50,7 @@ fun EmptyStatePuzzleBoard(puzzleTemplates: List<Int>, onTemplateSelected: (Int) 
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun ImagePager(puzzleTemplates: List<Int>, onCurrentPageChanged: KFunction1<Int, Unit>) {
+fun PuzzleImagePager(puzzleTemplates: List<Int>, onCurrentPageChanged: KFunction1<Int, Unit>) {
     val pagerState = rememberPagerState()
 
     LaunchedEffect(pagerState) {

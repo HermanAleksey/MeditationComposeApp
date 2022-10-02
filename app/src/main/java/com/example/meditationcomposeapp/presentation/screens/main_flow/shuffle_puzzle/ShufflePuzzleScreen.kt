@@ -41,8 +41,7 @@ fun ShufflePuzzleScreen(
                 onMovePerformed = { movePerformedSuccessfully ->
                     viewModel.onMovePerformed(movePerformedSuccessfully)
                 },
-                movesDone = viewModel.getMovesDone(),
-                puzzle = viewModel.getPuzzle()
+                movesDone = viewModel.getMovesDone()
             )
             if (viewModel.isPuzzleSolved()) {
                 PuzzleIsSolvedLabel()

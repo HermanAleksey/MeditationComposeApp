@@ -45,7 +45,7 @@ data class Puzzle(
         )
         val canvas = Canvas(emptyBitmap)
         val paint = Paint()
-        paint.color = Color.YELLOW
+        paint.color = Color.TRANSPARENT
 
         canvas.drawRect(0f,
             0f,

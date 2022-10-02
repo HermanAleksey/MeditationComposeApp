@@ -20,8 +20,8 @@ fun PuzzlePiece(piece: Piece, width: Dp, height: Dp, onPieceClick: () -> Unit) {
             .height(height)
             .width(width)
             .clickable {
-            onPieceClick()
-        },
+                onPieceClick()
+            },
         contentScale = ContentScale.Crop
     )
 }
