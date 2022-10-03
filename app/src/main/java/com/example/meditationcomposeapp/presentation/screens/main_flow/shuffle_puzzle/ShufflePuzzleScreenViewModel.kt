@@ -12,10 +12,6 @@ import javax.inject.Inject
 @HiltViewModel
 class ShufflePuzzleScreenViewModel @Inject constructor() : ViewModel() {
 
-    private var _puzzle: Puzzle? by mutableStateOf(null)
-
-    fun getPuzzle() = _puzzle
-
     private var state by mutableStateOf(ShufflePuzzleState())
 
     fun isLoading() = state.isLoading
@@ -24,26 +20,48 @@ class ShufflePuzzleScreenViewModel @Inject constructor() : ViewModel() {
 
     fun isPuzzleSolved() = state.isPuzzleSolved
 
-    fun onFirstLunch(puzzleBitmap: Bitmap) {
-        state = state.copy(isLoading = true)
-        setPuzzleImage(puzzleBitmap)
-    }
+    fun getPuzzle(): Puzzle? = state.puzzle
 
-    private fun setPuzzleImage(puzzleBitmap: Bitmap) {
-        _puzzle = Puzzle(3, 3, puzzleBitmap)
-        state = state.copy(isLoading = false)
-    }
+    fun getPuzzleImage(): Int? = state.puzzleImageDrawableRes
 
-    fun onMovePerformed(movePerformedSuccessfully: Boolean) {
-        _puzzle?.apply {
-            if (movePerformedSuccessfully) {
-                state = state.copy(movesDone = state.movesDone + 1)
-                if (checkPuzzleSolved()) onPuzzleSolved()
-            }
-        }
+    fun onMovePerformed(success: Boolean) {
+        if (success) state = state.copy(movesDone = state.movesDone + 1)
+        if (state.puzzle?.checkPuzzleSolved() == true) onPuzzleSolved()
+
     }
 
     private fun onPuzzleSolved() {
         state = state.copy(isPuzzleSolved = true)
+    }
+
+    fun onCreatePuzzleClick(size: Int, bitmap: Bitmap) {
+        state = state.copy(
+            puzzle = Puzzle(size, bitmap)
+        )
+    }
+
+    fun onRefreshPuzzle() {
+        state = state.copy(
+            puzzle = state.puzzle?.apply {
+                shufflePuzzle(10)
+            }
+        )
+    }
+
+    fun onRestartPuzzle() {
+        state.puzzleImageDrawableRes = null
+        state.puzzle = null
+    }
+
+    fun onPuzzleSizeChanged(size: Int) {
+        state = state.copy(
+            puzzleSize = size
+        )
+    }
+
+    fun onPuzzleImageSelected(drawableRes: Int?) {
+        state = state.copy(
+            puzzleImageDrawableRes = drawableRes
+        )
     }
 }

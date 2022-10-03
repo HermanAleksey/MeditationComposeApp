@@ -8,12 +8,11 @@ import androidx.compose.ui.unit.dp
 import com.example.shuffle_puzzle.R
 import com.example.shuffle_puzzle.model.Piece
 import com.example.shuffle_puzzle.model.Puzzle
-import kotlin.reflect.KFunction1
 
 @Composable
 fun PuzzleBoard(
     puzzle: Puzzle?,
-    onPuzzleImageSelected: KFunction1<Int, Unit>,
+    onPuzzleImageSelected: (Int) -> Unit,
     onMovePerformed: (Boolean) -> Unit,
     modifier: Modifier,
 ) {

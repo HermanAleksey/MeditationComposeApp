@@ -1,65 +1,59 @@
 package com.example.shuffle_puzzle.presentation
 
 import PuzzleGameDescriptionCard
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
+import com.example.shuffle_puzzle.R
 import com.example.shuffle_puzzle.model.Puzzle
 import com.example.shuffle_puzzle.presentation.puzzle_board.PuzzleBoard
 
 @Composable
-fun PuzzleBoardWithCounter(movesDone: Int, onMovePerformed: (Boolean) -> Unit) {
-    var puzzleImageDrawableRes: Int? by remember {
-        mutableStateOf(null)
-    }
-    var puzzle: Puzzle? by remember {
-        mutableStateOf(null)
-    }
-    var columnsAmount by remember {
-        mutableStateOf(3)
-    }
-    var rowsAmount by remember {
-        mutableStateOf(3)
-    }
-    val resources = LocalContext.current.resources
-    fun onPuzzleImageSelected(imageRes: Int) {
-        puzzleImageDrawableRes = imageRes
-
-        val bitmap = BitmapFactory.decodeResource(
-            resources,
-            imageRes
-        )
-
-        puzzle = Puzzle(columnsAmount, rowsAmount, bitmap)
-    }
-
+fun PuzzleBoardWithCounter(
+    movesDone: Int,
+    onMovePerformed: (success: Boolean) -> Unit,
+    puzzle: Puzzle?,
+    puzzleImageDrawableRes: Int?,
+    onPuzzleImageSelected: (drawableRes: Int?) -> Unit,
+    onCreatePuzzleClick: (size: Int, drawableRes: Int) -> Unit,
+    puzzleSize: Int = 3,
+    onPuzzleSizeChanged: (size: Int) -> Unit,
+    onRestartPuzzle: () -> Unit,
+    onRefreshPuzzle: () -> Unit,
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(start = 18.dp, end = 18.dp, top = 18.dp)
     ) {
         PuzzleGameDescriptionCard(
-            puzzleImageDrawableRes,
-            movesDone,
+            puzzleImageDrawableRes = puzzleImageDrawableRes,
+            movesDone = movesDone,
+            restartPuzzle = onRestartPuzzle,
+            refreshPuzzle = onRefreshPuzzle,
+            updateSelectedSizeValue = onPuzzleSizeChanged,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(200.dp)
+                .height(dimensionResource(id = R.dimen.puzzle_game_description_height))
         )
         Spacer(modifier = Modifier.height(10.dp))
 
         PuzzleBoard(
             puzzle = puzzle,
-            onPuzzleImageSelected = ::onPuzzleImageSelected,
-            onMovePerformed = onMovePerformed,
+            onPuzzleImageSelected = { imageRes->
+                onPuzzleImageSelected(imageRes)
+                onCreatePuzzleClick(puzzleSize, imageRes)
+            },
+            onMovePerformed = { success ->
+                onMovePerformed(success)
+            },
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxWidth()
                 .padding(bottom = 18.dp)
         )
     }

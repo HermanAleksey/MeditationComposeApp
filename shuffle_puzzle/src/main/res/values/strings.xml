@@ -4,4 +4,5 @@
     <string name="completed_puzzle">completed puzzle</string>
     <string name="moves_done">Moves done</string>
     <string name="select_puzzle">Select puzzle</string>
+    <string name="select_puzzle_size">Select puzzle size:</string>
 </resources>

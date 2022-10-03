@@ -26,7 +26,7 @@ import com.example.shuffle_puzzle.R
 
 @Composable
 fun SelectPuzzleBoard(puzzleTemplates: List<Int>, onTemplateSelected: (Int) -> Unit) {
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column(modifier = Modifier.fillMaxWidth()) {
         var currentPage = remember { 0 }
         fun onCurrentPageChanged(index: Int) {
             currentPage = index

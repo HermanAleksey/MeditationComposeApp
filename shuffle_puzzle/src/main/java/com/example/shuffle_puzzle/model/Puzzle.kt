@@ -10,8 +10,7 @@ import kotlin.math.roundToInt
 
 
 data class Puzzle(
-    val columnsAmount: Int,
-    val rowsAmount: Int,
+    val size: Int,
     val imageBitmap: Bitmap,
 ) {
     private var pieceImageWidthPx: Int = 0
@@ -19,22 +18,22 @@ data class Puzzle(
 
     val board: Array<Array<MutableState<Piece>>>
     private var emptyPiecePosition: Piece.Position =
-        Piece.Position(rowsAmount - 1, columnsAmount - 1)
+        Piece.Position(size - 1, size - 1)
 
     init {
         calculatePieceImageSize()
 
-        board = Array(rowsAmount) { row ->
-            Array(columnsAmount) { column ->
+        board = Array(size) { row ->
+            Array(size) { column ->
                 val position = Piece.Position(row, column)
                 //last item is empty
-                val pieceBitmap = if (row == rowsAmount - 1 && column == columnsAmount - 1) {
+                val pieceBitmap = if (row == size - 1 && column == size - 1) {
                     drawEmptyPieceBitmap()
                 } else chopImage(position)
                 mutableStateOf(Piece(position, pieceBitmap))
             }
         }
-        shufflePuzzle(2)
+        shufflePuzzle(size * size * 3)
     }
 
     private fun drawEmptyPieceBitmap(): Bitmap {
@@ -57,8 +56,8 @@ data class Puzzle(
     }
 
     private fun calculatePieceImageSize() {
-        pieceImageWidthPx = imageBitmap.width / columnsAmount
-        pieceImageHeightPx = imageBitmap.height / rowsAmount
+        pieceImageWidthPx = imageBitmap.width / size
+        pieceImageHeightPx = imageBitmap.height / size
     }
 
     private fun chopImage(position: Piece.Position): Bitmap {
@@ -77,7 +76,7 @@ data class Puzzle(
         if (!emptyPiecePosition.isConnectedTo(piecePosition)) return false
 
         //wanted position can't be out of the board
-        if (piecePosition.column >= columnsAmount || piecePosition.row >= rowsAmount) return false
+        if (piecePosition.column >= size || piecePosition.row >= size) return false
 
         val temp = board[piecePosition.row][piecePosition.column]
         board[piecePosition.row][piecePosition.column] =
@@ -103,12 +102,12 @@ data class Puzzle(
 
     private fun performRandomMove() {
         val allowedPositions = mutableListOf<Piece.Position>()
-        if (emptyPiecePosition.row + 1 < rowsAmount)
+        if (emptyPiecePosition.row + 1 < size)
             allowedPositions.add(Piece.Position(
                 emptyPiecePosition.row + 1,
                 emptyPiecePosition.column
             ))
-        if (emptyPiecePosition.column + 1 < columnsAmount)
+        if (emptyPiecePosition.column + 1 < size)
             allowedPositions.add(Piece.Position(
                 emptyPiecePosition.row,
                 emptyPiecePosition.column + 1
