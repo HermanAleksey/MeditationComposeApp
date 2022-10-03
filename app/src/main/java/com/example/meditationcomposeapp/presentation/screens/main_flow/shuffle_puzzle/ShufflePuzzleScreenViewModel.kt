@@ -1,6 +1,7 @@
 package com.example.meditationcomposeapp.presentation.screens.main_flow.shuffle_puzzle
 
 import android.graphics.Bitmap
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -34,9 +35,9 @@ class ShufflePuzzleScreenViewModel @Inject constructor() : ViewModel() {
         state = state.copy(isPuzzleSolved = true)
     }
 
-    fun onCreatePuzzleClick(size: Int, bitmap: Bitmap) {
+    fun onCreatePuzzleClick(bitmap: Bitmap) {
         state = state.copy(
-            puzzle = Puzzle(size, bitmap)
+            puzzle = Puzzle(state.puzzleSize, bitmap)
         )
     }
 
@@ -49,8 +50,10 @@ class ShufflePuzzleScreenViewModel @Inject constructor() : ViewModel() {
     }
 
     fun onRestartPuzzle() {
-        state.puzzleImageDrawableRes = null
-        state.puzzle = null
+        state = state.copy(
+            puzzleImageDrawableRes = null,
+            puzzle = null
+        )
     }
 
     fun onPuzzleSizeChanged(size: Int) {

@@ -37,13 +37,13 @@ fun ShufflePuzzleScreen(
                 onPuzzleImageSelected = { drawableRes ->
                     viewModel.onPuzzleImageSelected(drawableRes)
                 },
-                onCreatePuzzleClick = { size, drawableResId ->
+                onCreatePuzzleClick = { drawableResId ->
                     val bitmap = BitmapFactory.decodeResource(
                         resources,
                         drawableResId
                     )
 
-                    viewModel.onCreatePuzzleClick(size, bitmap)
+                    viewModel.onCreatePuzzleClick(bitmap)
                 },
                 onPuzzleSizeChanged = {
                     viewModel.onPuzzleSizeChanged(it)

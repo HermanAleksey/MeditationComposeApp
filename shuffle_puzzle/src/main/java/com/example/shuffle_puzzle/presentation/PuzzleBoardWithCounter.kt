@@ -20,7 +20,7 @@ fun PuzzleBoardWithCounter(
     puzzle: Puzzle?,
     puzzleImageDrawableRes: Int?,
     onPuzzleImageSelected: (drawableRes: Int?) -> Unit,
-    onCreatePuzzleClick: (size: Int, drawableRes: Int) -> Unit,
+    onCreatePuzzleClick: (drawableRes: Int) -> Unit,
     puzzleSize: Int = 3,
     onPuzzleSizeChanged: (size: Int) -> Unit,
     onRestartPuzzle: () -> Unit,
@@ -47,7 +47,7 @@ fun PuzzleBoardWithCounter(
             puzzle = puzzle,
             onPuzzleImageSelected = { imageRes->
                 onPuzzleImageSelected(imageRes)
-                onCreatePuzzleClick(puzzleSize, imageRes)
+                onCreatePuzzleClick(imageRes)
             },
             onMovePerformed = { success ->
                 onMovePerformed(success)
