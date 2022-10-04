@@ -7,7 +7,6 @@ import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -16,30 +15,29 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.lerp
+import com.example.shuffle_puzzle.R
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.calculateCurrentOffsetForPage
 import com.google.accompanist.pager.rememberPagerState
 import kotlin.math.absoluteValue
-import kotlin.reflect.KFunction1
-import com.example.shuffle_puzzle.R
 
 @Composable
-fun SelectPuzzleBoard(puzzleTemplates: List<Int>, onTemplateSelected: (Int) -> Unit) {
+fun SelectPuzzleBoard(
+    puzzleTemplates: List<Int>,
+    onPuzzleImageChanged: (Int) -> Unit,
+    onCreatePuzzleClick: () -> Unit,
+) {
     Column(modifier = Modifier.fillMaxWidth()) {
-        var currentPage = remember { 0 }
-        fun onCurrentPageChanged(index: Int) {
-            currentPage = index
-        }
 
-        PuzzleImagePager(puzzleTemplates, ::onCurrentPageChanged)
+        PuzzleImagePager(puzzleTemplates) { currentPage: Int -> onPuzzleImageChanged(puzzleTemplates[currentPage]) }
 
         Box(contentAlignment = Alignment.Center,
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight()) {
             Button(
-                onClick = { onTemplateSelected(puzzleTemplates[currentPage]) },
+                onClick = { onCreatePuzzleClick() },
                 modifier = Modifier.padding(horizontal = 32.dp, vertical = 10.dp),
             ) {
                 Text(text = stringResource(id = R.string.select_puzzle))
@@ -50,7 +48,7 @@ fun SelectPuzzleBoard(puzzleTemplates: List<Int>, onTemplateSelected: (Int) -> U
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun PuzzleImagePager(puzzleTemplates: List<Int>, onCurrentPageChanged: KFunction1<Int, Unit>) {
+fun PuzzleImagePager(puzzleTemplates: List<Int>, onCurrentPageChanged: (Int) -> Unit) {
     val pagerState = rememberPagerState()
 
     LaunchedEffect(pagerState) {

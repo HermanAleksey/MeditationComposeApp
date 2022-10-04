@@ -1,12 +1,9 @@
 package com.example.shuffle_puzzle.presentation
 
 import PuzzleGameDescriptionCard
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import com.example.shuffle_puzzle.R
@@ -15,13 +12,13 @@ import com.example.shuffle_puzzle.presentation.puzzle_board.PuzzleBoard
 
 @Composable
 fun PuzzleBoardWithCounter(
+    isPuzzleCreated: Boolean,
     movesDone: Int,
     onMovePerformed: (success: Boolean) -> Unit,
     puzzle: Puzzle?,
     puzzleImageDrawableRes: Int?,
-    onPuzzleImageSelected: (drawableRes: Int?) -> Unit,
-    onCreatePuzzleClick: (drawableRes: Int) -> Unit,
-    puzzleSize: Int = 3,
+    onPuzzleImageChanged: (drawableRes: Int?) -> Unit,
+    onCreatePuzzleClick: () -> Unit,
     onPuzzleSizeChanged: (size: Int) -> Unit,
     onRestartPuzzle: () -> Unit,
     onRefreshPuzzle: () -> Unit,
@@ -32,6 +29,7 @@ fun PuzzleBoardWithCounter(
             .padding(start = 18.dp, end = 18.dp, top = 18.dp)
     ) {
         PuzzleGameDescriptionCard(
+            isPuzzleCreated = isPuzzleCreated,
             puzzleImageDrawableRes = puzzleImageDrawableRes,
             movesDone = movesDone,
             restartPuzzle = onRestartPuzzle,
@@ -45,10 +43,8 @@ fun PuzzleBoardWithCounter(
 
         PuzzleBoard(
             puzzle = puzzle,
-            onPuzzleImageSelected = { imageRes->
-                onPuzzleImageSelected(imageRes)
-                onCreatePuzzleClick(imageRes)
-            },
+            onPuzzleImageChanged = onPuzzleImageChanged,
+            onCreatePuzzleClick = onCreatePuzzleClick,
             onMovePerformed = { success ->
                 onMovePerformed(success)
             },

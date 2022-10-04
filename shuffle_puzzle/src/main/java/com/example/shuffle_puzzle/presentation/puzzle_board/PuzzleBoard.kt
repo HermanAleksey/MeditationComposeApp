@@ -12,8 +12,9 @@ import com.example.shuffle_puzzle.model.Puzzle
 @Composable
 fun PuzzleBoard(
     puzzle: Puzzle?,
-    onPuzzleImageSelected: (Int) -> Unit,
+    onPuzzleImageChanged: (Int) -> Unit,
     onMovePerformed: (Boolean) -> Unit,
+    onCreatePuzzleClick: () -> Unit,
     modifier: Modifier,
 ) {
     Card(
@@ -27,11 +28,7 @@ fun PuzzleBoard(
                 R.drawable.shuffle_puzzle_template_3,
             )
 
-            fun onTemplateSelected(drawableRes: Int) {
-                onPuzzleImageSelected(drawableRes)
-            }
-
-            SelectPuzzleBoard(templatePainters, ::onTemplateSelected)
+            SelectPuzzleBoard(templatePainters, onPuzzleImageChanged, onCreatePuzzleClick)
         } else
             FilledStatePuzzleBoard(
                 puzzle = puzzle,

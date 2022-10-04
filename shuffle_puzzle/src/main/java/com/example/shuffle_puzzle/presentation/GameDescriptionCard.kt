@@ -20,6 +20,7 @@ import com.example.shuffle_puzzle.R
 
 @Composable
 fun PuzzleGameDescriptionCard(
+    isPuzzleCreated: Boolean,
     puzzleImageDrawableRes: Int?,
     movesDone: Int,
     refreshPuzzle: () -> Unit,
@@ -35,8 +36,11 @@ fun PuzzleGameDescriptionCard(
             .fillMaxSize()
             .padding(10.dp)) {
             Image(
-                painter = painterResource(id = puzzleImageDrawableRes
-                    ?: R.drawable.empty_puzzle_image),
+                painter = painterResource(
+                    id = if (isPuzzleCreated && puzzleImageDrawableRes != null)
+                        puzzleImageDrawableRes
+                    else R.drawable.empty_puzzle_image
+                ),
                 contentDescription = stringResource(id = R.string.completed_puzzle),
                 modifier = Modifier.fillMaxHeight(),
                 contentScale = ContentScale.FillHeight,
@@ -46,7 +50,7 @@ fun PuzzleGameDescriptionCard(
                     .weight(1F),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                if (puzzleImageDrawableRes != null)
+                if (isPuzzleCreated)
                     InGameFunctionsDescription(movesDone, refreshPuzzle, restartPuzzle)
                 else
                     PuzzleSizeSelection(updateSelectedSizeValue)

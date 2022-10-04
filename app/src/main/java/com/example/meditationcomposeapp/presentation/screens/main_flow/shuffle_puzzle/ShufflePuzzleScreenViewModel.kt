@@ -1,7 +1,7 @@
 package com.example.meditationcomposeapp.presentation.screens.main_flow.shuffle_puzzle
 
-import android.graphics.Bitmap
-import android.util.Log
+import android.content.res.Resources
+import android.graphics.BitmapFactory
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -16,6 +16,8 @@ class ShufflePuzzleScreenViewModel @Inject constructor() : ViewModel() {
     private var state by mutableStateOf(ShufflePuzzleState())
 
     fun isLoading() = state.isLoading
+
+    fun isPuzzleCreated() = state.puzzle != null
 
     fun getMovesDone() = state.movesDone
 
@@ -35,13 +37,20 @@ class ShufflePuzzleScreenViewModel @Inject constructor() : ViewModel() {
         state = state.copy(isPuzzleSolved = true)
     }
 
-    fun onCreatePuzzleClick(bitmap: Bitmap) {
-        state = state.copy(
-            puzzle = Puzzle(state.puzzleSize, bitmap)
-        )
+    fun onCreatePuzzleClick(resources: Resources) {
+        state.puzzleImageDrawableRes?.apply {
+            val bitmap = BitmapFactory.decodeResource(
+                resources,
+                this
+            )
+
+            state = state.copy(
+                puzzle = Puzzle(state.puzzleSize, bitmap)
+            )
+        }
     }
 
-    fun onRefreshPuzzle() {
+    fun onRefreshPuzzleClicked() {
         state = state.copy(
             puzzle = state.puzzle?.apply {
                 shufflePuzzle(10)
@@ -49,10 +58,11 @@ class ShufflePuzzleScreenViewModel @Inject constructor() : ViewModel() {
         )
     }
 
-    fun onRestartPuzzle() {
+    fun onRestartPuzzleClicked() {
         state = state.copy(
             puzzleImageDrawableRes = null,
-            puzzle = null
+            puzzle = null,
+            movesDone = 0,
         )
     }
 
@@ -62,7 +72,7 @@ class ShufflePuzzleScreenViewModel @Inject constructor() : ViewModel() {
         )
     }
 
-    fun onPuzzleImageSelected(drawableRes: Int?) {
+    fun onPuzzleImageChanged(drawableRes: Int?) {
         state = state.copy(
             puzzleImageDrawableRes = drawableRes
         )
