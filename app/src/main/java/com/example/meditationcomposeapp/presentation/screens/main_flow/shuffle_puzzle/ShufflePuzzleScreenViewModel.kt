@@ -1,7 +1,6 @@
 package com.example.meditationcomposeapp.presentation.screens.main_flow.shuffle_puzzle
 
-import android.content.res.Resources
-import android.graphics.BitmapFactory
+import android.graphics.Bitmap
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -25,8 +24,6 @@ class ShufflePuzzleScreenViewModel @Inject constructor() : ViewModel() {
 
     fun getPuzzle(): Puzzle? = state.puzzle
 
-    fun getPuzzleImage(): Int? = state.puzzleImageDrawableRes
-
     fun onMovePerformed(success: Boolean) {
         if (success) state = state.copy(movesDone = state.movesDone + 1)
         if (state.puzzle?.checkPuzzleSolved() == true) onPuzzleSolved()
@@ -37,17 +34,10 @@ class ShufflePuzzleScreenViewModel @Inject constructor() : ViewModel() {
         state = state.copy(isPuzzleSolved = true)
     }
 
-    fun onCreatePuzzleClick(resources: Resources) {
-        state.puzzleImageDrawableRes?.apply {
-            val bitmap = BitmapFactory.decodeResource(
-                resources,
-                this
-            )
-
-            state = state.copy(
-                puzzle = Puzzle(state.puzzleSize, bitmap)
-            )
-        }
+    fun onCreatePuzzleClick(bitmap: Bitmap) {
+        state = state.copy(
+            puzzle = Puzzle(state.puzzleSize, bitmap)
+        )
     }
 
     fun onRefreshPuzzleClicked() {
@@ -60,7 +50,6 @@ class ShufflePuzzleScreenViewModel @Inject constructor() : ViewModel() {
 
     fun onRestartPuzzleClicked() {
         state = state.copy(
-            puzzleImageDrawableRes = null,
             puzzle = null,
             movesDone = 0,
         )
@@ -69,12 +58,6 @@ class ShufflePuzzleScreenViewModel @Inject constructor() : ViewModel() {
     fun onPuzzleSizeChanged(size: Int) {
         state = state.copy(
             puzzleSize = size
-        )
-    }
-
-    fun onPuzzleImageChanged(drawableRes: Int?) {
-        state = state.copy(
-            puzzleImageDrawableRes = drawableRes
         )
     }
 }

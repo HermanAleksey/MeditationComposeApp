@@ -1,3 +1,4 @@
+import android.graphics.Bitmap
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.selection.selectableGroup
@@ -11,9 +12,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.integerArrayResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.shuffle_puzzle.R
@@ -21,7 +22,7 @@ import com.example.shuffle_puzzle.R
 @Composable
 fun PuzzleGameDescriptionCard(
     isPuzzleCreated: Boolean,
-    puzzleImageDrawableRes: Int?,
+    puzzleImageBitmap: Bitmap?,
     movesDone: Int,
     refreshPuzzle: () -> Unit,
     restartPuzzle: () -> Unit,
@@ -36,11 +37,13 @@ fun PuzzleGameDescriptionCard(
             .fillMaxSize()
             .padding(10.dp)) {
             Image(
-                painter = painterResource(
-                    id = if (isPuzzleCreated && puzzleImageDrawableRes != null)
-                        puzzleImageDrawableRes
-                    else R.drawable.empty_puzzle_image
-                ),
+                //todo add proper empty image
+                bitmap = puzzleImageBitmap?.asImageBitmap() ?: Bitmap.createBitmap(
+                    100,
+                    100,
+                    Bitmap.Config.ARGB_8888
+                ).asImageBitmap(),
+
                 contentDescription = stringResource(id = R.string.completed_puzzle),
                 modifier = Modifier.fillMaxHeight(),
                 contentScale = ContentScale.FillHeight,

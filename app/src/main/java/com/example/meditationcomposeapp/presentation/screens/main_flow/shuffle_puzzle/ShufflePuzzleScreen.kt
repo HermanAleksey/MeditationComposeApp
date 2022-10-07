@@ -18,8 +18,6 @@ import com.ramcosta.composedestinations.annotation.Destination
 fun ShufflePuzzleScreen(
     viewModel: ShufflePuzzleScreenViewModel,
 ) {
-    val resources = LocalContext.current.resources
-
     ColorBackground(color = MaterialTheme.colors.colorBackground,
         lockScreenWhenLoading = true,
         isLoading = viewModel.isLoading()) {
@@ -31,12 +29,8 @@ fun ShufflePuzzleScreen(
                     viewModel.onMovePerformed(it)
                 },
                 puzzle = viewModel.getPuzzle(),
-                puzzleImageDrawableRes = viewModel.getPuzzleImage(),
-                onPuzzleImageChanged = { drawableRes ->
-                    viewModel.onPuzzleImageChanged(drawableRes)
-                },
-                onCreatePuzzleClick = {
-                    viewModel.onCreatePuzzleClick(resources)
+                onCreatePuzzleClick = { bitmap ->
+                    viewModel.onCreatePuzzleClick(bitmap)
                 },
                 onPuzzleSizeChanged = {
                     viewModel.onPuzzleSizeChanged(it)

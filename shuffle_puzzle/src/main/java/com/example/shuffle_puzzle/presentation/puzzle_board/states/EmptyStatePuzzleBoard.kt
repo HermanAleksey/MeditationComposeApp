@@ -1,21 +1,24 @@
-package com.example.shuffle_puzzle.presentation.puzzle_board
+package com.example.shuffle_puzzle.presentation.puzzle_board.states
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.snapshotFlow
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.lerp
 import com.example.shuffle_puzzle.R
+import com.example.shuffle_puzzle.presentation.puzzle_board.SELECT_YOUR_IMAGE
+import com.example.shuffle_puzzle.presentation.puzzle_board.SelectPuzzleImageFromGalleryCard
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.calculateCurrentOffsetForPage
@@ -24,20 +27,43 @@ import kotlin.math.absoluteValue
 
 @Composable
 fun SelectPuzzleBoard(
-    puzzleTemplates: List<Int>,
-    onPuzzleImageChanged: (Int) -> Unit,
-    onCreatePuzzleClick: () -> Unit,
+    onCreatePuzzleClick: (Bitmap) -> Unit,
 ) {
+    val resources = LocalContext.current.resources
+    val templatePainters = listOf(
+        R.drawable.shuffle_puzzle_template_1,
+        R.drawable.shuffle_puzzle_template_2,
+        R.drawable.shuffle_puzzle_template_3,
+        SELECT_YOUR_IMAGE
+    )
+
+    val (currentPage, onCurrentPageChanged) = remember {
+        mutableStateOf(0)
+    }
     Column(modifier = Modifier.fillMaxWidth()) {
 
-        PuzzleImagePager(puzzleTemplates) { currentPage: Int -> onPuzzleImageChanged(puzzleTemplates[currentPage]) }
+        PuzzleImagePager(
+            puzzleTemplates = templatePainters,
+            onCurrentPageChanged = onCurrentPageChanged,
+            onPuzzleImageSelected = { selectedUserBitmap ->
+                onCreatePuzzleClick(selectedUserBitmap)
+            }
+        )
 
         Box(contentAlignment = Alignment.Center,
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight()) {
             Button(
-                onClick = { onCreatePuzzleClick() },
+                enabled = currentPage != templatePainters.lastIndex,
+                onClick = {
+                    val bitmap = BitmapFactory.decodeResource(
+                        resources,
+                        templatePainters[currentPage]
+                    )
+
+                    onCreatePuzzleClick(bitmap)
+                },
                 modifier = Modifier.padding(horizontal = 32.dp, vertical = 10.dp),
             ) {
                 Text(text = stringResource(id = R.string.select_puzzle))
@@ -48,7 +74,11 @@ fun SelectPuzzleBoard(
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun PuzzleImagePager(puzzleTemplates: List<Int>, onCurrentPageChanged: (Int) -> Unit) {
+fun PuzzleImagePager(
+    puzzleTemplates: List<Int>,
+    onCurrentPageChanged: (Int) -> Unit,
+    onPuzzleImageSelected: (Bitmap) -> Unit,
+) {
     val pagerState = rememberPagerState()
 
     LaunchedEffect(pagerState) {
@@ -93,10 +123,18 @@ fun PuzzleImagePager(puzzleTemplates: List<Int>, onCurrentPageChanged: (Int) -> 
             }
             .aspectRatio(1f)
         ) {
-            Image(
-                painter = painterResource(puzzleTemplates[pageNumber]),
-                contentDescription = null
-            )
+            if (puzzleTemplates[pageNumber] == SELECT_YOUR_IMAGE) {
+                Box(contentAlignment = Alignment.Center) {
+                    SelectPuzzleImageFromGalleryCard(
+                        modifier = Modifier.fillMaxSize(),
+                        onPuzzleImageSelected
+                    )
+                }
+            } else
+                Image(
+                    painter = painterResource(puzzleTemplates[pageNumber]),
+                    contentDescription = null
+                )
         }
     }
 }

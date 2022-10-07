@@ -1,4 +1,4 @@
-package com.example.shuffle_puzzle.presentation.puzzle_board
+package com.example.shuffle_puzzle.presentation.puzzle_board.states
 
 import android.util.Log
 import androidx.compose.foundation.layout.*

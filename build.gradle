@@ -1,5 +1,7 @@
 buildscript {
     ext {
+        activity_ktx_version = '1.6.0'
+
         ktx_version = '1.7.0'
         kps_version = '1.7.10-1.0.6'
         kotlin_version = '1.7.10'
@@ -23,6 +25,8 @@ buildscript {
 
         retrofit_version = '2.9.0'
         okhttp_version = '4.9.3'
+
+        canhub_version = '4.3.2'
     }
     dependencies {
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
@@ -32,6 +36,7 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        maven { url = 'https://jitpack.io' }
     }
 }// Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {

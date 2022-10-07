@@ -1,6 +1,7 @@
 package com.example.shuffle_puzzle.presentation
 
 import PuzzleGameDescriptionCard
+import android.graphics.Bitmap
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -16,9 +17,7 @@ fun PuzzleBoardWithCounter(
     movesDone: Int,
     onMovePerformed: (success: Boolean) -> Unit,
     puzzle: Puzzle?,
-    puzzleImageDrawableRes: Int?,
-    onPuzzleImageChanged: (drawableRes: Int?) -> Unit,
-    onCreatePuzzleClick: () -> Unit,
+    onCreatePuzzleClick: (Bitmap) -> Unit,
     onPuzzleSizeChanged: (size: Int) -> Unit,
     onRestartPuzzle: () -> Unit,
     onRefreshPuzzle: () -> Unit,
@@ -30,7 +29,7 @@ fun PuzzleBoardWithCounter(
     ) {
         PuzzleGameDescriptionCard(
             isPuzzleCreated = isPuzzleCreated,
-            puzzleImageDrawableRes = puzzleImageDrawableRes,
+            puzzleImageBitmap = puzzle?.imageBitmap,
             movesDone = movesDone,
             restartPuzzle = onRestartPuzzle,
             refreshPuzzle = onRefreshPuzzle,
@@ -43,7 +42,6 @@ fun PuzzleBoardWithCounter(
 
         PuzzleBoard(
             puzzle = puzzle,
-            onPuzzleImageChanged = onPuzzleImageChanged,
             onCreatePuzzleClick = onCreatePuzzleClick,
             onMovePerformed = { success ->
                 onMovePerformed(success)

@@ -1,5 +1,6 @@
 package com.example.shuffle_puzzle.presentation.puzzle_board
 
+import android.graphics.Bitmap
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
@@ -8,13 +9,16 @@ import androidx.compose.ui.unit.dp
 import com.example.shuffle_puzzle.R
 import com.example.shuffle_puzzle.model.Piece
 import com.example.shuffle_puzzle.model.Puzzle
+import com.example.shuffle_puzzle.presentation.puzzle_board.states.FilledStatePuzzleBoard
+import com.example.shuffle_puzzle.presentation.puzzle_board.states.SelectPuzzleBoard
+
+const val SELECT_YOUR_IMAGE = -1
 
 @Composable
 fun PuzzleBoard(
     puzzle: Puzzle?,
-    onPuzzleImageChanged: (Int) -> Unit,
     onMovePerformed: (Boolean) -> Unit,
-    onCreatePuzzleClick: () -> Unit,
+    onCreatePuzzleClick: (Bitmap) -> Unit,
     modifier: Modifier,
 ) {
     Card(
@@ -22,13 +26,7 @@ fun PuzzleBoard(
         shape = RoundedCornerShape(8.dp)
     ) {
         if (puzzle == null) {
-            val templatePainters = listOf(
-                R.drawable.shuffle_puzzle_template_1,
-                R.drawable.shuffle_puzzle_template_2,
-                R.drawable.shuffle_puzzle_template_3,
-            )
-
-            SelectPuzzleBoard(templatePainters, onPuzzleImageChanged, onCreatePuzzleClick)
+            SelectPuzzleBoard(onCreatePuzzleClick)
         } else
             FilledStatePuzzleBoard(
                 puzzle = puzzle,
