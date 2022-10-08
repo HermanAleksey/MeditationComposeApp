@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.sp
 import com.example.meditationcomposeapp.R
 import com.example.meditationcomposeapp.presentation.common_composables.ColorBackground
 import com.example.meditationcomposeapp.presentation.common_composables.Toolbar
+import com.example.meditationcomposeapp.presentation.screens.destinations.ShufflePuzzleScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.main_flow.main_screen.composable.MenuItem
 import com.example.meditationcomposeapp.presentation.screens.main_flow.main_screen.composable.MenuItemModel
 import com.example.meditationcomposeapp.ui.theme.Alegreya
@@ -37,10 +38,11 @@ fun MainScreen(
 
     val menuItems = listOf(
         MenuItemModel(
-            title = "Super Title",
+            title = "Shuffle Puzzle",
             painterRes = R.drawable.ic_check_icon_main,
             backgroundColor = Color(169, 213, 113),
-            foregroundColor = Color(106, 174, 114)
+            foregroundColor = Color(106, 174, 114),
+            onClick = { navigator.navigate(ShufflePuzzleScreenDestination()) },
         ),
         MenuItemModel(
             title = "Mood Booster",
