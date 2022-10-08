@@ -13,8 +13,8 @@ android {
         applicationId "com.example.meditationcomposeapp"
         minSdk 26
         targetSdk 33
-        versionName "0.3"
-        versionCode 3
+        versionName "0.4-alpha"
+        versionCode 4
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
