@@ -1,9 +1,9 @@
 import android.graphics.Bitmap
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.RadioButton
 import androidx.compose.material.Text
@@ -18,6 +18,7 @@ import androidx.compose.ui.res.integerArrayResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.shuffle_puzzle.R
 
 @Composable
@@ -25,7 +26,6 @@ fun PuzzleGameDescriptionCard(
     isPuzzleCreated: Boolean,
     puzzleImageBitmap: Bitmap?,
     movesDone: Int,
-    refreshPuzzle: () -> Unit,
     restartPuzzle: () -> Unit,
     modifier: Modifier,
     puzzleSize: Int,
@@ -35,9 +35,11 @@ fun PuzzleGameDescriptionCard(
         modifier = modifier,
         shape = RoundedCornerShape(8.dp)
     ) {
-        Row(modifier = Modifier
-            .fillMaxSize()
-            .padding(10.dp)) {
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(10.dp),
+        ) {
             if (puzzleImageBitmap == null) {
                 Image(
                     painter = painterResource(id = R.drawable.empty_puzzle_image),
@@ -55,12 +57,10 @@ fun PuzzleGameDescriptionCard(
             }
 
             Column(
-                modifier = Modifier
-                    .weight(1F),
-                horizontalAlignment = Alignment.CenterHorizontally
+                modifier = Modifier.fillMaxSize(),
             ) {
                 if (isPuzzleCreated)
-                    InGameFunctionsDescription(movesDone, refreshPuzzle, restartPuzzle)
+                    InGameFunctionsDescription(movesDone, restartPuzzle)
                 else
                     PuzzleSizeSelection(puzzleSize, updateSelectedSizeValue)
             }
@@ -71,22 +71,30 @@ fun PuzzleGameDescriptionCard(
 @Composable
 fun InGameFunctionsDescription(
     movesDone: Int,
-    refreshPuzzle: () -> Unit,
     restartPuzzle: () -> Unit,
 ) {
-    Text(text = stringResource(id = R.string.moves_done))
-    Text(text = movesDone.toString())
-    Row {
-        Button(onClick = {
-            refreshPuzzle()
-        }) {
-            Text(text = "Refresh")
-        }
-        Spacer(modifier = Modifier.width(20.dp))
-        Button(onClick = {
-            restartPuzzle()
-        }) {
-            Text(text = "Restart")
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceEvenly
+    ) {
+        Text(text = stringResource(id = R.string.moves_done) + ": $movesDone")
+        //todo add timer
+        Text(text = stringResource(id = R.string.time_passed) + ": 10.01")
+
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(text = "Restart: ")
+            Image(
+                painter = painterResource(id = R.drawable.ic_restart),
+                contentDescription = "Restart game",
+                modifier = Modifier
+                    .size(24.dp)
+                    .clickable {
+                        restartPuzzle()
+                    }
+            )
         }
     }
 }
@@ -97,10 +105,20 @@ fun PuzzleSizeSelection(puzzleSize: Int, updateSelectedSizeValue: (Int) -> Unit)
     val sizeOptions = integerArrayResource(id = R.array.puzzle_sizes)
     val (_, onOptionSelected) = remember { mutableStateOf(sizeOptions[0]) }
 
-    Column(modifier = Modifier.fillMaxSize()) {
-        Text(text = stringResource(id = R.string.select_puzzle_size))
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(
+            text = stringResource(id = R.string.select_puzzle_size),
+            fontSize = 18.sp
+        )
 
-        Row(modifier = Modifier.selectableGroup()) {
+        Row(
+            modifier = Modifier.selectableGroup(),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
             sizeOptions.forEach { size ->
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally
@@ -111,13 +129,8 @@ fun PuzzleSizeSelection(puzzleSize: Int, updateSelectedSizeValue: (Int) -> Unit)
                             onOptionSelected(size)
                             updateSelectedSizeValue(size)
                         },
-                        modifier = Modifier.padding(8.dp)
                     )
                     Text(text = "${size}x$size")
-                }
-
-                if (size != sizeOptions.last()) {
-                    Spacer(modifier = Modifier.width(5.dp))
                 }
             }
         }

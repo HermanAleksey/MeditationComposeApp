@@ -3,19 +3,21 @@ package com.example.shuffle_puzzle.presentation.puzzle_board.states
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.Card
-import androidx.compose.material.Text
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.lerp
+import androidx.compose.ui.unit.sp
 import com.example.shuffle_puzzle.R
 import com.example.shuffle_puzzle.presentation.puzzle_board.SELECT_YOUR_IMAGE
 import com.example.shuffle_puzzle.presentation.puzzle_board.SelectPuzzleImageFromGalleryCard
@@ -64,9 +66,14 @@ fun SelectPuzzleBoard(
 
                     onCreatePuzzleClick(bitmap)
                 },
-                modifier = Modifier.padding(horizontal = 32.dp, vertical = 10.dp),
+                shape = RoundedCornerShape(10.dp),
+                modifier = Modifier.padding(horizontal = 42.dp, vertical = 16.dp),
+                colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondary, contentColor = Color.White, ),
             ) {
-                Text(text = stringResource(id = R.string.select_puzzle))
+                Text(
+                    text = stringResource(id = R.string.select_puzzle),
+                    fontSize = 20.sp
+                )
             }
         }
     }
@@ -126,7 +133,9 @@ fun PuzzleImagePager(
             if (puzzleTemplates[pageNumber] == SELECT_YOUR_IMAGE) {
                 Box(contentAlignment = Alignment.Center) {
                     SelectPuzzleImageFromGalleryCard(
-                        modifier = Modifier.fillMaxSize(),
+                        modifier = Modifier
+                            .background(Color(0xFFB8B8B8))
+                            .fillMaxSize(),
                         onPuzzleImageSelected
                     )
                 }

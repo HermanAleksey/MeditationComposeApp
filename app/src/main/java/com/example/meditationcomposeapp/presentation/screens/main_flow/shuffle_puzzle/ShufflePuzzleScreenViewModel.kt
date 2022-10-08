@@ -50,16 +50,9 @@ class ShufflePuzzleScreenViewModel @Inject constructor() : ViewModel() {
         )
     }
 
-    fun onRefreshPuzzleClicked() {
-        state = state.copy(
-            puzzle = state.puzzle?.apply {
-                shufflePuzzle(10)
-            }
-        )
-    }
-
     fun onRestartPuzzleClicked() {
         state = state.copy(
+            isPuzzleSolved = false,
             puzzle = null,
             movesDone = 0,
         )

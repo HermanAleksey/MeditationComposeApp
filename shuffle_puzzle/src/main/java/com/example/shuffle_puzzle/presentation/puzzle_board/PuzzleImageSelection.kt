@@ -5,18 +5,35 @@ import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.os.Build
 import android.provider.MediaStore
+import android.text.Html
 import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.ParagraphStyle
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.TextUnitType
+import androidx.compose.ui.unit.sp
 import com.canhub.cropper.CropImageContract
 import com.canhub.cropper.CropImageView
 import com.canhub.cropper.options
+import com.example.shuffle_puzzle.R
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.PermissionStatus
 import com.google.accompanist.permissions.rememberPermissionState
@@ -74,13 +91,27 @@ fun SelectPuzzleImageFromGalleryCard(
         rememberPermissionState(Manifest.permission.READ_EXTERNAL_STORAGE)
 
 
-    Box(contentAlignment = Alignment.Center, modifier = modifier
-        .clickable {
-            externalStoragePermission.launchPermissionRequest()
-            if (externalStoragePermission.status == PermissionStatus.Granted) {
-                startCrop()
-            }
-        }) {
-        Text(text = "Click here to select photo from your gallery")
+    Column(
+        modifier = modifier
+            .clickable {
+                externalStoragePermission.launchPermissionRequest()
+                if (externalStoragePermission.status == PermissionStatus.Granted) {
+                    startCrop()
+                }
+            },
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Image(painter = painterResource(id = R.drawable.image_selection),
+            contentDescription = "Select image from gallery")
+
+        val selectPuzzleImageFromGalleryLabel = stringResource(id = R.string.select_puzzle_image_from_gallery_text)
+        Text(
+            text = selectPuzzleImageFromGalleryLabel,
+            modifier = Modifier.wrapContentWidth(),
+            textAlign = TextAlign.Center,
+            fontSize = 16.sp,
+            color = Color.Black
+        )
     }
 }

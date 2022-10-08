@@ -94,7 +94,7 @@ data class Puzzle(
         return true
     }
 
-    fun shufflePuzzle(times: Int) {
+    private fun shufflePuzzle(times: Int) {
         repeat(times) {
             performRandomMove()
         }

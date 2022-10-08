@@ -21,7 +21,6 @@ fun PuzzleBoardWithCounter(
     puzzleSize: Int,
     onPuzzleSizeChanged: (size: Int) -> Unit,
     onRestartPuzzle: () -> Unit,
-    onRefreshPuzzle: () -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -33,7 +32,6 @@ fun PuzzleBoardWithCounter(
             puzzleImageBitmap = puzzle?.imageBitmap,
             movesDone = movesDone,
             restartPuzzle = onRestartPuzzle,
-            refreshPuzzle = onRefreshPuzzle,
             puzzleSize = puzzleSize,
             updateSelectedSizeValue = onPuzzleSizeChanged,
             modifier = Modifier

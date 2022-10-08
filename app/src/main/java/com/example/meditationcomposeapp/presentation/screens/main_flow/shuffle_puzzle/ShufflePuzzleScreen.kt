@@ -37,9 +37,6 @@ fun ShufflePuzzleScreen(
                 },
                 onRestartPuzzle = {
                     viewModel.onRestartPuzzleClicked()
-                },
-                onRefreshPuzzle = {
-                    viewModel.onRefreshPuzzleClicked()
                 }
             )
             if (viewModel.isPuzzleSolved()) {
