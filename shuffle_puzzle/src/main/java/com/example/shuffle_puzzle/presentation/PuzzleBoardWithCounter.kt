@@ -18,6 +18,7 @@ fun PuzzleBoardWithCounter(
     onMovePerformed: (success: Boolean) -> Unit,
     puzzle: Puzzle?,
     onCreatePuzzleClick: (Bitmap) -> Unit,
+    puzzleSize: Int,
     onPuzzleSizeChanged: (size: Int) -> Unit,
     onRestartPuzzle: () -> Unit,
     onRefreshPuzzle: () -> Unit,
@@ -33,6 +34,7 @@ fun PuzzleBoardWithCounter(
             movesDone = movesDone,
             restartPuzzle = onRestartPuzzle,
             refreshPuzzle = onRefreshPuzzle,
+            puzzleSize = puzzleSize,
             updateSelectedSizeValue = onPuzzleSizeChanged,
             modifier = Modifier
                 .fillMaxWidth()

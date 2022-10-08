@@ -6,7 +6,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import com.example.meditationcomposeapp.presentation.common_composables.ColorBackground
 import com.example.meditationcomposeapp.presentation.screens.main_flow.shuffle_puzzle.composable.PuzzleIsSolvedLabel
 import com.example.meditationcomposeapp.ui.theme.colorBackground
@@ -32,6 +31,7 @@ fun ShufflePuzzleScreen(
                 onCreatePuzzleClick = { bitmap ->
                     viewModel.onCreatePuzzleClick(bitmap)
                 },
+                puzzleSize = viewModel.getPuzzleSize(),
                 onPuzzleSizeChanged = {
                     viewModel.onPuzzleSizeChanged(it)
                 },

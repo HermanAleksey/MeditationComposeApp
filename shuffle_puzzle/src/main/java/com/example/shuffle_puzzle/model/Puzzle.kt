@@ -20,6 +20,8 @@ data class Puzzle(
     private var emptyPiecePosition: Piece.Position =
         Piece.Position(size - 1, size - 1)
 
+    private lateinit var emptyPieceInitialImage: Bitmap
+
     init {
         calculatePieceImageSize()
 
@@ -28,6 +30,7 @@ data class Puzzle(
                 val position = Piece.Position(row, column)
                 //last item is empty
                 val pieceBitmap = if (row == size - 1 && column == size - 1) {
+                    emptyPieceInitialImage = chopImage(position)
                     drawEmptyPieceBitmap()
                 } else chopImage(position)
                 mutableStateOf(Piece(position, pieceBitmap))
@@ -137,6 +140,14 @@ data class Puzzle(
                 }
             }
         }
+        replaceRightBottomPieceWithInitialImage()
         return true
+    }
+
+    //call only when puzzle is completed
+    private fun replaceRightBottomPieceWithInitialImage() {
+        board[size-1][size-1].value = board[size-1][size-1].value.copy(
+            imageBitmap = emptyPieceInitialImage
+        )
     }
 }

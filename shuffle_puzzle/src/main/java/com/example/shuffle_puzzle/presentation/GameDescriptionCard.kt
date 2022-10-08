@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.integerArrayResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.shuffle_puzzle.R
@@ -27,6 +28,7 @@ fun PuzzleGameDescriptionCard(
     refreshPuzzle: () -> Unit,
     restartPuzzle: () -> Unit,
     modifier: Modifier,
+    puzzleSize: Int,
     updateSelectedSizeValue: (Int) -> Unit,
 ) {
     Card(
@@ -36,18 +38,22 @@ fun PuzzleGameDescriptionCard(
         Row(modifier = Modifier
             .fillMaxSize()
             .padding(10.dp)) {
-            Image(
-                //todo add proper empty image
-                bitmap = puzzleImageBitmap?.asImageBitmap() ?: Bitmap.createBitmap(
-                    100,
-                    100,
-                    Bitmap.Config.ARGB_8888
-                ).asImageBitmap(),
+            if (puzzleImageBitmap == null) {
+                Image(
+                    painter = painterResource(id = R.drawable.empty_puzzle_image),
+                    contentDescription = stringResource(id = R.string.completed_puzzle),
+                    modifier = Modifier.fillMaxHeight(),
+                    contentScale = ContentScale.FillHeight,
+                )
+            } else {
+                Image(
+                    bitmap = puzzleImageBitmap.asImageBitmap(),
+                    contentDescription = stringResource(id = R.string.completed_puzzle),
+                    modifier = Modifier.fillMaxHeight(),
+                    contentScale = ContentScale.FillHeight,
+                )
+            }
 
-                contentDescription = stringResource(id = R.string.completed_puzzle),
-                modifier = Modifier.fillMaxHeight(),
-                contentScale = ContentScale.FillHeight,
-            )
             Column(
                 modifier = Modifier
                     .weight(1F),
@@ -56,7 +62,7 @@ fun PuzzleGameDescriptionCard(
                 if (isPuzzleCreated)
                     InGameFunctionsDescription(movesDone, refreshPuzzle, restartPuzzle)
                 else
-                    PuzzleSizeSelection(updateSelectedSizeValue)
+                    PuzzleSizeSelection(puzzleSize, updateSelectedSizeValue)
             }
         }
     }
@@ -87,9 +93,9 @@ fun InGameFunctionsDescription(
 
 
 @Composable
-fun PuzzleSizeSelection(updateSelectedSizeValue: (Int) -> Unit) {
+fun PuzzleSizeSelection(puzzleSize: Int, updateSelectedSizeValue: (Int) -> Unit) {
     val sizeOptions = integerArrayResource(id = R.array.puzzle_sizes)
-    val (selectedOption, onOptionSelected) = remember { mutableStateOf(sizeOptions[0]) }
+    val (_, onOptionSelected) = remember { mutableStateOf(sizeOptions[0]) }
 
     Column(modifier = Modifier.fillMaxSize()) {
         Text(text = stringResource(id = R.string.select_puzzle_size))
@@ -100,7 +106,7 @@ fun PuzzleSizeSelection(updateSelectedSizeValue: (Int) -> Unit) {
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     RadioButton(
-                        selected = (size == selectedOption),
+                        selected = (size == puzzleSize),
                         onClick = {
                             onOptionSelected(size)
                             updateSelectedSizeValue(size)
