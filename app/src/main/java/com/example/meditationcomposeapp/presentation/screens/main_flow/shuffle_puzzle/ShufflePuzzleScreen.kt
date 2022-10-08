@@ -37,7 +37,10 @@ fun ShufflePuzzleScreen(
                 },
                 onRestartPuzzle = {
                     viewModel.onRestartPuzzleClicked()
-                }
+                },
+                timerValueSec = viewModel.getSolvingTimerSec(),
+                onTimerSecTick = { viewModel.onTimerTick() },
+                isTimerActivated = viewModel.isTimerActive(),
             )
             if (viewModel.isPuzzleSolved()) {
                 PuzzleIsSolvedLabel()

@@ -8,9 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.shuffle_puzzle.model.Puzzle
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import okhttp3.internal.wait
 import javax.inject.Inject
 
 @HiltViewModel
@@ -30,6 +28,16 @@ class ShufflePuzzleScreenViewModel @Inject constructor() : ViewModel() {
 
     fun getPuzzleSize(): Int = state.puzzleSize
 
+    fun getSolvingTimerSec(): Long = state.solvingTimerSec
+
+    fun isTimerActive(): Boolean = state.isTimerActive
+
+    fun onTimerTick() {
+        state = state.copy(
+            solvingTimerSec = state.solvingTimerSec + 1
+        )
+    }
+
     fun onMovePerformed(success: Boolean) {
         if (state.isPuzzleSolved) return
 
@@ -40,18 +48,24 @@ class ShufflePuzzleScreenViewModel @Inject constructor() : ViewModel() {
 
     private fun onPuzzleSolved() {
         viewModelScope.launch {
-            state = state.copy(isPuzzleSolved = true)
+            state = state.copy(
+                isTimerActive = false,
+                isPuzzleSolved = true
+            )
         }
     }
 
     fun onCreatePuzzleClick(bitmap: Bitmap) {
         state = state.copy(
+            solvingTimerSec = 0,
+            isTimerActive = true,
             puzzle = Puzzle(state.puzzleSize, bitmap)
         )
     }
 
     fun onRestartPuzzleClicked() {
         state = state.copy(
+            solvingTimerSec = 0,
             isPuzzleSolved = false,
             puzzle = null,
             movesDone = 0,

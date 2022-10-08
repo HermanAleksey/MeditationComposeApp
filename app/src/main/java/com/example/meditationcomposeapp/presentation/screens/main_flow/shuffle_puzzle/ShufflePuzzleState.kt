@@ -8,4 +8,6 @@ data class ShufflePuzzleState(
     var puzzleSize: Int = 3,
     var movesDone: Int = 0,
     var isPuzzleSolved: Boolean = false,
+    var isTimerActive: Boolean = false,
+    var solvingTimerSec: Long = 0,
 )

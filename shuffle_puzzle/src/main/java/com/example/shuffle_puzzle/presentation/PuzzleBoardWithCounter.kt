@@ -21,6 +21,9 @@ fun PuzzleBoardWithCounter(
     puzzleSize: Int,
     onPuzzleSizeChanged: (size: Int) -> Unit,
     onRestartPuzzle: () -> Unit,
+    timerValueSec: Long,
+    onTimerSecTick: () -> Unit,
+    isTimerActivated: Boolean,
 ) {
     Column(
         modifier = Modifier
@@ -31,9 +34,12 @@ fun PuzzleBoardWithCounter(
             isPuzzleCreated = isPuzzleCreated,
             puzzleImageBitmap = puzzle?.imageBitmap,
             movesDone = movesDone,
-            restartPuzzle = onRestartPuzzle,
+            onRestartPuzzle = onRestartPuzzle,
             puzzleSize = puzzleSize,
             updateSelectedSizeValue = onPuzzleSizeChanged,
+            timerValueSec = timerValueSec,
+            onTimerSecTick = onTimerSecTick,
+            isTimerActivated = isTimerActivated,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(dimensionResource(id = R.dimen.puzzle_game_description_height))

@@ -11,7 +11,10 @@ import com.example.shuffle_puzzle.model.Puzzle
 import com.example.shuffle_puzzle.presentation.PuzzlePiece
 
 @Composable
-fun FilledStatePuzzleBoard(puzzle: Puzzle, onPieceClicked: (Int, Int) -> Unit) {
+fun FilledStatePuzzleBoard(
+    puzzle: Puzzle,
+    onPieceClicked: (Int, Int) -> Unit,
+) {
     var puzzleBoardWidth by remember {
         mutableStateOf(0.dp)
     }
