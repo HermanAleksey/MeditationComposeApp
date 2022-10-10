@@ -68,7 +68,7 @@ fun MainScreen(
         )
     )
 
-    ColorBackground(color = com.example.meditationcomposeapp.ui.theme.ColorBackground) {
+    ColorBackground(color = MaterialTheme.colors.background) {
         Column(modifier = Modifier.fillMaxSize()) {
             Toolbar()
             Column(

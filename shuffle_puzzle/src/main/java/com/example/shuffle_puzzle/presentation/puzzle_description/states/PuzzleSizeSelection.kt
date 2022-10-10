@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.selection.selectableGroup
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.RadioButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -14,7 +15,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.integerArrayResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import com.example.shuffle_puzzle.R
 
 @Composable
@@ -29,7 +31,11 @@ fun PuzzleSizeSelection(puzzleSize: Int, updateSelectedSizeValue: (Int) -> Unit)
     ) {
         Text(
             text = stringResource(id = R.string.select_puzzle_size),
-            fontSize = 18.sp
+            style = MaterialTheme.typography.body1.copy(
+                color = MaterialTheme.colors.onSurface,
+                fontWeight = FontWeight.W400
+            ),
+            textAlign = TextAlign.Center
         )
 
         Row(
@@ -47,7 +53,12 @@ fun PuzzleSizeSelection(puzzleSize: Int, updateSelectedSizeValue: (Int) -> Unit)
                             updateSelectedSizeValue(size)
                         },
                     )
-                    Text(text = "${size}x$size")
+                    Text(
+                        text = "${size}x$size",
+                        style = MaterialTheme.typography.body1.copy(
+                            color = MaterialTheme.colors.onSurface
+                        ),
+                    )
                 }
             }
         }

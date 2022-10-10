@@ -5,6 +5,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 
 //source for material themes
 //https://material.io/design/color/the-color-system.html#color-theme-creation
@@ -17,13 +18,14 @@ private val DarkColorPalette = darkColors(
 private val LightColorPalette = lightColors(
     //main brand color (app bar uses it)
     primary = Purple500,
-    primaryVariant = Purple700,
     //used to provide accents
-    secondary = ColorSecondary,
+    secondary = Green300,
     //screen background uses it
     surface = ColorPlatinum,
+    onSurface = Green700,
     //app background uses it
     background = Green700,
+    onBackground = ColorPlatinum
 
 
     //Material also defines "on" colors—colors to use for content on top of one of the named colors

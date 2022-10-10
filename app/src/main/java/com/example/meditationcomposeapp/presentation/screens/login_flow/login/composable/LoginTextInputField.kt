@@ -19,8 +19,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.meditationcomposeapp.ui.theme.ColorBackground
-import com.example.meditationcomposeapp.ui.theme.ColorTextHint
+import com.example.meditationcomposeapp.ui.theme.ColorPlatinum
 import com.example.meditationcomposeapp.ui.theme.Montserrat
 
 @Composable
@@ -40,7 +39,7 @@ fun LoginTextInputField(
         mutableStateOf(18)
     }
     var labelTextColor by remember {
-        mutableStateOf(ColorTextHint)
+        mutableStateOf(ColorPlatinum)
     }
     TextField(
         value = textFieldValue,
@@ -69,10 +68,10 @@ fun LoginTextInputField(
         ),
         singleLine = true,
         colors = TextFieldDefaults.textFieldColors(
-            backgroundColor = ColorBackground,
+            backgroundColor = MaterialTheme.colors.background,
             cursorColor = Color.White,
             focusedIndicatorColor = Color.White,
-            unfocusedIndicatorColor = ColorTextHint
+            unfocusedIndicatorColor = MaterialTheme.colors.onBackground
         ),
         modifier = Modifier
             .padding(top = 50.dp)
@@ -80,7 +79,7 @@ fun LoginTextInputField(
             .focusRequester(focusRequester ?: FocusRequester())
             .onFocusChanged { focusState ->
                 if (textFieldValue.isBlank() && !focusState.isFocused) {
-                    labelTextColor = ColorTextHint
+                    labelTextColor = ColorPlatinum
                     labelFontSize = 18
                 } else {
                     labelTextColor = Color.White

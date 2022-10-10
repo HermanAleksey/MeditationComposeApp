@@ -13,16 +13,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.ExperimentalUnitApi
 import androidx.compose.ui.unit.dp
 import com.example.meditationcomposeapp.R
-import com.example.meditationcomposeapp.ui.theme.colorPopUpBackground
 
 @Composable
 fun PuzzleIsSolvedLabel() {
     Card(
         shape = RoundedCornerShape(dimensionResource(id = R.dimen.radius_pop_up_corner)),
-        backgroundColor = MaterialTheme.colors.colorPopUpBackground
+        backgroundColor = MaterialTheme.colors.surface
     ) {
         Box(contentAlignment = Alignment.Center) {
             Text(

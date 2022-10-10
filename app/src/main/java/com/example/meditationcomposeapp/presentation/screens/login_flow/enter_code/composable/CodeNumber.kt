@@ -3,6 +3,7 @@ package com.example.meditationcomposeapp.presentation.screens.login_flow.enter_c
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -19,8 +20,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.text.isDigitsOnly
 import com.example.meditationcomposeapp.presentation.screens.login_flow.enter_code.EnterCodeScreenState.Companion.EMPTY_NUMBER
-import com.example.meditationcomposeapp.ui.theme.ColorBackground
-import com.example.meditationcomposeapp.ui.theme.ColorTextHint
 import com.example.meditationcomposeapp.ui.theme.Montserrat
 
 /**
@@ -82,7 +81,7 @@ fun CodeNumber(
         },
         textStyle = TextStyle(
             color = Color.White,
-            fontSize = 50.sp,
+            fontSize = 46.sp,
             fontFamily = Montserrat,
             fontWeight = FontWeight.W400,
         ),
@@ -91,10 +90,10 @@ fun CodeNumber(
             imeAction = ImeAction.Done
         ),
         colors = TextFieldDefaults.textFieldColors(
-            backgroundColor = ColorBackground,
+            backgroundColor = MaterialTheme.colors.background,
             cursorColor = Color.White,
             focusedIndicatorColor = Color.White,
-            unfocusedIndicatorColor = ColorTextHint
+            unfocusedIndicatorColor = MaterialTheme.colors.onBackground
         ),
         onValueChange = { onValueChanged(it) },
         keyboardActions = KeyboardActions(
