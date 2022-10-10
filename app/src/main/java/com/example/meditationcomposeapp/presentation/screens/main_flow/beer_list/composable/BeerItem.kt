@@ -14,7 +14,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.meditationcomposeapp.R
 import com.example.meditationcomposeapp.model.entity.Beer
-import com.example.meditationcomposeapp.ui.theme.colorListItemBackground
 import com.example.meditationcomposeapp.ui.theme.colorText
 
 @Composable
@@ -23,7 +22,7 @@ fun BeerItem(beer: Beer) {
         shape = RoundedCornerShape(dimensionResource(id = R.dimen.radius_list_item_corner)),
         modifier = Modifier
             .fillMaxWidth(),
-        backgroundColor = MaterialTheme.colors.colorListItemBackground
+        backgroundColor = MaterialTheme.colors.surface
     ) {
         Column(
             modifier = Modifier
