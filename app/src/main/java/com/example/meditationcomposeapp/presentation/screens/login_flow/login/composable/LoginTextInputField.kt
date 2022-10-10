@@ -9,20 +9,20 @@ import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.*
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.*
+import androidx.compose.ui.focus.FocusManager
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.meditationcomposeapp.ui.theme.Alegreya
 import com.example.meditationcomposeapp.ui.theme.ColorBackground
 import com.example.meditationcomposeapp.ui.theme.ColorTextHint
+import com.example.meditationcomposeapp.ui.theme.Montserrat
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun LoginTextInputField(
     textFieldValue: String,
@@ -35,7 +35,6 @@ fun LoginTextInputField(
     focusRequester: FocusRequester? = null,
     keyboardOptions: KeyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
     nextFocusRequester: FocusRequester? = null,
-    previousFocusRequester: FocusRequester? = null
 ) {
     var labelFontSize by remember {
         mutableStateOf(18)
@@ -49,18 +48,13 @@ fun LoginTextInputField(
             onValueChanged(it)
         },
         isError = isError,
-        textStyle = TextStyle(
-            color = Color.White,
-            fontSize = 18.sp,
-            fontFamily = Alegreya,
-            fontWeight = FontWeight.W400,
-        ),
+        textStyle =  MaterialTheme.typography.body2,
         label = {
             Text(
                 text = label,
                 color = labelTextColor,
                 fontSize = labelFontSize.sp,
-                fontFamily = Alegreya,
+                fontFamily = Montserrat,
                 fontWeight = FontWeight.W400,
             )
         },
@@ -98,7 +92,6 @@ fun LoginTextInputField(
         Text(
             text = errorValue,
             color = MaterialTheme.colors.error,
-//            modifier = Modifier.align(Alignment.End)
         )
     }
 }

@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import com.example.meditationcomposeapp.presentation.screens.NavGraphs
 import com.example.meditationcomposeapp.presentation.screens.appCurrentDestinationAsState
 import com.example.meditationcomposeapp.presentation.screens.destinations.MainScreenDestination
@@ -13,7 +12,6 @@ import com.example.meditationcomposeapp.presentation.screens.startAppDestination
 import com.example.meditationcomposeapp.ui.theme.ColorBackground
 import com.example.meditationcomposeapp.ui.theme.ColorTextHint
 import com.ramcosta.composedestinations.navigation.navigate
-import com.ramcosta.composedestinations.navigation.navigateTo
 
 @Composable
 fun BottomBar(navController: NavController) {
@@ -42,7 +40,10 @@ fun RowScope.AddItem(
 ) {
     BottomNavigationItem(
         label = {
-            Text(text = screen.title)
+            Text(
+                text = screen.title,
+                style = MaterialTheme.typography.caption
+            )
         },
         icon = {
             Icon(
@@ -54,7 +55,7 @@ fun RowScope.AddItem(
         unselectedContentColor = LocalContentColor.current.copy(alpha = ContentAlpha.disabled),
         onClick = {
             with(navController) {
-                navigate(screen.direction){
+                navigate(screen.direction) {
                     popUpTo(MainScreenDestination.route) {
                         saveState = true
                     }

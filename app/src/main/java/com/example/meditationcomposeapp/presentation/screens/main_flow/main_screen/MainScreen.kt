@@ -3,6 +3,7 @@ package com.example.meditationcomposeapp.presentation.screens.main_flow.main_scr
 import android.app.Activity
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -10,16 +11,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.sp
 import com.example.meditationcomposeapp.R
 import com.example.meditationcomposeapp.presentation.common_composables.ColorBackground
 import com.example.meditationcomposeapp.presentation.common_composables.Toolbar
 import com.example.meditationcomposeapp.presentation.screens.destinations.ShufflePuzzleScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.main_flow.main_screen.composable.MenuItem
 import com.example.meditationcomposeapp.presentation.screens.main_flow.main_screen.composable.MenuItemModel
-import com.example.meditationcomposeapp.ui.theme.Alegreya
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
@@ -78,11 +76,8 @@ fun MainScreen(
             ) {
                 Text(
                     text = stringResource(id = R.string.features),
-                    fontSize = 34.sp,
-                    color = Color.White,
+                    style = MaterialTheme.typography.h2,
                     textAlign = TextAlign.Center,
-                    fontFamily = Alegreya,
-                    fontWeight = FontWeight.W500,
                     modifier = Modifier.padding(
                         top = dimensionResource(id = R.dimen.padding_top_screen_title),
                         start = dimensionResource(id = R.dimen.padding_horizontal_main_content)

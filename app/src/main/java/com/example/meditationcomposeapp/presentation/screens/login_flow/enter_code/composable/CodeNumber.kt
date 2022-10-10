@@ -19,9 +19,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.text.isDigitsOnly
 import com.example.meditationcomposeapp.presentation.screens.login_flow.enter_code.EnterCodeScreenState.Companion.EMPTY_NUMBER
-import com.example.meditationcomposeapp.ui.theme.Alegreya
 import com.example.meditationcomposeapp.ui.theme.ColorBackground
 import com.example.meditationcomposeapp.ui.theme.ColorTextHint
+import com.example.meditationcomposeapp.ui.theme.Montserrat
 
 /**
  * Represent 1 number from code panel
@@ -83,8 +83,7 @@ fun CodeNumber(
         textStyle = TextStyle(
             color = Color.White,
             fontSize = 50.sp,
-            //todo replace with Lato font
-            fontFamily = Alegreya,
+            fontFamily = Montserrat,
             fontWeight = FontWeight.W400,
         ),
         keyboardOptions = KeyboardOptions(
