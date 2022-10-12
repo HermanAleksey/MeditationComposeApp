@@ -26,7 +26,7 @@ Cards on main screen are drawn using Canvas, not png images.
 
 ### Shuffle puzzle
 
-Default screen     |  Possibility to choose your photo  |  Puzzle itself   |  Completed puzzle
+Default screen             |  Possibility to choose your photo  |     Puzzle itself       |  Completed puzzle
 :-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
 <img src="https://user-images.githubusercontent.com/68656704/195431352-4b30b7a3-8b69-4aae-8393-aab4908b40a2.jpg" width="200">  | <img src="https://user-images.githubusercontent.com/68656704/195431431-891ee2f7-5839-4f12-a570-cf57f119c432.jpg" width="200">  | <img src="https://user-images.githubusercontent.com/68656704/195431467-a892b30f-69ec-4d2b-87b8-ad004eec8133.jpg" width="200">  | <img src="https://user-images.githubusercontent.com/68656704/195431485-47cb7cc9-42f7-4028-b275-a0fe478575f5.jpg" width="200"> 
 
