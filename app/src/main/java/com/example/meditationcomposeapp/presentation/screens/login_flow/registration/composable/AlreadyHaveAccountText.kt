@@ -9,6 +9,7 @@ import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.sp
 import com.example.meditationcomposeapp.R
@@ -30,7 +31,7 @@ fun AlreadyHaveAccountText(
                         fontWeight = FontWeight.W200
                     )
                 ) {
-                    alreadyHaveAccountLabel
+                    append(alreadyHaveAccountLabel)
                 }
                 append(" ")
                 withStyle(
@@ -43,6 +44,7 @@ fun AlreadyHaveAccountText(
             }
         },
         style = MaterialTheme.typography.body1.copy(fontSize = 20.sp),
+        textAlign = TextAlign.Center,
         modifier = modifier
     )
 }
