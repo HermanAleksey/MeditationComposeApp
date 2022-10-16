@@ -68,11 +68,11 @@ fun NewPasswordScreen(
                     .alpha(0.7F)
             )
             LoginFlowInputField(
-                isEnabled = !viewModel.state.isLoading,
-                textFieldValue = viewModel.state.newPassword,
+                isEnabled = !viewModel.isLoading(),
+                textFieldValue = viewModel.getNewPassword(),
                 label = stringResource(id = R.string.new_password),
-                isError = viewModel.state.newPasswordError != null,
-                errorValue = viewModel.state.newPasswordError?.asString(),
+                isError = viewModel.getNewPasswordError() != null,
+                errorValue = viewModel.getNewPasswordError()?.asString(),
                 onValueChanged = { viewModel.onNewPasswordTextChanged(it) },
                 imeAction = ImeAction.Next,
                 keyboardType = KeyboardType.Password,
@@ -81,11 +81,11 @@ fun NewPasswordScreen(
                 },
             )
             LoginFlowInputField(
-                isEnabled = !viewModel.state.isLoading,
-                textFieldValue = viewModel.state.repeatPassword,
+                isEnabled = !viewModel.isLoading(),
+                textFieldValue = viewModel.getRepeatPassword(),
                 label = stringResource(id = R.string.repeat_new_password),
-                isError = viewModel.state.repeatPasswordError != null,
-                errorValue = viewModel.state.repeatPasswordError?.asString(),
+                isError = viewModel.getRepeatPasswordError() != null,
+                errorValue = viewModel.getRepeatPasswordError()?.asString(),
                 onValueChanged = { viewModel.onRepeatPasswordTextChanged(it) },
                 imeAction = ImeAction.Done,
                 keyboardType = KeyboardType.Password,

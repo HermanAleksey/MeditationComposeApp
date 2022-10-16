@@ -14,7 +14,6 @@ import com.example.meditationcomposeapp.model.utils.validation.PasswordField
 import com.example.meditationcomposeapp.presentation.screens.destinations.EnterLoginScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.EnterScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.MainScreenDestination
-import com.example.meditationcomposeapp.presentation.screens.destinations.NewPasswordScreenDestination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -23,10 +22,17 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginScreenViewModel @Inject constructor(
     private val userDataStore: UserDataStore,
-    private val loginUseCase: LoginUseCase
+    private val loginUseCase: LoginUseCase,
 ) : ViewModel() {
 
-    var state by mutableStateOf(LoginScreenState())
+    private var state by mutableStateOf(LoginScreenState())
+
+    fun isLoading() = state.isLoading
+    fun getLogin() = state.login
+    fun getLoginError() = state.loginError
+    fun getPassword() = state.password
+    fun getPasswordError() = state.passwordError
+
 
     private fun setLoading(isLoading: Boolean) {
         state = state.copy(isLoading = isLoading)
@@ -76,7 +82,7 @@ class LoginScreenViewModel @Inject constructor(
     }
 
     private suspend fun saveCreditsOnDataStore(login: String, password: String) {
-        with(userDataStore){
+        with(userDataStore) {
             writeLogin(login)
             writePassword(password)
         }

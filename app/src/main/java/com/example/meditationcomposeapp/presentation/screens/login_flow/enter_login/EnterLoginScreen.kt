@@ -3,7 +3,6 @@ package com.example.meditationcomposeapp.presentation.screens.login_flow.enter_l
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -55,7 +54,7 @@ fun EnterLoginScreen(
         ) {
             Image(
                 painter = painterResource(id = R.drawable.ic_logo_white),
-                contentDescription = "Background image",
+                contentDescription = "App logo",
                 contentScale = ContentScale.FillHeight,
                 modifier = Modifier
                     .padding(top = 100.dp)
@@ -74,11 +73,11 @@ fun EnterLoginScreen(
                     .alpha(0.7F)
             )
             LoginFlowInputField(
-                isEnabled = !viewModel.state.isLoading,
-                textFieldValue = viewModel.state.login,
+                isEnabled = !viewModel.isLoading(),
+                textFieldValue = viewModel.getLogin(),
                 label = stringResource(id = R.string.email_address),
-                isError = viewModel.state.emailError != null,
-                errorValue = viewModel.state.emailError?.asString(),
+                isError = viewModel.getLoginError() != null,
+                errorValue = viewModel.getLoginError()?.asString(),
                 onValueChanged = { viewModel.onLoginTextChanged(it) },
                 imeAction = ImeAction.Done,
                 keyboardType = KeyboardType.Email,

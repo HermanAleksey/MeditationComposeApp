@@ -16,7 +16,7 @@ fun ImageBackground(
     Box {
         Image(
             painter = painterResource(id = imageRes),
-            contentDescription = "Background image",
+            contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize()
         )

@@ -20,13 +20,17 @@ class EnterLoginScreenViewModel @Inject constructor(
     private val requestPasswordRestorationUseCase: RequestPasswordRestorationUseCase
 ) : ViewModel() {
 
-    var state by mutableStateOf(EnterLoginScreenState())
+   private var state by mutableStateOf(EnterLoginScreenState())
 
     private fun setLoading(isLoading: Boolean) {
         state = state.copy(isLoading = isLoading)
     }
 
     fun isLoading() = state.isLoading
+
+    fun getLogin() = state.login
+
+    fun getLoginError() = state.loginError
 
     fun onLoginTextChanged(value: String) {
         state = state.copy(login = value)
@@ -62,7 +66,7 @@ class EnterLoginScreenViewModel @Inject constructor(
 
     private fun isEmailValid(): Boolean {
         LoginField(state.login).validate().let {
-            state = state.copy(emailError = it.errorMessage)
+            state = state.copy(loginError = it.errorMessage)
             return it.successful
         }
     }

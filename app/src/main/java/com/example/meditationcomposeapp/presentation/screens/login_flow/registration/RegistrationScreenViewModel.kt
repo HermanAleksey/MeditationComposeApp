@@ -22,7 +22,14 @@ class RegistrationScreenViewModel @Inject constructor(
     private val registerUseCase: RegisterUseCase
 ) : ViewModel() {
 
-    var state by mutableStateOf(RegistrationScreenState())
+    private var state by mutableStateOf(RegistrationScreenState())
+
+    fun getLogin() = state.login
+    fun getLoginError() = state.loginError
+    fun getName() = state.name
+    fun getNameError() = state.nameError
+    fun getPassword() = state.password
+    fun getPasswordError() = state.passwordError
 
     private fun setLoading(isLoading: Boolean) {
         state = state.copy(isLoading = isLoading)
@@ -90,7 +97,7 @@ class RegistrationScreenViewModel @Inject constructor(
     private fun isLoginFieldValid(): Boolean {
         //todo validate login
         LoginField(state.name).validate().let {
-            state = state.copy(emailError = it.errorMessage)
+            state = state.copy(loginError = it.errorMessage)
             return it.successful
         }
     }

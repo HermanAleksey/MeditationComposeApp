@@ -22,7 +22,12 @@ class NewPasswordScreenViewModel @Inject constructor(
     private val setNewPasswordUseCase: SetNewPasswordUseCase
 ) : ViewModel() {
 
-    var state by mutableStateOf(NewPasswordScreenState())
+    private  var state by mutableStateOf(NewPasswordScreenState())
+
+    fun getNewPassword() = state.newPassword
+    fun getNewPasswordError() = state.newPasswordError
+    fun getRepeatPassword() = state.repeatPassword
+    fun getRepeatPasswordError() = state.repeatPasswordError
 
     private fun setLoading(isLoading: Boolean) {
         state = state.copy(isLoading = isLoading)

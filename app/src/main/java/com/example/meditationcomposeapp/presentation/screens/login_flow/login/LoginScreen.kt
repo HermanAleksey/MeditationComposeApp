@@ -41,7 +41,7 @@ fun LoginScreen(
     val passwordFocusRequester = FocusRequester()
 
     LoginFlowBackground(
-        isLoading = viewModel.state.isLoading
+        isLoading = viewModel.isLoading()
     ) {
         Column(
             horizontalAlignment = Alignment.Start,
@@ -71,11 +71,11 @@ fun LoginScreen(
                     .alpha(0.7F)
             )
             LoginFlowInputField(
-                isEnabled = !viewModel.state.isLoading,
-                textFieldValue = viewModel.state.login,
+                isEnabled = !viewModel.isLoading(),
+                textFieldValue = viewModel.getLogin(),
                 label = stringResource(id = R.string.email_address),
-                isError = viewModel.state.loginError != null,
-                errorValue = viewModel.state.loginError?.asString(),
+                isError = viewModel.getLoginError() != null,
+                errorValue = viewModel.getLoginError()?.asString(),
                 onValueChanged = { viewModel.onLoginTextChanged(it) },
                 imeAction = ImeAction.Next,
                 keyboardType = KeyboardType.Email,
@@ -84,11 +84,11 @@ fun LoginScreen(
                 },
             )
             LoginFlowInputField(
-                isEnabled = !viewModel.state.isLoading,
-                textFieldValue = viewModel.state.password,
+                isEnabled = !viewModel.isLoading(),
+                textFieldValue = viewModel.getPassword(),
                 label = stringResource(id = R.string.password),
-                isError = viewModel.state.passwordError != null,
-                errorValue = viewModel.state.passwordError?.asString(),
+                isError = viewModel.getPasswordError() != null,
+                errorValue = viewModel.getPasswordError()?.asString(),
                 onValueChanged = { viewModel.onPasswordTextChanged(it) },
                 imeAction = ImeAction.Done,
                 keyboardType = KeyboardType.Password,
