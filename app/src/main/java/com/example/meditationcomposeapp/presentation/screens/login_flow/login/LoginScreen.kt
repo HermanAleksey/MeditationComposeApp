@@ -18,6 +18,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
@@ -25,7 +26,7 @@ import com.example.meditationcomposeapp.R
 import com.example.meditationcomposeapp.presentation.screens.login_flow.enter.composable.DontHaveAccountText
 import com.example.meditationcomposeapp.presentation.screens.login_flow.enter.composable.LoginMainButton
 import com.example.meditationcomposeapp.presentation.screens.login_flow.login.composable.LoginFlowBackground
-import com.example.meditationcomposeapp.presentation.screens.login_flow.login.composable.LoginTextInputField
+import com.example.meditationcomposeapp.presentation.screens.login_flow.login.composable.LoginFlowInputField
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
@@ -33,7 +34,7 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 @Composable
 fun LoginScreen(
     viewModel: LoginScreenViewModel,
-    navigator: DestinationsNavigator
+    navigator: DestinationsNavigator,
 ) {
 
     val focusManager = LocalFocusManager.current
@@ -69,24 +70,29 @@ fun LoginScreen(
                     .padding(top = 4.dp)
                     .alpha(0.7F)
             )
-            LoginTextInputField(
+            LoginFlowInputField(
                 textFieldValue = viewModel.state.login,
                 label = stringResource(id = R.string.email_address),
                 isError = viewModel.state.loginError != null,
                 errorValue = viewModel.state.loginError?.asString(),
                 onValueChanged = { viewModel.onLoginTextChanged(it) },
-                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
-                focusManager = focusManager,
-                nextFocusRequester = passwordFocusRequester
+                imeAction = ImeAction.Next,
+                keyboardType = KeyboardType.Email,
+                onKeyboardActions = {
+                    passwordFocusRequester.requestFocus()
+                },
             )
-            LoginTextInputField(
+            LoginFlowInputField(
                 textFieldValue = viewModel.state.password,
                 label = stringResource(id = R.string.password),
                 isError = viewModel.state.passwordError != null,
                 errorValue = viewModel.state.passwordError?.asString(),
                 onValueChanged = { viewModel.onPasswordTextChanged(it) },
-                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
-                focusManager = focusManager,
+                imeAction = ImeAction.Done,
+                keyboardType = KeyboardType.Password,
+                onKeyboardActions = {
+                    focusManager.clearFocus()
+                },
                 focusRequester = passwordFocusRequester
             )
             Box(

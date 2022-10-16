@@ -93,6 +93,8 @@ dependencies {
     implementation "androidx.activity:activity-compose:$activity_ktx_version"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
+    implementation "androidx.compose.material:material-icons-extended:$compose_version"
+
     //animations
     implementation "com.google.accompanist:accompanist-systemuicontroller:$accompanist_version"
 

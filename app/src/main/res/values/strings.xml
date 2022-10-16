@@ -31,5 +31,7 @@
     <string name="alcohol_is">Alcohol:</string>
     <string name="try_now">Try now</string>
     <string name="puzzle_solved">Puzzle solved!</string>
+    <string name="hide_password">Hide password</string>
+    <string name="show_password">Show password</string>
 
 </resources>

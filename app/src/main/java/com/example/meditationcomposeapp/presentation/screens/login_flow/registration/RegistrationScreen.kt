@@ -18,13 +18,14 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
 import com.example.meditationcomposeapp.R
 import com.example.meditationcomposeapp.presentation.screens.login_flow.enter.composable.LoginMainButton
 import com.example.meditationcomposeapp.presentation.screens.login_flow.login.composable.LoginFlowBackground
-import com.example.meditationcomposeapp.presentation.screens.login_flow.login.composable.LoginTextInputField
+import com.example.meditationcomposeapp.presentation.screens.login_flow.login.composable.LoginFlowInputField
 import com.example.meditationcomposeapp.presentation.screens.login_flow.registration.composable.AlreadyHaveAccountText
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -33,7 +34,7 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 @Composable
 fun RegistrationScreen(
     viewModel: RegistrationScreenViewModel,
-    navigator: DestinationsNavigator
+    navigator: DestinationsNavigator,
 ) {
     val focusManager = LocalFocusManager.current
     val passwordFocusRequester = FocusRequester()
@@ -69,36 +70,42 @@ fun RegistrationScreen(
                     .padding(top = 4.dp)
                     .alpha(0.7F)
             )
-            LoginTextInputField(
+            LoginFlowInputField(
                 textFieldValue = viewModel.state.name,
                 isError = viewModel.state.nameError != null,
                 errorValue = viewModel.state.nameError?.asString(),
                 label = stringResource(id = R.string.name),
                 onValueChanged = { viewModel.onNameTextChanged(it) },
-                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
-                focusManager = focusManager,
-                nextFocusRequester = emailFocusRequester
+                imeAction = ImeAction.Next,
+                keyboardType = KeyboardType.Text,
+                onKeyboardActions = {
+                    emailFocusRequester.requestFocus()
+                },
             )
-            LoginTextInputField(
+            LoginFlowInputField(
                 textFieldValue = viewModel.state.login,
                 isError = viewModel.state.emailError != null,
                 errorValue = viewModel.state.emailError?.asString(),
                 label = stringResource(id = R.string.email_address),
                 onValueChanged = { viewModel.onLoginTextChanged(it) },
-                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
-                focusManager = focusManager,
+                imeAction = ImeAction.Next,
+                keyboardType = KeyboardType.Email,
+                onKeyboardActions = {
+                    passwordFocusRequester.requestFocus()
+                },
                 focusRequester = emailFocusRequester,
-                nextFocusRequester = passwordFocusRequester
             )
-            LoginTextInputField(
+            LoginFlowInputField(
                 textFieldValue = viewModel.state.password,
                 isError = viewModel.state.passwordError != null,
                 errorValue = viewModel.state.passwordError?.asString(),
                 label = stringResource(id = R.string.password),
                 onValueChanged = { viewModel.onPasswordTextChanged(it) },
-                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
-                focusManager = focusManager,
-                focusRequester = passwordFocusRequester
+                imeAction = ImeAction.Done,
+                keyboardType = KeyboardType.Password,
+                onKeyboardActions = {
+                    focusManager.clearFocus()
+                },
             )
             LoginMainButton(
                 text = stringResource(id = R.string.sign_up).toUpperCase(Locale.current),

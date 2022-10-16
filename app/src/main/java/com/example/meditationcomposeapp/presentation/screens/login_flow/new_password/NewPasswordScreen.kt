@@ -17,13 +17,14 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
 import com.example.meditationcomposeapp.R
 import com.example.meditationcomposeapp.presentation.screens.login_flow.enter.composable.LoginMainButton
 import com.example.meditationcomposeapp.presentation.screens.login_flow.login.composable.LoginFlowBackground
-import com.example.meditationcomposeapp.presentation.screens.login_flow.login.composable.LoginTextInputField
+import com.example.meditationcomposeapp.presentation.screens.login_flow.login.composable.LoginFlowInputField
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
@@ -66,24 +67,29 @@ fun NewPasswordScreen(
                     .padding(top = 4.dp)
                     .alpha(0.7F)
             )
-            LoginTextInputField(
+            LoginFlowInputField(
                 textFieldValue = viewModel.state.newPassword,
                 label = stringResource(id = R.string.new_password),
                 isError = viewModel.state.newPasswordError != null,
                 errorValue = viewModel.state.newPasswordError?.asString(),
                 onValueChanged = { viewModel.onNewPasswordTextChanged(it) },
-                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
-                focusManager = focusManager,
-                nextFocusRequester = repeatPasswordFocusRequester
+                imeAction = ImeAction.Next,
+                keyboardType = KeyboardType.Password,
+                onKeyboardActions = {
+                    repeatPasswordFocusRequester.requestFocus()
+                },
             )
-            LoginTextInputField(
+            LoginFlowInputField(
                 textFieldValue = viewModel.state.repeatPassword,
                 label = stringResource(id = R.string.repeat_new_password),
                 isError = viewModel.state.repeatPasswordError != null,
                 errorValue = viewModel.state.repeatPasswordError?.asString(),
                 onValueChanged = { viewModel.onRepeatPasswordTextChanged(it) },
-                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
-                focusManager = focusManager,
+                imeAction = ImeAction.Done,
+                keyboardType = KeyboardType.Password,
+                onKeyboardActions = {
+                  focusManager.clearFocus()
+                },
                 focusRequester = repeatPasswordFocusRequester
             )
             LoginMainButton(

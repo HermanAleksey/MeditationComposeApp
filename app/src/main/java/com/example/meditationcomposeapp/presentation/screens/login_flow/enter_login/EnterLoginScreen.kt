@@ -18,13 +18,14 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
 import com.example.meditationcomposeapp.R
 import com.example.meditationcomposeapp.presentation.screens.login_flow.enter.composable.LoginMainButton
 import com.example.meditationcomposeapp.presentation.screens.login_flow.login.composable.LoginFlowBackground
-import com.example.meditationcomposeapp.presentation.screens.login_flow.login.composable.LoginTextInputField
+import com.example.meditationcomposeapp.presentation.screens.login_flow.login.composable.LoginFlowInputField
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
@@ -72,15 +73,18 @@ fun EnterLoginScreen(
                     .padding(top = 4.dp)
                     .alpha(0.7F)
             )
-            LoginTextInputField(
+            LoginFlowInputField(
                 textFieldValue = viewModel.state.login,
                 label = stringResource(id = R.string.email_address),
                 isError = viewModel.state.emailError != null,
                 errorValue = viewModel.state.emailError?.asString(),
                 onValueChanged = { viewModel.onLoginTextChanged(it) },
-                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
-                focusManager = focusManager,
-                focusRequester = repeatPasswordFocusRequester
+                imeAction = ImeAction.Done,
+                keyboardType = KeyboardType.Email,
+                focusRequester = repeatPasswordFocusRequester,
+                onKeyboardActions =  {
+                    focusManager.clearFocus()
+                }
             )
             LoginMainButton(
                 text = stringResource(id = R.string.confirm).toUpperCase(Locale.current),
