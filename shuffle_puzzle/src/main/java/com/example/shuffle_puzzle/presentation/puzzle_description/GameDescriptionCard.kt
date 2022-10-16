@@ -52,6 +52,8 @@ fun PuzzleGameDescriptionCard(
                 )
             }
 
+            Spacer(modifier = Modifier.width(10.dp))
+
             Column(
                 modifier = Modifier.fillMaxSize(),
             ) {

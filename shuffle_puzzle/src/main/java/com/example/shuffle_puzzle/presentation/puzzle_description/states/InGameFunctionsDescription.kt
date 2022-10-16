@@ -4,6 +4,7 @@ import android.text.format.DateUtils
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -12,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.shuffle_puzzle.R
 import kotlinx.coroutines.delay
 
@@ -43,13 +45,32 @@ fun InGameFunctionsDescription(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceEvenly
     ) {
-        Text(text = stringResource(id = R.string.moves_done) + ": $movesDone")
-        Text(text = stringResource(id = R.string.time_passed) + ": ${formatDuration(timerValueSec)}")
+        Text(
+            text = stringResource(id = R.string.moves_done) + ": $movesDone",
+            style = MaterialTheme.typography.body1.copy(
+                color = MaterialTheme.colors.onSurface,
+                fontSize = 20.sp,
+            ),
+        )
+        Text(
+            text = stringResource(id = R.string.time_passed) + ": ${formatDuration(timerValueSec)}",
+            style = MaterialTheme.typography.body1.copy(
+                color = MaterialTheme.colors.onSurface,
+                fontSize = 20.sp,
+            ),
+        )
 
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(text = "Restart: ")
+            Text(
+                text = stringResource(id = R.string.restart),
+                style = MaterialTheme.typography.body1.copy(
+                    color = MaterialTheme.colors.onSurface,
+                    fontSize = 20.sp,
+                ),
+            )
+            Spacer(modifier = Modifier.width(10.dp))
             Image(
                 painter = painterResource(id = R.drawable.ic_restart),
                 contentDescription = "Restart game",

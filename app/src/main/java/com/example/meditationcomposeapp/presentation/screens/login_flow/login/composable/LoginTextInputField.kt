@@ -4,89 +4,113 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
-import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.runtime.*
-import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.*
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.meditationcomposeapp.ui.theme.Alegreya
-import com.example.meditationcomposeapp.ui.theme.ColorBackground
-import com.example.meditationcomposeapp.ui.theme.ColorTextHint
+import com.example.meditationcomposeapp.R
+import com.example.meditationcomposeapp.ui.theme.ColorPlatinum
+import com.example.meditationcomposeapp.ui.theme.Montserrat
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun LoginTextInputField(
+fun LoginFlowInputField(
     textFieldValue: String,
     label: String,
     onValueChanged: (String) -> Unit,
-    //TODO remove default values
-    isError: Boolean = true,
-    errorValue: String? = "hello error",
-    focusManager: FocusManager,
+    isError: Boolean,
+    errorValue: String?,
+    isEnabled: Boolean = true,
     focusRequester: FocusRequester? = null,
-    keyboardOptions: KeyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
-    nextFocusRequester: FocusRequester? = null,
-    previousFocusRequester: FocusRequester? = null
+    imeAction: ImeAction = ImeAction.Done,
+    keyboardType: KeyboardType = KeyboardType.Text,
+    onKeyboardActions: () -> Unit,
 ) {
+    val isPasswordField = remember {
+        keyboardType == KeyboardType.Password
+    }
+    var passwordVisible by rememberSaveable { mutableStateOf(!isPasswordField) }
     var labelFontSize by remember {
         mutableStateOf(18)
     }
     var labelTextColor by remember {
-        mutableStateOf(ColorTextHint)
+        mutableStateOf(ColorPlatinum)
     }
     TextField(
+        enabled = isEnabled,
         value = textFieldValue,
         onValueChange = {
             onValueChanged(it)
         },
         isError = isError,
-        textStyle = TextStyle(
-            color = Color.White,
-            fontSize = 18.sp,
-            fontFamily = Alegreya,
-            fontWeight = FontWeight.W400,
-        ),
+        textStyle = MaterialTheme.typography.body2,
         label = {
             Text(
                 text = label,
                 color = labelTextColor,
                 fontSize = labelFontSize.sp,
-                fontFamily = Alegreya,
+                fontFamily = Montserrat,
                 fontWeight = FontWeight.W400,
             )
         },
-        keyboardOptions = keyboardOptions,
+        keyboardOptions = KeyboardOptions(imeAction = imeAction, keyboardType = keyboardType),
         keyboardActions = KeyboardActions(
             onDone = {
-                focusManager.clearFocus()
+                onKeyboardActions()
             },
             onNext = {
-                nextFocusRequester?.requestFocus()
+                onKeyboardActions()
             }
         ),
         singleLine = true,
         colors = TextFieldDefaults.textFieldColors(
-            backgroundColor = ColorBackground,
+            backgroundColor = MaterialTheme.colors.background,
             cursorColor = Color.White,
             focusedIndicatorColor = Color.White,
-            unfocusedIndicatorColor = ColorTextHint
+            unfocusedIndicatorColor = MaterialTheme.colors.onBackground
         ),
+        visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+        trailingIcon = {
+            if (!isPasswordField) return@TextField
+
+            val image = if (passwordVisible)
+                Icons.Filled.Visibility
+            else Icons.Filled.VisibilityOff
+
+            // Please provide localized description for accessibility services
+            val description =
+                if (passwordVisible) stringResource(R.string.hide_password)
+                else stringResource(R.string.show_password)
+
+            IconButton(onClick = { passwordVisible = !passwordVisible }) {
+                Icon(
+                    imageVector = image,
+                    tint = Color.White,
+                    contentDescription = description
+                )
+            }
+        },
         modifier = Modifier
             .padding(top = 50.dp)
             .fillMaxWidth()
             .focusRequester(focusRequester ?: FocusRequester())
             .onFocusChanged { focusState ->
                 if (textFieldValue.isBlank() && !focusState.isFocused) {
-                    labelTextColor = ColorTextHint
+                    labelTextColor = ColorPlatinum
                     labelFontSize = 18
                 } else {
                     labelTextColor = Color.White
@@ -98,7 +122,6 @@ fun LoginTextInputField(
         Text(
             text = errorValue,
             color = MaterialTheme.colors.error,
-//            modifier = Modifier.align(Alignment.End)
         )
     }
 }

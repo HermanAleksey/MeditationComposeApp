@@ -15,7 +15,6 @@ import com.example.meditationcomposeapp.model.entity.Beer
 import com.example.meditationcomposeapp.presentation.common_composables.ColorBackground
 import com.example.meditationcomposeapp.presentation.common_composables.Toolbar
 import com.example.meditationcomposeapp.presentation.screens.main_flow.beer_list.composable.BeerItem
-import com.example.meditationcomposeapp.ui.theme.colorBackground
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
@@ -32,7 +31,7 @@ fun BeerListScreen(
     ColorBackground(
         isLoading = viewModel.isLoading(),
         lockScreenWhenLoading = true,
-        color = MaterialTheme.colors.colorBackground
+        color = MaterialTheme.colors.background
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
             Toolbar()
@@ -47,7 +46,7 @@ fun BeerList(list: List<Beer>) {
         modifier = Modifier
             .fillMaxSize()
             .padding(horizontal = dimensionResource(id = R.dimen.padding_horizontal_list))
-            .background(MaterialTheme.colors.colorBackground),
+            .background(MaterialTheme.colors.background),
     ) {
         items(list) { data ->
             BeerItem(beer = data)

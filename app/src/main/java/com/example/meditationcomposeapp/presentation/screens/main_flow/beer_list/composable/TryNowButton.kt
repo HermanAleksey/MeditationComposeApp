@@ -16,7 +16,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.meditationcomposeapp.R
-import com.example.meditationcomposeapp.ui.theme.colorBackground
 
 @Composable
 fun TryNowButton() {
@@ -25,7 +24,7 @@ fun TryNowButton() {
         modifier = Modifier
             .height(45.dp)
             .width(140.dp),
-        backgroundColor = MaterialTheme.colors.colorBackground
+        backgroundColor = MaterialTheme.colors.secondary
     ) {
         Row(
             modifier = Modifier.fillMaxSize(),

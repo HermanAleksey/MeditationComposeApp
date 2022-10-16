@@ -13,7 +13,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import com.example.meditationcomposeapp.R
 import com.example.meditationcomposeapp.presentation.common_composables.ColorBackground
-import com.example.meditationcomposeapp.ui.theme.colorBackground
 
 @Composable
 fun LoginFlowBackground(
@@ -26,7 +25,7 @@ fun LoginFlowBackground(
             DecorationLeavesBottom()
             content()
         },
-        color = MaterialTheme.colors.colorBackground,
+        color = MaterialTheme.colors.background,
         isLoading = isLoading
     )
 }

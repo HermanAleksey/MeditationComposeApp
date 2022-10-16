@@ -3,6 +3,7 @@ package com.example.meditationcomposeapp.presentation.common_composables
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,7 +18,7 @@ fun Toolbar() {
         modifier = Modifier
             .fillMaxWidth()
             .height(dimensionResource(id = R.dimen.height_toolbar))
-            .background(color = com.example.meditationcomposeapp.ui.theme.ColorBackground)
+            .background(color = MaterialTheme.colors.background)
             .padding(horizontal = dimensionResource(id = R.dimen.padding_horizontal_main_content)),
         verticalAlignment = Alignment.CenterVertically
     ) {

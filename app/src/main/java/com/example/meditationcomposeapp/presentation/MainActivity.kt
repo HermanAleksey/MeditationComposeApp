@@ -11,6 +11,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -29,11 +30,9 @@ import com.example.meditationcomposeapp.presentation.screens.login_flow.registra
 import com.example.meditationcomposeapp.presentation.screens.main_flow.beer_list.BeerListScreenViewModel
 import com.example.meditationcomposeapp.presentation.screens.main_flow.bottom_nav_bar.BottomBar
 import com.example.meditationcomposeapp.presentation.screens.main_flow.main_screen.MainScreenViewModel
-import com.example.meditationcomposeapp.presentation.screens.main_flow.shuffle_puzzle.ShufflePuzzleScreen
 import com.example.meditationcomposeapp.presentation.screens.main_flow.shuffle_puzzle.ShufflePuzzleScreenViewModel
 import com.example.meditationcomposeapp.presentation.screens.main_flow.test_screens.TestScreenViewModel
 import com.example.meditationcomposeapp.presentation.screens.splash.SplashScreenViewModel
-import com.example.meditationcomposeapp.ui.theme.ColorBackground
 import com.example.meditationcomposeapp.ui.theme.MeditationComposeAppTheme
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
@@ -66,14 +65,14 @@ fun MyApp(windows: Window) {
 
     val navController = rememberAnimatedNavController()
 
-    val statusBarColor = ColorBackground.toArgb()
+    val statusBarColor = MaterialTheme.colors.background.toArgb()
     fun setStatusBarColor(color: Int) {
         windows.statusBarColor = color
     }
 
-    MeditationComposeAppTheme {
+    MeditationComposeAppTheme(false) {
         windows.statusBarColor = statusBarColor
-        windows.navigationBarColor = ColorBackground.toArgb()
+        windows.navigationBarColor = MaterialTheme.colors.background.toArgb()
         var bottomBarIsVisible by remember {
             mutableStateOf(false)
         }

@@ -8,7 +8,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.example.meditationcomposeapp.presentation.common_composables.ColorBackground
 import com.example.meditationcomposeapp.presentation.screens.main_flow.shuffle_puzzle.composable.PuzzleIsSolvedLabel
-import com.example.meditationcomposeapp.ui.theme.colorBackground
 import com.example.shuffle_puzzle.presentation.PuzzleBoardWithCounter
 import com.ramcosta.composedestinations.annotation.Destination
 
@@ -17,7 +16,7 @@ import com.ramcosta.composedestinations.annotation.Destination
 fun ShufflePuzzleScreen(
     viewModel: ShufflePuzzleScreenViewModel,
 ) {
-    ColorBackground(color = MaterialTheme.colors.colorBackground,
+    ColorBackground(color = MaterialTheme.colors.background,
         lockScreenWhenLoading = true,
         isLoading = viewModel.isLoading()) {
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
