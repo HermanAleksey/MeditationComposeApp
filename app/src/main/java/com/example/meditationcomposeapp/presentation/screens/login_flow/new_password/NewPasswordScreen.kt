@@ -68,6 +68,7 @@ fun NewPasswordScreen(
                     .alpha(0.7F)
             )
             LoginFlowInputField(
+                isEnabled = !viewModel.state.isLoading,
                 textFieldValue = viewModel.state.newPassword,
                 label = stringResource(id = R.string.new_password),
                 isError = viewModel.state.newPasswordError != null,
@@ -80,6 +81,7 @@ fun NewPasswordScreen(
                 },
             )
             LoginFlowInputField(
+                isEnabled = !viewModel.state.isLoading,
                 textFieldValue = viewModel.state.repeatPassword,
                 label = stringResource(id = R.string.repeat_new_password),
                 isError = viewModel.state.repeatPasswordError != null,

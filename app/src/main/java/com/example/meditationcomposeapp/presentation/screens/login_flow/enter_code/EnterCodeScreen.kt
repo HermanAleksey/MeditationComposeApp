@@ -67,9 +67,10 @@ fun EnterCodeScreen(
                     .alpha(0.7F)
             )
             CodePanel(
-                viewModel.getCode(),
-                { position, number -> viewModel.onCodeDigitChanged(position, number) },
-                ::onLastDigitFilled
+                isEnabled = !viewModel.isLoading(),
+                code = viewModel.getCode(),
+                onCodeDigitChanged = { position, number -> viewModel.onCodeDigitChanged(position, number) },
+                onLastDigitFilled = ::onLastDigitFilled
             )
             Spacer(modifier = Modifier.padding(top = 80.dp))
         }

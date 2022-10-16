@@ -74,6 +74,7 @@ fun EnterLoginScreen(
                     .alpha(0.7F)
             )
             LoginFlowInputField(
+                isEnabled = !viewModel.state.isLoading,
                 textFieldValue = viewModel.state.login,
                 label = stringResource(id = R.string.email_address),
                 isError = viewModel.state.emailError != null,

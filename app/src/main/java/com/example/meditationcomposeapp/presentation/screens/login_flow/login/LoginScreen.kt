@@ -71,6 +71,7 @@ fun LoginScreen(
                     .alpha(0.7F)
             )
             LoginFlowInputField(
+                isEnabled = !viewModel.state.isLoading,
                 textFieldValue = viewModel.state.login,
                 label = stringResource(id = R.string.email_address),
                 isError = viewModel.state.loginError != null,
@@ -83,6 +84,7 @@ fun LoginScreen(
                 },
             )
             LoginFlowInputField(
+                isEnabled = !viewModel.state.isLoading,
                 textFieldValue = viewModel.state.password,
                 label = stringResource(id = R.string.password),
                 isError = viewModel.state.passwordError != null,

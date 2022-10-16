@@ -14,6 +14,7 @@ import com.example.meditationcomposeapp.presentation.screens.login_flow.enter_co
 
 @Composable
 fun CodePanel(
+    isEnabled: Boolean = true,
     code: Array<Int>,
     onCodeDigitChanged: (position: Int, inputtedDigit: Int) -> Boolean,
     onLastDigitFilled: () -> Unit,
@@ -53,6 +54,7 @@ fun CodePanel(
     ) {
         CodeNumber(
             value = code[0],
+            isEnabled = isEnabled,
             focusRequester = focusRequesters[0]!!,
             onBackspaceToPrevious = { },
             onDigitInputted = { inputtedDigit ->
@@ -64,6 +66,7 @@ fun CodePanel(
         )
         CodeNumber(
             value = code[1],
+            isEnabled = isEnabled,
             focusRequester = focusRequesters[1]!!,
             onBackspaceToPrevious = {
                 focusRequesters[0]?.requestFocus()
@@ -78,6 +81,7 @@ fun CodePanel(
         )
         CodeNumber(
             value = code[2],
+            isEnabled = isEnabled,
             focusRequester = focusRequesters[2]!!,
             onBackspaceToPrevious = {
                 focusRequesters[1]?.requestFocus()
@@ -91,6 +95,7 @@ fun CodePanel(
         )
         CodeNumber(
             value = code[3],
+            isEnabled = isEnabled,
             focusRequester = focusRequesters[3]!!,
             onBackspaceToPrevious = {
                 focusRequesters[2]?.requestFocus()
@@ -104,6 +109,7 @@ fun CodePanel(
         )
         CodeNumber(
             value = code[4],
+            isEnabled = isEnabled,
             focusRequester = focusRequesters[4]!!,
             onBackspaceToPrevious = {
                 focusRequesters[3]?.requestFocus()

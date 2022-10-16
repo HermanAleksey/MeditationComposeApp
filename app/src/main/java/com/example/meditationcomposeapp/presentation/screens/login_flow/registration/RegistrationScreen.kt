@@ -71,6 +71,7 @@ fun RegistrationScreen(
                     .alpha(0.7F)
             )
             LoginFlowInputField(
+                isEnabled = !viewModel.state.isLoading,
                 textFieldValue = viewModel.state.name,
                 isError = viewModel.state.nameError != null,
                 errorValue = viewModel.state.nameError?.asString(),
@@ -83,6 +84,7 @@ fun RegistrationScreen(
                 },
             )
             LoginFlowInputField(
+                isEnabled = !viewModel.state.isLoading,
                 textFieldValue = viewModel.state.login,
                 isError = viewModel.state.emailError != null,
                 errorValue = viewModel.state.emailError?.asString(),
@@ -96,6 +98,7 @@ fun RegistrationScreen(
                 focusRequester = emailFocusRequester,
             )
             LoginFlowInputField(
+                isEnabled = !viewModel.state.isLoading,
                 textFieldValue = viewModel.state.password,
                 isError = viewModel.state.passwordError != null,
                 errorValue = viewModel.state.passwordError?.asString(),

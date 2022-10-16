@@ -45,6 +45,7 @@ import com.example.meditationcomposeapp.ui.theme.Montserrat
 @Composable
 fun CodeNumber(
     value: Int,
+    isEnabled: Boolean,
     focusRequester: FocusRequester,
     onBackspaceToPrevious: () -> Unit,
     onDigitInputted: (Int) -> Unit,
@@ -65,6 +66,7 @@ fun CodeNumber(
         value = value.let {
             if (it == EMPTY_NUMBER) "" else it.toString()
         },
+        enabled = isEnabled,
         textStyle = TextStyle(
             color = Color.White,
             fontSize = 36.sp,
@@ -99,6 +101,7 @@ fun CodeNumber(
 fun CodeNumberPreview() {
     CodeNumber(
         value = 3,
+        isEnabled = true,
         focusRequester = FocusRequester(),
         onBackspaceToPrevious = {},
         onDigitInputted = {}

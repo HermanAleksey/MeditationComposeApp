@@ -34,6 +34,7 @@ fun LoginFlowInputField(
     onValueChanged: (String) -> Unit,
     isError: Boolean,
     errorValue: String?,
+    isEnabled: Boolean = true,
     focusRequester: FocusRequester? = null,
     imeAction: ImeAction = ImeAction.Done,
     keyboardType: KeyboardType = KeyboardType.Text,
@@ -50,6 +51,7 @@ fun LoginFlowInputField(
         mutableStateOf(ColorPlatinum)
     }
     TextField(
+        enabled = isEnabled,
         value = textFieldValue,
         onValueChange = {
             onValueChanged(it)
