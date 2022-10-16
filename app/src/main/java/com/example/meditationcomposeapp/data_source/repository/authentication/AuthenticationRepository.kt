@@ -1,9 +1,9 @@
 package com.example.meditationcomposeapp.data_source.repository.authentication
 
 import com.example.meditationcomposeapp.data_source.entity.LoginUserResponse
-import com.example.meditationcomposeapp.model.entity.SuccessInfo
+import com.example.meditationcomposeapp.model.entity.login_flow.SuccessInfo
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
-import com.example.meditationcomposeapp.model.entity.Profile
+import com.example.meditationcomposeapp.model.entity.login_flow.Profile
 import kotlinx.coroutines.flow.Flow
 
 interface AuthenticationRepository {

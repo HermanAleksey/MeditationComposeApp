@@ -1,4 +1,4 @@
-package com.example.meditationcomposeapp.model.entity
+package com.example.meditationcomposeapp.model.entity.login_flow
 
 import com.google.gson.annotations.SerializedName
 

@@ -1,6 +1,6 @@
 package com.example.meditationcomposeapp.data_source.repository.random_data
 
-import com.example.meditationcomposeapp.model.entity.Beer
+import com.example.meditationcomposeapp.model.entity.beer.Beer
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import kotlinx.coroutines.flow.Flow
 

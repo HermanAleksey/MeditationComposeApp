@@ -6,7 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.meditationcomposeapp.data_source.utils.printEventLog
-import com.example.meditationcomposeapp.model.entity.Beer
+import com.example.meditationcomposeapp.model.entity.beer.Beer
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.usecase.random_data.GetBeerListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel

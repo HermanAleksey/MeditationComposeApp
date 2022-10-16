@@ -3,7 +3,7 @@ package com.example.meditationcomposeapp.data_source.repository.random_data
 import com.example.meditationcomposeapp.data_source.entity.BeerResponse
 import com.example.meditationcomposeapp.data_source.mappers.Mapper
 import com.example.meditationcomposeapp.data_source.network.RandomDataApi
-import com.example.meditationcomposeapp.model.entity.Beer
+import com.example.meditationcomposeapp.model.entity.beer.Beer
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

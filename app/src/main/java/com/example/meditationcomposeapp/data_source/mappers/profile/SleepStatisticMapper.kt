@@ -3,7 +3,7 @@ package com.example.meditationcomposeapp.data_source.mappers.profile
 import com.example.meditationcomposeapp.data_source.entity.LoginUserResponse
 import com.example.meditationcomposeapp.data_source.mappers.Mapper
 import com.example.meditationcomposeapp.data_source.utils.DateUtils
-import com.example.meditationcomposeapp.model.entity.Profile
+import com.example.meditationcomposeapp.model.entity.login_flow.Profile
 import javax.inject.Inject
 
 class SleepStatisticMapper @Inject constructor(

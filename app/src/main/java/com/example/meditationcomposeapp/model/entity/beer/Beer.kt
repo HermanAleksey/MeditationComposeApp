@@ -1,0 +1,25 @@
+package com.example.meditationcomposeapp.model.entity.beer
+
+data class Beer(
+    var id: Int,
+    var name: String,
+    var tagline: String,
+    var firstBrewed: String,
+    var description: String,
+    var imageUrl: String,
+    var abv: Double,
+    var ibu: Double,
+    var targetFg: Int,
+    var targetOg: Double,
+    var ebc: Int,
+    var srm: Int,
+    var ph: Double,
+    var attenuationLevel: Int,
+    var volume: Volume,
+    var boilVolume: BoilVolume,
+    var method: Method,
+    var ingredients: Ingredients,
+    var foodPairing: List<String>,
+    var brewersTips: String,
+    var contributedBy: String,
+)

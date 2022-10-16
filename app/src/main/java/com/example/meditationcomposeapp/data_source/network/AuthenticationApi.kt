@@ -2,7 +2,7 @@ package com.example.meditationcomposeapp.data_source.network
 
 import com.example.meditationcomposeapp.data_source.entity.LoginUserResponse
 import com.example.meditationcomposeapp.data_source.entity.RegistrationRequest
-import com.example.meditationcomposeapp.model.entity.SuccessInfo
+import com.example.meditationcomposeapp.model.entity.login_flow.SuccessInfo
 import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.GET
