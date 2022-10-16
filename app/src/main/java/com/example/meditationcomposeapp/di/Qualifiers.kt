@@ -5,7 +5,7 @@ import javax.inject.Qualifier
 class Qualifiers {
     @Qualifier
     @Retention(AnnotationRetention.BINARY)
-    annotation class RandomDataRetrofit
+    annotation class PunkRetrofit
 
     @Qualifier
     @Retention(AnnotationRetention.BINARY)

@@ -33,7 +33,7 @@ class AuthenticationRepositoryImpl @Inject constructor(
                         "User Name",
                         "https://static.vecteezy.com/packs/media/components/global/search-explore-nav/img/vectors/term-bg-1-666de2d941529c25aa511dc18d727160.jpg",
                         "London",
-                        listOf()
+                        "listOf()"
                     )
                     emit(NetworkResponse.Success(data = profileMapper.mapFrom(response)))
                 } else {

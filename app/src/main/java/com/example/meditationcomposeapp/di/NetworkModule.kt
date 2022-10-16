@@ -2,7 +2,7 @@ package com.example.meditationcomposeapp.di
 
 import com.example.meditationcomposeapp.BuildConfig
 import com.example.meditationcomposeapp.data_source.network.AuthenticationApi
-import com.example.meditationcomposeapp.data_source.network.RandomDataApi
+import com.example.meditationcomposeapp.data_source.network.PunkApi
 import com.example.meditationcomposeapp.data_source.utils.LoggingInterceptor
 import dagger.Module
 import dagger.Provides
@@ -21,9 +21,9 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRandomDataApi(
-        @Qualifiers.RandomDataRetrofit retrofit: Retrofit
-    ): RandomDataApi = retrofit.create(RandomDataApi::class.java)
+    fun providePunkApi(
+        @Qualifiers.PunkRetrofit retrofit: Retrofit
+    ): PunkApi = retrofit.create(PunkApi::class.java)
 
     @Provides
     @Singleton
@@ -33,12 +33,12 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    @Qualifiers.RandomDataRetrofit
-    fun provideRetrofitRandomApi(
+    @Qualifiers.PunkRetrofit
+    fun provideRetrofitPunkApi(
         okHttpClient: OkHttpClient
     ): Retrofit =
         Retrofit.Builder()
-            .baseUrl(BuildConfig.RANDOM_DATA_URL)
+            .baseUrl(BuildConfig.PUNK_API_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()

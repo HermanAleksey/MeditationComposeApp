@@ -1,6 +1,7 @@
 package com.example.meditationcomposeapp.di
 
 import com.example.meditationcomposeapp.model.usecase.authentication.*
+import com.example.meditationcomposeapp.model.usecase.punk.*
 import com.example.meditationcomposeapp.model.usecase.random_data.*
 import dagger.Binds
 import dagger.Module
@@ -42,9 +43,14 @@ abstract class UseCaseModule {
     ): ClearAuthDataUseCase
 
     @Binds
-    abstract fun provideGetBeerListUseCase(
-        implementation: GetBeerListUseCaseImpl
-    ): GetBeerListUseCase
+    abstract fun provideGetBeersUseCase(
+        implementation: GetBeersUseCaseImpl
+    ): GetBeersUseCase
+
+    @Binds
+    abstract fun provideGetBeerByIdUseCase(
+        implementation: GetBeerByIdUseCaseImpl
+    ): GetBeerByIdUseCase
 
     @Binds
     abstract fun provideGetRandomBeerUseCase(
