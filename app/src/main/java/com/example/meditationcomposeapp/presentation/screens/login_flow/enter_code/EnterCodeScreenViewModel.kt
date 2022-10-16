@@ -1,5 +1,6 @@
 package com.example.meditationcomposeapp.presentation.screens.login_flow.enter_code
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -30,17 +31,22 @@ class EnterCodeScreenViewModel @Inject constructor(
 
     fun getCode() = state.code
 
-    fun onCodeDigitChanged(index: Int, value: Int) {
+    private fun isCodeFullyInputted() = state.code.all { it != EnterCodeScreenState.EMPTY_NUMBER }
+
+    fun onCodeDigitChanged(index: Int, value: Int): Boolean {
+        Log.e("TAGG", "onCodeDigitChanged: S")
         val newCodeState = state.code.copyOf()
         newCodeState[index] = value
 
         state = state.copy(
             code = newCodeState
         )
+        Log.e("TAGG", "onCodeDigitChanged: E")
+        return isCodeFullyInputted()
     }
 
     fun onLastDigitFilled(login: String, navigator: DestinationsNavigator) {
-        //TODO login has to be passed from previous screen
+        Log.e("TAGG", "onLastDigitFilled: ")
         viewModelScope.launch {
             verifyCodeUseCase.invoke(login, getCodeAsString()).collect {
                 when (it) {
@@ -56,6 +62,7 @@ class EnterCodeScreenViewModel @Inject constructor(
                             )
                         else {
                             //displayError()
+                            clearCodeInput()
                         }
                     }
                     is NetworkResponse.Failure<*> -> {
@@ -69,6 +76,12 @@ class EnterCodeScreenViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    private fun clearCodeInput() {
+        state = state.copy(
+            code = EnterCodeScreenState.EMPTY_CODE_VALUE
+        )
     }
 
     private fun getCodeAsString(): String {

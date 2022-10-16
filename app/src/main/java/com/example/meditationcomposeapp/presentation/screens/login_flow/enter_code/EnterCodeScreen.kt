@@ -25,7 +25,7 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 fun EnterCodeScreen(
     login: String,
     viewModel: EnterCodeScreenViewModel,
-    navigator: DestinationsNavigator
+    navigator: DestinationsNavigator,
 ) {
     /**
      * Use to transmit navigation method and
@@ -48,7 +48,7 @@ fun EnterCodeScreen(
         ) {
             Image(
                 painter = painterResource(id = R.drawable.ic_logo_white),
-                contentDescription = "Background image",
+                contentDescription = null,
                 contentScale = ContentScale.FillHeight,
                 modifier = Modifier
                     .padding(top = 100.dp)
@@ -66,7 +66,11 @@ fun EnterCodeScreen(
                     .padding(top = 4.dp)
                     .alpha(0.7F)
             )
-            CodePanel(viewModel.getCode(), viewModel::onCodeDigitChanged, ::onLastDigitFilled)
+            CodePanel(
+                viewModel.getCode(),
+                { position, number -> viewModel.onCodeDigitChanged(position, number) },
+                ::onLastDigitFilled
+            )
             Spacer(modifier = Modifier.padding(top = 80.dp))
         }
     }

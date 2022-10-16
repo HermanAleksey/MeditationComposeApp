@@ -2,13 +2,7 @@ package com.example.meditationcomposeapp.presentation.screens.login_flow.enter_c
 
 data class EnterCodeScreenState(
     val isLoading: Boolean = false,
-    val code: Array<Int> = arrayOf(
-        EMPTY_NUMBER,
-        EMPTY_NUMBER,
-        EMPTY_NUMBER,
-        EMPTY_NUMBER,
-        EMPTY_NUMBER
-    )
+    val code: Array<Int> = EMPTY_CODE_VALUE,
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -30,5 +24,13 @@ data class EnterCodeScreenState(
 
     companion object {
         const val EMPTY_NUMBER = -1
+
+       val EMPTY_CODE_VALUE = arrayOf(
+            EMPTY_NUMBER,
+            EMPTY_NUMBER,
+            EMPTY_NUMBER,
+            EMPTY_NUMBER,
+            EMPTY_NUMBER
+        )
     }
 }

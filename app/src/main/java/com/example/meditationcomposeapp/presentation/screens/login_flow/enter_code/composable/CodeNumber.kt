@@ -7,10 +7,14 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.input.key.key
+import androidx.compose.ui.input.key.onKeyEvent
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -37,42 +41,24 @@ import com.example.meditationcomposeapp.ui.theme.Montserrat
  * [previousFocusRequester] used to change focus to previous cell
  * */
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun CodeNumber(
     value: Int,
-    position: Int,
-    onCodeDigitChanged: (Int, Int) -> Unit,
     focusRequester: FocusRequester,
-    nextFocusRequester: FocusRequester? = null,
-    previousFocusRequester: FocusRequester? = null,
-    onLastDigitFilled: (() -> Unit)? = null
+    onBackspaceToPrevious: () -> Unit,
+    onDigitInputted: (Int) -> Unit,
 ) {
 
-    fun moveFocusToNextDigit() {
-        if (nextFocusRequester != null)
-            nextFocusRequester.requestFocus()
-        else {
-            onLastDigitFilled?.invoke()
-        }
-    }
-
-    fun moveFocusToPreviousDigit() {
-        previousFocusRequester?.requestFocus()
-    }
-
-    fun processInputtedNumber(newValue: String) {
-        val inputDigit = newValue.toInt() % 10
-        onCodeDigitChanged(position, inputDigit)
-        moveFocusToNextDigit()
-    }
-
-    fun onValueChanged(newValue: String){
+    fun onValueChanged(newValue: String) {
         //when input is cleared or value is not digit - set emmit [-1]
         if (newValue.isEmpty() || !newValue.isDigitsOnly()) {
-            onCodeDigitChanged(position, EMPTY_NUMBER)
+            onDigitInputted(EMPTY_NUMBER)
             return
         }
-        processInputtedNumber(newValue)
+
+        val inputtedDigit = newValue.toInt() % 10
+        onDigitInputted(inputtedDigit)
     }
 
     TextField(
@@ -81,7 +67,7 @@ fun CodeNumber(
         },
         textStyle = TextStyle(
             color = Color.White,
-            fontSize = 46.sp,
+            fontSize = 36.sp,
             fontFamily = Montserrat,
             fontWeight = FontWeight.W400,
         ),
@@ -96,26 +82,25 @@ fun CodeNumber(
             unfocusedIndicatorColor = MaterialTheme.colors.onBackground
         ),
         onValueChange = { onValueChanged(it) },
-        keyboardActions = KeyboardActions(
-            onPrevious = {
-                moveFocusToPreviousDigit()
-            },
-            onDone = {
-                moveFocusToNextDigit()
-            }),
         modifier = Modifier
             .width(55.dp)
             .focusRequester(focusRequester)
+            .onKeyEvent {
+                if (it.key == Key.Backspace && value == EMPTY_NUMBER) {
+                    onBackspaceToPrevious()
+                    true
+                } else false
+            }
     )
 }
 
 @Composable
 @Preview
-fun CodeNumberPreview(){
+fun CodeNumberPreview() {
     CodeNumber(
         value = 3,
-        position = 1,
-        onCodeDigitChanged = { q, w -> },
-        focusRequester = FocusRequester()
+        focusRequester = FocusRequester(),
+        onBackspaceToPrevious = {},
+        onDigitInputted = {}
     )
 }

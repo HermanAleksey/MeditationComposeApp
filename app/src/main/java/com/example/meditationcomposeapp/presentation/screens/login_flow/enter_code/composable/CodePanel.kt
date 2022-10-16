@@ -15,8 +15,8 @@ import com.example.meditationcomposeapp.presentation.screens.login_flow.enter_co
 @Composable
 fun CodePanel(
     code: Array<Int>,
-    onCodeDigitChanged: (Int, Int) -> Unit,
-    onLastDigitFilled: () -> Unit
+    onCodeDigitChanged: (position: Int, inputtedDigit: Int) -> Boolean,
+    onLastDigitFilled: () -> Unit,
 ) {
     val focusRequesters = mapOf(
         0 to FocusRequester(),
@@ -31,15 +31,17 @@ fun CodePanel(
         focusRequesters[notFilledCellIndex]?.requestFocus()
     }
 
-    fun doOnLastDigitFilled() {
-        if (code.all { it != EMPTY_NUMBER }) {
+    fun onDigitInputted(position: Int, value: Int) {
+        val isCodeFullyInputted = onCodeDigitChanged(position, value)
+
+        if (isCodeFullyInputted) {
             onLastDigitFilled()
         } else {
             setFocusToFirstNotFilledCell()
         }
     }
 
-    LaunchedEffect(key1 = true, block = {
+    LaunchedEffect(key1 = Unit, block = {
         focusRequesters[0]?.requestFocus()
     })
 
@@ -51,44 +53,65 @@ fun CodePanel(
     ) {
         CodeNumber(
             value = code[0],
-            position = 0,
-            onCodeDigitChanged = onCodeDigitChanged,
             focusRequester = focusRequesters[0]!!,
-            nextFocusRequester = focusRequesters[1],
-            previousFocusRequester = null
+            onBackspaceToPrevious = { },
+            onDigitInputted = { inputtedDigit ->
+                onDigitInputted(0, inputtedDigit)
+                if (inputtedDigit != EMPTY_NUMBER)
+                    focusRequesters[1]?.requestFocus()
+
+            }
         )
         CodeNumber(
             value = code[1],
-            1,
-            onCodeDigitChanged,
             focusRequester = focusRequesters[1]!!,
-            nextFocusRequester = focusRequesters[2],
-            previousFocusRequester = focusRequesters[0]
+            onBackspaceToPrevious = {
+                focusRequesters[0]?.requestFocus()
+                onCodeDigitChanged(0, EMPTY_NUMBER)
+            },
+            onDigitInputted = { inputtedDigit ->
+                onDigitInputted(1, inputtedDigit)
+                if (inputtedDigit != EMPTY_NUMBER)
+                    focusRequesters[2]?.requestFocus()
+
+            }
         )
         CodeNumber(
             value = code[2],
-            2,
-            onCodeDigitChanged,
             focusRequester = focusRequesters[2]!!,
-            nextFocusRequester = focusRequesters[3],
-            previousFocusRequester = focusRequesters[1]
+            onBackspaceToPrevious = {
+                focusRequesters[1]?.requestFocus()
+                onCodeDigitChanged(1, EMPTY_NUMBER)
+            },
+            onDigitInputted = { inputtedDigit ->
+                onDigitInputted(2, inputtedDigit)
+                if (inputtedDigit != EMPTY_NUMBER)
+                    focusRequesters[3]?.requestFocus()
+            }
         )
         CodeNumber(
             value = code[3],
-            3,
-            onCodeDigitChanged,
             focusRequester = focusRequesters[3]!!,
-            nextFocusRequester = focusRequesters[4],
-            previousFocusRequester = focusRequesters[2]
+            onBackspaceToPrevious = {
+                focusRequesters[2]?.requestFocus()
+                onCodeDigitChanged(2, EMPTY_NUMBER)
+            },
+            onDigitInputted = { inputtedDigit ->
+                onDigitInputted(3, inputtedDigit)
+                if (inputtedDigit != EMPTY_NUMBER)
+                    focusRequesters[4]?.requestFocus()
+            }
         )
         CodeNumber(
             value = code[4],
-            4,
-            onCodeDigitChanged,
             focusRequester = focusRequesters[4]!!,
-            nextFocusRequester = null,
-            previousFocusRequester = focusRequesters[3],
-            onLastDigitFilled = ::doOnLastDigitFilled
+            onBackspaceToPrevious = {
+                focusRequesters[3]?.requestFocus()
+                onCodeDigitChanged(3, EMPTY_NUMBER)
+            },
+            onDigitInputted = { inputtedDigit ->
+                onDigitInputted(4, inputtedDigit)
+            }
         )
     }
 }
@@ -98,5 +121,6 @@ fun CodePanel(
 fun CodePanelPreview() {
     CodePanel(
         code = arrayOf(1, 3, 2, 3, EMPTY_NUMBER),
-        onCodeDigitChanged = { q, w -> }) { }
+        onCodeDigitChanged = { q, w -> true}
+    ) { }
 }
