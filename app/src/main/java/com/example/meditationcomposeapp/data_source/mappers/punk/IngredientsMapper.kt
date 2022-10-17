@@ -18,7 +18,7 @@ class IngredientsMapper @Inject constructor(
             hops = objectFrom.hops.map {
                 hopsMapper.mapFrom(it)
             },
-            yeast = objectFrom.yeast!!
+            yeast = objectFrom.yeast
         )
     }
 }

@@ -10,8 +10,8 @@ class MashTempMapper @Inject constructor(
 ) : Mapper<Method.MashTemp, BeerResponse.MethodResponse.MashTempResponse> {
     override fun mapFrom(objectFrom: BeerResponse.MethodResponse.MashTempResponse): Method.MashTemp {
         return Method.MashTemp(
-            temp = tempMapper.mapFrom(objectFrom.temp!!),
-            duration = objectFrom.duration!!
+            temp = if (objectFrom.temp?.value == null) tempMapper.mapFrom(objectFrom.temp!!) else null,
+            duration = objectFrom.duration
         )
     }
 }

@@ -10,7 +10,7 @@ class FermentationMapper @Inject constructor(
 ) : Mapper<Method.Fermentation, BeerResponse.MethodResponse.FermentationResponse> {
     override fun mapFrom(objectFrom: BeerResponse.MethodResponse.FermentationResponse): Method.Fermentation {
         return Method.Fermentation(
-            temp = tempMapper.mapFrom(objectFrom.temp!!)
+            temp = if (objectFrom.temp?.value == null) tempMapper.mapFrom(objectFrom.temp!!) else null
         )
     }
 }

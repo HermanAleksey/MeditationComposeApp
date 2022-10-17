@@ -2,7 +2,6 @@ package com.example.meditationcomposeapp.di
 
 import com.example.meditationcomposeapp.model.usecase.authentication.*
 import com.example.meditationcomposeapp.model.usecase.punk.*
-import com.example.meditationcomposeapp.model.usecase.random_data.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -38,7 +37,7 @@ abstract class UseCaseModule {
     ): SetNewPasswordUseCase
 
     @Binds
-    abstract fun  provideClearAuthDataUseCase(
+    abstract fun provideClearAuthDataUseCase(
         implementation: ClearAuthDataUseCaseImpl
     ): ClearAuthDataUseCase
 

@@ -15,5 +15,5 @@ interface PunkRepository {
     suspend fun getBeers(
         page: Int,
         pageSize: Int,
-    ): Flow<NetworkResponse<List<Beer>>>
+    ): List<Beer>
 }

@@ -8,15 +8,16 @@ import retrofit2.http.Query
 //https://punkapi.com/documentation/v2
 interface PunkApi {
 
-    @GET("/beers/{id}")
+    //TODO why v2 dont count from base URL?
+    @GET("/v2/beers/{id}")
     suspend fun getBeerById(
         @Path("id") page: Int,
     ): BeerResponse
 
-    @GET("/beers/random")
+    @GET("/v2/beers/random")
     suspend fun getRandomBeer(): BeerResponse
 
-    @GET("/beers")
+    @GET("/v2/beers")
     suspend fun getBeers(
         @Query("page") page: Int,
         @Query("per_page") pageSize: Int

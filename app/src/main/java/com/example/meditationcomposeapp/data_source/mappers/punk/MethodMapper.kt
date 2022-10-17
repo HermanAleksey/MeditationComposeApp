@@ -16,7 +16,7 @@ class MethodMapper @Inject constructor(
                 mashTempMapper.mapFrom(it)
             },
             fermentation = fermentationMapper.mapFrom(objectFrom.fermentation!!),
-            twist = objectFrom.twist!!
+            twist = objectFrom.twist
         )
     }
 }

@@ -3,20 +3,20 @@ package com.example.meditationcomposeapp.model.entity.beer
 data class Method(
     var mashTemp: List<MashTemp>,
     var fermentation: Fermentation,
-    var twist: String,
+    var twist: String?,
 ) {
 
     data class Temp(
-        var value: Int,
-        var unit: String,
+        var value: Int?,
+        var unit: Unit,
     )
 
     data class Fermentation(
-        var temp: Temp,
+        var temp: Temp?,
     )
 
     data class MashTemp(
-        var temp: Temp,
-        var duration: String,
+        var temp: Temp?,
+        var duration: String?,
     )
 }

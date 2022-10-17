@@ -14,10 +14,10 @@ data class BeerResponse(
     @SerializedName("ibu") var ibu: Double?,
     @SerializedName("target_fg") var targetFg: Int?,
     @SerializedName("target_og") var targetOg: Double?,
-    @SerializedName("ebc") var ebc: Int?,
-    @SerializedName("srm") var srm: Int?,
+    @SerializedName("ebc") var ebc: Double?,
+    @SerializedName("srm") var srm: Double?,
     @SerializedName("ph") var ph: Double?,
-    @SerializedName("attenuation_level") var attenuationLevel: Int?,
+    @SerializedName("attenuation_level") var attenuationLevel: Double?,
     @SerializedName("volume") var volume: VolumeResponse?,
     @SerializedName("boil_volume") var boilVolume: BoilVolumeResponse?,
     @SerializedName("method") var method: MethodResponse?,
@@ -28,13 +28,13 @@ data class BeerResponse(
 ) {
 
     data class VolumeResponse(
-        @SerializedName("value") var value: Int?,
-        @SerializedName("unit") var unit: String?,
+        @SerializedName("value") var value: Int,
+        @SerializedName("unit") var unit: String,
     )
 
     data class BoilVolumeResponse(
-        @SerializedName("value") var value: Int?,
-        @SerializedName("unit") var unit: String?,
+        @SerializedName("value") var value: Int,
+        @SerializedName("unit") var unit: String,
     )
 
     data class MethodResponse(
@@ -44,8 +44,8 @@ data class BeerResponse(
     ) {
 
         data class TempResponse(
-            @SerializedName("value") var value: Int?,
-            @SerializedName("unit") var unit: String?,
+            @SerializedName("value") var value: Int,
+            @SerializedName("unit") var unit: String,
         )
 
         data class FermentationResponse(
@@ -64,8 +64,8 @@ data class BeerResponse(
         @SerializedName("yeast") var yeast: String?,
     ) {
         data class AmountResponse(
-            @SerializedName("value") var value: Double?,
-            @SerializedName("unit") var unit: String?,
+            @SerializedName("value") var value: Double,
+            @SerializedName("unit") var unit: String,
         )
 
         data class MaltResponse(

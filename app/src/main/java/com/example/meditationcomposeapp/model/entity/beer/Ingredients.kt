@@ -3,11 +3,11 @@ package com.example.meditationcomposeapp.model.entity.beer
 data class Ingredients(
     var malt: List<Malt>,
     var hops: List<Hops>,
-    var yeast: String,
+    var yeast: String?,
 ) {
     data class Amount(
         var value: Double,
-        var unit: String,
+        var unit: Unit,
     )
 
     data class Malt(
