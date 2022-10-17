@@ -25,13 +25,16 @@
     <string name="passwords_dont_match">Passwords doesn\'t match!</string>
     <string name="features">Features</string>
 
-    <string name="style_is">Style:</string>
-    <string name="malts_is">Malts:</string>
-    <string name="blg_is">BLG:</string>
-    <string name="alcohol_is">Alcohol:</string>
+    <string name="first_brewed">First brewed:</string>
+    <string name="abv_is">ABV:</string>
+    <string name="ebc_is">EBC:</string>
+    <string name="srm_is">SRM:</string>
+    <string name="ph_is">PH:</string>
     <string name="try_now">Try now</string>
     <string name="puzzle_solved">Puzzle solved!</string>
     <string name="hide_password">Hide password</string>
     <string name="show_password">Show password</string>
+    <string name="beer_list_title">A lot of beer here!</string>
+    <string name="ibu">IBU</string>
 
 </resources>

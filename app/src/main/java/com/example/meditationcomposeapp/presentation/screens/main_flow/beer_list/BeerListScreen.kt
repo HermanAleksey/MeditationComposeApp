@@ -11,6 +11,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
@@ -20,6 +21,7 @@ import com.example.meditationcomposeapp.R
 import com.example.meditationcomposeapp.model.entity.beer.Beer
 import com.example.meditationcomposeapp.presentation.common_composables.ColorBackground
 import com.example.meditationcomposeapp.presentation.common_composables.Toolbar
+import com.example.meditationcomposeapp.presentation.screens.main_flow.beer_list.composable.BeerItem
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
@@ -46,18 +48,19 @@ fun BeerListScreen(
 @Composable
 fun BeerList(beers: LazyPagingItems<Beer>) {
     LazyColumn(
+        verticalArrangement = Arrangement.spacedBy(8.dp),
         modifier = Modifier
             .fillMaxSize()
             .padding(horizontal = dimensionResource(id = R.dimen.padding_horizontal_list))
             .background(MaterialTheme.colors.background),
-        contentPadding = PaddingValues(bottom = 16.dp)
     ) {
         item {
+            Spacer(modifier = Modifier.height(16.dp))
             Text(
-                text = "Scroll for more recipes!",
-                style = MaterialTheme.typography.h5
+                text = stringResource(id = R.string.beer_list_title),
+                style = MaterialTheme.typography.h2
             )
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(16.dp))
         }
         when (val state = beers.loadState.prepend) {
             is LoadState.NotLoading -> Unit
@@ -79,11 +82,7 @@ fun BeerList(beers: LazyPagingItems<Beer>) {
         }
         items(items = beers, key = { it.id }) { item ->
             item?.let {
-                Card(modifier = Modifier
-                    .fillMaxWidth()
-                    .height(100.dp)) {
-                    Text(text = "${item.id} + ${item.abv}")
-                }
+                BeerItem(beer = it)
             }
         }
 

@@ -24,68 +24,76 @@ fun BeerItem(beer: Beer) {
             .fillMaxWidth(),
         backgroundColor = MaterialTheme.colors.surface
     ) {
-//        Column(
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .padding(
-//                    horizontal = dimensionResource(id = R.dimen.padding_horizontal_list_item),
-//                    vertical = dimensionResource(id = R.dimen.padding_vertical_list_item)
-//                )
-//        ) {
-//            Row(modifier = Modifier.fillMaxWidth()) {
-//                Text(
-//                    text = beer.name,
-//                    style = MaterialTheme.typography.body1.copy(
-//                        color = MaterialTheme.colors.onSurface
-//                    ),
-//                    modifier = Modifier.weight(1f)
-//                )
-//                Text(
-//                    text = beer.ibu,
-//                    style = MaterialTheme.typography.body1.copy(
-//                        color = MaterialTheme.colors.onSurface,
-//                        fontWeight = FontWeight.W700
-//                    ),
-//                )
-//            }
-//            Spacer(modifier = Modifier.height(10.dp))
-//            Text(
-//                text = beer.brand, modifier = Modifier.fillMaxWidth(),
-//                fontSize = 18.sp,
-//                color = MaterialTheme.colors.onSurface,
-//            )
-//            Spacer(modifier = Modifier.height(8.dp))
-//            Text(
-//                text = "${stringResource(id = R.string.style_is)} ${beer.style}",
-//                modifier = Modifier.fillMaxWidth(),
-//                fontSize = 15.sp,
-//                color = MaterialTheme.colors.onSurface,
-//            )
-//            Spacer(modifier = Modifier.height(8.dp))
-//            Text(
-//                text = "${stringResource(id = R.string.malts_is)} ${beer.malts}",
-//                modifier = Modifier.fillMaxWidth(),
-//                fontSize = 15.sp,
-//                color = MaterialTheme.colors.onSurface
-//            )
-//            Spacer(modifier = Modifier.height(8.dp))
-//            Row(modifier = Modifier.fillMaxWidth()) {
-//                Text(
-//                    text = "${stringResource(id = R.string.blg_is)} ${beer.blg}",
-//                    modifier = Modifier.weight(1F),
-//                    fontSize = 15.sp,
-//                    color = MaterialTheme.colors.onSurface
-//                )
-//                Text(
-//                    text = "${stringResource(id = R.string.alcohol_is)} ${beer.alcohol}",
-//                    modifier = Modifier.weight(1F),
-//                    fontSize = 15.sp,
-//                    color = MaterialTheme.colors.onSurface
-//                )
-//            }
-//            Spacer(modifier = Modifier.height(18.dp))
-//            TryNowButton()
-//        }
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(
+                    horizontal = dimensionResource(id = R.dimen.padding_horizontal_list_item),
+                    vertical = dimensionResource(id = R.dimen.padding_vertical_list_item)
+                )
+        ) {
+            Row(modifier = Modifier.fillMaxWidth()) {
+                Text(
+                    text = beer.name,
+                    style = MaterialTheme.typography.body1.copy(
+                        color = MaterialTheme.colors.onSurface
+                    ),
+                    modifier = Modifier.weight(1f)
+                )
+                Text(
+                    text = "${beer.ibu.toString()} ${stringResource(id = R.string.ibu)}",
+                    style = MaterialTheme.typography.body1.copy(
+                        color = MaterialTheme.colors.onSurface,
+                        fontWeight = FontWeight.W700
+                    ),
+                )
+            }
+            Spacer(modifier = Modifier.height(10.dp))
+            Text(
+                text = beer.tagline, modifier = Modifier.fillMaxWidth(),
+                fontSize = 18.sp,
+                color = MaterialTheme.colors.onSurface,
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = "${stringResource(id = R.string.first_brewed)} ${beer.firstBrewed}",
+                modifier = Modifier.fillMaxWidth(),
+                fontSize = 15.sp,
+                color = MaterialTheme.colors.onSurface,
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Row(modifier = Modifier.fillMaxWidth()) {
+                Text(
+                    text = "${stringResource(id = R.string.abv_is)} ${beer.abv}",
+                    modifier = Modifier.weight(1F),
+                    fontSize = 15.sp,
+                    color = MaterialTheme.colors.onSurface
+                )
+                Text(
+                    text = "${stringResource(id = R.string.ph_is)} ${beer.ph}",
+                    modifier = Modifier.weight(1F),
+                    fontSize = 15.sp,
+                    color = MaterialTheme.colors.onSurface
+                )
+            }
+            Spacer(modifier = Modifier.height(8.dp))
+            Row(modifier = Modifier.fillMaxWidth()) {
+                Text(
+                    text = "${stringResource(id = R.string.ebc_is)} ${beer.ebc}",
+                    modifier = Modifier.weight(1F),
+                    fontSize = 15.sp,
+                    color = MaterialTheme.colors.onSurface
+                )
+                Text(
+                    text = "${stringResource(id = R.string.srm_is)} ${beer.srm}",
+                    modifier = Modifier.weight(1F),
+                    fontSize = 15.sp,
+                    color = MaterialTheme.colors.onSurface
+                )
+            }
+            Spacer(modifier = Modifier.height(18.dp))
+            TryNowButton()
+        }
     }
 }
 
