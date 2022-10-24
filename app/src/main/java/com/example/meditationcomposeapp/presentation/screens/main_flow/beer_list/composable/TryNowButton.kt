@@ -1,6 +1,9 @@
 package com.example.meditationcomposeapp.presentation.screens.main_flow.beer_list.composable
 
+import android.app.SearchManager
+import android.content.Intent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -10,21 +13,35 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat.startActivity
 import com.example.meditationcomposeapp.R
 
+
 @Composable
-fun TryNowButton() {
+fun TryNowButton(beerName: String, tagline: String) {
+    val context = LocalContext.current
+
     Card(
         shape = RoundedCornerShape(10.dp),
         modifier = Modifier
             .height(45.dp)
-            .width(140.dp),
-        backgroundColor = MaterialTheme.colors.secondary
+            .width(140.dp)
+            .clickable {
+                Intent(Intent.ACTION_WEB_SEARCH)
+                    .apply {
+                        putExtra(SearchManager.QUERY, "$beerName, $tagline")
+                    }
+                    .let {
+                        startActivity(context, it, null)
+                    }
+            },
+        backgroundColor = MaterialTheme.colors.secondary,
     ) {
         Row(
             modifier = Modifier.fillMaxSize(),
@@ -49,5 +66,5 @@ fun TryNowButton() {
 @Preview
 @Composable
 fun previewTryNowButton() {
-    TryNowButton()
+    TryNowButton("Beer", "tagline")
 }

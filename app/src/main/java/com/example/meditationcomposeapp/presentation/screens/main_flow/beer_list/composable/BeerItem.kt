@@ -79,7 +79,7 @@ fun BeerItem(beer: Beer) {
             BeerParamsTable(paramsInfo = paramsWithInfo)
 
             Spacer(modifier = Modifier.height(10.dp))
-            TryNowButton()
+            TryNowButton(beer.name, beer.tagline)
         }
     }
 }
