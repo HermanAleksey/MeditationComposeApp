@@ -39,7 +39,7 @@ fun TryNowButton() {
             Spacer(modifier = Modifier.width(6.dp))
             Image(
                 painter = painterResource(id = R.drawable.ic_play_icon),
-                contentDescription = "",
+                contentDescription = null,
                 modifier = Modifier.size(13.dp)
             )
         }
