@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'kotlin-parcelize'
     id 'dagger.hilt.android.plugin'
     id 'com.google.devtools.ksp' version "$kps_version" // Depends on your kotlin version
 }
@@ -105,7 +106,6 @@ dependencies {
     //navigation
     implementation "androidx.navigation:navigation-compose:$navigation_compose_version"
     implementation "io.github.raamcosta.compose-destinations:animations-core:$compose_destination_version"
-    implementation 'androidx.paging:paging-common-ktx:3.1.1'
     ksp "io.github.raamcosta.compose-destinations:ksp:$compose_destination_version"
 
     //splash screen
@@ -128,8 +128,12 @@ dependencies {
     implementation "androidx.datastore:datastore-preferences:$data_store_version"
 
     //paging
+    implementation "androidx.paging:paging-common-ktx:$paging_version"
     implementation "androidx.paging:paging-runtime:$paging_version"
     implementation "androidx.paging:paging-compose:$paging_compose_version"
+
+    //glide
+    implementation "com.github.skydoves:landscapist-glide:$glide_version"
 
     //testing
     testImplementation 'junit:junit:4.13.2'
