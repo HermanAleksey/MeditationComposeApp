@@ -1,5 +1,6 @@
 package com.example.meditationcomposeapp.presentation.screens.main_flow.beer_list.composable
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -16,10 +17,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.meditationcomposeapp.R
 import com.example.meditationcomposeapp.model.entity.beer.*
-import com.example.meditationcomposeapp.model.entity.beer.Unit
 
 @Composable
-fun BeerItem(beer: Beer) {
+fun BeerItem(
+    beer: Beer,
+    onClick: () -> Unit = {}
+) {
     val paramsWithInfo = remember {
         listOf(
             R.string.abv_is to beer.abv,
@@ -32,7 +35,10 @@ fun BeerItem(beer: Beer) {
     Card(
         shape = RoundedCornerShape(dimensionResource(id = R.dimen.radius_list_item_corner)),
         modifier = Modifier
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .clickable {
+                onClick()
+            },
         backgroundColor = MaterialTheme.colors.surface
     ) {
         Column(
@@ -103,11 +109,11 @@ fun previewBeerItem() {
             srm = 76.0,
             ph = 4.0,
             attenuationLevel = 432.3,
-            volume = Volume(213, Unit.LITRES),
-            boilVolume = BoilVolume(23, Unit.LITRES),
+            volume = Volume(213, MeasurementUnit.LITRES),
+            boilVolume = BoilVolume(23, MeasurementUnit.LITRES),
             method = Method(
                 listOf(),
-                Method.Fermentation(Method.Temp(33, Unit.CELSIUS)),
+                Method.Fermentation(Method.Temp(33, MeasurementUnit.CELSIUS)),
                 twist = "twist"
             ),
             ingredients = Ingredients(listOf(), listOf(), null),

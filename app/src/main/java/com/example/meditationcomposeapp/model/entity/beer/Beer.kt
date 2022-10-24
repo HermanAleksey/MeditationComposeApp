@@ -1,5 +1,9 @@
 package com.example.meditationcomposeapp.model.entity.beer
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Beer(
     var id: Int,
     var name: String,
@@ -22,4 +26,4 @@ data class Beer(
     var foodPairing: List<String>,
     var brewersTips: String,
     var contributedBy: String,
-)
+) : Parcelable

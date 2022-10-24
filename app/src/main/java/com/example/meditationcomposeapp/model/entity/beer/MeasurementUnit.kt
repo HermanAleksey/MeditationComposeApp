@@ -1,6 +1,6 @@
 package com.example.meditationcomposeapp.model.entity.beer
 
-enum class Unit {
+enum class MeasurementUnit {
     LITRES,
 
     KILOGRAMS,

@@ -33,20 +33,21 @@ fun BeerListScreen(
 ) {
     val beersPaging = viewModel.beersPagingFlow.collectAsLazyPagingItems()
 
-
     ColorBackground(
         lockScreenWhenLoading = true,
         color = MaterialTheme.colors.background
     ) {
         Column(modifier = Modifier.fillMaxSize()) {
             Toolbar()
-            BeerList(beersPaging)
+            BeerList(beersPaging, onBeerItemClicked = {
+                viewModel.onBeerItemClicked(it, navigator)
+            })
         }
     }
 }
 
 @Composable
-fun BeerList(beers: LazyPagingItems<Beer>) {
+fun BeerList(beers: LazyPagingItems<Beer>, onBeerItemClicked: (Beer) -> Unit) {
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(8.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -83,7 +84,7 @@ fun BeerList(beers: LazyPagingItems<Beer>) {
         }
         items(items = beers, key = { it.id }) { item ->
             item?.let {
-                BeerItem(beer = it)
+                BeerItem(beer = it, onClick = { onBeerItemClicked(it) })
             }
         }
 
