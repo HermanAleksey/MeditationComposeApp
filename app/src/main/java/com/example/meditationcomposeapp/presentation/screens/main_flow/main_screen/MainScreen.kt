@@ -12,6 +12,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.meditationcomposeapp.R
 import com.example.meditationcomposeapp.presentation.common_composables.ColorBackground
 import com.example.meditationcomposeapp.presentation.common_composables.Toolbar
@@ -20,6 +23,17 @@ import com.example.meditationcomposeapp.presentation.screens.main_flow.main_scre
 import com.example.meditationcomposeapp.presentation.screens.main_flow.main_screen.composable.MenuItemModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
+
+@Preview
+@Composable
+fun MainScreenPreview() {
+    MainScreen(
+        setBottomNavBarVisible = {},
+        viewModel = MainScreenViewModel(),
+        navigator = EmptyDestinationsNavigator
+    )
+}
 
 @Destination
 @Composable
