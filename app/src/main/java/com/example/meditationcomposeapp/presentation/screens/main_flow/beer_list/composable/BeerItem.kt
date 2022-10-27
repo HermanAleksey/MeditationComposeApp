@@ -21,7 +21,7 @@ import com.example.meditationcomposeapp.model.entity.beer.*
 @Composable
 fun BeerItem(
     beer: Beer,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
 ) {
     val paramsWithInfo = remember {
         listOf(
@@ -82,7 +82,10 @@ fun BeerItem(
             )
             Spacer(modifier = Modifier.height(8.dp))
 
-            BeerParamsTable(paramsInfo = paramsWithInfo)
+            BeerParamsTable(paramsInfo = paramsWithInfo,
+                textStyle = MaterialTheme.typography.body2.copy(
+                    fontSize = 15.sp, color = MaterialTheme.colors.onSurface
+                ))
 
             Spacer(modifier = Modifier.height(10.dp))
             TryNowButton(beer.name, beer.tagline)
