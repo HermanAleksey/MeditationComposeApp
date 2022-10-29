@@ -6,9 +6,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
@@ -18,10 +16,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.meditationcomposeapp.R
 import com.example.meditationcomposeapp.presentation.common_composables.ColorBackground
 import com.example.meditationcomposeapp.presentation.common_composables.Toolbar
-import com.example.meditationcomposeapp.presentation.screens.destinations.ShufflePuzzleScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.main_flow.main_screen.composable.MenuItem
 import com.example.meditationcomposeapp.presentation.screens.main_flow.main_screen.composable.MenuItemModel
 import com.example.meditationcomposeapp.presentation.screens.main_flow.main_screen.composable.UpdateDescriptionDialog
+import com.example.meditationcomposeapp.presentation.screens.main_flow.main_screen.composable.getMenuItemsList
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
@@ -43,53 +41,16 @@ fun MainScreen(
     viewModel: MainScreenViewModel,
     navigator: DestinationsNavigator,
 ) {
-    val uiState = remember {
-        viewModel.uiState
-    }
+    val uiState = viewModel.iuState
     setBottomNavBarVisible(true)
     val activity = LocalContext.current as? Activity
     BackHandler(enabled = true, onBack = {
         activity?.finish()
     })
 
-    val menuItems = listOf(
-        MenuItemModel(
-            title = "Shuffle Puzzle",
-            painterRes = R.drawable.ic_check_icon_main,
-            backgroundColor = Color(169, 213, 113),
-            foregroundColor = Color(106, 174, 114),
-            onClick = { navigator.navigate(ShufflePuzzleScreenDestination()) },
-        ),
-        MenuItemModel(
-            title = "Mood Booster",
-            painterRes = R.drawable.ic_rocket,
-            backgroundColor = Color(104, 175, 156),
-            foregroundColor = Color(73, 138, 120)
-        ),
-        MenuItemModel(
-            title = "Lego",
-            painterRes = R.drawable.ic_lego,
-            backgroundColor = Color(62, 132, 105),
-            foregroundColor = Color(43, 91, 84)
-        ),
-        MenuItemModel(
-            title = "Chill Relax",
-            painterRes = R.drawable.ic_audacity,
-            backgroundColor = Color(106, 174, 114),
-            foregroundColor = Color(62, 132, 105)
-        ),
-        MenuItemModel(
-            title = "Super Finger",
-            painterRes = R.drawable.ic_touch_id,
-            backgroundColor = Color(154, 154, 154),
-            foregroundColor = Color(177, 177, 177)
-        )
-    )
+    val menuItems = getMenuItemsList(navigator)
 
     ColorBackground(color = MaterialTheme.colors.background) {
-        if (uiState.updateNotesDialogVisible)
-            UpdateDescriptionDialog(updatesLog = uiState.updateNotesList)
-
         Column(modifier = Modifier.fillMaxSize()) {
             Toolbar()
             Column(
@@ -108,6 +69,11 @@ fun MainScreen(
                 MainMenu(menuItems = menuItems)
             }
         }
+
+        if (uiState.updateNotesDialogVisible)
+            UpdateDescriptionDialog(updatesLog = uiState.updateNotesList, onBackgroundClick = {
+                viewModel.onDialogBackgroundClick()
+            })
     }
 }
 

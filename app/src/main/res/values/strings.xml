@@ -42,5 +42,6 @@
     <string name="food_pairings">Good pairings:</string>
     <string name="app_update_version">Update: %s</string>
     <string name="app_update_time">From: %s</string>
+    <string name="update_notes_dialog_title">Update notes!</string>
 
 </resources>
