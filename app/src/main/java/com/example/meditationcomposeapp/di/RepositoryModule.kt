@@ -17,7 +17,7 @@ abstract class RepositoryModule {
 
     @Binds
     abstract fun provideUpdateDescriptionRepository(
-        repository: UpdateDescriptionRepositoryImpl,
+        implementation: UpdateDescriptionRepositoryImpl,
     ): UpdateDescriptionRepository
 
     @Binds

@@ -6,7 +6,7 @@ interface UpdateDescriptionRepository {
 
     suspend fun getAll(): List<UpdateDescriptionModel>
 
-    suspend fun getLastUpdate(): UpdateDescriptionModel
+    suspend fun getLastUpdate(): UpdateDescriptionModel?
 
     suspend fun insertAll(vararg updates: UpdateDescriptionModel)
 

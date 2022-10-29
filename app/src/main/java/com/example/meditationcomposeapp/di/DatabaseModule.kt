@@ -10,21 +10,25 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class DatabaseModule {
+object DatabaseModule {
 
+    @Singleton
     @Provides
     fun provideUpdateDescriptionDao(
         appDatabase: AppDatabase,
     ): UpdateDescriptionDao = appDatabase.updatesDescriptionDao()
 
+    @Singleton
     @Provides
     fun provideDatabase(
         @ApplicationContext context: Context,
-    ) = Room.databaseBuilder(
+    ): AppDatabase = Room.databaseBuilder(
         context,
-        AppDatabase::class.java, BuildConfig.DATABASE_NAME
+        AppDatabase::class.java,
+        BuildConfig.DATABASE_NAME
     ).build()
 }

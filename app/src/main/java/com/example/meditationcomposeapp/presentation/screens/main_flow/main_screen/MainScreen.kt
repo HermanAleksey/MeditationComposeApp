@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -13,14 +14,14 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.meditationcomposeapp.R
 import com.example.meditationcomposeapp.presentation.common_composables.ColorBackground
 import com.example.meditationcomposeapp.presentation.common_composables.Toolbar
 import com.example.meditationcomposeapp.presentation.screens.destinations.ShufflePuzzleScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.main_flow.main_screen.composable.MenuItem
 import com.example.meditationcomposeapp.presentation.screens.main_flow.main_screen.composable.MenuItemModel
+import com.example.meditationcomposeapp.presentation.screens.main_flow.main_screen.composable.UpdateDescriptionDialog
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
@@ -30,7 +31,7 @@ import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
 fun MainScreenPreview() {
     MainScreen(
         setBottomNavBarVisible = {},
-        viewModel = MainScreenViewModel(),
+        viewModel = hiltViewModel(),
         navigator = EmptyDestinationsNavigator
     )
 }
@@ -42,6 +43,9 @@ fun MainScreen(
     viewModel: MainScreenViewModel,
     navigator: DestinationsNavigator,
 ) {
+    val uiState = remember {
+        viewModel.uiState
+    }
     setBottomNavBarVisible(true)
     val activity = LocalContext.current as? Activity
     BackHandler(enabled = true, onBack = {
@@ -83,6 +87,9 @@ fun MainScreen(
     )
 
     ColorBackground(color = MaterialTheme.colors.background) {
+        if (uiState.updateNotesDialogVisible)
+            UpdateDescriptionDialog(updatesLog = uiState.updateNotesList)
+
         Column(modifier = Modifier.fillMaxSize()) {
             Toolbar()
             Column(

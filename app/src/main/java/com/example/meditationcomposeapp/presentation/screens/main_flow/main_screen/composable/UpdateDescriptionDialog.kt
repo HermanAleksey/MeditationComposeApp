@@ -26,8 +26,8 @@ import com.example.meditationcomposeapp.ui.theme.MeditationComposeAppTheme
 fun UpdateDescriptionDialogPreview() {
     MeditationComposeAppTheme(false) {
         UpdateDescriptionDialog(listOf(
-            UpdateDescriptionModel("10.10.10", 1667045395445, "title", "desc"),
-            UpdateDescriptionModel("10.10.10", 1667045395445, "title", "desc")
+            UpdateDescriptionModel("10.10.10", 1667045395445, "title", "desc", true),
+            UpdateDescriptionModel("10.10.10", 1667045395445, "title", "desc", true)
         ))
     }
 }

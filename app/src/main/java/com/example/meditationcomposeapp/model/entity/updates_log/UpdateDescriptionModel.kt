@@ -5,4 +5,5 @@ data class UpdateDescriptionModel(
     val updateReleaseTime: Long,
     val updateTitle: String,
     val updateDescription: String,
+    val wasShown: Boolean
 )

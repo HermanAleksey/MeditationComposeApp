@@ -31,4 +31,5 @@ fun UpdateDescriptionDBEntity.toUiModel() = UpdateDescriptionModel(
     this.updateReleaseTime,
     this.updateTitle,
     this.updateDescription,
+    this.isUpdateWasShown
 )

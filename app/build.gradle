@@ -139,8 +139,9 @@ dependencies {
 
     //room database
     implementation "androidx.room:room-runtime:$room_version"
-    annotationProcessor "androidx.room:room-compiler:$room_version"
-    implementation "androidx.room:room-coroutines:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+//    implementation "androidx.room:room-coroutines:$room_coroutines_version"
 
     //testing
     testImplementation 'junit:junit:4.13.2'

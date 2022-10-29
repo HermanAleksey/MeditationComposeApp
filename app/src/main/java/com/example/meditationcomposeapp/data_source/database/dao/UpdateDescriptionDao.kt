@@ -16,10 +16,10 @@ interface UpdateDescriptionDao {
 //    suspend fun loadAllByIds(updateIds: IntArray): Flow<List<UpdateDescriptionDBEntity>>
 
     @Query("SELECT * FROM updates_log WHERE id = (SELECT MAX(id) FROM updates_log) ")
-    suspend fun getLastUpdate(): UpdateDescriptionDBEntity
+    suspend fun getLastUpdate(): UpdateDescriptionDBEntity?
 
     @Query("UPDATE updates_log SET shown = (:wasShown) WHERE id = (:updateId)")
-    suspend fun setIsShown(updateId: Long, wasShown: Boolean): UpdateDescriptionDBEntity
+    suspend fun setIsShown(updateId: Long, wasShown: Boolean)
 
     @Insert
     suspend fun insertAll(vararg updates: UpdateDescriptionDBEntity)
