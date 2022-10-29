@@ -1,0 +1,30 @@
+package com.example.meditationcomposeapp.di
+
+import android.content.Context
+import androidx.room.Room
+import com.example.meditationcomposeapp.BuildConfig
+import com.example.meditationcomposeapp.data_source.database.AppDatabase
+import com.example.meditationcomposeapp.data_source.database.dao.UpdateDescriptionDao
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
+
+@Module
+@InstallIn(SingletonComponent::class)
+abstract class DatabaseModule {
+
+    @Provides
+    fun provideUpdateDescriptionDao(
+        appDatabase: AppDatabase,
+    ): UpdateDescriptionDao = appDatabase.updatesDescriptionDao()
+
+    @Provides
+    fun provideDatabase(
+        @ApplicationContext context: Context,
+    ) = Room.databaseBuilder(
+        context,
+        AppDatabase::class.java, BuildConfig.DATABASE_NAME
+    ).build()
+}

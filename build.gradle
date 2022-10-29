@@ -32,6 +32,8 @@ buildscript {
         paging_compose_version = '1.0.0-alpha16'
 
         glide_version = '2.0.2'
+
+        room_version = '2.4.3'
     }
     dependencies {
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
