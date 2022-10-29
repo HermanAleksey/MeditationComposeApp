@@ -52,7 +52,7 @@ fun MainScreen(
 
     ColorBackground(color = MaterialTheme.colors.background) {
         Column(modifier = Modifier.fillMaxSize()) {
-            Toolbar()
+            Toolbar(onUpdateHistoryClick = viewModel.onUpdateHistoryClick())
             Column(
                 modifier = Modifier.fillMaxSize()
             ) {

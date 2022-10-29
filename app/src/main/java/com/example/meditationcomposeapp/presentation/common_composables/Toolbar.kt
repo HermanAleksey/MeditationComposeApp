@@ -2,18 +2,24 @@ package com.example.meditationcomposeapp.presentation.common_composables
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Newspaper
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.meditationcomposeapp.R
 
 @Composable
-fun Toolbar() {
+fun Toolbar(
+    onUpdateHistoryClick: () -> Unit = {},
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -35,9 +41,12 @@ fun Toolbar() {
         )
         Spacer(modifier = Modifier.weight(1f))
         Image(
-            painter = painterResource(id = R.drawable.ic_hamburger),
-            contentDescription = "profile picture image",
-            modifier = Modifier.size(22.dp)
+            imageVector = Icons.Rounded.Newspaper,
+            contentDescription = "Updates news",
+            modifier = Modifier
+                .size(28.dp)
+                .clickable { onUpdateHistoryClick() },
+            colorFilter = ColorFilter.tint(color = MaterialTheme.colors.onBackground)
         )
     }
 }

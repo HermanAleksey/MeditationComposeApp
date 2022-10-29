@@ -15,6 +15,16 @@ class MainScreenViewModel @Inject constructor(
         _uiState.updateNotesDialogVisible = false
     }
 
+    fun onUpdateHistoryClick(): () -> Unit = {
+        viewModelScope.launch {
+            with(_uiState) {
+                updateNotesList = updateDescriptionRepository.getAll()
+                if (updateNotesList.isNotEmpty())
+                    updateNotesDialogVisible = true
+            }
+        }
+    }
+
     private var _uiState = MutableMainScreenState()
     val iuState: MainScreenState = _uiState
 
@@ -23,8 +33,8 @@ class MainScreenViewModel @Inject constructor(
         viewModelScope.launch {
             updateDescriptionRepository.getLastUpdate()?.let { lastUpdateDesc ->
 //                if (!lastUpdateDesc.wasShown) {
-                    _uiState.updateNotesDialogVisible = true
-                    _uiState.updateNotesList = listOf(lastUpdateDesc)
+                _uiState.updateNotesList = listOf(lastUpdateDesc)
+                _uiState.updateNotesDialogVisible = true
 //                }
             }
         }
