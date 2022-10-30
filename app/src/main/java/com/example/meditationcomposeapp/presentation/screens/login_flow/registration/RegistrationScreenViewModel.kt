@@ -5,7 +5,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.meditationcomposeapp.data_source.utils.printEventLog
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.usecase.authentication.RegisterUseCase
 import com.example.meditationcomposeapp.model.utils.validation.LoginField
@@ -65,7 +64,6 @@ class RegistrationScreenViewModel @Inject constructor(
                 registerUseCase.invoke(state.name, state.login, state.password).collect {
                     when (it) {
                         is NetworkResponse.Success<*> -> {
-                            printEventLog("RegistrationScreen","Success")
                             if (it.data!!.success)
                                 navigator.navigate(
                                     LoginScreenDestination()
@@ -76,10 +74,8 @@ class RegistrationScreenViewModel @Inject constructor(
                         }
                         is NetworkResponse.Failure<*> -> {
                             //on error show pop-up
-                            printEventLog("RegistrationScreen","Error")
                         }
                         is NetworkResponse.Loading<*> -> {
-                            printEventLog("RegistrationScreen","Loading:${it.isLoading}")
                             setLoading(it.isLoading)
                         }
                     }

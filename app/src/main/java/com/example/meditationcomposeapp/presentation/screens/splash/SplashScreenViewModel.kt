@@ -5,12 +5,11 @@ import androidx.lifecycle.viewModelScope
 import com.example.meditationcomposeapp.BuildConfig
 import com.example.meditationcomposeapp.data_source.data_store.UserDataStore
 import com.example.meditationcomposeapp.data_source.repository.update_description.UpdateDescriptionRepository
-import com.example.meditationcomposeapp.data_source.utils.printEventLog
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
-import com.example.meditationcomposeapp.model.entity.updates_log.UpdateDescriptionModel
 import com.example.meditationcomposeapp.model.usecase.authentication.LoginUseCase
 import com.example.meditationcomposeapp.presentation.screens.destinations.EnterScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.MainScreenDestination
+import com.example.meditationcomposeapp.presentation.utils.getVersionDescriptions
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.first
@@ -49,7 +48,6 @@ class SplashScreenViewModel @Inject constructor(
         loginUseCase(login, password).collect {
             when (it) {
                 is NetworkResponse.Success<*> -> {
-                    printEventLog("SplashScreen", "Success")
                     with(navigator) {
                         navigate(
                             MainScreenDestination()
@@ -58,12 +56,10 @@ class SplashScreenViewModel @Inject constructor(
                 }
                 is NetworkResponse.Failure<*> -> {
                     //on error show pop-up
-                    printEventLog("SplashScreen", "Error")
                 }
                 is NetworkResponse.Loading<*> -> {
                     //todo splash screen loading
 //                    setLoading(it.isLoading)
-                    printEventLog("SplashScreen", "Loading:${it.isLoading}")
                 }
             }
         }
@@ -75,34 +71,7 @@ class SplashScreenViewModel @Inject constructor(
         val lastInstalledVersion = userDataStore.readLastUpdateVersion().first()
         if (lastInstalledVersion.compareToVersion(currentVersionName) == COMPARATION_RESULT.EQUALS) return
 
-        val version0_0_1 = UpdateDescriptionModel(
-            versionName = "0.0.1",
-            updateReleaseTime = 1667034395445,
-            updateTitle = "Project initialization!",
-            updateDescription = "Project was created. This update created in order to show origin.",
-            wasShown = false
-        )
-        val version0_5_0 = UpdateDescriptionModel(
-            versionName = "0.5.0",
-            updateReleaseTime = 1667034395445,
-            updateTitle = "A lot of Beer!",
-            updateDescription = "Added new beer api with more details. Also detailed screen were added for" +
-                    "each beer! Just click on it. Button on items of the list were meant to navigate to" +
-                    "beer page on an online store or similar.",
-            wasShown = false
-        )
-        val version0_6_0 = UpdateDescriptionModel(
-            versionName = "0.6.0",
-            updateReleaseTime = 1667138968792,
-            updateTitle = "Update notes!",
-            updateDescription = "Now you can see what is new in the app with less effort! Also you can check updates history.",
-            wasShown = false
-        )
-        val versions = listOf(
-            version0_0_1,
-            version0_5_0,
-            version0_6_0
-        )
+        val versions = getVersionDescriptions()
 
         versions.forEach { updateDesc ->
             //if this version update wasn't added into db yet - add it

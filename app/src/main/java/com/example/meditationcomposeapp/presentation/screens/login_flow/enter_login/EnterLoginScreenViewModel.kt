@@ -5,7 +5,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.meditationcomposeapp.data_source.utils.printEventLog
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.usecase.authentication.RequestPasswordRestorationUseCase
 import com.example.meditationcomposeapp.model.utils.validation.LoginField
@@ -42,7 +41,6 @@ class EnterLoginScreenViewModel @Inject constructor(
                 requestPasswordRestorationUseCase.invoke(state.login).collect {
                     when (it) {
                         is NetworkResponse.Success<*> -> {
-                            printEventLog("EnterLoginScreen", "Success")
                             if (it.data!!.success)
                                 navigator.navigate(
                                     EnterCodeScreenDestination(state.login)
@@ -53,10 +51,8 @@ class EnterLoginScreenViewModel @Inject constructor(
                         }
                         is NetworkResponse.Failure<*> -> {
                             //on error show pop-up
-                            printEventLog("EnterLoginScreen", "Error")
                         }
                         is NetworkResponse.Loading<*> -> {
-                            printEventLog("EnterLoginScreen", "Loading:${it.isLoading}")
                             setLoading(it.isLoading)
                         }
                     }

@@ -6,7 +6,6 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.meditationcomposeapp.data_source.data_store.UserDataStore
-import com.example.meditationcomposeapp.data_source.utils.printEventLog
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.usecase.authentication.LoginUseCase
 import com.example.meditationcomposeapp.model.utils.validation.LoginField
@@ -61,7 +60,6 @@ class LoginScreenViewModel @Inject constructor(
                 loginUseCase.invoke(login, password).collect {
                     when (it) {
                         is NetworkResponse.Success<*> -> {
-                            printEventLog("LoginScreen", "Success")
                             saveCreditsOnDataStore(login, password)
                             navigator.navigate(
                                 MainScreenDestination()
@@ -69,10 +67,8 @@ class LoginScreenViewModel @Inject constructor(
                         }
                         is NetworkResponse.Failure<*> -> {
                             //on error show pop-up
-                            printEventLog("LoginScreen", "Error")
                         }
                         is NetworkResponse.Loading<*> -> {
-                            printEventLog("LoginScreen", "Loading:${it.isLoading}")
                             setLoading(it.isLoading)
                         }
                     }

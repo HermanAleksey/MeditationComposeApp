@@ -6,7 +6,6 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.meditationcomposeapp.R
-import com.example.meditationcomposeapp.data_source.utils.printEventLog
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.usecase.authentication.SetNewPasswordUseCase
 import com.example.meditationcomposeapp.model.utils.resources.UiText
@@ -49,7 +48,6 @@ class NewPasswordScreenViewModel @Inject constructor(
                 setNewPasswordUseCase.invoke("login", state.newPassword).collect {
                     when (it) {
                         is NetworkResponse.Success<*> -> {
-                            printEventLog("NewPasswordScreen", "Success")
                             if (it.data!!.success)
                                 navigator.navigate(
                                     LoginScreenDestination()
@@ -60,10 +58,8 @@ class NewPasswordScreenViewModel @Inject constructor(
                         }
                         is NetworkResponse.Failure<*> -> {
                             //on error show pop-up
-                            printEventLog("NewPasswordScreen", "Error")
                         }
                         is NetworkResponse.Loading<*> -> {
-                            printEventLog("NewPasswordScreen", "Loading:${it.isLoading}")
                             setLoading(it.isLoading)
                         }
                     }
