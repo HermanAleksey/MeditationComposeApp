@@ -95,7 +95,7 @@ class SplashScreenViewModel @Inject constructor(
             versionName = "0.6.0",
             updateReleaseTime = 1667138968792,
             updateTitle = "Update notes!",
-            updateDescription = "Now you can see what is new in the app with less effort!",
+            updateDescription = "Now you can see what is new in the app with less effort! Also you can check updates history.",
             wasShown = false
         )
         val versions = listOf(
