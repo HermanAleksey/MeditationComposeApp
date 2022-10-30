@@ -18,7 +18,10 @@ class UpdateDescriptionRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getLastUpdate(): UpdateDescriptionModel? {
-        return dao.getLastUpdate()?.toUiModel()
+        val lastUpdate = dao.getLastUpdate()
+        if (lastUpdate?.isUpdateWasShown == false)
+            dao.setIsShown(lastUpdate.versionName, true)
+        return lastUpdate?.toUiModel()
     }
 
     override suspend fun insertAll(vararg updates: UpdateDescriptionModel) {
