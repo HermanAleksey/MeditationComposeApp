@@ -26,10 +26,18 @@ fun getVersionDescriptions(): List<UpdateDescriptionModel> {
         updateDescription = "Now you can see what is new in the app with less effort! Also you can check updates history.",
         wasShown = false
     )
+    val version0_6_1 = UpdateDescriptionModel(
+        versionName = "0.6.1",
+        updateReleaseTime = 1667152000868,
+        updateTitle = "Bug fix",
+        updateDescription = "Bug with infinite update description pop-up fixed :)",
+        wasShown = false
+    )
 
     return listOf(
         version0_0_1,
         version0_5_0,
-        version0_6_0
+        version0_6_0,
+        version0_6_1
     )
 }
