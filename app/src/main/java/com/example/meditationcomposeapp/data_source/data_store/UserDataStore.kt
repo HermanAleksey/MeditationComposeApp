@@ -55,15 +55,15 @@ class UserDataStore @Inject constructor(
 
     suspend fun writeLastUpdateVersion(value: String) {
         context.userDataStore.edit { preferences ->
-            val passwordKey = stringPreferencesKey(UserDataStoreField.LAST_UPDATE_VERSION.name)
-            preferences[passwordKey] = value
+            val lastInstalledVersionKey = stringPreferencesKey(UserDataStoreField.LAST_UPDATE_VERSION.name)
+            preferences[lastInstalledVersionKey] = value
         }
     }
 
     fun readLastUpdateVersion(): Flow<String> {
-        val passwordKey = stringPreferencesKey(UserDataStoreField.LAST_UPDATE_VERSION.name)
+        val lastInstalledVersionKey = stringPreferencesKey(UserDataStoreField.LAST_UPDATE_VERSION.name)
         return context.userDataStore.data.map { preferences ->
-            preferences[passwordKey] ?: "0.0.1"
+            preferences[lastInstalledVersionKey] ?: "0.0.0"
         }
     }
 }

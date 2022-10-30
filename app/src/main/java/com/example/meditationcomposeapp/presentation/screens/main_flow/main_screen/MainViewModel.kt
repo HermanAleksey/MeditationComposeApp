@@ -18,7 +18,7 @@ class MainScreenViewModel @Inject constructor(
     fun onUpdateHistoryClick(): () -> Unit = {
         viewModelScope.launch {
             with(_uiState) {
-                updateNotesList = updateDescriptionRepository.getAll()
+                updateNotesList = updateDescriptionRepository.getAll().reversed()
                 if (updateNotesList.isNotEmpty())
                     updateNotesDialogVisible = true
             }

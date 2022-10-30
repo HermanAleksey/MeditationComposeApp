@@ -19,15 +19,17 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SplashScreenViewModel @Inject constructor(
-    val userDataStore: UserDataStore,
-    val loginUseCase: LoginUseCase,
-    val updateDescriptionRepository: UpdateDescriptionRepository,
+    private val userDataStore: UserDataStore,
+    private val loginUseCase: LoginUseCase,
+    private val updateDescriptionRepository: UpdateDescriptionRepository,
 ) : ViewModel() {
 
     fun onLaunchSplashScreen(
         navigator: DestinationsNavigator,
     ) {
         viewModelScope.launch {
+            checkLastUpdateVersion()
+
             val login = userDataStore.readLogin().first()
             val password = userDataStore.readPassword().first()
 
@@ -70,34 +72,44 @@ class SplashScreenViewModel @Inject constructor(
     private suspend fun checkLastUpdateVersion() {
         val currentVersionName = BuildConfig.VERSION_NAME
 
-        userDataStore.readLastUpdateVersion().collect { lastInstalledVersion ->
-            if (lastInstalledVersion.compareToVersion(currentVersionName) == COMPARATION_RESULT.EQUALS) return@collect
+        val lastInstalledVersion = userDataStore.readLastUpdateVersion().first()
+        if (lastInstalledVersion.compareToVersion(currentVersionName) == COMPARATION_RESULT.EQUALS) return
 
-            val versions = listOf<UpdateDescriptionModel>(
+        val version0_0_1 = UpdateDescriptionModel(
+            versionName = "0.0.1",
+            updateReleaseTime = 1667034395445,
+            updateTitle = "Project initialization!",
+            updateDescription = "Project was created. This update created in order to show origin.",
+            wasShown = false
+        )
+        val version0_5_0 = UpdateDescriptionModel(
+            versionName = "0.5.0",
+            updateReleaseTime = 1667034395445,
+            updateTitle = "A lot of Beer!",
+            updateDescription = "Added new beer api with more details. Also detailed screen were added for" +
+                    "each beer! Just click on it. Button on items of the list were meant to navigate to" +
+                    "beer page on an online store or similar.",
+            wasShown = false
+        )
+        val version0_6_0 = UpdateDescriptionModel(
+            versionName = "0.6.0",
+            updateReleaseTime = 1667138968792,
+            updateTitle = "Update notes!",
+            updateDescription = "Now you can see what is new in the app with less effort!",
+            wasShown = false
+        )
+        val versions = listOf(
+            version0_0_1,
+            version0_5_0,
+            version0_6_0
+        )
 
+        versions.forEach { updateDesc ->
+            //if this version update wasn't added into db yet - add it
+            if (updateDesc.versionName.compareToVersion(lastInstalledVersion)
+                == COMPARATION_RESULT.BIGGER
             )
-            val version0_0_1 = UpdateDescriptionModel(
-                versionName = "0.0.1",
-                updateReleaseTime = 1667034395445,
-                updateTitle = "Project initialization!",
-                updateDescription = "Project was created. This update created in order to show origin.",
-                wasShown = false
-            )
-            val version0_4_0 = UpdateDescriptionModel(
-                versionName = "0.5.0",
-                updateReleaseTime = 1667034395445,
-                updateTitle = "A lot of Beer!",
-                updateDescription = "Added new beer api with more details. Also detailed screen were added for" +
-                        "each beer! Just click on it. Button on items of the list were meant to navigate to" +
-                        "beer page on an online store or similar.",
-                wasShown = false
-            )
-
-            versions.forEach {
-                //if this version update wasn't added into db yet - add it
-                if (it.versionName.compareToVersion(lastInstalledVersion) == COMPARATION_RESULT.BIGGER)
-                    updateDescriptionRepository.insertAll(it)
-            }
+                updateDescriptionRepository.insertAll(updateDesc)
         }
 
         userDataStore.writeLastUpdateVersion(currentVersionName)

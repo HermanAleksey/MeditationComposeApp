@@ -4,7 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
@@ -12,6 +12,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
@@ -54,7 +55,7 @@ fun UpdateDescriptionDialog(
             modifier = Modifier
                 .padding(horizontal = 48.dp)
                 .fillMaxWidth()
-                .heightIn(max = screenHeight.value.times(0.8).dp )
+                .heightIn(max = screenHeight.value.times(0.8).dp)
                 .clickable { },
             backgroundColor = MaterialTheme.colors.surface,
             shape = RoundedCornerShape(dimensionResource(id = R.dimen.radius_pop_up_corner))
@@ -71,17 +72,23 @@ fun UpdateDescriptionDialog(
                             .padding(horizontal = dimensionResource(id = R.dimen.padding_horizontal_list))
                     )
                 }
-                items(updatesLog) {
-                    UpdateDescriptionElement(it)
-                }
-                items(updatesLog) {
-                    UpdateDescriptionElement(it)
-                }
-                items(updatesLog) {
-                    UpdateDescriptionElement(it)
-                }
-                items(updatesLog) {
-                    UpdateDescriptionElement(it)
+                itemsIndexed(updatesLog) { index, item ->
+                    UpdateDescriptionElement(item)
+
+                    if (index < updatesLog.lastIndex) {
+                        Spacer(modifier = Modifier.height(16.dp))
+                        Box(modifier = Modifier
+                            .fillMaxWidth()
+                            .height(1.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Box(modifier = Modifier
+                                .background(MaterialTheme.colors.background)
+                                .height(1.dp)
+                                .fillMaxWidth(0.7f)
+                            )
+                        }
+                    }
                 }
                 item {
                     Spacer(modifier = Modifier.height(16.dp))

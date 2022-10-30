@@ -7,8 +7,8 @@ import com.example.meditationcomposeapp.model.entity.updates_log.UpdateDescripti
 
 @Entity(tableName = "updates_log")
 data class UpdateDescriptionDBEntity(
-    @PrimaryKey(autoGenerate = true) val id: Long,
-    @ColumnInfo(name = "version_name") val versionName: String,
+//    @PrimaryKey(autoGenerate = true) val id: Long,
+    @PrimaryKey @ColumnInfo(name = "version_name") val versionName: String,
     @ColumnInfo(name = "release_time") val updateReleaseTime: Long,
     @ColumnInfo(name = "title") val updateTitle: String,
     @ColumnInfo(name = "description") val updateDescription: String,
@@ -18,7 +18,6 @@ data class UpdateDescriptionDBEntity(
 
 fun UpdateDescriptionModel.toDbEntity(): UpdateDescriptionDBEntity =
     UpdateDescriptionDBEntity(
-        id = 0,
         this.versionName,
         this.updateReleaseTime,
         this.updateTitle,

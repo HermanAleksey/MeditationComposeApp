@@ -12,19 +12,13 @@ class UpdateDescriptionRepositoryImpl @Inject constructor(
     override suspend fun getAll(): List<UpdateDescriptionModel> {
         return dao.getAll().map {
             if (!it.isUpdateWasShown)
-                dao.setIsShown(it.id, true)
+                dao.setIsShown(it.versionName, true)
             it.toUiModel()
         }
     }
 
     override suspend fun getLastUpdate(): UpdateDescriptionModel? {
-//        return dao.getLastUpdate()?.toUiModel()
-        //todo remove test hard-code
-        return UpdateDescriptionModel("1.0.3",
-            1667045395445,
-            "A lot of beer!",
-            "I've added screen with a lot of beer on it. You can click any item and check full info. bla bla bla",
-            false)
+        return dao.getLastUpdate()?.toUiModel()
     }
 
     override suspend fun insertAll(vararg updates: UpdateDescriptionModel) {
