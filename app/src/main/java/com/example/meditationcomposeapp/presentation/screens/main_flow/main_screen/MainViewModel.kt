@@ -32,10 +32,10 @@ class MainScreenViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             updateDescriptionRepository.getLastUpdate()?.let { lastUpdateDesc ->
-//                if (!lastUpdateDesc.wasShown) {
-                _uiState.updateNotesList = listOf(lastUpdateDesc)
-                _uiState.updateNotesDialogVisible = true
-//                }
+                if (!lastUpdateDesc.wasShown) {
+                    _uiState.updateNotesList = listOf(lastUpdateDesc)
+                    _uiState.updateNotesDialogVisible = true
+                }
             }
         }
     }

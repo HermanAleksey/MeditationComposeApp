@@ -11,7 +11,8 @@ class UpdateDescriptionRepositoryImpl @Inject constructor(
 ) : UpdateDescriptionRepository {
     override suspend fun getAll(): List<UpdateDescriptionModel> {
         return dao.getAll().map {
-            dao.setIsShown(it.id, true)
+            if (!it.isUpdateWasShown)
+                dao.setIsShown(it.id, true)
             it.toUiModel()
         }
     }

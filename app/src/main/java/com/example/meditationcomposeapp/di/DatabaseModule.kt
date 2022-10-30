@@ -2,6 +2,8 @@ package com.example.meditationcomposeapp.di
 
 import android.content.Context
 import androidx.room.Room
+import androidx.room.RoomDatabase
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.meditationcomposeapp.BuildConfig
 import com.example.meditationcomposeapp.data_source.database.AppDatabase
 import com.example.meditationcomposeapp.data_source.database.dao.UpdateDescriptionDao

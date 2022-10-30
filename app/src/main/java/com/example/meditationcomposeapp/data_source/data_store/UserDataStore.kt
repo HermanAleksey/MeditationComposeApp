@@ -19,7 +19,7 @@ object DataStoreName {
 }
 
 enum class UserDataStoreField {
-    LOGIN, PASSWORD
+    LOGIN, PASSWORD, LAST_UPDATE_VERSION
 }
 
 class UserDataStore @Inject constructor(
@@ -50,6 +50,20 @@ class UserDataStore @Inject constructor(
         val passwordKey = stringPreferencesKey(UserDataStoreField.PASSWORD.name)
         return context.userDataStore.data.map { preferences ->
             preferences[passwordKey] ?: ""
+        }
+    }
+
+    suspend fun writeLastUpdateVersion(value: String) {
+        context.userDataStore.edit { preferences ->
+            val passwordKey = stringPreferencesKey(UserDataStoreField.LAST_UPDATE_VERSION.name)
+            preferences[passwordKey] = value
+        }
+    }
+
+    fun readLastUpdateVersion(): Flow<String> {
+        val passwordKey = stringPreferencesKey(UserDataStoreField.LAST_UPDATE_VERSION.name)
+        return context.userDataStore.data.map { preferences ->
+            preferences[passwordKey] ?: "0.0.1"
         }
     }
 }
