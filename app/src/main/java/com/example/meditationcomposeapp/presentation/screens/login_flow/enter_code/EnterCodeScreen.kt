@@ -7,6 +7,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -27,6 +28,8 @@ fun EnterCodeScreen(
     viewModel: EnterCodeScreenViewModel,
     navigator: DestinationsNavigator,
 ) {
+
+    val uiState = viewModel.uiState.collectAsState()
     /**
      * Use to transmit navigation method and
      * also serve as callback for event when
@@ -37,7 +40,7 @@ fun EnterCodeScreen(
     }
 
     LoginFlowBackground(
-        isLoading = viewModel.isLoading()
+        isLoading = uiState.value.isLoading
     ) {
         Column(
             horizontalAlignment = Alignment.Start,
@@ -67,8 +70,8 @@ fun EnterCodeScreen(
                     .alpha(0.7F)
             )
             CodePanel(
-                isEnabled = !viewModel.isLoading(),
-                code = viewModel.getCode(),
+                isEnabled = !uiState.value.isLoading,
+                code = uiState.value.code,
                 onCodeDigitChanged = { position, number -> viewModel.onCodeDigitChanged(position, number) },
                 onLastDigitFilled = ::onLastDigitFilled
             )

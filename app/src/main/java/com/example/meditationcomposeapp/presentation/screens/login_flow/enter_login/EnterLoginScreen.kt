@@ -8,6 +8,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -38,12 +39,14 @@ fun EnterLoginScreen(
     val focusManager = LocalFocusManager.current
     val repeatPasswordFocusRequester = FocusRequester()
 
+    val uiState = viewModel.uiState.collectAsState()
+
     LaunchedEffect(key1 = null, block = {
         viewModel.onLoginTextChanged(initialLoginValue?:"")
     })
 
     LoginFlowBackground(
-        isLoading = viewModel.isLoading()
+        isLoading = uiState.value.isLoading
     ) {
         Column(
             horizontalAlignment = Alignment.Start,
@@ -73,11 +76,11 @@ fun EnterLoginScreen(
                     .alpha(0.7F)
             )
             LoginFlowInputField(
-                isEnabled = !viewModel.isLoading(),
-                textFieldValue = viewModel.getLogin(),
+                isEnabled = !uiState.value.isLoading,
+                textFieldValue = uiState.value.login,
                 label = stringResource(id = R.string.email_address),
-                isError = viewModel.getLoginError() != null,
-                errorValue = viewModel.getLoginError()?.asString(),
+                isError = uiState.value.loginError != null,
+                errorValue = uiState.value.loginError?.asString(),
                 onValueChanged = { viewModel.onLoginTextChanged(it) },
                 imeAction = ImeAction.Done,
                 keyboardType = KeyboardType.Email,

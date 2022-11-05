@@ -9,6 +9,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -36,12 +37,13 @@ fun LoginScreen(
     viewModel: LoginScreenViewModel,
     navigator: DestinationsNavigator,
 ) {
-
     val focusManager = LocalFocusManager.current
     val passwordFocusRequester = FocusRequester()
 
+    val uiState = viewModel.uiState.collectAsState()
+
     LoginFlowBackground(
-        isLoading = viewModel.isLoading()
+        isLoading = uiState.value.isLoading
     ) {
         Column(
             horizontalAlignment = Alignment.Start,
@@ -71,11 +73,11 @@ fun LoginScreen(
                     .alpha(0.7F)
             )
             LoginFlowInputField(
-                isEnabled = !viewModel.isLoading(),
-                textFieldValue = viewModel.getLogin(),
+                isEnabled = !uiState.value.isLoading,
+                textFieldValue = uiState.value.login,
                 label = stringResource(id = R.string.email_address),
-                isError = viewModel.getLoginError() != null,
-                errorValue = viewModel.getLoginError()?.asString(),
+                isError = uiState.value.loginError != null,
+                errorValue = uiState.value.loginError?.asString(),
                 onValueChanged = { viewModel.onLoginTextChanged(it) },
                 imeAction = ImeAction.Next,
                 keyboardType = KeyboardType.Email,
@@ -84,11 +86,11 @@ fun LoginScreen(
                 },
             )
             LoginFlowInputField(
-                isEnabled = !viewModel.isLoading(),
-                textFieldValue = viewModel.getPassword(),
+                isEnabled = !uiState.value.isLoading,
+                textFieldValue = uiState.value.password,
                 label = stringResource(id = R.string.password),
-                isError = viewModel.getPasswordError() != null,
-                errorValue = viewModel.getPasswordError()?.asString(),
+                isError = uiState.value.passwordError != null,
+                errorValue = uiState.value.passwordError?.asString(),
                 onValueChanged = { viewModel.onPasswordTextChanged(it) },
                 imeAction = ImeAction.Done,
                 keyboardType = KeyboardType.Password,

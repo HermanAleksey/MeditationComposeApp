@@ -37,4 +37,4 @@ The ability to select your photo from the gallery and crop it to a square is imp
 
 <img src="https://user-images.githubusercontent.com/68656704/195434819-758d1611-1b29-4050-841e-54906258dcf1.jpg" width="200"> 
 
-In the near future, I plan to use Pagination and data caching for this (or another, if I find a better option) list of data.
+Just list of items from open api. Implemented with usage of Pagination. Used api: `https://punkapi.com/documentation/v2`

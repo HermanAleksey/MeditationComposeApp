@@ -37,16 +37,10 @@ fun RowScope.AddItem(
     navController: NavController,
 ) {
     BottomNavigationItem(
-        label = {
-            Text(
-                text = screen.title,
-                style = MaterialTheme.typography.caption
-            )
-        },
         icon = {
             Icon(
                 imageVector = screen.icon,
-                contentDescription = "${screen.title} navigation icon"
+                contentDescription = screen.description.asString()
             )
         },
         selected = currentDestination == screen.direction,

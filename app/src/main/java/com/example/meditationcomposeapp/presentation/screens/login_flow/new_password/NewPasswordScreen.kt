@@ -8,6 +8,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -37,8 +38,10 @@ fun NewPasswordScreen(
     val focusManager = LocalFocusManager.current
     val repeatPasswordFocusRequester = FocusRequester()
 
+    val uiState = viewModel.uiState.collectAsState()
+
     LoginFlowBackground(
-        isLoading = viewModel.isLoading()
+        isLoading = uiState.value.isLoading
     ) {
         Column(
             horizontalAlignment = Alignment.Start,
@@ -68,11 +71,11 @@ fun NewPasswordScreen(
                     .alpha(0.7F)
             )
             LoginFlowInputField(
-                isEnabled = !viewModel.isLoading(),
-                textFieldValue = viewModel.getNewPassword(),
+                isEnabled = !uiState.value.isLoading,
+                textFieldValue = uiState.value.newPassword,
                 label = stringResource(id = R.string.new_password),
-                isError = viewModel.getNewPasswordError() != null,
-                errorValue = viewModel.getNewPasswordError()?.asString(),
+                isError = uiState.value.newPasswordError != null,
+                errorValue = uiState.value.newPasswordError?.asString(),
                 onValueChanged = { viewModel.onNewPasswordTextChanged(it) },
                 imeAction = ImeAction.Next,
                 keyboardType = KeyboardType.Password,
@@ -81,11 +84,11 @@ fun NewPasswordScreen(
                 },
             )
             LoginFlowInputField(
-                isEnabled = !viewModel.isLoading(),
-                textFieldValue = viewModel.getRepeatPassword(),
+                isEnabled = !uiState.value.isLoading,
+                textFieldValue = uiState.value.repeatPassword,
                 label = stringResource(id = R.string.repeat_new_password),
-                isError = viewModel.getRepeatPasswordError() != null,
-                errorValue = viewModel.getRepeatPasswordError()?.asString(),
+                isError = uiState.value.repeatPasswordError != null,
+                errorValue = uiState.value.repeatPasswordError?.asString(),
                 onValueChanged = { viewModel.onRepeatPasswordTextChanged(it) },
                 imeAction = ImeAction.Done,
                 keyboardType = KeyboardType.Password,

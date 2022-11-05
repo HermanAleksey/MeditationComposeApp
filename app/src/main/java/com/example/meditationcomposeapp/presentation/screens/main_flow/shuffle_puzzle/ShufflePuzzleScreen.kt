@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.example.meditationcomposeapp.presentation.common_composables.ColorBackground
@@ -16,35 +17,38 @@ import com.ramcosta.composedestinations.annotation.Destination
 fun ShufflePuzzleScreen(
     viewModel: ShufflePuzzleScreenViewModel,
 ) {
-    ColorBackground(color = MaterialTheme.colors.background,
+    val uiState = viewModel.uiState.collectAsState()
+
+    ColorBackground(
+        color = MaterialTheme.colors.background,
         lockScreenWhenLoading = true,
-        isLoading = viewModel.isLoading()) {
+        isLoading = uiState.value.isLoading
+    ) {
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             PuzzleBoardWithCounter(
-                isPuzzleCreated = viewModel.isPuzzleCreated(),
-                movesDone = viewModel.getMovesDone(),
+                isPuzzleCreated = uiState.value.puzzle != null,
+                movesDone = uiState.value.movesDone,
                 onMovePerformed = {
                     viewModel.onMovePerformed(it)
                 },
-                puzzle = viewModel.getPuzzle(),
+                puzzle = uiState.value.puzzle,
                 onCreatePuzzleClick = { bitmap ->
                     viewModel.onCreatePuzzleClick(bitmap)
                 },
-                puzzleSize = viewModel.getPuzzleSize(),
+                puzzleSize = uiState.value.puzzleSize,
                 onPuzzleSizeChanged = {
                     viewModel.onPuzzleSizeChanged(it)
                 },
                 onRestartPuzzle = {
                     viewModel.onRestartPuzzleClicked()
                 },
-                timerValueSec = viewModel.getSolvingTimerSec(),
+                timerValueSec = uiState.value.solvingTimerSec,
                 onTimerSecTick = { viewModel.onTimerTick() },
-                isTimerActivated = viewModel.isTimerActive(),
+                isTimerActivated = uiState.value.isTimerActive,
             )
-            if (viewModel.isPuzzleSolved()) {
+            if (uiState.value.isPuzzleSolved) {
                 PuzzleIsSolvedLabel()
             }
         }
-
     }
 }

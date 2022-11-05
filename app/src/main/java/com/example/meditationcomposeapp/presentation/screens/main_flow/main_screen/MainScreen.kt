@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
@@ -41,7 +42,8 @@ fun MainScreen(
     viewModel: MainScreenViewModel,
     navigator: DestinationsNavigator,
 ) {
-    val uiState = viewModel.iuState
+    val uiState = viewModel.uiState.collectAsState()
+
     setBottomNavBarVisible(true)
     val activity = LocalContext.current as? Activity
     BackHandler(enabled = true, onBack = {
@@ -70,8 +72,8 @@ fun MainScreen(
             }
         }
 
-        if (uiState.updateNotesDialogVisible)
-            UpdateDescriptionDialog(updatesLog = uiState.updateNotesList, onBackgroundClick = {
+        if (uiState.value.updateNotesDialogVisible)
+            UpdateDescriptionDialog(updatesLog = uiState.value.updateNotesList, onBackgroundClick = {
                 viewModel.onDialogBackgroundClick()
             })
     }

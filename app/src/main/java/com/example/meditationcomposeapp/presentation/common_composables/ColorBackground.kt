@@ -21,8 +21,6 @@ fun ColorBackground(
         modifier = Modifier
             .background(color = color)
             .fillMaxSize()
-
-
     ) {
         content()
 

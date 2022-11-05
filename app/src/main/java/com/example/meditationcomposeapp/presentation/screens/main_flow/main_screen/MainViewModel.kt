@@ -4,6 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.meditationcomposeapp.data_source.repository.update_description.UpdateDescriptionRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -11,31 +14,48 @@ import javax.inject.Inject
 class MainScreenViewModel @Inject constructor(
     private val updateDescriptionRepository: UpdateDescriptionRepository,
 ) : ViewModel() {
-    fun onDialogBackgroundClick() {
-        _uiState.updateNotesDialogVisible = false
-    }
 
-    fun onUpdateHistoryClick(): () -> Unit = {
-        viewModelScope.launch {
-            with(_uiState) {
-                updateNotesList = updateDescriptionRepository.getAll().reversed()
-                if (updateNotesList.isNotEmpty())
-                    updateNotesDialogVisible = true
-            }
-        }
-    }
-
-    private var _uiState = MutableMainScreenState()
-    val iuState: MainScreenState = _uiState
-
+    private val _uiState = MutableStateFlow(MainScreenState())
+    val uiState: StateFlow<MainScreenState> = _uiState
 
     init {
         viewModelScope.launch {
             updateDescriptionRepository.getLastUpdate()?.let { lastUpdateDesc ->
                 if (!lastUpdateDesc.wasShown) {
-                    _uiState.updateNotesList = listOf(lastUpdateDesc)
-                    _uiState.updateNotesDialogVisible = true
+                    _uiState.update { state ->
+                        state.copy(
+                            updateNotesList = listOf(lastUpdateDesc),
+                            updateNotesDialogVisible = true
+                        )
+                    }
                 }
+            }
+        }
+    }
+
+    fun onDialogBackgroundClick() {
+        _uiState.update {
+            it.copy(
+                updateNotesDialogVisible = false
+            )
+        }
+    }
+
+    fun onUpdateHistoryClick(): () -> Unit = {
+        viewModelScope.launch {
+            with(_uiState) {
+                update {
+                    it.copy(
+                        updateNotesList = updateDescriptionRepository.getAll().reversed()
+                    )
+                }
+
+                if (value.updateNotesList.isNotEmpty())
+                    update {
+                        it.copy(
+                            updateNotesDialogVisible = true
+                        )
+                    }
             }
         }
     }

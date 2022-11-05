@@ -1,8 +1,5 @@
 package com.example.meditationcomposeapp.presentation.screens.login_flow.login
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.meditationcomposeapp.data_source.data_store.UserDataStore
@@ -15,6 +12,9 @@ import com.example.meditationcomposeapp.presentation.screens.destinations.EnterS
 import com.example.meditationcomposeapp.presentation.screens.destinations.MainScreenDestination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -24,36 +24,30 @@ class LoginScreenViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase,
 ) : ViewModel() {
 
-    private var state by mutableStateOf(LoginScreenState())
-
-    fun isLoading() = state.isLoading
-    fun getLogin() = state.login
-    fun getLoginError() = state.loginError
-    fun getPassword() = state.password
-    fun getPasswordError() = state.passwordError
-
-
-    private fun setLoading(isLoading: Boolean) {
-        state = state.copy(isLoading = isLoading)
-    }
+    private val _uiState = MutableStateFlow(LoginScreenState())
+    val uiState: StateFlow<LoginScreenState> = _uiState
 
     fun onLoginTextChanged(value: String) {
-        state = state.copy(login = value)
+        _uiState.update {
+            it.copy(login = value)
+        }
     }
 
     fun onPasswordTextChanged(value: String) {
-        state = state.copy(password = value)
+        _uiState.update { state ->
+            state.copy(password = value)
+        }
     }
 
     fun onForgotPasswordClicked(navigator: DestinationsNavigator) {
         navigator.navigate(
-            EnterLoginScreenDestination(state.login)
+            EnterLoginScreenDestination(_uiState.value.login)
         )
     }
 
     fun onLoginClicked(navigator: DestinationsNavigator) {
-        val login = state.login
-        val password = state.password
+        val login = _uiState.value.login
+        val password = _uiState.value.password
 
         if (validateEmailField(login) && validatePasswordField(password)) {
             viewModelScope.launch {
@@ -69,7 +63,11 @@ class LoginScreenViewModel @Inject constructor(
                             //on error show pop-up
                         }
                         is NetworkResponse.Loading<*> -> {
-                            setLoading(it.isLoading)
+                            _uiState.update { state ->
+                                state.copy(
+                                    isLoading = it.isLoading
+                                )
+                            }
                         }
                     }
                 }
@@ -86,14 +84,18 @@ class LoginScreenViewModel @Inject constructor(
 
     private fun validatePasswordField(password: String): Boolean {
         PasswordField(password).validate().let {
-            state = state.copy(passwordError = it.errorMessage)
+            _uiState.update { state ->
+                state.copy(passwordError = it.errorMessage)
+            }
             return it.successful
         }
     }
 
     private fun validateEmailField(email: String): Boolean {
         LoginField(email).validate().let {
-            state = state.copy(loginError = it.errorMessage)
+            _uiState.update { state ->
+                state.copy(loginError = it.errorMessage)
+            }
             return it.successful
         }
     }

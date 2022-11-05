@@ -8,6 +8,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -39,8 +40,10 @@ fun RegistrationScreen(
     val passwordFocusRequester = FocusRequester()
     val emailFocusRequester = FocusRequester()
 
+    val uiState = viewModel.uiState.collectAsState()
+
     LoginFlowBackground(
-        isLoading = viewModel.isLoading()
+        isLoading = uiState.value.isLoading
     ) {
         Column(
             horizontalAlignment = Alignment.Start,
@@ -70,10 +73,10 @@ fun RegistrationScreen(
                     .alpha(0.7F)
             )
             LoginFlowInputField(
-                isEnabled = !viewModel.isLoading(),
-                textFieldValue = viewModel.getName(),
-                isError = viewModel.getNameError() != null,
-                errorValue = viewModel.getNameError()?.asString(),
+                isEnabled = !uiState.value.isLoading,
+                textFieldValue = uiState.value.name,
+                isError = uiState.value.nameError != null,
+                errorValue = uiState.value.nameError?.asString(),
                 label = stringResource(id = R.string.name),
                 onValueChanged = { viewModel.onNameTextChanged(it) },
                 imeAction = ImeAction.Next,
@@ -83,10 +86,10 @@ fun RegistrationScreen(
                 },
             )
             LoginFlowInputField(
-                isEnabled = !viewModel.isLoading(),
-                textFieldValue = viewModel.getLogin(),
-                isError = viewModel.getLoginError() != null,
-                errorValue = viewModel.getLoginError()?.asString(),
+                isEnabled = !uiState.value.isLoading,
+                textFieldValue = uiState.value.login,
+                isError = uiState.value.loginError != null,
+                errorValue = uiState.value.loginError?.asString(),
                 label = stringResource(id = R.string.email_address),
                 onValueChanged = { viewModel.onLoginTextChanged(it) },
                 imeAction = ImeAction.Next,
@@ -97,10 +100,10 @@ fun RegistrationScreen(
                 focusRequester = emailFocusRequester,
             )
             LoginFlowInputField(
-                isEnabled = !viewModel.isLoading(),
-                textFieldValue = viewModel.getPassword(),
-                isError = viewModel.getPasswordError() != null,
-                errorValue = viewModel.getPasswordError()?.asString(),
+                isEnabled = !uiState.value.isLoading,
+                textFieldValue = uiState.value.password,
+                isError = uiState.value.passwordError != null,
+                errorValue = uiState.value.passwordError?.asString(),
                 label = stringResource(id = R.string.password),
                 onValueChanged = { viewModel.onPasswordTextChanged(it) },
                 imeAction = ImeAction.Done,
