@@ -13,7 +13,7 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 @Composable
 fun SplashScreen(
     viewModel: SplashScreenViewModel,
-    navigator: DestinationsNavigator
+    navigator: DestinationsNavigator,
 ) {
     LaunchedEffect(key1 = true, block = {
         viewModel.onLaunchSplashScreen(

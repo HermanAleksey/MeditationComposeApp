@@ -7,39 +7,23 @@ import android.view.Window
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.*
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.graphics.Color
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.meditationcomposeapp.presentation.screens.NavGraphs
+import com.example.meditationcomposeapp.presentation.common_composables.Toolbar
+import com.example.meditationcomposeapp.presentation.navigation.MeditationDestinationsNavHost
+import com.example.meditationcomposeapp.presentation.navigation.getDestinationWrapper
 import com.example.meditationcomposeapp.presentation.screens.destinations.*
-import com.example.meditationcomposeapp.presentation.screens.login_flow.enter.EnterScreenViewModel
-import com.example.meditationcomposeapp.presentation.screens.login_flow.enter_code.EnterCodeScreenViewModel
-import com.example.meditationcomposeapp.presentation.screens.login_flow.enter_login.EnterLoginScreenViewModel
-import com.example.meditationcomposeapp.presentation.screens.login_flow.login.LoginScreenViewModel
-import com.example.meditationcomposeapp.presentation.screens.login_flow.new_password.NewPasswordScreenViewModel
-import com.example.meditationcomposeapp.presentation.screens.login_flow.registration.RegistrationScreenViewModel
-import com.example.meditationcomposeapp.presentation.screens.main_flow.beer_list.BeerListScreenViewModel
 import com.example.meditationcomposeapp.presentation.screens.main_flow.bottom_nav_bar.BottomBar
-import com.example.meditationcomposeapp.presentation.screens.main_flow.main_screen.MainScreenViewModel
-import com.example.meditationcomposeapp.presentation.screens.main_flow.shuffle_puzzle.ShufflePuzzleScreenViewModel
-import com.example.meditationcomposeapp.presentation.screens.main_flow.test_screens.TestScreenViewModel
-import com.example.meditationcomposeapp.presentation.screens.splash.SplashScreenViewModel
 import com.example.meditationcomposeapp.ui.theme.MeditationComposeAppTheme
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
-import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
-import com.ramcosta.composedestinations.DestinationsNavHost
-import com.ramcosta.composedestinations.animations.defaults.RootNavGraphDefaultAnimations
-import com.ramcosta.composedestinations.animations.rememberAnimatedNavHostEngine
-import com.ramcosta.composedestinations.navigation.dependency
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -55,7 +39,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@OptIn(ExperimentalAnimationApi::class, ExperimentalMaterialNavigationApi::class)
+@OptIn(ExperimentalAnimationApi::class)
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun MyApp(windows: Window) {
@@ -64,57 +48,39 @@ fun MyApp(windows: Window) {
     val screenWidth = displayMetrics.widthPixels
 
     val navController = rememberAnimatedNavController()
+    val systemUiController = rememberSystemUiController()
 
-    val statusBarColor = MaterialTheme.colors.background.toArgb()
-    fun setStatusBarColor(color: Int) {
-        windows.statusBarColor = color
+
+    var _bottomBarIsVisible by remember {
+        mutableStateOf(false)
+    }
+    var _toolbarIsVisible by remember {
+        mutableStateOf(false)
+    }
+
+    navController.addOnDestinationChangedListener { controller, destination, args ->
+        destination.getDestinationWrapper()?.let {
+            val toolbarShouldBeVisible = it.toolbarVisible
+            val bottomBarShouldBeVisible = it.bottomBarVisible
+            if (_toolbarIsVisible != toolbarShouldBeVisible) {
+                _toolbarIsVisible = toolbarShouldBeVisible
+            }
+            if (_bottomBarIsVisible != bottomBarShouldBeVisible) {
+                _bottomBarIsVisible = toolbarShouldBeVisible
+            }
+        }
     }
 
     MeditationComposeAppTheme(false) {
-        windows.statusBarColor = statusBarColor
-        windows.navigationBarColor = MaterialTheme.colors.background.toArgb()
-        var bottomBarIsVisible by remember {
-            mutableStateOf(false)
-        }
-
-        fun setBottomBarVisibility(isVisible: Boolean) {
-            bottomBarIsVisible = isVisible
-        }
-
-        val navHostEngine = rememberAnimatedNavHostEngine(
-            navHostContentAlignment = Alignment.Center,
-            rootDefaultAnimations = RootNavGraphDefaultAnimations(
-                enterTransition = {
-                    slideInHorizontally(
-                        initialOffsetX = { -screenWidth },
-                        animationSpec = tween(700)
-                    )
-                },
-                exitTransition = {
-                    slideOutHorizontally(
-                        targetOffsetX = { screenWidth },
-                        animationSpec = tween(700)
-                    )
-                },
-                popEnterTransition = {
-                    slideInHorizontally(
-                        initialOffsetX = { screenWidth },
-                        animationSpec = tween(700)
-                    )
-                },
-                popExitTransition = {
-                    slideOutHorizontally(
-                        targetOffsetX = { -screenWidth },
-                        animationSpec = tween(700)
-                    )
-                },
-            )
-        )
-
+        systemUiController.setSystemBarsColor(MaterialTheme.colors.background)
         Scaffold(
+            topBar = {
+                if (_toolbarIsVisible)
+                    Toolbar()
+            },
             bottomBar = {
                 AnimatedVisibility(
-                    visible = bottomBarIsVisible,
+                    visible = _bottomBarIsVisible,
                     enter = slideInVertically(
                         initialOffsetY = { it }
                     ),
@@ -128,26 +94,9 @@ fun MyApp(windows: Window) {
             modifier = Modifier.fillMaxSize()
         ) { innerPadding ->
             Box(modifier = Modifier.padding(innerPadding)) {
-                DestinationsNavHost(
-                    navGraph = NavGraphs.root,
+                MeditationDestinationsNavHost(
                     navController = navController,
-                    engine = navHostEngine,
-                    dependenciesContainerBuilder = {
-                        dependency(SplashScreenDestination) { hiltViewModel<SplashScreenViewModel>() }
-                        dependency(EnterScreenDestination) { ::setBottomBarVisibility }
-                        dependency(EnterScreenDestination) { hiltViewModel<EnterScreenViewModel>() }
-                        dependency(EnterCodeScreenDestination) { hiltViewModel<EnterCodeScreenViewModel>() }
-                        dependency(EnterLoginScreenDestination) { hiltViewModel<EnterLoginScreenViewModel>() }
-                        dependency(LoginScreenDestination) { hiltViewModel<LoginScreenViewModel>() }
-                        dependency(NewPasswordScreenDestination) { hiltViewModel<NewPasswordScreenViewModel>() }
-                        dependency(RegistrationScreenDestination) { hiltViewModel<RegistrationScreenViewModel>() }
-
-                        dependency(MainScreenDestination) { hiltViewModel<MainScreenViewModel>() }
-                        dependency(MainScreenDestination) { ::setBottomBarVisibility }
-                        dependency(BeerListScreenDestination) { hiltViewModel<BeerListScreenViewModel>() }
-                        dependency(ShufflePuzzleScreenDestination) { hiltViewModel<ShufflePuzzleScreenViewModel>() }
-                        dependency(TestScreenDestination) { hiltViewModel<TestScreenViewModel>() }
-                    }
+                    screenWidth = screenWidth
                 )
             }
         }

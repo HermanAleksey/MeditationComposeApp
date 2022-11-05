@@ -27,11 +27,9 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 @Destination
 @Composable
 fun EnterScreen(
-    setBottomNavBarVisible: (Boolean) -> Unit,
     viewModel: EnterScreenViewModel,
     navigator: DestinationsNavigator,
 ) {
-    setBottomNavBarVisible(false)
     val activity = LocalContext.current as? Activity
     BackHandler(enabled = true, onBack = {
         activity?.finish()

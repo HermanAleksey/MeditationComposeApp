@@ -16,7 +16,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.meditationcomposeapp.R
 import com.example.meditationcomposeapp.presentation.common_composables.ColorBackground
-import com.example.meditationcomposeapp.presentation.common_composables.Toolbar
 import com.example.meditationcomposeapp.presentation.screens.main_flow.main_screen.composable.MenuItem
 import com.example.meditationcomposeapp.presentation.screens.main_flow.main_screen.composable.MenuItemModel
 import com.example.meditationcomposeapp.presentation.screens.main_flow.main_screen.composable.UpdateDescriptionDialog
@@ -29,7 +28,6 @@ import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
 @Composable
 fun MainScreenPreview() {
     MainScreen(
-        setBottomNavBarVisible = {},
         viewModel = hiltViewModel(),
         navigator = EmptyDestinationsNavigator
     )
@@ -38,13 +36,11 @@ fun MainScreenPreview() {
 @Destination
 @Composable
 fun MainScreen(
-    setBottomNavBarVisible: (Boolean) -> Unit,
     viewModel: MainScreenViewModel,
     navigator: DestinationsNavigator,
 ) {
     val uiState = viewModel.uiState.collectAsState()
 
-    setBottomNavBarVisible(true)
     val activity = LocalContext.current as? Activity
     BackHandler(enabled = true, onBack = {
         activity?.finish()
@@ -53,29 +49,29 @@ fun MainScreen(
     val menuItems = getMenuItemsList(navigator)
 
     ColorBackground(color = MaterialTheme.colors.background) {
-        Column(modifier = Modifier.fillMaxSize()) {
-            Toolbar(onUpdateHistoryClick = viewModel.onUpdateHistoryClick())
-            Column(
-                modifier = Modifier.fillMaxSize()
-            ) {
-                Text(
-                    text = stringResource(id = R.string.features),
-                    style = MaterialTheme.typography.h2,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.padding(
-                        top = dimensionResource(id = R.dimen.padding_top_screen_title),
-                        start = dimensionResource(id = R.dimen.padding_horizontal_main_content)
-                    )
+        Column(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            Text(
+                text = stringResource(id = R.string.features),
+                style = MaterialTheme.typography.h2,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.padding(
+                    top = dimensionResource(id = R.dimen.padding_top_screen_title),
+                    start = dimensionResource(id = R.dimen.padding_horizontal_main_content)
                 )
-                Spacer(modifier = Modifier.padding(top = dimensionResource(id = R.dimen.padding_spacing_menu_item)))
-                MainMenu(menuItems = menuItems)
-            }
+            )
+            Spacer(modifier = Modifier.padding(top = dimensionResource(id = R.dimen.padding_spacing_menu_item)))
+            MainMenu(menuItems = menuItems)
         }
 
         if (uiState.value.updateNotesDialogVisible)
-            UpdateDescriptionDialog(updatesLog = uiState.value.updateNotesList, onBackgroundClick = {
-                viewModel.onDialogBackgroundClick()
-            })
+            UpdateDescriptionDialog(
+                updatesLog = uiState.value.updateNotesList,
+                onBackgroundClick = {
+                    viewModel.onDialogBackgroundClick()
+                }
+            )
     }
 }
 
