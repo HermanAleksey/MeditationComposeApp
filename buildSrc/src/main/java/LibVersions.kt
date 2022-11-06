@@ -35,7 +35,7 @@ object LibVersions {
     const val room_version = "2.4.3"
     const val room_coroutines_version = "2.4.3"
 
-    const val tool_build_gradle = "7.0.4"
+    const val tool_build_gradle = "7.3.1"
     const val kotlin_gradle_plugin = "1.7.10"
     const val gms_google_services = "4.3.14"
 }
