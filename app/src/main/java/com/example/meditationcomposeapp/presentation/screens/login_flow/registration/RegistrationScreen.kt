@@ -111,6 +111,7 @@ fun RegistrationScreen(
                 onKeyboardActions = {
                     focusManager.clearFocus()
                 },
+                focusRequester = passwordFocusRequester,
             )
             LoginMainButton(
                 text = stringResource(id = R.string.sign_up).toUpperCase(Locale.current),

@@ -10,6 +10,7 @@ import com.example.meditationcomposeapp.model.utils.validation.PasswordField
 import com.example.meditationcomposeapp.presentation.screens.destinations.EnterLoginScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.EnterScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.MainScreenDestination
+import com.example.meditationcomposeapp.presentation.screens.destinations.RegistrationScreenDestination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -102,7 +103,7 @@ class LoginScreenViewModel @Inject constructor(
 
     fun onSignUpClicked(navigator: DestinationsNavigator) {
         navigator.navigate(
-            EnterScreenDestination()
+            RegistrationScreenDestination()
         )
     }
 }
