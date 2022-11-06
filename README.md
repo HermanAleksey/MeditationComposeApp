@@ -48,7 +48,7 @@ Image select screen     |  Game      |     Picking image from gallery       |  P
 :-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
 <img src="https://user-images.githubusercontent.com/68656704/200193557-30c38ad4-2dca-4652-85b7-adf5ba0e538c.jpg" width="200">  | <img src="https://user-images.githubusercontent.com/68656704/200193582-d6ea2a4b-93ba-4ebe-a5e2-e0f00bfc33f0.jpg" width="200">  | <img src="https://user-images.githubusercontent.com/68656704/200193634-f14eaf17-9f6b-40c5-90ac-a23891b368c1.jpg" width="200">  | <img src="https://user-images.githubusercontent.com/68656704/200193649-e23969f5-4c0c-4342-a5cc-8c80498821bb.jpg" width="200"> 
 
-Shuffle puzzle game added. User can select one of default images, or select image from his gallery. For cropping images i used  `com.github.CanHub:Android-Image-Cropper` (pictures must be square in order for the game to look nice. The logic allows you to divide the picture not only into squares, but also any other resolutions, however, I added functions to the application itself only for sizes 3 * 3, 4 * 4 and 5 * 5.) \ 
+Shuffle puzzle game added. User can select one of default images, or select image from his gallery. For cropping images i used  `com.github.CanHub:Android-Image-Cropper` (pictures must be square in order for the game to look nice. The logic allows you to divide the picture not only into squares, but also any other resolutions, however, I added functions to the application itself only for sizes 3x3, 4x4 and 5x5.) \
 In order to access gallery - added permisions request via `accompanist`.
 
 ### Pagination with with open punk-api
