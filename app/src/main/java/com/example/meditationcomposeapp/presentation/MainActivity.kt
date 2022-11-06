@@ -14,13 +14,16 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.example.meditationcomposeapp.presentation.common_composables.Toolbar
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.meditationcomposeapp.presentation.navigation.MeditationDestinationsNavHost
 import com.example.meditationcomposeapp.presentation.navigation.getDestinationWrapper
 import com.example.meditationcomposeapp.presentation.screens.destinations.*
-import com.example.meditationcomposeapp.presentation.screens.main_flow.bottom_nav_bar.BottomBar
+import com.example.meditationcomposeapp.presentation.ui_controls.bottom_nav_bar.BottomBar
+import com.example.meditationcomposeapp.presentation.ui_controls.dialog.DialogController
+import com.example.meditationcomposeapp.presentation.ui_controls.dialog.DialogType
+import com.example.meditationcomposeapp.presentation.ui_controls.dialog.MeditationDialog
+import com.example.meditationcomposeapp.presentation.ui_controls.toolbar.Toolbar
 import com.example.meditationcomposeapp.ui.theme.MeditationComposeAppTheme
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -57,6 +60,25 @@ fun MyApp(windows: Window) {
     var _toolbarIsVisible by remember {
         mutableStateOf(false)
     }
+    var _dialogIsVisible by remember {
+        mutableStateOf(false)
+    }
+    var _dialogType: DialogType by remember {
+        mutableStateOf(
+            DialogType.EmptyDialog
+        )
+    }
+
+    val dialogController = object : DialogController {
+        override fun show(dialogType: DialogType) {
+            _dialogType = dialogType
+            _dialogIsVisible = true
+        }
+
+        override fun close() {
+            _dialogIsVisible = false
+        }
+    }
 
     navController.addOnDestinationChangedListener { controller, destination, args ->
         destination.getDestinationWrapper()?.let {
@@ -76,7 +98,10 @@ fun MyApp(windows: Window) {
         Scaffold(
             topBar = {
                 if (_toolbarIsVisible)
-                    Toolbar()
+                    Toolbar(
+                        hiltViewModel(),
+                        dialogController
+                    )
             },
             bottomBar = {
                 AnimatedVisibility(
@@ -98,6 +123,12 @@ fun MyApp(windows: Window) {
                     navController = navController,
                     screenWidth = screenWidth
                 )
+
+                if (_dialogIsVisible)
+                    MeditationDialog(
+                        onDismissRequest = { _dialogIsVisible = false },
+                        dialogType = _dialogType
+                    )
             }
         }
     }

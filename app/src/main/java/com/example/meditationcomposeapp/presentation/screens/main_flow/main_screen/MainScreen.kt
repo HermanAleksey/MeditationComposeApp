@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
@@ -18,7 +17,6 @@ import com.example.meditationcomposeapp.R
 import com.example.meditationcomposeapp.presentation.common_composables.ColorBackground
 import com.example.meditationcomposeapp.presentation.screens.main_flow.main_screen.composable.MenuItem
 import com.example.meditationcomposeapp.presentation.screens.main_flow.main_screen.composable.MenuItemModel
-import com.example.meditationcomposeapp.presentation.screens.main_flow.main_screen.composable.UpdateDescriptionDialog
 import com.example.meditationcomposeapp.presentation.screens.main_flow.main_screen.composable.getMenuItemsList
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -39,8 +37,6 @@ fun MainScreen(
     viewModel: MainScreenViewModel,
     navigator: DestinationsNavigator,
 ) {
-    val uiState = viewModel.uiState.collectAsState()
-
     val activity = LocalContext.current as? Activity
     BackHandler(enabled = true, onBack = {
         activity?.finish()
@@ -64,14 +60,6 @@ fun MainScreen(
             Spacer(modifier = Modifier.padding(top = dimensionResource(id = R.dimen.padding_spacing_menu_item)))
             MainMenu(menuItems = menuItems)
         }
-
-        if (uiState.value.updateNotesDialogVisible)
-            UpdateDescriptionDialog(
-                updatesLog = uiState.value.updateNotesList,
-                onBackgroundClick = {
-                    viewModel.onDialogBackgroundClick()
-                }
-            )
     }
 }
 

@@ -1,4 +1,4 @@
-package com.example.meditationcomposeapp.presentation.screens.main_flow.bottom_nav_bar
+package com.example.meditationcomposeapp.presentation.ui_controls.bottom_nav_bar
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*

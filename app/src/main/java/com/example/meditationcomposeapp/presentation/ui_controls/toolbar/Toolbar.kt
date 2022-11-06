@@ -1,4 +1,4 @@
-package com.example.meditationcomposeapp.presentation.common_composables
+package com.example.meditationcomposeapp.presentation.ui_controls.toolbar
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -8,18 +8,25 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Newspaper
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.meditationcomposeapp.R
+import com.example.meditationcomposeapp.presentation.ui_controls.dialog.DialogController
 
 @Composable
 fun Toolbar(
-    onUpdateHistoryClick: () -> Unit = {},
+    viewModel: ToolbarViewModel,
+    dialogController: DialogController,
 ) {
+    LaunchedEffect(key1 = Unit, block = {
+        viewModel.onLaunch(dialogController)
+    })
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -45,7 +52,9 @@ fun Toolbar(
             contentDescription = "Updates news",
             modifier = Modifier
                 .size(28.dp)
-                .clickable { onUpdateHistoryClick() },
+                .clickable {
+                    viewModel.onUpdateHistoryClick(dialogController)
+                },
             colorFilter = ColorFilter.tint(color = MaterialTheme.colors.onBackground)
         )
     }
