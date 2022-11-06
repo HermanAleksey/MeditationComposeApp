@@ -16,25 +16,51 @@ Talking about what's already been done.
 
 ### Registration flow
 
-Enter screen     |  Sing in screen  |   Main menu screen
+Splash screen              |   Enter screen            |   Sing in screen  |   Sign up screen
+:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
+<img src="https://user-images.githubusercontent.com/68656704/200169516-fd215ff2-69f5-4de0-bfb4-96d0469c70c7.jpg" width="200"> | <img src="https://user-images.githubusercontent.com/68656704/200169788-bb8f7cf7-e0b4-419b-ace6-1a2f03afbeec.jpg" width="200">| <img src="https://user-images.githubusercontent.com/68656704/200169685-e77e1e3f-6365-4663-9656-24b80dde3796.jpg" width="200"> | <img src="https://user-images.githubusercontent.com/68656704/200169651-a80d5578-8f2c-4e7e-ac35-ede031c21496.jpg" width="200"> 
+
+Password recovery screen  |   Enter email for code     |   Code input screen  
 :-------------------------:|:-------------------------:|:-------------------------:
-<img src="https://user-images.githubusercontent.com/68656704/195434222-3c4e155f-8f98-486f-af18-b1f815fb194e.jpg" width="200">| <img src="https://user-images.githubusercontent.com/68656704/195434196-65014fea-e306-4d41-ad95-d1ee071d1380.jpg" width="200"> | <img src="https://user-images.githubusercontent.com/68656704/195434439-9652dbc2-af07-4e28-86c7-701970d2bb60.jpg" width="200"> 
+<img src="https://user-images.githubusercontent.com/68656704/200169812-653e2739-0e63-43a0-9808-43269aa4173f.jpg" width="200"> | <img src="https://user-images.githubusercontent.com/68656704/200169861-94bcc669-5382-4ec3-bcce-66cd361e84c2.jpg" width="200">| <img src="https://user-images.githubusercontent.com/68656704/200169836-94a70bc1-8f81-4a30-9f7f-221c71c01f09.jpg" width="200">
+
+Implement a standard user script for entering and registering into the application.
+The most interesting part of it is the code entry screen: it implements additional logic for switching focus between cells and automatically "sending" the entered code.
 
 On the main screen implemented BottomNavigationBar. \
 Cards on main screen are drawn using Canvas, not png images.
 
+### Main screen
+
+Main screen              |   Update pop-ups            
+:-------------------------:|:-------------------------:
+<img src="https://user-images.githubusercontent.com/68656704/200170265-cb9016bd-7edc-4fe2-87c0-db058e5661f1.jpg" width="200"> |  <img src="https://user-images.githubusercontent.com/68656704/200170454-c3364eae-950d-4d47-bc42-d4e69e74a0f5.jpg" width="200">
+
+The main screen contains all the features that I implement in the application. \
+Of the interesting, you can highlight the feature cards with icons. The drawing on them is done by drawing on canvas. \
+The application has a bottom navigation bar. It has the ability to switch to the beer list and profile screens. \
+The profile screen is a dummy for now. All it contains at the moment is an logout button.
+The application database stores a history of all changes in "release" versions. When the application is updated, a dialog appears describing the changes made.
 
 ### Shuffle puzzle
 
-Default screen             |  Possibility to choose your photo  |     Puzzle itself       |  Completed puzzle
+Image select screen     |  Game      |     Picking image from gallery       |  Permission request
 :-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
-<img src="https://user-images.githubusercontent.com/68656704/195431352-4b30b7a3-8b69-4aae-8393-aab4908b40a2.jpg" width="200">  | <img src="https://user-images.githubusercontent.com/68656704/195431431-891ee2f7-5839-4f12-a570-cf57f119c432.jpg" width="200">  | <img src="https://user-images.githubusercontent.com/68656704/195431467-a892b30f-69ec-4d2b-87b8-ad004eec8133.jpg" width="200">  | <img src="https://user-images.githubusercontent.com/68656704/195431485-47cb7cc9-42f7-4028-b275-a0fe478575f5.jpg" width="200"> 
+<img src="https://user-images.githubusercontent.com/68656704/200193557-30c38ad4-2dca-4652-85b7-adf5ba0e538c.jpg" width="200">  | <img src="https://user-images.githubusercontent.com/68656704/200193582-d6ea2a4b-93ba-4ebe-a5e2-e0f00bfc33f0.jpg" width="200">  | <img src="https://user-images.githubusercontent.com/68656704/200193634-f14eaf17-9f6b-40c5-90ac-a23891b368c1.jpg" width="200">  | <img src="https://user-images.githubusercontent.com/68656704/200193649-e23969f5-4c0c-4342-a5cc-8c80498821bb.jpg" width="200"> 
 
-The ability to select your photo from the gallery and crop it to a square is implemented thanks to the open library: `com.github.CanHub:Android-Image-Cropper`
+Shuffle puzzle game added. User can select one of default images, or select image from his gallery. For cropping images i used  `com.github.CanHub:Android-Image-Cropper` (pictures must be square in order for the game to look nice. The logic allows you to divide the picture not only into squares, but also any other resolutions, however, I added functions to the application itself only for sizes 3x3, 4x4 and 5x5.) \
+In order to access gallery - added permisions request via `accompanist`.
+
+### Pagination with with open punk-api
+
+Paging list screen         |   Detailed info screen            
+:-------------------------:|:-------------------------:
+<img src="https://user-images.githubusercontent.com/68656704/200193098-d4e25705-417f-40a2-86e0-d3f8493b2a8e.jpg" width="200"> |  <img src="https://user-images.githubusercontent.com/68656704/200193111-82ff34b4-7256-459a-ac52-ee1eb2d895a0.jpg" width="200">
+
+List of beers implemented with usage of Pagination. (Used api: `https://punkapi.com/documentation/v2`) \
+On click user can open Detailed info screen. Nothing really interesting here, but in my opinion pagination is a must to know thing, so i have to add something.
 
 
-### List that displays data from open API
-
-<img src="https://user-images.githubusercontent.com/68656704/195434819-758d1611-1b29-4050-841e-54906258dcf1.jpg" width="200"> 
-
-Just list of items from open api. Implemented with usage of Pagination. Used api: `https://punkapi.com/documentation/v2`
+### What is next?
+Right now i'm working on maps. The idea is to use google maps and Room database to store markers. \
+User can create marker on map and add description and photos (perhaps in further version) to it. It is possible to add synchronization with the server, either improvised by my own, or using Firebase storage.
