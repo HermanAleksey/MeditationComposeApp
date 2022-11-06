@@ -1,8 +1,11 @@
 package com.example.meditationcomposeapp.presentation.ui_controls.bottom_nav_bar
 
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.meditationcomposeapp.presentation.screens.NavGraphs
 import com.example.meditationcomposeapp.presentation.screens.appCurrentDestinationAsState
@@ -40,7 +43,8 @@ fun RowScope.AddItem(
         icon = {
             Icon(
                 imageVector = screen.icon,
-                contentDescription = screen.description.asString()
+                contentDescription = screen.description.asString(),
+                modifier = Modifier.size(26.dp)
             )
         },
         selected = currentDestination == screen.direction,
