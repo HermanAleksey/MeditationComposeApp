@@ -15,15 +15,18 @@ import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.meditationcomposeapp.R
+import com.example.meditationcomposeapp.model.utils.resources.UiText
 
 data class MenuItemModel(
-    val title: String,
-    val painterRes: Int,
+    val title: UiText,
+    val icon: ImageVector,
     val backgroundColor: Color,
     val foregroundColor: Color,
     val onClick: () -> Unit = {},
@@ -43,18 +46,19 @@ fun MenuItem(modifier: Modifier, model: MenuItemModel) {
             Row {
                 Spacer(modifier = Modifier.width(12.dp))
                 Image(
-                    painter = painterResource(id = model.painterRes),
-                    contentDescription = "",
+                    imageVector = model.icon,
+                    contentDescription = null,
                     alignment = Alignment.BottomCenter,
                     modifier = Modifier
-                        .size(18.dp)
+                        .size(24.dp),
+                    colorFilter = ColorFilter.tint(Color.White)
                 )
             }
             Spacer(modifier = Modifier.height(4.dp))
             Row {
                 Spacer(modifier = Modifier.width(9.dp))
                 Text(
-                    text = model.title,
+                    text = model.title.asString(),
                     style = MaterialTheme.typography.body1.copy(fontSize = 20.sp),
                 )
             }
