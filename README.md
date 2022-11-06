@@ -16,12 +16,25 @@ Talking about what's already been done.
 
 ### Registration flow
 
-Enter screen     |  Sing in screen  |   Main menu screen
+Splash screen              |   Enter screen            |   Sing in screen  |   Sign up screen
+:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
+<img src="https://user-images.githubusercontent.com/68656704/200169516-fd215ff2-69f5-4de0-bfb4-96d0469c70c7.jpg" width="200"> | <img src="https://user-images.githubusercontent.com/68656704/200169788-bb8f7cf7-e0b4-419b-ace6-1a2f03afbeec.jpg" width="200">| <img src="https://user-images.githubusercontent.com/68656704/200169685-e77e1e3f-6365-4663-9656-24b80dde3796.jpg" width="200"> | <img src="https://user-images.githubusercontent.com/68656704/200169651-a80d5578-8f2c-4e7e-ac35-ede031c21496.jpg" width="200"> 
+
+Password recovery screen  |   Enter email for code     |   Code input screen  
 :-------------------------:|:-------------------------:|:-------------------------:
-<img src="https://user-images.githubusercontent.com/68656704/195434222-3c4e155f-8f98-486f-af18-b1f815fb194e.jpg" width="200">| <img src="https://user-images.githubusercontent.com/68656704/195434196-65014fea-e306-4d41-ad95-d1ee071d1380.jpg" width="200"> | <img src="https://user-images.githubusercontent.com/68656704/195434439-9652dbc2-af07-4e28-86c7-701970d2bb60.jpg" width="200"> 
+<img src="https://user-images.githubusercontent.com/68656704/200169812-653e2739-0e63-43a0-9808-43269aa4173f.jpg" width="200"> | <img src="https://user-images.githubusercontent.com/68656704/200169861-94bcc669-5382-4ec3-bcce-66cd361e84c2.jpg" width="200">| <img src="https://user-images.githubusercontent.com/68656704/200169836-94a70bc1-8f81-4a30-9f7f-221c71c01f09.jpg" width="200">
+
+Implement a standard user script for entering and registering into the application.
+The most interesting part of it is the code entry screen: it implements additional logic for switching focus between cells and automatically "sending" the entered code.
 
 On the main screen implemented BottomNavigationBar. \
 Cards on main screen are drawn using Canvas, not png images.
+
+### Main screen
+
+Main screen              |   Update pop-ups            |   q  |   q
+:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
+<img src="https://user-images.githubusercontent.com/68656704/200170265-cb9016bd-7edc-4fe2-87c0-db058e5661f1.jpg" width="200">
 
 
 ### Shuffle puzzle
