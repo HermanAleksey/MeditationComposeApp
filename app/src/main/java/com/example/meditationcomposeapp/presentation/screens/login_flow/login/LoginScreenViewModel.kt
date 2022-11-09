@@ -3,12 +3,12 @@ package com.example.meditationcomposeapp.presentation.screens.login_flow.login
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.meditationcomposeapp.data_source.data_store.UserDataStore
+import com.example.meditationcomposeapp.data_source.data_store.UserDataStoreImpl
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.usecase.authentication.LoginUseCase
 import com.example.meditationcomposeapp.model.utils.validation.LoginField
 import com.example.meditationcomposeapp.model.utils.validation.PasswordField
 import com.example.meditationcomposeapp.presentation.screens.destinations.EnterLoginScreenDestination
-import com.example.meditationcomposeapp.presentation.screens.destinations.EnterScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.MainScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.RegistrationScreenDestination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
