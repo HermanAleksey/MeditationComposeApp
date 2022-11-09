@@ -151,8 +151,7 @@ dependencies {
 
     //testing
     testImplementation(Dependencies.junit)
-    androidTestImplementation(Dependencies.test_ext_junit)
-    androidTestImplementation(Dependencies.espresso_core)
-    androidTestImplementation(Dependencies.ui_test_junit)
-    debugImplementation(Dependencies.ui_tooling)
+    testImplementation (Dependencies.mockito)
+    testImplementation (Dependencies.mockito_kotlin)
+    androidTestImplementation(Dependencies.mockito_android)
 }

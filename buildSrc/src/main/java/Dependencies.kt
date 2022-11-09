@@ -75,10 +75,8 @@ object Dependencies {
     const val room_compiler = "androidx.room:room-compiler:${LibVersions.room_version}"
 
     //testing
-    const val junit = "junit:junit:4.13.2"
-    const val test_ext_junit = "androidx.test.ext:junit:1.1.3"
-    const val espresso_core = "androidx.test.espresso:espresso-core:3.4.0"
-    const val ui_test_junit = "androidx.compose.ui:ui-test-junit4:${LibVersions.compose_version}"
-    const val ui_tooling = "androidx.compose.ui:ui-tooling:${LibVersions.compose_version}"
-
+    const val junit = "junit:junit:${LibVersions.junit}"
+    const val mockito = "org.mockito:mockito-core:${LibVersions.mockito}"
+    const val mockito_kotlin = "org.mockito.kotlin:mockito-kotlin:${LibVersions.mockito_kotlin}"
+    const val mockito_android = "org.mockito:mockito-android:${LibVersions.mockito_android}"
 }
