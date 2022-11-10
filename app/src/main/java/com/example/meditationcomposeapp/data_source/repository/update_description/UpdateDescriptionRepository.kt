@@ -1,6 +1,6 @@
 package com.example.meditationcomposeapp.data_source.repository.update_description
 
-import com.example.meditationcomposeapp.model.entity.updates_log.UpdateDescriptionModel
+import com.example.meditationcomposeapp.model.entity.login_flow.UpdateDescriptionModel
 
 interface UpdateDescriptionRepository {
 

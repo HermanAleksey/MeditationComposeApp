@@ -56,23 +56,4 @@ class PunkRepositoryImpl @Inject constructor(
     ): List<Beer> = punkApi.getBeers(page, pageSize).map {
         beerMapper.mapFrom(it)
     }
-
-//        {
-//        return flow {
-//            emit(NetworkResponse.Loading(true))
-//            try {
-//                val response = punkApi.getBeers(page, pageSize).map {
-//                    beerMapper.mapFrom(it)
-//                }
-//                emit(NetworkResponse.Success(data = response))
-//            } catch (e: IOException) {
-//                e.printStackTrace()
-//                emit(NetworkResponse.Failure(error = e.message))
-//            } catch (e: HttpException) {
-//                e.printStackTrace()
-//                emit(NetworkResponse.Failure(error = e.message))
-//            }
-//            emit(NetworkResponse.Loading(false))
-//        }
-//    }
 }

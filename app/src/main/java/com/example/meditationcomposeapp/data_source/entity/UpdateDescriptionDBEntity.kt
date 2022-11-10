@@ -3,11 +3,10 @@ package com.example.meditationcomposeapp.data_source.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.meditationcomposeapp.model.entity.updates_log.UpdateDescriptionModel
+import com.example.meditationcomposeapp.model.entity.login_flow.UpdateDescriptionModel
 
 @Entity(tableName = "updates_log")
 data class UpdateDescriptionDBEntity(
-//    @PrimaryKey(autoGenerate = true) val id: Long,
     @PrimaryKey @ColumnInfo(name = "version_name") val versionName: String,
     @ColumnInfo(name = "release_time") val updateReleaseTime: Long,
     @ColumnInfo(name = "title") val updateTitle: String,
