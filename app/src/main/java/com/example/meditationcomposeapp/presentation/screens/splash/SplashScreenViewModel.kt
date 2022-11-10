@@ -4,14 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.meditationcomposeapp.BuildConfig
 import com.example.meditationcomposeapp.data_source.data_store.UserDataStore
-import com.example.meditationcomposeapp.data_source.data_store.UserDataStoreImpl
 import com.example.meditationcomposeapp.data_source.repository.update_description.UpdateDescriptionRepository
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.usecase.authentication.LoginUseCase
-import com.example.meditationcomposeapp.presentation.screens.destinations.EnterScreenDestination
-import com.example.meditationcomposeapp.presentation.screens.destinations.MainScreenDestination
 import com.example.meditationcomposeapp.presentation.utils.getVersionDescriptions
-import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -25,7 +21,8 @@ class SplashScreenViewModel @Inject constructor(
 ) : ViewModel() {
 
     fun onLaunchSplashScreen(
-        navigator: DestinationsNavigator,
+        navigateToMainScreen: () -> Unit,
+        navigateToLoginScreen: () -> Unit,
     ) {
         viewModelScope.launch {
             checkLastUpdateVersion()
@@ -34,33 +31,29 @@ class SplashScreenViewModel @Inject constructor(
             val password = userDataStore.readPassword().first()
 
             if (login.isNotEmpty() && password.isNotEmpty()) {
-                logIn(login, password, navigator)
+                logIn(login, password, navigateToMainScreen, navigateToLoginScreen)
             } else {
-                with(navigator) {
-                    navigate(
-                        EnterScreenDestination()
-                    )
-                }
+                navigateToLoginScreen()
             }
         }
     }
 
-    private suspend fun logIn(login: String, password: String, navigator: DestinationsNavigator) {
+    private suspend fun logIn(
+        login: String,
+        password: String,
+        navigateToMainScreen: () -> Unit,
+        navigateToLoginScreen: () -> Unit,
+    ) {
         loginUseCase(login, password).collect {
             when (it) {
                 is NetworkResponse.Success<*> -> {
-                    with(navigator) {
-                        navigate(
-                            MainScreenDestination()
-                        )
-                    }
+                    navigateToMainScreen()
                 }
                 is NetworkResponse.Failure<*> -> {
-                    //on error show pop-up
+                    navigateToLoginScreen()
                 }
                 is NetworkResponse.Loading<*> -> {
-                    //todo splash screen loading
-//                    setLoading(it.isLoading)
+                    //do nothing
                 }
             }
         }
@@ -85,25 +78,24 @@ class SplashScreenViewModel @Inject constructor(
         userDataStore.writeLastUpdateVersion(currentVersionName)
     }
 
-    fun test_1() = 1
+    private fun String.compareToVersion(versionName: String): COMPARATION_RESULT {
+        val version1 = this.split(".")
+        val version2 = versionName.split(".")
+
+        if (version1[0] > version2[0]) return COMPARATION_RESULT.BIGGER
+        if (version1[0] < version2[0]) return COMPARATION_RESULT.SMALLER
+
+        if (version1[1] > version2[1]) return COMPARATION_RESULT.BIGGER
+        if (version1[1] < version2[1]) return COMPARATION_RESULT.SMALLER
+
+        if (version1[2] > version2[2]) return COMPARATION_RESULT.BIGGER
+        if (version1[2] < version2[2]) return COMPARATION_RESULT.SMALLER
+
+        return COMPARATION_RESULT.EQUALS
+    }
+
+    enum class COMPARATION_RESULT {
+        BIGGER, SMALLER, EQUALS
+    }
 }
 
-private fun String.compareToVersion(versionName: String): COMPARATION_RESULT {
-    val version1 = this.split(".")
-    val version2 = versionName.split(".")
-
-    if (version1[0] > version2[0]) return COMPARATION_RESULT.BIGGER
-    if (version1[0] < version2[0]) return COMPARATION_RESULT.SMALLER
-
-    if (version1[1] > version2[1]) return COMPARATION_RESULT.BIGGER
-    if (version1[1] < version2[1]) return COMPARATION_RESULT.SMALLER
-
-    if (version1[2] > version2[2]) return COMPARATION_RESULT.BIGGER
-    if (version1[2] < version2[2]) return COMPARATION_RESULT.SMALLER
-
-    return COMPARATION_RESULT.EQUALS
-}
-
-enum class COMPARATION_RESULT {
-    BIGGER, SMALLER, EQUALS
-}

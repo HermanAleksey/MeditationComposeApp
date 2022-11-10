@@ -115,6 +115,8 @@ dependencies {
     //navigation
     implementation(Dependencies.navigation_compose)
     implementation(Dependencies.raamcosta_compose_destinations_anim_core)
+    testImplementation("org.testng:testng:6.9.6")
+    testImplementation("org.testng:testng:6.9.6")
     ksp(Dependencies.raamcosta_compose_destinations_ksp)
 
     //splash screen
@@ -152,6 +154,7 @@ dependencies {
     //testing
     testImplementation(Dependencies.junit)
     testImplementation (Dependencies.mockito)
+    testImplementation (Dependencies.coroutines_test)
     testImplementation (Dependencies.mockito_kotlin)
     androidTestImplementation(Dependencies.mockito_android)
 }

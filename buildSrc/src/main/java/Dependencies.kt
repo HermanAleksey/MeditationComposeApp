@@ -76,6 +76,7 @@ object Dependencies {
 
     //testing
     const val junit = "junit:junit:${LibVersions.junit}"
+    const val coroutines_test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${LibVersions.coroutines_test}"
     const val mockito = "org.mockito:mockito-core:${LibVersions.mockito}"
     const val mockito_kotlin = "org.mockito.kotlin:mockito-kotlin:${LibVersions.mockito_kotlin}"
     const val mockito_android = "org.mockito:mockito-android:${LibVersions.mockito_android}"

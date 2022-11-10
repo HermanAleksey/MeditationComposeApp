@@ -40,6 +40,7 @@ object LibVersions {
     const val gms_google_services = "4.3.14"
 
     const val junit = "4.13.2"
+    const val coroutines_test = "1.6.3"
     const val mockito = "4.8.1"
     const val mockito_kotlin = "4.0.0"
     const val mockito_android = "4.8.1"
