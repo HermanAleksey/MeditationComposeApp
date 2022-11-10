@@ -15,7 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.meditationcomposeapp.R
-import com.example.meditationcomposeapp.model.entity.updates_log.UpdateDescriptionModel
+import com.example.meditationcomposeapp.model.entity.login_flow.UpdateDescriptionModel
 import com.example.meditationcomposeapp.presentation.utils.DateFormat
 import com.example.meditationcomposeapp.presentation.utils.formatMillisIntoDate
 import com.example.meditationcomposeapp.ui.theme.MeditationComposeAppTheme

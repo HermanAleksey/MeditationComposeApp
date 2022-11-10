@@ -11,7 +11,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.example.meditationcomposeapp.R
-import com.example.meditationcomposeapp.model.entity.updates_log.UpdateDescriptionModel
+import com.example.meditationcomposeapp.model.entity.login_flow.UpdateDescriptionModel
 import com.example.meditationcomposeapp.presentation.dialogs.types.UpdateDescriptionDialog
 
 sealed class DialogType {

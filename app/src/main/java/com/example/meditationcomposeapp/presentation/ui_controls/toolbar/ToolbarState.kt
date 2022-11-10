@@ -1,7 +1,7 @@
 package com.example.meditationcomposeapp.presentation.ui_controls.toolbar
 
 import androidx.compose.runtime.Stable
-import com.example.meditationcomposeapp.model.entity.updates_log.UpdateDescriptionModel
+import com.example.meditationcomposeapp.model.entity.login_flow.UpdateDescriptionModel
 
 @Stable
 data class ToolbarState(

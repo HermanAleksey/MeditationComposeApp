@@ -12,6 +12,11 @@ import dagger.hilt.components.SingletonComponent
 abstract class UseCaseModule {
 
     @Binds
+    abstract fun provideGetAppUpdatesHistory(
+        implementation: GetAppUpdatesHistoryUseCaseImpl
+    ): GetAppUpdatesHistoryUseCase
+
+    @Binds
     abstract fun provideLoginUseCase(
         implementation: LoginUseCaseImpl
     ): LoginUseCase

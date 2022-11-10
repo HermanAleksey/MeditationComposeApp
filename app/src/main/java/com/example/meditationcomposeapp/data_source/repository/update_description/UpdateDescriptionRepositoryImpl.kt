@@ -3,7 +3,7 @@ package com.example.meditationcomposeapp.data_source.repository.update_descripti
 import com.example.meditationcomposeapp.data_source.database.dao.UpdateDescriptionDao
 import com.example.meditationcomposeapp.data_source.entity.toDbEntity
 import com.example.meditationcomposeapp.data_source.entity.toUiModel
-import com.example.meditationcomposeapp.model.entity.updates_log.UpdateDescriptionModel
+import com.example.meditationcomposeapp.model.entity.login_flow.UpdateDescriptionModel
 import javax.inject.Inject
 
 class UpdateDescriptionRepositoryImpl @Inject constructor(

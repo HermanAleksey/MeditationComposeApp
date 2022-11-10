@@ -2,6 +2,7 @@ package com.example.meditationcomposeapp.data_source.network
 
 import com.example.meditationcomposeapp.data_source.entity.LoginUserResponse
 import com.example.meditationcomposeapp.data_source.entity.RegistrationRequest
+import com.example.meditationcomposeapp.data_source.entity.UpdateDescriptionResponse
 import com.example.meditationcomposeapp.model.entity.login_flow.SuccessInfo
 import retrofit2.http.Body
 import retrofit2.http.Field
@@ -37,4 +38,9 @@ interface AuthenticationApi {
         @Field("login") login: String,
         @Body newPassword: String
     ): SuccessInfo
+
+    @GET("updates")
+    suspend fun getAppUpdatesHistory(
+        @Field("start") startFromVersion: String,
+    ): List<UpdateDescriptionResponse>
 }
