@@ -10,10 +10,6 @@ import com.example.meditationcomposeapp.model.entity.login_flow.CompareResult
 import com.example.meditationcomposeapp.model.entity.login_flow.toVersion
 import com.example.meditationcomposeapp.model.usecase.authentication.GetAppUpdatesHistoryUseCase
 import com.example.meditationcomposeapp.model.usecase.authentication.LoginUseCase
-import com.example.meditationcomposeapp.presentation.screens.destinations.EnterScreenDestination
-import com.example.meditationcomposeapp.presentation.screens.destinations.MainScreenDestination
-import com.ramcosta.composedestinations.navigation.DestinationsNavigator
-import com.example.meditationcomposeapp.presentation.utils.getVersionDescriptions
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -73,7 +69,7 @@ class SplashScreenViewModel @Inject constructor(
         if (lastInstalledVersion.toVersion()
                 .compare(currentVersionName.toVersion()) == CompareResult.EQUALS
         ) return
-
+        
         getAppUpdatesHistoryUseCase(lastInstalledVersion)
             .collect {
                 if (it is NetworkResponse.Success) {

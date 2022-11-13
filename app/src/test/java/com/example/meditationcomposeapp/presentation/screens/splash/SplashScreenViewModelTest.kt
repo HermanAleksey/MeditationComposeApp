@@ -1,9 +1,12 @@
 package com.example.meditationcomposeapp.presentation.screens.splash
 
+import com.example.meditationcomposeapp.BuildConfig
 import com.example.meditationcomposeapp.FakeObjects
 import com.example.meditationcomposeapp.data_source.data_store.UserDataStore
 import com.example.meditationcomposeapp.data_source.repository.update_description.UpdateDescriptionRepository
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
+import com.example.meditationcomposeapp.model.entity.login_flow.UpdateDescriptionModel
+import com.example.meditationcomposeapp.model.usecase.authentication.GetAppUpdatesHistoryUseCase
 import com.example.meditationcomposeapp.model.usecase.authentication.LoginUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -17,6 +20,8 @@ import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import org.mockito.junit.MockitoJUnitRunner
+import org.mockito.kotlin.never
+import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 
 @RunWith(MockitoJUnitRunner::class)
@@ -35,6 +40,9 @@ class SplashScreenViewModelTest {
     @Mock
     private lateinit var updateDescriptionRepository: UpdateDescriptionRepository
 
+    @Mock
+    private lateinit var getAppUpdatesHistoryUseCase: GetAppUpdatesHistoryUseCase
+
     private lateinit var viewModel: SplashScreenViewModel
 
     @Before
@@ -43,10 +51,11 @@ class SplashScreenViewModelTest {
 
         MockitoAnnotations.openMocks(this)
         viewModel = SplashScreenViewModel(
-            userDataStore, loginUseCase, updateDescriptionRepository
+            userDataStore,
+            loginUseCase,
+            updateDescriptionRepository,
+            getAppUpdatesHistoryUseCase,
         )
-
-        whenever(userDataStore.readLastUpdateVersion()).thenReturn(flow { emit("1.0.0") })
     }
 
     @After
@@ -62,6 +71,14 @@ class SplashScreenViewModelTest {
             var mainScreenWasLaunched = false
             var loginScreenWasLaunched = false
 
+            whenever(userDataStore.readLastUpdateVersion()).thenReturn(flow { emit("0.0.1") })
+            whenever(getAppUpdatesHistoryUseCase(anyString())).thenReturn(flow {
+                emit(
+                    NetworkResponse.Failure(
+                        error = null
+                    )
+                )
+            })
             whenever(loginUseCase(anyString(), anyString()))
                 .thenReturn(flow {
                     emit(
@@ -93,6 +110,14 @@ class SplashScreenViewModelTest {
             var mainScreenWasLaunched = false
             var loginScreenWasLaunched = false
 
+            whenever(userDataStore.readLastUpdateVersion()).thenReturn(flow { emit("0.0.1") })
+            whenever(getAppUpdatesHistoryUseCase(anyString())).thenReturn(flow {
+                emit(
+                    NetworkResponse.Failure(
+                        error = null
+                    )
+                )
+            })
             whenever(loginUseCase(anyString(), anyString()))
                 .thenReturn(flow {
                     emit(
@@ -122,6 +147,14 @@ class SplashScreenViewModelTest {
             var mainScreenWasLaunched = false
             var loginScreenWasLaunched = false
 
+            whenever(userDataStore.readLastUpdateVersion()).thenReturn(flow { emit("0.0.1") })
+            whenever(getAppUpdatesHistoryUseCase(anyString())).thenReturn(flow {
+                emit(
+                    NetworkResponse.Failure(
+                        error = null
+                    )
+                )
+            })
             whenever(userDataStore.readLogin()).thenReturn(flow { emit(login) })
             whenever(userDataStore.readPassword()).thenReturn(flow { emit(password) })
 
@@ -135,5 +168,84 @@ class SplashScreenViewModelTest {
 
             assert(!mainScreenWasLaunched)
             assert(loginScreenWasLaunched)
+        }
+
+    @Test
+    fun `checkLastUpdateVersion, is newest version, don't request update info`() {
+        viewModel.onLaunchSplashScreen({ }, {})
+
+        verify(getAppUpdatesHistoryUseCase, never()).invoke(anyString())
+    }
+
+    @Test
+    fun `checkLastUpdateVersion, not newest version, no new versions info, insert new updates info into db`() =
+        scope.runTest {
+            val installedVersion = "0.0.1"
+            whenever(userDataStore.readLastUpdateVersion()).thenReturn(
+                flow {
+                    emit(installedVersion)
+                }
+            )
+            whenever(getAppUpdatesHistoryUseCase.invoke(anyString())).thenReturn(
+                flow {
+                    emit(
+                        NetworkResponse.Success(
+                            listOf()
+                        )
+                    )
+                }
+            )
+            whenever(userDataStore.readLogin()).thenReturn(flow { emit("login") })
+            whenever(userDataStore.readPassword()).thenReturn(flow { emit("password") })
+            whenever(loginUseCase(anyString(), anyString()))
+                .thenReturn(flow {
+                    emit(
+                        NetworkResponse.Failure(data = null, error = "")
+                    )
+                })
+
+            viewModel.onLaunchSplashScreen({}, {})
+
+            advanceUntilIdle()
+
+            verify(userDataStore).writeLastUpdateVersion(BuildConfig.VERSION_NAME)
+        }
+
+    @Test
+    fun `checkLastUpdateVersion, not newest version, add new versions info into db`() =
+        scope.runTest {
+            val installedVersion = "0.0.1"
+            val updates = listOf(
+                FakeObjects.getFakeUpdateDescriptionModel()
+            )
+
+            whenever(userDataStore.readLastUpdateVersion()).thenReturn(
+                flow {
+                    emit(installedVersion)
+                }
+            )
+            whenever(getAppUpdatesHistoryUseCase.invoke(anyString())).thenReturn(
+                flow {
+                    emit(
+                        NetworkResponse.Success(
+                            updates
+                        )
+                    )
+                }
+            )
+            whenever(userDataStore.readLogin()).thenReturn(flow { emit("login") })
+            whenever(userDataStore.readPassword()).thenReturn(flow { emit("password") })
+            whenever(loginUseCase(anyString(), anyString()))
+                .thenReturn(flow {
+                    emit(
+                        NetworkResponse.Failure(data = null, error = "")
+                    )
+                })
+
+            viewModel.onLaunchSplashScreen({}, {})
+
+            advanceUntilIdle()
+
+            verify(updateDescriptionRepository).insertAll(*updates.toTypedArray())
         }
 }
