@@ -1,11 +1,11 @@
 package com.example.meditationcomposeapp.presentation.screens.splash
 
 import com.example.meditationcomposeapp.BuildConfig
+import com.example.meditationcomposeapp.CoroutinesTestRule
 import com.example.meditationcomposeapp.FakeObjects
 import com.example.meditationcomposeapp.data_source.data_store.UserDataStore
 import com.example.meditationcomposeapp.data_source.repository.update_description.UpdateDescriptionRepository
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
-import com.example.meditationcomposeapp.model.entity.login_flow.UpdateDescriptionModel
 import com.example.meditationcomposeapp.model.usecase.authentication.GetAppUpdatesHistoryUseCase
 import com.example.meditationcomposeapp.model.usecase.authentication.LoginUseCase
 import kotlinx.coroutines.Dispatchers
@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.*
 import org.junit.After
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.anyString
@@ -28,8 +29,9 @@ import org.mockito.kotlin.whenever
 @OptIn(ExperimentalCoroutinesApi::class)
 class SplashScreenViewModelTest {
 
-    private val dispatcher = StandardTestDispatcher()
-    private val scope = TestScope(dispatcher)
+    @ExperimentalCoroutinesApi
+    @get:Rule
+    var rule = CoroutinesTestRule()
 
     @Mock
     private lateinit var userDataStore: UserDataStore
@@ -47,9 +49,6 @@ class SplashScreenViewModelTest {
 
     @Before
     fun setup() {
-        Dispatchers.setMain(dispatcher)
-
-        MockitoAnnotations.openMocks(this)
         viewModel = SplashScreenViewModel(
             userDataStore,
             loginUseCase,
@@ -58,14 +57,9 @@ class SplashScreenViewModelTest {
         )
     }
 
-    @After
-    fun tearDown() {
-        Dispatchers.resetMain()
-    }
-
     @Test
     fun `onLaunchSplashScreen, check login and password success, logIn success, navigate to main`() =
-        scope.runTest {
+        rule.scope.runTest {
             val login = "q"
             val password = "2"
             var mainScreenWasLaunched = false
@@ -104,7 +98,7 @@ class SplashScreenViewModelTest {
 
     @Test
     fun `onLaunchSplashScreen, check login and password success, logIn fail, navigate to login`() =
-        scope.runTest {
+        rule.scope.runTest {
             val login = "q"
             val password = "2"
             var mainScreenWasLaunched = false
@@ -141,7 +135,7 @@ class SplashScreenViewModelTest {
 
     @Test
     fun `onLaunchSplashScreen, check login and password empty, navigate to login`() =
-        scope.runTest {
+        rule.scope.runTest {
             val login = ""
             val password = ""
             var mainScreenWasLaunched = false
@@ -179,7 +173,7 @@ class SplashScreenViewModelTest {
 
     @Test
     fun `checkLastUpdateVersion, not newest version, no new versions info, insert new updates info into db`() =
-        scope.runTest {
+        rule.scope.runTest {
             val installedVersion = "0.0.1"
             whenever(userDataStore.readLastUpdateVersion()).thenReturn(
                 flow {
@@ -213,7 +207,7 @@ class SplashScreenViewModelTest {
 
     @Test
     fun `checkLastUpdateVersion, not newest version, add new versions info into db`() =
-        scope.runTest {
+        rule.scope.runTest {
             val installedVersion = "0.0.1"
             val updates = listOf(
                 FakeObjects.getFakeUpdateDescriptionModel()
