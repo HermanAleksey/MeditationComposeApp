@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -25,6 +26,10 @@ class EnterCodeScreenViewModel @Inject constructor(
     private fun isCodeFullyInputted() = _uiState.value.code.all { it != EnterCodeScreenState.EMPTY_NUMBER }
 
     fun onCodeDigitChanged(index: Int, value: Int): Boolean {
+        if (index < 0 || index >= _uiState.value.code.size){
+            Timber.e("Trying to insert item in index out of code bounds")
+            return isCodeFullyInputted()
+        }
         val newCodeState = _uiState.value.code.copyOf()
         newCodeState[index] = value
 

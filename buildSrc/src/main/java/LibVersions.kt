@@ -44,4 +44,6 @@ object LibVersions {
     const val mockito = "4.8.1"
     const val mockito_kotlin = "4.0.0"
     const val mockito_android = "4.8.1"
+
+    const val timber_version = "5.0.1"
 }
