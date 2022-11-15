@@ -151,6 +151,8 @@ dependencies {
     implementation(Dependencies.room_ktx)
     kapt(Dependencies.room_compiler)
 
+    implementation(Dependencies.timber)
+
     //testing
     testImplementation(Dependencies.junit)
     testImplementation (Dependencies.mockito)

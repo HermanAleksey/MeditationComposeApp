@@ -74,6 +74,8 @@ object Dependencies {
     const val room_ktx = "androidx.room:room-ktx:${LibVersions.room_version}"
     const val room_compiler = "androidx.room:room-compiler:${LibVersions.room_version}"
 
+    const val timber = "com.jakewharton.timber:timber:${LibVersions.timber_version}"
+
     //testing
     const val junit = "junit:junit:${LibVersions.junit}"
     const val coroutines_test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${LibVersions.coroutines_test}"
