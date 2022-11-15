@@ -59,7 +59,7 @@ class SplashScreenViewModelTest {
 
     @Test
     fun `onLaunchSplashScreen, check login and password success, logIn success, navigate to main`() =
-        rule.scope.runTest {
+        runTest {
             val login = "q"
             val password = "2"
             var mainScreenWasLaunched = false
@@ -98,7 +98,7 @@ class SplashScreenViewModelTest {
 
     @Test
     fun `onLaunchSplashScreen, check login and password success, logIn fail, navigate to login`() =
-        rule.scope.runTest {
+        runTest {
             val login = "q"
             val password = "2"
             var mainScreenWasLaunched = false
@@ -135,7 +135,7 @@ class SplashScreenViewModelTest {
 
     @Test
     fun `onLaunchSplashScreen, check login and password empty, navigate to login`() =
-        rule.scope.runTest {
+        runTest {
             val login = ""
             val password = ""
             var mainScreenWasLaunched = false
@@ -173,7 +173,7 @@ class SplashScreenViewModelTest {
 
     @Test
     fun `checkLastUpdateVersion, not newest version, no new versions info, insert new updates info into db`() =
-        rule.scope.runTest {
+        runTest {
             val installedVersion = "0.0.1"
             whenever(userDataStore.readLastUpdateVersion()).thenReturn(
                 flow {
@@ -207,7 +207,7 @@ class SplashScreenViewModelTest {
 
     @Test
     fun `checkLastUpdateVersion, not newest version, add new versions info into db`() =
-        rule.scope.runTest {
+        runTest {
             val installedVersion = "0.0.1"
             val updates = listOf(
                 FakeObjects.getFakeUpdateDescriptionModel()

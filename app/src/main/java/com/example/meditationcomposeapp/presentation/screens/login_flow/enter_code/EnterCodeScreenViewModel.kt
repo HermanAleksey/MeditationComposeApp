@@ -41,19 +41,16 @@ class EnterCodeScreenViewModel @Inject constructor(
         return isCodeFullyInputted()
     }
 
-    fun onLastDigitFilled(login: String, navigator: DestinationsNavigator) {
+    fun onLastDigitFilled(
+        login: String,
+        navigateToNewPasswordScreen: () -> Unit
+    ) {
         viewModelScope.launch {
             verifyCodeUseCase.invoke(login, getCodeAsString()).collect {
                 when (it) {
                     is NetworkResponse.Success<*> -> {
                         if (it.data!!.success)
-                            navigator.navigate(
-                                route = NewPasswordScreenDestination().route,
-                                onlyIfResumed = false,
-                                builder = {
-                                    popUpTo(LoginScreenDestination().route)
-                                }
-                            )
+                            navigateToNewPasswordScreen()
                         else {
                             //displayError()
                             clearCodeInput()

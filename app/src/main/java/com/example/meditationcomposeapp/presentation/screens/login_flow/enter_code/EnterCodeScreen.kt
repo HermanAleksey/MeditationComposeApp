@@ -16,6 +16,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.meditationcomposeapp.R
+import com.example.meditationcomposeapp.presentation.screens.destinations.LoginScreenDestination
+import com.example.meditationcomposeapp.presentation.screens.destinations.NewPasswordScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.login_flow.enter_code.composable.CodePanel
 import com.example.meditationcomposeapp.presentation.screens.login_flow.login.composable.LoginFlowBackground
 import com.ramcosta.composedestinations.annotation.Destination
@@ -30,13 +32,24 @@ fun EnterCodeScreen(
 ) {
 
     val uiState = viewModel.uiState.collectAsState()
+
     /**
      * Use to transmit navigation method and
      * also serve as callback for event when
      * last digit on CodePanel was filled
      * */
     fun onLastDigitFilled() {
-        viewModel.onLastDigitFilled(login, navigator)
+        viewModel.onLastDigitFilled(
+            login
+        ) {
+            navigator.navigate(
+                route = NewPasswordScreenDestination.route,
+                onlyIfResumed = false,
+                builder = {
+                    popUpTo(LoginScreenDestination.route)
+                }
+            )
+        }
     }
 
     LoginFlowBackground(
@@ -72,7 +85,12 @@ fun EnterCodeScreen(
             CodePanel(
                 isEnabled = !uiState.value.isLoading,
                 code = uiState.value.code,
-                onCodeDigitChanged = { position, number -> viewModel.onCodeDigitChanged(position, number) },
+                onCodeDigitChanged = { position, number ->
+                    viewModel.onCodeDigitChanged(
+                        position,
+                        number
+                    )
+                },
                 onLastDigitFilled = ::onLastDigitFilled
             )
             Spacer(modifier = Modifier.padding(top = 80.dp))

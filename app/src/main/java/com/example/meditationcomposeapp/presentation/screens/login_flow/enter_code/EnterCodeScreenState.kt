@@ -2,7 +2,13 @@ package com.example.meditationcomposeapp.presentation.screens.login_flow.enter_c
 
 data class EnterCodeScreenState(
     val isLoading: Boolean = false,
-    val code: Array<Int> = EMPTY_CODE_VALUE,
+    val code: Array<Int> = arrayOf(
+        EMPTY_NUMBER,
+        EMPTY_NUMBER,
+        EMPTY_NUMBER,
+        EMPTY_NUMBER,
+        EMPTY_NUMBER
+    ),
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
