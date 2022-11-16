@@ -23,6 +23,7 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
 import com.example.meditationcomposeapp.R
+import com.example.meditationcomposeapp.presentation.screens.destinations.*
 import com.example.meditationcomposeapp.presentation.screens.login_flow.enter.composable.LoginMainButton
 import com.example.meditationcomposeapp.presentation.screens.login_flow.login.composable.LoginFlowBackground
 import com.example.meditationcomposeapp.presentation.screens.login_flow.login.composable.LoginFlowInputField
@@ -42,7 +43,7 @@ fun EnterLoginScreen(
     val uiState = viewModel.uiState.collectAsState()
 
     LaunchedEffect(key1 = null, block = {
-        viewModel.onLoginTextChanged(initialLoginValue?:"")
+        viewModel.onLoginTextChanged(initialLoginValue ?: "")
     })
 
     LoginFlowBackground(
@@ -85,7 +86,7 @@ fun EnterLoginScreen(
                 imeAction = ImeAction.Done,
                 keyboardType = KeyboardType.Email,
                 focusRequester = repeatPasswordFocusRequester,
-                onKeyboardActions =  {
+                onKeyboardActions = {
                     focusManager.clearFocus()
                 }
             )
@@ -96,7 +97,13 @@ fun EnterLoginScreen(
                     .wrapContentHeight()
                     .padding(top = 28.dp)
             ) {
-                viewModel.onConfirmClick(navigator)
+                viewModel.onConfirmClick { login ->
+                    navigator.navigate(
+                        EnterCodeScreenDestination(
+                            login
+                        )
+                    )
+                }
             }
         }
     }
