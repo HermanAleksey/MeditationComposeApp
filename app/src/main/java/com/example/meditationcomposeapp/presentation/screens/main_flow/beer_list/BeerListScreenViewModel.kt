@@ -8,9 +8,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.meditationcomposeapp.model.entity.beer.Beer
 import com.example.meditationcomposeapp.model.usecase.punk.GetBeersUseCase
-import com.example.meditationcomposeapp.presentation.screens.destinations.DetailedBeerScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.main_flow.beer_list.paging.BeerPagingSource
-import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -25,9 +23,7 @@ class BeerListScreenViewModel @Inject constructor(
         config = PagingConfig(pageSize = 5)
     ).flow.cachedIn(viewModelScope)
 
-    fun onBeerItemClicked(beer: Beer, navigator: DestinationsNavigator) {
-        navigator.navigate(
-            DetailedBeerScreenDestination(beer)
-        )
+    fun onBeerItemClicked(navigatorToBeerDetails: () -> Unit) {
+        navigatorToBeerDetails()
     }
 }

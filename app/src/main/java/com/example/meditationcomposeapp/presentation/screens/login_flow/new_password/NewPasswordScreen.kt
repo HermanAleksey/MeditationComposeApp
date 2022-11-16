@@ -3,7 +3,6 @@ package com.example.meditationcomposeapp.presentation.screens.login_flow.new_pas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -23,6 +22,7 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
 import com.example.meditationcomposeapp.R
+import com.example.meditationcomposeapp.presentation.screens.destinations.LoginScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.login_flow.enter.composable.LoginMainButton
 import com.example.meditationcomposeapp.presentation.screens.login_flow.login.composable.LoginFlowBackground
 import com.example.meditationcomposeapp.presentation.screens.login_flow.login.composable.LoginFlowInputField
@@ -93,7 +93,7 @@ fun NewPasswordScreen(
                 imeAction = ImeAction.Done,
                 keyboardType = KeyboardType.Password,
                 onKeyboardActions = {
-                  focusManager.clearFocus()
+                    focusManager.clearFocus()
                 },
                 focusRequester = repeatPasswordFocusRequester
             )
@@ -104,7 +104,11 @@ fun NewPasswordScreen(
                     .wrapContentHeight()
                     .padding(top = 28.dp)
             ) {
-                viewModel.onConfirmClick(navigator)
+                viewModel.onConfirmClick {
+                    navigator.navigate(
+                        LoginScreenDestination()
+                    )
+                }
             }
         }
     }
