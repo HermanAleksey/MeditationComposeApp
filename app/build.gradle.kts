@@ -158,5 +158,6 @@ dependencies {
     testImplementation (Dependencies.mockito)
     testImplementation (Dependencies.coroutines_test)
     testImplementation (Dependencies.mockito_kotlin)
+    testImplementation (Dependencies.powermock_reflect)
     androidTestImplementation(Dependencies.mockito_android)
 }

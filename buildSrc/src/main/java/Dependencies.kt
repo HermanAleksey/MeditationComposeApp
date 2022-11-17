@@ -82,4 +82,5 @@ object Dependencies {
     const val mockito = "org.mockito:mockito-core:${LibVersions.mockito}"
     const val mockito_kotlin = "org.mockito.kotlin:mockito-kotlin:${LibVersions.mockito_kotlin}"
     const val mockito_android = "org.mockito:mockito-android:${LibVersions.mockito_android}"
+    const val powermock_reflect = "org.powermock:powermock-reflect:${LibVersions.power_mock}"
 }
