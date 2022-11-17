@@ -40,10 +40,10 @@ class NewPasswordScreenViewModel @Inject constructor(
         }
     }
 
-    fun onConfirmClick(navigateToLoginScreen: () -> Unit) {
+    fun onConfirmClick(login: String, navigateToLoginScreen: () -> Unit) {
         viewModelScope.launch {
             if (isNewPasswordValid())
-                setNewPasswordUseCase.invoke("login", _uiState.value.newPassword).collect {
+                setNewPasswordUseCase.invoke(login, _uiState.value.newPassword).collect {
                     when (it) {
                         is NetworkResponse.Success<*> -> {
                             if (it.data!!.success)

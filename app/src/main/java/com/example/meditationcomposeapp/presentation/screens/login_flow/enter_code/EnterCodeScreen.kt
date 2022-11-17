@@ -43,7 +43,7 @@ fun EnterCodeScreen(
             login
         ) {
             navigator.navigate(
-                route = NewPasswordScreenDestination.route,
+                direction = NewPasswordScreenDestination(login),
                 onlyIfResumed = false,
                 builder = {
                     popUpTo(LoginScreenDestination.route)

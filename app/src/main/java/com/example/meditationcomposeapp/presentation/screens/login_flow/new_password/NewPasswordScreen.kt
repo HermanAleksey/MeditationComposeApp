@@ -33,7 +33,8 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 @Composable
 fun NewPasswordScreen(
     viewModel: NewPasswordScreenViewModel,
-    navigator: DestinationsNavigator
+    navigator: DestinationsNavigator,
+    login: String,
 ) {
     val focusManager = LocalFocusManager.current
     val repeatPasswordFocusRequester = FocusRequester()
@@ -52,7 +53,7 @@ fun NewPasswordScreen(
         ) {
             Image(
                 painter = painterResource(id = R.drawable.ic_logo_white),
-                contentDescription = "Background image",
+                contentDescription = null,
                 contentScale = ContentScale.FillHeight,
                 modifier = Modifier
                     .padding(top = 100.dp)
@@ -104,7 +105,7 @@ fun NewPasswordScreen(
                     .wrapContentHeight()
                     .padding(top = 28.dp)
             ) {
-                viewModel.onConfirmClick {
+                viewModel.onConfirmClick(login) {
                     navigator.navigate(
                         LoginScreenDestination()
                     )
