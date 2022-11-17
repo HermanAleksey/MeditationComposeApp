@@ -68,7 +68,7 @@ class NewPasswordScreenViewModelTest {
     @Test
     fun `onConfirmClick, new password is not valid, don't navigate`() = runTest {
         var navigated = false
-        val login = "login"
+        val login = "lo5gin"
         viewModel.onNewPasswordTextChanged("")
 
         viewModel.onConfirmClick(login) { navigated = true }
@@ -83,7 +83,7 @@ class NewPasswordScreenViewModelTest {
     fun `onConfirmClick, new password is valid, passwords dont match, dont call request`() =
         runTest {
             var navigated = false
-            val login = "login"
+            val login = "lo4gin"
             viewModel.onNewPasswordTextChanged("wdwddw")
             viewModel.onRepeatPasswordTextChanged("212")
 
@@ -98,7 +98,7 @@ class NewPasswordScreenViewModelTest {
     @Test
     fun `onConfirmClick, new password is valid, request fail, don't navigate`() = runTest {
         var navigated = false
-        val login = "login"
+        val login = "logi4n"
         val password = "password"
         viewModel.onNewPasswordTextChanged(password)
         viewModel.onRepeatPasswordTextChanged(password)

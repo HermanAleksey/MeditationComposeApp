@@ -90,8 +90,7 @@ class RegistrationScreenViewModel @Inject constructor(
     }
 
     private fun isLoginFieldValid(): Boolean {
-        //todo validate login
-        LoginField(_uiState.value.name).validate().let {
+        LoginField(_uiState.value.login).validate().let {
             _uiState.update { state ->
                 state.copy(loginError = it.errorMessage)
             }
@@ -100,8 +99,7 @@ class RegistrationScreenViewModel @Inject constructor(
     }
 
     private fun isPasswordFieldValid(): Boolean {
-        //todo validate password
-        PasswordField(_uiState.value.name).validate().let {
+        PasswordField(_uiState.value.password).validate().let {
             _uiState.update { state ->
                 state.copy(passwordError = it.errorMessage)
             }
