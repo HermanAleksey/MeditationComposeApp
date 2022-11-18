@@ -41,7 +41,6 @@ android {
 
 dependencies {
     implementation(Dependencies.activity_compose)
-//    implementation(Dependencies.ac) "androidx.activity:activity-ktx:$activity_ktx_version"
     implementation(Dependencies.core_ktx)
     implementation(Dependencies.compose_ui)
     implementation(Dependencies.compose_material)

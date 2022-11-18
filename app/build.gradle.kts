@@ -115,9 +115,8 @@ dependencies {
     //navigation
     implementation(Dependencies.navigation_compose)
     implementation(Dependencies.raamcosta_compose_destinations_anim_core)
-    testImplementation("org.testng:testng:6.9.6")
-    testImplementation("org.testng:testng:6.9.6")
     ksp(Dependencies.raamcosta_compose_destinations_ksp)
+    testImplementation(Dependencies.testng)
 
     //splash screen
     implementation(Dependencies.splash_screen_core)

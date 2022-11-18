@@ -4,10 +4,10 @@ object Dependencies {
     const val compose_material = "androidx.compose.material:material:${LibVersions.compose_version}"
     const val compose_ui_tooling_preview =
         "androidx.compose.ui:ui-tooling-preview:${LibVersions.compose_version}"
-    const val lifecycle_runtime_ktx = "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
+    const val lifecycle_runtime_ktx = "androidx.lifecycle:lifecycle-runtime-ktx:${LibVersions.lifecycle_runtime_ktx_version}"
     const val activity_compose =
         "androidx.activity:activity-compose:${LibVersions.activity_ktx_version}"
-    const val androidx_legacy_support = "androidx.legacy:legacy-support-v4:1.0.0"
+    const val androidx_legacy_support = "androidx.legacy:legacy-support-v4:${LibVersions.legacy_support_version}"
 
     const val compose_material_icons =
         "androidx.compose.material:material-icons-extended:${LibVersions.compose_version}"
@@ -31,6 +31,7 @@ object Dependencies {
         "io.github.raamcosta.compose-destinations:animations-core:${LibVersions.compose_destination_version}"
     const val raamcosta_compose_destinations_ksp =
         "io.github.raamcosta.compose-destinations:ksp:${LibVersions.compose_destination_version}"
+    const val testng = "org.testng:testng:${LibVersions.testng_version}"
 
     //splash screen
     const val splash_screen_core =
@@ -78,7 +79,8 @@ object Dependencies {
 
     //testing
     const val junit = "junit:junit:${LibVersions.junit}"
-    const val coroutines_test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${LibVersions.coroutines_test}"
+    const val coroutines_test =
+        "org.jetbrains.kotlinx:kotlinx-coroutines-test:${LibVersions.coroutines_test}"
     const val mockito = "org.mockito:mockito-core:${LibVersions.mockito}"
     const val mockito_kotlin = "org.mockito.kotlin:mockito-kotlin:${LibVersions.mockito_kotlin}"
     const val mockito_android = "org.mockito:mockito-android:${LibVersions.mockito_android}"

@@ -1,11 +1,13 @@
 object LibVersions {
     const val activity_ktx_version = "1.6.0"
+    const val legacy_support_version = "1.0.0"
 
     const val ktx_version = "1.7.0"
     const val ksp_version = "1.7.10-1.0.6"
     const val kotlin_version = "1.7.10"
 
     const val compose_version = "1.2.1"
+    const val lifecycle_runtime_ktx_version = "2.3.1"
     const val compose_compiler_version = "1.3.0"
 
     const val hilt_version = "2.42"
@@ -13,6 +15,7 @@ object LibVersions {
 
     const val navigation_compose_version = "2.5.2"
     const val compose_destination_version = "1.6.20-beta"
+    const val testng_version = "7.3.0"
 
     const val splashscreen_version = "1.0.0"
 
