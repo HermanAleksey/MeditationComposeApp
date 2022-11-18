@@ -115,6 +115,8 @@ dependencies {
     //navigation
     implementation(Dependencies.navigation_compose)
     implementation(Dependencies.raamcosta_compose_destinations_anim_core)
+    testImplementation("org.testng:testng:6.9.6")
+    testImplementation("org.testng:testng:6.9.6")
     ksp(Dependencies.raamcosta_compose_destinations_ksp)
 
     //splash screen
@@ -149,10 +151,13 @@ dependencies {
     implementation(Dependencies.room_ktx)
     kapt(Dependencies.room_compiler)
 
+    implementation(Dependencies.timber)
+
     //testing
     testImplementation(Dependencies.junit)
-    androidTestImplementation(Dependencies.test_ext_junit)
-    androidTestImplementation(Dependencies.espresso_core)
-    androidTestImplementation(Dependencies.ui_test_junit)
-    debugImplementation(Dependencies.ui_tooling)
+    testImplementation (Dependencies.mockito)
+    testImplementation (Dependencies.coroutines_test)
+    testImplementation (Dependencies.mockito_kotlin)
+    testImplementation (Dependencies.powermock_reflect)
+    androidTestImplementation(Dependencies.mockito_android)
 }

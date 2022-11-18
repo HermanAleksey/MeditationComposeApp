@@ -49,7 +49,8 @@ data class Puzzle(
         val paint = Paint()
         paint.color = Color.TRANSPARENT
 
-        canvas.drawRect(0f,
+        canvas.drawRect(
+            0f,
             0f,
             pieceImageWidthPx.toFloat(),
             pieceImageHeightPx.toFloat(),
@@ -67,11 +68,13 @@ data class Puzzle(
         val startX: Int = position.row * pieceImageWidthPx
         val startY: Int = position.column * pieceImageHeightPx
 
-        return Bitmap.createBitmap(imageBitmap,
+        return Bitmap.createBitmap(
+            imageBitmap,
             startX,
             startY,
             pieceImageWidthPx,
-            pieceImageHeightPx)
+            pieceImageHeightPx
+        )
     }
 
     fun switchPieces(piecePosition: Piece.Position): Boolean {
@@ -106,25 +109,33 @@ data class Puzzle(
     private fun performRandomMove() {
         val allowedPositions = mutableListOf<Piece.Position>()
         if (emptyPiecePosition.row + 1 < size)
-            allowedPositions.add(Piece.Position(
-                emptyPiecePosition.row + 1,
-                emptyPiecePosition.column
-            ))
+            allowedPositions.add(
+                Piece.Position(
+                    emptyPiecePosition.row + 1,
+                    emptyPiecePosition.column
+                )
+            )
         if (emptyPiecePosition.column + 1 < size)
-            allowedPositions.add(Piece.Position(
-                emptyPiecePosition.row,
-                emptyPiecePosition.column + 1
-            ))
+            allowedPositions.add(
+                Piece.Position(
+                    emptyPiecePosition.row,
+                    emptyPiecePosition.column + 1
+                )
+            )
         if (emptyPiecePosition.row > 0)
-            allowedPositions.add(Piece.Position(
-                emptyPiecePosition.row - 1,
-                emptyPiecePosition.column
-            ))
+            allowedPositions.add(
+                Piece.Position(
+                    emptyPiecePosition.row - 1,
+                    emptyPiecePosition.column
+                )
+            )
         if (emptyPiecePosition.column > 0)
-            allowedPositions.add(Piece.Position(
-                emptyPiecePosition.row,
-                emptyPiecePosition.column - 1
-            ))
+            allowedPositions.add(
+                Piece.Position(
+                    emptyPiecePosition.row,
+                    emptyPiecePosition.column - 1
+                )
+            )
 
         val moveToPerform =
             allowedPositions[(Math.random() * (allowedPositions.size - 1)).roundToInt()]
@@ -146,7 +157,7 @@ data class Puzzle(
 
     //call only when puzzle is completed
     private fun replaceRightBottomPieceWithInitialImage() {
-        board[size-1][size-1].value = board[size-1][size-1].value.copy(
+        board[size - 1][size - 1].value = board[size - 1][size - 1].value.copy(
             imageBitmap = emptyPieceInitialImage
         )
     }

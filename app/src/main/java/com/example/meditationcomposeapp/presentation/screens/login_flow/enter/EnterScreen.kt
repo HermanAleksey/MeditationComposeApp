@@ -19,6 +19,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.meditationcomposeapp.R
 import com.example.meditationcomposeapp.presentation.common_composables.ImageBackground
+import com.example.meditationcomposeapp.presentation.screens.destinations.LoginScreenDestination
+import com.example.meditationcomposeapp.presentation.screens.destinations.RegistrationScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.login_flow.enter.composable.DontHaveAccountText
 import com.example.meditationcomposeapp.presentation.screens.login_flow.enter.composable.LoginMainButton
 import com.ramcosta.composedestinations.annotation.Destination
@@ -73,12 +75,20 @@ fun EnterScreen(
                     .fillMaxWidth(0.8F)
                     .wrapContentHeight()
             ) {
-                viewModel.onEnterClick(navigator)
+                viewModel.onEnterClick {
+                    navigator.navigate(
+                        LoginScreenDestination()
+                    )
+                }
             }
             DontHaveAccountText(modifier = Modifier
                 .padding(top = 18.dp)
                 .clickable {
-                    viewModel.onDontHaveAccountClick(navigator)
+                    viewModel.onDontHaveAccountClick {
+                        navigator.navigate(
+                            RegistrationScreenDestination()
+                        )
+                    }
                 })
         }
     }

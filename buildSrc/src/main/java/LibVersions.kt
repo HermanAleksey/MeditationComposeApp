@@ -38,4 +38,13 @@ object LibVersions {
     const val tool_build_gradle = "7.3.1"
     const val kotlin_gradle_plugin = "1.7.10"
     const val gms_google_services = "4.3.14"
+
+    const val junit = "4.13.2"
+    const val coroutines_test = "1.6.3"
+    const val mockito = "4.8.1"
+    const val mockito_kotlin = "4.0.0"
+    const val mockito_android = "4.8.1"
+    const val power_mock = "1.6.1"
+
+    const val timber_version = "5.0.1"
 }

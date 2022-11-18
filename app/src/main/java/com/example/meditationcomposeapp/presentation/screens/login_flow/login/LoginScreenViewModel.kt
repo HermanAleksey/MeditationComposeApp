@@ -7,11 +7,6 @@ import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.usecase.authentication.LoginUseCase
 import com.example.meditationcomposeapp.model.utils.validation.LoginField
 import com.example.meditationcomposeapp.model.utils.validation.PasswordField
-import com.example.meditationcomposeapp.presentation.screens.destinations.EnterLoginScreenDestination
-import com.example.meditationcomposeapp.presentation.screens.destinations.EnterScreenDestination
-import com.example.meditationcomposeapp.presentation.screens.destinations.MainScreenDestination
-import com.example.meditationcomposeapp.presentation.screens.destinations.RegistrationScreenDestination
-import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -40,13 +35,10 @@ class LoginScreenViewModel @Inject constructor(
         }
     }
 
-    fun onForgotPasswordClicked(navigator: DestinationsNavigator) {
-        navigator.navigate(
-            EnterLoginScreenDestination(_uiState.value.login)
-        )
-    }
+    fun onForgotPasswordClicked(navigateToLoginScreen: (String) -> Unit) =
+        navigateToLoginScreen(_uiState.value.login)
 
-    fun onLoginClicked(navigator: DestinationsNavigator) {
+    fun onLoginClicked(navigateToMainScreen: () -> Unit) {
         val login = _uiState.value.login
         val password = _uiState.value.password
 
@@ -56,9 +48,7 @@ class LoginScreenViewModel @Inject constructor(
                     when (it) {
                         is NetworkResponse.Success<*> -> {
                             saveCreditsOnDataStore(login, password)
-                            navigator.navigate(
-                                MainScreenDestination()
-                            )
+                            navigateToMainScreen()
                         }
                         is NetworkResponse.Failure<*> -> {
                             //on error show pop-up
@@ -76,7 +66,10 @@ class LoginScreenViewModel @Inject constructor(
         }
     }
 
-    private suspend fun saveCreditsOnDataStore(login: String, password: String) {
+    private suspend fun saveCreditsOnDataStore(
+        login: String,
+        password: String
+    ) {
         with(userDataStore) {
             writeLogin(login)
             writePassword(password)
@@ -101,9 +94,6 @@ class LoginScreenViewModel @Inject constructor(
         }
     }
 
-    fun onSignUpClicked(navigator: DestinationsNavigator) {
-        navigator.navigate(
-            RegistrationScreenDestination()
-        )
-    }
+    fun onSignUpClicked(navigateToRegistration: () -> Unit) =
+        navigateToRegistration()
 }

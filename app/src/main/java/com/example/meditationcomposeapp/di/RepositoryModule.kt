@@ -1,5 +1,7 @@
 package com.example.meditationcomposeapp.di
 
+import com.example.meditationcomposeapp.data_source.data_store.UserDataStore
+import com.example.meditationcomposeapp.data_source.data_store.UserDataStoreImpl
 import com.example.meditationcomposeapp.data_source.repository.authentication.AuthenticationRepository
 import com.example.meditationcomposeapp.data_source.repository.authentication.AuthenticationRepositoryImpl
 import com.example.meditationcomposeapp.data_source.repository.punk.PunkRepository
@@ -14,6 +16,11 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class RepositoryModule {
+
+    @Binds
+    abstract fun provideDataStore(
+        implementation: UserDataStoreImpl,
+    ): UserDataStore
 
     @Binds
     abstract fun provideUpdateDescriptionRepository(

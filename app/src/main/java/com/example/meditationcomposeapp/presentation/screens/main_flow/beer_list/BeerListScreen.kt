@@ -20,6 +20,7 @@ import androidx.paging.compose.items
 import com.example.meditationcomposeapp.R
 import com.example.meditationcomposeapp.model.entity.beer.Beer
 import com.example.meditationcomposeapp.presentation.common_composables.ColorBackground
+import com.example.meditationcomposeapp.presentation.screens.destinations.DetailedBeerScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.main_flow.beer_list.composable.BeerItem
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -37,7 +38,13 @@ fun BeerListScreen(
         color = MaterialTheme.colors.background
     ) {
         BeerList(beersPaging, onBeerItemClicked = {
-            viewModel.onBeerItemClicked(it, navigator)
+            viewModel.onBeerItemClicked {
+                navigator.navigate(
+                    DetailedBeerScreenDestination(
+                        it
+                    )
+                )
+            }
         })
     }
 }

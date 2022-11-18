@@ -7,8 +7,6 @@ import com.example.meditationcomposeapp.model.usecase.authentication.RegisterUse
 import com.example.meditationcomposeapp.model.utils.validation.LoginField
 import com.example.meditationcomposeapp.model.utils.validation.NameField
 import com.example.meditationcomposeapp.model.utils.validation.PasswordField
-import com.example.meditationcomposeapp.presentation.screens.destinations.LoginScreenDestination
-import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -49,20 +47,22 @@ class RegistrationScreenViewModel @Inject constructor(
         }
     }
 
-    fun onSignUpClicked(navigator: DestinationsNavigator) {
+    fun onSignUpClicked(navigateToLoginScreen: () -> Unit) {
         viewModelScope.launch {
             if (
                 isNameFieldValid() &&
                 isLoginFieldValid() &&
                 isPasswordFieldValid()
             )
-                registerUseCase.invoke(_uiState.value.name, _uiState.value.login, _uiState.value.password).collect {
+                registerUseCase.invoke(
+                    _uiState.value.name,
+                    _uiState.value.login,
+                    _uiState.value.password
+                ).collect {
                     when (it) {
                         is NetworkResponse.Success<*> -> {
                             if (it.data!!.success)
-                                navigator.navigate(
-                                    LoginScreenDestination()
-                                )
+                                navigateToLoginScreen()
                             else {
                                 //displayError()
                             }
@@ -82,7 +82,7 @@ class RegistrationScreenViewModel @Inject constructor(
 
     private fun isNameFieldValid(): Boolean {
         NameField(_uiState.value.name).validate().let {
-            _uiState.update {  state ->
+            _uiState.update { state ->
                 state.copy(nameError = it.errorMessage)
             }
             return it.successful
@@ -90,9 +90,8 @@ class RegistrationScreenViewModel @Inject constructor(
     }
 
     private fun isLoginFieldValid(): Boolean {
-        //todo validate login
-        LoginField(_uiState.value.name).validate().let {
-            _uiState.update { state->
+        LoginField(_uiState.value.login).validate().let {
+            _uiState.update { state ->
                 state.copy(loginError = it.errorMessage)
             }
             return it.successful
@@ -100,8 +99,7 @@ class RegistrationScreenViewModel @Inject constructor(
     }
 
     private fun isPasswordFieldValid(): Boolean {
-        //todo validate password
-        PasswordField(_uiState.value.name).validate().let {
+        PasswordField(_uiState.value.password).validate().let {
             _uiState.update { state ->
                 state.copy(passwordError = it.errorMessage)
             }
@@ -109,9 +107,6 @@ class RegistrationScreenViewModel @Inject constructor(
         }
     }
 
-    fun onSignInClicked(navigator: DestinationsNavigator) {
-        navigator.navigate(
-            LoginScreenDestination()
-        )
-    }
+    fun onSignInClicked(navigateToLoginScreen: () -> Unit) =
+        navigateToLoginScreen()
 }

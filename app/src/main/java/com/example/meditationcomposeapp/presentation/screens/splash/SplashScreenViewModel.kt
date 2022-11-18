@@ -10,9 +10,6 @@ import com.example.meditationcomposeapp.model.entity.login_flow.CompareResult
 import com.example.meditationcomposeapp.model.entity.login_flow.toVersion
 import com.example.meditationcomposeapp.model.usecase.authentication.GetAppUpdatesHistoryUseCase
 import com.example.meditationcomposeapp.model.usecase.authentication.LoginUseCase
-import com.example.meditationcomposeapp.presentation.screens.destinations.EnterScreenDestination
-import com.example.meditationcomposeapp.presentation.screens.destinations.MainScreenDestination
-import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -27,7 +24,8 @@ class SplashScreenViewModel @Inject constructor(
 ) : ViewModel() {
 
     fun onLaunchSplashScreen(
-        navigator: DestinationsNavigator,
+        navigateToMainScreen: () -> Unit,
+        navigateToLoginScreen: () -> Unit,
     ) {
         viewModelScope.launch {
             checkLastUpdateVersion()
@@ -36,33 +34,29 @@ class SplashScreenViewModel @Inject constructor(
             val password = userDataStore.readPassword().first()
 
             if (login.isNotEmpty() && password.isNotEmpty()) {
-                logIn(login, password, navigator)
+                logIn(login, password, navigateToMainScreen, navigateToLoginScreen)
             } else {
-                with(navigator) {
-                    navigate(
-                        EnterScreenDestination()
-                    )
-                }
+                navigateToLoginScreen()
             }
         }
     }
 
-    private suspend fun logIn(login: String, password: String, navigator: DestinationsNavigator) {
+    private suspend fun logIn(
+        login: String,
+        password: String,
+        navigateToMainScreen: () -> Unit,
+        navigateToLoginScreen: () -> Unit,
+    ) {
         loginUseCase(login, password).collect {
             when (it) {
                 is NetworkResponse.Success<*> -> {
-                    with(navigator) {
-                        navigate(
-                            MainScreenDestination()
-                        )
-                    }
+                    navigateToMainScreen()
                 }
                 is NetworkResponse.Failure<*> -> {
-                    //on error show pop-up
+                    navigateToLoginScreen()
                 }
                 is NetworkResponse.Loading<*> -> {
-                    //todo splash screen loading
-//                    setLoading(it.isLoading)
+                    //do nothing
                 }
             }
         }
@@ -75,7 +69,7 @@ class SplashScreenViewModel @Inject constructor(
         if (lastInstalledVersion.toVersion()
                 .compare(currentVersionName.toVersion()) == CompareResult.EQUALS
         ) return
-
+        
         getAppUpdatesHistoryUseCase(lastInstalledVersion)
             .collect {
                 if (it is NetworkResponse.Success) {

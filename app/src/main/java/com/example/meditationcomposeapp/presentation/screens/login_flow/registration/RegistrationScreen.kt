@@ -23,6 +23,7 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
 import com.example.meditationcomposeapp.R
+import com.example.meditationcomposeapp.presentation.screens.destinations.LoginScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.login_flow.enter.composable.LoginMainButton
 import com.example.meditationcomposeapp.presentation.screens.login_flow.login.composable.LoginFlowBackground
 import com.example.meditationcomposeapp.presentation.screens.login_flow.login.composable.LoginFlowInputField
@@ -120,7 +121,11 @@ fun RegistrationScreen(
                     .wrapContentHeight()
                     .padding(top = 28.dp)
             ) {
-                viewModel.onSignUpClicked(navigator)
+                viewModel.onSignUpClicked{
+                    navigator.navigate(
+                        LoginScreenDestination()
+                    )
+                }
             }
             Box(
                 modifier = Modifier
@@ -132,7 +137,11 @@ fun RegistrationScreen(
                 AlreadyHaveAccountText(modifier = Modifier
                     .padding(top = 18.dp)
                     .clickable {
-                        viewModel.onSignInClicked(navigator)
+                        viewModel.onSignInClicked {
+                            navigator.navigate(
+                                LoginScreenDestination()
+                            )
+                        }
                     })
             }
             Spacer(modifier = Modifier.padding(top = 80.dp))

@@ -7,15 +7,12 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import javax.inject.Inject
 
 class EnterScreenViewModel @Inject constructor() : ViewModel() {
-    fun onEnterClick(navigator: DestinationsNavigator) {
-        navigator.navigate(
-            LoginScreenDestination()
-        )
+
+    fun onEnterClick(navigateToLoginScreen: () -> Unit) {
+        navigateToLoginScreen()
     }
 
-    fun onDontHaveAccountClick(navigator: DestinationsNavigator) {
-        navigator.navigate(
-            RegistrationScreenDestination()
-        )
+    fun onDontHaveAccountClick(navigateToRegisterScreen:  () -> Unit) {
+        navigateToRegisterScreen()
     }
 }

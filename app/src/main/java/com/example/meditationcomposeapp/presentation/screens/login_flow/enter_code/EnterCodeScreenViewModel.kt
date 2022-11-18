@@ -4,14 +4,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.usecase.authentication.VerifyCodeUseCase
-import com.example.meditationcomposeapp.presentation.screens.destinations.LoginScreenDestination
-import com.example.meditationcomposeapp.presentation.screens.destinations.NewPasswordScreenDestination
-import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -25,6 +23,10 @@ class EnterCodeScreenViewModel @Inject constructor(
     private fun isCodeFullyInputted() = _uiState.value.code.all { it != EnterCodeScreenState.EMPTY_NUMBER }
 
     fun onCodeDigitChanged(index: Int, value: Int): Boolean {
+        if (index < 0 || index >= _uiState.value.code.size){
+            Timber.e("Trying to insert item in index out of code bounds")
+            return isCodeFullyInputted()
+        }
         val newCodeState = _uiState.value.code.copyOf()
         newCodeState[index] = value
 
@@ -36,19 +38,16 @@ class EnterCodeScreenViewModel @Inject constructor(
         return isCodeFullyInputted()
     }
 
-    fun onLastDigitFilled(login: String, navigator: DestinationsNavigator) {
+    fun onLastDigitFilled(
+        login: String,
+        navigateToNewPasswordScreen: () -> Unit
+    ) {
         viewModelScope.launch {
             verifyCodeUseCase.invoke(login, getCodeAsString()).collect {
                 when (it) {
                     is NetworkResponse.Success<*> -> {
                         if (it.data!!.success)
-                            navigator.navigate(
-                                route = NewPasswordScreenDestination().route,
-                                onlyIfResumed = false,
-                                builder = {
-                                    popUpTo(LoginScreenDestination().route)
-                                }
-                            )
+                            navigateToNewPasswordScreen()
                         else {
                             //displayError()
                             clearCodeInput()

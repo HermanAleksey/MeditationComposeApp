@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.usecase.authentication.RequestPasswordRestorationUseCase
 import com.example.meditationcomposeapp.model.utils.validation.LoginField
-import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -27,18 +26,14 @@ class EnterLoginScreenViewModel @Inject constructor(
         }
     }
 
-    fun onConfirmClick(navigator: DestinationsNavigator) {
+    fun onConfirmClick(navigateToEnterCode: (String) -> Unit) {
         viewModelScope.launch {
             if (isEmailValid())
                 requestPasswordRestorationUseCase.invoke(_uiState.value.login).collect {
                     when (it) {
                         is NetworkResponse.Success<*> -> {
                             if (it.data!!.success)
-                                navigator.navigate(
-                                    com.example.meditationcomposeapp.presentation.screens.destinations.EnterCodeScreenDestination(
-                                        _uiState.value.login
-                                    )
-                                )
+                                navigateToEnterCode(_uiState.value.login)
                             else {
                                 //displayError()
                             }
@@ -47,7 +42,7 @@ class EnterLoginScreenViewModel @Inject constructor(
                             //on error show pop-up
                         }
                         is NetworkResponse.Loading<*> -> {
-                            _uiState.update {  state ->
+                            _uiState.update { state ->
                                 state.copy(
                                     isLoading = it.isLoading
                                 )
