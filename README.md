@@ -8,7 +8,8 @@ I really hope that I will develop the project further and further and add variou
 ## What is in the project now? 
 
 Currently stack of project: Jetpack Compose, MVVM, Coroutines, Flow, Dagger-Hilt, Rxjava, Firebase\
-Also used: Splashscreen, Datastore, Accompanist, Compose-destinations, Image-Cropper
+Also used: Splashscreen, Datastore, Accompanist, Compose-destinations, Image-Cropper, Paging, JUnit\
+Setuped CI/CD with running tests task on each PR on master.
 
 ## What does it look like?
 
