@@ -119,7 +119,6 @@ class EnterCodeScreenViewModelTest {
                 emit(NetworkResponse.Failure(error = null))
             }
         )
-        val a = mock<DestinationsNavigator>()
 
         viewModel.onLastDigitFilled(login) { }
 
