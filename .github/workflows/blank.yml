@@ -6,7 +6,7 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the "master" branch
   push:
-    branches: [ "master" ]
+    branches: [ "master", "feature/configuring_ci/cd_and_linter"]
   pull_request:
     branches: [ "master" ]
 
@@ -36,4 +36,4 @@ jobs:
           echo test, and deploy your project.
 
       - name: Run tests
-        run: gradlew test
+        run: ./gradlew test
