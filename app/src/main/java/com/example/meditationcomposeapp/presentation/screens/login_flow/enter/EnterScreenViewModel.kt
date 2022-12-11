@@ -1,18 +1,32 @@
 package com.example.meditationcomposeapp.presentation.screens.login_flow.enter
 
-import androidx.lifecycle.ViewModel
+import com.example.meditationcomposeapp.presentation.navigation.Event
+import com.example.meditationcomposeapp.presentation.navigation.NavigationEvent
+import com.example.meditationcomposeapp.presentation.screens.BaseViewModel
 import com.example.meditationcomposeapp.presentation.screens.destinations.LoginScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.RegistrationScreenDestination
-import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
-class EnterScreenViewModel @Inject constructor() : ViewModel() {
+class EnterScreenViewModel @Inject constructor() : BaseViewModel() {
 
-    fun onEnterClick(navigateToLoginScreen: () -> Unit) {
-        navigateToLoginScreen()
+    fun onEnterClick() {
+        _navigationEvent.update {
+            Event(
+                NavigationEvent.Navigate(
+                    LoginScreenDestination()
+                )
+            )
+        }
     }
 
-    fun onDontHaveAccountClick(navigateToRegisterScreen:  () -> Unit) {
-        navigateToRegisterScreen()
+    fun onDontHaveAccountClick() {
+        _navigationEvent.update {
+            Event(
+                NavigationEvent.Navigate(
+                    RegistrationScreenDestination()
+                )
+            )
+        }
     }
 }
