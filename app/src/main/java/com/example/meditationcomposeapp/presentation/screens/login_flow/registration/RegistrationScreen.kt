@@ -121,11 +121,7 @@ fun RegistrationScreen(
                     .wrapContentHeight()
                     .padding(top = 28.dp)
             ) {
-                viewModel.onSignUpClicked{
-                    navigator.navigate(
-                        LoginScreenDestination()
-                    )
-                }
+                viewModel.onSignUpClicked()
             }
             Box(
                 modifier = Modifier
@@ -137,11 +133,7 @@ fun RegistrationScreen(
                 AlreadyHaveAccountText(modifier = Modifier
                     .padding(top = 18.dp)
                     .clickable {
-                        viewModel.onSignInClicked {
-                            navigator.navigate(
-                                LoginScreenDestination()
-                            )
-                        }
+                        viewModel.onSignInClicked()
                     })
             }
             Spacer(modifier = Modifier.padding(top = 80.dp))
