@@ -4,6 +4,8 @@ import com.example.meditationcomposeapp.CoroutinesTestRule
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.entity.login_flow.SuccessInfo
 import com.example.meditationcomposeapp.model.usecase.authentication.RequestPasswordRestorationUseCase
+import com.example.meditationcomposeapp.presentation.navigation.NavigationEvent
+import com.example.meditationcomposeapp.presentation.screens.destinations.RegistrationScreenDestination
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.advanceUntilIdle
@@ -36,6 +38,7 @@ class EnterLoginScreenViewModelTest {
     fun setup() {
         viewModel = EnterLoginScreenViewModel(requestPasswordRestorationUseCase)
     }
+    //todo how to test navigation with arguments?
 
     @Test
     fun `init, default values check`() {
@@ -54,17 +57,7 @@ class EnterLoginScreenViewModelTest {
     }
 
     @Test
-    fun `onConfirmClick, email is not valid, do nothing`() {
-        var navigate = false
-
-        viewModel.onConfirmClick { navigate = true }
-
-        assert(!navigate)
-    }
-
-    @Test
     fun `onConfirmClick, email is valid, network response error, don't navigate`() = runTest{
-        var navigate = false
         val login = "qwewqe"
         whenever(requestPasswordRestorationUseCase(anyString()))
             .thenReturn(flow {
@@ -79,17 +72,19 @@ class EnterLoginScreenViewModelTest {
             })
         viewModel.onLoginTextChanged(login)
 
-        viewModel.onConfirmClick { navigate = true }
+        viewModel.onConfirmClick()
 
         advanceUntilIdle()
 
-        assert(!navigate)
+        assertEquals(
+            NavigationEvent.Empty.toString(),
+            viewModel.navigationEvent.value.getNavigationIfNotHandled().toString()
+        )
         verify(requestPasswordRestorationUseCase).invoke(login)
     }
 
     @Test
     fun `onConfirmClick, email is valid, network response success, navigate`() = runTest{
-        var navigate = false
         val login = "qwewqe"
         whenever(requestPasswordRestorationUseCase(anyString()))
             .thenReturn(flow {
@@ -104,11 +99,14 @@ class EnterLoginScreenViewModelTest {
             })
         viewModel.onLoginTextChanged(login)
 
-        viewModel.onConfirmClick { navigate = true }
+        viewModel.onConfirmClick()
 
         advanceUntilIdle()
 
-        assert(navigate)
+        assertEquals(
+            NavigationEvent.Empty.toString(),
+            viewModel.navigationEvent.value.getNavigationIfNotHandled().toString()
+        )
         verify(requestPasswordRestorationUseCase).invoke(login)
     }
 }
