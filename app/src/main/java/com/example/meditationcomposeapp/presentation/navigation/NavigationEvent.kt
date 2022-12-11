@@ -12,6 +12,10 @@ sealed class NavigationEvent {
         override fun handleNavigationEvent(navigator: DestinationsNavigator) {
             navigator.navigate(direction = direction)
         }
+
+        override fun toString(): String {
+            return "Navigate{route=${this.direction.route}}"
+        }
     }
 
     class NavigateWithPop(
@@ -28,6 +32,10 @@ sealed class NavigationEvent {
                     }
                 }
             }
+
+        override fun toString(): String {
+            return "NavigateWithPop{route=${this.direction.route},popUpTo=${this.popUpTo.route},inclusive=${this.inclusive}}"
+        }
     }
 
     class Pop(
@@ -42,12 +50,20 @@ sealed class NavigationEvent {
                     inclusive = navigationEvent.inclusive
                 )
             }
+
+        override fun toString(): String {
+            return "Pop{popUpTo=${this.popUpTo.route},inclusive=${this.inclusive}}"
+        }
     }
 
     object Empty : NavigationEvent() {
 
         override fun handleNavigationEvent(navigator: DestinationsNavigator) {
             //do nothing
+        }
+
+        override fun toString(): String {
+            return "NavigationEvent.Empty"
         }
     }
 

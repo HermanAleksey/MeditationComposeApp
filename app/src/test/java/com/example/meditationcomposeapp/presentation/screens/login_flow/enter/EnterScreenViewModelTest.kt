@@ -1,11 +1,8 @@
 package com.example.meditationcomposeapp.presentation.screens.login_flow.enter
 
-import com.example.meditationcomposeapp.presentation.navigation.Event
 import com.example.meditationcomposeapp.presentation.navigation.NavigationEvent
-import com.example.meditationcomposeapp.presentation.screens.destinations.EnterScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.LoginScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.RegistrationScreenDestination
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
