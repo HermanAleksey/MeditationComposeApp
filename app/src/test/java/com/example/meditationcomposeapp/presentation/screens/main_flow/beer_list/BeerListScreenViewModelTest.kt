@@ -12,10 +12,10 @@ import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 
-@RunWith(MockitoJUnitRunner::class)
-@OptIn(ExperimentalCoroutinesApi::class)
-class BeerListScreenViewModelTest {
-
+//@RunWith(MockitoJUnitRunner::class)
+//@OptIn(ExperimentalCoroutinesApi::class)
+//class BeerListScreenViewModelTest {
+//
 //    @ExperimentalCoroutinesApi
 //    @get:Rule
 //    var rule = CoroutinesTestRule()
@@ -29,4 +29,4 @@ class BeerListScreenViewModelTest {
 //    fun setup() {
 //        viewModel = BeerListScreenViewModel(getBeerListUseCase)
 //    }
-}
+//}

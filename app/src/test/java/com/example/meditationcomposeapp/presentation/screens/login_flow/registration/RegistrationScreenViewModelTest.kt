@@ -219,7 +219,6 @@ class RegistrationScreenViewModelTest {
     @Test
     fun `onSignUpClicked, name not valid, login is valid, password is valid, don't call request`() =
         runTest {
-            var navigated = false
             val login = ""
             val password = "btrtnre"
             val name = "dfccnc"
