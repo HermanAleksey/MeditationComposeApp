@@ -1,9 +1,13 @@
 package com.example.meditationcomposeapp.presentation.screens.login_flow.enter_code
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.usecase.authentication.VerifyCodeUseCase
+import com.example.meditationcomposeapp.presentation.navigation.Event
+import com.example.meditationcomposeapp.presentation.navigation.NavigationEvent
+import com.example.meditationcomposeapp.presentation.screens.BaseViewModel
+import com.example.meditationcomposeapp.presentation.screens.destinations.LoginScreenDestination
+import com.example.meditationcomposeapp.presentation.screens.destinations.NewPasswordScreenDestination
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,15 +19,16 @@ import javax.inject.Inject
 @HiltViewModel
 class EnterCodeScreenViewModel @Inject constructor(
     private val verifyCodeUseCase: VerifyCodeUseCase,
-) : ViewModel() {
+) : BaseViewModel() {
 
     private val _uiState = MutableStateFlow(EnterCodeScreenState())
     val uiState: StateFlow<EnterCodeScreenState> = _uiState
 
-    private fun isCodeFullyInputted() = _uiState.value.code.all { it != EnterCodeScreenState.EMPTY_NUMBER }
+    private fun isCodeFullyInputted() =
+        _uiState.value.code.all { it != EnterCodeScreenState.EMPTY_NUMBER }
 
     fun onCodeDigitChanged(index: Int, value: Int): Boolean {
-        if (index < 0 || index >= _uiState.value.code.size){
+        if (index < 0 || index >= _uiState.value.code.size) {
             Timber.e("Trying to insert item in index out of code bounds")
             return isCodeFullyInputted()
         }
@@ -39,15 +44,22 @@ class EnterCodeScreenViewModel @Inject constructor(
     }
 
     fun onLastDigitFilled(
-        login: String,
-        navigateToNewPasswordScreen: () -> Unit
+        login: String
     ) {
         viewModelScope.launch {
             verifyCodeUseCase.invoke(login, getCodeAsString()).collect {
                 when (it) {
                     is NetworkResponse.Success<*> -> {
                         if (it.data!!.success)
-                            navigateToNewPasswordScreen()
+                            _navigationEvent.update {
+                                Event(
+                                    NavigationEvent.NavigateWithPop(
+                                        direction = NewPasswordScreenDestination(login),
+                                        popUpTo = LoginScreenDestination,
+                                        inclusive = false
+                                    )
+                                )
+                            }
                         else {
                             //displayError()
                             clearCodeInput()
@@ -69,7 +81,7 @@ class EnterCodeScreenViewModel @Inject constructor(
     }
 
     private fun clearCodeInput() {
-        _uiState.update{
+        _uiState.update {
             it.copy(
                 code = EnterCodeScreenState.EMPTY_CODE_VALUE
             )

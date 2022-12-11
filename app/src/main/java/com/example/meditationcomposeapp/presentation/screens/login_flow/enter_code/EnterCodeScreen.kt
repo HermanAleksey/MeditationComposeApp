@@ -7,6 +7,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -16,6 +17,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.meditationcomposeapp.R
+import com.example.meditationcomposeapp.presentation.navigation.processEvent
 import com.example.meditationcomposeapp.presentation.screens.destinations.LoginScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.NewPasswordScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.login_flow.enter_code.composable.CodePanel
@@ -30,8 +32,13 @@ fun EnterCodeScreen(
     viewModel: EnterCodeScreenViewModel,
     navigator: DestinationsNavigator,
 ) {
-
     val uiState = viewModel.uiState.collectAsState()
+
+    LaunchedEffect(key1 = viewModel.navigationEvent.collectAsState()) {
+        viewModel.navigationEvent.collect { event ->
+            event.processEvent(navigator)
+        }
+    }
 
     /**
      * Use to transmit navigation method and
@@ -41,15 +48,7 @@ fun EnterCodeScreen(
     fun onLastDigitFilled() {
         viewModel.onLastDigitFilled(
             login
-        ) {
-            navigator.navigate(
-                direction = NewPasswordScreenDestination(login),
-                onlyIfResumed = false,
-                builder = {
-                    popUpTo(LoginScreenDestination.route)
-                }
-            )
-        }
+        )
     }
 
     LoginFlowBackground(
