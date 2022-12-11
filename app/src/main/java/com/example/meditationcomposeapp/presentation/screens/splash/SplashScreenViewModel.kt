@@ -1,6 +1,5 @@
 package com.example.meditationcomposeapp.presentation.screens.splash
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.meditationcomposeapp.BuildConfig
 import com.example.meditationcomposeapp.data_source.data_store.UserDataStore
@@ -10,8 +9,14 @@ import com.example.meditationcomposeapp.model.entity.login_flow.CompareResult
 import com.example.meditationcomposeapp.model.entity.login_flow.toVersion
 import com.example.meditationcomposeapp.model.usecase.authentication.GetAppUpdatesHistoryUseCase
 import com.example.meditationcomposeapp.model.usecase.authentication.LoginUseCase
+import com.example.meditationcomposeapp.presentation.navigation.Event
+import com.example.meditationcomposeapp.presentation.navigation.NavigationEvent
+import com.example.meditationcomposeapp.presentation.screens.BaseViewModel
+import com.example.meditationcomposeapp.presentation.screens.destinations.EnterScreenDestination
+import com.example.meditationcomposeapp.presentation.screens.destinations.MainScreenDestination
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,12 +26,9 @@ class SplashScreenViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase,
     private val updateDescriptionRepository: UpdateDescriptionRepository,
     private val getAppUpdatesHistoryUseCase: GetAppUpdatesHistoryUseCase,
-) : ViewModel() {
+) : BaseViewModel() {
 
-    fun onLaunchSplashScreen(
-        navigateToMainScreen: () -> Unit,
-        navigateToLoginScreen: () -> Unit,
-    ) {
+    fun onLaunchSplashScreen() {
         viewModelScope.launch {
             checkLastUpdateVersion()
 
@@ -34,9 +36,11 @@ class SplashScreenViewModel @Inject constructor(
             val password = userDataStore.readPassword().first()
 
             if (login.isNotEmpty() && password.isNotEmpty()) {
-                logIn(login, password, navigateToMainScreen, navigateToLoginScreen)
+                logIn(login, password)
             } else {
-                navigateToLoginScreen()
+                _navigationEvent.update {
+                   Event(NavigationEvent.Navigate(EnterScreenDestination))
+                }
             }
         }
     }
@@ -44,16 +48,18 @@ class SplashScreenViewModel @Inject constructor(
     private suspend fun logIn(
         login: String,
         password: String,
-        navigateToMainScreen: () -> Unit,
-        navigateToLoginScreen: () -> Unit,
     ) {
         loginUseCase(login, password).collect {
             when (it) {
                 is NetworkResponse.Success<*> -> {
-                    navigateToMainScreen()
+                    _navigationEvent.update {
+                        Event(NavigationEvent.Navigate(MainScreenDestination))
+                    }
                 }
                 is NetworkResponse.Failure<*> -> {
-                    navigateToLoginScreen()
+                    _navigationEvent.update {
+                        Event(NavigationEvent.Navigate(EnterScreenDestination))
+                    }
                 }
                 is NetworkResponse.Loading<*> -> {
                     //do nothing

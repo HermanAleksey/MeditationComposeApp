@@ -8,14 +8,15 @@ import com.example.meditationcomposeapp.data_source.repository.update_descriptio
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.usecase.authentication.GetAppUpdatesHistoryUseCase
 import com.example.meditationcomposeapp.model.usecase.authentication.LoginUseCase
+import com.example.meditationcomposeapp.presentation.navigation.NavigationEvent
+import com.example.meditationcomposeapp.presentation.screens.destinations.EnterScreenDestination
+import com.example.meditationcomposeapp.presentation.screens.destinations.LoginScreenDestination
+import com.example.meditationcomposeapp.presentation.screens.destinations.MainScreenDestination
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.*
-import org.junit.After
-import org.junit.Before
-import org.junit.Rule
-import org.junit.Test
+import org.junit.*
 import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mock
@@ -62,8 +63,6 @@ class SplashScreenViewModelTest {
         runTest {
             val login = "q"
             val password = "2"
-            var mainScreenWasLaunched = false
-            var loginScreenWasLaunched = false
 
             whenever(userDataStore.readLastUpdateVersion()).thenReturn(flow { emit("0.0.1") })
             whenever(getAppUpdatesHistoryUseCase(anyString())).thenReturn(flow {
@@ -84,25 +83,23 @@ class SplashScreenViewModelTest {
             whenever(userDataStore.readLogin()).thenReturn(flow { emit(login) })
             whenever(userDataStore.readPassword()).thenReturn(flow { emit(password) })
 
-            viewModel.onLaunchSplashScreen({
-                mainScreenWasLaunched = true
-            }, {
-                loginScreenWasLaunched = true
-            })
+            viewModel.onLaunchSplashScreen()
 
             advanceUntilIdle()
 
-            assert(mainScreenWasLaunched)
-            assert(!loginScreenWasLaunched)
+            Assert.assertEquals(
+                NavigationEvent.Navigate(
+                    MainScreenDestination()
+                ).toString(),
+                viewModel.navigationEvent.value.getNavigationIfNotHandled().toString()
+            )
         }
 
     @Test
-    fun `onLaunchSplashScreen, check login and password success, logIn fail, navigate to login`() =
+    fun `onLaunchSplashScreen, check login and password success, logIn fail, navigate to enter screen`() =
         runTest {
             val login = "q"
             val password = "2"
-            var mainScreenWasLaunched = false
-            var loginScreenWasLaunched = false
 
             whenever(userDataStore.readLastUpdateVersion()).thenReturn(flow { emit("0.0.1") })
             whenever(getAppUpdatesHistoryUseCase(anyString())).thenReturn(flow {
@@ -121,25 +118,23 @@ class SplashScreenViewModelTest {
             whenever(userDataStore.readLogin()).thenReturn(flow { emit(login) })
             whenever(userDataStore.readPassword()).thenReturn(flow { emit(password) })
 
-            viewModel.onLaunchSplashScreen({
-                mainScreenWasLaunched = true
-            }, {
-                loginScreenWasLaunched = true
-            })
+            viewModel.onLaunchSplashScreen()
 
             advanceUntilIdle()
 
-            assert(!mainScreenWasLaunched)
-            assert(loginScreenWasLaunched)
+            Assert.assertEquals(
+                NavigationEvent.Navigate(
+                    EnterScreenDestination()
+                ).toString(),
+                viewModel.navigationEvent.value.getNavigationIfNotHandled().toString()
+            )
         }
 
     @Test
-    fun `onLaunchSplashScreen, check login and password empty, navigate to login`() =
+    fun `onLaunchSplashScreen, check login and password empty, navigate to enter screen`() =
         runTest {
             val login = ""
             val password = ""
-            var mainScreenWasLaunched = false
-            var loginScreenWasLaunched = false
 
             whenever(userDataStore.readLastUpdateVersion()).thenReturn(flow { emit("0.0.1") })
             whenever(getAppUpdatesHistoryUseCase(anyString())).thenReturn(flow {
@@ -152,21 +147,21 @@ class SplashScreenViewModelTest {
             whenever(userDataStore.readLogin()).thenReturn(flow { emit(login) })
             whenever(userDataStore.readPassword()).thenReturn(flow { emit(password) })
 
-            viewModel.onLaunchSplashScreen({
-                mainScreenWasLaunched = true
-            }, {
-                loginScreenWasLaunched = true
-            })
+            viewModel.onLaunchSplashScreen()
 
             advanceUntilIdle()
 
-            assert(!mainScreenWasLaunched)
-            assert(loginScreenWasLaunched)
+            Assert.assertEquals(
+                NavigationEvent.Navigate(
+                    EnterScreenDestination()
+                ).toString(),
+                viewModel.navigationEvent.value.getNavigationIfNotHandled().toString()
+            )
         }
 
     @Test
     fun `checkLastUpdateVersion, is newest version, don't request update info`() {
-        viewModel.onLaunchSplashScreen({ }, {})
+        viewModel.onLaunchSplashScreen()
 
         verify(getAppUpdatesHistoryUseCase, never()).invoke(anyString())
     }
@@ -198,7 +193,7 @@ class SplashScreenViewModelTest {
                     )
                 })
 
-            viewModel.onLaunchSplashScreen({}, {})
+            viewModel.onLaunchSplashScreen()
 
             advanceUntilIdle()
 
@@ -236,7 +231,7 @@ class SplashScreenViewModelTest {
                     )
                 })
 
-            viewModel.onLaunchSplashScreen({}, {})
+            viewModel.onLaunchSplashScreen()
 
             advanceUntilIdle()
 
