@@ -5,10 +5,16 @@ import com.example.meditationcomposeapp.FakeObjects.getFakeProfile
 import com.example.meditationcomposeapp.data_source.data_store.UserDataStore
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.usecase.authentication.LoginUseCase
+import com.example.meditationcomposeapp.presentation.navigation.NavigationEvent
+import com.example.meditationcomposeapp.presentation.screens.destinations.EnterCodeScreenDestination
+import com.example.meditationcomposeapp.presentation.screens.destinations.EnterScreenDestination
+import com.example.meditationcomposeapp.presentation.screens.destinations.MainScreenDestination
+import com.example.meditationcomposeapp.presentation.screens.destinations.RegistrationScreenDestination
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
+import org.junit.Assert
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
@@ -67,53 +73,51 @@ class LoginScreenViewModelTest {
         assert(viewModel.uiState.value.password == pass)
     }
 
-    @Test
-    fun `onForgotPasswordClicked, navigation invoked`() {
-        var navigated = false
-
-        viewModel.onForgotPasswordClicked { navigated = true }
-
-        assert(navigated)
-    }
 
     @Test
     fun `onSignUpClicked, navigation invoked`() {
-        var navigated = false
+        viewModel.onSignUpClicked()
 
-        viewModel.onSignUpClicked { navigated = true }
-
-        assert(navigated)
+        assertEquals(
+            NavigationEvent.Navigate(
+                RegistrationScreenDestination()
+            ).toString(),
+            viewModel.navigationEvent.value.getNavigationIfNotHandled().toString()
+        )
     }
 
     @Test
     fun `onLoginClicked, login is not valid, pass valid, don't call loginUseCase`() = runTest {
-        var navigated = false
         viewModel.onLoginTextChanged("")
         viewModel.onPasswordTextChanged("qwewqeq")
 
-        viewModel.onLoginClicked { navigated = true }
+        viewModel.onLoginClicked()
 
         advanceUntilIdle()
 
-        assert(!navigated)
+        assertEquals(
+            NavigationEvent.Empty.toString(),
+            viewModel.navigationEvent.value.getNavigationIfNotHandled().toString()
+        )
     }
 
     @Test
     fun `onLoginClicked, password is not valid, login valid, don't call loginUseCase`() = runTest {
-        var navigated = false
         viewModel.onLoginTextChanged("wefwefwef")
         viewModel.onPasswordTextChanged("")
 
-        viewModel.onLoginClicked { navigated = true }
+        viewModel.onLoginClicked()
 
         advanceUntilIdle()
 
-        assert(!navigated)
+        assertEquals(
+            NavigationEvent.Empty.toString(),
+            viewModel.navigationEvent.value.getNavigationIfNotHandled().toString()
+        )
     }
 
     @Test
     fun `onLoginClicked, login and password valid, login success, navigate`() = runTest {
-        var navigated = false
         val login = "qeww"
         val password = "qeww243"
 
@@ -128,16 +132,20 @@ class LoginScreenViewModelTest {
                 )
             })
 
-        viewModel.onLoginClicked { navigated = true }
+        viewModel.onLoginClicked()
 
         advanceUntilIdle()
 
-        assert(navigated)
+        assertEquals(
+            NavigationEvent.Navigate(
+                MainScreenDestination()
+            ).toString(),
+            viewModel.navigationEvent.value.getNavigationIfNotHandled().toString()
+        )
     }
 
     @Test
     fun `onLoginClicked, login and password valid, login error, don't navigate`() = runTest {
-        var navigated = false
         val login = "qeww"
         val password = "qeww243"
 
@@ -153,16 +161,18 @@ class LoginScreenViewModelTest {
                 )
             })
 
-        viewModel.onLoginClicked { navigated = true }
+        viewModel.onLoginClicked()
 
         advanceUntilIdle()
 
-        assert(!navigated)
+        assertEquals(
+            NavigationEvent.Empty.toString(),
+            viewModel.navigationEvent.value.getNavigationIfNotHandled().toString()
+        )
     }
 
     @Test
     fun `onLoginClicked, login and password valid, login success, save credits into dataStore`() = runTest {
-        var navigated = false
         val login = "qeww"
         val password = "qeww243"
 
@@ -177,11 +187,16 @@ class LoginScreenViewModelTest {
                 )
             })
 
-        viewModel.onLoginClicked { navigated = true }
+        viewModel.onLoginClicked()
 
         advanceUntilIdle()
 
-        assert(navigated)
+        assertEquals(
+            NavigationEvent.Navigate(
+                MainScreenDestination()
+            ).toString(),
+            viewModel.navigationEvent.value.getNavigationIfNotHandled().toString()
+        )
         verify(userDataStore).writeLogin(login)
         verify(userDataStore).writePassword(password)
     }

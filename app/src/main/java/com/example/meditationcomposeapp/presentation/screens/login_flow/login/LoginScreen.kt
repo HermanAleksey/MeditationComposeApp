@@ -8,6 +8,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,9 +24,7 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
 import com.example.meditationcomposeapp.R
-import com.example.meditationcomposeapp.presentation.screens.destinations.EnterLoginScreenDestination
-import com.example.meditationcomposeapp.presentation.screens.destinations.MainScreenDestination
-import com.example.meditationcomposeapp.presentation.screens.destinations.RegistrationScreenDestination
+import com.example.meditationcomposeapp.presentation.navigation.processEvent
 import com.example.meditationcomposeapp.presentation.screens.login_flow.enter.composable.DontHaveAccountText
 import com.example.meditationcomposeapp.presentation.screens.login_flow.enter.composable.LoginMainButton
 import com.example.meditationcomposeapp.presentation.screens.login_flow.login.composable.LoginFlowBackground
@@ -43,6 +42,12 @@ fun LoginScreen(
     val passwordFocusRequester = FocusRequester()
 
     val uiState = viewModel.uiState.collectAsState()
+
+    LaunchedEffect(key1 = viewModel.navigationEvent.collectAsState()) {
+        viewModel.navigationEvent.collect { event ->
+            event.processEvent(navigator)
+        }
+    }
 
     LoginFlowBackground(
         isLoading = uiState.value.isLoading
@@ -113,13 +118,7 @@ fun LoginScreen(
                     modifier = Modifier
                         .padding(top = 9.dp)
                         .clickable {
-                            viewModel.onForgotPasswordClicked { login ->
-                                navigator.navigate(
-                                    EnterLoginScreenDestination(
-                                        login
-                                    )
-                                )
-                            }
+                            viewModel.onForgotPasswordClicked()
                         }
                 )
             }
@@ -130,11 +129,7 @@ fun LoginScreen(
                     .wrapContentHeight()
                     .padding(top = 28.dp)
             ) {
-                viewModel.onLoginClicked {
-                    navigator.navigate(
-                        MainScreenDestination()
-                    )
-                }
+                viewModel.onLoginClicked()
             }
             Box(
                 modifier = Modifier
@@ -146,11 +141,7 @@ fun LoginScreen(
                 DontHaveAccountText(modifier = Modifier
                     .padding(top = 18.dp)
                     .clickable {
-                        viewModel.onSignUpClicked {
-                            navigator.navigate(
-                                RegistrationScreenDestination()
-                            )
-                        }
+                        viewModel.onSignUpClicked()
                     })
             }
             Spacer(modifier = Modifier.padding(top = 80.dp))
