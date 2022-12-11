@@ -16,17 +16,17 @@ import org.mockito.junit.MockitoJUnitRunner
 @OptIn(ExperimentalCoroutinesApi::class)
 class BeerListScreenViewModelTest {
 
-    @ExperimentalCoroutinesApi
-    @get:Rule
-    var rule = CoroutinesTestRule()
-
-    @Mock
-    private lateinit var getBeerListUseCase: GetBeersUseCase
-
-    private lateinit var viewModel: BeerListScreenViewModel
-
-    @Before
-    fun setup() {
-        viewModel = BeerListScreenViewModel(getBeerListUseCase)
-    }
+//    @ExperimentalCoroutinesApi
+//    @get:Rule
+//    var rule = CoroutinesTestRule()
+//
+//    @Mock
+//    private lateinit var getBeerListUseCase: GetBeersUseCase
+//
+//    private lateinit var viewModel: BeerListScreenViewModel
+//
+//    @Before
+//    fun setup() {
+//        viewModel = BeerListScreenViewModel(getBeerListUseCase)
+//    }
 }
