@@ -4,6 +4,9 @@ import com.example.meditationcomposeapp.CoroutinesTestRule
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.entity.login_flow.SuccessInfo
 import com.example.meditationcomposeapp.model.usecase.authentication.SetNewPasswordUseCase
+import com.example.meditationcomposeapp.presentation.navigation.NavigationEvent
+import com.example.meditationcomposeapp.presentation.screens.destinations.LoginScreenDestination
+import com.example.meditationcomposeapp.presentation.screens.destinations.MainScreenDestination
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.advanceUntilIdle
@@ -67,37 +70,40 @@ class NewPasswordScreenViewModelTest {
 
     @Test
     fun `onConfirmClick, new password is not valid, don't navigate`() = runTest {
-        var navigated = false
         val login = "lo5gin"
         viewModel.onNewPasswordTextChanged("")
 
-        viewModel.onConfirmClick(login) { navigated = true }
+        viewModel.onConfirmClick(login)
 
         advanceUntilIdle()
 
-        assert(!navigated)
+        assertEquals(
+            NavigationEvent.Empty.toString(),
+            viewModel.navigationEvent.value.getNavigationIfNotHandled().toString()
+        )
         verify(setNewPasswordUseCase, never()).invoke(anyString(), anyString())
     }
 
     @Test
     fun `onConfirmClick, new password is valid, passwords dont match, dont call request`() =
         runTest {
-            var navigated = false
             val login = "lo4gin"
             viewModel.onNewPasswordTextChanged("wdwddw")
             viewModel.onRepeatPasswordTextChanged("212")
 
-            viewModel.onConfirmClick(login) { navigated = true }
+            viewModel.onConfirmClick(login)
 
             advanceUntilIdle()
 
-            assert(!navigated)
+            assertEquals(
+                NavigationEvent.Empty.toString(),
+                viewModel.navigationEvent.value.getNavigationIfNotHandled().toString()
+            )
             verify(setNewPasswordUseCase, never()).invoke(anyString(), anyString())
         }
 
     @Test
     fun `onConfirmClick, new password is valid, request fail, don't navigate`() = runTest {
-        var navigated = false
         val login = "logi4n"
         val password = "password"
         viewModel.onNewPasswordTextChanged(password)
@@ -113,18 +119,20 @@ class NewPasswordScreenViewModelTest {
                 }
             )
 
-        viewModel.onConfirmClick (login) { navigated = true }
+        viewModel.onConfirmClick (login)
 
         advanceUntilIdle()
 
-        assert(!navigated)
+        assertEquals(
+            NavigationEvent.Empty.toString(),
+            viewModel.navigationEvent.value.getNavigationIfNotHandled().toString()
+        )
         verify(setNewPasswordUseCase).invoke(login, password)
     }
 
     @Test
     fun `onConfirmClick, new password is valid, request success, response data error, don't navigate`() =
         runTest {
-            var navigated = false
             val login = "qweeqw"
             val password = "password"
             viewModel.onNewPasswordTextChanged(password)
@@ -142,18 +150,20 @@ class NewPasswordScreenViewModelTest {
                     }
                 )
 
-            viewModel.onConfirmClick(login) { navigated = true }
+            viewModel.onConfirmClick(login)
 
             advanceUntilIdle()
 
-            assert(!navigated)
+            assertEquals(
+                NavigationEvent.Empty.toString(),
+                viewModel.navigationEvent.value.getNavigationIfNotHandled().toString()
+            )
             verify(setNewPasswordUseCase).invoke(login, password)
         }
 
     @Test
     fun `onConfirmClick, new password is valid, request success, response success, don't navigate`() =
         runTest {
-            var navigated = false
             val login = "login"
             val password = "rebrtjn"
             viewModel.onNewPasswordTextChanged(password)
@@ -171,11 +181,16 @@ class NewPasswordScreenViewModelTest {
                     }
                 )
 
-            viewModel.onConfirmClick(login) { navigated = true }
+            viewModel.onConfirmClick(login)
 
             advanceUntilIdle()
 
-            assert(navigated)
+            assertEquals(
+                NavigationEvent.Navigate(
+                    LoginScreenDestination()
+                ).toString(),
+                viewModel.navigationEvent.value.getNavigationIfNotHandled().toString()
+            )
             verify(setNewPasswordUseCase).invoke(login, password)
         }
 }
