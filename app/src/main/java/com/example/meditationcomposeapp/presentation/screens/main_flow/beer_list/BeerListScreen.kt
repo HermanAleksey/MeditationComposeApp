@@ -8,6 +8,8 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
@@ -20,7 +22,7 @@ import androidx.paging.compose.items
 import com.example.meditationcomposeapp.R
 import com.example.meditationcomposeapp.model.entity.beer.Beer
 import com.example.meditationcomposeapp.presentation.common_composables.ColorBackground
-import com.example.meditationcomposeapp.presentation.screens.destinations.DetailedBeerScreenDestination
+import com.example.meditationcomposeapp.presentation.navigation.processEvent
 import com.example.meditationcomposeapp.presentation.screens.main_flow.beer_list.composable.BeerItem
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -33,18 +35,18 @@ fun BeerListScreen(
 ) {
     val beersPaging = viewModel.beersPagingFlow.collectAsLazyPagingItems()
 
+    LaunchedEffect(key1 = viewModel.navigationEvent.collectAsState()) {
+        viewModel.navigationEvent.collect { event ->
+            event.processEvent(navigator)
+        }
+    }
+
     ColorBackground(
         lockScreenWhenLoading = true,
         color = MaterialTheme.colors.background
     ) {
         BeerList(beersPaging, onBeerItemClicked = {
-            viewModel.onBeerItemClicked {
-                navigator.navigate(
-                    DetailedBeerScreenDestination(
-                        it
-                    )
-                )
-            }
+            viewModel.onBeerItemClicked(it)
         })
     }
 }
