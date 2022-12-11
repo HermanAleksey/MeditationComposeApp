@@ -6,8 +6,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.example.meditationcomposeapp.presentation.navigation.processEvent
 import com.example.meditationcomposeapp.presentation.screens.destinations.EnterScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.SplashScreenDestination
 import com.ramcosta.composedestinations.annotation.Destination
@@ -19,6 +22,12 @@ fun TestScreen(
     viewModel: ProfileScreenViewModel,
     navigator: DestinationsNavigator,
 ) {
+    LaunchedEffect(key1 = viewModel.navigationEvent.collectAsState()) {
+        viewModel.navigationEvent.collect { event ->
+            event.processEvent(navigator)
+        }
+    }
+
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -26,13 +35,7 @@ fun TestScreen(
     ) {
         Text(text = "profile screen")
         Button(onClick = {
-            viewModel.onLogOutClicked {
-                navigator.navigate(
-                    EnterScreenDestination()
-                ) {
-                    popUpTo(SplashScreenDestination().route)
-                }
-            }
+            viewModel.onLogOutClicked()
         }) {
             Text(text = "Log out")
         }
