@@ -1,12 +1,15 @@
 package com.example.meditationcomposeapp.presentation.screens.login_flow.registration
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.usecase.authentication.RegisterUseCase
 import com.example.meditationcomposeapp.model.utils.validation.LoginField
 import com.example.meditationcomposeapp.model.utils.validation.NameField
 import com.example.meditationcomposeapp.model.utils.validation.PasswordField
+import com.example.meditationcomposeapp.presentation.navigation.Event
+import com.example.meditationcomposeapp.presentation.navigation.NavigationEvent
+import com.example.meditationcomposeapp.presentation.screens.BaseViewModel
+import com.example.meditationcomposeapp.presentation.screens.destinations.LoginScreenDestination
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -17,7 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 class RegistrationScreenViewModel @Inject constructor(
     private val registerUseCase: RegisterUseCase
-) : ViewModel() {
+) : BaseViewModel() {
 
     private val _uiState = MutableStateFlow(RegistrationScreenState())
     val uiState: StateFlow<RegistrationScreenState> = _uiState
@@ -47,7 +50,7 @@ class RegistrationScreenViewModel @Inject constructor(
         }
     }
 
-    fun onSignUpClicked(navigateToLoginScreen: () -> Unit) {
+    fun onSignUpClicked() {
         viewModelScope.launch {
             if (
                 isNameFieldValid() &&
@@ -62,7 +65,13 @@ class RegistrationScreenViewModel @Inject constructor(
                     when (it) {
                         is NetworkResponse.Success<*> -> {
                             if (it.data!!.success)
-                                navigateToLoginScreen()
+                                _navigationEvent.update {
+                                    Event(
+                                        NavigationEvent.Navigate(
+                                            LoginScreenDestination()
+                                        )
+                                    )
+                                }
                             else {
                                 //displayError()
                             }
@@ -107,6 +116,11 @@ class RegistrationScreenViewModel @Inject constructor(
         }
     }
 
-    fun onSignInClicked(navigateToLoginScreen: () -> Unit) =
-        navigateToLoginScreen()
+    fun onSignInClicked() = _navigationEvent.update {
+        Event(
+            NavigationEvent.Navigate(
+                LoginScreenDestination()
+            )
+        )
+    }
 }

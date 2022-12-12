@@ -7,6 +7,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,6 +23,7 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
 import com.example.meditationcomposeapp.R
+import com.example.meditationcomposeapp.presentation.navigation.processEvent
 import com.example.meditationcomposeapp.presentation.screens.destinations.LoginScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.login_flow.enter.composable.LoginMainButton
 import com.example.meditationcomposeapp.presentation.screens.login_flow.login.composable.LoginFlowBackground
@@ -40,6 +42,12 @@ fun NewPasswordScreen(
     val repeatPasswordFocusRequester = FocusRequester()
 
     val uiState = viewModel.uiState.collectAsState()
+
+    LaunchedEffect(key1 = viewModel.navigationEvent.collectAsState()) {
+        viewModel.navigationEvent.collect { event ->
+            event.processEvent(navigator)
+        }
+    }
 
     LoginFlowBackground(
         isLoading = uiState.value.isLoading
@@ -105,11 +113,7 @@ fun NewPasswordScreen(
                     .wrapContentHeight()
                     .padding(top = 28.dp)
             ) {
-                viewModel.onConfirmClick(login) {
-                    navigator.navigate(
-                        LoginScreenDestination()
-                    )
-                }
+                viewModel.onConfirmClick(login)
             }
         }
     }

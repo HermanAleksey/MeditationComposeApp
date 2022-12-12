@@ -23,6 +23,7 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
 import com.example.meditationcomposeapp.R
+import com.example.meditationcomposeapp.presentation.navigation.processEvent
 import com.example.meditationcomposeapp.presentation.screens.destinations.*
 import com.example.meditationcomposeapp.presentation.screens.login_flow.enter.composable.LoginMainButton
 import com.example.meditationcomposeapp.presentation.screens.login_flow.login.composable.LoginFlowBackground
@@ -45,6 +46,12 @@ fun EnterLoginScreen(
     LaunchedEffect(key1 = null, block = {
         viewModel.onLoginTextChanged(initialLoginValue ?: "")
     })
+
+    LaunchedEffect(key1 = viewModel.navigationEvent.collectAsState()) {
+        viewModel.navigationEvent.collect { event ->
+            event.processEvent(navigator)
+        }
+    }
 
     LoginFlowBackground(
         isLoading = uiState.value.isLoading
@@ -97,13 +104,7 @@ fun EnterLoginScreen(
                     .wrapContentHeight()
                     .padding(top = 28.dp)
             ) {
-                viewModel.onConfirmClick { login ->
-                    navigator.navigate(
-                        EnterCodeScreenDestination(
-                            login
-                        )
-                    )
-                }
+                viewModel.onConfirmClick()
             }
         }
     }

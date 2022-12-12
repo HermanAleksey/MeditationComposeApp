@@ -4,7 +4,9 @@ import com.example.meditationcomposeapp.CoroutinesTestRule
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.entity.login_flow.SuccessInfo
 import com.example.meditationcomposeapp.model.usecase.authentication.VerifyCodeUseCase
-import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.example.meditationcomposeapp.presentation.navigation.NavigationEvent
+import com.example.meditationcomposeapp.presentation.screens.destinations.LoginScreenDestination
+import com.example.meditationcomposeapp.presentation.screens.destinations.NewPasswordScreenDestination
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.advanceUntilIdle
@@ -21,6 +23,7 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 import java.util.*
+
 
 @RunWith(MockitoJUnitRunner::class)
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -120,7 +123,7 @@ class EnterCodeScreenViewModelTest {
             }
         )
 
-        viewModel.onLastDigitFilled(login) { }
+        viewModel.onLastDigitFilled(login)
 
         advanceUntilIdle()
 
@@ -138,7 +141,7 @@ class EnterCodeScreenViewModelTest {
             }
         )
 
-        viewModel.onLastDigitFilled(login) { }
+        viewModel.onLastDigitFilled(login)
 
         advanceUntilIdle()
 
@@ -156,7 +159,7 @@ class EnterCodeScreenViewModelTest {
             }
         )
 
-        viewModel.onLastDigitFilled(login) { }
+        viewModel.onLastDigitFilled(login)
 
         advanceUntilIdle()
 
@@ -164,30 +167,9 @@ class EnterCodeScreenViewModelTest {
     }
 
     @Test
-    fun `onLastDigitFilled, network request success, data is success, navigate to login screen`() =
-        runTest {
-            val viewModel = EnterCodeScreenViewModel(verifyCodeUseCase)
-            val login = "q"
-            var navigate = false
-
-            whenever(verifyCodeUseCase(anyString(), anyString())).thenReturn(
-                flow {
-                    emit(NetworkResponse.Success(data = SuccessInfo(true, null)))
-                }
-            )
-
-            viewModel.onLastDigitFilled(login) { navigate = true }
-
-            advanceUntilIdle()
-
-            assertTrue(navigate)
-        }
-
-    @Test
     fun `onLastDigitFilled, network request success, error received, clear code`() = runTest {
         val viewModel = EnterCodeScreenViewModel(verifyCodeUseCase)
         val login = "q"
-        var navigate = false
 
         whenever(verifyCodeUseCase(anyString(), anyString())).thenReturn(
             flow {
@@ -195,11 +177,10 @@ class EnterCodeScreenViewModelTest {
             }
         )
 
-        viewModel.onLastDigitFilled(login) { navigate = true }
+        viewModel.onLastDigitFilled(login)
 
         advanceUntilIdle()
 
-        assertTrue(!navigate)
         assert(viewModel.uiState.value.code.contentToString() == EnterCodeScreenState.EMPTY_CODE_VALUE.contentToString())
     }
 }

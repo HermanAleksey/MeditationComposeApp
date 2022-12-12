@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -19,12 +21,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.meditationcomposeapp.R
 import com.example.meditationcomposeapp.presentation.common_composables.ImageBackground
-import com.example.meditationcomposeapp.presentation.screens.destinations.LoginScreenDestination
-import com.example.meditationcomposeapp.presentation.screens.destinations.RegistrationScreenDestination
+import com.example.meditationcomposeapp.presentation.navigation.NavigationEvent
+import com.example.meditationcomposeapp.presentation.navigation.processEvent
 import com.example.meditationcomposeapp.presentation.screens.login_flow.enter.composable.DontHaveAccountText
 import com.example.meditationcomposeapp.presentation.screens.login_flow.enter.composable.LoginMainButton
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import kotlinx.coroutines.flow.StateFlow
 
 @Destination
 @Composable
@@ -36,6 +39,12 @@ fun EnterScreen(
     BackHandler(enabled = true, onBack = {
         activity?.finish()
     })
+
+    LaunchedEffect(key1 = viewModel.navigationEvent.collectAsState()) {
+        viewModel.navigationEvent.collect { event ->
+            event.processEvent(navigator)
+        }
+    }
 
     ImageBackground(
         imageRes = R.drawable.background_login
@@ -75,20 +84,12 @@ fun EnterScreen(
                     .fillMaxWidth(0.8F)
                     .wrapContentHeight()
             ) {
-                viewModel.onEnterClick {
-                    navigator.navigate(
-                        LoginScreenDestination()
-                    )
-                }
+                viewModel.onEnterClick()
             }
             DontHaveAccountText(modifier = Modifier
                 .padding(top = 18.dp)
                 .clickable {
-                    viewModel.onDontHaveAccountClick {
-                        navigator.navigate(
-                            RegistrationScreenDestination()
-                        )
-                    }
+                    viewModel.onDontHaveAccountClick()
                 })
         }
     }

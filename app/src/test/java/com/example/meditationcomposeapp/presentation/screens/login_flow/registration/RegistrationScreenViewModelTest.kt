@@ -4,6 +4,8 @@ import com.example.meditationcomposeapp.CoroutinesTestRule
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.entity.login_flow.SuccessInfo
 import com.example.meditationcomposeapp.model.usecase.authentication.RegisterUseCase
+import com.example.meditationcomposeapp.presentation.navigation.NavigationEvent
+import com.example.meditationcomposeapp.presentation.screens.destinations.LoginScreenDestination
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.advanceUntilIdle
@@ -78,17 +80,19 @@ class RegistrationScreenViewModelTest {
 
     @Test
     fun `onSignInClicked, navigate to login screen`() {
-        var navigated = false
+        viewModel.onSignInClicked()
 
-        viewModel.onSignInClicked { navigated = true }
-
-        assert(navigated)
+        assertEquals(
+            NavigationEvent.Navigate(
+                LoginScreenDestination()
+            ).toString(),
+            viewModel.navigationEvent.value.getNavigationIfNotHandled().toString()
+        )
     }
 
     @Test
     fun `onSignUpClicked, name not valid, login not valid, password not valid, don't call request`() =
         runTest {
-            var navigated = false
             val login = ""
             val password = ""
             val name = ""
@@ -96,18 +100,20 @@ class RegistrationScreenViewModelTest {
             viewModel.onLoginTextChanged(login)
             viewModel.onPasswordTextChanged(password)
 
-            viewModel.onSignUpClicked { navigated = true }
+            viewModel.onSignUpClicked()
 
             advanceUntilIdle()
 
             verify(registerUseCase, never()).invoke(anyString(), anyString(), anyString())
-            assert(!navigated)
+            assertEquals(
+                NavigationEvent.Empty.toString(),
+                viewModel.navigationEvent.value.getNavigationIfNotHandled().toString()
+            )
         }
 
     @Test
     fun `onSignUpClicked, name is valid, login not valid, password not valid, don't call request`() =
         runTest {
-            var navigated = false
             val login = "qwewqe"
             val password = ""
             val name = ""
@@ -115,18 +121,20 @@ class RegistrationScreenViewModelTest {
             viewModel.onLoginTextChanged(login)
             viewModel.onPasswordTextChanged(password)
 
-            viewModel.onSignUpClicked { navigated = true }
+            viewModel.onSignUpClicked()
 
             advanceUntilIdle()
 
             verify(registerUseCase, never()).invoke(anyString(), anyString(), anyString())
-            assert(!navigated)
+            assertEquals(
+                NavigationEvent.Empty.toString(),
+                viewModel.navigationEvent.value.getNavigationIfNotHandled().toString()
+            )
         }
 
     @Test
     fun `onSignUpClicked, name not valid, login is valid, password not valid, don't call request`() =
         runTest {
-            var navigated = false
             val login = ""
             val password = "qweqwe"
             val name = ""
@@ -134,18 +142,20 @@ class RegistrationScreenViewModelTest {
             viewModel.onLoginTextChanged(login)
             viewModel.onPasswordTextChanged(password)
 
-            viewModel.onSignUpClicked { navigated = true }
+            viewModel.onSignUpClicked()
 
             advanceUntilIdle()
 
             verify(registerUseCase, never()).invoke(anyString(), anyString(), anyString())
-            assert(!navigated)
+            assertEquals(
+                NavigationEvent.Empty.toString(),
+                viewModel.navigationEvent.value.getNavigationIfNotHandled().toString()
+            )
         }
 
     @Test
     fun `onSignUpClicked, name not valid, login not valid, password is valid, don't call request`() =
         runTest {
-            var navigated = false
             val login = ""
             val password = ""
             val name = "qwdqwd"
@@ -153,18 +163,20 @@ class RegistrationScreenViewModelTest {
             viewModel.onLoginTextChanged(login)
             viewModel.onPasswordTextChanged(password)
 
-            viewModel.onSignUpClicked { navigated = true }
+            viewModel.onSignUpClicked()
 
             advanceUntilIdle()
 
             verify(registerUseCase, never()).invoke(anyString(), anyString(), anyString())
-            assert(!navigated)
+            assertEquals(
+                NavigationEvent.Empty.toString(),
+                viewModel.navigationEvent.value.getNavigationIfNotHandled().toString()
+            )
         }
 
     @Test
     fun `onSignUpClicked, name is valid, login is valid, password not valid, don't call request`() =
         runTest {
-            var navigated = false
             val login = "qwewqe"
             val password = "qwewqe"
             val name = ""
@@ -172,18 +184,20 @@ class RegistrationScreenViewModelTest {
             viewModel.onLoginTextChanged(login)
             viewModel.onPasswordTextChanged(password)
 
-            viewModel.onSignUpClicked { navigated = true }
+            viewModel.onSignUpClicked()
 
             advanceUntilIdle()
 
             verify(registerUseCase, never()).invoke(anyString(), anyString(), anyString())
-            assert(!navigated)
+            assertEquals(
+                NavigationEvent.Empty.toString(),
+                viewModel.navigationEvent.value.getNavigationIfNotHandled().toString()
+            )
         }
 
     @Test
     fun `onSignUpClicked, name is valid, login not valid, password is valid, don't call request`() =
         runTest {
-            var navigated = false
             val login = "qwewqe"
             val password = ""
             val name = "breerbe"
@@ -191,18 +205,20 @@ class RegistrationScreenViewModelTest {
             viewModel.onLoginTextChanged(login)
             viewModel.onPasswordTextChanged(password)
 
-            viewModel.onSignUpClicked { navigated = true }
+            viewModel.onSignUpClicked()
 
             advanceUntilIdle()
 
             verify(registerUseCase, never()).invoke(anyString(), anyString(), anyString())
-            assert(!navigated)
+            assertEquals(
+                NavigationEvent.Empty.toString(),
+                viewModel.navigationEvent.value.getNavigationIfNotHandled().toString()
+            )
         }
 
     @Test
     fun `onSignUpClicked, name not valid, login is valid, password is valid, don't call request`() =
         runTest {
-            var navigated = false
             val login = ""
             val password = "btrtnre"
             val name = "dfccnc"
@@ -210,18 +226,20 @@ class RegistrationScreenViewModelTest {
             viewModel.onLoginTextChanged(login)
             viewModel.onPasswordTextChanged(password)
 
-            viewModel.onSignUpClicked { navigated = true }
+            viewModel.onSignUpClicked()
 
             advanceUntilIdle()
 
             verify(registerUseCase, never()).invoke(anyString(), anyString(), anyString())
-            assert(!navigated)
+            assertEquals(
+                NavigationEvent.Empty.toString(),
+                viewModel.navigationEvent.value.getNavigationIfNotHandled().toString()
+            )
         }
 
     @Test
     fun `onSignUpClicked, fields are valid, register fail, don't navigate`() =
         runTest {
-            var navigated = false
             val login = "qwewqe"
             val password = "yumtymf"
             val name = "fghmfmy"
@@ -235,18 +253,20 @@ class RegistrationScreenViewModelTest {
                     }
                 )
 
-            viewModel.onSignUpClicked { navigated = true }
+            viewModel.onSignUpClicked()
 
             advanceUntilIdle()
 
             verify(registerUseCase).invoke(name, login, password)
-            assert(!navigated)
+            assertEquals(
+                NavigationEvent.Empty.toString(),
+                viewModel.navigationEvent.value.getNavigationIfNotHandled().toString()
+            )
         }
 
     @Test
     fun `onSignUpClicked, fields are valid, register success, response error, don't navigate`() =
         runTest {
-            var navigated = false
             val login = "qwewqe"
             val password = "yumtymf"
             val name = "fghmfmy"
@@ -266,18 +286,20 @@ class RegistrationScreenViewModelTest {
                     }
                 )
 
-            viewModel.onSignUpClicked { navigated = true }
+            viewModel.onSignUpClicked()
 
             advanceUntilIdle()
 
             verify(registerUseCase).invoke(name, login, password)
-            assert(!navigated)
+            assertEquals(
+                NavigationEvent.Empty.toString(),
+                viewModel.navigationEvent.value.getNavigationIfNotHandled().toString()
+            )
         }
 
     @Test
     fun `onSignUpClicked, fields are valid, register success, response success, don't navigate`() =
         runTest {
-            var navigated = false
             val login = "qwewqe"
             val password = "yumtymf"
             val name = "fghmfmy"
@@ -297,11 +319,16 @@ class RegistrationScreenViewModelTest {
                     }
                 )
 
-            viewModel.onSignUpClicked { navigated = true }
+            viewModel.onSignUpClicked()
 
             advanceUntilIdle()
 
             verify(registerUseCase).invoke(name, login, password)
-            assert(navigated)
+            assertEquals(
+                NavigationEvent.Navigate(
+                    LoginScreenDestination()
+                ).toString(),
+                viewModel.navigationEvent.value.getNavigationIfNotHandled().toString()
+            )
         }
 }

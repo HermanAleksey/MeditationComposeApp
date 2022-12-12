@@ -1,10 +1,13 @@
 package com.example.meditationcomposeapp.presentation.screens.login_flow.enter_login
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.usecase.authentication.RequestPasswordRestorationUseCase
 import com.example.meditationcomposeapp.model.utils.validation.LoginField
+import com.example.meditationcomposeapp.presentation.navigation.Event
+import com.example.meditationcomposeapp.presentation.navigation.NavigationEvent
+import com.example.meditationcomposeapp.presentation.screens.BaseViewModel
+import com.example.meditationcomposeapp.presentation.screens.destinations.EnterCodeScreenDestination
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,7 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class EnterLoginScreenViewModel @Inject constructor(
     private val requestPasswordRestorationUseCase: RequestPasswordRestorationUseCase
-) : ViewModel() {
+) : BaseViewModel() {
 
     private val _uiState = MutableStateFlow(EnterLoginScreenState())
     val uiState: StateFlow<EnterLoginScreenState> = _uiState
@@ -26,14 +29,21 @@ class EnterLoginScreenViewModel @Inject constructor(
         }
     }
 
-    fun onConfirmClick(navigateToEnterCode: (String) -> Unit) {
+    //todo how to test navigation with arguments?
+    fun onConfirmClick() {
         viewModelScope.launch {
             if (isEmailValid())
                 requestPasswordRestorationUseCase.invoke(_uiState.value.login).collect {
                     when (it) {
                         is NetworkResponse.Success<*> -> {
                             if (it.data!!.success)
-                                navigateToEnterCode(_uiState.value.login)
+                                _navigationEvent.update {
+                                    Event(
+                                        NavigationEvent.Navigate(
+                                            EnterCodeScreenDestination(_uiState.value.login)
+                                        )
+                                    )
+                                }
                             else {
                                 //displayError()
                             }
