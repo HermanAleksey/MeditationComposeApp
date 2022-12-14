@@ -4,6 +4,6 @@ import androidx.compose.runtime.Stable
 import com.example.meditationcomposeapp.model.entity.login_flow.UpdateDescriptionModel
 
 @Stable
-data class ToolbarState(
+data class ToolbarViewState(
     val updateNotesList: List<UpdateDescriptionModel> = listOf()
 )

@@ -17,8 +17,8 @@ class ToolbarViewModel @Inject constructor(
     private val updateDescriptionRepository: UpdateDescriptionRepository,
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(ToolbarState())
-    val uiState: StateFlow<ToolbarState> = _uiState
+    private val _uiState = MutableStateFlow(ToolbarViewState())
+    val uiState: StateFlow<ToolbarViewState> = _uiState
 
     fun onLaunch(dialogController: DialogController) {
         viewModelScope.launch {

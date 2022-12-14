@@ -10,6 +10,7 @@ import androidx.compose.animation.*
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.*
@@ -20,10 +21,14 @@ import com.example.meditationcomposeapp.presentation.navigation.MeditationDestin
 import com.example.meditationcomposeapp.presentation.navigation.getDestinationWrapper
 import com.example.meditationcomposeapp.presentation.screens.destinations.*
 import com.example.meditationcomposeapp.presentation.ui_controls.bottom_nav_bar.BottomBar
+import com.example.meditationcomposeapp.presentation.ui_controls.bottom_nav_bar.BottomBarController
+import com.example.meditationcomposeapp.presentation.ui_controls.bottom_nav_bar.BottomBarState
 import com.example.meditationcomposeapp.presentation.ui_controls.dialog.DialogController
 import com.example.meditationcomposeapp.presentation.ui_controls.dialog.DialogType
 import com.example.meditationcomposeapp.presentation.ui_controls.dialog.MeditationDialog
+import com.example.meditationcomposeapp.presentation.ui_controls.toolbar.ToolBarController
 import com.example.meditationcomposeapp.presentation.ui_controls.toolbar.Toolbar
+import com.example.meditationcomposeapp.presentation.ui_controls.toolbar.ToolbarState
 import com.example.meditationcomposeapp.ui.theme.MeditationComposeAppTheme
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -42,7 +47,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@OptIn(ExperimentalAnimationApi::class)
+@OptIn(ExperimentalAnimationApi::class, ExperimentalMaterialApi::class)
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun MyApp(windows: Window) {
@@ -57,9 +62,23 @@ fun MyApp(windows: Window) {
     var _bottomBarIsVisible by remember {
         mutableStateOf(false)
     }
-    var _toolbarIsVisible by remember {
-        mutableStateOf(false)
+    var _bottomBarState: BottomBarState by remember {
+        mutableStateOf(BottomBarState.NavigationBottomBarState(navController))
     }
+    val bottomBarController = object : BottomBarController {
+        override fun setState(state: BottomBarState) {
+            _bottomBarState = state
+        }
+
+        override fun show() {
+            _bottomBarIsVisible = true
+        }
+
+        override fun hide() {
+            _bottomBarIsVisible = false
+        }
+    }
+
     var _dialogIsVisible by remember {
         mutableStateOf(false)
     }
@@ -68,7 +87,6 @@ fun MyApp(windows: Window) {
             DialogType.EmptyDialog
         )
     }
-
     val dialogController = object : DialogController {
         override fun show(dialogType: DialogType) {
             _dialogType = dialogType
@@ -80,27 +98,52 @@ fun MyApp(windows: Window) {
         }
     }
 
+    var _toolbarIsVisible by remember {
+        mutableStateOf(false)
+    }
+    var _toolbarState: ToolbarState by remember {
+        mutableStateOf(ToolbarState.ToolbarMainState(dialogController))
+    }
+    val toolBarController = object : ToolBarController {
+        override fun setState(state: ToolbarState) {
+            _toolbarState = state
+        }
+
+        override fun show() {
+            _toolbarIsVisible = true
+        }
+
+        override fun hide() {
+            _toolbarIsVisible = false
+        }
+    }
+
     navController.addOnDestinationChangedListener { controller, destination, args ->
         destination.getDestinationWrapper()?.let {
             val toolbarShouldBeVisible = it.toolbarVisible
             val bottomBarShouldBeVisible = it.bottomBarVisible
-            if (_toolbarIsVisible != toolbarShouldBeVisible) {
-                _toolbarIsVisible = toolbarShouldBeVisible
-            }
-            if (_bottomBarIsVisible != bottomBarShouldBeVisible) {
-                _bottomBarIsVisible = toolbarShouldBeVisible
-            }
+
+            if (toolbarShouldBeVisible)
+                toolBarController.show()
+            else toolBarController.hide()
+
+            if (bottomBarShouldBeVisible)
+                bottomBarController.show()
+            else bottomBarController.hide()
         }
     }
 
     MeditationComposeAppTheme(false) {
         systemUiController.setSystemBarsColor(MaterialTheme.colors.background)
+//        ModalBottomSheetLayout(sheetContent = {
+//
+//        }) {
         Scaffold(
             topBar = {
                 if (_toolbarIsVisible)
                     Toolbar(
+                        toolbarState = _toolbarState,
                         hiltViewModel(),
-                        dialogController
                     )
             },
             bottomBar = {
@@ -113,7 +156,7 @@ fun MyApp(windows: Window) {
                         targetOffsetY = { it }
                     ),
                 ) {
-                    BottomBar(navController = navController)
+                    BottomBar(state = _bottomBarState)
                 }
             },
             modifier = Modifier.fillMaxSize()
@@ -131,5 +174,6 @@ fun MyApp(windows: Window) {
                     )
             }
         }
+//        }
     }
 }
