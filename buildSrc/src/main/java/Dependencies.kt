@@ -43,6 +43,9 @@ object Dependencies {
     const val hilt_android = "com.google.dagger:hilt-android:${LibVersions.hilt_version}"
     const val hilt_compiler = "com.google.dagger:hilt-compiler:${LibVersions.hilt_version}"
 
+    //gson
+    const val gson = "com.google.code.gson:gson:${LibVersions.gson_version}"
+
     //retrofit
     const val retrofit = "com.squareup.retrofit2:retrofit:${LibVersions.retrofit_version}"
     const val retrofit_converter_gson =

@@ -4,8 +4,7 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import com.example.meditationcomposeapp.data_source.entity.UpdateDescriptionDBEntity
-import kotlinx.coroutines.flow.Flow
+import com.example.meditationcomposeapp.data_source.entity.db.UpdateDescriptionDBEntity
 
 @Dao
 interface UpdateDescriptionDao {

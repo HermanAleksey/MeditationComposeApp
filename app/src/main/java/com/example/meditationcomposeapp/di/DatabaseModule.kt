@@ -6,6 +6,7 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.meditationcomposeapp.BuildConfig
 import com.example.meditationcomposeapp.data_source.database.AppDatabase
+import com.example.meditationcomposeapp.data_source.database.dao.BeerDao
 import com.example.meditationcomposeapp.data_source.database.dao.UpdateDescriptionDao
 import dagger.Module
 import dagger.Provides
@@ -23,6 +24,12 @@ object DatabaseModule {
     fun provideUpdateDescriptionDao(
         appDatabase: AppDatabase,
     ): UpdateDescriptionDao = appDatabase.updatesDescriptionDao()
+
+    @Singleton
+    @Provides
+    fun provideBeerDao(
+        appDatabase: AppDatabase,
+    ): BeerDao = appDatabase.beerDao()
 
     @Singleton
     @Provides

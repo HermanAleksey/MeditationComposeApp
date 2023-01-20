@@ -1,6 +1,6 @@
 package com.example.meditationcomposeapp.data_source.repository.punk
 
-import com.example.meditationcomposeapp.data_source.entity.BeerResponse
+import com.example.meditationcomposeapp.data_source.entity.network.BeerResponse
 import com.example.meditationcomposeapp.data_source.mappers.Mapper
 import com.example.meditationcomposeapp.data_source.network.PunkApi
 import com.example.meditationcomposeapp.model.entity.NetworkResponse

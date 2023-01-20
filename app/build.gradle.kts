@@ -126,6 +126,9 @@ dependencies {
     implementation(Dependencies.hilt_android)
     kapt(Dependencies.hilt_compiler)
 
+    //Gson
+    implementation(Dependencies.gson)
+
     //retrofit
     implementation(Dependencies.retrofit)
     implementation(Dependencies.retrofit_converter_gson)

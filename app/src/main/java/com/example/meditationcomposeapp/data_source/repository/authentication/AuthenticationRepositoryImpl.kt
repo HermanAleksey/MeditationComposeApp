@@ -1,10 +1,10 @@
 package com.example.meditationcomposeapp.data_source.repository.authentication
 
 import com.example.meditationcomposeapp.BuildConfig
-import com.example.meditationcomposeapp.data_source.entity.LoginUserResponse
-import com.example.meditationcomposeapp.data_source.entity.RegistrationRequest
-import com.example.meditationcomposeapp.data_source.entity.UpdateDescriptionResponse
-import com.example.meditationcomposeapp.data_source.mappers.profile.ProfileMapper
+import com.example.meditationcomposeapp.data_source.entity.network.LoginUserResponse
+import com.example.meditationcomposeapp.data_source.entity.network.RegistrationRequest
+import com.example.meditationcomposeapp.data_source.entity.network.UpdateDescriptionResponse
+import com.example.meditationcomposeapp.data_source.mappers.network.profile.ProfileMapper
 import com.example.meditationcomposeapp.data_source.network.AuthenticationApi
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.entity.login_flow.Profile

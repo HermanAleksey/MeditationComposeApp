@@ -1,6 +1,6 @@
-package com.example.meditationcomposeapp.data_source.mappers.profile
+package com.example.meditationcomposeapp.data_source.mappers.network.profile
 
-import com.example.meditationcomposeapp.data_source.entity.LoginUserResponse
+import com.example.meditationcomposeapp.data_source.entity.network.LoginUserResponse
 import com.example.meditationcomposeapp.data_source.mappers.Mapper
 import com.example.meditationcomposeapp.model.entity.login_flow.Profile
 import javax.inject.Inject

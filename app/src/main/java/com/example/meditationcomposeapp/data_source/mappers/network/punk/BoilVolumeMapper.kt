@@ -1,6 +1,6 @@
-package com.example.meditationcomposeapp.data_source.mappers.punk
+package com.example.meditationcomposeapp.data_source.mappers.network.punk
 
-import com.example.meditationcomposeapp.data_source.entity.BeerResponse
+import com.example.meditationcomposeapp.data_source.entity.network.BeerResponse
 import com.example.meditationcomposeapp.data_source.mappers.Mapper
 import com.example.meditationcomposeapp.model.entity.beer.BoilVolume
 import com.example.meditationcomposeapp.model.entity.beer.MeasurementUnit

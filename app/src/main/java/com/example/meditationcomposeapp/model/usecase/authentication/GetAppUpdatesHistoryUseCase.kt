@@ -1,6 +1,6 @@
 package com.example.meditationcomposeapp.model.usecase.authentication
 
-import com.example.meditationcomposeapp.data_source.entity.UpdateDescriptionResponse
+import com.example.meditationcomposeapp.data_source.entity.network.UpdateDescriptionResponse
 import com.example.meditationcomposeapp.data_source.mappers.Mapper
 import com.example.meditationcomposeapp.data_source.repository.authentication.AuthenticationRepository
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
