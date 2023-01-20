@@ -4,13 +4,13 @@ import com.google.gson.annotations.SerializedName
 
 
 data class BeerResponse(
-    @SerializedName("id") var id: Int?,
-    @SerializedName("name") var name: String?,
-    @SerializedName("tagline") var tagline: String?,
-    @SerializedName("first_brewed") var firstBrewed: String?,
-    @SerializedName("description") var description: String?,
-    @SerializedName("image_url") var imageUrl: String?,
-    @SerializedName("abv") var abv: Double?,
+    @SerializedName("id") var id: Int,
+    @SerializedName("name") var name: String,
+    @SerializedName("tagline") var tagline: String,
+    @SerializedName("first_brewed") var firstBrewed: String,
+    @SerializedName("description") var description: String,
+    @SerializedName("image_url") var imageUrl: String,
+    @SerializedName("abv") var abv: Double,
     @SerializedName("ibu") var ibu: Double?,
     @SerializedName("target_fg") var targetFg: Int?,
     @SerializedName("target_og") var targetOg: Double?,
@@ -18,13 +18,13 @@ data class BeerResponse(
     @SerializedName("srm") var srm: Double?,
     @SerializedName("ph") var ph: Double?,
     @SerializedName("attenuation_level") var attenuationLevel: Double?,
-    @SerializedName("volume") var volume: VolumeResponse?,
-    @SerializedName("boil_volume") var boilVolume: BoilVolumeResponse?,
-    @SerializedName("method") var method: MethodResponse?,
-    @SerializedName("ingredients") var ingredients: IngredientsResponse?,
+    @SerializedName("volume") var volume: VolumeResponse,
+    @SerializedName("boil_volume") var boilVolume: BoilVolumeResponse,
+    @SerializedName("method") var method: MethodResponse,
+    @SerializedName("ingredients") var ingredients: IngredientsResponse,
     @SerializedName("food_pairing") var foodPairing: List<String> = arrayListOf(),
-    @SerializedName("brewers_tips") var brewersTips: String?,
-    @SerializedName("contributed_by") var contributedBy: String?,
+    @SerializedName("brewers_tips") var brewersTips: String,
+    @SerializedName("contributed_by") var contributedBy: String,
 ) {
 
     data class VolumeResponse(

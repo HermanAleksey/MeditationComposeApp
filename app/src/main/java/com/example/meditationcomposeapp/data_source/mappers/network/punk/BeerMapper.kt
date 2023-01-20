@@ -13,13 +13,13 @@ class BeerMapper @Inject constructor(
 ) : Mapper<Beer, BeerResponse> {
     override fun mapFrom(objectFrom: BeerResponse): Beer {
         return Beer(
-            id = objectFrom.id!!,
-            name = objectFrom.name!!,
-            tagline = objectFrom.tagline!!,
-            firstBrewed = objectFrom.firstBrewed!!,
-            description = objectFrom.description!!,
-            imageUrl = objectFrom.imageUrl!!,
-            abv = objectFrom.abv!!,
+            id = objectFrom.id,
+            name = objectFrom.name,
+            tagline = objectFrom.tagline,
+            firstBrewed = objectFrom.firstBrewed,
+            description = objectFrom.description,
+            imageUrl = objectFrom.imageUrl,
+            abv = objectFrom.abv,
             ibu = objectFrom.ibu,
             targetFg = objectFrom.targetFg,
             targetOg = objectFrom.targetOg,
@@ -27,13 +27,13 @@ class BeerMapper @Inject constructor(
             srm = objectFrom.srm,
             ph = objectFrom.ph,
             attenuationLevel = objectFrom.attenuationLevel,
-            volume = volumeMapper.mapFrom(objectFrom.volume!!),
-            boilVolume = boilVolumeMapper.mapFrom(objectFrom.boilVolume!!),
-            method = methodMapper.mapFrom(objectFrom.method!!),
-            ingredients = ingredientsMapper.mapFrom(objectFrom.ingredients!!),
+            volume = volumeMapper.mapFrom(objectFrom.volume),
+            boilVolume = boilVolumeMapper.mapFrom(objectFrom.boilVolume),
+            method = methodMapper.mapFrom(objectFrom.method),
+            ingredients = ingredientsMapper.mapFrom(objectFrom.ingredients),
             foodPairing = objectFrom.foodPairing,
-            brewersTips = objectFrom.brewersTips!!,
-            contributedBy = objectFrom.contributedBy!!
+            brewersTips = objectFrom.brewersTips,
+            contributedBy = objectFrom.contributedBy
         )
     }
 }
