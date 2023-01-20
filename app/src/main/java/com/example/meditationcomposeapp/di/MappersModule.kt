@@ -1,8 +1,10 @@
 package com.example.meditationcomposeapp.di
 
+import com.example.meditationcomposeapp.data_source.entity.db.BeerDB
 import com.example.meditationcomposeapp.data_source.entity.network.BeerResponse
 import com.example.meditationcomposeapp.data_source.entity.network.LoginUserResponse
 import com.example.meditationcomposeapp.data_source.entity.network.UpdateDescriptionResponse
+import com.example.meditationcomposeapp.data_source.mappers.BidirectionalMapper
 import com.example.meditationcomposeapp.data_source.mappers.Mapper
 import com.example.meditationcomposeapp.data_source.mappers.network.profile.ProfileMapper
 import com.example.meditationcomposeapp.data_source.mappers.network.profile.UpdateDescriptionMapper
@@ -28,6 +30,11 @@ abstract class MappersModule {
     abstract fun provideProfileMapper(
         implementation: ProfileMapper
     ): Mapper<Profile, LoginUserResponse>
+
+    @Binds
+    abstract fun provideBeerDBMapper(
+        implementation: BeerMapper
+    ): BidirectionalMapper<BeerDB, Beer>
 
     @Binds
     abstract fun provideBeerMapper(
