@@ -60,4 +60,19 @@ abstract class UseCaseModule {
     abstract fun provideGetRandomBeerUseCase(
         implementation: GetRandomBeerUseCaseImpl
     ): GetRandomBeerUseCase
+
+    @Binds
+    abstract fun provideClearBeerDBUseCase(
+        implementation: ClearBeersDBUseCaseImpl
+    ): ClearBeersDBUseCase
+
+    @Binds
+    abstract fun provideGetBeersFromDBUseCase(
+        implementation: GetBeersFromDBUseCaseImpl
+    ): GetBeersFromDBUseCase
+
+    @Binds
+    abstract fun provideInsertBeersIntoDBUseCase(
+        implementation: InsertBeersIntoDBUseCaseImpl
+    ): InsertBeersIntoDBUseCase
 }

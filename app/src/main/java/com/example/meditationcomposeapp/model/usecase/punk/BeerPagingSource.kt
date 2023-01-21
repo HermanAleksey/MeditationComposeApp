@@ -1,4 +1,4 @@
-package com.example.meditationcomposeapp.presentation.screens.main_flow.beer_list.paging
+package com.example.meditationcomposeapp.model.usecase.punk
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState

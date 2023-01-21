@@ -4,6 +4,8 @@ import com.example.meditationcomposeapp.data_source.data_store.UserDataStore
 import com.example.meditationcomposeapp.data_source.data_store.UserDataStoreImpl
 import com.example.meditationcomposeapp.data_source.repository.authentication.AuthenticationRepository
 import com.example.meditationcomposeapp.data_source.repository.authentication.AuthenticationRepositoryImpl
+import com.example.meditationcomposeapp.data_source.repository.punk.PunkDBRepository
+import com.example.meditationcomposeapp.data_source.repository.punk.PunkDBRepositoryImpl
 import com.example.meditationcomposeapp.data_source.repository.punk.PunkRepository
 import com.example.meditationcomposeapp.data_source.repository.punk.PunkRepositoryImpl
 import com.example.meditationcomposeapp.data_source.repository.update_description.UpdateDescriptionRepository
@@ -36,4 +38,9 @@ abstract class RepositoryModule {
     abstract fun providePunkRepository(
         implementation: PunkRepositoryImpl,
     ): PunkRepository
+
+    @Binds
+    abstract fun providePunkDBRepository(
+        implementation: PunkDBRepositoryImpl,
+    ): PunkDBRepository
 }
