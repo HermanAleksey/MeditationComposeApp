@@ -6,6 +6,7 @@ import com.example.meditationcomposeapp.data_source.entity.network.LoginUserResp
 import com.example.meditationcomposeapp.data_source.entity.network.UpdateDescriptionResponse
 import com.example.meditationcomposeapp.data_source.mappers.BidirectionalMapper
 import com.example.meditationcomposeapp.data_source.mappers.Mapper
+import com.example.meditationcomposeapp.data_source.mappers.db.BeerDBMapper
 import com.example.meditationcomposeapp.data_source.mappers.network.profile.ProfileMapper
 import com.example.meditationcomposeapp.data_source.mappers.network.profile.UpdateDescriptionMapper
 import com.example.meditationcomposeapp.data_source.mappers.network.punk.*
@@ -33,7 +34,7 @@ abstract class MappersModule {
 
     @Binds
     abstract fun provideBeerDBMapper(
-        implementation: BeerMapper
+        implementation: BeerDBMapper
     ): BidirectionalMapper<BeerDB, Beer>
 
     @Binds

@@ -7,7 +7,6 @@ import javax.inject.Inject
 interface InsertBeersIntoDBUseCase {
 
     suspend operator fun invoke(beers: List<Beer>)
-
 }
 
 class InsertBeersIntoDBUseCaseImpl @Inject constructor(

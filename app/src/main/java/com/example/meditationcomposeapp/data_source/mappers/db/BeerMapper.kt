@@ -5,7 +5,7 @@ import com.example.meditationcomposeapp.data_source.mappers.BidirectionalMapper
 import com.example.meditationcomposeapp.model.entity.beer.Beer
 import javax.inject.Inject
 
-class BeerMapper @Inject constructor() : BidirectionalMapper<BeerDB, Beer> {
+class BeerDBMapper @Inject constructor() : BidirectionalMapper<BeerDB, Beer> {
 
     override fun mapFrom(objectFrom: Beer) = with(objectFrom) {
         BeerDB(

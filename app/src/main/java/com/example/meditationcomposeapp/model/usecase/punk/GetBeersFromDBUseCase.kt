@@ -11,7 +11,7 @@ interface GetBeersFromDBUseCase {
 
 class GetBeersFromDBUseCaseImpl @Inject constructor(
     private val punkDbRepository: PunkDBRepository
-) : GetBeersFromDBUseCase{
+) : GetBeersFromDBUseCase {
 
     override suspend fun invoke(offset: Int, limit: Int): List<Beer> =
         punkDbRepository.getBeers(offset = offset, limit = limit)
