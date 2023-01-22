@@ -12,8 +12,6 @@ class ClearBeersDBUseCaseImpl @Inject constructor(
     private val repository: PunkDBRepository
 ) : ClearBeersDBUseCase {
 
-
-    override suspend fun invoke() =
-        repository.clear()
+    override suspend fun invoke() = repository.clear()
 }
 
