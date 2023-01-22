@@ -1,4 +1,4 @@
-package com.example.meditationcomposeapp.model.usecase.punk
+package com.example.meditationcomposeapp.model.usecase.punk.db
 
 import com.example.meditationcomposeapp.data_source.repository.punk.PunkDBRepository
 import com.example.meditationcomposeapp.model.entity.beer.Beer
@@ -12,8 +12,8 @@ interface InsertBeersIntoDBUseCase {
 class InsertBeersIntoDBUseCaseImpl @Inject constructor(
     private val repository: PunkDBRepository
 ): InsertBeersIntoDBUseCase {
+    
     override suspend fun invoke(beers: List<Beer>) {
         repository.insertAll(beers)
     }
-
 }

@@ -1,4 +1,4 @@
-package com.example.meditationcomposeapp.model.usecase.punk
+package com.example.meditationcomposeapp.model.usecase.punk.network
 
 import com.example.meditationcomposeapp.data_source.repository.punk.PunkRepository
 import com.example.meditationcomposeapp.model.entity.beer.Beer
@@ -18,7 +18,6 @@ class GetBeersUseCaseImpl @Inject constructor(
     override suspend fun invoke(
         page: Int,
         pageSize: Int,
-    ): List<Beer> =
-        punkRepository.getBeers(page, pageSize)
+    ): List<Beer> = punkRepository.getBeers(page, pageSize)
 
 }

@@ -1,4 +1,4 @@
-package com.example.meditationcomposeapp.model.usecase.punk
+package com.example.meditationcomposeapp.model.usecase.punk.db
 
 import com.example.meditationcomposeapp.data_source.repository.punk.PunkDBRepository
 import javax.inject.Inject
