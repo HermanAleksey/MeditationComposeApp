@@ -4,19 +4,14 @@ import androidx.paging.PagingSource
 import com.example.meditationcomposeapp.data_source.database.dao.BeerDao
 import com.example.meditationcomposeapp.data_source.entity.db.BeerListItem
 import com.example.meditationcomposeapp.data_source.mappers.BidirectionalMapper
+import com.example.meditationcomposeapp.data_source.mappers.Mapper
 import com.example.meditationcomposeapp.model.entity.beer.Beer
 import javax.inject.Inject
 
 class PunkDBRepositoryImpl @Inject constructor(
     private val beerDao: BeerDao,
-    private val beerMapper: BidirectionalMapper<BeerListItem, Beer>
+    private val beerMapper: Mapper<BeerListItem, Beer>
 ) : PunkDBRepository {
-
-    override suspend fun getBeers(offset: Int, limit: Int): List<Beer> {
-        return beerDao.getAll(offset = offset, limit = limit).map {
-            beerMapper.mapTo(it)
-        }
-    }
 
     override fun getPagingSource(): PagingSource<Int, BeerListItem> =
         beerDao.pagingSource()

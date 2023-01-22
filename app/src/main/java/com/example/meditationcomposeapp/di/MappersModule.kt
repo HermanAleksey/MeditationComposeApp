@@ -35,7 +35,7 @@ abstract class MappersModule {
     @Binds
     abstract fun provideBeerDBMapper(
         implementation: BeerDBMapper
-    ): BidirectionalMapper<BeerListItem, Beer>
+    ): Mapper<BeerListItem, Beer>
 
     @Binds
     abstract fun provideBeerMapper(

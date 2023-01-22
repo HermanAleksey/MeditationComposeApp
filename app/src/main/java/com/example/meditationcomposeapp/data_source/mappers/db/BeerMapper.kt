@@ -2,10 +2,11 @@ package com.example.meditationcomposeapp.data_source.mappers.db
 
 import com.example.meditationcomposeapp.data_source.entity.db.BeerListItem
 import com.example.meditationcomposeapp.data_source.mappers.BidirectionalMapper
+import com.example.meditationcomposeapp.data_source.mappers.Mapper
 import com.example.meditationcomposeapp.model.entity.beer.Beer
 import javax.inject.Inject
 
-class BeerDBMapper @Inject constructor() : BidirectionalMapper<BeerListItem, Beer> {
+class BeerDBMapper @Inject constructor() : Mapper<BeerListItem, Beer> {
 
     override fun mapFrom(objectFrom: Beer) = with(objectFrom) {
         BeerListItem(
@@ -14,7 +15,7 @@ class BeerDBMapper @Inject constructor() : BidirectionalMapper<BeerListItem, Bee
             tagline = tagline,
             firstBrewed = firstBrewed,
             description = description,
-            imageUrl = imageUrl,
+            imageUrl = imageUrl ?: "",
             abv = abv,
             ibu = ibu,
             targetFg = targetFg,
@@ -25,32 +26,6 @@ class BeerDBMapper @Inject constructor() : BidirectionalMapper<BeerListItem, Bee
             attenuationLevel = attenuationLevel,
             brewersTips = brewersTips,
             contributedBy = contributedBy,
-        )
-    }
-
-    override fun mapTo(objectTo: BeerListItem) = with(objectTo) {
-        Beer(
-            id = id,
-            name = name,
-            tagline = tagline,
-            firstBrewed = firstBrewed,
-            description = description,
-            imageUrl = imageUrl,
-            abv = abv,
-            ibu = ibu,
-            targetFg = targetFg,
-            targetOg = targetOg,
-            ebc = ebc,
-            srm = srm,
-            ph = ph,
-            attenuationLevel = attenuationLevel,
-            brewersTips = brewersTips,
-            contributedBy = contributedBy,
-            volume = null,
-            boilVolume = null,
-            foodPairing = listOf(),
-            method = null,
-            ingredients = null
         )
     }
 }

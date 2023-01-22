@@ -9,7 +9,7 @@ data class BeerResponse(
     @SerializedName("tagline") var tagline: String,
     @SerializedName("first_brewed") var firstBrewed: String,
     @SerializedName("description") var description: String,
-    @SerializedName("image_url") var imageUrl: String,
+    @SerializedName("image_url") var imageUrl: String?,
     @SerializedName("abv") var abv: Double,
     @SerializedName("ibu") var ibu: Double?,
     @SerializedName("target_fg") var targetFg: Int?,

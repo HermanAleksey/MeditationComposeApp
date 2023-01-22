@@ -6,8 +6,6 @@ import com.example.meditationcomposeapp.model.entity.beer.Beer
 
 interface PunkDBRepository {
 
-    suspend fun getBeers(offset: Int, limit: Int): List<Beer>
-
     fun getPagingSource(): PagingSource<Int, BeerListItem>
 
     suspend fun insertAll(beers: List<Beer>)

@@ -54,36 +54,43 @@ fun DetailedBeerScreen(
             Spacer(modifier = Modifier.height(24.dp))
         }
 
-        item {
-            BeerDetailsCard {
-                GlideImage(
-                    imageModel = { beer.imageUrl }, // loading a network image using an URL.
-                    imageOptions = ImageOptions(
-                        contentScale = ContentScale.FillHeight,
-                        alignment = Alignment.Center
-                    ),
-                    modifier = Modifier
-                        .height(200.dp)
-                )
+        if (!beer.imageUrl.isNullOrBlank())
+            item {
+                BeerDetailsCard {
+                    GlideImage(
+                        imageModel = { beer.imageUrl }, // loading a network image using an URL.
+                        imageOptions = ImageOptions(
+                            contentScale = ContentScale.FillHeight,
+                            alignment = Alignment.Center
+                        ),
+                        modifier = Modifier
+                            .height(200.dp)
+                    )
+                }
             }
-        }
 
         item {
             BeerDetailsCard {
-                Column(modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp, horizontal = 16.dp)
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 8.dp, horizontal = 16.dp)
                 ) {
-                    Text(text = beer.name,
-                        style = MaterialTheme.typography.body1.copy(color = MaterialTheme.colors.onSurface,
-                            fontSize = 26.sp)
+                    Text(
+                        text = beer.name,
+                        style = MaterialTheme.typography.body1.copy(
+                            color = MaterialTheme.colors.onSurface,
+                            fontSize = 26.sp
+                        )
                     )
                     Spacer(modifier = Modifier.height(4.dp))
-                    Text(text = beer.tagline,
+                    Text(
+                        text = beer.tagline,
                         style = MaterialTheme.typography.body1.copy(color = MaterialTheme.colors.onSurface)
                     )
                     Spacer(modifier = Modifier.height(4.dp))
-                    Text(text = beer.description,
+                    Text(
+                        text = beer.description,
                         style = MaterialTheme.typography.body2.copy(color = MaterialTheme.colors.onSurface)
                     )
                 }
@@ -92,9 +99,10 @@ fun DetailedBeerScreen(
 
         item {
             BeerDetailsCard {
-                Column(modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp, horizontal = 16.dp)
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 8.dp, horizontal = 16.dp)
                 ) {
                     Text(
                         text = stringResource(id = R.string.beer_params),
@@ -115,9 +123,10 @@ fun DetailedBeerScreen(
 
         item {
             BeerDetailsCard {
-                Column(modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp, horizontal = 16.dp)
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 8.dp, horizontal = 16.dp)
                 ) {
                     Text(
                         text = stringResource(id = R.string.brewers_tips),
@@ -150,15 +159,18 @@ fun DetailedBeerScreen(
                         .fillMaxWidth()
                         .padding(vertical = 8.dp, horizontal = 16.dp)
                 ) {
-                    Text(text = stringResource(id = R.string.contributed_by),
+                    Text(
+                        text = stringResource(id = R.string.contributed_by),
                         style = MaterialTheme.typography.body1.copy(
                             color = MaterialTheme.colors.onSurface
                         )
                     )
                     Spacer(modifier = Modifier.height(4.dp))
-                    Text(text = beer.contributedBy, style = MaterialTheme.typography.body2.copy(
-                        color = MaterialTheme.colors.onSurface
-                    ))
+                    Text(
+                        text = beer.contributedBy, style = MaterialTheme.typography.body2.copy(
+                            color = MaterialTheme.colors.onSurface
+                        )
+                    )
                 }
             }
         }

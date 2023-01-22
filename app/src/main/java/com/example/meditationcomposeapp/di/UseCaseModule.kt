@@ -77,11 +77,6 @@ abstract class UseCaseModule {
     ): GetBeerPagingSourceUseCase
 
     @Binds
-    abstract fun provideGetBeersFromDBUseCase(
-        implementation: GetBeersFromDBUseCaseImpl
-    ): GetBeersFromDBUseCase
-
-    @Binds
     abstract fun provideInsertBeersIntoDBUseCase(
         implementation: InsertBeersIntoDBUseCaseImpl
     ): InsertBeersIntoDBUseCase

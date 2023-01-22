@@ -7,9 +7,6 @@ import com.example.meditationcomposeapp.data_source.entity.db.BeerListItem
 @Dao
 interface BeerDao {
 
-    @Query("SELECT * FROM beer LIMIT :limit OFFSET :offset")
-    suspend fun getAll(limit: Int, offset: Int): List<BeerListItem>
-
     @Query("SELECT * FROM beer ORDER BY id")
     fun pagingSource(): PagingSource<Int, BeerListItem>
 
