@@ -14,5 +14,5 @@ class InsertAllRemoteKeysUseCaseImpl @Inject constructor(
 ) : InsertAllRemoteKeysUseCase {
 
     override suspend fun invoke(remoteKey: List<RemoteKeys>) =
-        repository.clearRemoteKeys()
+        repository.insertAll(remoteKey)
 }
