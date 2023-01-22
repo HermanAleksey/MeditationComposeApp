@@ -32,17 +32,6 @@ object DatabaseModule {
         appDatabase: AppDatabase,
     ): BeerDao = appDatabase.beerDao()
 
-    @Provides
-    fun provideTransactionExecutor(
-        appDatabase: AppDatabase,
-    ): (scope: CoroutineScope, function: () -> Unit) -> Unit = { scope, function ->
-        scope.launch {
-            appDatabase.withTransaction {
-                function()
-            }
-        }
-    }
-
     @Singleton
     @Provides
     fun provideDatabase(
