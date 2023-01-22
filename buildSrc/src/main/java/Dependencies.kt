@@ -77,6 +77,7 @@ object Dependencies {
     const val room_runtime = "androidx.room:room-runtime:${LibVersions.room_version}"
     const val room_ktx = "androidx.room:room-ktx:${LibVersions.room_version}"
     const val room_compiler = "androidx.room:room-compiler:${LibVersions.room_version}"
+    const val room_pager = "androidx.room:room-paging:${LibVersions.room_version}"
 
     const val timber = "com.jakewharton.timber:timber:${LibVersions.timber_version}"
 
