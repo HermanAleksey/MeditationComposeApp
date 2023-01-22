@@ -2,6 +2,7 @@ package com.example.meditationcomposeapp.di
 
 import com.example.meditationcomposeapp.model.usecase.authentication.*
 import com.example.meditationcomposeapp.model.usecase.punk.*
+import com.example.meditationcomposeapp.model.usecase.remote_keys.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -75,4 +76,25 @@ abstract class UseCaseModule {
     abstract fun provideInsertBeersIntoDBUseCase(
         implementation: InsertBeersIntoDBUseCaseImpl
     ): InsertBeersIntoDBUseCase
+
+
+    @Binds
+    abstract fun provideClearRemoteKeysUseCase(
+        implementation: ClearRemoteKeysUseCaseImpl
+    ): ClearRemoteKeysUseCase
+
+    @Binds
+    abstract fun provideGetCreationTimeUseCase(
+        implementation: GetCreationTimeUseCaseImpl
+    ): GetCreationTimeUseCase
+
+    @Binds
+    abstract fun provideGetRemoteKeyBeBeerIdUseCase(
+        implementation: GetRemoteKeyBeBeerIdUseCaseImpl
+    ): GetRemoteKeyBeBeerIdUseCase
+
+    @Binds
+    abstract fun provideInsertAllRemoteKeysUseCase(
+        implementation: InsertAllRemoteKeysUseCaseImpl
+    ): InsertAllRemoteKeysUseCase
 }
