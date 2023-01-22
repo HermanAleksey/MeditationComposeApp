@@ -152,6 +152,7 @@ dependencies {
     implementation(Dependencies.room_runtime)
     implementation(Dependencies.room_ktx)
     kapt(Dependencies.room_compiler)
+    implementation(Dependencies.room_pager)
 
     implementation(Dependencies.timber)
 
