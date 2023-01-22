@@ -1,6 +1,6 @@
 package com.example.meditationcomposeapp.di
 
-import com.example.meditationcomposeapp.data_source.entity.db.BeerDB
+import com.example.meditationcomposeapp.data_source.entity.db.BeerListItem
 import com.example.meditationcomposeapp.data_source.entity.network.BeerResponse
 import com.example.meditationcomposeapp.data_source.entity.network.LoginUserResponse
 import com.example.meditationcomposeapp.data_source.entity.network.UpdateDescriptionResponse
@@ -35,7 +35,7 @@ abstract class MappersModule {
     @Binds
     abstract fun provideBeerDBMapper(
         implementation: BeerDBMapper
-    ): BidirectionalMapper<BeerDB, Beer>
+    ): BidirectionalMapper<BeerListItem, Beer>
 
     @Binds
     abstract fun provideBeerMapper(

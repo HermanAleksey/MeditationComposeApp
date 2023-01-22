@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "beer")
-data class BeerDB(
+data class BeerListItem(
     @PrimaryKey var id: Int,
     @ColumnInfo(name = "name") var name: String,
     @ColumnInfo(name = "tagline") var tagline: String,
@@ -20,20 +20,6 @@ data class BeerDB(
     @ColumnInfo(name = "srm") var srm: Double?,
     @ColumnInfo(name = "ph") var ph: Double?,
     @ColumnInfo(name = "attenuation_level") var attenuationLevel: Double?,
-
-//    //volume
-//    @ColumnInfo(name = "volume_value") var volumeValue: Int,
-//    @ColumnInfo(name = "volume_unit") var volumeUnit: String,
-//
-//    //boil volume
-//    @ColumnInfo(name = "boil_volume_value") var boilVolumeValue: Int,
-//    @ColumnInfo(name = "boil_volume_unit") var boilVolumeUnit: String,
-
-    //get from other tables by beer id
-//    @ColumnInfo(name = "method") var method: MethodDB?,
-//    @ColumnInfo(name = "ingredients") var ingredients: IngredientsDB?,
-//    @ColumnInfo(name = "food_pairing_id") var foodPairing: List<String>,
-
     @ColumnInfo(name = "brewers_tips") var brewersTips: String,
     @ColumnInfo(name = "contributed_by") var contributedBy: String,
 )

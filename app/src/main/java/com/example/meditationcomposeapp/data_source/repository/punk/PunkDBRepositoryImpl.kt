@@ -1,14 +1,14 @@
 package com.example.meditationcomposeapp.data_source.repository.punk
 
 import com.example.meditationcomposeapp.data_source.database.dao.BeerDao
-import com.example.meditationcomposeapp.data_source.entity.db.BeerDB
+import com.example.meditationcomposeapp.data_source.entity.db.BeerListItem
 import com.example.meditationcomposeapp.data_source.mappers.BidirectionalMapper
 import com.example.meditationcomposeapp.model.entity.beer.Beer
 import javax.inject.Inject
 
 class PunkDBRepositoryImpl @Inject constructor(
     private val beerDao: BeerDao,
-    private val beerMapper: BidirectionalMapper<BeerDB, Beer>
+    private val beerMapper: BidirectionalMapper<BeerListItem, Beer>
 ) : PunkDBRepository {
 
     override suspend fun getBeers(offset: Int, limit: Int): List<Beer> {
@@ -26,6 +26,6 @@ class PunkDBRepositoryImpl @Inject constructor(
     }
 
     override suspend fun clear() {
-        beerDao.deleteAll()
+        beerDao.clear()
     }
 }

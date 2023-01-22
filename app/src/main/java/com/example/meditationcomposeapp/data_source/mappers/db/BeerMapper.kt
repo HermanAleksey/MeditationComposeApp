@@ -1,14 +1,14 @@
 package com.example.meditationcomposeapp.data_source.mappers.db
 
-import com.example.meditationcomposeapp.data_source.entity.db.BeerDB
+import com.example.meditationcomposeapp.data_source.entity.db.BeerListItem
 import com.example.meditationcomposeapp.data_source.mappers.BidirectionalMapper
 import com.example.meditationcomposeapp.model.entity.beer.Beer
 import javax.inject.Inject
 
-class BeerDBMapper @Inject constructor() : BidirectionalMapper<BeerDB, Beer> {
+class BeerDBMapper @Inject constructor() : BidirectionalMapper<BeerListItem, Beer> {
 
     override fun mapFrom(objectFrom: Beer) = with(objectFrom) {
-        BeerDB(
+        BeerListItem(
             id = id,
             name = name,
             tagline = tagline,
@@ -28,7 +28,7 @@ class BeerDBMapper @Inject constructor() : BidirectionalMapper<BeerDB, Beer> {
         )
     }
 
-    override fun mapTo(objectTo: BeerDB) = with(objectTo) {
+    override fun mapTo(objectTo: BeerListItem) = with(objectTo) {
         Beer(
             id = id,
             name = name,
