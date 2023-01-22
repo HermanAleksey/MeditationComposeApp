@@ -6,14 +6,15 @@ import javax.inject.Inject
 
 class RemoteKeysRepositoryImpl @Inject constructor(
     private val remoteKeysDao: RemoteKeysDao
-) {
+) : RemoteKeysRepository {
 
-    suspend fun insertAll(remoteKeys: List<RemoteKeys>) = remoteKeysDao.insertAll(remoteKeys)
+    override suspend fun insertAll(remoteKeys: List<RemoteKeys>) =
+        remoteKeysDao.insertAll(remoteKeys)
 
-    suspend fun getRemoteKeyByBeerID(id: Int) = remoteKeysDao.getRemoteKeyByBeerID(id)
+    override suspend fun getRemoteKeyByBeerID(id: Int) = remoteKeysDao.getRemoteKeyByBeerID(id)
 
-    suspend fun clearRemoteKeys() = remoteKeysDao.clearRemoteKeys()
+    override suspend fun clearRemoteKeys() = remoteKeysDao.clearRemoteKeys()
 
-    suspend fun getCreationTime() = remoteKeysDao.getCreationTime()
+    override suspend fun getCreationTime() = remoteKeysDao.getCreationTime()
 
 }

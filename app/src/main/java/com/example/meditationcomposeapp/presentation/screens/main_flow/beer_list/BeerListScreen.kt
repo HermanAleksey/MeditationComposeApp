@@ -20,7 +20,7 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
 import com.example.meditationcomposeapp.R
-import com.example.meditationcomposeapp.model.entity.beer.Beer
+import com.example.meditationcomposeapp.data_source.entity.db.BeerListItem
 import com.example.meditationcomposeapp.presentation.common_composables.ColorBackground
 import com.example.meditationcomposeapp.presentation.navigation.processEvent
 import com.example.meditationcomposeapp.presentation.screens.main_flow.beer_list.composable.BeerItem
@@ -52,7 +52,7 @@ fun BeerListScreen(
 }
 
 @Composable
-fun BeerList(beers: LazyPagingItems<Beer>, onBeerItemClicked: (Beer) -> Unit) {
+fun BeerList(beers: LazyPagingItems<BeerListItem>, onBeerItemClicked: (id: Int) -> Unit) {
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(8.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -89,7 +89,7 @@ fun BeerList(beers: LazyPagingItems<Beer>, onBeerItemClicked: (Beer) -> Unit) {
         }
         items(items = beers, key = { it.id }) { item ->
             item?.let {
-                BeerItem(beer = it, onClick = { onBeerItemClicked(it) })
+                BeerItem(beer = it, onClick = { onBeerItemClicked(it.id) })
             }
         }
 

@@ -6,6 +6,7 @@ import androidx.room.withTransaction
 import com.example.meditationcomposeapp.BuildConfig
 import com.example.meditationcomposeapp.data_source.database.AppDatabase
 import com.example.meditationcomposeapp.data_source.database.dao.BeerDao
+import com.example.meditationcomposeapp.data_source.database.dao.RemoteKeysDao
 import com.example.meditationcomposeapp.data_source.database.dao.UpdateDescriptionDao
 import dagger.Module
 import dagger.Provides
@@ -31,6 +32,12 @@ object DatabaseModule {
     fun provideBeerDao(
         appDatabase: AppDatabase,
     ): BeerDao = appDatabase.beerDao()
+
+    @Singleton
+    @Provides
+    fun provideRemoteKeysDao(
+        appDatabase: AppDatabase,
+    ): RemoteKeysDao = appDatabase.remoteKeysDao()
 
     @Singleton
     @Provides

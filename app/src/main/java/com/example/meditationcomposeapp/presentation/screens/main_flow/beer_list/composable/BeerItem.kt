@@ -15,11 +15,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.meditationcomposeapp.R
+import com.example.meditationcomposeapp.data_source.entity.db.BeerListItem
 import com.example.meditationcomposeapp.model.entity.beer.*
 
 @Composable
 fun BeerItem(
-    beer: Beer,
+    beer: BeerListItem,
     onClick: () -> Unit = {},
 ) {
     val paramsWithInfo = remember {
