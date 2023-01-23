@@ -126,6 +126,9 @@ dependencies {
     implementation(Dependencies.hilt_android)
     kapt(Dependencies.hilt_compiler)
 
+    //Gson
+    implementation(Dependencies.gson)
+
     //retrofit
     implementation(Dependencies.retrofit)
     implementation(Dependencies.retrofit_converter_gson)
@@ -149,6 +152,7 @@ dependencies {
     implementation(Dependencies.room_runtime)
     implementation(Dependencies.room_ktx)
     kapt(Dependencies.room_compiler)
+    implementation(Dependencies.room_pager)
 
     implementation(Dependencies.timber)
 

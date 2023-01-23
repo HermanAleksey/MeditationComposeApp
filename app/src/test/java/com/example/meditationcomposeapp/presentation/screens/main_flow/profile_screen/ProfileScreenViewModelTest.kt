@@ -2,12 +2,9 @@ package com.example.meditationcomposeapp.presentation.screens.main_flow.profile_
 
 import com.example.meditationcomposeapp.CoroutinesTestRule
 import com.example.meditationcomposeapp.model.usecase.authentication.ClearAuthDataUseCase
-import com.example.meditationcomposeapp.model.usecase.punk.GetBeersUseCase
 import com.example.meditationcomposeapp.presentation.navigation.NavigationEvent
 import com.example.meditationcomposeapp.presentation.screens.destinations.EnterScreenDestination
-import com.example.meditationcomposeapp.presentation.screens.destinations.LoginScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.SplashScreenDestination
-import com.example.meditationcomposeapp.presentation.screens.main_flow.beer_list.BeerListScreenViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest

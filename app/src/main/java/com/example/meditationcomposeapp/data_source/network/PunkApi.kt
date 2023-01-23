@@ -1,6 +1,6 @@
 package com.example.meditationcomposeapp.data_source.network
 
-import com.example.meditationcomposeapp.data_source.entity.BeerResponse
+import com.example.meditationcomposeapp.data_source.entity.network.BeerResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -12,7 +12,7 @@ interface PunkApi {
     @GET("/v2/beers/{id}")
     suspend fun getBeerById(
         @Path("id") page: Int,
-    ): BeerResponse
+    ): List<BeerResponse>
 
     @GET("/v2/beers/random")
     suspend fun getRandomBeer(): BeerResponse

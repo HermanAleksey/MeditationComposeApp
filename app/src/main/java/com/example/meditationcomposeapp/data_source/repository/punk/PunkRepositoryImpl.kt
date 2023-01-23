@@ -1,6 +1,6 @@
 package com.example.meditationcomposeapp.data_source.repository.punk
 
-import com.example.meditationcomposeapp.data_source.entity.BeerResponse
+import com.example.meditationcomposeapp.data_source.entity.network.BeerResponse
 import com.example.meditationcomposeapp.data_source.mappers.Mapper
 import com.example.meditationcomposeapp.data_source.network.PunkApi
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
@@ -21,7 +21,7 @@ class PunkRepositoryImpl @Inject constructor(
             emit(NetworkResponse.Loading(true))
             try {
                 val response = punkApi.getBeerById(page)
-                emit(NetworkResponse.Success(data = beerMapper.mapFrom(response)))
+                emit(NetworkResponse.Success(data = beerMapper.mapFrom(response.first())))
             } catch (e: IOException) {
                 e.printStackTrace()
                 emit(NetworkResponse.Failure(error = e.message))

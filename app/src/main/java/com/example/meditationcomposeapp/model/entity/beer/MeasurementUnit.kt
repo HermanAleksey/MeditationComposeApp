@@ -1,12 +1,22 @@
 package com.example.meditationcomposeapp.model.entity.beer
 
-enum class MeasurementUnit {
-    LITRES,
+enum class MeasurementUnit(val namings: Array<String>) {
+    UNDEFINED(emptyArray()),
 
-    KILOGRAMS,
-    GRAMS,
+    LITRES(arrayOf("LITRES")),
 
-    CELSIUS,
+    KILOGRAMS(arrayOf("KILOGRAM", "KILOGRAMS")),
+    GRAMS(arrayOf("GRAMS")),
 
-    TOTAL;
+    CELSIUS(arrayOf("CELSIUS")),
+
+    TOTAL(arrayOf("TOTAL"));
+}
+
+fun String.convertToMeasurementUnit(): MeasurementUnit {
+    MeasurementUnit.values().forEach {
+        if (it.namings.contains(this.uppercase()))
+            return it
+    }
+    return MeasurementUnit.UNDEFINED
 }

@@ -1,8 +1,8 @@
 package com.example.meditationcomposeapp.data_source.repository.update_description
 
 import com.example.meditationcomposeapp.data_source.database.dao.UpdateDescriptionDao
-import com.example.meditationcomposeapp.data_source.entity.toDbEntity
-import com.example.meditationcomposeapp.data_source.entity.toUiModel
+import com.example.meditationcomposeapp.data_source.entity.db.toDbEntity
+import com.example.meditationcomposeapp.data_source.entity.db.toUiModel
 import com.example.meditationcomposeapp.model.entity.login_flow.UpdateDescriptionModel
 import javax.inject.Inject
 

@@ -12,6 +12,7 @@ import com.example.meditationcomposeapp.presentation.screens.login_flow.login.Lo
 import com.example.meditationcomposeapp.presentation.screens.login_flow.new_password.NewPasswordScreenViewModel
 import com.example.meditationcomposeapp.presentation.screens.login_flow.registration.RegistrationScreenViewModel
 import com.example.meditationcomposeapp.presentation.screens.main_flow.beer_list.BeerListScreenViewModel
+import com.example.meditationcomposeapp.presentation.screens.main_flow.detailed_beer.DetailedBeerScreenViewModel
 import com.example.meditationcomposeapp.presentation.screens.main_flow.main_screen.MainScreenViewModel
 import com.example.meditationcomposeapp.presentation.screens.main_flow.shuffle_puzzle.ShufflePuzzleScreenViewModel
 import com.example.meditationcomposeapp.presentation.screens.main_flow.profile_screen.ProfileScreenViewModel
@@ -39,6 +40,7 @@ fun MeditationDestinationsNavHost(
 
             dependency(MainScreenDestination) { hiltViewModel<MainScreenViewModel>() }
             dependency(BeerListScreenDestination) { hiltViewModel<BeerListScreenViewModel>() }
+            dependency(DetailedBeerScreenDestination) { hiltViewModel<DetailedBeerScreenViewModel>() }
             dependency(ShufflePuzzleScreenDestination) { hiltViewModel<ShufflePuzzleScreenViewModel>() }
             dependency(TestScreenDestination) { hiltViewModel<ProfileScreenViewModel>() }
         }

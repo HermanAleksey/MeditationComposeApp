@@ -43,6 +43,9 @@ object Dependencies {
     const val hilt_android = "com.google.dagger:hilt-android:${LibVersions.hilt_version}"
     const val hilt_compiler = "com.google.dagger:hilt-compiler:${LibVersions.hilt_version}"
 
+    //gson
+    const val gson = "com.google.code.gson:gson:${LibVersions.gson_version}"
+
     //retrofit
     const val retrofit = "com.squareup.retrofit2:retrofit:${LibVersions.retrofit_version}"
     const val retrofit_converter_gson =
@@ -74,6 +77,7 @@ object Dependencies {
     const val room_runtime = "androidx.room:room-runtime:${LibVersions.room_version}"
     const val room_ktx = "androidx.room:room-ktx:${LibVersions.room_version}"
     const val room_compiler = "androidx.room:room-compiler:${LibVersions.room_version}"
+    const val room_pager = "androidx.room:room-paging:${LibVersions.room_version}"
 
     const val timber = "com.jakewharton.timber:timber:${LibVersions.timber_version}"
 
