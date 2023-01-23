@@ -26,7 +26,7 @@ class BeerPagingRemoteMediator(
 ) : RemoteMediator<Int, BeerListItem>() {
 
     override suspend fun initialize(): InitializeAction {
-        val cacheTimeout = TimeUnit.MILLISECONDS.convert(1, TimeUnit.HOURS)
+        val cacheTimeout = TimeUnit.MILLISECONDS.convert(DATA_INVALIDATION_TIME_HOURS, TimeUnit.HOURS)
         return if (System.currentTimeMillis() - (getCreationTimeUseCase() ?: 0) < cacheTimeout
         ) {
             InitializeAction.SKIP_INITIAL_REFRESH
@@ -112,5 +112,9 @@ class BeerPagingRemoteMediator(
         }?.data?.lastOrNull()?.let { beer ->
             getRemoteKeyBeBeerIdUseCase(beer.id)
         }
+    }
+
+    companion object {
+        private const val DATA_INVALIDATION_TIME_HOURS = 24L
     }
 }
