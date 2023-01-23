@@ -1,0 +1,48 @@
+package com.example.meditationcomposeapp.presentation.screens.main_flow.detailed_beer
+
+import androidx.lifecycle.viewModelScope
+import com.example.meditationcomposeapp.model.entity.NetworkResponse
+import com.example.meditationcomposeapp.model.usecase.punk.network.GetBeerByIdUseCase
+import com.example.meditationcomposeapp.presentation.navigation.Event
+import com.example.meditationcomposeapp.presentation.navigation.NavigationEvent
+import com.example.meditationcomposeapp.presentation.screens.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+import javax.inject.Inject
+
+
+@HiltViewModel
+class DetailedBeerScreenViewModel @Inject constructor(
+    private val getBeerByIdUseCase: GetBeerByIdUseCase
+) : BaseViewModel() {
+
+    private val _uiState = MutableStateFlow(DetailedBeerScreenState())
+    val uiState = _uiState.asStateFlow()
+
+    fun onScreenOpened(beerId: Int) = viewModelScope.launch {
+        getBeerByIdUseCase.invoke(beerId).collect { response ->
+            when (response) {
+                is NetworkResponse.Success<*> -> {
+                    _uiState.update {
+                        it.copy(
+                            beer = response.data
+                        )
+                    }
+                }
+                is NetworkResponse.Failure<*> -> {
+                    //on error show pop-up
+                }
+                is NetworkResponse.Loading<*> -> {
+                    _uiState.update { state ->
+                        state.copy(
+                            isLoading = response.isLoading
+                        )
+                    }
+                }
+            }
+        }
+    }
+}

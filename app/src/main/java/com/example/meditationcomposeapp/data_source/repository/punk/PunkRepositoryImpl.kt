@@ -21,7 +21,7 @@ class PunkRepositoryImpl @Inject constructor(
             emit(NetworkResponse.Loading(true))
             try {
                 val response = punkApi.getBeerById(page)
-                emit(NetworkResponse.Success(data = beerMapper.mapFrom(response)))
+                emit(NetworkResponse.Success(data = beerMapper.mapFrom(response.first())))
             } catch (e: IOException) {
                 e.printStackTrace()
                 emit(NetworkResponse.Failure(error = e.message))

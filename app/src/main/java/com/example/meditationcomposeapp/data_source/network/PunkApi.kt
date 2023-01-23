@@ -12,7 +12,7 @@ interface PunkApi {
     @GET("/v2/beers/{id}")
     suspend fun getBeerById(
         @Path("id") page: Int,
-    ): BeerResponse
+    ): List<BeerResponse>
 
     @GET("/v2/beers/random")
     suspend fun getRandomBeer(): BeerResponse
