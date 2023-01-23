@@ -35,9 +35,6 @@ class BeerListScreenViewModel @Inject constructor(
                     DetailedBeerScreenDestination(
                         beerId
                     )
-//                    DetailedBeerScreenDestination(
-//                        beerId
-//                    )
                 )
             )
         }
