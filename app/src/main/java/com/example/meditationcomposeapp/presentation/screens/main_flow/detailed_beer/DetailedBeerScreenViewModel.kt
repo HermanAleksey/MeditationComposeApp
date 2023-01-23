@@ -23,7 +23,7 @@ class DetailedBeerScreenViewModel @Inject constructor(
     val uiState = _uiState.asStateFlow()
 
     fun onScreenOpened(beerId: Int) = viewModelScope.launch {
-        getBeerByIdUseCase.invoke(beerId).collect { response ->
+        getBeerByIdUseCase(beerId).collect { response ->
             when (response) {
                 is NetworkResponse.Success<*> -> {
                     _uiState.update {
