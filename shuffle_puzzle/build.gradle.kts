@@ -42,7 +42,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":design_system"))
+    implementation(project(":core:design_system"))
 
     implementation(Dependencies.activity_compose)
     implementation(Dependencies.core_ktx)
