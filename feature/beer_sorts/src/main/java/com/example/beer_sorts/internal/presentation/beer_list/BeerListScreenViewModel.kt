@@ -2,17 +2,10 @@ package com.example.beer_sorts.internal.presentation.beer_list
 
 import androidx.lifecycle.viewModelScope
 import androidx.paging.*
-import com.example.meditationcomposeapp.data_source.entity.db.BeerListItem
-import com.example.meditationcomposeapp.model.usecase.punk.*
-import com.example.meditationcomposeapp.model.usecase.punk.db.GetBeerPagingSourceUseCase
-import com.example.meditationcomposeapp.presentation.navigation.Event
-import com.example.meditationcomposeapp.presentation.navigation.NavigationEvent
-import com.example.meditationcomposeapp.presentation.screens.BaseViewModel
+import com.example.common.view_model.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.update
 import javax.inject.Inject
-import com.example.meditationcomposeapp.presentation.screens.destinations.DetailedBeerScreenDestination
 
 @HiltViewModel
 class BeerListScreenViewModel @Inject constructor(
@@ -29,15 +22,16 @@ class BeerListScreenViewModel @Inject constructor(
     }.flow.cachedIn(viewModelScope)
 
     fun onBeerItemClicked(beerId: Int) {
-        _navigationEvent.update {
-            Event(
-                NavigationEvent.Navigate(
-                    DetailedBeerScreenDestination(
-                        beerId
-                    )
-                )
-            )
-        }
+        //todo fix
+//        _navigationEvent.update {
+//            Event(
+//                NavigationEvent.Navigate(
+//                    DetailedBeerScreenDestination(
+//                        beerId
+//                    )
+//                )
+//            )
+//        }
     }
 
     companion object {

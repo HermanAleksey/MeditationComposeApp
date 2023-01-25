@@ -25,23 +25,6 @@
     <string name="passwords_dont_match">Passwords doesn\'t match!</string>
     <string name="features">Features</string>
 
-    <string name="first_brewed">First brewed:</string>
-    <string name="abv_is">ABV:</string>
-    <string name="ebc_is">EBC:</string>
-    <string name="srm_is">SRM:</string>
-    <string name="ph_is">PH:</string>
-    <string name="try_now">Try now</string>
-    <string name="puzzle_solved">Puzzle solved!</string>
-    <string name="hide_password">Hide password</string>
-    <string name="show_password">Show password</string>
-    <string name="beer_list_title">A lot of beer here!</string>
-    <string name="ibu">IBU</string>
-    <string name="brewers_tips">Brewers tips</string>
-    <string name="beer_params">Beer parameters</string>
-    <string name="contributed_by">"Contributed by: "</string>
-    <string name="food_pairings">Good pairings:</string>
-    <string name="app_update_version">Update: %s</string>
-    <string name="app_update_time">From: %s</string>
     <string name="update_notes_dialog_title">Update notes!</string>
 
     <string name="home_screen_desc">Home screen</string>

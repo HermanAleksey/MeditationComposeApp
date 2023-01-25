@@ -12,19 +12,19 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
+import com.example.beer_sorts.internal.presentation.beer_list.composables.BeerItem
+import com.example.common.view_model.processEvent
 import com.example.design_system.common_composables.ColorBackground
-import com.example.meditationcomposeapp.R
+import com.example.feature.beer_sorts.R
 import com.example.meditationcomposeapp.data_source.entity.db.BeerListItem
 import com.example.meditationcomposeapp.presentation.navigation.processEvent
 import com.example.meditationcomposeapp.presentation.screens.main_flow.beer_list.composable.BeerItem
-import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @Composable
@@ -57,7 +57,7 @@ fun BeerList(beers: LazyPagingItems<BeerListItem>, onBeerItemClicked: (id: Int) 
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = dimensionResource(id = R.dimen.padding_horizontal_list))
+            .padding(horizontal = 16.dp)
             .background(MaterialTheme.colors.background),
     ) {
         item {

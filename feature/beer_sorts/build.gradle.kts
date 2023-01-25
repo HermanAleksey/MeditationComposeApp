@@ -44,4 +44,9 @@ dependencies {
 
     //glide
     implementation(Dependencies.glide)
+
+    //paging
+    implementation(Dependencies.paging_common_ktx)
+    implementation(Dependencies.paging_runtime)
+    implementation(Dependencies.paging_compose)
 }
