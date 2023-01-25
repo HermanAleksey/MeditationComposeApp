@@ -13,8 +13,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.design_system.common_composables.ColorBackground
 import com.example.meditationcomposeapp.R
-import com.example.meditationcomposeapp.presentation.common_composables.ColorBackground
 import com.example.meditationcomposeapp.presentation.screens.main_flow.main_screen.composable.MenuItem
 import com.example.meditationcomposeapp.presentation.screens.main_flow.main_screen.composable.MenuItemModel
 import com.example.meditationcomposeapp.presentation.screens.main_flow.main_screen.composable.getMenuItemsList

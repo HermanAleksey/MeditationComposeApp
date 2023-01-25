@@ -1,4 +1,4 @@
-package com.example.meditationcomposeapp.presentation.screens.main_flow.shuffle_puzzle.composable
+package com.example.shuffle_puzzle.internal.presentation.composables
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
@@ -10,21 +10,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.example.meditationcomposeapp.R
 
 @Composable
-fun PuzzleIsSolvedLabel() {
+internal fun PuzzleIsSolvedLabel() {
     Card(
-        shape = RoundedCornerShape(dimensionResource(id = R.dimen.radius_pop_up_corner)),
+        shape = RoundedCornerShape(2.dp),//todo fix dimensionResource(id =  R.dimen.radius_pop_up_corner)),
         backgroundColor = MaterialTheme.colors.surface
     ) {
         Box(contentAlignment = Alignment.Center) {
             Text(
-                text = stringResource(id = R.string.puzzle_solved),
+                text = "solved",//todo fix stringResource(id = R.string.puzzle_solved),
                 style = MaterialTheme.typography.body1.copy(color = Color.Black),
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(horizontal = 60.dp, vertical = 25.dp)

@@ -11,11 +11,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.shuffle_puzzle.R
-import com.example.shuffle_puzzle.presentation.puzzle_description.states.InGameFunctionsDescription
-import com.example.shuffle_puzzle.presentation.puzzle_description.states.PuzzleSizeSelection
+import com.example.shuffle_puzzle.internal.presentation.composables.puzzle_description.states.InGameFunctionsDescription
+import com.example.shuffle_puzzle.internal.presentation.composables.puzzle_description.states.PuzzleSizeSelection
 
 @Composable
-fun PuzzleGameDescriptionCard(
+internal fun PuzzleGameDescriptionCard(
     isPuzzleCreated: Boolean,
     puzzleImageBitmap: Bitmap?,
     movesDone: Int,

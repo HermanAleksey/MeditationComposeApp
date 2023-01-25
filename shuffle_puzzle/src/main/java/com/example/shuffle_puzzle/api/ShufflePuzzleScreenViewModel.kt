@@ -1,9 +1,10 @@
-package com.example.meditationcomposeapp.presentation.screens.main_flow.shuffle_puzzle
+package com.example.shuffle_puzzle.api
 
 import android.graphics.Bitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.shuffle_puzzle.model.Puzzle
+import com.example.shuffle_puzzle.internal.model.Puzzle
+import com.example.shuffle_puzzle.internal.presentation.ShufflePuzzleState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

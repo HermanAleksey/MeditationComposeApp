@@ -1,6 +1,6 @@
-package com.example.meditationcomposeapp.presentation.screens.main_flow.shuffle_puzzle
+package com.example.shuffle_puzzle.internal.presentation
 
-import com.example.shuffle_puzzle.model.Puzzle
+import com.example.shuffle_puzzle.internal.model.Puzzle
 
 data class ShufflePuzzleState(
     val isLoading: Boolean = false,

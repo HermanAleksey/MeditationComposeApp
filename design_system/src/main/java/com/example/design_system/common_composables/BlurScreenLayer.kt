@@ -1,4 +1,4 @@
-package com.example.meditationcomposeapp.presentation.common_composables
+package com.example.design_system.common_composables
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

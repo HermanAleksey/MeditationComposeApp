@@ -3,8 +3,8 @@ package com.example.meditationcomposeapp.presentation.screens.splash
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import com.example.design_system.common_composables.ImageBackground
 import com.example.meditationcomposeapp.R
-import com.example.meditationcomposeapp.presentation.common_composables.ImageBackground
 import com.example.meditationcomposeapp.presentation.navigation.processEvent
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph

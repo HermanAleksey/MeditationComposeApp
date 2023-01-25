@@ -1,4 +1,4 @@
-package com.example.shuffle_puzzle.presentation
+package com.example.shuffle_puzzle.internal.presentation.composables
 
 import PuzzleGameDescriptionCard
 import android.graphics.Bitmap
@@ -8,11 +8,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import com.example.shuffle_puzzle.R
-import com.example.shuffle_puzzle.model.Puzzle
-import com.example.shuffle_puzzle.presentation.puzzle_board.PuzzleBoard
+import com.example.shuffle_puzzle.internal.model.Puzzle
+import com.example.shuffle_puzzle.internal.presentation.composables.puzzle_board.PuzzleBoard
 
 @Composable
-fun PuzzleBoardWithCounter(
+internal fun PuzzleBoardWithCounter(
     isPuzzleCreated: Boolean,
     movesDone: Int,
     onMovePerformed: (success: Boolean) -> Unit,

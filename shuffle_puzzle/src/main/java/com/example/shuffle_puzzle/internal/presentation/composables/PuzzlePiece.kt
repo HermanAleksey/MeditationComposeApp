@@ -1,4 +1,4 @@
-package com.example.shuffle_puzzle.presentation
+package com.example.shuffle_puzzle.internal.presentation.composables
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -10,10 +10,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.Dp
-import com.example.shuffle_puzzle.model.Piece
+import com.example.shuffle_puzzle.internal.model.Piece
 
 @Composable
-fun PuzzlePiece(piece: Piece, sizeDp: Dp, onPieceClick: () -> Unit) {
+internal fun PuzzlePiece(piece: Piece, sizeDp: Dp, onPieceClick: () -> Unit) {
     Image(
         bitmap = piece.imageBitmap.asImageBitmap(),
         contentDescription = null,

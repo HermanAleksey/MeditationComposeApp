@@ -1,11 +1,10 @@
-package com.example.shuffle_puzzle.presentation.puzzle_board
+package com.example.shuffle_puzzle.internal.presentation.composables.puzzle_board
 
 import android.Manifest
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.os.Build
 import android.provider.MediaStore
-import android.text.Html
 import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.compose.foundation.Image
@@ -21,14 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.ParagraphStyle
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.sp
 import com.canhub.cropper.CropImageContract
 import com.canhub.cropper.CropImageView
@@ -40,7 +32,7 @@ import com.google.accompanist.permissions.rememberPermissionState
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
-fun SelectPuzzleImageFromGalleryCard(
+internal fun SelectPuzzleImageFromGalleryCard(
     modifier: Modifier,
     onImageSelected: (Bitmap) -> Unit,
 ) {

@@ -1,4 +1,4 @@
-package com.example.shuffle_puzzle.presentation.puzzle_board.states
+package com.example.shuffle_puzzle.internal.presentation.composables.puzzle_board.states
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -19,8 +19,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.lerp
 import androidx.compose.ui.unit.sp
 import com.example.shuffle_puzzle.R
-import com.example.shuffle_puzzle.presentation.puzzle_board.SELECT_YOUR_IMAGE
-import com.example.shuffle_puzzle.presentation.puzzle_board.SelectPuzzleImageFromGalleryCard
+import com.example.shuffle_puzzle.internal.presentation.composables.puzzle_board.SELECT_YOUR_IMAGE
+import com.example.shuffle_puzzle.internal.presentation.composables.puzzle_board.SelectPuzzleImageFromGalleryCard
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.calculateCurrentOffsetForPage
@@ -28,7 +28,7 @@ import com.google.accompanist.pager.rememberPagerState
 import kotlin.math.absoluteValue
 
 @Composable
-fun SelectPuzzleBoard(
+internal fun SelectPuzzleBoard(
     onCreatePuzzleClick: (Bitmap) -> Unit,
 ) {
     val resources = LocalContext.current.resources

@@ -11,8 +11,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import com.example.design_system.common_composables.ColorBackground
 import com.example.meditationcomposeapp.R
-import com.example.meditationcomposeapp.presentation.common_composables.ColorBackground
 
 @Composable
 fun LoginFlowBackground(

@@ -1,4 +1,4 @@
-package com.example.shuffle_puzzle.presentation.puzzle_description.states
+package com.example.shuffle_puzzle.internal.presentation.composables.puzzle_description.states
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -20,7 +20,7 @@ import androidx.compose.ui.text.style.TextAlign
 import com.example.shuffle_puzzle.R
 
 @Composable
-fun PuzzleSizeSelection(puzzleSize: Int, updateSelectedSizeValue: (Int) -> Unit) {
+internal fun PuzzleSizeSelection(puzzleSize: Int, updateSelectedSizeValue: (Int) -> Unit) {
     val sizeOptions = integerArrayResource(id = R.array.puzzle_sizes)
     val (_, onOptionSelected) = remember { mutableStateOf(sizeOptions[0]) }
 

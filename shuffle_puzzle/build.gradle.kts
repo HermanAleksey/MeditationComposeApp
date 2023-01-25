@@ -1,6 +1,8 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
+    id("com.google.devtools.ksp") version LibVersions.ksp_version // Depends on your kotlin version
 }
 
 android {
@@ -40,6 +42,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":design_system"))
+
     implementation(Dependencies.activity_compose)
     implementation(Dependencies.core_ktx)
     implementation(Dependencies.compose_ui)
@@ -51,4 +55,14 @@ dependencies {
     implementation(Dependencies.accompanist_permissions)
 
     implementation(Dependencies.canhub_image_cropper)
+
+    //hilt
+    implementation(Dependencies.hilt_navigation_compose)
+    implementation(Dependencies.hilt_android)
+    kapt(Dependencies.hilt_compiler)
+
+    //navigation
+    implementation(Dependencies.navigation_compose)
+    implementation(Dependencies.raamcosta_compose_destinations_anim_core)
+    ksp(Dependencies.raamcosta_compose_destinations_ksp)
 }

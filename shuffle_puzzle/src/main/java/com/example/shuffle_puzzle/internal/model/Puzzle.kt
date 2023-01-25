@@ -1,4 +1,4 @@
-package com.example.shuffle_puzzle.model
+package com.example.shuffle_puzzle.internal.model
 
 import android.graphics.Bitmap
 import android.graphics.Canvas

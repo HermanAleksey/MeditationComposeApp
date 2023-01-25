@@ -1,4 +1,4 @@
-package com.example.meditationcomposeapp.presentation.screens.main_flow.shuffle_puzzle
+package com.example.shuffle_puzzle.internal.presentation
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -7,14 +7,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.example.meditationcomposeapp.presentation.common_composables.ColorBackground
-import com.example.meditationcomposeapp.presentation.screens.main_flow.shuffle_puzzle.composable.PuzzleIsSolvedLabel
-import com.example.shuffle_puzzle.presentation.PuzzleBoardWithCounter
-import com.ramcosta.composedestinations.annotation.Destination
+import com.example.design_system.common_composables.ColorBackground
+import com.example.shuffle_puzzle.api.ShufflePuzzleScreenViewModel
+import com.example.shuffle_puzzle.internal.presentation.composables.PuzzleBoardWithCounter
+import com.example.shuffle_puzzle.internal.presentation.composables.PuzzleIsSolvedLabel
 
-@Destination
 @Composable
-fun ShufflePuzzleScreen(
+internal fun InternalShufflePuzzleScreen(
     viewModel: ShufflePuzzleScreenViewModel,
 ) {
     val uiState = viewModel.uiState.collectAsState()

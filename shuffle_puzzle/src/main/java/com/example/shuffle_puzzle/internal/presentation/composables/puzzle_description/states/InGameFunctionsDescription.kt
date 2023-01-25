@@ -1,4 +1,4 @@
-package com.example.shuffle_puzzle.presentation.puzzle_description.states
+package com.example.shuffle_puzzle.internal.presentation.composables.puzzle_description.states
 
 import android.text.format.DateUtils
 import androidx.compose.foundation.Image
@@ -17,9 +17,8 @@ import androidx.compose.ui.unit.sp
 import com.example.shuffle_puzzle.R
 import kotlinx.coroutines.delay
 
-
 @Composable
-fun InGameFunctionsDescription(
+internal fun InGameFunctionsDescription(
     timerValueSec: Long,
     onTimerSecTick: () -> Unit,
     isTimerActivated: Boolean,

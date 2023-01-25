@@ -19,9 +19,9 @@ import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
+import com.example.design_system.common_composables.ColorBackground
 import com.example.meditationcomposeapp.R
 import com.example.meditationcomposeapp.data_source.entity.db.BeerListItem
-import com.example.meditationcomposeapp.presentation.common_composables.ColorBackground
 import com.example.meditationcomposeapp.presentation.navigation.processEvent
 import com.example.meditationcomposeapp.presentation.screens.main_flow.beer_list.composable.BeerItem
 import com.ramcosta.composedestinations.annotation.Destination

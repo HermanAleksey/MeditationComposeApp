@@ -1,4 +1,4 @@
-package com.example.shuffle_puzzle.presentation.puzzle_board.states
+package com.example.shuffle_puzzle.internal.presentation.composables.puzzle_board.states
 
 import android.util.Log
 import androidx.compose.foundation.layout.*
@@ -7,11 +7,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
-import com.example.shuffle_puzzle.model.Puzzle
-import com.example.shuffle_puzzle.presentation.PuzzlePiece
+import com.example.shuffle_puzzle.internal.model.Puzzle
+import com.example.shuffle_puzzle.internal.presentation.composables.PuzzlePiece
 
 @Composable
-fun FilledStatePuzzleBoard(
+internal fun FilledStatePuzzleBoard(
     puzzle: Puzzle,
     onPieceClicked: (Int, Int) -> Unit,
 ) {

@@ -22,8 +22,8 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.design_system.common_composables.ColorBackground
 import com.example.meditationcomposeapp.R
-import com.example.meditationcomposeapp.presentation.common_composables.ColorBackground
 import com.example.meditationcomposeapp.presentation.screens.main_flow.beer_list.composable.BeerParamsTable
 import com.ramcosta.composedestinations.annotation.Destination
 import com.skydoves.landscapist.ImageOptions
