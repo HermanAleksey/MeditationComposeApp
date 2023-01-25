@@ -7,7 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
-import com.example.shuffle_puzzle.internal.model.Puzzle
+import com.example.shuffle_puzzle.api.model.Puzzle
 import com.example.shuffle_puzzle.internal.presentation.composables.PuzzlePiece
 
 @Composable

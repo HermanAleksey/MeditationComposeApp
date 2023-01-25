@@ -1,6 +1,6 @@
 package com.example.shuffle_puzzle.internal.presentation
 
-import com.example.shuffle_puzzle.internal.model.Puzzle
+import com.example.shuffle_puzzle.api.model.Puzzle
 
 data class ShufflePuzzleState(
     val isLoading: Boolean = false,

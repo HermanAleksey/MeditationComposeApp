@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.Dp
-import com.example.shuffle_puzzle.internal.model.Piece
+import com.example.shuffle_puzzle.api.model.Piece
 
 @Composable
 internal fun PuzzlePiece(piece: Piece, sizeDp: Dp, onPieceClick: () -> Unit) {

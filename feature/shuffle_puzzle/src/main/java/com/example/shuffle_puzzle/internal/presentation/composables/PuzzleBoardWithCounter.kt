@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.shuffle_puzzle.internal.model.Puzzle
+import com.example.shuffle_puzzle.api.model.Puzzle
 import com.example.shuffle_puzzle.internal.presentation.composables.puzzle_board.PuzzleBoard
 
 @Composable
