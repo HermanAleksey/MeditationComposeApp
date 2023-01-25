@@ -4,8 +4,6 @@ import com.example.meditationcomposeapp.CoroutinesTestRule
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.entity.login_flow.SuccessInfo
 import com.example.meditationcomposeapp.model.usecase.authentication.RequestPasswordRestorationUseCase
-import com.example.meditationcomposeapp.presentation.navigation.NavigationEvent
-import com.example.meditationcomposeapp.presentation.screens.destinations.RegistrationScreenDestination
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.advanceUntilIdle

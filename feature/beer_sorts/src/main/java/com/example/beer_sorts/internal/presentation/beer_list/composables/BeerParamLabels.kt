@@ -11,8 +11,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.meditationcomposeapp.R
-import com.example.meditationcomposeapp.model.entity.beer.Beer
+import com.example.feature.beer_sorts.R
 
 @Composable
 fun BeerParamsTable(

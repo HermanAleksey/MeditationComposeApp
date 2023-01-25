@@ -5,16 +5,12 @@ import com.example.meditationcomposeapp.FakeObjects.getFakeProfile
 import com.example.meditationcomposeapp.data_source.data_store.UserDataStore
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.usecase.authentication.LoginUseCase
-import com.example.meditationcomposeapp.presentation.navigation.NavigationEvent
-import com.example.meditationcomposeapp.presentation.screens.destinations.EnterCodeScreenDestination
-import com.example.meditationcomposeapp.presentation.screens.destinations.EnterScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.MainScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.RegistrationScreenDestination
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
-import org.junit.Assert
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule

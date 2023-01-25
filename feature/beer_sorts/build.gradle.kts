@@ -25,6 +25,7 @@ android {
 
 dependencies {
     implementation(project(":core:design_system"))
+    implementation(project(":core:common"))
 
     implementation(Dependencies.activity_compose)
     implementation(Dependencies.core_ktx)
@@ -36,10 +37,11 @@ dependencies {
     implementation(Dependencies.accompanist_pager)
     implementation(Dependencies.accompanist_permissions)
 
-    implementation(Dependencies.canhub_image_cropper)
-
     //hilt
     implementation(Dependencies.hilt_navigation_compose)
     implementation(Dependencies.hilt_android)
     kapt(Dependencies.hilt_compiler)
+
+    //glide
+    implementation(Dependencies.glide)
 }

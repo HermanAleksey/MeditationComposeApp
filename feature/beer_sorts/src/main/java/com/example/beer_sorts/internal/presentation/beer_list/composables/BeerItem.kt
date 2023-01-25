@@ -13,7 +13,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.meditationcomposeapp.R
+import com.example.feature.beer_sorts.R
 import com.example.meditationcomposeapp.data_source.entity.db.BeerListItem
 
 @Composable
@@ -22,7 +22,7 @@ fun BeerItem(
     onClick: () -> Unit = {},
 ) {
     Card(
-        shape = RoundedCornerShape(dimensionResource(id = R.dimen.radius_list_item_corner)),
+        shape = RoundedCornerShape(20.dp),
         modifier = Modifier
             .fillMaxWidth()
             .clickable {
@@ -34,8 +34,8 @@ fun BeerItem(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(
-                    horizontal = dimensionResource(id = R.dimen.padding_horizontal_list_item),
-                    vertical = dimensionResource(id = R.dimen.padding_vertical_list_item)
+                    horizontal = 22.dp,
+                    vertical = 16.dp
                 )
         ) {
             Row(modifier = Modifier.fillMaxWidth()) {

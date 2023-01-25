@@ -1,6 +1,5 @@
 package com.example.meditationcomposeapp.presentation.screens.login_flow.login
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.meditationcomposeapp.data_source.data_store.UserDataStore
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
@@ -8,10 +7,8 @@ import com.example.meditationcomposeapp.model.usecase.authentication.LoginUseCas
 import com.example.meditationcomposeapp.model.utils.validation.LoginField
 import com.example.meditationcomposeapp.model.utils.validation.PasswordField
 import com.example.meditationcomposeapp.presentation.navigation.Event
-import com.example.meditationcomposeapp.presentation.navigation.NavigationEvent
 import com.example.meditationcomposeapp.presentation.screens.BaseViewModel
 import com.example.meditationcomposeapp.presentation.screens.destinations.EnterLoginScreenDestination
-import com.example.meditationcomposeapp.presentation.screens.destinations.LoginScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.MainScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.RegistrationScreenDestination
 import dagger.hilt.android.lifecycle.HiltViewModel

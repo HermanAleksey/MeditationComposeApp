@@ -10,7 +10,6 @@ import com.example.meditationcomposeapp.model.entity.login_flow.toVersion
 import com.example.meditationcomposeapp.model.usecase.authentication.GetAppUpdatesHistoryUseCase
 import com.example.meditationcomposeapp.model.usecase.authentication.LoginUseCase
 import com.example.meditationcomposeapp.presentation.navigation.Event
-import com.example.meditationcomposeapp.presentation.navigation.NavigationEvent
 import com.example.meditationcomposeapp.presentation.screens.BaseViewModel
 import com.example.meditationcomposeapp.presentation.screens.destinations.EnterScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.MainScreenDestination

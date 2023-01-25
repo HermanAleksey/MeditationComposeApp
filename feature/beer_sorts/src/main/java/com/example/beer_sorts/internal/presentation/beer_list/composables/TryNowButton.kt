@@ -20,7 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat.startActivity
-import com.example.meditationcomposeapp.R
+import com.example.feature.beer_sorts.R
 
 
 @Composable

@@ -95,6 +95,7 @@ android {
 dependencies {
     implementation(project(":feature:shuffle_puzzle"))
     implementation(project(":core:design_system"))
+    implementation(project(":core:common"))
 
     implementation(Dependencies.core_ktx)
     implementation(Dependencies.compose_ui)

@@ -1,4 +1,4 @@
-package com.example.meditationcomposeapp.presentation.navigation
+package com.example.common.view_model
 
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 

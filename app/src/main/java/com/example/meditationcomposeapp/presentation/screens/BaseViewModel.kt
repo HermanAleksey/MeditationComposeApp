@@ -2,7 +2,6 @@ package com.example.meditationcomposeapp.presentation.screens
 
 import androidx.lifecycle.ViewModel
 import com.example.meditationcomposeapp.presentation.navigation.Event
-import com.example.meditationcomposeapp.presentation.navigation.NavigationEvent
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 

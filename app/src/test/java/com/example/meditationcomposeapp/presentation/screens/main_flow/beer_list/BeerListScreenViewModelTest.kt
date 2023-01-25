@@ -3,7 +3,6 @@ package com.example.meditationcomposeapp.presentation.screens.main_flow.beer_lis
 import com.example.meditationcomposeapp.CoroutinesTestRule
 import com.example.meditationcomposeapp.model.usecase.punk.GetBeerPagingRemoteMediatorUseCase
 import com.example.meditationcomposeapp.model.usecase.punk.db.GetBeerPagingSourceUseCase
-import com.example.meditationcomposeapp.presentation.navigation.NavigationEvent
 import com.example.meditationcomposeapp.presentation.screens.destinations.DetailedBeerScreenDestination
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Assert.*

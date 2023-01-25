@@ -18,14 +18,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.beer_sorts.internal.presentation.beer_list.composables.BeerParamsTable
 import com.example.design_system.common_composables.ColorBackground
-import com.example.meditationcomposeapp.R
-import com.example.meditationcomposeapp.presentation.screens.main_flow.beer_list.composable.BeerParamsTable
-import com.ramcosta.composedestinations.annotation.Destination
+import com.example.feature.beer_sorts.R
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
 
@@ -48,7 +46,7 @@ internal fun InternalDetailedBeerScreen(
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = dimensionResource(id = R.dimen.padding_horizontal_list))
+                .padding(horizontal = 16.dp)
                 .scrollable(rememberScrollState(), Orientation.Vertical),
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
@@ -237,7 +235,7 @@ fun BeerDetailsCard(modifier: Modifier = Modifier, content: @Composable () -> Un
     Card(
         modifier = modifier
             .fillMaxWidth(),
-        shape = RoundedCornerShape(dimensionResource(id = R.dimen.radius_list_item_corner)),
+        shape = RoundedCornerShape(20.dp),
         elevation = 0.dp
     ) {
         content()

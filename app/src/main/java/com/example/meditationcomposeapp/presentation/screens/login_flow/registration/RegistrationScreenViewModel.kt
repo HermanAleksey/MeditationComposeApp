@@ -7,7 +7,6 @@ import com.example.meditationcomposeapp.model.utils.validation.LoginField
 import com.example.meditationcomposeapp.model.utils.validation.NameField
 import com.example.meditationcomposeapp.model.utils.validation.PasswordField
 import com.example.meditationcomposeapp.presentation.navigation.Event
-import com.example.meditationcomposeapp.presentation.navigation.NavigationEvent
 import com.example.meditationcomposeapp.presentation.screens.BaseViewModel
 import com.example.meditationcomposeapp.presentation.screens.destinations.LoginScreenDestination
 import dagger.hilt.android.lifecycle.HiltViewModel

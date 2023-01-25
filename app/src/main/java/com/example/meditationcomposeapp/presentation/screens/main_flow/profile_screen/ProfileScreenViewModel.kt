@@ -3,7 +3,6 @@ package com.example.meditationcomposeapp.presentation.screens.main_flow.profile_
 import androidx.lifecycle.viewModelScope
 import com.example.meditationcomposeapp.model.usecase.authentication.ClearAuthDataUseCase
 import com.example.meditationcomposeapp.presentation.navigation.Event
-import com.example.meditationcomposeapp.presentation.navigation.NavigationEvent
 import com.example.meditationcomposeapp.presentation.screens.BaseViewModel
 import com.example.meditationcomposeapp.presentation.screens.destinations.EnterScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.SplashScreenDestination

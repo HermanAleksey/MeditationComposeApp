@@ -8,11 +8,8 @@ import com.example.meditationcomposeapp.data_source.repository.update_descriptio
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.usecase.authentication.GetAppUpdatesHistoryUseCase
 import com.example.meditationcomposeapp.model.usecase.authentication.LoginUseCase
-import com.example.meditationcomposeapp.presentation.navigation.NavigationEvent
 import com.example.meditationcomposeapp.presentation.screens.destinations.EnterScreenDestination
-import com.example.meditationcomposeapp.presentation.screens.destinations.LoginScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.MainScreenDestination
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.*
@@ -20,7 +17,6 @@ import org.junit.*
 import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mock
-import org.mockito.MockitoAnnotations
 import org.mockito.junit.MockitoJUnitRunner
 import org.mockito.kotlin.never
 import org.mockito.kotlin.verify

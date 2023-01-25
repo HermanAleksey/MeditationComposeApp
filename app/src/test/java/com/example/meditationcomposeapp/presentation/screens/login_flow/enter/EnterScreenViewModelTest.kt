@@ -1,6 +1,5 @@
 package com.example.meditationcomposeapp.presentation.screens.login_flow.enter
 
-import com.example.meditationcomposeapp.presentation.navigation.NavigationEvent
 import com.example.meditationcomposeapp.presentation.screens.destinations.LoginScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.RegistrationScreenDestination
 import org.junit.Assert.*

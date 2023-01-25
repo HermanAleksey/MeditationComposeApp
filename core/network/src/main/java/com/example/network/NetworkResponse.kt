@@ -1,4 +1,4 @@
-package com.example.meditationcomposeapp.model.entity
+package com.example.network
 
 sealed class NetworkResponse<T>(
     val data: T? = null,

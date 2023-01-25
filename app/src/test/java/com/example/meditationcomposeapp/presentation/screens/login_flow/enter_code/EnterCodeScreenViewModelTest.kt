@@ -4,9 +4,6 @@ import com.example.meditationcomposeapp.CoroutinesTestRule
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.entity.login_flow.SuccessInfo
 import com.example.meditationcomposeapp.model.usecase.authentication.VerifyCodeUseCase
-import com.example.meditationcomposeapp.presentation.navigation.NavigationEvent
-import com.example.meditationcomposeapp.presentation.screens.destinations.LoginScreenDestination
-import com.example.meditationcomposeapp.presentation.screens.destinations.NewPasswordScreenDestination
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.advanceUntilIdle
@@ -19,7 +16,6 @@ import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
-import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 import java.util.*
