@@ -14,7 +14,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.shuffle_puzzle.R
+import com.example.feature.shuffle_puzzle.R
 import kotlinx.coroutines.delay
 
 @Composable

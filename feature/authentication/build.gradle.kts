@@ -4,12 +4,15 @@ plugins {
 }
 
 android {
-    namespace = "com.example.core.design_system"
+    namespace = "com.example.feature.authentication"
     compileSdk = 33
 
     defaultConfig {
         minSdk = 24
         targetSdk = 33
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     compileOptions {
@@ -19,17 +22,7 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_11.toString()
     }
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = LibVersions.compose_compiler_version
-    }
 }
 
 dependencies {
-    implementation(Dependencies.core_ktx)
-    implementation(Dependencies.compose_ui)
-    implementation(Dependencies.compose_material)
-    implementation(Dependencies.compose_ui_tooling_preview)
 }

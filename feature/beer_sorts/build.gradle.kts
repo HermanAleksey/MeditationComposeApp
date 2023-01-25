@@ -6,12 +6,12 @@ plugins {
 }
 
 android {
-    namespace = "com.example.feature.shuffle_puzzle"
-    compileSdk = Config.compileSdk
+    namespace = "com.example.feature.beer_sorts"
+    compileSdk = 33
 
     defaultConfig {
-        minSdk = Config.minSdk
-        targetSdk = Config.targetSdk
+        minSdk = 24
+        targetSdk = 33
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -23,12 +23,6 @@ android {
     }
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_11.toString()
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = LibVersions.compose_compiler_version
-    }
-    buildFeatures {
-        compose = true
     }
 }
 

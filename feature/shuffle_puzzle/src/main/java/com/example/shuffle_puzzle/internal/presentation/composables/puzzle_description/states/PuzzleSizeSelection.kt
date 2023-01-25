@@ -17,7 +17,7 @@ import androidx.compose.ui.res.integerArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import com.example.shuffle_puzzle.R
+import com.example.feature.shuffle_puzzle.R
 
 @Composable
 internal fun PuzzleSizeSelection(puzzleSize: Int, updateSelectedSizeValue: (Int) -> Unit) {

@@ -5,9 +5,7 @@ import android.graphics.Bitmap
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
-import com.example.shuffle_puzzle.R
 import com.example.shuffle_puzzle.internal.model.Puzzle
 import com.example.shuffle_puzzle.internal.presentation.composables.puzzle_board.PuzzleBoard
 
@@ -42,7 +40,7 @@ internal fun PuzzleBoardWithCounter(
             isTimerActivated = isTimerActivated,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(dimensionResource(id = R.dimen.puzzle_game_description_height))
+                .height(150.dp)
         )
         Spacer(modifier = Modifier.height(10.dp))
 

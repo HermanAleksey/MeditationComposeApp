@@ -8,9 +8,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import com.example.feature.shuffle_puzzle.R
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.example.shuffle_puzzle.R
 import com.example.shuffle_puzzle.internal.presentation.composables.puzzle_description.states.InGameFunctionsDescription
 import com.example.shuffle_puzzle.internal.presentation.composables.puzzle_description.states.PuzzleSizeSelection
 
