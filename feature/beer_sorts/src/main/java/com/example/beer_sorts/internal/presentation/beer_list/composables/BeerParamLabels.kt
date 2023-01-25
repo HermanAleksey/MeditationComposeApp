@@ -1,4 +1,4 @@
-package com.example.meditationcomposeapp.presentation.screens.main_flow.beer_list.composable
+package com.example.beer_sorts.internal.presentation.beer_list.composables
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme

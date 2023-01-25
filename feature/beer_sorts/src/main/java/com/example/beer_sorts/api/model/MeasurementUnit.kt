@@ -1,4 +1,4 @@
-package com.example.meditationcomposeapp.model.entity.beer
+package com.example.beer_sorts.api.model
 
 enum class MeasurementUnit(val namings: Array<String>) {
     UNDEFINED(emptyArray()),

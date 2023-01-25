@@ -11,8 +11,6 @@ import com.example.meditationcomposeapp.presentation.screens.login_flow.enter_lo
 import com.example.meditationcomposeapp.presentation.screens.login_flow.login.LoginScreenViewModel
 import com.example.meditationcomposeapp.presentation.screens.login_flow.new_password.NewPasswordScreenViewModel
 import com.example.meditationcomposeapp.presentation.screens.login_flow.registration.RegistrationScreenViewModel
-import com.example.meditationcomposeapp.presentation.screens.main_flow.beer_list.BeerListScreenViewModel
-import com.example.meditationcomposeapp.presentation.screens.main_flow.detailed_beer.DetailedBeerScreenViewModel
 import com.example.meditationcomposeapp.presentation.screens.main_flow.main_screen.MainScreenViewModel
 import com.example.meditationcomposeapp.presentation.screens.main_flow.profile_screen.ProfileScreenViewModel
 import com.example.meditationcomposeapp.presentation.screens.splash.SplashScreenViewModel

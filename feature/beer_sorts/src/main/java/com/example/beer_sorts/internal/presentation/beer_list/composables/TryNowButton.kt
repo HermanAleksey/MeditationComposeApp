@@ -1,4 +1,4 @@
-package com.example.meditationcomposeapp.presentation.screens.main_flow.beer_list.composable
+package com.example.beer_sorts.internal.presentation.beer_list.composables
 
 import android.app.SearchManager
 import android.content.Intent

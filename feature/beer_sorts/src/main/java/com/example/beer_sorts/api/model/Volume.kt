@@ -1,4 +1,4 @@
-package com.example.meditationcomposeapp.model.entity.beer
+package com.example.beer_sorts.api.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

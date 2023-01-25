@@ -1,0 +1,12 @@
+package com.example.beer_sorts.api
+
+import androidx.compose.runtime.Composable
+import com.example.beer_sorts.internal.presentation.beer_list.BeerListScreenViewModel
+
+@Composable
+fun InternalBeerListScreen(
+    viewModel: BeerListScreenViewModel,
+    navigator: DestinationsNavigator,
+) {
+    InternalBeerListScreen(viewModel, navigator)
+}

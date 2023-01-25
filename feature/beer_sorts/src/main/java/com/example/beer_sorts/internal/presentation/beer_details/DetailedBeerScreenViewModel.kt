@@ -1,4 +1,4 @@
-package com.example.meditationcomposeapp.presentation.screens.main_flow.detailed_beer
+package com.example.beer_sorts.internal.presentation.beer_details
 
 import androidx.lifecycle.viewModelScope
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
