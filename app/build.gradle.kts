@@ -93,7 +93,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":shuffle_puzzle"))
+    implementation(project(":feature:shuffle_puzzle"))
     implementation(project(":core:design_system"))
 
     implementation(Dependencies.core_ktx)

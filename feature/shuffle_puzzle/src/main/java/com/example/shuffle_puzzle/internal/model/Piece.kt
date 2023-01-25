@@ -1,8 +1,6 @@
 package com.example.shuffle_puzzle.internal.model
 
 import android.graphics.Bitmap
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
 
 data class Piece(
     var initialPosition: Position,

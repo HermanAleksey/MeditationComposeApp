@@ -14,7 +14,8 @@
             <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/core/design_system" />
-            <option value="$PROJECT_DIR$/shuffle_puzzle" />
+            <option value="$PROJECT_DIR$/feature" />
+            <option value="$PROJECT_DIR$/feature/shuffle_puzzle" />
           </set>
         </option>
       </GradleProjectSettings>
