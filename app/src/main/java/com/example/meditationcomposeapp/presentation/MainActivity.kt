@@ -10,13 +10,13 @@ import androidx.compose.animation.*
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.design_system.AppTheme
 import com.example.meditationcomposeapp.presentation.navigation.MeditationDestinationsNavHost
 import com.example.meditationcomposeapp.presentation.navigation.getDestinationWrapper
 import com.example.meditationcomposeapp.presentation.screens.destinations.*
@@ -29,7 +29,6 @@ import com.example.meditationcomposeapp.presentation.ui_controls.dialog.Meditati
 import com.example.meditationcomposeapp.presentation.ui_controls.toolbar.ToolBarController
 import com.example.meditationcomposeapp.presentation.ui_controls.toolbar.Toolbar
 import com.example.meditationcomposeapp.presentation.ui_controls.toolbar.ToolbarState
-import com.example.meditationcomposeapp.ui.theme.MeditationComposeAppTheme
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,7 +46,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@OptIn(ExperimentalAnimationApi::class, ExperimentalMaterialApi::class)
+@OptIn(ExperimentalAnimationApi::class)
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun MyApp(windows: Window) {
@@ -57,7 +56,6 @@ fun MyApp(windows: Window) {
 
     val navController = rememberAnimatedNavController()
     val systemUiController = rememberSystemUiController()
-
 
     var _bottomBarIsVisible by remember {
         mutableStateOf(false)
@@ -133,7 +131,7 @@ fun MyApp(windows: Window) {
         }
     }
 
-    MeditationComposeAppTheme(false) {
+    AppTheme(false) {
         systemUiController.setSystemBarsColor(MaterialTheme.colors.background)
 //        ModalBottomSheetLayout(sheetContent = {
 //

@@ -1,11 +1,10 @@
-package com.example.meditationcomposeapp.ui.theme
+package com.example.design_system
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 
 //source for material themes
 //https://material.io/design/color/the-color-system.html#color-theme-creation
@@ -42,7 +41,7 @@ private val LightColorPalette = lightColors(
 )
 
 @Composable
-fun MeditationComposeAppTheme(
+fun AppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {

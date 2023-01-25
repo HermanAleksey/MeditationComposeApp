@@ -14,16 +14,16 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.design_system.AppTheme
 import com.example.meditationcomposeapp.R
 import com.example.meditationcomposeapp.model.entity.login_flow.UpdateDescriptionModel
 import com.example.meditationcomposeapp.presentation.utils.DateFormat
 import com.example.meditationcomposeapp.presentation.utils.formatMillisIntoDate
-import com.example.meditationcomposeapp.ui.theme.MeditationComposeAppTheme
 
 @Preview
 @Composable
 fun UpdateDescriptionDialogPreview() {
-    MeditationComposeAppTheme(false) {
+    AppTheme(false) {
         UpdateDescriptionDialog(
             listOf(
                 UpdateDescriptionModel("10.10.10", 1667045395445, "title", "desc", true),

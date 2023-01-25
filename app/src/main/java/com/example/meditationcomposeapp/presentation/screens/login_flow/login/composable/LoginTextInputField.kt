@@ -23,9 +23,9 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.design_system.ColorPlatinum
+import com.example.design_system.Montserrat
 import com.example.meditationcomposeapp.R
-import com.example.meditationcomposeapp.ui.theme.ColorPlatinum
-import com.example.meditationcomposeapp.ui.theme.Montserrat
 
 @Composable
 fun LoginFlowInputField(

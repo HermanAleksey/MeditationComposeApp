@@ -1,7 +1,6 @@
 package com.example.meditationcomposeapp.presentation.screens.login_flow.enter_code.composable
 
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.TextField
@@ -23,8 +22,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.text.isDigitsOnly
+import com.example.design_system.Montserrat
 import com.example.meditationcomposeapp.presentation.screens.login_flow.enter_code.EnterCodeScreenState.Companion.EMPTY_NUMBER
-import com.example.meditationcomposeapp.ui.theme.Montserrat
 
 /**
  * Represent 1 number from code panel
