@@ -26,6 +26,8 @@ android {
 dependencies {
     implementation(project(":core:design_system"))
     implementation(project(":core:common"))
+    implementation(project(":core:model"))
+    implementation(project(":core:punk_api"))
 
     implementation(Dependencies.activity_compose)
     implementation(Dependencies.core_ktx)

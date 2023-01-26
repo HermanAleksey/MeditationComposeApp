@@ -23,8 +23,6 @@ import com.example.common.view_model.processEvent
 import com.example.design_system.common_composables.ColorBackground
 import com.example.feature.beer_sorts.R
 import com.example.meditationcomposeapp.data_source.entity.db.BeerListItem
-import com.example.meditationcomposeapp.presentation.navigation.processEvent
-import com.example.meditationcomposeapp.presentation.screens.main_flow.beer_list.composable.BeerItem
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @Composable

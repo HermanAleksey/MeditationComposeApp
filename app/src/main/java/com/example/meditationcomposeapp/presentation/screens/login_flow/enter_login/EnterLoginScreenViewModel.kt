@@ -1,10 +1,10 @@
 package com.example.meditationcomposeapp.presentation.screens.login_flow.enter_login
 
 import androidx.lifecycle.viewModelScope
-import com.example.meditationcomposeapp.model.entity.NetworkResponse
+import com.example.common.view_model.Event
+import com.example.common.view_model.NavigationEvent
 import com.example.meditationcomposeapp.model.usecase.authentication.RequestPasswordRestorationUseCase
 import com.example.meditationcomposeapp.model.utils.validation.LoginField
-import com.example.meditationcomposeapp.presentation.navigation.Event
 import com.example.meditationcomposeapp.presentation.screens.BaseViewModel
 import com.example.meditationcomposeapp.presentation.screens.destinations.EnterCodeScreenDestination
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -1,11 +1,10 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
-    id("kotlin-kapt")
 }
 
 android {
-    namespace = "com.example.core.punk_api"
+    namespace = "com.example.core.model"
     compileSdk = 33
 
     defaultConfig {
@@ -23,18 +22,5 @@ android {
 }
 
 dependencies {
-    api(project(":core:network"))
-    implementation(project(":core:common"))
-    implementation(project(":core:model"))
-
     implementation(Dependencies.core_ktx)
-    implementation(Dependencies.coroutines_core)
-
-    //hilt
-    implementation(Dependencies.hilt_android)
-    kapt(Dependencies.hilt_compiler)
-
-    //retrofit
-    implementation(Dependencies.retrofit)
-    implementation(Dependencies.retrofit_converter_gson)
 }

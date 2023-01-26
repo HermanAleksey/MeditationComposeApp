@@ -1,4 +1,4 @@
-package com.example.beer_sorts.api.model
+package com.example.core.model.beer_sorts
 
 enum class MeasurementUnit(val namings: Array<String>) {
     UNDEFINED(emptyArray()),

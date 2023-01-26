@@ -1,17 +1,17 @@
-package com.example.meditationcomposeapp.data_source.mappers.network.punk
+package com.example.punk_api.api.mapper
 
+import com.example.common.mapper.Mapper
+import com.example.core.model.beer_sorts.*
 import com.example.punk_api.api.model.BeerResponse
-import com.example.meditationcomposeapp.data_source.mappers.Mapper
-import com.example.meditationcomposeapp.model.entity.beer.*
 import javax.inject.Inject
 
 class BeerMapper @Inject constructor(
-    private val volumeMapper: Mapper<Volume, com.example.punk_api.api.model.BeerResponse.VolumeResponse>,
-    private val boilVolumeMapper: Mapper<BoilVolume, com.example.punk_api.api.model.BeerResponse.BoilVolumeResponse>,
-    private val methodMapper: Mapper<Method, com.example.punk_api.api.model.BeerResponse.MethodResponse>,
-    private val ingredientsMapper: Mapper<Ingredients, com.example.punk_api.api.model.BeerResponse.IngredientsResponse>,
-) : Mapper<Beer, com.example.punk_api.api.model.BeerResponse> {
-    override fun mapFrom(objectFrom: com.example.punk_api.api.model.BeerResponse): Beer {
+    private val volumeMapper: Mapper<Volume, BeerResponse.VolumeResponse>,
+    private val boilVolumeMapper: Mapper<BoilVolume, BeerResponse.BoilVolumeResponse>,
+    private val methodMapper: Mapper<Method, BeerResponse.MethodResponse>,
+    private val ingredientsMapper: Mapper<Ingredients, BeerResponse.IngredientsResponse>,
+) : Mapper<Beer, BeerResponse> {
+    override fun mapFrom(objectFrom: BeerResponse): Beer {
         return Beer(
             id = objectFrom.id,
             name = objectFrom.name,

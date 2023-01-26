@@ -1,7 +1,7 @@
 package com.example.punk_api.api.repository
 
 import com.example.common.mapper.Mapper
-import com.example.meditationcomposeapp.model.entity.beer.Beer
+import com.example.core.model.beer_sorts.Beer
 import com.example.network.NetworkResponse
 import com.example.punk_api.api.model.BeerResponse
 import com.example.punk_api.internal.PunkApi

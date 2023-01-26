@@ -1,4 +1,4 @@
-package com.example.beer_sorts.api.model
+package com.example.core.model.beer_sorts
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

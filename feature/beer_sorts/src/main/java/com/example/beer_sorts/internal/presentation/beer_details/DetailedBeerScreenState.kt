@@ -1,6 +1,7 @@
 package com.example.beer_sorts.internal.presentation.beer_details
 
-import com.example.beer_sorts.api.model.Beer
+import com.example.core.model.beer_sorts.Beer
+
 
 data class DetailedBeerScreenState(
     val isLoading: Boolean = false,

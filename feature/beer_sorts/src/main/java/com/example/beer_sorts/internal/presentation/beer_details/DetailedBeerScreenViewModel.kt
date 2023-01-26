@@ -2,8 +2,7 @@ package com.example.beer_sorts.internal.presentation.beer_details
 
 import androidx.lifecycle.viewModelScope
 import com.example.common.view_model.BaseViewModel
-import com.example.meditationcomposeapp.model.entity.NetworkResponse
-import com.example.meditationcomposeapp.model.usecase.punk.network.GetBeerByIdUseCase
+import com.example.network.NetworkResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
