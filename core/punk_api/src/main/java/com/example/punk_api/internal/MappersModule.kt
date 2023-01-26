@@ -1,4 +1,4 @@
-package com.example.punk_api.api
+package com.example.punk_api.internal
 
 import com.example.common.mapper.Mapper
 import com.example.core.model.beer_sorts.*

@@ -1,14 +1,13 @@
-package com.example.meditationcomposeapp.data_source.repository.authentication
+package com.example.core.authentication_api.api.repository
 
-import com.example.meditationcomposeapp.BuildConfig
-import com.example.meditationcomposeapp.data_source.entity.network.LoginUserResponse
-import com.example.meditationcomposeapp.data_source.entity.network.RegistrationRequest
-import com.example.meditationcomposeapp.data_source.entity.network.UpdateDescriptionResponse
-import com.example.meditationcomposeapp.data_source.mappers.network.profile.ProfileMapper
-import com.example.meditationcomposeapp.data_source.network.AuthenticationApi
-import com.example.meditationcomposeapp.model.entity.NetworkResponse
-import com.example.meditationcomposeapp.model.entity.login_flow.Profile
-import com.example.meditationcomposeapp.model.entity.login_flow.SuccessInfo
+import com.example.core.authentication_api.api.AuthenticationApi
+import com.example.core.authentication_api.api.mapper.ProfileMapper
+import com.example.core.authentication_api.api.model.LoginUserResponse
+import com.example.core.authentication_api.api.model.RegistrationRequest
+import com.example.core.authentication_api.api.model.UpdateDescriptionResponse
+import com.example.core.model.authentication.Profile
+import com.example.network.NetworkResponse
+import com.example.network.SuccessInfo
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -205,6 +204,7 @@ class AuthenticationRepositoryImpl @Inject constructor(
     }
 }
 
+//todo move updates logic into separate module
 //improvised response from back-end
 fun getVersionDescriptions(startFromVersion: String): List<UpdateDescriptionResponse> {
     val version0_0_1 = UpdateDescriptionResponse(

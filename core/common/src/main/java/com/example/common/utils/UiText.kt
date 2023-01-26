@@ -1,4 +1,4 @@
-package com.example.meditationcomposeapp.model.utils.resources
+package com.example.common.utils
 
 import android.content.Context
 import androidx.annotation.StringRes

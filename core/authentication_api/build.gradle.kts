@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.core.network"
+    namespace = "com.example.core.authentication_api"
     compileSdk = 33
 
     defaultConfig {
@@ -23,7 +23,12 @@ android {
 }
 
 dependencies {
+    api(project(":core:network"))
+    implementation(project(":core:common"))
+    implementation(project(":core:model"))
+
     implementation(Dependencies.core_ktx)
+    implementation(Dependencies.coroutines_core)
 
     //hilt
     implementation(Dependencies.hilt_android)
@@ -32,8 +37,4 @@ dependencies {
     //retrofit
     implementation(Dependencies.retrofit)
     implementation(Dependencies.retrofit_converter_gson)
-
-    //okHttp
-    implementation(Dependencies.okhttp)
-    implementation(Dependencies.okhttp_logging_interceptor)
 }

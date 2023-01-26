@@ -1,4 +1,4 @@
-package com.example.meditationcomposeapp.data_source.entity.network
+package com.example.core.authentication_api.api.model
 
 data class RegistrationRequest(
     val name: String,

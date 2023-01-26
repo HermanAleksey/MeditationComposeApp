@@ -1,9 +1,9 @@
-package com.example.meditationcomposeapp.data_source.network
+package com.example.core.authentication_api.api
 
-import com.example.meditationcomposeapp.data_source.entity.network.LoginUserResponse
-import com.example.meditationcomposeapp.data_source.entity.network.RegistrationRequest
-import com.example.meditationcomposeapp.data_source.entity.network.UpdateDescriptionResponse
-import com.example.meditationcomposeapp.model.entity.login_flow.SuccessInfo
+import com.example.core.authentication_api.api.model.LoginUserResponse
+import com.example.core.authentication_api.api.model.RegistrationRequest
+import com.example.core.authentication_api.api.model.UpdateDescriptionResponse
+import com.example.network.SuccessInfo
 import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.GET
@@ -39,6 +39,7 @@ interface AuthenticationApi {
         @Body newPassword: String
     ): SuccessInfo
 
+    //todo move updates logic into separate module
     @GET("updates")
     suspend fun getAppUpdatesHistory(
         @Field("start") startFromVersion: String,

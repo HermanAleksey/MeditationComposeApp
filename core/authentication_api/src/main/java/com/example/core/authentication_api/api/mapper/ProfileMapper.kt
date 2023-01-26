@@ -1,8 +1,8 @@
-package com.example.meditationcomposeapp.data_source.mappers.network.profile
+package com.example.core.authentication_api.api.mapper
 
-import com.example.meditationcomposeapp.data_source.entity.network.LoginUserResponse
-import com.example.meditationcomposeapp.data_source.mappers.Mapper
-import com.example.meditationcomposeapp.model.entity.login_flow.Profile
+import com.example.common.mapper.Mapper
+import com.example.core.authentication_api.api.model.LoginUserResponse
+import com.example.core.model.authentication.Profile
 import javax.inject.Inject
 
 class ProfileMapper @Inject constructor() : Mapper<Profile, LoginUserResponse> {

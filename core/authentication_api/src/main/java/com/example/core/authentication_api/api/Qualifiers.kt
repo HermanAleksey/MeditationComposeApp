@@ -1,4 +1,4 @@
-package com.example.meditationcomposeapp.di
+package com.example.core.authentication_api.api
 
 import javax.inject.Qualifier
 

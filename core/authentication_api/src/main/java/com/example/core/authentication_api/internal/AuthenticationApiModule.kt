@@ -1,6 +1,7 @@
-package com.example.punk_api.internal
+package com.example.core.authentication_api.internal
 
-import com.example.punk_api.api.Qualifiers
+import com.example.core.authentication_api.api.AuthenticationApi
+import com.example.core.authentication_api.api.Qualifiers
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,22 +13,22 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object PunkApiModule {
+object AuthenticationApiModule {
 
     @Provides
     @Singleton
-    fun providePunkApi(
-        @Qualifiers.PunkRetrofit retrofit: Retrofit
-    ): PunkApi = retrofit.create(PunkApi::class.java)
+    fun provideAuthenticationApi(
+        @Qualifiers.AuthRetrofit   retrofit: Retrofit
+    ): AuthenticationApi = retrofit.create(AuthenticationApi::class.java)
 
     @Provides
     @Singleton
-    @Qualifiers.PunkRetrofit
-    fun provideRetrofitPunkApi(
+    @Qualifiers.AuthRetrofit
+    fun provideRetrofitAuth(
         okHttpClient: OkHttpClient
     ): Retrofit =
         Retrofit.Builder()
-            .baseUrl("https://hello.com")//todo updateBuildConfig.PUNK_API_URL)
+            .baseUrl("http://ok.com")//todo fix BuildConfig.SERVER_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()

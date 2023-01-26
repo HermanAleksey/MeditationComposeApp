@@ -1,7 +1,6 @@
 package com.example.meditationcomposeapp
 
 import com.example.meditationcomposeapp.model.entity.beer.*
-import com.example.meditationcomposeapp.model.entity.login_flow.Profile
 import com.example.meditationcomposeapp.model.entity.login_flow.UpdateDescriptionModel
 
 object FakeObjects {
