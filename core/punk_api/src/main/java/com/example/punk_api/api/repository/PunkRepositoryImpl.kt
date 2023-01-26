@@ -1,10 +1,10 @@
-package com.example.meditationcomposeapp.data_source.repository.punk
+package com.example.punk_api.api.repository
 
-import com.example.meditationcomposeapp.data_source.entity.network.BeerResponse
-import com.example.meditationcomposeapp.data_source.mappers.Mapper
-import com.example.meditationcomposeapp.data_source.network.PunkApi
-import com.example.meditationcomposeapp.model.entity.NetworkResponse
+import com.example.common.mapper.Mapper
 import com.example.meditationcomposeapp.model.entity.beer.Beer
+import com.example.network.NetworkResponse
+import com.example.punk_api.api.model.BeerResponse
+import com.example.punk_api.internal.PunkApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException

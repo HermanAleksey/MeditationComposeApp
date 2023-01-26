@@ -1,6 +1,6 @@
-package com.example.meditationcomposeapp.data_source.network
+package com.example.punk_api.internal
 
-import com.example.meditationcomposeapp.data_source.entity.network.BeerResponse
+import com.example.punk_api.api.model.BeerResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

@@ -2,7 +2,7 @@ package com.example.meditationcomposeapp.di
 
 import com.example.meditationcomposeapp.BuildConfig
 import com.example.meditationcomposeapp.data_source.network.AuthenticationApi
-import com.example.meditationcomposeapp.data_source.network.PunkApi
+import com.example.punk_api.internal.PunkApi
 import com.example.meditationcomposeapp.data_source.utils.LoggingInterceptor
 import dagger.Module
 import dagger.Provides
@@ -21,27 +21,9 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun providePunkApi(
-        @Qualifiers.PunkRetrofit retrofit: Retrofit
-    ): PunkApi = retrofit.create(PunkApi::class.java)
-
-    @Provides
-    @Singleton
     fun provideAuthenticationApi(
         @Qualifiers.AuthRetrofit   retrofit: Retrofit
     ): AuthenticationApi = retrofit.create(AuthenticationApi::class.java)
-
-    @Provides
-    @Singleton
-    @Qualifiers.PunkRetrofit
-    fun provideRetrofitPunkApi(
-        okHttpClient: OkHttpClient
-    ): Retrofit =
-        Retrofit.Builder()
-            .baseUrl(BuildConfig.PUNK_API_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(okHttpClient)
-            .build()
 
     @Provides
     @Singleton

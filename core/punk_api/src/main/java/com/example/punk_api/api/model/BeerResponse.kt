@@ -1,4 +1,4 @@
-package com.example.meditationcomposeapp.data_source.entity.network
+package com.example.punk_api.api.model
 
 import com.google.gson.annotations.SerializedName
 

@@ -1,6 +1,5 @@
 package com.example.meditationcomposeapp.model.usecase.punk.network
 
-import com.example.meditationcomposeapp.data_source.repository.punk.PunkRepository
 import com.example.meditationcomposeapp.model.entity.beer.Beer
 import javax.inject.Inject
 

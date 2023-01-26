@@ -1,10 +1,9 @@
 package com.example.meditationcomposeapp.di
 
 import com.example.meditationcomposeapp.data_source.entity.db.BeerListItem
-import com.example.meditationcomposeapp.data_source.entity.network.BeerResponse
+import com.example.punk_api.api.model.BeerResponse
 import com.example.meditationcomposeapp.data_source.entity.network.LoginUserResponse
 import com.example.meditationcomposeapp.data_source.entity.network.UpdateDescriptionResponse
-import com.example.meditationcomposeapp.data_source.mappers.BidirectionalMapper
 import com.example.meditationcomposeapp.data_source.mappers.Mapper
 import com.example.meditationcomposeapp.data_source.mappers.db.BeerDBMapper
 import com.example.meditationcomposeapp.data_source.mappers.network.profile.ProfileMapper
@@ -40,55 +39,55 @@ abstract class MappersModule {
     @Binds
     abstract fun provideBeerMapper(
         implementation: BeerMapper
-    ): Mapper<Beer, BeerResponse>
+    ): Mapper<Beer, com.example.punk_api.api.model.BeerResponse>
 
     @Binds
     abstract fun provideAmountMapper(
         implementation: AmountMapper
-    ): Mapper<Ingredients.Amount, BeerResponse.IngredientsResponse.AmountResponse>
+    ): Mapper<Ingredients.Amount, com.example.punk_api.api.model.BeerResponse.IngredientsResponse.AmountResponse>
 
     @Binds
     abstract fun provideBoilVolumeMapper(
         implementation: BoilVolumeMapper
-    ): Mapper<BoilVolume, BeerResponse.BoilVolumeResponse>
+    ): Mapper<BoilVolume, com.example.punk_api.api.model.BeerResponse.BoilVolumeResponse>
 
     @Binds
     abstract fun provideFermentationMapper(
         implementation: FermentationMapper
-    ): Mapper<Method.Fermentation, BeerResponse.MethodResponse.FermentationResponse>
+    ): Mapper<Method.Fermentation, com.example.punk_api.api.model.BeerResponse.MethodResponse.FermentationResponse>
 
     @Binds
     abstract fun provideHopsMapper(
         implementation: HopsMapper
-    ): Mapper<Ingredients.Hops, BeerResponse.IngredientsResponse.HopsResponse>
+    ): Mapper<Ingredients.Hops, com.example.punk_api.api.model.BeerResponse.IngredientsResponse.HopsResponse>
 
     @Binds
     abstract fun provideIngredientsMapper(
         implementation: IngredientsMapper
-    ): Mapper<Ingredients, BeerResponse.IngredientsResponse>
+    ): Mapper<Ingredients, com.example.punk_api.api.model.BeerResponse.IngredientsResponse>
 
     @Binds
     abstract fun provideMaltMapper(
         implementation: MaltMapper
-    ): Mapper<Ingredients.Malt, BeerResponse.IngredientsResponse.MaltResponse>
+    ): Mapper<Ingredients.Malt, com.example.punk_api.api.model.BeerResponse.IngredientsResponse.MaltResponse>
 
     @Binds
     abstract fun provideMashTempMapper(
         implementation: MashTempMapper
-    ): Mapper<Method.MashTemp, BeerResponse.MethodResponse.MashTempResponse>
+    ): Mapper<Method.MashTemp, com.example.punk_api.api.model.BeerResponse.MethodResponse.MashTempResponse>
 
     @Binds
     abstract fun provideMethodMapper(
         implementation: MethodMapper
-    ): Mapper<Method, BeerResponse.MethodResponse>
+    ): Mapper<Method, com.example.punk_api.api.model.BeerResponse.MethodResponse>
 
     @Binds
     abstract fun provideTempMapper(
         implementation: TempMapper
-    ): Mapper<Method.Temp, BeerResponse.MethodResponse.TempResponse>
+    ): Mapper<Method.Temp, com.example.punk_api.api.model.BeerResponse.MethodResponse.TempResponse>
 
     @Binds
     abstract fun provideVolumeMapper(
         implementation: VolumeMapper
-    ): Mapper<Volume, BeerResponse.VolumeResponse>
+    ): Mapper<Volume, com.example.punk_api.api.model.BeerResponse.VolumeResponse>
 }

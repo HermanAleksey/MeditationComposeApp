@@ -12,6 +12,10 @@ object Dependencies {
     const val compose_material_icons =
         "androidx.compose.material:material-icons-extended:${LibVersions.compose_version}"
 
+    //coroutines
+    const val coroutines_core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${LibVersions.coroutines_version}"
+
+
     //accompanist
     const val accompanist_system_ui_controller =
         "com.google.accompanist:accompanist-systemuicontroller:${LibVersions.accompanist_version}"

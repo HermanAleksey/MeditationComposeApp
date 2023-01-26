@@ -1,16 +1,16 @@
 package com.example.meditationcomposeapp.data_source.mappers.network.punk
 
-import com.example.meditationcomposeapp.data_source.entity.network.BeerResponse
+import com.example.punk_api.api.model.BeerResponse
 import com.example.meditationcomposeapp.data_source.mappers.Mapper
 import com.example.meditationcomposeapp.model.entity.beer.Ingredients
 import javax.inject.Inject
 
 class IngredientsMapper @Inject constructor(
-    private val maltMapper: Mapper<Ingredients.Malt, BeerResponse.IngredientsResponse.MaltResponse>,
-    private val hopsMapper: Mapper<Ingredients.Hops, BeerResponse.IngredientsResponse.HopsResponse>,
+    private val maltMapper: Mapper<Ingredients.Malt, com.example.punk_api.api.model.BeerResponse.IngredientsResponse.MaltResponse>,
+    private val hopsMapper: Mapper<Ingredients.Hops, com.example.punk_api.api.model.BeerResponse.IngredientsResponse.HopsResponse>,
 ) :
-    Mapper<Ingredients, BeerResponse.IngredientsResponse> {
-    override fun mapFrom(objectFrom: BeerResponse.IngredientsResponse): Ingredients {
+    Mapper<Ingredients, com.example.punk_api.api.model.BeerResponse.IngredientsResponse> {
+    override fun mapFrom(objectFrom: com.example.punk_api.api.model.BeerResponse.IngredientsResponse): Ingredients {
         return Ingredients(
             malt = objectFrom.malt.map {
                 maltMapper.mapFrom(it)

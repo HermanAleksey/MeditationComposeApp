@@ -10,6 +10,8 @@ object LibVersions {
     const val lifecycle_runtime_ktx_version = "2.3.1"
     const val compose_compiler_version = "1.3.0"
 
+    const val coroutines_version = "1.3.2"
+
     const val gson_version = "2.9.0"
 
     const val hilt_version = "2.42"

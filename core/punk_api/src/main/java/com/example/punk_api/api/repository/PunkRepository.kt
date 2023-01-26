@@ -1,7 +1,7 @@
-package com.example.meditationcomposeapp.data_source.repository.punk
+package com.example.punk_api.api.repository
 
-import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.entity.beer.Beer
+import com.example.network.NetworkResponse
 import kotlinx.coroutines.flow.Flow
 
 interface PunkRepository {
