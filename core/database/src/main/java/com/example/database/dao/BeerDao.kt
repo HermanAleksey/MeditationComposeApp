@@ -1,8 +1,8 @@
-package com.example.punk_source.internal
+package com.example.database.dao
 
 import androidx.paging.PagingSource
 import androidx.room.*
-import com.example.punk_source.api.model.db.BeerListItem
+import com.example.database.model.BeerListItem
 
 @Dao
 interface BeerDao {

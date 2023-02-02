@@ -1,9 +1,9 @@
-package com.example.punk_source.api.model.db
+package com.example.database.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.meditationcomposeapp.model.entity.login_flow.UpdateDescriptionModel
+import com.example.core.model.updates.UpdateDescriptionModel
 
 @Entity(tableName = "updates_log")
 data class UpdateDescriptionDBEntity(

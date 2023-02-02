@@ -2,8 +2,12 @@ package com.example.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.example.meditationcomposeapp.data_source.database.dao.UpdateDescriptionDao
-import com.example.meditationcomposeapp.data_source.entity.db.UpdateDescriptionDBEntity
+import com.example.database.dao.BeerDao
+import com.example.database.dao.RemoteKeysDao
+import com.example.database.dao.UpdateDescriptionDao
+import com.example.database.model.BeerListItem
+import com.example.database.model.RemoteKeys
+import com.example.database.model.UpdateDescriptionDBEntity
 
 @Database(
     entities = [UpdateDescriptionDBEntity::class, BeerListItem::class, RemoteKeys::class],

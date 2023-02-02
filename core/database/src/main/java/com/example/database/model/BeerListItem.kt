@@ -1,4 +1,4 @@
-package com.example.punk_source.api.model.db
+package com.example.database.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

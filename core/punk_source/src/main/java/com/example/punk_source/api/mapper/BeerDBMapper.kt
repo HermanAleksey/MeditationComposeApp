@@ -2,13 +2,13 @@ package com.example.punk_source.api.mapper
 
 import com.example.common.mapper.Mapper
 import com.example.core.model.beer_sorts.Beer
-import com.example.punk_source.api.model.db.BeerListItem
+import com.example.database.model.BeerListItem
 import javax.inject.Inject
 
-class BeerDBMapper @Inject constructor() : Mapper<BeerListItem, Beer> {
+class BeerDBMapper @Inject constructor() : Mapper<com.example.database.model.BeerListItem, Beer> {
 
     override fun mapFrom(objectFrom: Beer) = with(objectFrom) {
-        BeerListItem(
+        com.example.database.model.BeerListItem(
             id = id,
             name = name,
             tagline = tagline,
