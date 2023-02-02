@@ -1,4 +1,4 @@
-package com.example.meditationcomposeapp.data_source.entity.db
+package com.example.punk_source.api.model.db
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

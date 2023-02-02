@@ -1,7 +1,6 @@
 package com.example.meditationcomposeapp.model.usecase.punk.db
 
 import androidx.paging.PagingSource
-import com.example.meditationcomposeapp.data_source.entity.db.BeerListItem
 import com.example.meditationcomposeapp.data_source.repository.punk.PunkDBRepository
 import javax.inject.Inject
 

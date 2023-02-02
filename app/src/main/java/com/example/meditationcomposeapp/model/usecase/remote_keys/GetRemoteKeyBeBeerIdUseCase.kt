@@ -1,6 +1,5 @@
 package com.example.meditationcomposeapp.model.usecase.remote_keys
 
-import com.example.meditationcomposeapp.data_source.entity.db.RemoteKeys
 import com.example.meditationcomposeapp.data_source.repository.punk.RemoteKeysRepository
 import javax.inject.Inject
 

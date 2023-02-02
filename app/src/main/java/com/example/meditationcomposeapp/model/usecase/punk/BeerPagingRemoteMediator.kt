@@ -1,8 +1,6 @@
 package com.example.meditationcomposeapp.model.usecase.punk
 
 import androidx.paging.*
-import com.example.meditationcomposeapp.data_source.entity.db.BeerListItem
-import com.example.meditationcomposeapp.data_source.entity.db.RemoteKeys
 import com.example.meditationcomposeapp.model.usecase.ExecuteDatabaseTransactionUseCase
 import com.example.meditationcomposeapp.model.usecase.punk.db.ClearBeersDBUseCase
 import com.example.meditationcomposeapp.model.usecase.punk.db.InsertBeersIntoDBUseCase

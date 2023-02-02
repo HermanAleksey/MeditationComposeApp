@@ -1,6 +1,5 @@
 package com.example.meditationcomposeapp.di
 
-import com.example.meditationcomposeapp.data_source.entity.db.BeerListItem
 import com.example.meditationcomposeapp.data_source.entity.network.UpdateDescriptionResponse
 import com.example.meditationcomposeapp.data_source.mappers.Mapper
 import com.example.meditationcomposeapp.data_source.mappers.db.BeerDBMapper
@@ -21,12 +20,7 @@ abstract class MappersModule {
     abstract fun provideUpdateDescriptionMapper(
         implementation: UpdateDescriptionMapper
     ): Mapper<UpdateDescriptionModel, UpdateDescriptionResponse>
-
-
-    @Binds
-    abstract fun provideBeerDBMapper(
-        implementation: BeerDBMapper
-    ): Mapper<BeerListItem, Beer>
+    
 
 
 }

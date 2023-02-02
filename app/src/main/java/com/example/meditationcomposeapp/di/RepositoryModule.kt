@@ -27,11 +27,6 @@ abstract class RepositoryModule {
     ): UpdateDescriptionRepository
 
     @Binds
-    abstract fun provideAuthenticationRepository(
-        implementation: AuthenticationRepositoryImpl,
-    ): AuthenticationRepository
-
-    @Binds
     abstract fun providePunkRepository(
         implementation: PunkRepositoryImpl,
     ): PunkRepository

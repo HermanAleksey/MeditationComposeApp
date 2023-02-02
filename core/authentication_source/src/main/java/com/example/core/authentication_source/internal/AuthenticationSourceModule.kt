@@ -13,7 +13,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object AuthenticationApiModule {
+object AuthenticationSourceModule {
 
     @Provides
     @Singleton

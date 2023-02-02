@@ -1,10 +1,10 @@
-package com.example.meditationcomposeapp.data_source.database.dao
+package com.example.punk_source.internal
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.meditationcomposeapp.data_source.entity.db.RemoteKeys
+import com.example.punk_source.api.model.db.RemoteKeys
 
 @Dao
 interface RemoteKeysDao {

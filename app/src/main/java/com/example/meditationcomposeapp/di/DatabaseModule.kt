@@ -2,19 +2,14 @@ package com.example.meditationcomposeapp.di
 
 import android.content.Context
 import androidx.room.Room
-import androidx.room.withTransaction
 import com.example.meditationcomposeapp.BuildConfig
 import com.example.meditationcomposeapp.data_source.database.AppDatabase
-import com.example.meditationcomposeapp.data_source.database.dao.BeerDao
-import com.example.meditationcomposeapp.data_source.database.dao.RemoteKeysDao
 import com.example.meditationcomposeapp.data_source.database.dao.UpdateDescriptionDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
 import javax.inject.Singleton
 
 @Module

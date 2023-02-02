@@ -1,8 +1,8 @@
-package com.example.meditationcomposeapp.data_source.database.dao
+package com.example.punk_source.internal
 
 import androidx.paging.PagingSource
 import androidx.room.*
-import com.example.meditationcomposeapp.data_source.entity.db.BeerListItem
+import com.example.punk_source.api.model.db.BeerListItem
 
 @Dao
 interface BeerDao {

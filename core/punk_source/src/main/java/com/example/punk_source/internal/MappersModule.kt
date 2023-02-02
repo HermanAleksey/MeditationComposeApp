@@ -3,7 +3,8 @@ package com.example.punk_source.internal
 import com.example.common.mapper.Mapper
 import com.example.core.model.beer_sorts.*
 import com.example.punk_source.api.mapper.*
-import com.example.punk_source.api.model.BeerResponse
+import com.example.punk_source.api.model.db.BeerListItem
+import com.example.punk_source.api.model.web.BeerResponse
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -12,6 +13,11 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class MappersModule {
+
+    @Binds
+    abstract fun provideBeerDBMapper(
+        implementation: BeerDBMapper
+    ): Mapper<BeerListItem, Beer>
 
     @Binds
     abstract fun provideBeerMapper(

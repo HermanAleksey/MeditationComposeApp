@@ -1,7 +1,5 @@
 package com.example.meditationcomposeapp.data_source.repository.punk
 
-import com.example.meditationcomposeapp.data_source.database.dao.RemoteKeysDao
-import com.example.meditationcomposeapp.data_source.entity.db.RemoteKeys
 import javax.inject.Inject
 
 class RemoteKeysRepositoryImpl @Inject constructor(

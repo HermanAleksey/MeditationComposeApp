@@ -15,6 +15,11 @@ import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 
+//todo rework BuildConfig
+object BuildConfig {
+    const val ENABLE_VALIDATION = false
+}
+
 class AuthenticationRepositoryImpl @Inject constructor(
     private val authApi: AuthenticationApi,
     private val profileMapper: ProfileMapper,

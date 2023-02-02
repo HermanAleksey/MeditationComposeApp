@@ -1,4 +1,4 @@
-package com.example.meditationcomposeapp.data_source.database
+package com.example.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

@@ -1,4 +1,4 @@
-package com.example.punk_source.api.model
+package com.example.punk_source.api.model.web
 
 import com.google.gson.annotations.SerializedName
 
