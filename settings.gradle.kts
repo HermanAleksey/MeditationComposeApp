@@ -9,6 +9,7 @@ include(":core:network")
 include(":core:punk_source")
 include(":core:model")
 include(":core:data_store")
+include(":core:updates_history")
 
 include(":feature:shuffle_puzzle")
 include(":feature:authentication")

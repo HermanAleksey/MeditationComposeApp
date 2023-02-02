@@ -11,6 +11,8 @@ android {
     defaultConfig {
         minSdk = 24
         targetSdk = 33
+
+        buildConfigField("String", "DATABASE_NAME", "MeditationComposeApp")
     }
 
     compileOptions {
@@ -28,4 +30,8 @@ dependencies {
     implementation(Dependencies.room_ktx)
     kapt(Dependencies.room_compiler)
     implementation(Dependencies.room_pager)
+
+    //hilt
+    implementation(Dependencies.hilt_android)
+    kapt(Dependencies.hilt_compiler)
 }
