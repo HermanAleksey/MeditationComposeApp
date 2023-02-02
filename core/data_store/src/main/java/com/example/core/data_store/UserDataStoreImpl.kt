@@ -65,8 +65,12 @@ class UserDataStoreImpl @Inject constructor(
         val lastInstalledVersionKey =
             stringPreferencesKey(UserDataStoreField.LAST_UPDATE_VERSION.name)
         return context.userDataStore.data.map { preferences ->
-            preferences[lastInstalledVersionKey] ?: "0.0.0"
+            preferences[lastInstalledVersionKey] ?: INITIAL_VERSION
         }
+    }
+
+    companion object {
+        private const val INITIAL_VERSION = "0.0.0"
     }
 }
 
