@@ -1,8 +1,8 @@
-package com.example.core.updates_history
+package com.example.core.updates_history.source.db
 
 import com.example.core.model.updates.UpdateDescriptionModel
 
-interface UpdateDescriptionRepository {
+interface UpdateDescriptionDBRepository {
 
     suspend fun getAll(): List<UpdateDescriptionModel>
 

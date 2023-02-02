@@ -1,6 +1,5 @@
 package com.example.core.authentication_source.api.repository
 
-import com.example.core.updates_history.UpdateDescriptionResponse
 import com.example.core.model.authentication.Profile
 import com.example.network.NetworkResponse
 import com.example.network.SuccessInfo
@@ -42,9 +41,4 @@ interface AuthenticationRepository {
      * @return returns the [SuccessInfo] value of success or failure
      * */
     fun verifyCode(login: String, code: String): Flow<NetworkResponse<SuccessInfo>>
-
-    /**
-     * Returns list of update descriptions since [startFromVersion] version excluded
-     * */
-    fun getAppUpdates(startFromVersion: String): Flow<NetworkResponse<List<com.example.core.updates_history.UpdateDescriptionResponse>>>
 }

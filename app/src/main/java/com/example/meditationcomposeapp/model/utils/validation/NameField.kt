@@ -10,7 +10,6 @@ class NameField(
 
     override fun specialFieldValidation(): ValidationResult {
         //TODO implement special validation
-        DirectionDestination
         return ValidationResult(successful = true)
     }
 }

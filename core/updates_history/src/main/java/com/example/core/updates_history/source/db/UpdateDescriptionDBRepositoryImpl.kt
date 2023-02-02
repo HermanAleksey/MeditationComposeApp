@@ -1,4 +1,4 @@
-package com.example.core.updates_history
+package com.example.core.updates_history.source.db
 
 import com.example.common.mapper.Mapper
 import com.example.core.model.updates.UpdateDescriptionModel
@@ -6,10 +6,10 @@ import com.example.database.dao.UpdateDescriptionDao
 import com.example.database.model.UpdateDescriptionDBEntity
 import javax.inject.Inject
 
-class UpdateDescriptionRepositoryImpl @Inject constructor(
+class UpdateDescriptionDBRepositoryImpl @Inject constructor(
     private val dao: UpdateDescriptionDao,
     private val mapper: Mapper<UpdateDescriptionModel, UpdateDescriptionDBEntity>
-) : UpdateDescriptionRepository {
+) : UpdateDescriptionDBRepository {
     override suspend fun getAll(): List<UpdateDescriptionModel> {
         return dao.getAll().map {
             if (!it.isUpdateWasShown)

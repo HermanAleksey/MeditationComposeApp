@@ -2,6 +2,8 @@ package com.example.core.updates_history
 
 import com.example.common.mapper.Mapper
 import com.example.core.model.updates.UpdateDescriptionModel
+import com.example.core.updates_history.source.db.UpdateDescriptionDBRepository
+import com.example.core.updates_history.source.db.UpdateDescriptionDBRepositoryImpl
 import com.example.database.dao.UpdateDescriptionDao
 import com.example.database.model.UpdateDescriptionDBEntity
 import dagger.Module
@@ -23,7 +25,7 @@ object HistoryDescriptionSourceModule {
     fun provideUpdateDescriptionDBRepository(
         dao: UpdateDescriptionDao,
         mapper: Mapper<UpdateDescriptionModel, UpdateDescriptionDBEntity>
-    ): UpdateDescriptionRepository = UpdateDescriptionRepositoryImpl(
+    ): UpdateDescriptionDBRepository = UpdateDescriptionDBRepositoryImpl(
         dao, mapper
     )
 
