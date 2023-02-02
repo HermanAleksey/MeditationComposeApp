@@ -1,4 +1,4 @@
-package com.example.core.authentication_source.api.model
+package com.example.core.updates_history.model
 
 import com.google.gson.annotations.SerializedName
 

@@ -11,6 +11,8 @@ android {
     defaultConfig {
         minSdk = 24
         targetSdk = 33
+
+        buildConfigField("String", "SERVER_URL", "\"https://myserver:8080/v1/\"")
     }
 
     compileOptions {
@@ -29,6 +31,9 @@ dependencies {
 
     implementation(Dependencies.core_ktx)
     implementation(Dependencies.coroutines_core)
+
+    //gson converter
+    implementation(Dependencies.retrofit_converter_gson)
 
     //hilt
     implementation(Dependencies.hilt_android)

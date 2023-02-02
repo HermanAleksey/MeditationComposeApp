@@ -4,7 +4,7 @@ import com.example.core.authentication_source.api.AuthenticationApi
 import com.example.core.authentication_source.api.mapper.ProfileMapper
 import com.example.core.authentication_source.api.model.LoginUserResponse
 import com.example.core.authentication_source.api.model.RegistrationRequest
-import com.example.core.authentication_source.api.model.UpdateDescriptionResponse
+import com.example.core.updates_history.UpdateDescriptionResponse
 import com.example.core.model.authentication.Profile
 import com.example.network.NetworkResponse
 import com.example.network.SuccessInfo
@@ -183,7 +183,7 @@ class AuthenticationRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getAppUpdates(startFromVersion: String): Flow<NetworkResponse<List<UpdateDescriptionResponse>>> {
+    override fun getAppUpdates(startFromVersion: String): Flow<NetworkResponse<List<com.example.core.updates_history.UpdateDescriptionResponse>>> {
         return flow {
             emit(NetworkResponse.Loading(true))
             try {
@@ -211,15 +211,15 @@ class AuthenticationRepositoryImpl @Inject constructor(
 
 //todo move updates logic into separate module
 //improvised response from back-end
-fun getVersionDescriptions(startFromVersion: String): List<UpdateDescriptionResponse> {
-    val version0_0_1 = UpdateDescriptionResponse(
+fun getVersionDescriptions(startFromVersion: String): List<com.example.core.updates_history.UpdateDescriptionResponse> {
+    val version0_0_1 = com.example.core.updates_history.UpdateDescriptionResponse(
         id = 1,
         versionName = "0.0.1",
         updateReleaseTime = 1667034395445,
         updateTitle = "Project initialization!",
         updateDescription = "Project was created. This update created in order to show origin.",
     )
-    val version0_5_0 = UpdateDescriptionResponse(
+    val version0_5_0 = com.example.core.updates_history.UpdateDescriptionResponse(
         id = 2,
         versionName = "0.5.0",
         updateReleaseTime = 1667034395445,
@@ -228,14 +228,14 @@ fun getVersionDescriptions(startFromVersion: String): List<UpdateDescriptionResp
                 "each beer! Just click on it. Button on items of the list were meant to navigate to" +
                 "beer page on an online store or similar.",
     )
-    val version0_6_0 = UpdateDescriptionResponse(
+    val version0_6_0 = com.example.core.updates_history.UpdateDescriptionResponse(
         id = 3,
         versionName = "0.6.0",
         updateReleaseTime = 1667138968792,
         updateTitle = "Update notes!",
         updateDescription = "Now you can see what is new in the app with less effort! Also you can check updates history.",
     )
-    val version0_6_1 = UpdateDescriptionResponse(
+    val version0_6_1 = com.example.core.updates_history.UpdateDescriptionResponse(
         id = 4,
         versionName = "0.6.1",
         updateReleaseTime = 1667152000868,

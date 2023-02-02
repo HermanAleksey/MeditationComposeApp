@@ -1,6 +1,6 @@
 package com.example.core.authentication_source.api.repository
 
-import com.example.core.authentication_source.api.model.UpdateDescriptionResponse
+import com.example.core.updates_history.UpdateDescriptionResponse
 import com.example.core.model.authentication.Profile
 import com.example.network.NetworkResponse
 import com.example.network.SuccessInfo
@@ -46,5 +46,5 @@ interface AuthenticationRepository {
     /**
      * Returns list of update descriptions since [startFromVersion] version excluded
      * */
-    fun getAppUpdates(startFromVersion: String): Flow<NetworkResponse<List<UpdateDescriptionResponse>>>
+    fun getAppUpdates(startFromVersion: String): Flow<NetworkResponse<List<com.example.core.updates_history.UpdateDescriptionResponse>>>
 }

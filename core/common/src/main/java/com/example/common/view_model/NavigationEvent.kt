@@ -1,6 +1,6 @@
 package com.example.common.view_model
 
-import com.example.meditationcomposeapp.presentation.screens.destinations.DirectionDestination
+import com.example.common.view_model.destinations.DirectionDestination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.spec.Direction
 

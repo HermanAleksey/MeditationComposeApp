@@ -17,7 +17,7 @@ abstract class MappersModule {
     @Binds
     abstract fun provideBeerDBMapper(
         implementation: BeerDBMapper
-    ): Mapper<com.example.database.model.BeerListItem, Beer>
+    ): Mapper<BeerListItem, Beer>
 
     @Binds
     abstract fun provideBeerMapper(

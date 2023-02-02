@@ -2,7 +2,7 @@ package com.example.core.authentication_source.api
 
 import com.example.core.authentication_source.api.model.LoginUserResponse
 import com.example.core.authentication_source.api.model.RegistrationRequest
-import com.example.core.authentication_source.api.model.UpdateDescriptionResponse
+import com.example.core.updates_history.UpdateDescriptionResponse
 import com.example.network.SuccessInfo
 import retrofit2.http.Body
 import retrofit2.http.Field
@@ -38,10 +38,4 @@ interface AuthenticationApi {
         @Field("login") login: String,
         @Body newPassword: String
     ): SuccessInfo
-
-    //todo move updates logic into separate module
-    @GET("updates")
-    suspend fun getAppUpdatesHistory(
-        @Field("start") startFromVersion: String,
-    ): List<UpdateDescriptionResponse>
 }
