@@ -5,7 +5,6 @@ import com.example.common.view_model.Event
 import com.example.common.view_model.NavigationEvent
 import com.example.meditationcomposeapp.model.usecase.authentication.RequestPasswordRestorationUseCase
 import com.example.meditationcomposeapp.model.utils.validation.LoginField
-import com.example.meditationcomposeapp.presentation.screens.BaseViewModel
 import com.example.meditationcomposeapp.presentation.screens.destinations.EnterCodeScreenDestination
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

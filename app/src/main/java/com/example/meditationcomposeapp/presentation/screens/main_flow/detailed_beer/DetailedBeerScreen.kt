@@ -1,6 +1,7 @@
 package com.example.meditationcomposeapp.presentation.screens.main_flow.detailed_beer
 
 import androidx.compose.runtime.Composable
+import com.example.beer_sorts.internal.presentation.beer_details.DetailedBeerScreenViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 
 @Destination
@@ -9,5 +10,8 @@ fun DetailedBeerScreen(
     beerId: Int,
     viewModel: DetailedBeerScreenViewModel,
 ) {
-    //here DetailedBeerScreen From beer module feature
+    com.example.beer_sorts.api.DetailedBeerScreen(
+        beerId = beerId,
+        viewModel = viewModel
+    )
 }

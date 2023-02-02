@@ -1,17 +1,19 @@
 package com.example.meditationcomposeapp.presentation.screens.splash
 
 import androidx.lifecycle.viewModelScope
+import com.example.common.view_model.BaseViewModel
+import com.example.common.view_model.Event
+import com.example.common.view_model.NavigationEvent
+import com.example.core.data_store.UserDataStore
+import com.example.core.model.updates.CompareResult
+import com.example.core.model.updates.toVersion
+import com.example.core.updates_history.source.db.UpdateDescriptionDBRepository
 import com.example.meditationcomposeapp.BuildConfig
-import com.example.meditationcomposeapp.data_source.repository.update_description.UpdateDescriptionRepository
-import com.example.meditationcomposeapp.model.entity.NetworkResponse
-import com.example.meditationcomposeapp.model.entity.login_flow.CompareResult
-import com.example.meditationcomposeapp.model.entity.login_flow.toVersion
 import com.example.meditationcomposeapp.model.usecase.authentication.GetAppUpdatesHistoryUseCase
 import com.example.meditationcomposeapp.model.usecase.authentication.LoginUseCase
-import com.example.meditationcomposeapp.presentation.navigation.Event
-import com.example.meditationcomposeapp.presentation.screens.BaseViewModel
 import com.example.meditationcomposeapp.presentation.screens.destinations.EnterScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.MainScreenDestination
+import com.example.network.NetworkResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
@@ -22,7 +24,7 @@ import javax.inject.Inject
 class SplashScreenViewModel @Inject constructor(
     private val userDataStore: UserDataStore,
     private val loginUseCase: LoginUseCase,
-    private val updateDescriptionRepository: UpdateDescriptionRepository,
+    private val updateDescriptionDBRepository: UpdateDescriptionDBRepository,
     private val getAppUpdatesHistoryUseCase: GetAppUpdatesHistoryUseCase,
 ) : BaseViewModel() {
 
@@ -78,7 +80,7 @@ class SplashScreenViewModel @Inject constructor(
             .collect {
                 if (it is NetworkResponse.Success) {
                     it.data?.forEach { update ->
-                        updateDescriptionRepository.insertAll(update)
+                        updateDescriptionDBRepository.insertAll(update)
                     }
                 }
             }

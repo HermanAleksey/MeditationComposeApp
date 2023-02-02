@@ -94,8 +94,14 @@ android {
 
 dependencies {
     implementation(project(":feature:shuffle_puzzle"))
+    implementation(project(":feature:beer_sorts"))
+
+    implementation(project(":core:data_store"))
+    implementation(project(":core:updates_history"))
     implementation(project(":core:design_system"))
     implementation(project(":core:common"))
+    implementation(project(":core:model"))
+    implementation(project(":core:network"))
 
     implementation(Dependencies.core_ktx)
     implementation(Dependencies.compose_ui)

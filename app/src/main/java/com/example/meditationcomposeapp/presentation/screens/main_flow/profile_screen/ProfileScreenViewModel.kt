@@ -1,9 +1,10 @@
 package com.example.meditationcomposeapp.presentation.screens.main_flow.profile_screen
 
 import androidx.lifecycle.viewModelScope
+import com.example.common.view_model.BaseViewModel
+import com.example.common.view_model.Event
+import com.example.common.view_model.NavigationEvent
 import com.example.meditationcomposeapp.model.usecase.authentication.ClearAuthDataUseCase
-import com.example.meditationcomposeapp.presentation.navigation.Event
-import com.example.meditationcomposeapp.presentation.screens.BaseViewModel
 import com.example.meditationcomposeapp.presentation.screens.destinations.EnterScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.SplashScreenDestination
 import dagger.hilt.android.lifecycle.HiltViewModel

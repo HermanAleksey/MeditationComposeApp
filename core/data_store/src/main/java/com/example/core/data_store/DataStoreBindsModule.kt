@@ -10,7 +10,7 @@ import dagger.hilt.components.SingletonComponent
 abstract class DataStoreBindsModule {
 
     @Binds
-    abstract fun provideDataStore(
+    abstract fun provideUserDataStore(
         implementation: UserDataStoreImpl,
     ): UserDataStore
 
