@@ -4,7 +4,7 @@ import com.example.core.model.beer_sorts.Beer
 import com.example.network.NetworkResponse
 import kotlinx.coroutines.flow.Flow
 
-interface PunkRepository {
+interface PunkWebRepository {
 
     suspend fun getBeerById(
         page: Int,

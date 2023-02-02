@@ -1,4 +1,6 @@
-package com.example.meditationcomposeapp.data_source.repository.punk
+package com.example.punk_source.api.repository
+
+import com.example.database.model.RemoteKeys
 
 interface RemoteKeysRepository {
 

@@ -5,12 +5,14 @@ plugins {
 }
 
 android {
-    namespace = "com.example.core.punk_api"
+    namespace = "com.example.core.punk_source"
     compileSdk = 33
 
     defaultConfig {
         minSdk = 24
         targetSdk = 33
+
+        buildConfigField("String", "PUNK_API_URL", "\"https://api.punkapi.com/v2/\"")
     }
 
     compileOptions {
@@ -38,4 +40,9 @@ dependencies {
     //retrofit
     implementation(Dependencies.retrofit)
     implementation(Dependencies.retrofit_converter_gson)
+
+    //paging
+    implementation(Dependencies.paging_common_ktx)
+    implementation(Dependencies.paging_runtime)
+    implementation(Dependencies.paging_compose)
 }

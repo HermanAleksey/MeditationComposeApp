@@ -1,8 +1,10 @@
-package com.example.meditationcomposeapp.data_source.repository.punk
+package com.example.punk_source.api.repository
 
 import androidx.paging.PagingSource
-import com.example.meditationcomposeapp.data_source.mappers.Mapper
-import com.example.meditationcomposeapp.model.entity.beer.Beer
+import com.example.common.mapper.Mapper
+import com.example.core.model.beer_sorts.Beer
+import com.example.database.dao.BeerDao
+import com.example.database.model.BeerListItem
 import javax.inject.Inject
 
 class PunkDBRepositoryImpl @Inject constructor(

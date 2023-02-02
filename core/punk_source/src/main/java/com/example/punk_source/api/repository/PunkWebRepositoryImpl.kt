@@ -11,10 +11,10 @@ import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 
-class PunkRepositoryImpl @Inject constructor(
+class PunkWebRepositoryImpl @Inject constructor(
     private val punkApi: PunkApi,
     private val beerMapper: Mapper<Beer, BeerResponse>,
-) : PunkRepository {
+) : PunkWebRepository {
 
     override suspend fun getBeerById(page: Int): Flow<NetworkResponse<Beer>> {
         return flow {

@@ -1,5 +1,6 @@
 package com.example.punk_source.internal
 
+import com.example.core.punk_source.BuildConfig
 import com.example.punk_source.api.Qualifiers
 import dagger.Module
 import dagger.Provides
@@ -27,7 +28,7 @@ object PunkApiModule {
         okHttpClient: OkHttpClient
     ): Retrofit =
         Retrofit.Builder()
-            .baseUrl("https://hello.com")//todo updateBuildConfig.PUNK_API_URL)
+            .baseUrl(BuildConfig.PUNK_API_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
