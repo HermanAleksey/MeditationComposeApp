@@ -3,9 +3,7 @@ package com.example.meditationcomposeapp.presentation.screens.splash
 import com.example.meditationcomposeapp.BuildConfig
 import com.example.meditationcomposeapp.CoroutinesTestRule
 import com.example.meditationcomposeapp.FakeObjects
-import com.example.meditationcomposeapp.data_source.data_store.UserDataStore
 import com.example.meditationcomposeapp.data_source.repository.update_description.UpdateDescriptionRepository
-import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.usecase.authentication.GetAppUpdatesHistoryUseCase
 import com.example.meditationcomposeapp.model.usecase.authentication.LoginUseCase
 import com.example.meditationcomposeapp.presentation.screens.destinations.EnterScreenDestination

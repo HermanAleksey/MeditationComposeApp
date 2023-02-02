@@ -1,7 +1,5 @@
 package com.example.meditationcomposeapp.model.usecase.authentication
 
-import com.example.meditationcomposeapp.data_source.data_store.UserDataStore
-import com.example.meditationcomposeapp.data_source.data_store.UserDataStoreImpl
 import javax.inject.Inject
 
 interface ClearAuthDataUseCase {

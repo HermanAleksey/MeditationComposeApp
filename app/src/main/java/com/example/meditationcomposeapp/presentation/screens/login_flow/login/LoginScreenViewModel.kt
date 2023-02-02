@@ -1,7 +1,6 @@
 package com.example.meditationcomposeapp.presentation.screens.login_flow.login
 
 import androidx.lifecycle.viewModelScope
-import com.example.meditationcomposeapp.data_source.data_store.UserDataStore
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.usecase.authentication.LoginUseCase
 import com.example.meditationcomposeapp.model.utils.validation.LoginField

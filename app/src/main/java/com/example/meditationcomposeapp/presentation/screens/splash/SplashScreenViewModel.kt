@@ -2,7 +2,6 @@ package com.example.meditationcomposeapp.presentation.screens.splash
 
 import androidx.lifecycle.viewModelScope
 import com.example.meditationcomposeapp.BuildConfig
-import com.example.meditationcomposeapp.data_source.data_store.UserDataStore
 import com.example.meditationcomposeapp.data_source.repository.update_description.UpdateDescriptionRepository
 import com.example.meditationcomposeapp.model.entity.NetworkResponse
 import com.example.meditationcomposeapp.model.entity.login_flow.CompareResult
