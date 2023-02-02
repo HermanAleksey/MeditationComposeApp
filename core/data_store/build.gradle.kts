@@ -5,14 +5,12 @@ plugins {
 }
 
 android {
-    namespace = "com.example.database"
+    namespace = "com.example.core.data_store"
     compileSdk = 33
 
     defaultConfig {
         minSdk = 24
         targetSdk = 33
-
-        buildConfigField("String", "DATABASE_NAME", "\"MeditationComposeApp\"")
     }
 
     compileOptions {
@@ -25,11 +23,10 @@ android {
 }
 
 dependencies {
-    //room database
-    implementation(Dependencies.room_runtime)
-    implementation(Dependencies.room_ktx)
-    kapt(Dependencies.room_compiler)
-    implementation(Dependencies.room_pager)
+    implementation(Dependencies.core_ktx)
+
+    //data store
+    implementation(Dependencies.datastore_preferences)
 
     //hilt
     implementation(Dependencies.hilt_android)
