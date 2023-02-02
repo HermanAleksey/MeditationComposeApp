@@ -8,13 +8,12 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.database.model.BeerListItem
 import com.example.feature.beer_sorts.R
-import com.example.meditationcomposeapp.data_source.entity.db.BeerListItem
 
 @Composable
 fun BeerItem(

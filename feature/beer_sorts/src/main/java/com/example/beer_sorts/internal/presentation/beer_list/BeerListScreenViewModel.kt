@@ -3,8 +3,12 @@ package com.example.beer_sorts.internal.presentation.beer_list
 import androidx.lifecycle.viewModelScope
 import androidx.paging.*
 import com.example.common.view_model.BaseViewModel
+import com.example.common.view_model.Event
+import com.example.common.view_model.NavigationEvent
+import com.example.database.model.BeerListItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel

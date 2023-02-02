@@ -20,9 +20,9 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
 import com.example.beer_sorts.internal.presentation.beer_list.composables.BeerItem
 import com.example.common.view_model.processEvent
+import com.example.database.model.BeerListItem
 import com.example.design_system.common_composables.ColorBackground
 import com.example.feature.beer_sorts.R
-import com.example.meditationcomposeapp.data_source.entity.db.BeerListItem
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @Composable
@@ -74,6 +74,7 @@ fun BeerList(beers: LazyPagingItems<BeerListItem>, onBeerItemClicked: (id: Int) 
             is LoadState.Error -> {
                 Error(message = state.error.message ?: "")
             }
+            else -> {}
         }
         when (val state = beers.loadState.refresh) {
             is LoadState.NotLoading -> Unit
@@ -83,6 +84,7 @@ fun BeerList(beers: LazyPagingItems<BeerListItem>, onBeerItemClicked: (id: Int) 
             is LoadState.Error -> {
                 Error(message = state.error.message ?: "")
             }
+            else -> {}
         }
         items(items = beers, key = { it.id }) { item ->
             item?.let {
@@ -98,6 +100,7 @@ fun BeerList(beers: LazyPagingItems<BeerListItem>, onBeerItemClicked: (id: Int) 
             is LoadState.Error -> {
                 Error(message = state.error.message ?: "")
             }
+            else -> {}
         }
     }
 }

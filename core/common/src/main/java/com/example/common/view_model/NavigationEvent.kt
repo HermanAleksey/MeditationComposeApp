@@ -1,6 +1,5 @@
 package com.example.common.view_model
 
-import com.example.common.view_model.destinations.DirectionDestination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.spec.Direction
 
@@ -20,26 +19,28 @@ sealed class NavigationEvent {
 
     class NavigateWithPop(
         private val direction: Direction,
-        private val popUpTo: DirectionDestination,
+        //todo check if works DirectionDestination.Route
+        private val popUpTo: String,
         private val inclusive: Boolean,
     ) : NavigationEvent() {
 
         override fun handleNavigationEvent(navigator: DestinationsNavigator) =
             this.let { navigationEvent ->
                 navigator.navigate(direction = direction) {
-                    popUpTo(navigationEvent.popUpTo.route) {
+                    popUpTo(navigationEvent.popUpTo) {
                         inclusive = navigationEvent.inclusive
                     }
                 }
             }
 
         override fun toString(): String {
-            return "NavigateWithPop{route=${this.direction.route},popUpTo=${this.popUpTo.route},inclusive=${this.inclusive}}"
+            return "NavigateWithPop{route=${this.direction.route},popUpTo=${this.popUpTo},inclusive=${this.inclusive}}"
         }
     }
 
     class Pop(
-        private val popUpTo: DirectionDestination,
+//      todo check if works   private val popUpTo: DirectionDestination,
+        private val popUpTo: String,
         private val inclusive: Boolean,
     ) : NavigationEvent() {
 
@@ -52,7 +53,7 @@ sealed class NavigationEvent {
             }
 
         override fun toString(): String {
-            return "Pop{popUpTo=${this.popUpTo.route},inclusive=${this.inclusive}}"
+            return "Pop{popUpTo=${this.popUpTo},inclusive=${this.inclusive}}"
         }
     }
 
