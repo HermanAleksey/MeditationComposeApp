@@ -1,7 +1,7 @@
 package com.example.punk_source.api.repository
 
 import com.example.core.model.beer_sorts.Beer
-import com.example.network.NetworkResponse
+import com.example.core.model.NetworkResponse
 import kotlinx.coroutines.flow.Flow
 
 interface PunkWebRepository {

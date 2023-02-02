@@ -2,7 +2,7 @@ package com.example.core.updates_history.source.web
 
 import com.example.core.updates_history.UpdatesHistoryApi
 import com.example.core.updates_history.model.UpdateDescriptionResponse
-import com.example.network.NetworkResponse
+import com.example.core.model.NetworkResponse
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

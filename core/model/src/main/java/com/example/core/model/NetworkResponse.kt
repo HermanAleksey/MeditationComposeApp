@@ -1,4 +1,4 @@
-package com.example.network
+package com.example.core.model
 
 sealed class NetworkResponse<T>(
     val data: T? = null,

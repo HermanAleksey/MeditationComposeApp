@@ -1,7 +1,7 @@
 package com.example.core.authentication_source.api.repository
 
 import com.example.core.model.authentication.Profile
-import com.example.network.NetworkResponse
+import com.example.core.model.NetworkResponse
 import com.example.network.SuccessInfo
 import kotlinx.coroutines.flow.Flow
 

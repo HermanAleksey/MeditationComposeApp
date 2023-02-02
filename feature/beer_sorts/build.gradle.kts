@@ -51,4 +51,9 @@ dependencies {
     implementation(Dependencies.paging_common_ktx)
     implementation(Dependencies.paging_runtime)
     implementation(Dependencies.paging_compose)
+
+    //navigation
+    implementation(Dependencies.navigation_compose)
+    implementation(Dependencies.raamcosta_compose_destinations_anim_core)
+    ksp(Dependencies.raamcosta_compose_destinations_ksp)
 }
