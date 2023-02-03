@@ -1,7 +1,6 @@
-package com.example.meditationcomposeapp.model.usecase
+package com.example.database
 
 import androidx.room.withTransaction
-import com.example.meditationcomposeapp.data_source.database.AppDatabase
 import javax.inject.Inject
 
 interface ExecuteDatabaseTransactionUseCase {
