@@ -25,6 +25,7 @@ android {
 dependencies {
     api(project(":core:network"))
     implementation(project(":core:common"))
+    implementation(project(":core:data_store"))
     implementation(project(":core:model"))
 
     implementation(Dependencies.core_ktx)

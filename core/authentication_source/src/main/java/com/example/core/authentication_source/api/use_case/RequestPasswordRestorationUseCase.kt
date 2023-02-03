@@ -1,7 +1,8 @@
-package com.example.meditationcomposeapp.model.usecase.authentication
+package com.example.core.authentication_source.api.use_case
 
-import com.example.meditationcomposeapp.data_source.repository.authentication.AuthenticationRepository
-import com.example.meditationcomposeapp.model.entity.NetworkResponse
+import com.example.core.authentication_source.api.repository.AuthenticationRepository
+import com.example.core.model.NetworkResponse
+import com.example.network.SuccessInfo
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

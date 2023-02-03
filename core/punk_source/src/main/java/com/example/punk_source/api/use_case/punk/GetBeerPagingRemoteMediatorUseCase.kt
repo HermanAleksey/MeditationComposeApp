@@ -6,7 +6,7 @@ import com.example.punk_source.api.use_case.punk.db.InsertBeersIntoDBUseCase
 import com.example.punk_source.api.use_case.punk.network.GetBeersUseCase
 import com.example.punk_source.api.use_case.remote_keys.ClearRemoteKeysUseCase
 import com.example.punk_source.api.use_case.remote_keys.GetCreationTimeUseCase
-import com.example.punk_source.api.use_case.remote_keys.GetRemoteKeyBeBeerIdUseCase
+import com.example.punk_source.api.use_case.remote_keys.GetRemoteKeyByBeerIdUseCase
 import com.example.punk_source.api.use_case.remote_keys.InsertAllRemoteKeysUseCase
 import javax.inject.Inject
 
@@ -20,7 +20,7 @@ class GetBeerPagingRemoteMediatorUseCaseImpl @Inject constructor(
     private val clearBeersDBUseCase: ClearBeersDBUseCase,
     private val getCreationTimeUseCase: GetCreationTimeUseCase,
     private val clearRemoteKeysUseCase: ClearRemoteKeysUseCase,
-    private val getRemoteKeyBeBeerIdUseCase: GetRemoteKeyBeBeerIdUseCase,
+    private val getRemoteKeyByBeerIdUseCase: GetRemoteKeyByBeerIdUseCase,
     private val insertAllRemoteKeysUseCase: InsertAllRemoteKeysUseCase,
     private val getBeersUseCase: GetBeersUseCase,
     private val executeDatabaseTransaction: ExecuteDatabaseTransactionUseCase,
@@ -31,7 +31,7 @@ class GetBeerPagingRemoteMediatorUseCaseImpl @Inject constructor(
         clearBeersDBUseCase = clearBeersDBUseCase,
         getCreationTimeUseCase = getCreationTimeUseCase,
         clearRemoteKeysUseCase = clearRemoteKeysUseCase,
-        getRemoteKeyBeBeerIdUseCase = getRemoteKeyBeBeerIdUseCase,
+        getRemoteKeyByBeerIdUseCase = getRemoteKeyByBeerIdUseCase,
         insertAllRemoteKeysUseCase = insertAllRemoteKeysUseCase,
         getBeersUseCase = getBeersUseCase,
         executeDatabaseTransaction = executeDatabaseTransaction,

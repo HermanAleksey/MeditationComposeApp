@@ -5,6 +5,7 @@ import com.example.core.authentication_source.api.mapper.ProfileMapper
 import com.example.core.authentication_source.api.model.LoginUserResponse
 import com.example.core.authentication_source.api.repository.AuthenticationRepository
 import com.example.core.authentication_source.api.repository.AuthenticationRepositoryImpl
+import com.example.core.authentication_source.api.use_case.*
 import com.example.core.model.authentication.Profile
 import dagger.Binds
 import dagger.Module
@@ -25,4 +26,33 @@ abstract class AuthenticationBindsModule {
         implementation: AuthenticationRepositoryImpl,
     ): AuthenticationRepository
 
+    @Binds
+    abstract fun provideClearAuthDataUseCase(
+        implementation: ClearAuthDataUseCaseImpl
+    ): ClearAuthDataUseCase
+
+    @Binds
+    abstract fun provideLoginUseCase(
+        implementation: LoginUseCaseImpl
+    ): LoginUseCase
+
+    @Binds
+    abstract fun provideRegisterUseCase(
+        implementation: RegisterUseCaseImpl
+    ): RegisterUseCase
+
+    @Binds
+    abstract fun provideRequestPasswordRestorationUseCase(
+        implementation: RequestPasswordRestorationUseCaseImpl
+    ): RequestPasswordRestorationUseCase
+
+    @Binds
+    abstract fun provideSetNewPasswordUseCase(
+        implementation: SetNewPasswordUseCaseImpl
+    ): SetNewPasswordUseCase
+
+    @Binds
+    abstract fun provideVerifyCodeUseCase(
+        implementation: VerifyCodeUseCaseImpl
+    ): VerifyCodeUseCase
 }

@@ -4,6 +4,8 @@ import com.example.common.mapper.Mapper
 import com.example.core.model.updates.UpdateDescriptionModel
 import com.example.core.updates_history.source.db.UpdateDescriptionDBRepository
 import com.example.core.updates_history.source.db.UpdateDescriptionDBRepositoryImpl
+import com.example.core.updates_history.source.web.UpdateDescriptionWebRepository
+import com.example.core.updates_history.source.web.UpdateDescriptionWebRepositoryImpl
 import com.example.database.dao.UpdateDescriptionDao
 import com.example.database.model.UpdateDescriptionDBEntity
 import dagger.Module
@@ -19,6 +21,14 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object HistoryDescriptionSourceModule {
+
+    @Provides
+    @Singleton
+    fun provideUpdateDescriptionWebRepository(
+        updatesHistoryApi: UpdatesHistoryApi
+    ): UpdateDescriptionWebRepository = UpdateDescriptionWebRepositoryImpl(
+        updatesHistoryApi
+    )
 
     @Provides
     @Singleton

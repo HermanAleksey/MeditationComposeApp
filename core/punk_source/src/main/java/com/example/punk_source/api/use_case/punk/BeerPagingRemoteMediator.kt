@@ -9,7 +9,7 @@ import com.example.punk_source.api.use_case.punk.db.InsertBeersIntoDBUseCase
 import com.example.punk_source.api.use_case.punk.network.GetBeersUseCase
 import com.example.punk_source.api.use_case.remote_keys.ClearRemoteKeysUseCase
 import com.example.punk_source.api.use_case.remote_keys.GetCreationTimeUseCase
-import com.example.punk_source.api.use_case.remote_keys.GetRemoteKeyBeBeerIdUseCase
+import com.example.punk_source.api.use_case.remote_keys.GetRemoteKeyByBeerIdUseCase
 import com.example.punk_source.api.use_case.remote_keys.InsertAllRemoteKeysUseCase
 import retrofit2.HttpException
 import java.io.IOException
@@ -21,7 +21,7 @@ class BeerPagingRemoteMediator(
     private val clearBeersDBUseCase: ClearBeersDBUseCase,
     private val getCreationTimeUseCase: GetCreationTimeUseCase,
     private val clearRemoteKeysUseCase: ClearRemoteKeysUseCase,
-    private val getRemoteKeyBeBeerIdUseCase: GetRemoteKeyBeBeerIdUseCase,
+    private val getRemoteKeyByBeerIdUseCase: GetRemoteKeyByBeerIdUseCase,
     private val insertAllRemoteKeysUseCase: InsertAllRemoteKeysUseCase,
 
     private val getBeersUseCase: GetBeersUseCase,
@@ -96,7 +96,7 @@ class BeerPagingRemoteMediator(
     private suspend fun getRemoteKeyClosestToCurrentPosition(state: PagingState<Int, BeerListItem>): RemoteKeys? {
         return state.anchorPosition?.let { position ->
             state.closestItemToPosition(position)?.id?.let { id ->
-                getRemoteKeyBeBeerIdUseCase(id)
+                getRemoteKeyByBeerIdUseCase(id)
             }
         }
     }
@@ -105,7 +105,7 @@ class BeerPagingRemoteMediator(
         return state.pages.firstOrNull {
             it.data.isNotEmpty()
         }?.data?.firstOrNull()?.let { beer ->
-            getRemoteKeyBeBeerIdUseCase(beer.id)
+            getRemoteKeyByBeerIdUseCase(beer.id)
         }
     }
 
@@ -113,7 +113,7 @@ class BeerPagingRemoteMediator(
         return state.pages.lastOrNull {
             it.data.isNotEmpty()
         }?.data?.lastOrNull()?.let { beer ->
-            getRemoteKeyBeBeerIdUseCase(beer.id)
+            getRemoteKeyByBeerIdUseCase(beer.id)
         }
     }
 

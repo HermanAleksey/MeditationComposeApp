@@ -1,5 +1,6 @@
-package com.example.meditationcomposeapp.model.usecase.authentication
+package com.example.core.authentication_source.api.use_case
 
+import com.example.core.data_store.UserDataStore
 import javax.inject.Inject
 
 interface ClearAuthDataUseCase {

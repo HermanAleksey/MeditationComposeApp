@@ -4,14 +4,14 @@ import com.example.database.model.RemoteKeys
 import com.example.punk_source.api.repository.RemoteKeysRepository
 import javax.inject.Inject
 
-interface GetRemoteKeyBeBeerIdUseCase {
+interface GetRemoteKeyByBeerIdUseCase {
 
     suspend operator fun invoke(id: Int): RemoteKeys?
 }
 
-class GetRemoteKeyBeBeerIdUseCaseImpl @Inject constructor(
+class GetRemoteKeyByBeerIdUseCaseImpl @Inject constructor(
     private val repository: RemoteKeysRepository
-): GetRemoteKeyBeBeerIdUseCase {
+): GetRemoteKeyByBeerIdUseCase {
 
     override suspend fun invoke(id: Int): RemoteKeys? =
         repository.getRemoteKeyByBeerID(id)

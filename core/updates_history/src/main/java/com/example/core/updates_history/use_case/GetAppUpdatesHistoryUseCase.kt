@@ -1,10 +1,10 @@
-package com.example.meditationcomposeapp.model.usecase.authentication
+package com.example.core.updates_history.use_case
 
-import com.example.meditationcomposeapp.data_source.entity.network.UpdateDescriptionResponse
-import com.example.meditationcomposeapp.data_source.mappers.Mapper
-import com.example.meditationcomposeapp.data_source.repository.authentication.AuthenticationRepository
-import com.example.meditationcomposeapp.model.entity.NetworkResponse
-import com.example.meditationcomposeapp.model.entity.login_flow.UpdateDescriptionModel
+import com.example.common.mapper.Mapper
+import com.example.core.model.NetworkResponse
+import com.example.core.model.updates.UpdateDescriptionModel
+import com.example.core.updates_history.model.UpdateDescriptionResponse
+import com.example.core.updates_history.source.web.UpdateDescriptionWebRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -15,7 +15,7 @@ interface GetAppUpdatesHistoryUseCase {
 }
 
 class GetAppUpdatesHistoryUseCaseImpl @Inject constructor(
-    private val repository: AuthenticationRepository,
+    private val repository: UpdateDescriptionWebRepository,
     private val mapper: Mapper<UpdateDescriptionModel, UpdateDescriptionResponse>
 ) : GetAppUpdatesHistoryUseCase {
     override fun invoke(startFromVersion: String): Flow<NetworkResponse<List<UpdateDescriptionModel>>> {
