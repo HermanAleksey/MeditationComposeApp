@@ -7,8 +7,11 @@ import com.example.punk_source.api.use_case.punk.network.*
 import com.example.punk_source.api.use_case.remote_keys.*
 import dagger.Binds
 import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 
 @Module
+@InstallIn(SingletonComponent::class)
 abstract class PunkUseCaseModule {
 
     @Binds

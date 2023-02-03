@@ -8,8 +8,11 @@ import com.example.core.updates_history.model.UpdateDescriptionResponse
 import com.example.database.model.UpdateDescriptionDBEntity
 import dagger.Binds
 import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 
 @Module
+@InstallIn(SingletonComponent::class)
 abstract class UpdateHistoryMappersModule {
 
     @Binds

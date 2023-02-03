@@ -9,7 +9,7 @@ plugins {
 
 android {
     namespace = "com.example.meditationcomposeapp"
-    compileSdk = Config.compileSdk
+    compileSdk = 33
 
     defaultConfig {
         applicationId = Config.applicationId

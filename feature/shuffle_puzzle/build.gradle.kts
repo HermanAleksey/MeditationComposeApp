@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.example.feature.shuffle_puzzle"
-    compileSdk = Config.compileSdk
+    compileSdk = 33
 
     defaultConfig {
         minSdk = Config.minSdk
