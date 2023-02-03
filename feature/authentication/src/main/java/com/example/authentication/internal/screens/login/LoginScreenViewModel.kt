@@ -2,6 +2,8 @@ package com.example.authentication.internal.screens.login
 
 import androidx.lifecycle.viewModelScope
 import com.example.authentication.internal.login.LoginScreenState
+import com.example.authentication.internal.validation.LoginField
+import com.example.authentication.internal.validation.PasswordField
 import com.example.common.view_model.BaseViewModel
 import com.example.common.view_model.Event
 import com.example.common.view_model.NavigationEvent

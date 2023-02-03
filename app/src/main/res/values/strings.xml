@@ -33,4 +33,7 @@
 
     <string name="shuffle_puzzle_menu_option">Shuffle Puzzle</string>
     <string name="menu_item_coming_soon">Coming soon</string>
+
+    <string name="app_update_version">Update: %s</string>
+    <string name="app_update_time">From: %s</string>
 </resources>

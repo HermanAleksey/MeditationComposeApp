@@ -23,14 +23,14 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
-import com.example.authentication.internal.enter.composable.DontHaveAccountText
-import com.example.authentication.internal.enter.composable.LoginMainButton
-import com.example.authentication.internal.login.composable.LoginFlowBackground
-import com.example.authentication.internal.login.composable.LoginFlowInputField
+import com.example.authentication.internal.screens.enter.composable.DontHaveAccountText
+import com.example.authentication.internal.screens.enter.composable.LoginMainButton
+import com.example.authentication.internal.screens.login.composable.LoginFlowBackground
+import com.example.authentication.internal.screens.login.composable.LoginFlowInputField
 import com.example.common.view_model.processEvent
+import com.example.feature.authentication.R
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
-import com.example.feature.authentication.R
 
 @Destination
 @Composable

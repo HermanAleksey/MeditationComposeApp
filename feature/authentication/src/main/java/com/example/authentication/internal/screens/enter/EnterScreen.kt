@@ -19,6 +19,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.authentication.internal.screens.enter.composable.DontHaveAccountText
+import com.example.authentication.internal.screens.enter.composable.LoginMainButton
 import com.example.common.view_model.processEvent
 import com.example.design_system.common_composables.ImageBackground
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator

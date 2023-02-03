@@ -12,8 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.common.utils.UiText
 import com.example.meditationcomposeapp.R
-import com.example.meditationcomposeapp.model.utils.resources.UiText
 import com.example.meditationcomposeapp.presentation.screens.NavGraphs
 import com.example.meditationcomposeapp.presentation.screens.appCurrentDestinationAsState
 import com.example.meditationcomposeapp.presentation.screens.destinations.BeerListScreenDestination

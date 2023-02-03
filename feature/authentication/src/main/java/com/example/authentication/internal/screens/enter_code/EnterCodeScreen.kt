@@ -1,5 +1,4 @@
 package com.example.authentication.internal.screens.enter_code
-import com.example.feature.authentication.R
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -17,9 +16,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.example.authentication.internal.enter_code.composable.CodePanel
-import com.example.authentication.internal.login.composable.LoginFlowBackground
+import com.example.authentication.internal.screens.enter_code.composable.CodePanel
+import com.example.authentication.internal.screens.login.composable.LoginFlowBackground
 import com.example.common.view_model.processEvent
+import com.example.feature.authentication.R
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 

@@ -14,7 +14,5 @@
     <string name="beer_params">Beer parameters</string>
     <string name="contributed_by">"Contributed by: "</string>
     <string name="food_pairings">Good pairings:</string>
-    <string name="app_update_version">Update: %s</string>
-    <string name="app_update_time">From: %s</string>
 
 </resources>

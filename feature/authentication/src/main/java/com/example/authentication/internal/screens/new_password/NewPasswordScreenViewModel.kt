@@ -1,6 +1,7 @@
 package com.example.authentication.internal.screens.new_password
 
 import androidx.lifecycle.viewModelScope
+import com.example.authentication.internal.validation.PasswordField
 import com.example.common.utils.UiText
 import com.example.common.view_model.BaseViewModel
 import com.example.common.view_model.Event
