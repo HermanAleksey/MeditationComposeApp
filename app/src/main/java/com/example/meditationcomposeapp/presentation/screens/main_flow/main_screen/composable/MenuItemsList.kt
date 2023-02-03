@@ -3,8 +3,8 @@ package com.example.meditationcomposeapp.presentation.screens.main_flow.main_scr
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.ui.graphics.Color
+import com.example.common.utils.UiText
 import com.example.meditationcomposeapp.R
-import com.example.meditationcomposeapp.model.utils.resources.UiText
 import com.example.meditationcomposeapp.presentation.screens.destinations.ShufflePuzzleScreenDestination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 

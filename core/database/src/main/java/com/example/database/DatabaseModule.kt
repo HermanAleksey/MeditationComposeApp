@@ -18,6 +18,12 @@ object DatabaseModule {
 
     @Singleton
     @Provides
+    fun provideExecuteDatabaseTransactionUseCase(
+        appDatabase: AppDatabase,
+    ): ExecuteDatabaseTransactionUseCase = ExecuteDatabaseTransactionUseCaseImpl(appDatabase)
+
+    @Singleton
+    @Provides
     fun provideUpdateDescriptionDao(
         appDatabase: AppDatabase,
     ): UpdateDescriptionDao = appDatabase.updatesDescriptionDao()

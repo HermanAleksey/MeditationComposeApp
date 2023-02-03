@@ -18,11 +18,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.common.utils.UiText
 import com.example.meditationcomposeapp.R
-import com.example.meditationcomposeapp.model.utils.resources.UiText
 
 data class MenuItemModel(
     val title: UiText,

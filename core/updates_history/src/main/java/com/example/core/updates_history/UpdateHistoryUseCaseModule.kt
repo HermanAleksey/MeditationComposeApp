@@ -1,6 +1,7 @@
 package com.example.core.updates_history
 
 import com.example.core.updates_history.use_case.GetAppUpdatesHistoryUseCase
+import com.example.core.updates_history.use_case.GetAppUpdatesHistoryUseCaseImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -13,7 +14,7 @@ abstract class UpdateHistoryUseCaseModule {
 
     @Binds
     abstract fun provideGetAppUpdatesHistoryUseCase(
-        implementation: GetAppUpdatesHistoryUseCase
+        implementation: GetAppUpdatesHistoryUseCaseImpl
     ): GetAppUpdatesHistoryUseCase
 
 }

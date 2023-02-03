@@ -9,12 +9,12 @@ enum class DestinationWrapper(
     val toolbarVisible: Boolean = false,
     val bottomBarVisible: Boolean = false,
 ) {
-    EnterScreen(EnterScreenDestination),
-    EnterCodeScreen(EnterCodeScreenDestination),
-    EnterLoginScreen(EnterLoginScreenDestination),
-    LoginScreen(LoginScreenDestination),
-    NewPasswordScreen(NewPasswordScreenDestination),
-    RegistrationScreen(RegistrationScreenDestination),
+//    EnterScreen(EnterScreenDestination),
+//    EnterCodeScreen(EnterCodeScreenDestination),
+//    EnterLoginScreen(EnterLoginScreenDestination),
+//    LoginScreen(LoginScreenDestination),
+//    NewPasswordScreen(NewPasswordScreenDestination),
+//    RegistrationScreen(RegistrationScreenDestination),
 
     BeerListScreen(BeerListScreenDestination, true, true),
     DetailedBeerScreen(DetailedBeerScreenDestination, true, true),

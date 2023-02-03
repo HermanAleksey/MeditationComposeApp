@@ -6,14 +6,13 @@ import com.example.common.view_model.Event
 import com.example.common.view_model.NavigationEvent
 import com.example.core.authentication_source.api.use_case.LoginUseCase
 import com.example.core.data_store.UserDataStore
+import com.example.core.model.NetworkResponse
 import com.example.core.model.updates.CompareResult
 import com.example.core.model.updates.toVersion
 import com.example.core.updates_history.source.db.UpdateDescriptionDBRepository
-import com.example.meditationcomposeapp.BuildConfig
-import com.example.meditationcomposeapp.presentation.screens.destinations.EnterScreenDestination
-import com.example.meditationcomposeapp.presentation.screens.destinations.MainScreenDestination
-import com.example.core.model.NetworkResponse
 import com.example.core.updates_history.use_case.GetAppUpdatesHistoryUseCase
+import com.example.meditationcomposeapp.BuildConfig
+import com.example.meditationcomposeapp.presentation.screens.destinations.MainScreenDestination
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
@@ -38,9 +37,10 @@ class SplashScreenViewModel @Inject constructor(
             if (login.isNotEmpty() && password.isNotEmpty()) {
                 logIn(login, password)
             } else {
-                _navigationEvent.update {
-                   Event(NavigationEvent.Navigate(EnterScreenDestination))
-                }
+                //todo restore
+//                _navigationEvent.update {
+//                   Event(NavigationEvent.Navigate(EnterScreenDestination))
+//                }
             }
         }
     }
@@ -57,9 +57,10 @@ class SplashScreenViewModel @Inject constructor(
                     }
                 }
                 is NetworkResponse.Failure<*> -> {
-                    _navigationEvent.update {
-                        Event(NavigationEvent.Navigate(EnterScreenDestination))
-                    }
+                    ////todo restore
+//                    _navigationEvent.update {
+//                        Event(NavigationEvent.Navigate(EnterScreenDestination))
+//                    }
                 }
                 is NetworkResponse.Loading<*> -> {
                     //do nothing
