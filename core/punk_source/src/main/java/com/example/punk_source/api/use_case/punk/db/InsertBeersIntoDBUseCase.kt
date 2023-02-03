@@ -1,7 +1,7 @@
-package com.example.meditationcomposeapp.model.usecase.punk.db
+package com.example.punk_source.api.use_case.punk.db
 
-import com.example.meditationcomposeapp.data_source.repository.punk.PunkDBRepository
-import com.example.meditationcomposeapp.model.entity.beer.Beer
+import com.example.core.model.beer_sorts.Beer
+import com.example.punk_source.api.repository.PunkDBRepository
 import javax.inject.Inject
 
 interface InsertBeersIntoDBUseCase {

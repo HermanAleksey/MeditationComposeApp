@@ -1,7 +1,8 @@
-package com.example.meditationcomposeapp.model.usecase.punk.db
+package com.example.punk_source.api.use_case.punk.db
 
 import androidx.paging.PagingSource
-import com.example.meditationcomposeapp.data_source.repository.punk.PunkDBRepository
+import com.example.database.model.BeerListItem
+import com.example.punk_source.api.repository.PunkDBRepository
 import javax.inject.Inject
 
 interface GetBeerPagingSourceUseCase {

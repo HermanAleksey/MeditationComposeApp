@@ -1,6 +1,7 @@
-package com.example.meditationcomposeapp.model.usecase.remote_keys
+package com.example.punk_source.api.use_case.remote_keys
 
-import com.example.meditationcomposeapp.data_source.repository.punk.RemoteKeysRepository
+import com.example.database.model.RemoteKeys
+import com.example.punk_source.api.repository.RemoteKeysRepository
 import javax.inject.Inject
 
 interface InsertAllRemoteKeysUseCase {

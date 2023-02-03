@@ -1,7 +1,8 @@
-package com.example.meditationcomposeapp.model.usecase.punk.network
+package com.example.punk_source.api.use_case.punk.network
 
-import com.example.meditationcomposeapp.model.entity.NetworkResponse
-import com.example.meditationcomposeapp.model.entity.beer.Beer
+import com.example.core.model.NetworkResponse
+import com.example.core.model.beer_sorts.Beer
+import com.example.punk_source.api.repository.PunkWebRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -10,7 +11,7 @@ interface GetBeerByIdUseCase {
 }
 
 class GetBeerByIdUseCaseImpl @Inject constructor(
-    private val punkRepository: PunkRepository
+    private val punkRepository: PunkWebRepository
 ) : GetBeerByIdUseCase {
 
     override suspend fun invoke(beerId: Int): Flow<NetworkResponse<Beer>> =

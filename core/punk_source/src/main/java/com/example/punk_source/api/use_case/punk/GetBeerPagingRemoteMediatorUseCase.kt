@@ -1,13 +1,13 @@
-package com.example.meditationcomposeapp.model.usecase.punk
+package com.example.punk_source.api.use_case.punk
 
-import com.example.meditationcomposeapp.model.usecase.ExecuteDatabaseTransactionUseCase
-import com.example.meditationcomposeapp.model.usecase.punk.db.ClearBeersDBUseCase
-import com.example.meditationcomposeapp.model.usecase.punk.db.InsertBeersIntoDBUseCase
-import com.example.meditationcomposeapp.model.usecase.punk.network.GetBeersUseCase
-import com.example.meditationcomposeapp.model.usecase.remote_keys.ClearRemoteKeysUseCase
-import com.example.meditationcomposeapp.model.usecase.remote_keys.GetCreationTimeUseCase
-import com.example.meditationcomposeapp.model.usecase.remote_keys.GetRemoteKeyBeBeerIdUseCase
-import com.example.meditationcomposeapp.model.usecase.remote_keys.InsertAllRemoteKeysUseCase
+import com.example.database.ExecuteDatabaseTransactionUseCase
+import com.example.punk_source.api.use_case.punk.db.ClearBeersDBUseCase
+import com.example.punk_source.api.use_case.punk.db.InsertBeersIntoDBUseCase
+import com.example.punk_source.api.use_case.punk.network.GetBeersUseCase
+import com.example.punk_source.api.use_case.remote_keys.ClearRemoteKeysUseCase
+import com.example.punk_source.api.use_case.remote_keys.GetCreationTimeUseCase
+import com.example.punk_source.api.use_case.remote_keys.GetRemoteKeyBeBeerIdUseCase
+import com.example.punk_source.api.use_case.remote_keys.InsertAllRemoteKeysUseCase
 import javax.inject.Inject
 
 interface GetBeerPagingRemoteMediatorUseCase {

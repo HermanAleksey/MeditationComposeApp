@@ -1,6 +1,7 @@
-package com.example.meditationcomposeapp.model.usecase.punk.network
+package com.example.punk_source.api.use_case.punk.network
 
-import com.example.meditationcomposeapp.model.entity.beer.Beer
+import com.example.core.model.beer_sorts.Beer
+import com.example.punk_source.api.repository.PunkWebRepository
 import javax.inject.Inject
 
 interface GetBeersUseCase {
@@ -11,7 +12,7 @@ interface GetBeersUseCase {
 }
 
 class GetBeersUseCaseImpl @Inject constructor(
-    private val punkRepository: PunkRepository,
+    private val punkRepository: PunkWebRepository,
 ) : GetBeersUseCase {
 
     override suspend fun invoke(

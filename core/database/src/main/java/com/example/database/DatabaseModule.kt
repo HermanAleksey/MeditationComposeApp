@@ -16,11 +16,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
 
-    @Provides
-    fun provideExecuteDatabaseTransactionUseCase(
-        appDatabase: AppDatabase,
-    ): ExecuteDatabaseTransactionUseCase = ExecuteDatabaseTransactionUseCaseImpl(appDatabase)
-
     @Singleton
     @Provides
     fun provideUpdateDescriptionDao(

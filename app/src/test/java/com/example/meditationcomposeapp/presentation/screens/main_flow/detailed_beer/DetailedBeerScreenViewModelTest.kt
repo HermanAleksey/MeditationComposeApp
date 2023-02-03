@@ -2,8 +2,7 @@ package com.example.meditationcomposeapp.presentation.screens.main_flow.detailed
 
 import com.example.meditationcomposeapp.CoroutinesTestRule
 import com.example.meditationcomposeapp.FakeObjects.getFakeBeer
-import com.example.meditationcomposeapp.model.entity.NetworkResponse
-import com.example.meditationcomposeapp.model.usecase.punk.network.GetBeerByIdUseCase
+import com.example.punk_source.api.use_case.GetBeerByIdUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.advanceUntilIdle
@@ -26,7 +25,7 @@ class DetailedBeerScreenViewModelTest {
     var rule = CoroutinesTestRule()
 
     @Mock
-    private lateinit var getBeerByIdUseCase: GetBeerByIdUseCase
+    private lateinit var getBeerByIdUseCase: com.example.punk_source.api.use_case.GetBeerByIdUseCase
 
     private lateinit var viewModel: DetailedBeerScreenViewModel
 

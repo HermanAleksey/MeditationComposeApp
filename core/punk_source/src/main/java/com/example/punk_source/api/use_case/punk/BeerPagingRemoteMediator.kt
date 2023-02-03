@@ -1,11 +1,16 @@
-package com.example.meditationcomposeapp.model.usecase.punk
+package com.example.punk_source.api.use_case.punk
 
 import androidx.paging.*
-import com.example.meditationcomposeapp.model.usecase.ExecuteDatabaseTransactionUseCase
-import com.example.meditationcomposeapp.model.usecase.punk.db.ClearBeersDBUseCase
-import com.example.meditationcomposeapp.model.usecase.punk.db.InsertBeersIntoDBUseCase
-import com.example.meditationcomposeapp.model.usecase.punk.network.GetBeersUseCase
-import com.example.meditationcomposeapp.model.usecase.remote_keys.*
+import com.example.database.ExecuteDatabaseTransactionUseCase
+import com.example.database.model.BeerListItem
+import com.example.database.model.RemoteKeys
+import com.example.punk_source.api.use_case.punk.db.ClearBeersDBUseCase
+import com.example.punk_source.api.use_case.punk.db.InsertBeersIntoDBUseCase
+import com.example.punk_source.api.use_case.punk.network.GetBeersUseCase
+import com.example.punk_source.api.use_case.remote_keys.ClearRemoteKeysUseCase
+import com.example.punk_source.api.use_case.remote_keys.GetCreationTimeUseCase
+import com.example.punk_source.api.use_case.remote_keys.GetRemoteKeyBeBeerIdUseCase
+import com.example.punk_source.api.use_case.remote_keys.InsertAllRemoteKeysUseCase
 import retrofit2.HttpException
 import java.io.IOException
 import java.util.concurrent.TimeUnit

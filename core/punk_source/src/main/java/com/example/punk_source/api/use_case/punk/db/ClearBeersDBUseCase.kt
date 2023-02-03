@@ -1,6 +1,6 @@
-package com.example.meditationcomposeapp.model.usecase.punk.db
+package com.example.punk_source.api.use_case.punk.db
 
-import com.example.meditationcomposeapp.data_source.repository.punk.PunkDBRepository
+import com.example.punk_source.api.repository.PunkDBRepository
 import javax.inject.Inject
 
 interface ClearBeersDBUseCase {
