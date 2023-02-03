@@ -6,6 +6,8 @@ import com.example.core.authentication_source.api.model.LoginUserResponse
 import com.example.core.authentication_source.api.repository.AuthenticationRepository
 import com.example.core.authentication_source.api.repository.AuthenticationRepositoryImpl
 import com.example.core.authentication_source.api.use_case.*
+import com.example.core.data_store.use_case.ClearAuthDataUseCase
+import com.example.core.data_store.use_case.ClearAuthDataUseCaseImpl
 import com.example.core.model.authentication.Profile
 import dagger.Binds
 import dagger.Module
@@ -25,11 +27,6 @@ abstract class AuthenticationBindsModule {
     abstract fun provideAuthenticationRepository(
         implementation: AuthenticationRepositoryImpl,
     ): AuthenticationRepository
-
-    @Binds
-    abstract fun provideClearAuthDataUseCase(
-        implementation: ClearAuthDataUseCaseImpl
-    ): ClearAuthDataUseCase
 
     @Binds
     abstract fun provideLoginUseCase(

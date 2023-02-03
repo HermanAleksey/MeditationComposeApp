@@ -1,4 +1,4 @@
-package com.example.core.authentication_source.api.use_case
+package com.example.core.data_store.use_case
 
 import com.example.core.data_store.UserDataStore
 import javax.inject.Inject

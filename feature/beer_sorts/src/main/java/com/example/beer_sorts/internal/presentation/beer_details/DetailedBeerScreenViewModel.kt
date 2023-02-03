@@ -3,6 +3,7 @@ package com.example.beer_sorts.internal.presentation.beer_details
 import androidx.lifecycle.viewModelScope
 import com.example.common.view_model.BaseViewModel
 import com.example.core.model.NetworkResponse
+import com.example.punk_source.api.use_case.punk.network.GetBeerByIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

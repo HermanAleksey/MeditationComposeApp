@@ -5,12 +5,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.meditationcomposeapp.presentation.screens.NavGraphs
 import com.example.meditationcomposeapp.presentation.screens.destinations.*
-import com.example.meditationcomposeapp.presentation.screens.login_flow.enter.EnterScreenViewModel
-import com.example.meditationcomposeapp.presentation.screens.login_flow.enter_code.EnterCodeScreenViewModel
 import com.example.meditationcomposeapp.presentation.screens.login_flow.enter_login.EnterLoginScreenViewModel
-import com.example.meditationcomposeapp.presentation.screens.login_flow.login.LoginScreenViewModel
-import com.example.meditationcomposeapp.presentation.screens.login_flow.new_password.NewPasswordScreenViewModel
-import com.example.meditationcomposeapp.presentation.screens.login_flow.registration.RegistrationScreenViewModel
 import com.example.meditationcomposeapp.presentation.screens.main_flow.main_screen.MainScreenViewModel
 import com.example.meditationcomposeapp.presentation.screens.main_flow.profile_screen.ProfileScreenViewModel
 import com.example.meditationcomposeapp.presentation.screens.splash.SplashScreenViewModel

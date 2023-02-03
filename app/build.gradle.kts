@@ -93,9 +93,11 @@ android {
 }
 
 dependencies {
-    implementation(project(":feature:shuffle_puzzle"))
     implementation(project(":feature:beer_sorts"))
 
+    implementation(project(":core:authentication_source"))
+    implementation(project(":core:updates_history"))
+    implementation(project(":core:updates_history"))
     implementation(project(":core:data_store"))
     implementation(project(":core:updates_history"))
     implementation(project(":core:design_system"))

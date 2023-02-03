@@ -4,7 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.common.view_model.BaseViewModel
 import com.example.common.view_model.Event
 import com.example.common.view_model.NavigationEvent
-import com.example.meditationcomposeapp.model.usecase.authentication.ClearAuthDataUseCase
+import com.example.core.data_store.use_case.ClearAuthDataUseCase
 import com.example.meditationcomposeapp.presentation.screens.destinations.EnterScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.SplashScreenDestination
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,7 +24,7 @@ class ProfileScreenViewModel @Inject constructor(
                 Event(
                     NavigationEvent.NavigateWithPop(
                         direction = EnterScreenDestination(),
-                        popUpTo = SplashScreenDestination(),
+                        popUpTo = SplashScreenDestination.route,
                         inclusive = false
                     )
                 )
