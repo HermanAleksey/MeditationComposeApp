@@ -37,9 +37,15 @@ dependencies {
     implementation(Dependencies.compose_ui_tooling_preview)
     implementation(Dependencies.compose_material_icons)
 
+    //accomponist
     implementation(Dependencies.accompanist_system_ui_controller)
     implementation(Dependencies.accompanist_pager)
     implementation(Dependencies.accompanist_permissions)
+
+    //navigation
+    implementation(Dependencies.navigation_compose)
+    implementation(Dependencies.raamcosta_compose_destinations_anim_core)
+    ksp(Dependencies.raamcosta_compose_destinations_ksp)
 
     //hilt
     implementation(Dependencies.hilt_navigation_compose)

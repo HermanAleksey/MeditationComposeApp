@@ -6,9 +6,6 @@ import com.example.common.view_model.Event
 import com.example.common.view_model.NavigationEvent
 import com.example.core.authentication_source.api.use_case.VerifyCodeUseCase
 import com.example.core.model.NetworkResponse
-import com.example.meditationcomposeapp.model.entity.NetworkResponse
-import com.example.meditationcomposeapp.model.usecase.authentication.VerifyCodeUseCase
-import com.example.meditationcomposeapp.presentation.navigation.Event
 import com.example.meditationcomposeapp.presentation.screens.destinations.LoginScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.NewPasswordScreenDestination
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +13,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -32,7 +28,6 @@ class EnterCodeScreenViewModel @Inject constructor(
 
     fun onCodeDigitChanged(index: Int, value: Int): Boolean {
         if (index < 0 || index >= _uiState.value.code.size) {
-            Timber.e("Trying to insert item in index out of code bounds")
             return isCodeFullyInputted()
         }
         val newCodeState = _uiState.value.code.copyOf()

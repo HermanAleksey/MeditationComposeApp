@@ -31,10 +31,6 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-
-            buildConfigField("String", "SERVER_URL", "\"https://192.168.0.1:5000/\"")
-            buildConfigField("String", "PUNK_API_URL", "\"https://api.punkapi.com/v2/\"")
-            buildConfigField("String", "DATABASE_NAME", "\"MEDITATION_COMPOSE_DB\"")
         }
         getByName("debug") {
             isMinifyEnabled = false
@@ -44,10 +40,6 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-
-            buildConfigField("String", "SERVER_URL", "\"https://192.168.0.1:5000/\"")
-            buildConfigField("String", "PUNK_API_URL", "\"https://api.punkapi.com/v2/\"")
-            buildConfigField("String", "DATABASE_NAME", "\"MEDITATION_COMPOSE_DB\"")
         }
     }
 
@@ -93,6 +85,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":feature:authentication"))
     implementation(project(":feature:beer_sorts"))
     implementation(project(":feature:shuffle_puzzle"))
 
