@@ -1,6 +1,5 @@
 package com.example.authentication.internal.screens.enter_login
 
-import com.example.feature.authentication.R
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -23,14 +22,13 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
-import com.example.authentication.internal.enter.composable.LoginMainButton
-import com.example.authentication.internal.login.composable.LoginFlowBackground
-import com.example.authentication.internal.login.composable.LoginFlowInputField
+import com.example.authentication.internal.screens.enter.composable.LoginMainButton
+import com.example.authentication.internal.screens.login.composable.LoginFlowBackground
+import com.example.authentication.internal.screens.login.composable.LoginFlowInputField
 import com.example.common.view_model.processEvent
-import com.ramcosta.composedestinations.annotation.Destination
+import com.example.feature.authentication.R
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
-@Destination
 @Composable
 fun EnterLoginScreen(
     initialLoginValue: String?,

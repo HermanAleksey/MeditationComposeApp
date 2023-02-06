@@ -4,13 +4,9 @@ import androidx.lifecycle.viewModelScope
 import com.example.authentication.internal.validation.PasswordField
 import com.example.common.utils.UiText
 import com.example.common.view_model.BaseViewModel
-import com.example.common.view_model.Event
-import com.example.common.view_model.NavigationEvent
 import com.example.core.authentication_source.api.use_case.SetNewPasswordUseCase
 import com.example.core.model.NetworkResponse
 import com.example.feature.authentication.R
-import com.example.meditationcomposeapp.model.utils.validation.PasswordField
-import com.example.meditationcomposeapp.presentation.screens.destinations.LoginScreenDestination
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -51,13 +47,13 @@ class NewPasswordScreenViewModel @Inject constructor(
                     when (it) {
                         is NetworkResponse.Success<*> -> {
                             if (it.data!!.success)
-                                _navigationEvent.update {
-                                    Event(
-                                        NavigationEvent.Navigate(
-                                            LoginScreenDestination
-                                        )
-                                    )
-                                }
+//                                _navigationEvent.update {
+//                                    Event(
+//                                        NavigationEvent.Navigate(
+//                                            LoginScreenDestination
+//                                        )
+//                                    )
+//                                }
                             else {
                                 //displayError()
                             }

@@ -2,12 +2,8 @@ package com.example.authentication.internal.screens.enter_code
 
 import androidx.lifecycle.viewModelScope
 import com.example.common.view_model.BaseViewModel
-import com.example.common.view_model.Event
-import com.example.common.view_model.NavigationEvent
 import com.example.core.authentication_source.api.use_case.VerifyCodeUseCase
 import com.example.core.model.NetworkResponse
-import com.example.meditationcomposeapp.presentation.screens.destinations.LoginScreenDestination
-import com.example.meditationcomposeapp.presentation.screens.destinations.NewPasswordScreenDestination
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -49,15 +45,15 @@ class EnterCodeScreenViewModel @Inject constructor(
                 when (it) {
                     is NetworkResponse.Success<*> -> {
                         if (it.data!!.success)
-                            _navigationEvent.update {
-                                Event(
-                                    NavigationEvent.NavigateWithPop(
-                                        direction = NewPasswordScreenDestination(login),
-                                        popUpTo = LoginScreenDestination,
-                                        inclusive = false
-                                    )
-                                )
-                            }
+//                            _navigationEvent.update {
+//                                Event(
+//                                    NavigationEvent.NavigateWithPop(
+//                                        direction = NewPasswordScreenDestination(login),
+//                                        popUpTo = LoginScreenDestination,
+//                                        inclusive = false
+//                                    )
+//                                )
+//                            }
                         else {
                             //displayError()
                             clearCodeInput()

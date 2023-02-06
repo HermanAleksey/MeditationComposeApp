@@ -8,22 +8,22 @@ import javax.inject.Inject
 
 class EnterScreenViewModel @Inject constructor() : BaseViewModel() {
     fun onEnterClick() {
-        _navigationEvent.update {
-            Event(
-                NavigationEvent.Navigate(
-                    LoginScreenDestination()
-                )
-            )
-        }
+//        _navigationEvent.update {
+//            Event(
+//                NavigationEvent.Navigate(
+//                    LoginScreenDestination()
+//                )
+//            )
+//        }
     }
 
     fun onDontHaveAccountClick() {
-        _navigationEvent.update {
-            Event(
-                NavigationEvent.Navigate(
-                    RegistrationScreenDestination()
-                )
-            )
-        }
+//        _navigationEvent.update {
+//            Event(
+//                NavigationEvent.Navigate(
+//                    RegistrationScreenDestination()
+//                )
+//            )
+//        }
     }
 }

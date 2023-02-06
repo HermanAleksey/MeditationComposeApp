@@ -34,14 +34,18 @@ class SplashScreenViewModel @Inject constructor(
             val login = userDataStore.readLogin().first()
             val password = userDataStore.readPassword().first()
 
-            if (login.isNotEmpty() && password.isNotEmpty()) {
-                logIn(login, password)
-            } else {
-                //todo restore
-//                _navigationEvent.update {
-//                   Event(NavigationEvent.Navigate(EnterScreenDestination))
-//                }
+            _navigationEvent.update {
+                Event(NavigationEvent.Navigate(MainScreenDestination))
             }
+            //todo restore after multi-module refactoring
+//            if (login.isNotEmpty() && password.isNotEmpty()) {
+//                logIn(login, password)
+//            } else {
+//                //todo restore
+////                _navigationEvent.update {
+////                   Event(NavigationEvent.Navigate(EnterScreenDestination))
+////                }
+//            }
         }
     }
 

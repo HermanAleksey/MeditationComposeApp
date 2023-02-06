@@ -42,11 +42,6 @@ dependencies {
     implementation(Dependencies.accompanist_pager)
     implementation(Dependencies.accompanist_permissions)
 
-    //navigation
-    implementation(Dependencies.navigation_compose)
-    implementation(Dependencies.raamcosta_compose_destinations_anim_core)
-    ksp(Dependencies.raamcosta_compose_destinations_ksp)
-
     //hilt
     implementation(Dependencies.hilt_navigation_compose)
     implementation(Dependencies.hilt_android)

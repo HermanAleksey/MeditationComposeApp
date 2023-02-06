@@ -5,12 +5,12 @@ import com.example.authentication.internal.screens.enter.EnterScreenViewModel
 import com.example.authentication.internal.screens.enter.InternalEnterScreen
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
-@Composable
-fun EnterScreen(
-    viewModel: EnterScreenViewModel,
-    navigator: DestinationsNavigator,
-) {
-    InternalEnterScreen(
-        viewModel, navigator
-    )
-}
+//@Composable
+//fun EnterScreen(
+//    viewModel: EnterScreenViewModel,
+//    navigator: DestinationsNavigator,
+//) {
+//    InternalEnterScreen(
+//        viewModel, navigator
+//    )
+//}

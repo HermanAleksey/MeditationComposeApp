@@ -22,8 +22,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.text.isDigitsOnly
+import com.example.authentication.internal.screens.enter_code.EnterCodeScreenState.Companion.EMPTY_NUMBER
 import com.example.design_system.Montserrat
-import com.example.authentication.internal.enter_code.EnterCodeScreenState.Companion.EMPTY_NUMBER
 
 /**
  * Represent 1 number from code panel

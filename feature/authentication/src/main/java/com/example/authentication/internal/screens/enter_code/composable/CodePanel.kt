@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.authentication.internal.enter_code.EnterCodeScreenState.Companion.EMPTY_NUMBER
+import com.example.authentication.internal.screens.enter_code.EnterCodeScreenState.Companion.EMPTY_NUMBER
 
 @Composable
 fun CodePanel(

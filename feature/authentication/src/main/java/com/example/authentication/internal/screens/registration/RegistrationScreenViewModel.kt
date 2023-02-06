@@ -5,8 +5,6 @@ import com.example.authentication.internal.validation.LoginField
 import com.example.authentication.internal.validation.NameField
 import com.example.authentication.internal.validation.PasswordField
 import com.example.common.view_model.BaseViewModel
-import com.example.common.view_model.Event
-import com.example.common.view_model.NavigationEvent
 import com.example.core.authentication_source.api.use_case.RegisterUseCase
 import com.example.core.model.NetworkResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -64,13 +62,13 @@ class RegistrationScreenViewModel @Inject constructor(
                     when (it) {
                         is NetworkResponse.Success<*> -> {
                             if (it.data!!.success)
-                                _navigationEvent.update {
-                                    Event(
-                                        NavigationEvent.Navigate(
-                                            LoginScreenDestination()
-                                        )
-                                    )
-                                }
+//                                _navigationEvent.update {
+//                                    Event(
+//                                        NavigationEvent.Navigate(
+//                                            LoginScreenDestination()
+//                                        )
+//                                    )
+//                                }
                             else {
                                 //displayError()
                             }
@@ -115,11 +113,13 @@ class RegistrationScreenViewModel @Inject constructor(
         }
     }
 
-    fun onSignInClicked() = _navigationEvent.update {
-        Event(
-            NavigationEvent.Navigate(
-                LoginScreenDestination.route
-            )
-        )
+    fun onSignInClicked() {
+//        _navigationEvent.update {
+//            Event(
+//                NavigationEvent.Navigate(
+//                    LoginScreenDestination.route
+//                )
+//            )
+//        }
     }
 }

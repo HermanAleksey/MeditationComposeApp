@@ -23,7 +23,6 @@ import com.example.feature.authentication.R
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
-@Destination
 @Composable
 fun EnterCodeScreen(
     login: String,
