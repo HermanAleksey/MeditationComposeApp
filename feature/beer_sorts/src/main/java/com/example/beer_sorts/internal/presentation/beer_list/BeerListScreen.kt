@@ -1,5 +1,6 @@
 package com.example.beer_sorts.internal.presentation.beer_list
 
+import android.app.Activity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -12,29 +13,32 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
+import com.example.beer_sorts.api.BeerListNavDependencies
 import com.example.beer_sorts.internal.presentation.beer_list.composables.BeerItem
-import com.example.common.view_model.processEvent
+import com.example.common.navigation.NavDependenciesProvider
 import com.example.database.model.BeerListItem
 import com.example.design_system.common_composables.ColorBackground
 import com.example.feature.beer_sorts.R
-import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @Composable
 internal fun InternalBeerListScreen(
-    viewModel: BeerListScreenViewModel,
-    navigator: DestinationsNavigator,
+    viewModel: BeerListScreenViewModel
 ) {
     val beersPaging = viewModel.beersPagingFlow.collectAsLazyPagingItems()
 
+    val navDependencies = ((LocalContext.current as? Activity) as NavDependenciesProvider)
+        .provideDependencies(BeerListNavDependencies::class.java)
+
     LaunchedEffect(key1 = viewModel.navigationEvent.collectAsState()) {
         viewModel.navigationEvent.collect { event ->
-            event.processEvent(navigator)
+            event?.tryNavigate(navDependencies)
         }
     }
 

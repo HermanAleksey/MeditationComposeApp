@@ -16,6 +16,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
+import com.example.beer_sorts.api.BeerListNavDependencies
+import com.example.common.navigation.NavDependencies
+import com.example.common.navigation.NavDependenciesProvider
 import com.example.design_system.AppTheme
 import com.example.meditationcomposeapp.presentation.navigation.MeditationDestinationsNavHost
 import com.example.meditationcomposeapp.presentation.navigation.getDestinationWrapper
@@ -31,30 +35,56 @@ import com.example.meditationcomposeapp.presentation.ui_controls.toolbar.Toolbar
 import com.example.meditationcomposeapp.presentation.ui_controls.toolbar.ToolbarState
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.ramcosta.composedestinations.navigation.navigate
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class MainActivity : ComponentActivity() {
+class MainActivity : ComponentActivity(), NavDependenciesProvider {
+
+    private lateinit var navController: NavHostController
+
+    @OptIn(ExperimentalAnimationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
 
         setContent {
-            MyApp(window)
+            navController = rememberAnimatedNavController()
+            MyApp(window, navController)
         }
+    }
+
+    override fun <D : NavDependencies> provideDependencies(clazz: Class<D>): D {
+        return when (clazz.name) {
+            BeerListNavDependencies::class.java.name -> {
+                BeerListNavDependencies(
+                    navigateToBeerDetails = { beerId ->
+                        navController.navigate(
+                            DetailedBeerScreenDestination(beerId)
+                        )
+                    }
+                ) as D
+            }
+            else -> throw java.lang.NullPointerException(":(")
+        }
+        //todo update
+
     }
 }
 
 @OptIn(ExperimentalAnimationApi::class)
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun MyApp(windows: Window) {
+fun MyApp(
+    windows: Window,
+    navController: NavHostController,
+) {
     val displayMetrics = DisplayMetrics()
     windows.windowManager.defaultDisplay.getMetrics(displayMetrics)
     val screenWidth = displayMetrics.widthPixels
 
-    val navController = rememberAnimatedNavController()
+
     val systemUiController = rememberSystemUiController()
 
     var _bottomBarIsVisible by remember {

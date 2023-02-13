@@ -2,9 +2,8 @@ package com.example.beer_sorts.internal.presentation.beer_list
 
 import androidx.lifecycle.viewModelScope
 import androidx.paging.*
-import com.example.common.view_model.BaseViewModel
-import com.example.common.view_model.Event
-import com.example.common.view_model.NavigationEvent
+import com.example.beer_sorts.api.BeerListNavRoute
+import com.example.common.view_model.NavigationBaseViewModel
 import com.example.database.model.BeerListItem
 import com.example.punk_source.api.use_case.punk.GetBeerPagingRemoteMediatorUseCase
 import com.example.punk_source.api.use_case.punk.db.GetBeerPagingSourceUseCase
@@ -17,7 +16,7 @@ import javax.inject.Inject
 class BeerListScreenViewModel @Inject constructor(
     getBeerPagingRemoteMediatorUseCase: GetBeerPagingRemoteMediatorUseCase,
     private val getBeerPagingSourceUseCase: GetBeerPagingSourceUseCase,
-) : BaseViewModel() {
+) : NavigationBaseViewModel<BeerListNavRoute>() {
 
     @OptIn(ExperimentalPagingApi::class)
     val beersPagingFlow: Flow<PagingData<BeerListItem>> = Pager(
@@ -28,16 +27,9 @@ class BeerListScreenViewModel @Inject constructor(
     }.flow.cachedIn(viewModelScope)
 
     fun onBeerItemClicked(beerId: Int) {
-        //todo fix
-//        _navigationEvent.update {
-//            Event(
-//                NavigationEvent.Navigate(
-//                    DetailedBeerScreenDestination(
-//                        beerId
-//                    )
-//                )
-//            )
-//        }
+        _navigationEvent.update {
+            BeerListNavRoute.DetailedBeerScreen(beerId)
+        }
     }
 
     companion object {
