@@ -1,6 +1,6 @@
 package com.example.authentication.internal.validation
 
-class PasswordField(
+internal class PasswordField(
     value: String
 ) : InputTextField(value) {
 

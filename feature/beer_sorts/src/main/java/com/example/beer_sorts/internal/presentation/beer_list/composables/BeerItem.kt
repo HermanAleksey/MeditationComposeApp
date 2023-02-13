@@ -16,7 +16,7 @@ import com.example.database.model.BeerListItem
 import com.example.feature.beer_sorts.R
 
 @Composable
-fun BeerItem(
+internal fun BeerItem(
     beer: BeerListItem,
     onClick: () -> Unit = {},
 ) {

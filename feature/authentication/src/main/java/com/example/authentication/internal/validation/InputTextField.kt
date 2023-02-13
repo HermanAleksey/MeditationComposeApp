@@ -3,7 +3,7 @@ package com.example.authentication.internal.validation
 import com.example.common.utils.UiText
 import com.example.feature.authentication.R
 
-abstract class InputTextField(
+internal abstract class InputTextField(
     val value: String
 ) {
     protected open val REGEX = """.+"""

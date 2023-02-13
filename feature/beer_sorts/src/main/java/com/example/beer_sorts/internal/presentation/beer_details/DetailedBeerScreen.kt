@@ -38,7 +38,6 @@ internal fun InternalDetailedBeerScreen(
         viewModel.onScreenOpened(beerId)
     }
 
-
     ColorBackground(
         isLoading = uiState.value.isLoading || uiState.value.beer == null,
         color = MaterialTheme.colors.background

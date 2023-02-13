@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.sp
 import com.example.feature.authentication.R
 
 @Composable
-fun DontHaveAccountText(
+internal fun DontHaveAccountText(
     modifier: Modifier,
 ) {
     Text(

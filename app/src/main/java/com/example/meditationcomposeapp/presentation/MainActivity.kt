@@ -17,6 +17,8 @@ import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.example.authentication.api.enter_code_screen.EnterCodeScreenNavDependencies
+import com.example.authentication.api.enter_screen.EnterScreenNavDependencies
 import com.example.beer_sorts.api.BeerListNavDependencies
 import com.example.common.navigation.NavDependencies
 import com.example.common.navigation.NavDependenciesProvider
@@ -56,7 +58,7 @@ class MainActivity : ComponentActivity(), NavDependenciesProvider {
     }
 
     override fun <D : NavDependencies> provideDependencies(clazz: Class<D>): D {
-        return when (clazz.name) {
+        val dependencies = when (clazz.name) {
             BeerListNavDependencies::class.java.name -> {
                 BeerListNavDependencies(
                     navigateToBeerDetails = { beerId ->
@@ -64,10 +66,32 @@ class MainActivity : ComponentActivity(), NavDependenciesProvider {
                             DetailedBeerScreenDestination(beerId)
                         )
                     }
-                ) as D
+                )
+            }
+            EnterScreenNavDependencies::class.java.name -> {
+                EnterScreenNavDependencies(
+                    navigateToLoginScreen = {
+                        navController.navigate(LoginScreenDestination())
+                    },
+                    navigateToRegistrationScreen = {
+                        navController.navigate(RegistrationScreenDestination())
+                    }
+                )
+            }
+            EnterCodeScreenNavDependencies::class.java.name -> {
+                EnterCodeScreenNavDependencies(
+                    navigateToNewPasswordScreen = {login ->
+                        navController.navigate(direction = NewPasswordScreenDestination(login)) {
+                            popUpTo(LoginScreenDestination) {
+                                inclusive = false
+                            }
+                        }
+                    }
+                )
             }
             else -> throw java.lang.NullPointerException(":(")
         }
+        return dependencies as D
         //todo update
 
     }

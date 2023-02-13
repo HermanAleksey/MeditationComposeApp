@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import com.example.authentication.internal.screens.enter_code.EnterCodeScreenState.Companion.EMPTY_NUMBER
 
 @Composable
-fun CodePanel(
+internal fun CodePanel(
     isEnabled: Boolean = true,
     code: Array<Int>,
     onCodeDigitChanged: (position: Int, inputtedDigit: Int) -> Boolean,

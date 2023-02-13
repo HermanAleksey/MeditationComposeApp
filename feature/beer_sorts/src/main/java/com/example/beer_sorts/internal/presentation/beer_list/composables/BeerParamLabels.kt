@@ -14,12 +14,12 @@ import androidx.compose.ui.unit.sp
 import com.example.feature.beer_sorts.R
 
 @Composable
-fun BeerParamsTable(
+internal fun BeerParamsTable(
+    modifier: Modifier = Modifier,
     abv: Double? = null,
     ebc: Double? = null,
     srm: Double? = null,
     ph: Double? = null,
-    modifier: Modifier = Modifier,
     textStyle: TextStyle,
 ) {
     val paramsWithInfo = remember {

@@ -42,7 +42,7 @@ import com.example.design_system.Montserrat
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun CodeNumber(
+internal fun CodeNumber(
     value: Int,
     isEnabled: Boolean,
     focusRequester: FocusRequester,

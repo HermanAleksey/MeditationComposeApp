@@ -1,7 +1,9 @@
 package com.example.authentication.internal.screens.enter_code
 
 import androidx.lifecycle.viewModelScope
+import com.example.authentication.api.enter_code_screen.EnterCodeScreenNavRoute
 import com.example.common.view_model.BaseViewModel
+import com.example.common.view_model.NavigationBaseViewModel
 import com.example.core.authentication_source.api.use_case.VerifyCodeUseCase
 import com.example.core.model.NetworkResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class EnterCodeScreenViewModel @Inject constructor(
     private val verifyCodeUseCase: VerifyCodeUseCase,
-) : BaseViewModel() {
+) : NavigationBaseViewModel<EnterCodeScreenNavRoute>() {
 
     private val _uiState = MutableStateFlow(EnterCodeScreenState())
     val uiState: StateFlow<EnterCodeScreenState> = _uiState
@@ -45,15 +47,9 @@ class EnterCodeScreenViewModel @Inject constructor(
                 when (it) {
                     is NetworkResponse.Success<*> -> {
                         if (it.data!!.success)
-//                            _navigationEvent.update {
-//                                Event(
-//                                    NavigationEvent.NavigateWithPop(
-//                                        direction = NewPasswordScreenDestination(login),
-//                                        popUpTo = LoginScreenDestination,
-//                                        inclusive = false
-//                                    )
-//                                )
-//                            }
+                            _navigationEvent.update {
+                                EnterCodeScreenNavRoute.NewPasswordScreen(login)
+                            }
                         else {
                             //displayError()
                             clearCodeInput()

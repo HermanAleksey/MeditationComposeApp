@@ -88,6 +88,7 @@ dependencies {
 //    implementation(project(":feature:authentication"))
     implementation(project(":feature:beer_sorts"))
     implementation(project(":feature:shuffle_puzzle"))
+    implementation(project(":feature:authentication"))
 
     implementation(project(":core:authentication_source"))
     implementation(project(":core:updates_history"))

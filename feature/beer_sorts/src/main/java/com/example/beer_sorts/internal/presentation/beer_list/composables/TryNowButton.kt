@@ -24,7 +24,7 @@ import com.example.feature.beer_sorts.R
 
 
 @Composable
-fun TryNowButton(beerName: String, tagline: String) {
+internal fun TryNowButton(beerName: String, tagline: String) {
     val context = LocalContext.current
 
     Card(

@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun LoginMainButton(
+internal fun LoginMainButton(
     text: String,
     modifier: Modifier,
     onClick: ()->Unit
