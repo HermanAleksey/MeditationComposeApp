@@ -1,9 +1,10 @@
 package com.example.authentication.internal.screens.new_password
 
 import androidx.lifecycle.viewModelScope
+import com.example.authentication.api.new_password_screen.NewPasswordScreenNavRoute
 import com.example.authentication.internal.validation.PasswordField
 import com.example.common.utils.UiText
-import com.example.common.view_model.BaseViewModel
+import com.example.common.view_model.NavigationBaseViewModel
 import com.example.core.authentication_source.api.use_case.SetNewPasswordUseCase
 import com.example.core.model.NetworkResponse
 import com.example.feature.authentication.R
@@ -17,7 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class NewPasswordScreenViewModel @Inject constructor(
     private val setNewPasswordUseCase: SetNewPasswordUseCase
-) : BaseViewModel() {
+) : NavigationBaseViewModel<NewPasswordScreenNavRoute>() {
 
     private val _uiState = MutableStateFlow(NewPasswordScreenState())
     val uiState: StateFlow<NewPasswordScreenState> = _uiState
@@ -47,13 +48,9 @@ class NewPasswordScreenViewModel @Inject constructor(
                     when (it) {
                         is NetworkResponse.Success<*> -> {
                             if (it.data!!.success)
-//                                _navigationEvent.update {
-//                                    Event(
-//                                        NavigationEvent.Navigate(
-//                                            LoginScreenDestination
-//                                        )
-//                                    )
-//                                }
+                                _navigationEvent.update {
+                                    NewPasswordScreenNavRoute.LoginScreen()
+                                }
                             else {
                                 //displayError()
                             }

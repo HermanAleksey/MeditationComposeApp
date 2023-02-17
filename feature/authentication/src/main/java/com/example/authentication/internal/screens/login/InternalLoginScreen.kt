@@ -1,5 +1,6 @@
 package com.example.authentication.internal.screens.login
 
+import android.app.Activity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -15,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -23,28 +25,29 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
+import com.example.authentication.api.login_screen.LoginScreenNavDependencies
 import com.example.authentication.internal.screens.enter.composable.DontHaveAccountText
 import com.example.authentication.internal.screens.enter.composable.LoginMainButton
 import com.example.authentication.internal.screens.login.composable.LoginFlowBackground
 import com.example.authentication.internal.screens.login.composable.LoginFlowInputField
-import com.example.common.view_model.processEvent
+import com.example.common.navigation.NavDependenciesProvider
 import com.example.feature.authentication.R
-import com.ramcosta.composedestinations.annotation.Destination
-import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @Composable
-fun LoginScreen(
+internal fun InternalLoginScreen(
     viewModel: LoginScreenViewModel,
-    navigator: DestinationsNavigator,
 ) {
     val focusManager = LocalFocusManager.current
     val passwordFocusRequester = FocusRequester()
 
     val uiState = viewModel.uiState.collectAsState()
 
+    val navDependencies = ((LocalContext.current as? Activity) as NavDependenciesProvider)
+        .provideDependencies(LoginScreenNavDependencies::class.java)
+
     LaunchedEffect(key1 = viewModel.navigationEvent.collectAsState()) {
         viewModel.navigationEvent.collect { event ->
-            event.processEvent(navigator)
+            event?.tryNavigate(navDependencies)
         }
     }
 

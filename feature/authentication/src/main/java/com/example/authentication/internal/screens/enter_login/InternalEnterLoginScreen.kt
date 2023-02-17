@@ -1,7 +1,7 @@
-package com.example.authentication.internal.screens.registration
+package com.example.authentication.internal.screens.enter_login
 
+import android.app.Activity
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -23,32 +24,35 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
+import com.example.authentication.api.enter_login_screen.EnterLoginScreenNavDependencies
 import com.example.authentication.internal.screens.enter.composable.LoginMainButton
 import com.example.authentication.internal.screens.login.composable.LoginFlowBackground
 import com.example.authentication.internal.screens.login.composable.LoginFlowInputField
-import com.example.authentication.internal.screens.registration.composable.AlreadyHaveAccountText
-import com.example.common.view_model.processEvent
+import com.example.common.navigation.NavDependenciesProvider
 import com.example.feature.authentication.R
-import com.ramcosta.composedestinations.annotation.Destination
-import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @Composable
-fun RegistrationScreen(
-    viewModel: RegistrationScreenViewModel,
-    navigator: DestinationsNavigator,
+internal fun InternalEnterLoginScreen(
+    initialLoginValue: String?,
+    viewModel: EnterLoginScreenViewModel,
 ) {
     val focusManager = LocalFocusManager.current
-    val passwordFocusRequester = FocusRequester()
-    val emailFocusRequester = FocusRequester()
+    val repeatPasswordFocusRequester = FocusRequester()
 
     val uiState = viewModel.uiState.collectAsState()
 
+    LaunchedEffect(key1 = null, block = {
+        viewModel.onLoginTextChanged(initialLoginValue ?: "")
+    })
+
+    val navDependencies = ((LocalContext.current as? Activity) as NavDependenciesProvider)
+        .provideDependencies(EnterLoginScreenNavDependencies::class.java)
+
     LaunchedEffect(key1 = viewModel.navigationEvent.collectAsState()) {
         viewModel.navigationEvent.collect { event ->
-            event.processEvent(navigator)
+            event?.tryNavigate(navDependencies)
         }
     }
-
     LoginFlowBackground(
         isLoading = uiState.value.isLoading
     ) {
@@ -61,19 +65,19 @@ fun RegistrationScreen(
         ) {
             Image(
                 painter = painterResource(id = R.drawable.ic_logo_white),
-                contentDescription = null,
+                contentDescription = "App logo",
                 contentScale = ContentScale.FillHeight,
                 modifier = Modifier
                     .padding(top = 100.dp)
                     .height(40.dp)
             )
             Text(
-                text = stringResource(id = R.string.sign_up),
+                text = stringResource(id = R.string.password_recovery),
                 style = MaterialTheme.typography.h2,
                 modifier = Modifier.padding(top = 31.dp)
             )
             Text(
-                text = stringResource(id = R.string.sign_in_desc),
+                text = stringResource(id = R.string.enter_login_desc),
                 style = MaterialTheme.typography.body1,
                 modifier = Modifier
                     .padding(top = 4.dp)
@@ -81,68 +85,27 @@ fun RegistrationScreen(
             )
             LoginFlowInputField(
                 isEnabled = !uiState.value.isLoading,
-                textFieldValue = uiState.value.name,
-                isError = uiState.value.nameError != null,
-                errorValue = uiState.value.nameError?.asString(),
-                label = stringResource(id = R.string.name),
-                onValueChanged = { viewModel.onNameTextChanged(it) },
-                imeAction = ImeAction.Next,
-                keyboardType = KeyboardType.Text,
-                onKeyboardActions = {
-                    emailFocusRequester.requestFocus()
-                },
-            )
-            LoginFlowInputField(
-                isEnabled = !uiState.value.isLoading,
                 textFieldValue = uiState.value.login,
+                label = stringResource(id = R.string.email_address),
                 isError = uiState.value.loginError != null,
                 errorValue = uiState.value.loginError?.asString(),
-                label = stringResource(id = R.string.email_address),
                 onValueChanged = { viewModel.onLoginTextChanged(it) },
-                imeAction = ImeAction.Next,
-                keyboardType = KeyboardType.Email,
-                onKeyboardActions = {
-                    passwordFocusRequester.requestFocus()
-                },
-                focusRequester = emailFocusRequester,
-            )
-            LoginFlowInputField(
-                isEnabled = !uiState.value.isLoading,
-                textFieldValue = uiState.value.password,
-                isError = uiState.value.passwordError != null,
-                errorValue = uiState.value.passwordError?.asString(),
-                label = stringResource(id = R.string.password),
-                onValueChanged = { viewModel.onPasswordTextChanged(it) },
                 imeAction = ImeAction.Done,
-                keyboardType = KeyboardType.Password,
+                keyboardType = KeyboardType.Email,
+                focusRequester = repeatPasswordFocusRequester,
                 onKeyboardActions = {
                     focusManager.clearFocus()
-                },
-                focusRequester = passwordFocusRequester,
+                }
             )
             LoginMainButton(
-                text = stringResource(id = R.string.sign_up).toUpperCase(Locale.current),
+                text = stringResource(id = R.string.confirm).toUpperCase(Locale.current),
                 modifier = Modifier
                     .fillMaxWidth()
                     .wrapContentHeight()
                     .padding(top = 28.dp)
             ) {
-                viewModel.onSignUpClicked()
+                viewModel.onConfirmClick()
             }
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight()
-                    .padding(top = 20.dp),
-                contentAlignment = Alignment.Center
-            ) {
-                AlreadyHaveAccountText(modifier = Modifier
-                    .padding(top = 18.dp)
-                    .clickable {
-                        viewModel.onSignInClicked()
-                    })
-            }
-            Spacer(modifier = Modifier.padding(top = 80.dp))
         }
     }
 }

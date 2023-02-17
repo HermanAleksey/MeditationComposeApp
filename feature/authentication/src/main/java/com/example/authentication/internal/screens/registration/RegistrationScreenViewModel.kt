@@ -1,10 +1,11 @@
 package com.example.authentication.internal.screens.registration
 
 import androidx.lifecycle.viewModelScope
+import com.example.authentication.api.registration_screen.RegistrationScreenNavRoute
 import com.example.authentication.internal.validation.LoginField
 import com.example.authentication.internal.validation.NameField
 import com.example.authentication.internal.validation.PasswordField
-import com.example.common.view_model.BaseViewModel
+import com.example.common.view_model.NavigationBaseViewModel
 import com.example.core.authentication_source.api.use_case.RegisterUseCase
 import com.example.core.model.NetworkResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class RegistrationScreenViewModel @Inject constructor(
     private val registerUseCase: RegisterUseCase
-) : BaseViewModel() {
+) : NavigationBaseViewModel<RegistrationScreenNavRoute>() {
 
     private val _uiState = MutableStateFlow(RegistrationScreenState())
     val uiState: StateFlow<RegistrationScreenState> = _uiState
@@ -62,13 +63,9 @@ class RegistrationScreenViewModel @Inject constructor(
                     when (it) {
                         is NetworkResponse.Success<*> -> {
                             if (it.data!!.success)
-//                                _navigationEvent.update {
-//                                    Event(
-//                                        NavigationEvent.Navigate(
-//                                            LoginScreenDestination()
-//                                        )
-//                                    )
-//                                }
+                                _navigationEvent.update {
+                                    RegistrationScreenNavRoute.LoginScreen()
+                                }
                             else {
                                 //displayError()
                             }
@@ -114,12 +111,8 @@ class RegistrationScreenViewModel @Inject constructor(
     }
 
     fun onSignInClicked() {
-//        _navigationEvent.update {
-//            Event(
-//                NavigationEvent.Navigate(
-//                    LoginScreenDestination.route
-//                )
-//            )
-//        }
+        _navigationEvent.update {
+            RegistrationScreenNavRoute.LoginScreen()
+        }
     }
 }

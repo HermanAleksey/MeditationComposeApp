@@ -18,7 +18,11 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.authentication.api.enter_code_screen.EnterCodeScreenNavDependencies
+import com.example.authentication.api.enter_login_screen.EnterLoginScreenNavDependencies
 import com.example.authentication.api.enter_screen.EnterScreenNavDependencies
+import com.example.authentication.api.login_screen.LoginScreenNavDependencies
+import com.example.authentication.api.new_password_screen.NewPasswordScreenNavDependencies
+import com.example.authentication.api.registration_screen.RegistrationScreenNavDependencies
 import com.example.beer_sorts.api.BeerListNavDependencies
 import com.example.common.navigation.NavDependencies
 import com.example.common.navigation.NavDependenciesProvider
@@ -38,6 +42,7 @@ import com.example.meditationcomposeapp.presentation.ui_controls.toolbar.Toolbar
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.ramcosta.composedestinations.navigation.navigate
+import com.ramcosta.composedestinations.navigation.popUpTo
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -80,12 +85,46 @@ class MainActivity : ComponentActivity(), NavDependenciesProvider {
             }
             EnterCodeScreenNavDependencies::class.java.name -> {
                 EnterCodeScreenNavDependencies(
-                    navigateToNewPasswordScreen = {login ->
+                    navigateToNewPasswordScreen = { login ->
                         navController.navigate(direction = NewPasswordScreenDestination(login)) {
                             popUpTo(LoginScreenDestination) {
                                 inclusive = false
                             }
                         }
+                    }
+                )
+            }
+            EnterLoginScreenNavDependencies::class.java.name -> {
+                EnterLoginScreenNavDependencies(
+                    navigateEnterCodeScreen = { login ->
+//                        navController.navigate(EnterCodeScreenDestination(login))
+                    }
+                )
+            }
+            LoginScreenNavDependencies::class.java.name -> {
+                LoginScreenNavDependencies(
+                    navigateToMainScreen = {
+                        //todo add
+                    },
+                    navigateToRegistrationScreen = {
+                        navController.navigate(RegistrationScreenDestination())
+                    },
+                    navigateToEnterLoginScreen = { login ->
+                        navController.navigate(EnterCodeScreenDestination(login))
+                    }
+                )
+            }
+            NewPasswordScreenNavDependencies::class.java.name -> {
+                NewPasswordScreenNavDependencies(
+                    navigateToLoginScreen = {
+                        navController.navigate(LoginScreenDestination())
+                    }
+                )
+            }
+            RegistrationScreenNavDependencies::class.java.name -> {
+                RegistrationScreenNavDependencies(
+                    navigateToLoginScreen = {
+                        navController.navigate(LoginScreenDestination())
                     }
                 )
             }

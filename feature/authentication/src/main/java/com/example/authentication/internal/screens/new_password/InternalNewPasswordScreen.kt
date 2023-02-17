@@ -1,5 +1,6 @@
-package com.example.authentication.internal.screens.enter_login
+package com.example.authentication.internal.screens.new_password
 
+import android.app.Activity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -14,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -22,31 +24,29 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
+import com.example.authentication.api.new_password_screen.NewPasswordScreenNavDependencies
 import com.example.authentication.internal.screens.enter.composable.LoginMainButton
 import com.example.authentication.internal.screens.login.composable.LoginFlowBackground
 import com.example.authentication.internal.screens.login.composable.LoginFlowInputField
-import com.example.common.view_model.processEvent
+import com.example.common.navigation.NavDependenciesProvider
 import com.example.feature.authentication.R
-import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @Composable
-fun EnterLoginScreen(
-    initialLoginValue: String?,
-    viewModel: EnterLoginScreenViewModel,
-    navigator: DestinationsNavigator
+internal fun InternalNewPasswordScreen(
+    viewModel: NewPasswordScreenViewModel,
+    login: String,
 ) {
     val focusManager = LocalFocusManager.current
     val repeatPasswordFocusRequester = FocusRequester()
 
     val uiState = viewModel.uiState.collectAsState()
 
-    LaunchedEffect(key1 = null, block = {
-        viewModel.onLoginTextChanged(initialLoginValue ?: "")
-    })
+    val navDependencies = ((LocalContext.current as? Activity) as NavDependenciesProvider)
+        .provideDependencies(NewPasswordScreenNavDependencies::class.java)
 
     LaunchedEffect(key1 = viewModel.navigationEvent.collectAsState()) {
         viewModel.navigationEvent.collect { event ->
-            event.processEvent(navigator)
+            event?.tryNavigate(navDependencies)
         }
     }
 
@@ -62,7 +62,7 @@ fun EnterLoginScreen(
         ) {
             Image(
                 painter = painterResource(id = R.drawable.ic_logo_white),
-                contentDescription = "App logo",
+                contentDescription = null,
                 contentScale = ContentScale.FillHeight,
                 modifier = Modifier
                     .padding(top = 100.dp)
@@ -74,7 +74,7 @@ fun EnterLoginScreen(
                 modifier = Modifier.padding(top = 31.dp)
             )
             Text(
-                text = stringResource(id = R.string.enter_login_desc),
+                text = stringResource(id = R.string.new_password_desc),
                 style = MaterialTheme.typography.body1,
                 modifier = Modifier
                     .padding(top = 4.dp)
@@ -82,17 +82,30 @@ fun EnterLoginScreen(
             )
             LoginFlowInputField(
                 isEnabled = !uiState.value.isLoading,
-                textFieldValue = uiState.value.login,
-                label = stringResource(id = R.string.email_address),
-                isError = uiState.value.loginError != null,
-                errorValue = uiState.value.loginError?.asString(),
-                onValueChanged = { viewModel.onLoginTextChanged(it) },
+                textFieldValue = uiState.value.newPassword,
+                label = stringResource(id = R.string.new_password),
+                isError = uiState.value.newPasswordError != null,
+                errorValue = uiState.value.newPasswordError?.asString(),
+                onValueChanged = { viewModel.onNewPasswordTextChanged(it) },
+                imeAction = ImeAction.Next,
+                keyboardType = KeyboardType.Password,
+                onKeyboardActions = {
+                    repeatPasswordFocusRequester.requestFocus()
+                },
+            )
+            LoginFlowInputField(
+                isEnabled = !uiState.value.isLoading,
+                textFieldValue = uiState.value.repeatPassword,
+                label = stringResource(id = R.string.repeat_new_password),
+                isError = uiState.value.repeatPasswordError != null,
+                errorValue = uiState.value.repeatPasswordError?.asString(),
+                onValueChanged = { viewModel.onRepeatPasswordTextChanged(it) },
                 imeAction = ImeAction.Done,
-                keyboardType = KeyboardType.Email,
-                focusRequester = repeatPasswordFocusRequester,
+                keyboardType = KeyboardType.Password,
                 onKeyboardActions = {
                     focusManager.clearFocus()
-                }
+                },
+                focusRequester = repeatPasswordFocusRequester
             )
             LoginMainButton(
                 text = stringResource(id = R.string.confirm).toUpperCase(Locale.current),
@@ -101,7 +114,7 @@ fun EnterLoginScreen(
                     .wrapContentHeight()
                     .padding(top = 28.dp)
             ) {
-                viewModel.onConfirmClick()
+                viewModel.onConfirmClick(login)
             }
         }
     }

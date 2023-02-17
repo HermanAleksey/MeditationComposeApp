@@ -1,8 +1,9 @@
 package com.example.authentication.internal.screens.enter_login
 
 import androidx.lifecycle.viewModelScope
+import com.example.authentication.api.enter_login_screen.EnterLoginScreenNavRoute
 import com.example.authentication.internal.validation.LoginField
-import com.example.common.view_model.BaseViewModel
+import com.example.common.view_model.NavigationBaseViewModel
 import com.example.core.authentication_source.api.use_case.RequestPasswordRestorationUseCase
 import com.example.core.model.NetworkResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class EnterLoginScreenViewModel @Inject constructor(
     private val requestPasswordRestorationUseCase: RequestPasswordRestorationUseCase
-) : BaseViewModel() {
+) : NavigationBaseViewModel<EnterLoginScreenNavRoute>() {
 
     private val _uiState = MutableStateFlow(EnterLoginScreenState())
     val uiState: StateFlow<EnterLoginScreenState> = _uiState
@@ -34,13 +35,9 @@ class EnterLoginScreenViewModel @Inject constructor(
                     when (it) {
                         is NetworkResponse.Success<*> -> {
                             if (it.data!!.success)
-//                                _navigationEvent.update {
-//                                    Event(
-//                                        NavigationEvent.Navigate(
-//                                            EnterCodeScreenDestination(_uiState.value.login)
-//                                        )
-//                                    )
-//                                }
+                                _navigationEvent.update {
+                                    EnterLoginScreenNavRoute.EnterCodeScreen(login = _uiState.value.login)
+                                }
                             else {
                                 //displayError()
                             }

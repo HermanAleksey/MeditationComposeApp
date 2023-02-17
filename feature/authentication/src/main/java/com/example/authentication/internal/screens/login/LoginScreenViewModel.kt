@@ -1,9 +1,10 @@
 package com.example.authentication.internal.screens.login
 
 import androidx.lifecycle.viewModelScope
+import com.example.authentication.api.login_screen.LoginScreenNavRoute
 import com.example.authentication.internal.validation.LoginField
 import com.example.authentication.internal.validation.PasswordField
-import com.example.common.view_model.BaseViewModel
+import com.example.common.view_model.NavigationBaseViewModel
 import com.example.core.authentication_source.api.use_case.LoginUseCase
 import com.example.core.data_store.UserDataStore
 import com.example.core.model.NetworkResponse
@@ -18,7 +19,7 @@ import javax.inject.Inject
 class LoginScreenViewModel @Inject constructor(
     private val userDataStore: UserDataStore,
     private val loginUseCase: LoginUseCase,
-) : BaseViewModel() {
+) : NavigationBaseViewModel<LoginScreenNavRoute>() {
 
     private val _uiState = MutableStateFlow(LoginScreenState())
     val uiState: StateFlow<LoginScreenState> = _uiState
@@ -36,13 +37,9 @@ class LoginScreenViewModel @Inject constructor(
     }
 
     fun onForgotPasswordClicked() {
-//        _navigationEvent.update {
-//            Event(
-//                NavigationEvent.Navigate(
-//                    EnterLoginScreenDestination(_uiState.value.login)
-//                )
-//            )
-//        }
+        _navigationEvent.update {
+            LoginScreenNavRoute.EnterLoginScreen(_uiState.value.login)
+        }
     }
 
     fun onLoginClicked() {
@@ -55,13 +52,9 @@ class LoginScreenViewModel @Inject constructor(
                     when (it) {
                         is NetworkResponse.Success<*> -> {
                             saveCreditsOnDataStore(login, password)
-//                            _navigationEvent.update {
-//                                Event(
-//                                    NavigationEvent.Navigate(
-//                                        MainScreenDestination()
-//                                    )
-//                                )
-//                            }
+                            _navigationEvent.update {
+                                LoginScreenNavRoute.MainScreen()
+                            }
                         }
                         is NetworkResponse.Failure<*> -> {
                             //on error show pop-up
@@ -108,12 +101,8 @@ class LoginScreenViewModel @Inject constructor(
     }
 
     fun onSignUpClicked() {
-//        _navigationEvent.update {
-//            Event(
-//                NavigationEvent.Navigate(
-//                    RegistrationScreenDestination()
-//                )
-//            )
-//        }
+        _navigationEvent.update {
+            LoginScreenNavRoute.RegistrationScreen()
+        }
     }
 }

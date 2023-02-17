@@ -12,6 +12,7 @@ import com.example.core.model.updates.toVersion
 import com.example.core.updates_history.source.db.UpdateDescriptionDBRepository
 import com.example.core.updates_history.use_case.GetAppUpdatesHistoryUseCase
 import com.example.meditationcomposeapp.BuildConfig
+import com.example.meditationcomposeapp.presentation.screens.destinations.EnterScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.MainScreenDestination
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.first
@@ -35,7 +36,7 @@ class SplashScreenViewModel @Inject constructor(
             val password = userDataStore.readPassword().first()
 
             _navigationEvent.update {
-                Event(NavigationEvent.Navigate(MainScreenDestination))
+                Event(NavigationEvent.Navigate(EnterScreenDestination))
             }
             //todo restore after multi-module refactoring
 //            if (login.isNotEmpty() && password.isNotEmpty()) {
