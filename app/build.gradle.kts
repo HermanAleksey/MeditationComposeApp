@@ -86,6 +86,7 @@ android {
 
 dependencies {
 //    implementation(project(":feature:authentication"))
+    implementation(project(":feature:splash_screen"))
     implementation(project(":feature:beer_sorts"))
     implementation(project(":feature:shuffle_puzzle"))
     implementation(project(":feature:authentication"))

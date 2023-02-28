@@ -19,14 +19,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.authentication.api.enter_code_screen.EnterCodeScreenNavDependencies
-import com.example.authentication.api.enter_screen.EnterScreenNavDependencies
 import com.example.authentication.internal.screens.enter_code.composable.CodePanel
 import com.example.authentication.internal.screens.login.composable.LoginFlowBackground
 import com.example.common.navigation.NavDependenciesProvider
-import com.example.common.view_model.processEvent
 import com.example.feature.authentication.R
-import com.ramcosta.composedestinations.annotation.Destination
-import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @Composable
 internal fun InternalEnterCodeScreen(

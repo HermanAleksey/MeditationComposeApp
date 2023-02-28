@@ -1,9 +1,7 @@
-package com.example.meditationcomposeapp.presentation.screens.splash
+package com.example.splash_screen.internal
 
 import androidx.lifecycle.viewModelScope
-import com.example.common.view_model.BaseViewModel
-import com.example.common.view_model.Event
-import com.example.common.view_model.NavigationEvent
+import com.example.common.view_model.NavigationBaseViewModel
 import com.example.core.authentication_source.api.use_case.LoginUseCase
 import com.example.core.data_store.UserDataStore
 import com.example.core.model.NetworkResponse
@@ -11,9 +9,7 @@ import com.example.core.model.updates.CompareResult
 import com.example.core.model.updates.toVersion
 import com.example.core.updates_history.source.db.UpdateDescriptionDBRepository
 import com.example.core.updates_history.use_case.GetAppUpdatesHistoryUseCase
-import com.example.meditationcomposeapp.BuildConfig
-import com.example.meditationcomposeapp.presentation.screens.destinations.EnterScreenDestination
-import com.example.meditationcomposeapp.presentation.screens.destinations.MainScreenDestination
+import com.example.splash_screen.api.SplashScreenNavRoute
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
@@ -26,27 +22,25 @@ class SplashScreenViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase,
     private val updateDescriptionDBRepository: UpdateDescriptionDBRepository,
     private val getAppUpdatesHistoryUseCase: GetAppUpdatesHistoryUseCase,
-) : BaseViewModel() {
+) : NavigationBaseViewModel<SplashScreenNavRoute>() {
 
-    fun onLaunchSplashScreen() {
+    private lateinit var currentVersionName: String
+
+    fun onLaunchSplashScreen(versionName: String) {
         viewModelScope.launch {
+            currentVersionName = versionName
             checkLastUpdateVersion()
 
             val login = userDataStore.readLogin().first()
             val password = userDataStore.readPassword().first()
 
-            _navigationEvent.update {
-                Event(NavigationEvent.Navigate(EnterScreenDestination))
+            if (login.isNotEmpty() && password.isNotEmpty()) {
+                logIn(login, password)
+            } else {
+                _navigationEvent.update {
+                    SplashScreenNavRoute.EnterScreen()
+                }
             }
-            //todo restore after multi-module refactoring
-//            if (login.isNotEmpty() && password.isNotEmpty()) {
-//                logIn(login, password)
-//            } else {
-//                //todo restore
-////                _navigationEvent.update {
-////                   Event(NavigationEvent.Navigate(EnterScreenDestination))
-////                }
-//            }
         }
     }
 
@@ -58,14 +52,13 @@ class SplashScreenViewModel @Inject constructor(
             when (it) {
                 is NetworkResponse.Success<*> -> {
                     _navigationEvent.update {
-                        Event(NavigationEvent.Navigate(MainScreenDestination))
+                        SplashScreenNavRoute.MainScreen()
                     }
                 }
                 is NetworkResponse.Failure<*> -> {
-                    ////todo restore
-//                    _navigationEvent.update {
-//                        Event(NavigationEvent.Navigate(EnterScreenDestination))
-//                    }
+                    _navigationEvent.update {
+                        SplashScreenNavRoute.EnterScreen()
+                    }
                 }
                 is NetworkResponse.Loading<*> -> {
                     //do nothing
@@ -75,8 +68,6 @@ class SplashScreenViewModel @Inject constructor(
     }
 
     private suspend fun checkLastUpdateVersion() {
-        val currentVersionName = BuildConfig.VERSION_NAME
-
         val lastInstalledVersion = userDataStore.readLastUpdateVersion().first()
         if (lastInstalledVersion.toVersion()
                 .compare(currentVersionName.toVersion()) == CompareResult.EQUALS

@@ -26,6 +26,7 @@
             <option value="$PROJECT_DIR$/feature/authentication" />
             <option value="$PROJECT_DIR$/feature/beer_sorts" />
             <option value="$PROJECT_DIR$/feature/shuffle_puzzle" />
+            <option value="$PROJECT_DIR$/feature/splash_screen" />
           </set>
         </option>
       </GradleProjectSettings>

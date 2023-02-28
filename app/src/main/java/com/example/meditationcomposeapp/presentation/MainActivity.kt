@@ -17,17 +17,11 @@ import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.example.authentication.api.enter_code_screen.EnterCodeScreenNavDependencies
-import com.example.authentication.api.enter_login_screen.EnterLoginScreenNavDependencies
-import com.example.authentication.api.enter_screen.EnterScreenNavDependencies
-import com.example.authentication.api.login_screen.LoginScreenNavDependencies
-import com.example.authentication.api.new_password_screen.NewPasswordScreenNavDependencies
-import com.example.authentication.api.registration_screen.RegistrationScreenNavDependencies
-import com.example.beer_sorts.api.BeerListNavDependencies
 import com.example.common.navigation.NavDependencies
 import com.example.common.navigation.NavDependenciesProvider
 import com.example.design_system.AppTheme
 import com.example.meditationcomposeapp.presentation.navigation.MeditationDestinationsNavHost
+import com.example.meditationcomposeapp.presentation.navigation.NavDependenciesProviderImpl
 import com.example.meditationcomposeapp.presentation.navigation.getDestinationWrapper
 import com.example.meditationcomposeapp.presentation.screens.destinations.*
 import com.example.meditationcomposeapp.presentation.ui_controls.bottom_nav_bar.BottomBar
@@ -41,8 +35,6 @@ import com.example.meditationcomposeapp.presentation.ui_controls.toolbar.Toolbar
 import com.example.meditationcomposeapp.presentation.ui_controls.toolbar.ToolbarState
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import com.ramcosta.composedestinations.navigation.navigate
-import com.ramcosta.composedestinations.navigation.popUpTo
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -50,6 +42,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : ComponentActivity(), NavDependenciesProvider {
 
     private lateinit var navController: NavHostController
+    private var navDepProvider: NavDependenciesProvider? = null
 
     @OptIn(ExperimentalAnimationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,80 +56,14 @@ class MainActivity : ComponentActivity(), NavDependenciesProvider {
     }
 
     override fun <D : NavDependencies> provideDependencies(clazz: Class<D>): D {
-        val dependencies = when (clazz.name) {
-            BeerListNavDependencies::class.java.name -> {
-                BeerListNavDependencies(
-                    navigateToBeerDetails = { beerId ->
-                        navController.navigate(
-                            DetailedBeerScreenDestination(beerId)
-                        )
-                    }
-                )
-            }
-            EnterScreenNavDependencies::class.java.name -> {
-                EnterScreenNavDependencies(
-                    navigateToLoginScreen = {
-                        navController.navigate(LoginScreenDestination())
-                    },
-                    navigateToRegistrationScreen = {
-                        navController.navigate(RegistrationScreenDestination())
-                    }
-                )
-            }
-            EnterCodeScreenNavDependencies::class.java.name -> {
-                EnterCodeScreenNavDependencies(
-                    navigateToNewPasswordScreen = { login ->
-                        navController.navigate(direction = NewPasswordScreenDestination(login)) {
-                            popUpTo(LoginScreenDestination) {
-                                inclusive = false
-                            }
-                        }
-                    }
-                )
-            }
-            EnterLoginScreenNavDependencies::class.java.name -> {
-                EnterLoginScreenNavDependencies(
-                    navigateEnterCodeScreen = { login ->
-//                        navController.navigate(EnterCodeScreenDestination(login))
-                    }
-                )
-            }
-            LoginScreenNavDependencies::class.java.name -> {
-                LoginScreenNavDependencies(
-                    navigateToMainScreen = {
-                        //todo add
-                    },
-                    navigateToRegistrationScreen = {
-                        navController.navigate(RegistrationScreenDestination())
-                    },
-                    navigateToEnterLoginScreen = { login ->
-                        navController.navigate(EnterCodeScreenDestination(login))
-                    }
-                )
-            }
-            NewPasswordScreenNavDependencies::class.java.name -> {
-                NewPasswordScreenNavDependencies(
-                    navigateToLoginScreen = {
-                        navController.navigate(LoginScreenDestination())
-                    }
-                )
-            }
-            RegistrationScreenNavDependencies::class.java.name -> {
-                RegistrationScreenNavDependencies(
-                    navigateToLoginScreen = {
-                        navController.navigate(LoginScreenDestination())
-                    }
-                )
-            }
-            else -> throw java.lang.NullPointerException(":(")
+        if (navDepProvider == null) {
+            navDepProvider = NavDependenciesProviderImpl(navController)
         }
-        return dependencies as D
-        //todo update
 
+        return navDepProvider!!.provideDependencies(clazz)
     }
 }
 
-@OptIn(ExperimentalAnimationApi::class)
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun MyApp(
