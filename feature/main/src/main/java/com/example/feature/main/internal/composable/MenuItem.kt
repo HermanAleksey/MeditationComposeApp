@@ -1,4 +1,4 @@
-package com.example.meditationcomposeapp.presentation.screens.main_flow.main_screen.composable
+package com.example.feature.main.internal.composable
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
@@ -21,9 +21,9 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.common.utils.UiText
-import com.example.meditationcomposeapp.R
+import com.example.feature.main.R
 
-data class MenuItemModel(
+internal data class MenuItemModel(
     val title: UiText,
     val icon: ImageVector,
     val backgroundColor: Color,
@@ -33,7 +33,7 @@ data class MenuItemModel(
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun MenuItem(modifier: Modifier, model: MenuItemModel) {
+internal fun MenuItem(modifier: Modifier, model: MenuItemModel) {
     Card(
         shape = RoundedCornerShape(dimensionResource(id = R.dimen.radius_menu_item_corner)),
         modifier = modifier,
@@ -67,7 +67,7 @@ fun MenuItem(modifier: Modifier, model: MenuItemModel) {
 }
 
 @Composable
-fun MenuItemBackground(backgroundColor: Color, colorForeground: Color) {
+internal fun MenuItemBackground(backgroundColor: Color, colorForeground: Color) {
     Canvas(
         modifier = Modifier
             .clipToBounds()

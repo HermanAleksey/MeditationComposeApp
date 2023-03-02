@@ -1,20 +1,22 @@
-package com.example.meditationcomposeapp.presentation.screens.main_flow.main_screen.composable
+package com.example.feature.main.internal.composable
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.ui.graphics.Color
 import com.example.common.utils.UiText
-import com.example.meditationcomposeapp.R
-import com.example.meditationcomposeapp.presentation.screens.destinations.ShufflePuzzleScreenDestination
-import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.example.feature.main.R
 
-fun getMenuItemsList(navigator: DestinationsNavigator) = listOf(
+enum class MenuItem {
+    PUZZLE,
+}
+
+internal fun getMenuItemsList(onMenuItemClick: (MenuItem) -> Unit) = listOf(
     MenuItemModel(
         title = UiText.StringResource(R.string.shuffle_puzzle_menu_option),
         icon = Icons.Default.Extension,
         backgroundColor = Color(169, 213, 113),
         foregroundColor = Color(106, 174, 114),
-        onClick = { navigator.navigate(ShufflePuzzleScreenDestination()) },
+        onClick = { onMenuItemClick(MenuItem.PUZZLE) },
     ),
     MenuItemModel(
         title = UiText.StringResource(R.string.menu_item_coming_soon),

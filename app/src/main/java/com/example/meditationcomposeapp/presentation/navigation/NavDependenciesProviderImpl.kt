@@ -10,6 +10,7 @@ import com.example.authentication.api.registration_screen.RegistrationScreenNavD
 import com.example.beer_sorts.api.BeerListNavDependencies
 import com.example.common.navigation.NavDependencies
 import com.example.common.navigation.NavDependenciesProvider
+import com.example.feature.main.api.MainScreenNavDependencies
 import com.example.feature.profile.api.ProfileScreenNavDependencies
 import com.example.meditationcomposeapp.presentation.screens.destinations.*
 import com.example.splash_screen.api.SplashScreenNavDependencies
@@ -31,6 +32,13 @@ class NavDependenciesProviderImpl(
 
     private fun <D : NavDependencies> findMainFlowNavDependencies(clazz: Class<D>): D? {
         val dependencies = when (clazz.name) {
+            MainScreenNavDependencies::class.java.name -> {
+                MainScreenNavDependencies(
+                    navigateToPuzzleScreen = {
+                        navController.navigate(ShufflePuzzleScreenDestination())
+                    },
+                )
+            }
             ProfileScreenNavDependencies::class.java.name -> {
                 ProfileScreenNavDependencies(
                     navigateToEnterScreen = {
@@ -49,6 +57,7 @@ class NavDependenciesProviderImpl(
         @Suppress("UNCHECKED_CAST")
         return dependencies as D?
     }
+
     private fun <D : NavDependencies> findSplashScreenNavDependencies(clazz: Class<D>): D? {
         val dependencies = when (clazz.name) {
             SplashScreenNavDependencies::class.java.name -> {

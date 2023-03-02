@@ -11,10 +11,10 @@ import com.example.authentication.internal.screens.new_password.NewPasswordScree
 import com.example.authentication.internal.screens.registration.RegistrationScreenViewModel
 import com.example.beer_sorts.internal.presentation.beer_details.DetailedBeerScreenViewModel
 import com.example.beer_sorts.internal.presentation.beer_list.BeerListScreenViewModel
-import com.example.feature.profile.internal.ProfileScreenViewModel
+import com.example.feature.main.api.MainScreenViewModel
+import com.example.feature.profile.api.ProfileScreenViewModel
 import com.example.meditationcomposeapp.presentation.screens.NavGraphs
 import com.example.meditationcomposeapp.presentation.screens.destinations.*
-import com.example.meditationcomposeapp.presentation.screens.main_flow.main_screen.MainScreenViewModel
 import com.example.shuffle_puzzle.api.ShufflePuzzleScreenViewModel
 import com.example.splash_screen.internal.SplashScreenViewModel
 import com.ramcosta.composedestinations.DestinationsNavHost

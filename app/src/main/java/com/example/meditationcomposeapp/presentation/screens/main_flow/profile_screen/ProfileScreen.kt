@@ -1,7 +1,7 @@
 package com.example.meditationcomposeapp.presentation.screens.main_flow.profile_screen
 
 import androidx.compose.runtime.Composable
-import com.example.feature.profile.internal.ProfileScreenViewModel
+import com.example.feature.profile.api.ProfileScreenViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 
 @Destination

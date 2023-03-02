@@ -1,4 +1,4 @@
-package com.example.feature.profile.internal
+package com.example.feature.profile.api
 
 import androidx.lifecycle.viewModelScope
 import com.example.common.view_model.BaseViewModel
