@@ -10,6 +10,7 @@ import com.example.authentication.api.registration_screen.RegistrationScreenNavD
 import com.example.beer_sorts.api.BeerListNavDependencies
 import com.example.common.navigation.NavDependencies
 import com.example.common.navigation.NavDependenciesProvider
+import com.example.feature.profile.api.ProfileScreenNavDependencies
 import com.example.meditationcomposeapp.presentation.screens.destinations.*
 import com.example.splash_screen.api.SplashScreenNavDependencies
 import com.ramcosta.composedestinations.navigation.navigate
@@ -22,11 +23,32 @@ class NavDependenciesProviderImpl(
 
     override fun <D : NavDependencies> provideDependencies(clazz: Class<D>): D {
         return findAuthFlowNavDependencies(clazz)
+            ?: findMainFlowNavDependencies(clazz)
             ?: findBeerSortFlowNavDependencies(clazz)
             ?: findSplashScreenNavDependencies(clazz)
             ?: throw NotImplementedError("NavDependencies not implemented for class ${clazz.canonicalName}")
     }
 
+    private fun <D : NavDependencies> findMainFlowNavDependencies(clazz: Class<D>): D? {
+        val dependencies = when (clazz.name) {
+            ProfileScreenNavDependencies::class.java.name -> {
+                ProfileScreenNavDependencies(
+                    navigateToEnterScreen = {
+                        navController.navigate(
+                            EnterScreenDestination()
+                        ) {
+                            popUpTo(SplashScreenDestination) {
+                                inclusive = false
+                            }
+                        }
+                    }
+                )
+            }
+            else -> null
+        }
+        @Suppress("UNCHECKED_CAST")
+        return dependencies as D?
+    }
     private fun <D : NavDependencies> findSplashScreenNavDependencies(clazz: Class<D>): D? {
         val dependencies = when (clazz.name) {
             SplashScreenNavDependencies::class.java.name -> {

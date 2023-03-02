@@ -9,18 +9,18 @@ enum class DestinationWrapper(
     val toolbarVisible: Boolean = false,
     val bottomBarVisible: Boolean = false,
 ) {
-//    EnterScreen(EnterScreenDestination),
-//    EnterCodeScreen(EnterCodeScreenDestination),
-//    EnterLoginScreen(EnterLoginScreenDestination),
-//    LoginScreen(LoginScreenDestination),
-//    NewPasswordScreen(NewPasswordScreenDestination),
-//    RegistrationScreen(RegistrationScreenDestination),
+    EnterScreen(EnterScreenDestination),
+    EnterCodeScreen(EnterCodeScreenDestination),
+    EnterLoginScreen(EnterLoginScreenDestination),
+    LoginScreen(LoginScreenDestination),
+    NewPasswordScreen(NewPasswordScreenDestination),
+    RegistrationScreen(RegistrationScreenDestination),
 
     BeerListScreen(BeerListScreenDestination, true, true),
     DetailedBeerScreen(DetailedBeerScreenDestination, true, true),
     MainScreen(MainScreenDestination, true, true),
     ShufflePuzzleScreen(ShufflePuzzleScreenDestination, true, true),
-    ProfileScreen(TestScreenDestination, true, true),
+    ProfileScreen(ProfileScreenDestination, true, true),
 }
 
 fun <T> TypedDestination<T>.getDestinationWrapper() =
