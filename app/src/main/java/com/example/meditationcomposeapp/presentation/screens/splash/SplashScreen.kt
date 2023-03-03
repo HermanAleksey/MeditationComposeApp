@@ -2,7 +2,7 @@ package com.example.meditationcomposeapp.presentation.screens.splash
 
 import androidx.compose.runtime.Composable
 import com.example.meditationcomposeapp.BuildConfig
-import com.example.splash_screen.internal.SplashScreenViewModel
+import com.example.splash_screen.api.SplashScreenViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 

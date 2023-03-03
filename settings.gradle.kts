@@ -10,6 +10,7 @@ include(":core:punk_source")
 include(":core:model")
 include(":core:data_store")
 include(":core:updates_history")
+include(":core:testing")
 
 include(":feature:shuffle_puzzle")
 include(":feature:authentication")
@@ -17,3 +18,4 @@ include(":feature:beer_sorts")
 include(":feature:splash_screen")
 include(":feature:profile")
 include(":feature:main")
+

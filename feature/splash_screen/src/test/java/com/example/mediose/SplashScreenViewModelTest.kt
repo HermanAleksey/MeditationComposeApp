@@ -1,13 +1,13 @@
-package com.example.meditationcomposeapp.presentation.screens.splash
+package com.example.mediose
 
-import com.example.meditationcomposeapp.BuildConfig
-import com.example.meditationcomposeapp.CoroutinesTestRule
-import com.example.meditationcomposeapp.FakeObjects
-import com.example.meditationcomposeapp.data_source.repository.update_description.UpdateDescriptionRepository
-import com.example.meditationcomposeapp.model.usecase.authentication.GetAppUpdatesHistoryUseCase
-import com.example.meditationcomposeapp.model.usecase.authentication.LoginUseCase
-import com.example.meditationcomposeapp.presentation.screens.destinations.EnterScreenDestination
-import com.example.meditationcomposeapp.presentation.screens.destinations.MainScreenDestination
+import com.example.core.authentication_source.api.use_case.LoginUseCase
+import com.example.core.data_store.UserDataStore
+import com.example.core.model.NetworkResponse
+import com.example.core.updates_history.source.db.UpdateDescriptionDBRepository
+import com.example.core.updates_history.use_case.GetAppUpdatesHistoryUseCase
+import com.example.coroutines_test.CoroutinesTestRule
+import com.example.splash_screen.api.SplashScreenNavRoute
+import com.example.splash_screen.api.SplashScreenViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.*
@@ -35,7 +35,7 @@ class SplashScreenViewModelTest {
     private lateinit var loginUseCase: LoginUseCase
 
     @Mock
-    private lateinit var updateDescriptionRepository: UpdateDescriptionRepository
+    private lateinit var updateDescriptionRepository: UpdateDescriptionDBRepository
 
     @Mock
     private lateinit var getAppUpdatesHistoryUseCase: GetAppUpdatesHistoryUseCase
@@ -57,6 +57,7 @@ class SplashScreenViewModelTest {
         runTest {
             val login = "q"
             val password = "2"
+            val versionName = "1.0.1"
 
             whenever(userDataStore.readLastUpdateVersion()).thenReturn(flow { emit("0.0.1") })
             whenever(getAppUpdatesHistoryUseCase(anyString())).thenReturn(flow {
@@ -77,16 +78,11 @@ class SplashScreenViewModelTest {
             whenever(userDataStore.readLogin()).thenReturn(flow { emit(login) })
             whenever(userDataStore.readPassword()).thenReturn(flow { emit(password) })
 
-            viewModel.onLaunchSplashScreen()
+            viewModel.onLaunchSplashScreen(versionName)
 
             advanceUntilIdle()
 
-            Assert.assertEquals(
-                NavigationEvent.Navigate(
-                    MainScreenDestination()
-                ).toString(),
-                viewModel.navigationEvent.value.getNavigationIfNotHandled().toString()
-            )
+            assert(viewModel.navigationEvent.value == SplashScreenNavRoute.MainScreen)
         }
 
     @Test
@@ -94,6 +90,7 @@ class SplashScreenViewModelTest {
         runTest {
             val login = "q"
             val password = "2"
+            val versionName = "1.0.1"
 
             whenever(userDataStore.readLastUpdateVersion()).thenReturn(flow { emit("0.0.1") })
             whenever(getAppUpdatesHistoryUseCase(anyString())).thenReturn(flow {
@@ -112,16 +109,11 @@ class SplashScreenViewModelTest {
             whenever(userDataStore.readLogin()).thenReturn(flow { emit(login) })
             whenever(userDataStore.readPassword()).thenReturn(flow { emit(password) })
 
-            viewModel.onLaunchSplashScreen()
+            viewModel.onLaunchSplashScreen(versionName)
 
             advanceUntilIdle()
 
-            Assert.assertEquals(
-                NavigationEvent.Navigate(
-                    EnterScreenDestination()
-                ).toString(),
-                viewModel.navigationEvent.value.getNavigationIfNotHandled().toString()
-            )
+            assert(viewModel.navigationEvent.value == SplashScreenNavRoute.EnterScreen)
         }
 
     @Test
@@ -129,6 +121,7 @@ class SplashScreenViewModelTest {
         runTest {
             val login = ""
             val password = ""
+            val versionName = "1.0.1"
 
             whenever(userDataStore.readLastUpdateVersion()).thenReturn(flow { emit("0.0.1") })
             whenever(getAppUpdatesHistoryUseCase(anyString())).thenReturn(flow {
@@ -141,21 +134,18 @@ class SplashScreenViewModelTest {
             whenever(userDataStore.readLogin()).thenReturn(flow { emit(login) })
             whenever(userDataStore.readPassword()).thenReturn(flow { emit(password) })
 
-            viewModel.onLaunchSplashScreen()
+            viewModel.onLaunchSplashScreen(versionName)
 
             advanceUntilIdle()
 
-            Assert.assertEquals(
-                NavigationEvent.Navigate(
-                    EnterScreenDestination()
-                ).toString(),
-                viewModel.navigationEvent.value.getNavigationIfNotHandled().toString()
-            )
+            assert(viewModel.navigationEvent.value == SplashScreenNavRoute.EnterScreen)
         }
 
     @Test
     fun `checkLastUpdateVersion, is newest version, don't request update info`() {
-        viewModel.onLaunchSplashScreen()
+        val versionName = "1.0.1"
+
+        viewModel.onLaunchSplashScreen(versionName)
 
         verify(getAppUpdatesHistoryUseCase, never()).invoke(anyString())
     }
@@ -164,6 +154,7 @@ class SplashScreenViewModelTest {
     fun `checkLastUpdateVersion, not newest version, no new versions info, insert new updates info into db`() =
         runTest {
             val installedVersion = "0.0.1"
+            val versionName = "1.0.1"
             whenever(userDataStore.readLastUpdateVersion()).thenReturn(
                 flow {
                     emit(installedVersion)
@@ -187,17 +178,18 @@ class SplashScreenViewModelTest {
                     )
                 })
 
-            viewModel.onLaunchSplashScreen()
+            viewModel.onLaunchSplashScreen(versionName)
 
             advanceUntilIdle()
 
-            verify(userDataStore).writeLastUpdateVersion(BuildConfig.VERSION_NAME)
+            verify(userDataStore).writeLastUpdateVersion(versionName)
         }
 
     @Test
     fun `checkLastUpdateVersion, not newest version, add new versions info into db`() =
         runTest {
             val installedVersion = "0.0.1"
+            val versionName = "1.0.1"
             val updates = listOf(
                 FakeObjects.getFakeUpdateDescriptionModel()
             )
@@ -225,7 +217,7 @@ class SplashScreenViewModelTest {
                     )
                 })
 
-            viewModel.onLaunchSplashScreen()
+            viewModel.onLaunchSplashScreen(versionName)
 
             advanceUntilIdle()
 

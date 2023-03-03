@@ -20,13 +20,13 @@ sealed class SplashScreenNavRoute : NavRoute<SplashScreenNavDependencies> {
         }
     }
 
-    class EnterScreen : SplashScreenNavRoute() {
+    object EnterScreen : SplashScreenNavRoute() {
         override fun navigate(navDependencies: SplashScreenNavDependencies) {
             navDependencies.navigateToEnterScreen()
         }
     }
 
-    class MainScreen : SplashScreenNavRoute() {
+    object MainScreen : SplashScreenNavRoute() {
         override fun navigate(navDependencies: SplashScreenNavDependencies) {
             navDependencies.navigateToMainScreen()
         }

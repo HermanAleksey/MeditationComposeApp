@@ -16,7 +16,7 @@ import com.example.feature.profile.api.ProfileScreenViewModel
 import com.example.meditationcomposeapp.presentation.screens.NavGraphs
 import com.example.meditationcomposeapp.presentation.screens.destinations.*
 import com.example.shuffle_puzzle.api.ShufflePuzzleScreenViewModel
-import com.example.splash_screen.internal.SplashScreenViewModel
+import com.example.splash_screen.api.SplashScreenViewModel
 import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.navigation.dependency
 

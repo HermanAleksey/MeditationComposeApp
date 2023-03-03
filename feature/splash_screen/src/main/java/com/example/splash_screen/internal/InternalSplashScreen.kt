@@ -9,6 +9,7 @@ import com.example.common.navigation.NavDependenciesProvider
 import com.example.design_system.common_composables.ImageBackground
 import com.example.feature.splash_screen.R
 import com.example.splash_screen.api.SplashScreenNavDependencies
+import com.example.splash_screen.api.SplashScreenViewModel
 
 @Composable
 internal fun InternalSplashScreen(

@@ -1,4 +1,4 @@
-package com.example.splash_screen.internal
+package com.example.splash_screen.api
 
 import androidx.lifecycle.viewModelScope
 import com.example.common.view_model.NavigationBaseViewModel
@@ -9,7 +9,6 @@ import com.example.core.model.updates.CompareResult
 import com.example.core.model.updates.toVersion
 import com.example.core.updates_history.source.db.UpdateDescriptionDBRepository
 import com.example.core.updates_history.use_case.GetAppUpdatesHistoryUseCase
-import com.example.splash_screen.api.SplashScreenNavRoute
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
@@ -38,7 +37,7 @@ class SplashScreenViewModel @Inject constructor(
                 logIn(login, password)
             } else {
                 _navigationEvent.update {
-                    SplashScreenNavRoute.EnterScreen()
+                    SplashScreenNavRoute.EnterScreen
                 }
             }
         }
@@ -52,12 +51,12 @@ class SplashScreenViewModel @Inject constructor(
             when (it) {
                 is NetworkResponse.Success<*> -> {
                     _navigationEvent.update {
-                        SplashScreenNavRoute.MainScreen()
+                        SplashScreenNavRoute.MainScreen
                     }
                 }
                 is NetworkResponse.Failure<*> -> {
                     _navigationEvent.update {
-                        SplashScreenNavRoute.EnterScreen()
+                        SplashScreenNavRoute.EnterScreen
                     }
                 }
                 is NetworkResponse.Loading<*> -> {
