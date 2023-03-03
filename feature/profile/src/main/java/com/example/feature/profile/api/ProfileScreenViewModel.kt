@@ -19,7 +19,7 @@ class ProfileScreenViewModel @Inject constructor(
         viewModelScope.launch {
             clearAuthDataUseCase()
             _navigationEvent.update {
-                ProfileScreenNavRoute.EnterScreen()
+                ProfileScreenNavRoute.EnterScreen
             }
         }
     }

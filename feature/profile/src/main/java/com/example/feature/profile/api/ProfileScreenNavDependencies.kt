@@ -19,7 +19,7 @@ sealed class ProfileScreenNavRoute : NavRoute<ProfileScreenNavDependencies> {
         }
     }
 
-    class EnterScreen : ProfileScreenNavRoute() {
+    object EnterScreen : ProfileScreenNavRoute() {
         override fun navigate(navDependencies: ProfileScreenNavDependencies) {
             navDependencies.navigateToEnterScreen()
         }
