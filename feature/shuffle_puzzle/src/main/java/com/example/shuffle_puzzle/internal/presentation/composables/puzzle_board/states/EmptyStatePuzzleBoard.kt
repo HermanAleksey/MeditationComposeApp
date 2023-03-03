@@ -81,7 +81,7 @@ internal fun SelectPuzzleBoard(
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun PuzzleImagePager(
+internal fun PuzzleImagePager(
     puzzleTemplates: List<Int>,
     onCurrentPageChanged: (Int) -> Unit,
     onPuzzleImageSelected: (Bitmap) -> Unit,

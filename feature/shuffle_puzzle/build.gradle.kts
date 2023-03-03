@@ -48,4 +48,13 @@ dependencies {
     implementation(Dependencies.hilt_navigation_compose)
     implementation(Dependencies.hilt_android)
     kapt(Dependencies.hilt_compiler)
+
+    //testing
+    testImplementation(project(":core:testing"))
+    testImplementation(Dependencies.junit)
+    testImplementation (Dependencies.mockito)
+    testImplementation (Dependencies.coroutines_test)
+    testImplementation (Dependencies.mockito_kotlin)
+    testImplementation (Dependencies.powermock_reflect)
+    androidTestImplementation(Dependencies.mockito_android)
 }

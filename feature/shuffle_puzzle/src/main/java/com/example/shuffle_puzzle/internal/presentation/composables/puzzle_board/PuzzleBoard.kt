@@ -11,7 +11,7 @@ import com.example.shuffle_puzzle.api.model.Puzzle
 import com.example.shuffle_puzzle.internal.presentation.composables.puzzle_board.states.FilledStatePuzzleBoard
 import com.example.shuffle_puzzle.internal.presentation.composables.puzzle_board.states.SelectPuzzleBoard
 
-const val SELECT_YOUR_IMAGE = -1
+internal const val SELECT_YOUR_IMAGE = -1
 
 @Composable
 internal fun PuzzleBoard(

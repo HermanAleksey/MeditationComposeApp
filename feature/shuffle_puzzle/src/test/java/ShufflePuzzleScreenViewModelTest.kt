@@ -1,17 +1,14 @@
-package com.example.meditationcomposeapp.presentation.screens.main_flow.shuffle_puzzle
-
-import android.graphics.Bitmap
-import com.example.meditationcomposeapp.CoroutinesTestRule
+import com.example.coroutines_test.CoroutinesTestRule
+import com.example.shuffle_puzzle.api.ShufflePuzzleScreenViewModel
+import com.example.shuffle_puzzle.internal.presentation.ShufflePuzzleState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.test.runTest
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.junit.MockitoJUnitRunner
-import org.mockito.kotlin.mock
 import org.powermock.reflect.Whitebox
 
 @RunWith(MockitoJUnitRunner::class)
