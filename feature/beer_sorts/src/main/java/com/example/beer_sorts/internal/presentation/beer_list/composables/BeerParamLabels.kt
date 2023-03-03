@@ -60,7 +60,7 @@ internal fun BeerParamsTable(
 }
 
 @Composable
-fun BeerParamLabel(
+internal fun BeerParamLabel(
     paramName: String,
     paramValue: Double,
     modifier: Modifier = Modifier,

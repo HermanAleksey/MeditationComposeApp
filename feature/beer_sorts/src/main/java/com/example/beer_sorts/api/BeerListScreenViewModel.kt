@@ -1,8 +1,7 @@
-package com.example.beer_sorts.internal.presentation.beer_list
+package com.example.beer_sorts.api
 
 import androidx.lifecycle.viewModelScope
 import androidx.paging.*
-import com.example.beer_sorts.api.BeerListNavRoute
 import com.example.common.view_model.NavigationBaseViewModel
 import com.example.database.model.BeerListItem
 import com.example.punk_source.api.use_case.punk.GetBeerPagingRemoteMediatorUseCase

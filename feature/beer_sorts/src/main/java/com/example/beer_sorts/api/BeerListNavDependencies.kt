@@ -19,7 +19,7 @@ sealed class BeerListNavRoute : NavRoute<BeerListNavDependencies> {
         }
     }
 
-    class DetailedBeerScreen(private val beerId: Int) : BeerListNavRoute() {
+    data class DetailedBeerScreen(private val beerId: Int) : BeerListNavRoute() {
         override fun navigate(navDependencies: BeerListNavDependencies) {
             navDependencies.navigateToBeerDetails(beerId)
         }

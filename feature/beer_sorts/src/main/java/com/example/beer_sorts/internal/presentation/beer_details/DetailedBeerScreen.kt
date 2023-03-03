@@ -21,6 +21,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.beer_sorts.api.DetailedBeerScreenViewModel
 import com.example.beer_sorts.internal.presentation.beer_list.composables.BeerParamsTable
 import com.example.design_system.common_composables.ColorBackground
 import com.example.feature.beer_sorts.R
@@ -190,7 +191,7 @@ internal fun InternalDetailedBeerScreen(
 }
 
 @Composable
-fun FoodPairingsCard(modifier: Modifier = Modifier, foodPairings: List<String>) {
+internal fun FoodPairingsCard(modifier: Modifier = Modifier, foodPairings: List<String>) {
     BeerDetailsCard {
         Column(modifier = modifier) {
             Text(
@@ -207,7 +208,7 @@ fun FoodPairingsCard(modifier: Modifier = Modifier, foodPairings: List<String>) 
 }
 
 @Composable
-fun FoodPairingElement(foodName: String) {
+internal fun FoodPairingElement(foodName: String) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
@@ -230,7 +231,7 @@ fun FoodPairingElement(foodName: String) {
 }
 
 @Composable
-fun BeerDetailsCard(modifier: Modifier = Modifier, content: @Composable () -> Unit) {
+internal fun BeerDetailsCard(modifier: Modifier = Modifier, content: @Composable () -> Unit) {
     Card(
         modifier = modifier
             .fillMaxWidth(),

@@ -21,6 +21,7 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
 import com.example.beer_sorts.api.BeerListNavDependencies
+import com.example.beer_sorts.api.BeerListScreenViewModel
 import com.example.beer_sorts.internal.presentation.beer_list.composables.BeerItem
 import com.example.common.navigation.NavDependenciesProvider
 import com.example.database.model.BeerListItem
@@ -53,7 +54,7 @@ internal fun InternalBeerListScreen(
 }
 
 @Composable
-fun BeerList(beers: LazyPagingItems<BeerListItem>, onBeerItemClicked: (id: Int) -> Unit) {
+internal fun BeerList(beers: LazyPagingItems<BeerListItem>, onBeerItemClicked: (id: Int) -> Unit) {
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(8.dp),
         horizontalAlignment = Alignment.CenterHorizontally,

@@ -9,8 +9,8 @@ import com.example.authentication.internal.screens.enter_login.EnterLoginScreenV
 import com.example.authentication.internal.screens.login.LoginScreenViewModel
 import com.example.authentication.internal.screens.new_password.NewPasswordScreenViewModel
 import com.example.authentication.internal.screens.registration.RegistrationScreenViewModel
-import com.example.beer_sorts.internal.presentation.beer_details.DetailedBeerScreenViewModel
-import com.example.beer_sorts.internal.presentation.beer_list.BeerListScreenViewModel
+import com.example.beer_sorts.api.DetailedBeerScreenViewModel
+import com.example.beer_sorts.api.BeerListScreenViewModel
 import com.example.feature.main.api.MainScreenViewModel
 import com.example.feature.profile.api.ProfileScreenViewModel
 import com.example.meditationcomposeapp.presentation.screens.NavGraphs
