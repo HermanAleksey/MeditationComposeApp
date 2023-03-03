@@ -66,9 +66,13 @@ dependencies {
     //testing
     testImplementation(project(":core:testing"))
     testImplementation(Dependencies.junit)
-    testImplementation (Dependencies.mockito)
-    testImplementation (Dependencies.coroutines_test)
-    testImplementation (Dependencies.mockito_kotlin)
-    testImplementation (Dependencies.powermock_reflect)
+    testImplementation(Dependencies.mockito)
+    testImplementation(Dependencies.coroutines_test)
+    testImplementation(Dependencies.mockito_kotlin)
+    testImplementation(Dependencies.powermock_reflect)
     androidTestImplementation(Dependencies.mockito_android)
+}
+
+task("testModule") {
+    dependsOn
 }

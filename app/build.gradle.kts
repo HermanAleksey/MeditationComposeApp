@@ -92,23 +92,14 @@ dependencies {
     implementation(project(":feature:authentication"))
     implementation(project(":feature:profile"))
 
-    implementation(project(":core:authentication_source"))
-    implementation(project(":core:updates_history"))
-    implementation(project(":core:updates_history"))
-    implementation(project(":core:data_store"))
     implementation(project(":core:updates_history"))
     implementation(project(":core:design_system"))
     implementation(project(":core:common"))
     implementation(project(":core:model"))
-    implementation(project(":core:network"))
 
-    implementation(Dependencies.core_ktx)
-    implementation(Dependencies.compose_ui)
     implementation(Dependencies.compose_material)
     implementation(Dependencies.compose_ui_tooling_preview)
-    implementation(Dependencies.lifecycle_runtime_ktx)
     implementation(Dependencies.activity_compose)
-    implementation(Dependencies.androidx_legacy_support)
 
     implementation(Dependencies.compose_material_icons)
 
@@ -120,10 +111,8 @@ dependencies {
     implementation(Dependencies.firebase_analytics_ktx)
 
     //navigation
-    implementation(Dependencies.navigation_compose)
     implementation(Dependencies.raamcosta_compose_destinations_anim_core)
     ksp(Dependencies.raamcosta_compose_destinations_ksp)
-    testImplementation(Dependencies.testng)
 
     //splash screen
     implementation(Dependencies.splash_screen_core)
@@ -133,41 +122,6 @@ dependencies {
     implementation(Dependencies.hilt_android)
     kapt(Dependencies.hilt_compiler)
 
-    //Gson
-    implementation(Dependencies.gson)
-
-    //retrofit
-    implementation(Dependencies.retrofit)
-    implementation(Dependencies.retrofit_converter_gson)
-
-    //okHttp
-    implementation(Dependencies.okhttp)
-    implementation(Dependencies.okhttp_logging_interceptor)
-
-    //data store
-    implementation(Dependencies.datastore_preferences)
-
-    //paging
-    implementation(Dependencies.paging_common_ktx)
-    implementation(Dependencies.paging_runtime)
-    implementation(Dependencies.paging_compose)
-
-    //glide
-    implementation(Dependencies.glide)
-
-    //room database
-    implementation(Dependencies.room_runtime)
-    implementation(Dependencies.room_ktx)
-    kapt(Dependencies.room_compiler)
-    implementation(Dependencies.room_pager)
-
     implementation(Dependencies.timber)
 
-    //testing
-    testImplementation(Dependencies.junit)
-    testImplementation (Dependencies.mockito)
-    testImplementation (Dependencies.coroutines_test)
-    testImplementation (Dependencies.mockito_kotlin)
-    testImplementation (Dependencies.powermock_reflect)
-    androidTestImplementation(Dependencies.mockito_android)
 }
