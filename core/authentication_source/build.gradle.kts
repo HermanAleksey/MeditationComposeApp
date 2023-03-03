@@ -28,7 +28,6 @@ dependencies {
     implementation(project(":core:data_store"))
     implementation(project(":core:model"))
 
-    implementation(Dependencies.core_ktx)
     implementation(Dependencies.coroutines_core)
 
     //hilt

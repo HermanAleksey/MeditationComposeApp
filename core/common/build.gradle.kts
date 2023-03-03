@@ -30,16 +30,12 @@ android {
 }
 
 dependencies {
-    implementation(Dependencies.core_ktx)
     implementation(Dependencies.compose_ui)
     implementation(Dependencies.compose_material)
     implementation(Dependencies.compose_ui_tooling_preview)
-    implementation(Dependencies.lifecycle_runtime_ktx)
-    implementation(Dependencies.activity_compose)
 
     //navigation
     implementation(Dependencies.navigation_compose)
     implementation(Dependencies.raamcosta_compose_destinations_anim_core)
     ksp(Dependencies.raamcosta_compose_destinations_ksp)
-    testImplementation(Dependencies.testng)
 }

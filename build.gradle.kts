@@ -13,6 +13,7 @@ buildscript {
 }
 
 plugins {
+    //https://github.com/autonomousapps/dependency-analysis-android-gradle-plugin detect unused dependencies in gradle
     id("com.autonomousapps.dependency-analysis") version "1.19.0"
 }
 

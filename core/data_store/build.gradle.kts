@@ -23,8 +23,6 @@ android {
 }
 
 dependencies {
-    implementation(Dependencies.core_ktx)
-
     //data store
     implementation(Dependencies.datastore_preferences)
 

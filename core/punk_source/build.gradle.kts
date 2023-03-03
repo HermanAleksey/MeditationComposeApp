@@ -30,7 +30,6 @@ dependencies {
     implementation(project(":core:common"))
     implementation(project(":core:model"))
 
-    implementation(Dependencies.core_ktx)
     implementation(Dependencies.coroutines_core)
 
     //hilt

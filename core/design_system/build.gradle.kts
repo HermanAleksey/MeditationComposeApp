@@ -28,7 +28,6 @@ android {
 }
 
 dependencies {
-    implementation(Dependencies.core_ktx)
     implementation(Dependencies.compose_ui)
     implementation(Dependencies.compose_material)
     implementation(Dependencies.compose_ui_tooling_preview)

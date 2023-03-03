@@ -26,6 +26,4 @@ dependencies {
     implementation(Dependencies.junit)
     implementation(Dependencies.mockito)
     implementation(Dependencies.coroutines_test)
-    implementation(Dependencies.mockito_kotlin)
-    implementation(Dependencies.powermock_reflect)
 }

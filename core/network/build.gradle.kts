@@ -23,8 +23,6 @@ android {
 }
 
 dependencies {
-    implementation(Dependencies.core_ktx)
-
     //hilt
     implementation(Dependencies.hilt_android)
     kapt(Dependencies.hilt_compiler)
