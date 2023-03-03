@@ -33,19 +33,16 @@ dependencies {
     implementation(project(":core:design_system"))
 
     implementation(Dependencies.activity_compose)
-    implementation(Dependencies.core_ktx)
     implementation(Dependencies.compose_ui)
     implementation(Dependencies.compose_material)
     implementation(Dependencies.compose_ui_tooling_preview)
 
-    implementation(Dependencies.accompanist_system_ui_controller)
     implementation(Dependencies.accompanist_pager)
     implementation(Dependencies.accompanist_permissions)
 
     implementation(Dependencies.canhub_image_cropper)
 
     //hilt
-    implementation(Dependencies.hilt_navigation_compose)
     implementation(Dependencies.hilt_android)
     kapt(Dependencies.hilt_compiler)
 
@@ -54,7 +51,4 @@ dependencies {
     testImplementation(Dependencies.junit)
     testImplementation (Dependencies.mockito)
     testImplementation (Dependencies.coroutines_test)
-    testImplementation (Dependencies.mockito_kotlin)
-    testImplementation (Dependencies.powermock_reflect)
-    androidTestImplementation(Dependencies.mockito_android)
 }

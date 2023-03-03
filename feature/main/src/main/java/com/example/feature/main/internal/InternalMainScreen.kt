@@ -13,8 +13,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.common.navigation.NavDependenciesProvider
 import com.example.design_system.common_composables.ColorBackground
 import com.example.feature.main.R
@@ -23,14 +21,6 @@ import com.example.feature.main.api.MainScreenViewModel
 import com.example.feature.main.internal.composable.MenuItem
 import com.example.feature.main.internal.composable.MenuItemModel
 import com.example.feature.main.internal.composable.getMenuItemsList
-
-@Preview
-@Composable
-fun MainScreenPreview() {
-    InternalMainScreen(
-        viewModel = hiltViewModel(),
-    )
-}
 
 @Composable
 internal fun InternalMainScreen(

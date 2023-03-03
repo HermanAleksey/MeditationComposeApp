@@ -40,13 +40,11 @@ dependencies {
     implementation(Dependencies.compose_material_icons)
 
     implementation(Dependencies.activity_compose)
-    implementation(Dependencies.core_ktx)
     implementation(Dependencies.compose_ui)
     implementation(Dependencies.compose_material)
     implementation(Dependencies.compose_ui_tooling_preview)
 
     //hilt
-    implementation(Dependencies.hilt_navigation_compose)
     implementation(Dependencies.hilt_android)
     kapt(Dependencies.hilt_compiler)
 }

@@ -52,10 +52,12 @@ internal fun SelectPuzzleBoard(
             }
         )
 
-        Box(contentAlignment = Alignment.Center,
+        Box(
+            contentAlignment = Alignment.Center,
             modifier = Modifier
                 .fillMaxWidth()
-                .fillMaxHeight()) {
+                .fillMaxHeight()
+        ) {
             Button(
                 enabled = currentPage != templatePainters.lastIndex,
                 onClick = {
@@ -68,7 +70,10 @@ internal fun SelectPuzzleBoard(
                 },
                 shape = RoundedCornerShape(10.dp),
                 modifier = Modifier.padding(horizontal = 42.dp, vertical = 16.dp),
-                colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondary, contentColor = Color.White, ),
+                colors = ButtonDefaults.buttonColors(
+                    backgroundColor = MaterialTheme.colors.secondary,
+                    contentColor = Color.White,
+                ),
             ) {
                 Text(
                     text = stringResource(id = R.string.select_puzzle),

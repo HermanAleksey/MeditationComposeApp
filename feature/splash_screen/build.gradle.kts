@@ -37,25 +37,18 @@ dependencies {
     implementation(project(":core:authentication_source"))
     implementation(project(":core:updates_history"))
 
-
     implementation(Dependencies.activity_compose)
-    implementation(Dependencies.core_ktx)
     implementation(Dependencies.compose_ui)
     implementation(Dependencies.compose_material)
     implementation(Dependencies.compose_ui_tooling_preview)
 
     //hilt
-    implementation(Dependencies.hilt_navigation_compose)
     implementation(Dependencies.hilt_android)
     kapt(Dependencies.hilt_compiler)
-
 
     //testing
     testImplementation(project(":core:testing"))
     testImplementation(Dependencies.junit)
     testImplementation (Dependencies.mockito)
     testImplementation (Dependencies.coroutines_test)
-    testImplementation (Dependencies.mockito_kotlin)
-    testImplementation (Dependencies.powermock_reflect)
-    androidTestImplementation(Dependencies.mockito_android)
 }
