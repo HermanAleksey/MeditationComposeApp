@@ -65,7 +65,7 @@ internal fun SelectPuzzleImageFromGalleryCard(
 
         } else {
             // an error occurred
-            val exception = result.error
+//            val exception = result.error
         }
     }
 

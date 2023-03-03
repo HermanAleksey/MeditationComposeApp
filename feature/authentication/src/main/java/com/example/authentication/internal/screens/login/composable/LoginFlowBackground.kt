@@ -15,7 +15,7 @@ import com.example.design_system.common_composables.ColorBackground
 import com.example.feature.authentication.R
 
 @Composable
-fun LoginFlowBackground(
+internal fun LoginFlowBackground(
     isLoading: Boolean = false,
     content: @Composable () -> Unit
 ) {

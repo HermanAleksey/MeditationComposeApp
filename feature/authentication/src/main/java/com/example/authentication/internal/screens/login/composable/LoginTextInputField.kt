@@ -28,7 +28,7 @@ import com.example.design_system.Montserrat
 import com.example.feature.authentication.R
 
 @Composable
-fun LoginFlowInputField(
+internal fun LoginFlowInputField(
     textFieldValue: String,
     label: String,
     onValueChanged: (String) -> Unit,

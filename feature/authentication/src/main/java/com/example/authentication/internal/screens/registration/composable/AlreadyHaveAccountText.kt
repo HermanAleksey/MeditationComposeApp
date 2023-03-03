@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.sp
 import com.example.feature.authentication.R
 
 @Composable
-fun AlreadyHaveAccountText(
+internal fun AlreadyHaveAccountText(
     modifier: Modifier
 ) {
 

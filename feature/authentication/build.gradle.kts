@@ -65,4 +65,13 @@ dependencies {
     implementation(Dependencies.navigation_compose)
     implementation(Dependencies.raamcosta_compose_destinations_anim_core)
     ksp(Dependencies.raamcosta_compose_destinations_ksp)
+
+    //testing
+    testImplementation(project(":core:testing"))
+    testImplementation(Dependencies.junit)
+    testImplementation (Dependencies.mockito)
+    testImplementation (Dependencies.coroutines_test)
+    testImplementation (Dependencies.mockito_kotlin)
+    testImplementation (Dependencies.powermock_reflect)
+    androidTestImplementation(Dependencies.mockito_android)
 }

@@ -20,13 +20,13 @@ sealed class EnterScreenNavRoute : NavRoute<EnterScreenNavDependencies> {
         }
     }
 
-    class LoginScreen : EnterScreenNavRoute() {
+    object LoginScreen : EnterScreenNavRoute() {
         override fun navigate(navDependencies: EnterScreenNavDependencies) {
             navDependencies.navigateToLoginScreen()
         }
     }
 
-    class RegistrationScreen : EnterScreenNavRoute() {
+    object RegistrationScreen : EnterScreenNavRoute() {
         override fun navigate(navDependencies: EnterScreenNavDependencies) {
             navDependencies.navigateToRegistrationScreen()
         }

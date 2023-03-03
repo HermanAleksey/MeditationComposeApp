@@ -19,7 +19,7 @@ sealed class EnterLoginScreenNavRoute : NavRoute<EnterLoginScreenNavDependencies
         }
     }
 
-    class EnterCodeScreen(private val login: String) : EnterLoginScreenNavRoute() {
+    data class EnterCodeScreen(private val login: String) : EnterLoginScreenNavRoute() {
         override fun navigate(navDependencies: EnterLoginScreenNavDependencies) {
             navDependencies.navigateEnterCodeScreen(login)
         }

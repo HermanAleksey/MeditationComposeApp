@@ -21,19 +21,19 @@ sealed class LoginScreenNavRoute : NavRoute<LoginScreenNavDependencies> {
         }
     }
 
-    class MainScreen : LoginScreenNavRoute() {
+    object MainScreen : LoginScreenNavRoute() {
         override fun navigate(navDependencies: LoginScreenNavDependencies) {
             navDependencies.navigateToMainScreen()
         }
     }
 
-    class EnterLoginScreen(private val login: String) : LoginScreenNavRoute() {
+    data class EnterLoginScreen(private val login: String) : LoginScreenNavRoute() {
         override fun navigate(navDependencies: LoginScreenNavDependencies) {
             navDependencies.navigateToEnterLoginScreen(login)
         }
     }
 
-    class RegistrationScreen : LoginScreenNavRoute() {
+    object RegistrationScreen : LoginScreenNavRoute() {
         override fun navigate(navDependencies: LoginScreenNavDependencies) {
             navDependencies.navigateToRegistrationScreen()
         }

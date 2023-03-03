@@ -20,6 +20,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.authentication.api.enter_screen.EnterScreenNavDependencies
+import com.example.authentication.api.enter_screen.EnterScreenViewModel
 import com.example.authentication.internal.screens.enter.composable.DontHaveAccountText
 import com.example.authentication.internal.screens.enter.composable.LoginMainButton
 import com.example.common.navigation.NavDependenciesProvider

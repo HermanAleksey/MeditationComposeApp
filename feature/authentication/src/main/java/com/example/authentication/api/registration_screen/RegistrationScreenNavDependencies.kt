@@ -19,7 +19,7 @@ sealed class RegistrationScreenNavRoute : NavRoute<RegistrationScreenNavDependen
         }
     }
 
-    class LoginScreen : RegistrationScreenNavRoute() {
+    object LoginScreen : RegistrationScreenNavRoute() {
         override fun navigate(navDependencies: RegistrationScreenNavDependencies) {
             navDependencies.navigateToLoginScreen()
         }

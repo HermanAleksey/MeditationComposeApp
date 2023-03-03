@@ -19,7 +19,7 @@ sealed class NewPasswordScreenNavRoute : NavRoute<NewPasswordScreenNavDependenci
         }
     }
 
-    class LoginScreen : NewPasswordScreenNavRoute() {
+    object LoginScreen : NewPasswordScreenNavRoute() {
         override fun navigate(navDependencies: NewPasswordScreenNavDependencies) {
             navDependencies.navigateToLoginScreen()
         }

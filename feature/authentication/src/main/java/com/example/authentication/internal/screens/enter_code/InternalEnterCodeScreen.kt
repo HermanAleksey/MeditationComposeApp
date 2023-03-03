@@ -19,6 +19,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.authentication.api.enter_code_screen.EnterCodeScreenNavDependencies
+import com.example.authentication.api.enter_code_screen.EnterCodeScreenViewModel
 import com.example.authentication.internal.screens.enter_code.composable.CodePanel
 import com.example.authentication.internal.screens.login.composable.LoginFlowBackground
 import com.example.common.navigation.NavDependenciesProvider

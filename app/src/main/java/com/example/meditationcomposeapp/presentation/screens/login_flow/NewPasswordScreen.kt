@@ -1,7 +1,7 @@
 package com.example.meditationcomposeapp.presentation.screens.login_flow
 
 import androidx.compose.runtime.Composable
-import com.example.authentication.internal.screens.new_password.NewPasswordScreenViewModel
+import com.example.authentication.api.new_password_screen.NewPasswordScreenViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 
 @Destination

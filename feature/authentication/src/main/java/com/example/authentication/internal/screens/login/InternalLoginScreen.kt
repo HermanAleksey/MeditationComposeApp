@@ -26,6 +26,7 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
 import com.example.authentication.api.login_screen.LoginScreenNavDependencies
+import com.example.authentication.api.login_screen.LoginScreenViewModel
 import com.example.authentication.internal.screens.enter.composable.DontHaveAccountText
 import com.example.authentication.internal.screens.enter.composable.LoginMainButton
 import com.example.authentication.internal.screens.login.composable.LoginFlowBackground
