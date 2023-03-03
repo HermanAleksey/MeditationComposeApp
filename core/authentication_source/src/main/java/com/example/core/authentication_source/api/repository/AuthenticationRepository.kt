@@ -9,7 +9,7 @@ interface AuthenticationRepository {
     /**
      * @param [login] the login of account
      * @param [password] the password of account
-     * @return [LoginUserResponse] of logged user if success
+     * @return [Profile] of logged user if success
      * @return error message if signing in was failed
      * */
     fun login(login: String, password: String): Flow<NetworkResponse<Profile>>

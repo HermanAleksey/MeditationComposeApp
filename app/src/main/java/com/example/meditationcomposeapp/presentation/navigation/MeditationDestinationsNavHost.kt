@@ -23,12 +23,11 @@ import com.ramcosta.composedestinations.navigation.dependency
 @Composable
 fun MeditationDestinationsNavHost(
     navController: NavHostController,
-    screenWidth: Int
 ) {
     DestinationsNavHost(
         navGraph = NavGraphs.root,
         navController = navController,
-        engine = MeditationNavHostEngine(screenWidth),
+        engine = MeditationNavHostEngine(),
         dependenciesContainerBuilder = {
             dependency(SplashScreenDestination) { hiltViewModel<SplashScreenViewModel>() }
             dependency(EnterScreenDestination) { hiltViewModel<EnterScreenViewModel>() }

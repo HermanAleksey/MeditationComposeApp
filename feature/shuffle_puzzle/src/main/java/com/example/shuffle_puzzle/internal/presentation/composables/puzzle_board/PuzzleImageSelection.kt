@@ -5,7 +5,6 @@ import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.os.Build
 import android.provider.MediaStore
-import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -43,6 +42,7 @@ internal fun SelectPuzzleImageFromGalleryCard(
             try {
                 result.uriContent?.let {
                     val bitmap: Bitmap = if (Build.VERSION.SDK_INT < 28) {
+                        @Suppress("DEPRECATION")
                         MediaStore.Images.Media.getBitmap(
                             context.contentResolver,
                             it
@@ -60,9 +60,6 @@ internal fun SelectPuzzleImageFromGalleryCard(
             } catch (e: Exception) {
                 e.printStackTrace()
             }
-
-            Log.e("TAG", "SelectPuzzleImageFromGalleryCard: ")
-
         } else {
             // an error occurred
 //            val exception = result.error

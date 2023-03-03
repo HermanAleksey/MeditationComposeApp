@@ -14,31 +14,31 @@ import com.ramcosta.composedestinations.animations.rememberAnimatedNavHostEngine
 @SuppressLint("ComposableNaming")
 @OptIn(ExperimentalAnimationApi::class, ExperimentalMaterialNavigationApi::class)
 @Composable
-fun MeditationNavHostEngine(screenWidth: Int) =
+fun MeditationNavHostEngine() =
     rememberAnimatedNavHostEngine(
         navHostContentAlignment = Alignment.Center,
         rootDefaultAnimations = RootNavGraphDefaultAnimations(
             enterTransition = {
                 slideInHorizontally(
-                    initialOffsetX = { -screenWidth },
+                    initialOffsetX = { width -> -width },
                     animationSpec = tween(700)
                 )
             },
             exitTransition = {
                 slideOutHorizontally(
-                    targetOffsetX = { screenWidth },
+                    targetOffsetX = {  width -> width },
                     animationSpec = tween(700)
                 )
             },
             popEnterTransition = {
                 slideInHorizontally(
-                    initialOffsetX = { screenWidth },
+                    initialOffsetX = {  width -> width },
                     animationSpec = tween(700)
                 )
             },
             popExitTransition = {
                 slideOutHorizontally(
-                    targetOffsetX = { -screenWidth },
+                    targetOffsetX = { width -> -width },
                     animationSpec = tween(700)
                 )
             },

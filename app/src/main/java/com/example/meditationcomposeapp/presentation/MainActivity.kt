@@ -2,8 +2,6 @@ package com.example.meditationcomposeapp.presentation
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.DisplayMetrics
-import android.view.Window
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.*
@@ -51,7 +49,7 @@ class MainActivity : ComponentActivity(), NavDependenciesProvider {
 
         setContent {
             navController = rememberAnimatedNavController()
-            MyApp(window, navController)
+            MyApp(navController)
         }
     }
 
@@ -64,17 +62,12 @@ class MainActivity : ComponentActivity(), NavDependenciesProvider {
     }
 }
 
+@Suppress("LocalVariableName")
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun MyApp(
-    windows: Window,
     navController: NavHostController,
 ) {
-    val displayMetrics = DisplayMetrics()
-    windows.windowManager.defaultDisplay.getMetrics(displayMetrics)
-    val screenWidth = displayMetrics.widthPixels
-
-
     val systemUiController = rememberSystemUiController()
 
     var _bottomBarIsVisible by remember {
@@ -182,7 +175,6 @@ fun MyApp(
             Box(modifier = Modifier.padding(innerPadding)) {
                 MeditationDestinationsNavHost(
                     navController = navController,
-                    screenWidth = screenWidth
                 )
 
                 if (_dialogIsVisible)

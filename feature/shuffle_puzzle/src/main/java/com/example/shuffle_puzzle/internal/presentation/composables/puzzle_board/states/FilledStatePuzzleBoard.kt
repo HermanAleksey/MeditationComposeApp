@@ -1,6 +1,5 @@
 package com.example.shuffle_puzzle.internal.presentation.composables.puzzle_board.states
 
-import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -29,7 +28,6 @@ internal fun FilledStatePuzzleBoard(
             .aspectRatio(1f)
     ) {
         val pieceSizeDp = puzzleBoardWidth / puzzle.size
-        Log.e("TAGG", "FilledStatePuzzleBoard: pieceSizeDp:$pieceSizeDp")
 
         puzzle.board.forEachIndexed { row, array ->
             if (row > 0)

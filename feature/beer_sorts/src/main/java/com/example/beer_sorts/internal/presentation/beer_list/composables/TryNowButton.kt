@@ -65,6 +65,6 @@ internal fun TryNowButton(beerName: String, tagline: String) {
 
 @Preview
 @Composable
-fun previewTryNowButton() {
+fun PreviewTryNowButton() {
     TryNowButton("Beer", "tagline")
 }

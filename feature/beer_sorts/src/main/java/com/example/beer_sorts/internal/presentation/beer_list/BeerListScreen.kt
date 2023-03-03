@@ -110,6 +110,7 @@ internal fun BeerList(beers: LazyPagingItems<BeerListItem>, onBeerItemClicked: (
     }
 }
 
+@Suppress("FunctionName")
 private fun LazyListScope.LoadingState() {
     item {
         CircularProgressIndicator(
@@ -119,6 +120,7 @@ private fun LazyListScope.LoadingState() {
     }
 }
 
+@Suppress("FunctionName")
 private fun LazyListScope.Error(
     message: String,
 ) {
