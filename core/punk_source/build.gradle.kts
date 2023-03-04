@@ -6,12 +6,10 @@ plugins {
 
 android {
     namespace = "com.example.core.punk_source"
-    compileSdk = 33
+    compileSdk = Config.COMPILE_SDK
 
     defaultConfig {
-        minSdk = 24
-        targetSdk = 33
-
+        minSdk = Config.MIN_SDK
         buildConfigField("String", "PUNK_API_URL", "\"https://api.punkapi.com/v2/\"")
     }
 

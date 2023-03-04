@@ -6,11 +6,10 @@ plugins {
 
 android {
     namespace = "com.example.database"
-    compileSdk = 33
+    compileSdk = Config.COMPILE_SDK
 
     defaultConfig {
-        minSdk = 24
-        targetSdk = 33
+        minSdk = Config.MIN_SDK
 
         buildConfigField("String", "DATABASE_NAME", "\"MeditationComposeApp\"")
     }

@@ -7,11 +7,10 @@ plugins {
 
 android {
     namespace = "com.example.feature.shuffle_puzzle"
-    compileSdk = 33
+    compileSdk = Config.COMPILE_SDK
 
     defaultConfig {
-        minSdk = Config.minSdk
-        targetSdk = Config.targetSdk
+        minSdk = Config.MIN_SDK
     }
 
     compileOptions {
@@ -21,11 +20,14 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_11.toString()
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = LibVersions.compose_compiler_version
-    }
+
+    @Suppress("UnstableApiUsage")
     buildFeatures {
         compose = true
+    }
+    @Suppress("UnstableApiUsage")
+    composeOptions {
+        kotlinCompilerExtensionVersion = LibVersions.compose_compiler_version
     }
 }
 

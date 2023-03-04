@@ -7,16 +7,17 @@ plugins {
     id("com.google.devtools.ksp") version LibVersions.ksp_version // Depends on your kotlin version
 }
 
+@Suppress("UnstableApiUsage")
 android {
     namespace = "com.example.meditationcomposeapp"
-    compileSdk = 33
+    compileSdk = Config.COMPILE_SDK
 
     defaultConfig {
-        applicationId = Config.applicationId
-        minSdk = Config.minSdk
-        targetSdk = Config.targetSdk
-        versionName = Config.versionName
-        versionCode = Config.versionCode
+        applicationId = Config.APPLICATION_ID
+        minSdk = Config.MIN_SDK
+        targetSdk = Config.TARGET_SDK
+        versionName = Config.VERSION_NAME
+        versionCode = Config.VERSION_CODE
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -26,11 +27,13 @@ android {
 
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+
+            buildConfigField("boolean", "ENABLE_VALIDATION", "true")
         }
         getByName("debug") {
             isMinifyEnabled = false
@@ -40,19 +43,11 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-        }
-    }
 
-    flavorDimensions.add("default")
-
-    productFlavors {
-        create("demo") {
             buildConfigField("boolean", "ENABLE_VALIDATION", "false")
         }
-        create("full") {
-            buildConfigField("boolean", "ENABLE_VALIDATION", "true")
-        }
     }
+
     kapt {
         correctErrorTypes = true
     }

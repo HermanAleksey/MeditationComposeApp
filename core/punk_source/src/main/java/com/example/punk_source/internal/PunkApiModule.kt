@@ -26,10 +26,9 @@ object PunkApiModule {
     @Qualifiers.PunkRetrofit
     fun provideRetrofitPunkApi(
         okHttpClient: OkHttpClient
-    ): Retrofit =
-        Retrofit.Builder()
-            .baseUrl(BuildConfig.PUNK_API_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(okHttpClient)
-            .build()
+    ): Retrofit = Retrofit.Builder()
+        .baseUrl(BuildConfig.PUNK_API_URL)
+        .addConverterFactory(GsonConverterFactory.create())
+        .client(okHttpClient)
+        .build()
 }

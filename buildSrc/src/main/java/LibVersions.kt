@@ -54,4 +54,6 @@ object LibVersions {
     const val power_mock = "1.6.1"
 
     const val timber_version = "5.0.1"
+
+    const val build_gradle_version = "7.4.2"
 }

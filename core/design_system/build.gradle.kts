@@ -5,11 +5,10 @@ plugins {
 
 android {
     namespace = "com.example.core.design_system"
-    compileSdk = 33
+    compileSdk = Config.COMPILE_SDK
 
     defaultConfig {
-        minSdk = 24
-        targetSdk = 33
+        minSdk = Config.MIN_SDK
     }
 
     compileOptions {
@@ -19,9 +18,12 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_11.toString()
     }
+
+    @Suppress("UnstableApiUsage")
     buildFeatures {
         compose = true
     }
+    @Suppress("UnstableApiUsage")
     composeOptions {
         kotlinCompilerExtensionVersion = LibVersions.compose_compiler_version
     }

@@ -6,11 +6,10 @@ plugins {
 
 android {
     namespace = "com.example.core.updates_history"
-    compileSdk = 33
+    compileSdk = Config.COMPILE_SDK
 
     defaultConfig {
-        minSdk = 24
-        targetSdk = 33
+        minSdk = Config.MIN_SDK
 
         buildConfigField("String", "SERVER_URL", "\"https://myserver:8080/v1/\"")
     }
