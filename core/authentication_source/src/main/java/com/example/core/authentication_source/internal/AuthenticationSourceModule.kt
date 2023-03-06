@@ -1,5 +1,6 @@
 package com.example.core.authentication_source.internal
 
+import com.example.core.authentication_api.BuildConfig
 import com.example.core.authentication_source.api.AuthenticationApi
 import com.example.core.authentication_source.api.Qualifiers
 import dagger.Module
@@ -18,7 +19,7 @@ object AuthenticationSourceModule {
     @Provides
     @Singleton
     fun provideAuthenticationApi(
-        @Qualifiers.AuthRetrofit   retrofit: Retrofit
+        @Qualifiers.AuthRetrofit retrofit: Retrofit
     ): AuthenticationApi = retrofit.create(AuthenticationApi::class.java)
 
     @Provides
@@ -28,7 +29,7 @@ object AuthenticationSourceModule {
         okHttpClient: OkHttpClient
     ): Retrofit =
         Retrofit.Builder()
-            .baseUrl("http://ok.com")//todo fix BuildConfig.SERVER_URL)
+            .baseUrl(BuildConfig.AUTHENTICATION_SERVER_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()

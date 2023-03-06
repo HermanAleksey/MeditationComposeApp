@@ -7,17 +7,7 @@ class RegistrationScreenNavDependencies(
     val navigateToLoginScreen: () -> Unit,
 ) : NavDependencies
 
-sealed class RegistrationScreenNavRoute : NavRoute<RegistrationScreenNavDependencies> {
-    override var navigationHasBeenHandled: Boolean = false
-
-    override fun tryNavigate(navDependencies: RegistrationScreenNavDependencies) {
-        return if (navigationHasBeenHandled) {
-            return
-        } else {
-            navigationHasBeenHandled = true
-            navigate(navDependencies)
-        }
-    }
+sealed class RegistrationScreenNavRoute : NavRoute<RegistrationScreenNavDependencies>() {
 
     object LoginScreen : RegistrationScreenNavRoute() {
         override fun navigate(navDependencies: RegistrationScreenNavDependencies) {

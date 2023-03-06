@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.authentication.internal.screens.login.LoginScreenState
 import com.example.authentication.internal.validation.LoginField
 import com.example.authentication.internal.validation.PasswordField
+import com.example.common.navigation.NavRoute
 import com.example.common.view_model.NavigationBaseViewModel
 import com.example.core.authentication_source.api.use_case.LoginUseCase
 import com.example.core.data_store.UserDataStore
@@ -27,6 +28,9 @@ class LoginScreenViewModel @Inject constructor(
     fun onLoginTextChanged(value: String) {
         _uiState.update {
             it.copy(login = value)
+        }
+        _navigationEvent.update {
+            null
         }
     }
 

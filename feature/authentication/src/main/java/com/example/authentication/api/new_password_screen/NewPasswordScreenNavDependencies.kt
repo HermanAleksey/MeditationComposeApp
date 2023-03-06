@@ -7,17 +7,7 @@ class NewPasswordScreenNavDependencies(
     val navigateToLoginScreen: () -> Unit,
 ) : NavDependencies
 
-sealed class NewPasswordScreenNavRoute : NavRoute<NewPasswordScreenNavDependencies> {
-    override var navigationHasBeenHandled: Boolean = false
-
-    override fun tryNavigate(navDependencies: NewPasswordScreenNavDependencies) {
-        return if (navigationHasBeenHandled) {
-            return
-        } else {
-            navigationHasBeenHandled = true
-            navigate(navDependencies)
-        }
-    }
+sealed class NewPasswordScreenNavRoute : NavRoute<NewPasswordScreenNavDependencies>() {
 
     object LoginScreen : NewPasswordScreenNavRoute() {
         override fun navigate(navDependencies: NewPasswordScreenNavDependencies) {

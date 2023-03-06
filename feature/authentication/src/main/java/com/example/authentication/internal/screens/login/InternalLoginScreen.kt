@@ -1,6 +1,7 @@
 package com.example.authentication.internal.screens.login
 
 import android.app.Activity
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -48,7 +49,13 @@ internal fun InternalLoginScreen(
 
     LaunchedEffect(key1 = viewModel.navigationEvent.collectAsState()) {
         viewModel.navigationEvent.collect { event ->
-            event?.tryNavigate(navDependencies)
+            Log.e("TAGG", "InternalLoginScreen: $event")
+            event?.let {
+                it.tryNavigate(navDependencies)
+                it.releaseNavigationLock()
+            }
+            viewModel.onNavigationPerformed()
+
         }
     }
 

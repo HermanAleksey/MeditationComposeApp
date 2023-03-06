@@ -1,7 +1,10 @@
 package com.example.authentication.api.login_screen
 
+import android.util.Log
 import com.example.common.navigation.NavDependencies
 import com.example.common.navigation.NavRoute
+import kotlinx.coroutines.internal.synchronized
+import java.util.concurrent.atomic.AtomicBoolean
 
 class LoginScreenNavDependencies(
     val navigateToMainScreen: () -> Unit,
@@ -9,18 +12,7 @@ class LoginScreenNavDependencies(
     val navigateToRegistrationScreen: () -> Unit,
 ) : NavDependencies
 
-sealed class LoginScreenNavRoute : NavRoute<LoginScreenNavDependencies> {
-    override var navigationHasBeenHandled: Boolean = false
-
-    override fun tryNavigate(navDependencies: LoginScreenNavDependencies) {
-        return if (navigationHasBeenHandled) {
-            return
-        } else {
-            navigationHasBeenHandled = true
-            navigate(navDependencies)
-        }
-    }
-
+sealed class LoginScreenNavRoute : NavRoute<LoginScreenNavDependencies>() {
     object MainScreen : LoginScreenNavRoute() {
         override fun navigate(navDependencies: LoginScreenNavDependencies) {
             navDependencies.navigateToMainScreen()
@@ -35,6 +27,7 @@ sealed class LoginScreenNavRoute : NavRoute<LoginScreenNavDependencies> {
 
     object RegistrationScreen : LoginScreenNavRoute() {
         override fun navigate(navDependencies: LoginScreenNavDependencies) {
+            Log.e("TAGG", "toRegistration: ")
             navDependencies.navigateToRegistrationScreen()
         }
     }

@@ -34,7 +34,6 @@ internal fun InternalEnterScreen(
     val activity = LocalContext.current as? Activity
     BackHandler(enabled = true, onBack = {
         activity?.finish()
-
     })
 
     val navDependencies = ((LocalContext.current as? Activity) as NavDependenciesProvider)

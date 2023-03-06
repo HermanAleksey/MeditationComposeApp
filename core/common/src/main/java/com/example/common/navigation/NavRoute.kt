@@ -1,23 +1,25 @@
 package com.example.common.navigation
 
-interface NavRoute<D : NavDependencies> {
-    var navigationHasBeenHandled: Boolean
+import android.util.Log
 
-    fun navigate(navDependencies: D)
+abstract class NavRoute<D : NavDependencies> {
 
-    fun tryNavigate(navDependencies: D)
+    private var navigationHasBeenHandled: Boolean = false
 
-    object Empty : NavRoute<NavDependencies> {
-        override var navigationHasBeenHandled: Boolean
-            get() = false
-            set(value) {}
-
-        override fun tryNavigate(navDependencies: NavDependencies) {
-            //do nothing
-        }
-
-        override fun navigate(navDependencies: NavDependencies) {
-            //do nothing
+    fun tryNavigate(navDependencies: D) {
+        Log.e("TAGG", "tryNavigate: $navigationHasBeenHandled")
+        return if (navigationHasBeenHandled) {
+            return
+        } else {
+            navigationHasBeenHandled = true
+            navigate(navDependencies)
         }
     }
+
+    fun releaseNavigationLock() {
+        navigationHasBeenHandled = false
+    }
+
+    protected abstract fun navigate(navDependencies: D)
+
 }

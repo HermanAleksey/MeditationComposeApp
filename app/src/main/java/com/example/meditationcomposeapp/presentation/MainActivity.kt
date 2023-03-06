@@ -2,6 +2,7 @@ package com.example.meditationcomposeapp.presentation
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.*
@@ -131,6 +132,7 @@ fun MyApp(
 
     navController.addOnDestinationChangedListener { controller, destination, args ->
         destination.getDestinationWrapper()?.let {
+            Log.e("TAGG", "MyApp: dest changed: ${it.name}")
             val toolbarShouldBeVisible = it.toolbarVisible
             val bottomBarShouldBeVisible = it.bottomBarVisible
 

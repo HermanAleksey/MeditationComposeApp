@@ -7,17 +7,7 @@ class ProfileScreenNavDependencies(
     val navigateToEnterScreen: () -> Unit,
 ) : NavDependencies
 
-sealed class ProfileScreenNavRoute : NavRoute<ProfileScreenNavDependencies> {
-    override var navigationHasBeenHandled: Boolean = false
-
-    override fun tryNavigate(navDependencies: ProfileScreenNavDependencies) {
-        return if (navigationHasBeenHandled) {
-            return
-        } else {
-            navigationHasBeenHandled = true
-            navigate(navDependencies)
-        }
-    }
+sealed class ProfileScreenNavRoute : NavRoute<ProfileScreenNavDependencies>() {
 
     object EnterScreen : ProfileScreenNavRoute() {
         override fun navigate(navDependencies: ProfileScreenNavDependencies) {

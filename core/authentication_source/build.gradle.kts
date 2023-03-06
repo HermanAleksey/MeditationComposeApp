@@ -12,6 +12,21 @@ android {
         minSdk = Config.MIN_SDK
     }
 
+    @Suppress("UnstableApiUsage")
+    buildTypes {
+        getByName("release") {
+            isMinifyEnabled = true
+
+            buildConfigField("boolean", "ENABLE_VALIDATION", "true")
+            buildConfigField("String", "AUTHENTICATION_SERVER_URL", "\"https://ok.com\"")
+        }
+        getByName("debug") {
+            isMinifyEnabled = false
+            buildConfigField("boolean", "ENABLE_VALIDATION", "false")
+            buildConfigField("String", "AUTHENTICATION_SERVER_URL", "\"https://ok.com\"")
+        }
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11

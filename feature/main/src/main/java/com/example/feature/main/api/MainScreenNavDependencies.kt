@@ -7,17 +7,7 @@ class MainScreenNavDependencies(
     val navigateToPuzzleScreen: () -> Unit,
 ) : NavDependencies
 
-sealed class MainScreenNavRoute : NavRoute<MainScreenNavDependencies> {
-    override var navigationHasBeenHandled: Boolean = false
-
-    override fun tryNavigate(navDependencies: MainScreenNavDependencies) {
-        return if (navigationHasBeenHandled) {
-            return
-        } else {
-            navigationHasBeenHandled = true
-            navigate(navDependencies)
-        }
-    }
+sealed class MainScreenNavRoute : NavRoute<MainScreenNavDependencies>() {
 
     class PuzzleScreen : MainScreenNavRoute() {
         override fun navigate(navDependencies: MainScreenNavDependencies) {

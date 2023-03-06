@@ -1,8 +1,8 @@
 package com.example.beer_sorts.api
 
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.beer_sorts.internal.presentation.beer_details.DetailedBeerScreenState
-import com.example.common.view_model.BaseViewModel
 import com.example.core.model.NetworkResponse
 import com.example.punk_source.api.use_case.punk.network.GetBeerByIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class DetailedBeerScreenViewModel @Inject constructor(
     private val getBeerByIdUseCase: GetBeerByIdUseCase
-) : BaseViewModel() {
+) : ViewModel() {
 
     private val _uiState = MutableStateFlow(DetailedBeerScreenState())
     val uiState = _uiState.asStateFlow()

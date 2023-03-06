@@ -32,8 +32,6 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-
-            buildConfigField("boolean", "ENABLE_VALIDATION", "true")
         }
         getByName("debug") {
             isMinifyEnabled = false
@@ -43,8 +41,6 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-
-            buildConfigField("boolean", "ENABLE_VALIDATION", "false")
         }
     }
 

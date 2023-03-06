@@ -7,17 +7,7 @@ class EnterLoginScreenNavDependencies(
     val navigateEnterCodeScreen: (login: String) -> Unit,
 ) : NavDependencies
 
-sealed class EnterLoginScreenNavRoute : NavRoute<EnterLoginScreenNavDependencies> {
-    override var navigationHasBeenHandled: Boolean = false
-
-    override fun tryNavigate(navDependencies: EnterLoginScreenNavDependencies) {
-        return if (navigationHasBeenHandled) {
-            return
-        } else {
-            navigationHasBeenHandled = true
-            navigate(navDependencies)
-        }
-    }
+sealed class EnterLoginScreenNavRoute : NavRoute<EnterLoginScreenNavDependencies>() {
 
     data class EnterCodeScreen(private val login: String) : EnterLoginScreenNavRoute() {
         override fun navigate(navDependencies: EnterLoginScreenNavDependencies) {

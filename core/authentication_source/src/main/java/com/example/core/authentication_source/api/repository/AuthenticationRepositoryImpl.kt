@@ -1,11 +1,12 @@
 package com.example.core.authentication_source.api.repository
 
+import com.example.core.authentication_api.BuildConfig
 import com.example.core.authentication_source.api.AuthenticationApi
 import com.example.core.authentication_source.api.mapper.ProfileMapper
 import com.example.core.authentication_source.api.model.LoginUserResponse
 import com.example.core.authentication_source.api.model.RegistrationRequest
-import com.example.core.model.authentication.Profile
 import com.example.core.model.NetworkResponse
+import com.example.core.model.authentication.Profile
 import com.example.network.SuccessInfo
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
@@ -13,11 +14,6 @@ import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
-
-//todo rework BuildConfig
-object BuildConfig {
-    const val ENABLE_VALIDATION = false
-}
 
 class AuthenticationRepositoryImpl @Inject constructor(
     private val authApi: AuthenticationApi,
@@ -65,7 +61,6 @@ class AuthenticationRepositoryImpl @Inject constructor(
             emit(NetworkResponse.Loading(true))
             try {
                 delay(1000)
-
                 if (!BuildConfig.ENABLE_VALIDATION) {
                     emit(
                         NetworkResponse.Success(

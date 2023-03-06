@@ -18,6 +18,19 @@ import com.ramcosta.composedestinations.navigation.navigate
 import com.ramcosta.composedestinations.navigation.popUpTo
 
 
+class NavigatorQueue {
+
+    private var isNavigating = false
+
+    fun performNavigation(navigation: () -> Unit) {
+        if (isNavigating) {
+            return
+        } else {
+            navigation()
+        }
+    }
+}
+
 class NavDependenciesProviderImpl(
     private val navController: NavHostController
 ) : NavDependenciesProvider {

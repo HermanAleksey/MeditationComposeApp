@@ -8,17 +8,7 @@ class SplashScreenNavDependencies(
     val navigateToEnterScreen: () -> Unit,
 ) : NavDependencies
 
-sealed class SplashScreenNavRoute : NavRoute<SplashScreenNavDependencies> {
-    override var navigationHasBeenHandled: Boolean = false
-
-    override fun tryNavigate(navDependencies: SplashScreenNavDependencies) {
-        return if (navigationHasBeenHandled) {
-            return
-        } else {
-            navigationHasBeenHandled = true
-            navigate(navDependencies)
-        }
-    }
+sealed class SplashScreenNavRoute : NavRoute<SplashScreenNavDependencies>() {
 
     object EnterScreen : SplashScreenNavRoute() {
         override fun navigate(navDependencies: SplashScreenNavDependencies) {
