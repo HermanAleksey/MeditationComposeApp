@@ -11,6 +11,8 @@ import com.google.accompanist.navigation.material.ExperimentalMaterialNavigation
 import com.ramcosta.composedestinations.animations.defaults.RootNavGraphDefaultAnimations
 import com.ramcosta.composedestinations.animations.rememberAnimatedNavHostEngine
 
+const val ANIMATION_DURATION = 400
+
 @SuppressLint("ComposableNaming")
 @OptIn(ExperimentalAnimationApi::class, ExperimentalMaterialNavigationApi::class)
 @Composable
@@ -21,25 +23,25 @@ fun MeditationNavHostEngine() =
             enterTransition = {
                 slideInHorizontally(
                     initialOffsetX = { width -> -width },
-                    animationSpec = tween(700)
+                    animationSpec = tween(ANIMATION_DURATION)
                 )
             },
             exitTransition = {
                 slideOutHorizontally(
                     targetOffsetX = {  width -> width },
-                    animationSpec = tween(700)
+                    animationSpec = tween(ANIMATION_DURATION)
                 )
             },
             popEnterTransition = {
                 slideInHorizontally(
                     initialOffsetX = {  width -> width },
-                    animationSpec = tween(700)
+                    animationSpec = tween(ANIMATION_DURATION)
                 )
             },
             popExitTransition = {
                 slideOutHorizontally(
                     targetOffsetX = { width -> -width },
-                    animationSpec = tween(700)
+                    animationSpec = tween(ANIMATION_DURATION)
                 )
             },
         )

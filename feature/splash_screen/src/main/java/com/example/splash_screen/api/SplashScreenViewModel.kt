@@ -11,7 +11,6 @@ import com.example.core.updates_history.source.db.UpdateDescriptionDBRepository
 import com.example.core.updates_history.use_case.GetAppUpdatesHistoryUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -36,8 +35,10 @@ class SplashScreenViewModel @Inject constructor(
             if (login.isNotEmpty() && password.isNotEmpty()) {
                 logIn(login, password)
             } else {
-                _navigationEvent.update {
-                    SplashScreenNavRoute.EnterScreen
+                navigationEventTransaction {
+                    _navigationEvent.emit(
+                        SplashScreenNavRoute.EnterScreen
+                    )
                 }
             }
         }
@@ -50,13 +51,17 @@ class SplashScreenViewModel @Inject constructor(
         loginUseCase(login, password).collect {
             when (it) {
                 is NetworkResponse.Success<*> -> {
-                    _navigationEvent.update {
-                        SplashScreenNavRoute.MainScreen
+                    navigationEventTransaction {
+                        _navigationEvent.emit(
+                            SplashScreenNavRoute.MainScreen
+                        )
                     }
                 }
                 is NetworkResponse.Failure<*> -> {
-                    _navigationEvent.update {
-                        SplashScreenNavRoute.EnterScreen
+                    navigationEventTransaction {
+                        _navigationEvent.emit(
+                            SplashScreenNavRoute.EnterScreen
+                        )
                     }
                 }
                 is NetworkResponse.Loading<*> -> {
@@ -71,7 +76,7 @@ class SplashScreenViewModel @Inject constructor(
         if (lastInstalledVersion.toVersion()
                 .compare(currentVersionName.toVersion()) == CompareResult.EQUALS
         ) return
-        
+
         getAppUpdatesHistoryUseCase(lastInstalledVersion)
             .collect {
                 if (it is NetworkResponse.Success) {

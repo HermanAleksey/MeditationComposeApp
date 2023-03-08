@@ -1,7 +1,6 @@
 package com.example.authentication.internal.screens.registration
 
 import android.app.Activity
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -9,12 +8,12 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.BlurredEdgeTreatment
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.draw.blur
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -48,9 +47,12 @@ internal fun InternalRegistrationScreen(
     val navDependencies = ((LocalContext.current as? Activity) as NavDependenciesProvider)
         .provideDependencies(RegistrationScreenNavDependencies::class.java)
 
-    LaunchedEffect(key1 = viewModel.navigationEvent.collectAsState()) {
+    LaunchedEffect(key1 = Unit) {
+        viewModel.onScreenEntered()
+    }
+
+    LaunchedEffect(key1 = viewModel.navigationEvent.collectAsState(null)) {
         viewModel.navigationEvent.collect { event ->
-            Log.e("TAGG", "InternalRegistrationScreen: $event")
             event?.tryNavigate(navDependencies)
         }
     }
@@ -142,11 +144,13 @@ internal fun InternalRegistrationScreen(
                     .padding(top = 20.dp),
                 contentAlignment = Alignment.Center
             ) {
-                AlreadyHaveAccountText(modifier = Modifier
-                    .padding(top = 18.dp)
-                    .clickable {
-                        viewModel.onSignInClicked()
-                    })
+                AlreadyHaveAccountText(
+                    modifier = Modifier
+                        .padding(top = 18.dp)
+                        .clickable {
+                            viewModel.onSignInClicked()
+                        }
+                )
             }
             Spacer(modifier = Modifier.padding(top = 80.dp))
         }

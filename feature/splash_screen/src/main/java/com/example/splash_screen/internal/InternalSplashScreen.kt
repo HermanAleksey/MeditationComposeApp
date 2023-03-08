@@ -19,15 +19,16 @@ internal fun InternalSplashScreen(
     val navDependencies = ((LocalContext.current as? Activity) as NavDependenciesProvider)
         .provideDependencies(SplashScreenNavDependencies::class.java)
 
-    LaunchedEffect(key1 = viewModel.navigationEvent.collectAsState()) {
+    LaunchedEffect(key1 = Unit) {
+        viewModel.onScreenEntered()
+        viewModel.onLaunchSplashScreen(currentVersionName)
+    }
+
+    LaunchedEffect(key1 = viewModel.navigationEvent.collectAsState(null)) {
         viewModel.navigationEvent.collect { event ->
             event?.tryNavigate(navDependencies)
         }
     }
-
-    LaunchedEffect(key1 = Unit, block = {
-        viewModel.onLaunchSplashScreen(currentVersionName)
-    })
 
     ImageBackground(
         imageRes = R.drawable.background_login

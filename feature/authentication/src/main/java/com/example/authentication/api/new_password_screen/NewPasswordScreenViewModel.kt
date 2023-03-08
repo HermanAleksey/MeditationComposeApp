@@ -48,8 +48,10 @@ class NewPasswordScreenViewModel @Inject constructor(
                     when (it) {
                         is NetworkResponse.Success<*> -> {
                             if (it.data!!.success)
-                                _navigationEvent.update {
-                                    NewPasswordScreenNavRoute.LoginScreen
+                                navigationEventTransaction {
+                                    _navigationEvent.emit(
+                                        NewPasswordScreenNavRoute.LoginScreen
+                                    )
                                 }
                             else {
                                 //displayError()

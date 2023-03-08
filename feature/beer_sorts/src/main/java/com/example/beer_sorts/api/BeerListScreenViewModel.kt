@@ -8,7 +8,7 @@ import com.example.punk_source.api.use_case.punk.GetBeerPagingRemoteMediatorUseC
 import com.example.punk_source.api.use_case.punk.db.GetBeerPagingSourceUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -25,9 +25,11 @@ class BeerListScreenViewModel @Inject constructor(
         getBeerPagingSourceUseCase()
     }.flow.cachedIn(viewModelScope)
 
-    fun onBeerItemClicked(beerId: Int) {
-        _navigationEvent.update {
-            BeerListNavRoute.DetailedBeerScreen(beerId)
+    fun onBeerItemClicked(beerId: Int) = viewModelScope.launch {
+        navigationEventTransaction {
+            _navigationEvent.emit(
+                BeerListNavRoute.DetailedBeerScreen(beerId)
+            )
         }
     }
 

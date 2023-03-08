@@ -23,7 +23,11 @@ internal fun InternalProfileScreen(
     val navDependencies = ((LocalContext.current as? Activity) as NavDependenciesProvider)
         .provideDependencies(ProfileScreenNavDependencies::class.java)
 
-    LaunchedEffect(key1 = viewModel.navigationEvent.collectAsState()) {
+    LaunchedEffect(key1 = Unit) {
+        viewModel.onScreenEntered()
+    }
+
+    LaunchedEffect(key1 = viewModel.navigationEvent.collectAsState(null)) {
         viewModel.navigationEvent.collect { event ->
             event?.tryNavigate(navDependencies)
         }
@@ -35,9 +39,11 @@ internal fun InternalProfileScreen(
         modifier = Modifier.fillMaxSize()
     ) {
         Text(text = "profile screen")
-        Button(onClick = {
-            viewModel.onLogOutClicked()
-        }) {
+        Button(
+            onClick = {
+                viewModel.onLogOutClicked()
+            }
+        ) {
             Text(text = "Log out")
         }
     }

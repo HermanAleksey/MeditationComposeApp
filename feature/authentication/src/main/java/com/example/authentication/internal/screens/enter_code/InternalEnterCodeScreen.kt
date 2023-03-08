@@ -35,22 +35,14 @@ internal fun InternalEnterCodeScreen(
     val navDependencies = ((LocalContext.current as? Activity) as NavDependenciesProvider)
         .provideDependencies(EnterCodeScreenNavDependencies::class.java)
 
-    LaunchedEffect(key1 = viewModel.navigationEvent.collectAsState()) {
+    LaunchedEffect(key1 = Unit) {
+        viewModel.onScreenEntered()
+    }
+
+    LaunchedEffect(key1 = viewModel.navigationEvent.collectAsState(null)) {
         viewModel.navigationEvent.collect { event ->
             event?.tryNavigate(navDependencies)
         }
-    }
-
-
-    /**
-     * Use to transmit navigation method and
-     * also serve as callback for event when
-     * last digit on CodePanel was filled
-     * */
-    fun onLastDigitFilled() {
-        viewModel.onLastDigitFilled(
-            login
-        )
     }
 
     LoginFlowBackground(
@@ -92,7 +84,16 @@ internal fun InternalEnterCodeScreen(
                         number
                     )
                 },
-                onLastDigitFilled = ::onLastDigitFilled
+                onLastDigitFilled = fun() {
+                    /**
+                     * Use to transmit navigation method and
+                     * also serve as callback for event when
+                     * last digit on CodePanel was filled
+                     * */
+                    viewModel.onLastDigitFilled(
+                        login
+                    )
+                }
             )
             Spacer(modifier = Modifier.padding(top = 80.dp))
         }

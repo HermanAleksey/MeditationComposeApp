@@ -1,19 +1,24 @@
 package com.example.authentication.api.enter_screen
 
+import androidx.lifecycle.viewModelScope
 import com.example.common.view_model.NavigationBaseViewModel
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class EnterScreenViewModel @Inject constructor() : NavigationBaseViewModel<EnterScreenNavRoute>() {
-    fun onEnterClick() {
-        _navigationEvent.update {
-            EnterScreenNavRoute.LoginScreen
+    fun onEnterClick() = viewModelScope.launch {
+        navigationEventTransaction {
+            _navigationEvent.emit(
+                EnterScreenNavRoute.LoginScreen
+            )
         }
     }
 
-    fun onDontHaveAccountClick() {
-        _navigationEvent.update {
-            EnterScreenNavRoute.RegistrationScreen
+    fun onDontHaveAccountClick() = viewModelScope.launch {
+        navigationEventTransaction {
+            _navigationEvent.emit(
+                EnterScreenNavRoute.RegistrationScreen
+            )
         }
     }
 }

@@ -1,23 +1,19 @@
 package com.example.common.navigation
 
-import android.util.Log
+import java.util.concurrent.atomic.AtomicBoolean
 
 abstract class NavRoute<D : NavDependencies> {
 
-    private var navigationHasBeenHandled: Boolean = false
+    private var navigationHasBeenHandled: AtomicBoolean = AtomicBoolean(false)
 
     fun tryNavigate(navDependencies: D) {
-        Log.e("TAGG", "tryNavigate: $navigationHasBeenHandled")
-        return if (navigationHasBeenHandled) {
+        return if (navigationHasBeenHandled.get()) {
             return
         } else {
-            navigationHasBeenHandled = true
+            navigationHasBeenHandled.set(true)
             navigate(navDependencies)
+            navigationHasBeenHandled.set(false)
         }
-    }
-
-    fun releaseNavigationLock() {
-        navigationHasBeenHandled = false
     }
 
     protected abstract fun navigate(navDependencies: D)

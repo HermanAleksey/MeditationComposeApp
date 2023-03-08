@@ -42,18 +42,20 @@ internal fun InternalEnterLoginScreen(
 
     val uiState = viewModel.uiState.collectAsState()
 
-    LaunchedEffect(key1 = null, block = {
+    LaunchedEffect(key1 = Unit) {
+        viewModel.onScreenEntered()
         viewModel.onLoginTextChanged(initialLoginValue ?: "")
-    })
+    }
 
     val navDependencies = ((LocalContext.current as? Activity) as NavDependenciesProvider)
         .provideDependencies(EnterLoginScreenNavDependencies::class.java)
 
-    LaunchedEffect(key1 = viewModel.navigationEvent.collectAsState()) {
+    LaunchedEffect(key1 = viewModel.navigationEvent.collectAsState(null)) {
         viewModel.navigationEvent.collect { event ->
             event?.tryNavigate(navDependencies)
         }
     }
+
     LoginFlowBackground(
         isLoading = uiState.value.isLoading
     ) {
@@ -66,7 +68,7 @@ internal fun InternalEnterLoginScreen(
         ) {
             Image(
                 painter = painterResource(id = R.drawable.ic_logo_white),
-                contentDescription = "App logo",
+                contentDescription = null,
                 contentScale = ContentScale.FillHeight,
                 modifier = Modifier
                     .padding(top = 100.dp)

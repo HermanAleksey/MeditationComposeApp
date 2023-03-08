@@ -1,7 +1,6 @@
 package com.example.authentication.internal.screens.login
 
 import android.app.Activity
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -47,15 +46,13 @@ internal fun InternalLoginScreen(
     val navDependencies = ((LocalContext.current as? Activity) as NavDependenciesProvider)
         .provideDependencies(LoginScreenNavDependencies::class.java)
 
-    LaunchedEffect(key1 = viewModel.navigationEvent.collectAsState()) {
-        viewModel.navigationEvent.collect { event ->
-            Log.e("TAGG", "InternalLoginScreen: $event")
-            event?.let {
-                it.tryNavigate(navDependencies)
-                it.releaseNavigationLock()
-            }
-            viewModel.onNavigationPerformed()
+    LaunchedEffect(key1 = Unit) {
+        viewModel.onScreenEntered()
+    }
 
+    LaunchedEffect(key1 = viewModel.navigationEvent.collectAsState(null)) {
+        viewModel.navigationEvent.collect { event ->
+            event?.tryNavigate(navDependencies)
         }
     }
 
@@ -71,7 +68,7 @@ internal fun InternalLoginScreen(
         ) {
             Image(
                 painter = painterResource(id = R.drawable.ic_logo_white),
-                contentDescription = "Background image",
+                contentDescription = null,
                 contentScale = ContentScale.FillHeight,
                 modifier = Modifier
                     .padding(top = 100.dp)
@@ -148,11 +145,13 @@ internal fun InternalLoginScreen(
                     .padding(top = 20.dp),
                 contentAlignment = Alignment.Center
             ) {
-                DontHaveAccountText(modifier = Modifier
-                    .padding(top = 18.dp)
-                    .clickable {
-                        viewModel.onSignUpClicked()
-                    })
+                DontHaveAccountText(
+                    modifier = Modifier
+                        .padding(top = 18.dp)
+                        .clickable {
+                            viewModel.onSignUpClicked()
+                        }
+                )
             }
             Spacer(modifier = Modifier.padding(top = 80.dp))
         }

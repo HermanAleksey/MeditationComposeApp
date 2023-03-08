@@ -33,11 +33,13 @@ class EnterLoginScreenViewModel @Inject constructor(
                 requestPasswordRestorationUseCase.invoke(_uiState.value.login).collect {
                     when (it) {
                         is NetworkResponse.Success<*> -> {
-                            if (it.data!!.success)
-                                _navigationEvent.update {
-                                    EnterLoginScreenNavRoute.EnterCodeScreen(login = _uiState.value.login)
+                            if (it.data!!.success) {
+                                navigationEventTransaction {
+                                    _navigationEvent.emit(
+                                        EnterLoginScreenNavRoute.EnterCodeScreen(login = _uiState.value.login)
+                                    )
                                 }
-                            else {
+                            } else {
                                 //displayError()
                             }
                         }

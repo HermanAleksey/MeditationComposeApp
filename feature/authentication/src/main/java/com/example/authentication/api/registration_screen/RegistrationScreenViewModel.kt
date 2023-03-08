@@ -63,8 +63,10 @@ class RegistrationScreenViewModel @Inject constructor(
                     when (it) {
                         is NetworkResponse.Success<*> -> {
                             if (it.data!!.success)
-                                _navigationEvent.update {
-                                    RegistrationScreenNavRoute.LoginScreen
+                                navigationEventTransaction {
+                                    _navigationEvent.emit(
+                                        RegistrationScreenNavRoute.LoginScreen
+                                    )
                                 }
                             else {
                                 //displayError()
@@ -110,9 +112,11 @@ class RegistrationScreenViewModel @Inject constructor(
         }
     }
 
-    fun onSignInClicked() {
-        _navigationEvent.update {
-            RegistrationScreenNavRoute.LoginScreen
+    fun onSignInClicked() = viewModelScope.launch {
+        navigationEventTransaction {
+            _navigationEvent.emit(
+                RegistrationScreenNavRoute.LoginScreen
+            )
         }
     }
 }

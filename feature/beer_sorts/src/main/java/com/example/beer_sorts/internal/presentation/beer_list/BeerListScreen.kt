@@ -37,7 +37,11 @@ internal fun InternalBeerListScreen(
     val navDependencies = ((LocalContext.current as? Activity) as NavDependenciesProvider)
         .provideDependencies(BeerListNavDependencies::class.java)
 
-    LaunchedEffect(key1 = viewModel.navigationEvent.collectAsState()) {
+    LaunchedEffect(key1 = Unit) {
+        viewModel.onScreenEntered()
+    }
+
+    LaunchedEffect(key1 = viewModel.navigationEvent.collectAsState(null)) {
         viewModel.navigationEvent.collect { event ->
             event?.tryNavigate(navDependencies)
         }
@@ -47,14 +51,20 @@ internal fun InternalBeerListScreen(
         lockScreenWhenLoading = true,
         color = MaterialTheme.colors.background
     ) {
-        BeerList(beersPaging, onBeerItemClicked = {
-            viewModel.onBeerItemClicked(it)
-        })
+        BeerList(
+            beersPaging,
+            onBeerItemClicked = {
+                viewModel.onBeerItemClicked(it)
+            }
+        )
     }
 }
 
 @Composable
-internal fun BeerList(beers: LazyPagingItems<BeerListItem>, onBeerItemClicked: (id: Int) -> Unit) {
+internal fun BeerList(
+    beers: LazyPagingItems<BeerListItem>,
+    onBeerItemClicked: (id: Int) -> Unit
+) {
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(8.dp),
         horizontalAlignment = Alignment.CenterHorizontally,

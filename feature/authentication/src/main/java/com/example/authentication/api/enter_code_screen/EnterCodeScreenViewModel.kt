@@ -45,11 +45,13 @@ class EnterCodeScreenViewModel @Inject constructor(
             verifyCodeUseCase.invoke(login, getCodeAsString()).collect {
                 when (it) {
                     is NetworkResponse.Success<*> -> {
-                        if (it.data!!.success)
-                            _navigationEvent.update {
-                                EnterCodeScreenNavRoute.NewPasswordScreen(login)
+                        if (it.data!!.success) {
+                            navigationEventTransaction {
+                                _navigationEvent.emit(
+                                    EnterCodeScreenNavRoute.NewPasswordScreen(login)
+                                )
                             }
-                        else {
+                        } else {
                             //displayError()
                             clearCodeInput()
                         }

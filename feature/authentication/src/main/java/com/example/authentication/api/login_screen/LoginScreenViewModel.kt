@@ -4,7 +4,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.authentication.internal.screens.login.LoginScreenState
 import com.example.authentication.internal.validation.LoginField
 import com.example.authentication.internal.validation.PasswordField
-import com.example.common.navigation.NavRoute
 import com.example.common.view_model.NavigationBaseViewModel
 import com.example.core.authentication_source.api.use_case.LoginUseCase
 import com.example.core.data_store.UserDataStore
@@ -29,9 +28,6 @@ class LoginScreenViewModel @Inject constructor(
         _uiState.update {
             it.copy(login = value)
         }
-        _navigationEvent.update {
-            null
-        }
     }
 
     fun onPasswordTextChanged(value: String) {
@@ -40,9 +36,11 @@ class LoginScreenViewModel @Inject constructor(
         }
     }
 
-    fun onForgotPasswordClicked() {
-        _navigationEvent.update {
-            LoginScreenNavRoute.EnterLoginScreen(_uiState.value.login)
+    fun onForgotPasswordClicked() = viewModelScope.launch {
+        navigationEventTransaction {
+            _navigationEvent.emit(
+                LoginScreenNavRoute.EnterLoginScreen(_uiState.value.login)
+            )
         }
     }
 
@@ -56,8 +54,11 @@ class LoginScreenViewModel @Inject constructor(
                     when (it) {
                         is NetworkResponse.Success<*> -> {
                             saveCreditsOnDataStore(login, password)
-                            _navigationEvent.update {
-                                LoginScreenNavRoute.MainScreen
+
+                            navigationEventTransaction {
+                                _navigationEvent.emit(
+                                    LoginScreenNavRoute.MainScreen
+                                )
                             }
                         }
                         is NetworkResponse.Failure<*> -> {
@@ -104,9 +105,11 @@ class LoginScreenViewModel @Inject constructor(
         }
     }
 
-    fun onSignUpClicked() {
-        _navigationEvent.update {
-            LoginScreenNavRoute.RegistrationScreen
+    fun onSignUpClicked() = viewModelScope.launch {
+        navigationEventTransaction {
+            _navigationEvent.emit(
+                LoginScreenNavRoute.RegistrationScreen
+            )
         }
     }
 }

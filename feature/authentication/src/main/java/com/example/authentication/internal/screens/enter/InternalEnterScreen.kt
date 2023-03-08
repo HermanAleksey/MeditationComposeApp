@@ -39,7 +39,11 @@ internal fun InternalEnterScreen(
     val navDependencies = ((LocalContext.current as? Activity) as NavDependenciesProvider)
         .provideDependencies(EnterScreenNavDependencies::class.java)
 
-    LaunchedEffect(key1 = viewModel.navigationEvent.collectAsState()) {
+    LaunchedEffect(key1 = Unit) {
+        viewModel.onScreenEntered()
+    }
+
+    LaunchedEffect(key1 = viewModel.navigationEvent.collectAsState(null)) {
         viewModel.navigationEvent.collect { event ->
             event?.tryNavigate(navDependencies)
         }
@@ -64,7 +68,7 @@ internal fun InternalEnterScreen(
                     alignment = Alignment.BottomStart,
                     painter = painterResource(id = R.drawable.ic_logo_white),
                     contentScale = ContentScale.Fit,
-                    contentDescription = "Logo image",
+                    contentDescription = null,
                 )
             }
             Text(
@@ -85,11 +89,13 @@ internal fun InternalEnterScreen(
             ) {
                 viewModel.onEnterClick()
             }
-            DontHaveAccountText(modifier = Modifier
-                .padding(top = 18.dp)
-                .clickable {
-                    viewModel.onDontHaveAccountClick()
-                })
+            DontHaveAccountText(
+                modifier = Modifier
+                    .padding(top = 18.dp)
+                    .clickable {
+                        viewModel.onDontHaveAccountClick()
+                    }
+            )
         }
     }
 }

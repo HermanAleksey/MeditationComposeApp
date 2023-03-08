@@ -4,7 +4,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.common.view_model.NavigationBaseViewModel
 import com.example.core.data_store.use_case.ClearAuthDataUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -16,8 +15,10 @@ class ProfileScreenViewModel @Inject constructor(
     fun onLogOutClicked() {
         viewModelScope.launch {
             clearAuthDataUseCase()
-            _navigationEvent.update {
-                ProfileScreenNavRoute.EnterScreen
+            navigationEventTransaction {
+                _navigationEvent.emit(
+                    ProfileScreenNavRoute.EnterScreen
+                )
             }
         }
     }
