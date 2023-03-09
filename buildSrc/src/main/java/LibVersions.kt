@@ -3,6 +3,7 @@ object LibVersions {
     const val legacy_support_version = "1.0.0"
 
     const val ktx_version = "1.7.0"
+    //todo update version for https://github.com/raamcosta/compose-destinations
     const val ksp_version = "1.7.10-1.0.6"
     const val kotlin_version = "1.7.10"
 

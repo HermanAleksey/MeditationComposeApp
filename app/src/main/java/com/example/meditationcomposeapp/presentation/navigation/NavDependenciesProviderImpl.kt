@@ -17,20 +17,6 @@ import com.example.splash_screen.api.SplashScreenNavDependencies
 import com.ramcosta.composedestinations.navigation.navigate
 import com.ramcosta.composedestinations.navigation.popUpTo
 
-
-class NavigatorQueue {
-
-    private var isNavigating = false
-
-    fun performNavigation(navigation: () -> Unit) {
-        if (isNavigating) {
-            return
-        } else {
-            navigation()
-        }
-    }
-}
-
 class NavDependenciesProviderImpl(
     private val navController: NavHostController
 ) : NavDependenciesProvider {
@@ -58,9 +44,7 @@ class NavDependenciesProviderImpl(
                         navController.navigate(
                             EnterScreenDestination()
                         ) {
-                            popUpTo(SplashScreenDestination) {
-                                inclusive = false
-                            }
+                            popUpTo(EnterScreenDestination)
                         }
                     }
                 )
@@ -125,10 +109,10 @@ class NavDependenciesProviderImpl(
             EnterCodeScreenNavDependencies::class.java.name -> {
                 EnterCodeScreenNavDependencies(
                     navigateToNewPasswordScreen = { login ->
-                        navController.navigate(direction = NewPasswordScreenDestination(login)) {
-                            popUpTo(LoginScreenDestination) {
-                                inclusive = false
-                            }
+                        navController.navigate(
+                            direction = NewPasswordScreenDestination(login)
+                        ) {
+                            popUpTo(LoginScreenDestination)
                         }
                     }
                 )
@@ -146,9 +130,11 @@ class NavDependenciesProviderImpl(
                         navController.navigate(MainScreenDestination())
                     },
                     navigateToRegistrationScreen = {
-                        navController.navigate(RegistrationScreenDestination())
+                        navController.navigate(RegistrationScreenDestination()) {
+                            popUpTo(EnterScreenDestination())
+                        }
                     },
-                    navigateToEnterLoginScreen = { login ->
+                    navigateToEnterCodeScreen = { login ->
                         navController.navigate(EnterCodeScreenDestination(login))
                     }
                 )
@@ -163,7 +149,9 @@ class NavDependenciesProviderImpl(
             RegistrationScreenNavDependencies::class.java.name -> {
                 RegistrationScreenNavDependencies(
                     navigateToLoginScreen = {
-                        navController.navigate(LoginScreenDestination())
+                        navController.navigate(LoginScreenDestination()) {
+                            popUpTo(EnterScreenDestination())
+                        }
                     }
                 )
             }

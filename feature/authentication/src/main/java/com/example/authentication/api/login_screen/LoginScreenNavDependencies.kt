@@ -3,12 +3,10 @@ package com.example.authentication.api.login_screen
 import android.util.Log
 import com.example.common.navigation.NavDependencies
 import com.example.common.navigation.NavRoute
-import kotlinx.coroutines.internal.synchronized
-import java.util.concurrent.atomic.AtomicBoolean
 
 class LoginScreenNavDependencies(
     val navigateToMainScreen: () -> Unit,
-    val navigateToEnterLoginScreen: (login: String) -> Unit,
+    val navigateToEnterCodeScreen: (login: String) -> Unit,
     val navigateToRegistrationScreen: () -> Unit,
 ) : NavDependencies
 
@@ -21,7 +19,7 @@ sealed class LoginScreenNavRoute : NavRoute<LoginScreenNavDependencies>() {
 
     data class EnterLoginScreen(private val login: String) : LoginScreenNavRoute() {
         override fun navigate(navDependencies: LoginScreenNavDependencies) {
-            navDependencies.navigateToEnterLoginScreen(login)
+            navDependencies.navigateToEnterCodeScreen(login)
         }
     }
 
