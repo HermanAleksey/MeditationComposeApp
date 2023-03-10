@@ -8,7 +8,7 @@ import com.example.feature.profile.internal.InternalProfileScreen
 
 @Composable
 fun ProfileScreen(
-    viewModel: ProfileScreenViewModel,
+    viewModel: ProfileScreenViewModel
 ) {
     InternalProfileScreen(viewModel)
 }

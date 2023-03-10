@@ -1,4 +1,4 @@
-package com.example.meditationcomposeapp.presentation.screens.main_flow
+package com.example.meditationcomposeapp.presentation.screens.main_flow.shuffle_puzzle
 
 import androidx.compose.runtime.Composable
 import com.example.shuffle_puzzle.api.ShufflePuzzleScreenViewModel

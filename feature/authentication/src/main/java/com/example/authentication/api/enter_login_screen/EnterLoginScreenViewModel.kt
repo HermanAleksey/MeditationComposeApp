@@ -21,6 +21,12 @@ class EnterLoginScreenViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(EnterLoginScreenState())
     val uiState: StateFlow<EnterLoginScreenState> = _uiState
 
+    fun onScreenOpened(initialLogin: String) {
+        _uiState.update {
+            it.copy(login = initialLogin)
+        }
+    }
+
     fun onLoginTextChanged(value: String) {
         _uiState.update {
             it.copy(login = value)

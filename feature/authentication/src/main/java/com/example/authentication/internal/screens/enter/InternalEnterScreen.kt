@@ -8,8 +8,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -19,11 +17,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.authentication.api.enter_screen.EnterScreenNavDependencies
 import com.example.authentication.api.enter_screen.EnterScreenViewModel
 import com.example.authentication.internal.screens.enter.composable.DontHaveAccountText
 import com.example.authentication.internal.screens.enter.composable.LoginMainButton
-import com.example.common.navigation.NavDependenciesProvider
 import com.example.design_system.common_composables.ImageBackground
 import com.example.feature.authentication.R
 
@@ -31,23 +27,11 @@ import com.example.feature.authentication.R
 internal fun InternalEnterScreen(
     viewModel: EnterScreenViewModel,
 ) {
+
     val activity = LocalContext.current as? Activity
     BackHandler(enabled = true, onBack = {
         activity?.finish()
     })
-
-    val navDependencies = ((LocalContext.current as? Activity) as NavDependenciesProvider)
-        .provideDependencies(EnterScreenNavDependencies::class.java)
-
-    LaunchedEffect(key1 = Unit) {
-        viewModel.onScreenEntered()
-    }
-
-    LaunchedEffect(key1 = viewModel.navigationEvent.collectAsState(null)) {
-        viewModel.navigationEvent.collect { event ->
-            event?.tryNavigate(navDependencies)
-        }
-    }
 
     ImageBackground(
         imageRes = R.drawable.background_login

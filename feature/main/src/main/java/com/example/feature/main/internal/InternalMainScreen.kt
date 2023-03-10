@@ -6,17 +6,13 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import com.example.common.navigation.NavDependenciesProvider
 import com.example.design_system.common_composables.ColorBackground
 import com.example.feature.main.R
-import com.example.feature.main.api.MainScreenNavDependencies
 import com.example.feature.main.api.MainScreenViewModel
 import com.example.feature.main.internal.composable.MenuItem
 import com.example.feature.main.internal.composable.MenuItemModel
@@ -30,19 +26,6 @@ internal fun InternalMainScreen(
     BackHandler(enabled = true, onBack = {
         activity?.finish()
     })
-
-    val navDependencies = ((LocalContext.current as? Activity) as NavDependenciesProvider)
-        .provideDependencies(MainScreenNavDependencies::class.java)
-
-    LaunchedEffect(key1 = Unit) {
-        viewModel.onScreenEntered()
-    }
-
-    LaunchedEffect(key1 = viewModel.navigationEvent.collectAsState(null)) {
-        viewModel.navigationEvent.collect { event ->
-            event?.tryNavigate(navDependencies)
-        }
-    }
 
     val menuItems = getMenuItemsList {
         viewModel.onMenuItemClick(it)

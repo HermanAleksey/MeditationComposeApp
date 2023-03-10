@@ -84,12 +84,15 @@ fun RowScope.AddItem(
         selected = currentDestination == screen.direction,
         unselectedContentColor = LocalContentColor.current.copy(alpha = ContentAlpha.disabled),
         onClick = {
+            if (navController.currentDestination?.route == screen.direction.route)
+                return@BottomNavigationItem
+
             with(navController) {
                 navigate(screen.direction) {
                     popUpTo(MainScreenDestination.route) {
                         saveState = true
+                        inclusive = false
                     }
-                    launchSingleTop = true
                 }
             }
         }
