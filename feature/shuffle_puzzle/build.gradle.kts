@@ -53,4 +53,5 @@ dependencies {
     testImplementation(Dependencies.junit)
     testImplementation (Dependencies.mockito)
     testImplementation (Dependencies.coroutines_test)
+    testImplementation (Dependencies.powermock_reflect)
 }

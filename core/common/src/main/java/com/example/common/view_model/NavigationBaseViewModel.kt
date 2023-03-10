@@ -12,7 +12,8 @@ abstract class NavigationBaseViewModel<NavRoute> : ViewModel() {
 
     protected val _navigationEvent: MutableSharedFlow<NavRoute?> =
         MutableSharedFlow(
-            replay = 1,
+            //replay value = 2 so it can be tested
+            replay = 2,
             extraBufferCapacity = 0,
             onBufferOverflow = BufferOverflow.SUSPEND
         )

@@ -8,6 +8,8 @@ import com.example.coroutines_test.CoroutinesTestRule
 import com.example.network.SuccessInfo
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.toList
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.*
@@ -74,9 +76,17 @@ class NewPasswordScreenViewModelTest {
 
         viewModel.onConfirmClick(login)
 
+        val sharedFlowResult = mutableListOf<NewPasswordScreenNavRoute?>()
+        val job = launch {
+            viewModel.navigationEvent.toList(sharedFlowResult)
+        }
         advanceUntilIdle()
 
-        assert(viewModel.navigationEvent.value == null)
+        assertEquals(
+            sharedFlowResult.firstOrNull(),
+            null
+        )
+        job.cancel()
         verify(setNewPasswordUseCase, never()).invoke(anyString(), anyString())
     }
 
@@ -89,10 +99,18 @@ class NewPasswordScreenViewModelTest {
 
             viewModel.onConfirmClick(login)
 
+            val sharedFlowResult = mutableListOf<NewPasswordScreenNavRoute?>()
+            val job = launch {
+                viewModel.navigationEvent.toList(sharedFlowResult)
+            }
             advanceUntilIdle()
 
-            assert(viewModel.navigationEvent.value == null)
+            assertEquals(
+                sharedFlowResult.firstOrNull(),
+                null
+            )
             verify(setNewPasswordUseCase, never()).invoke(anyString(), anyString())
+            job.cancel()
         }
 
     @Test
@@ -114,9 +132,17 @@ class NewPasswordScreenViewModelTest {
 
         viewModel.onConfirmClick(login)
 
+        val sharedFlowResult = mutableListOf<NewPasswordScreenNavRoute?>()
+        val job = launch {
+            viewModel.navigationEvent.toList(sharedFlowResult)
+        }
         advanceUntilIdle()
 
-        assert(viewModel.navigationEvent.value == null)
+        assertEquals(
+            sharedFlowResult.firstOrNull(),
+            null
+        )
+        job.cancel()
         verify(setNewPasswordUseCase).invoke(login, password)
     }
 
@@ -142,9 +168,17 @@ class NewPasswordScreenViewModelTest {
 
             viewModel.onConfirmClick(login)
 
+            val sharedFlowResult = mutableListOf<NewPasswordScreenNavRoute?>()
+            val job = launch {
+                viewModel.navigationEvent.toList(sharedFlowResult)
+            }
             advanceUntilIdle()
 
-            assert(viewModel.navigationEvent.value == null)
+            assertEquals(
+                sharedFlowResult.firstOrNull(),
+                null
+            )
+            job.cancel()
             verify(setNewPasswordUseCase).invoke(login, password)
         }
 
@@ -170,9 +204,17 @@ class NewPasswordScreenViewModelTest {
 
             viewModel.onConfirmClick(login)
 
+            val sharedFlowResult = mutableListOf<NewPasswordScreenNavRoute?>()
+            val job = launch {
+                viewModel.navigationEvent.toList(sharedFlowResult)
+            }
             advanceUntilIdle()
 
-            assert(viewModel.navigationEvent.value == NewPasswordScreenNavRoute.LoginScreen)
+            assertEquals(
+                sharedFlowResult.firstOrNull(),
+                NewPasswordScreenNavRoute.LoginScreen
+            )
+            job.cancel()
             verify(setNewPasswordUseCase).invoke(login, password)
         }
 }

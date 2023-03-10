@@ -8,6 +8,8 @@ import com.example.coroutines_test.CoroutinesTestRule
 import com.example.network.SuccessInfo
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.toList
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.*
@@ -56,7 +58,7 @@ class EnterLoginScreenViewModelTest {
     }
 
     @Test
-    fun `onConfirmClick, email is valid, network response error, don't navigate`() = runTest{
+    fun `onConfirmClick, email is valid, network response error, don't navigate`() = runTest {
         val login = "qwewqe"
         whenever(requestPasswordRestorationUseCase(anyString()))
             .thenReturn(flow {
@@ -73,14 +75,19 @@ class EnterLoginScreenViewModelTest {
 
         viewModel.onConfirmClick()
 
+        val sharedFlowResult = mutableListOf<EnterLoginScreenNavRoute?>()
+        val job = launch {
+            viewModel.navigationEvent.toList(sharedFlowResult)
+        }
         advanceUntilIdle()
 
-        assert(viewModel.navigationEvent.value == null)
+        assert(sharedFlowResult.firstOrNull() == null)
         verify(requestPasswordRestorationUseCase).invoke(login)
+        job.cancel()
     }
 
     @Test
-    fun `onConfirmClick, email is valid, network response success, navigate`() = runTest{
+    fun `onConfirmClick, email is valid, network response success, navigate`() = runTest {
         val login = "qwewqe"
         whenever(requestPasswordRestorationUseCase(anyString()))
             .thenReturn(flow {
@@ -97,14 +104,22 @@ class EnterLoginScreenViewModelTest {
 
         viewModel.onConfirmClick()
 
+        val sharedFlowResult = mutableListOf<EnterLoginScreenNavRoute?>()
+        val job = launch {
+            viewModel.navigationEvent.toList(sharedFlowResult)
+        }
         advanceUntilIdle()
 
-        assert(viewModel.navigationEvent.value == EnterLoginScreenNavRoute.EnterCodeScreen(login))
+        assertEquals(
+            sharedFlowResult.first(),
+            EnterLoginScreenNavRoute.EnterCodeScreen(login)
+        )
         verify(requestPasswordRestorationUseCase).invoke(login)
+        job.cancel()
     }
 
     @Test
-    fun `onConfirmClick, email is not valid, network response error, don't navigate`() = runTest{
+    fun `onConfirmClick, email is not valid, network response error, don't navigate`() = runTest {
         val login = "qwewqe"
         whenever(requestPasswordRestorationUseCase(anyString()))
             .thenReturn(flow {
@@ -118,10 +133,15 @@ class EnterLoginScreenViewModelTest {
 
         viewModel.onConfirmClick()
 
+        val sharedFlowResult = mutableListOf<EnterLoginScreenNavRoute?>()
+        val job = launch {
+            viewModel.navigationEvent.toList(sharedFlowResult)
+        }
         advanceUntilIdle()
 
-        assert(viewModel.navigationEvent.value == null)
+        assert(sharedFlowResult.firstOrNull() == null)
         verify(requestPasswordRestorationUseCase).invoke(login)
+        job.cancel()
     }
 
 }

@@ -10,6 +10,8 @@ import com.example.splash_screen.api.SplashScreenNavRoute
 import com.example.splash_screen.api.SplashScreenViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.toList
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.*
 import org.junit.*
 import org.junit.runner.RunWith
@@ -80,9 +82,17 @@ class SplashScreenViewModelTest {
 
             viewModel.onLaunchSplashScreen(versionName)
 
+            val sharedFlowResult = mutableListOf<SplashScreenNavRoute?>()
+            val job = launch {
+                viewModel.navigationEvent.toList(sharedFlowResult)
+            }
             advanceUntilIdle()
 
-            assert(viewModel.navigationEvent.value == SplashScreenNavRoute.MainScreen)
+            Assert.assertEquals(
+                sharedFlowResult.firstOrNull(),
+                SplashScreenNavRoute.MainScreen
+            )
+            job.cancel()
         }
 
     @Test
@@ -111,9 +121,17 @@ class SplashScreenViewModelTest {
 
             viewModel.onLaunchSplashScreen(versionName)
 
+            val sharedFlowResult = mutableListOf<SplashScreenNavRoute?>()
+            val job = launch {
+                viewModel.navigationEvent.toList(sharedFlowResult)
+            }
             advanceUntilIdle()
 
-            assert(viewModel.navigationEvent.value == SplashScreenNavRoute.EnterScreen)
+            Assert.assertEquals(
+                sharedFlowResult.firstOrNull(),
+                SplashScreenNavRoute.EnterScreen
+            )
+            job.cancel()
         }
 
     @Test
@@ -136,9 +154,17 @@ class SplashScreenViewModelTest {
 
             viewModel.onLaunchSplashScreen(versionName)
 
+            val sharedFlowResult = mutableListOf<SplashScreenNavRoute?>()
+            val job = launch {
+                viewModel.navigationEvent.toList(sharedFlowResult)
+            }
             advanceUntilIdle()
 
-            assert(viewModel.navigationEvent.value == SplashScreenNavRoute.EnterScreen)
+            Assert.assertEquals(
+                sharedFlowResult.firstOrNull(),
+                SplashScreenNavRoute.EnterScreen
+            )
+            job.cancel()
         }
 
     @Test

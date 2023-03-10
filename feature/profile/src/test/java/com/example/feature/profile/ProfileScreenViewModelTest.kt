@@ -5,6 +5,8 @@ import com.example.coroutines_test.CoroutinesTestRule
 import com.example.feature.profile.api.ProfileScreenNavRoute
 import com.example.feature.profile.api.ProfileScreenViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.toList
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.*
@@ -38,9 +40,17 @@ class ProfileScreenViewModelTest {
     fun `onBeerItemClicked, navigate`() = runTest{
         viewModel.onLogOutClicked()
 
+        val sharedFlowResult = mutableListOf<ProfileScreenNavRoute?>()
+        val job = launch {
+            viewModel.navigationEvent.toList(sharedFlowResult)
+        }
         advanceUntilIdle()
 
-        assert(viewModel.navigationEvent.value == ProfileScreenNavRoute.EnterScreen)
+        assertEquals(
+            sharedFlowResult.firstOrNull(),
+            ProfileScreenNavRoute.EnterScreen
+        )
+        job.cancel()
         verify(clearAuthDataUseCase).invoke()
     }
 

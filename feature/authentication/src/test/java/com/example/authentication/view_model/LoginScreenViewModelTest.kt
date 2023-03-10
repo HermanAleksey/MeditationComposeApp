@@ -9,6 +9,8 @@ import com.example.core.model.NetworkResponse
 import com.example.coroutines_test.CoroutinesTestRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.toList
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.*
@@ -71,10 +73,20 @@ class LoginScreenViewModelTest {
 
 
     @Test
-    fun `onSignUpClicked, navigation invoked`() {
+    fun `onSignUpClicked, navigation invoked`() = runTest {
         viewModel.onSignUpClicked()
 
-        assert(viewModel.navigationEvent.value == LoginScreenNavRoute.RegistrationScreen)
+        val sharedFlowResult = mutableListOf<LoginScreenNavRoute?>()
+        val job = launch {
+            viewModel.navigationEvent.toList(sharedFlowResult)
+        }
+        advanceUntilIdle()
+
+        assertEquals(
+            sharedFlowResult.firstOrNull(),
+            LoginScreenNavRoute.RegistrationScreen
+        )
+        job.cancel()
     }
 
     @Test
@@ -86,7 +98,17 @@ class LoginScreenViewModelTest {
 
         advanceUntilIdle()
 
-        assert(viewModel.navigationEvent.value == null)
+        val sharedFlowResult = mutableListOf<LoginScreenNavRoute?>()
+        val job = launch {
+            viewModel.navigationEvent.toList(sharedFlowResult)
+        }
+        advanceUntilIdle()
+
+        assertEquals(
+            sharedFlowResult.firstOrNull(),
+            null
+        )
+        job.cancel()
     }
 
     @Test
@@ -96,9 +118,17 @@ class LoginScreenViewModelTest {
 
         viewModel.onLoginClicked()
 
+        val sharedFlowResult = mutableListOf<LoginScreenNavRoute?>()
+        val job = launch {
+            viewModel.navigationEvent.toList(sharedFlowResult)
+        }
         advanceUntilIdle()
 
-        assert(viewModel.navigationEvent.value == null)
+        assertEquals(
+            sharedFlowResult.firstOrNull(),
+            null
+        )
+        job.cancel()
     }
 
     @Test
@@ -119,9 +149,17 @@ class LoginScreenViewModelTest {
 
         viewModel.onLoginClicked()
 
+        val sharedFlowResult = mutableListOf<LoginScreenNavRoute?>()
+        val job = launch {
+            viewModel.navigationEvent.toList(sharedFlowResult)
+        }
         advanceUntilIdle()
 
-        assert(viewModel.navigationEvent.value == LoginScreenNavRoute.MainScreen)
+        assertEquals(
+            sharedFlowResult.firstOrNull(),
+            LoginScreenNavRoute.MainScreen
+        )
+        job.cancel()
     }
 
     @Test
@@ -143,9 +181,14 @@ class LoginScreenViewModelTest {
 
         viewModel.onLoginClicked()
 
+        val sharedFlowResult = mutableListOf<LoginScreenNavRoute?>()
+        val job = launch {
+            viewModel.navigationEvent.toList(sharedFlowResult)
+        }
         advanceUntilIdle()
 
-        assert(viewModel.navigationEvent.value == null)
+        assert(sharedFlowResult.firstOrNull() == null)
+        job.cancel()
     }
 
     @Test
@@ -167,21 +210,39 @@ class LoginScreenViewModelTest {
 
             viewModel.onLoginClicked()
 
+            val sharedFlowResult = mutableListOf<LoginScreenNavRoute?>()
+            val job = launch {
+                viewModel.navigationEvent.toList(sharedFlowResult)
+            }
             advanceUntilIdle()
 
-            assert(viewModel.navigationEvent.value == LoginScreenNavRoute.MainScreen)
+            assertEquals(
+                sharedFlowResult.firstOrNull(),
+                LoginScreenNavRoute.MainScreen
+            )
             verify(userDataStore).writeLogin(login)
             verify(userDataStore).writePassword(password)
+            job.cancel()
         }
 
     @Test
-    fun `onForgotPasswordClicked, navigate to EnterLoginScreen`() {
+    fun `onForgotPasswordClicked, navigate to EnterLoginScreen`() = runTest {
         val login = "wefwefwe"
 
         viewModel.onLoginTextChanged(login)
         viewModel.onForgotPasswordClicked()
 
-        assert(viewModel.navigationEvent.value == LoginScreenNavRoute.EnterLoginScreen(login))
+        val sharedFlowResult = mutableListOf<LoginScreenNavRoute?>()
+        val job = launch {
+            viewModel.navigationEvent.toList(sharedFlowResult)
+        }
+        advanceUntilIdle()
+
+        assertEquals(
+            sharedFlowResult.firstOrNull(),
+            LoginScreenNavRoute.EnterLoginScreen(login)
+        )
+        job.cancel()
     }
 
     @Test

@@ -9,6 +9,9 @@ import com.example.coroutines_test.CoroutinesTestRule
 import com.example.network.SuccessInfo
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.toList
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.*
@@ -148,94 +151,132 @@ class EnterCodeScreenViewModelTest {
     }
 
     @Test
-    fun `onLastDigitFilled, process loading state true, uiState is loading`() = runTest {
-        val viewModel = EnterCodeScreenViewModel(verifyCodeUseCase)
-        val login = "q"
+    fun `onLastDigitFilled, process loading state true, uiState is loading`() =
+        runTest(UnconfinedTestDispatcher()) {
+            val viewModel = EnterCodeScreenViewModel(verifyCodeUseCase)
+            val login = "q"
 
-        whenever(verifyCodeUseCase(anyString(), anyString())).thenReturn(
-            flow {
-                emit(NetworkResponse.Loading(true))
+            whenever(verifyCodeUseCase(anyString(), anyString())).thenReturn(
+                flow {
+                    emit(NetworkResponse.Loading(true))
+                }
+            )
+
+            viewModel.onLastDigitFilled(login)
+
+            val sharedFlowResult = mutableListOf<EnterCodeScreenNavRoute?>()
+            val job = launch {
+                viewModel.navigationEvent.toList(sharedFlowResult)
             }
-        )
+            advanceUntilIdle()
 
-        viewModel.onLastDigitFilled(login)
-
-        advanceUntilIdle()
-
-        assertTrue(viewModel.uiState.value.isLoading)
-        assertTrue(viewModel.navigationEvent.value == null)
-    }
+            assertTrue(viewModel.uiState.value.isLoading)
+            assertTrue(sharedFlowResult.lastOrNull() == null)
+            job.cancel()
+        }
 
     @Test
-    fun `onLastDigitFilled, verify code request success, answer success, navigate to NewPasswordScreen`() = runTest {
-        val viewModel = EnterCodeScreenViewModel(verifyCodeUseCase)
-        val login = "hihiq"
+    fun `onLastDigitFilled, verify code request success, answer success, navigate to NewPasswordScreen`() =
+        runTest {
+            val viewModel = EnterCodeScreenViewModel(verifyCodeUseCase)
+            val login = "hihiq"
 
-        whenever(verifyCodeUseCase(anyString(), anyString())).thenReturn(
-            flow {
-                emit(NetworkResponse.Success(SuccessInfo(true, null)))
+            whenever(verifyCodeUseCase(anyString(), anyString())).thenReturn(
+                flow {
+                    emit(NetworkResponse.Success(SuccessInfo(true, null)))
+                }
+            )
+
+            viewModel.onLastDigitFilled(login)
+
+            val sharedFlowResult = mutableListOf<EnterCodeScreenNavRoute?>()
+            val job = launch {
+                viewModel.navigationEvent.toList(sharedFlowResult)
             }
-        )
+            advanceUntilIdle()
 
-        viewModel.onLastDigitFilled(login)
-
-        advanceUntilIdle()
-
-        assert(viewModel.navigationEvent.value == EnterCodeScreenNavRoute.NewPasswordScreen(login))
-    }
+            assertEquals(
+                sharedFlowResult.firstOrNull(),
+                EnterCodeScreenNavRoute.NewPasswordScreen(
+                    login
+                )
+            )
+            job.cancel()
+        }
 
     @Test
-    fun `onLastDigitFilled, verify code request success, answer error, don't navigate to NewPasswordScreen`() = runTest {
-        val viewModel = EnterCodeScreenViewModel(verifyCodeUseCase)
-        val login = "hihiq"
+    fun `onLastDigitFilled, verify code request success, answer error, don't navigate to NewPasswordScreen`() =
+        runTest {
+            val viewModel = EnterCodeScreenViewModel(verifyCodeUseCase)
+            val login = "hihiq"
 
-        whenever(verifyCodeUseCase(anyString(), anyString())).thenReturn(
-            flow {
-                emit(NetworkResponse.Success(SuccessInfo(false, "wfe")))
+            whenever(verifyCodeUseCase(anyString(), anyString())).thenReturn(
+                flow {
+                    emit(NetworkResponse.Success(SuccessInfo(false, "wfe")))
+                }
+            )
+
+            viewModel.onLastDigitFilled(login)
+
+            val sharedFlowResult = mutableListOf<EnterCodeScreenNavRoute?>()
+            val job = launch {
+                viewModel.navigationEvent.toList(sharedFlowResult)
             }
-        )
+            advanceUntilIdle()
 
-        viewModel.onLastDigitFilled(login)
-
-        advanceUntilIdle()
-
-        assert(viewModel.navigationEvent.value == null)
-    }
+            assertTrue(sharedFlowResult.lastOrNull() == null)
+            job.cancel()
+        }
 
     @Test
-    fun `onLastDigitFilled, verify code request fail, don't navigate to NewPasswordScreen`() = runTest {
-        val viewModel = EnterCodeScreenViewModel(verifyCodeUseCase)
-        val login = "hihiq"
+    fun `onLastDigitFilled, verify code request fail, don't navigate to NewPasswordScreen`() =
+        runTest {
+            val viewModel = EnterCodeScreenViewModel(verifyCodeUseCase)
+            val login = "hihiq"
 
-        whenever(verifyCodeUseCase(anyString(), anyString())).thenReturn(
-            flow {
-                emit(NetworkResponse.Failure(null, "error"))
+            whenever(verifyCodeUseCase(anyString(), anyString())).thenReturn(
+                flow {
+                    emit(NetworkResponse.Failure(null, "error"))
+                }
+            )
+
+            viewModel.onLastDigitFilled(login)
+
+            val sharedFlowResult = mutableListOf<EnterCodeScreenNavRoute?>()
+            val job = launch {
+                viewModel.navigationEvent.toList(sharedFlowResult)
             }
-        )
+            advanceUntilIdle()
 
-        viewModel.onLastDigitFilled(login)
-
-        advanceUntilIdle()
-
-        assert(viewModel.navigationEvent.value == null)
-    }
+            assertTrue(sharedFlowResult.lastOrNull() == null)
+            job.cancel()
+        }
 
     @Test
-    fun `onLastDigitFilled, network request success, error received, clear code, don't navigate`() = runTest {
-        val viewModel = EnterCodeScreenViewModel(verifyCodeUseCase)
-        val login = "q"
+    fun `onLastDigitFilled, network request success, error received, clear code, don't navigate`() =
+        runTest {
+            val viewModel = EnterCodeScreenViewModel(verifyCodeUseCase)
+            val login = "q"
 
-        whenever(verifyCodeUseCase(anyString(), anyString())).thenReturn(
-            flow {
-                emit(NetworkResponse.Success(data = SuccessInfo(false, null)))
+            whenever(verifyCodeUseCase(anyString(), anyString())).thenReturn(
+                flow {
+                    emit(NetworkResponse.Success(data = SuccessInfo(false, null)))
+                }
+            )
+
+            viewModel.onLastDigitFilled(login)
+
+            val sharedFlowResult = mutableListOf<EnterCodeScreenNavRoute?>()
+            val job = launch {
+                viewModel.navigationEvent.toList(sharedFlowResult)
             }
-        )
+            advanceUntilIdle()
 
-        viewModel.onLastDigitFilled(login)
-
-        advanceUntilIdle()
-
-        assert(viewModel.navigationEvent.value == null)
-        assert(viewModel.uiState.value.code.contentToString() == EnterCodeScreenState.EMPTY_CODE_VALUE.contentToString())
-    }
+            assertTrue(sharedFlowResult.lastOrNull() == null)
+            assertEquals(
+                viewModel.uiState.value.code.contentToString(),
+                EnterCodeScreenState.EMPTY_CODE_VALUE.contentToString()
+            )
+            job.cancel()
+        }
 }

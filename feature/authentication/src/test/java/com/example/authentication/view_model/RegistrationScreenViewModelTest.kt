@@ -8,6 +8,8 @@ import com.example.coroutines_test.CoroutinesTestRule
 import com.example.network.SuccessInfo
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.toList
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.*
@@ -79,10 +81,20 @@ class RegistrationScreenViewModelTest {
     }
 
     @Test
-    fun `onSignInClicked, navigate to login screen`() {
+    fun `onSignInClicked, navigate to login screen`() = runTest {
         viewModel.onSignInClicked()
 
-        assert(viewModel.navigationEvent.value == RegistrationScreenNavRoute.LoginScreen)
+        val sharedFlowResult = mutableListOf<RegistrationScreenNavRoute?>()
+        val job = launch {
+            viewModel.navigationEvent.toList(sharedFlowResult)
+        }
+        advanceUntilIdle()
+
+        assertEquals(
+            sharedFlowResult.firstOrNull(),
+            RegistrationScreenNavRoute.LoginScreen
+        )
+        job.cancel()
     }
 
     @Test
@@ -97,10 +109,18 @@ class RegistrationScreenViewModelTest {
 
             viewModel.onSignUpClicked()
 
+            val sharedFlowResult = mutableListOf<RegistrationScreenNavRoute?>()
+            val job = launch {
+                viewModel.navigationEvent.toList(sharedFlowResult)
+            }
             advanceUntilIdle()
 
+            assertEquals(
+                sharedFlowResult.firstOrNull(),
+                null
+            )
+            job.cancel()
             verify(registerUseCase, never()).invoke(anyString(), anyString(), anyString())
-            assert(viewModel.navigationEvent.value == null)
         }
 
     @Test
@@ -115,10 +135,18 @@ class RegistrationScreenViewModelTest {
 
             viewModel.onSignUpClicked()
 
+            val sharedFlowResult = mutableListOf<RegistrationScreenNavRoute?>()
+            val job = launch {
+                viewModel.navigationEvent.toList(sharedFlowResult)
+            }
             advanceUntilIdle()
 
+            assertEquals(
+                sharedFlowResult.firstOrNull(),
+                null
+            )
+            job.cancel()
             verify(registerUseCase, never()).invoke(anyString(), anyString(), anyString())
-            assert(viewModel.navigationEvent.value == null)
         }
 
     @Test
@@ -133,10 +161,19 @@ class RegistrationScreenViewModelTest {
 
             viewModel.onSignUpClicked()
 
+            val sharedFlowResult = mutableListOf<RegistrationScreenNavRoute?>()
+            val job = launch {
+                viewModel.navigationEvent.toList(sharedFlowResult)
+            }
             advanceUntilIdle()
 
+            assertEquals(
+                sharedFlowResult.firstOrNull(),
+                null
+            )
+            job.cancel()
+
             verify(registerUseCase, never()).invoke(anyString(), anyString(), anyString())
-            assert(viewModel.navigationEvent.value == null)
         }
 
     @Test
@@ -151,10 +188,19 @@ class RegistrationScreenViewModelTest {
 
             viewModel.onSignUpClicked()
 
+            val sharedFlowResult = mutableListOf<RegistrationScreenNavRoute?>()
+            val job = launch {
+                viewModel.navigationEvent.toList(sharedFlowResult)
+            }
             advanceUntilIdle()
 
+            assertEquals(
+                sharedFlowResult.firstOrNull(),
+                null
+            )
+            job.cancel()
+
             verify(registerUseCase, never()).invoke(anyString(), anyString(), anyString())
-            assert(viewModel.navigationEvent.value == null)
         }
 
     @Test
@@ -169,10 +215,18 @@ class RegistrationScreenViewModelTest {
 
             viewModel.onSignUpClicked()
 
+            val sharedFlowResult = mutableListOf<RegistrationScreenNavRoute?>()
+            val job = launch {
+                viewModel.navigationEvent.toList(sharedFlowResult)
+            }
             advanceUntilIdle()
 
+            assertEquals(
+                sharedFlowResult.firstOrNull(),
+                null
+            )
+            job.cancel()
             verify(registerUseCase, never()).invoke(anyString(), anyString(), anyString())
-            assert(viewModel.navigationEvent.value == null)
         }
 
     @Test
@@ -187,10 +241,19 @@ class RegistrationScreenViewModelTest {
 
             viewModel.onSignUpClicked()
 
+            val sharedFlowResult = mutableListOf<RegistrationScreenNavRoute?>()
+            val job = launch {
+                viewModel.navigationEvent.toList(sharedFlowResult)
+            }
             advanceUntilIdle()
 
+            assertEquals(
+                sharedFlowResult.firstOrNull(),
+                null
+            )
+            job.cancel()
+
             verify(registerUseCase, never()).invoke(anyString(), anyString(), anyString())
-            assert(viewModel.navigationEvent.value == null)
         }
 
     @Test
@@ -205,10 +268,18 @@ class RegistrationScreenViewModelTest {
 
             viewModel.onSignUpClicked()
 
+            val sharedFlowResult = mutableListOf<RegistrationScreenNavRoute?>()
+            val job = launch {
+                viewModel.navigationEvent.toList(sharedFlowResult)
+            }
             advanceUntilIdle()
 
+            assertEquals(
+                sharedFlowResult.firstOrNull(),
+                null
+            )
+            job.cancel()
             verify(registerUseCase, never()).invoke(anyString(), anyString(), anyString())
-            assert(viewModel.navigationEvent.value == null)
         }
 
     @Test
@@ -229,10 +300,18 @@ class RegistrationScreenViewModelTest {
 
             viewModel.onSignUpClicked()
 
+            val sharedFlowResult = mutableListOf<RegistrationScreenNavRoute?>()
+            val job = launch {
+                viewModel.navigationEvent.toList(sharedFlowResult)
+            }
             advanceUntilIdle()
 
+            assertEquals(
+                sharedFlowResult.firstOrNull(),
+                null
+            )
+            job.cancel()
             verify(registerUseCase).invoke(name, login, password)
-            assert(viewModel.navigationEvent.value == null)
         }
 
     @Test
@@ -259,10 +338,19 @@ class RegistrationScreenViewModelTest {
 
             viewModel.onSignUpClicked()
 
+            val sharedFlowResult = mutableListOf<RegistrationScreenNavRoute?>()
+            val job = launch {
+                viewModel.navigationEvent.toList(sharedFlowResult)
+            }
             advanceUntilIdle()
 
+            assertEquals(
+                sharedFlowResult.firstOrNull(),
+                null
+            )
+            job.cancel()
+
             verify(registerUseCase).invoke(name, login, password)
-            assert(viewModel.navigationEvent.value == null)
         }
 
     @Test
@@ -289,9 +377,17 @@ class RegistrationScreenViewModelTest {
 
             viewModel.onSignUpClicked()
 
+            val sharedFlowResult = mutableListOf<RegistrationScreenNavRoute?>()
+            val job = launch {
+                viewModel.navigationEvent.toList(sharedFlowResult)
+            }
             advanceUntilIdle()
 
+            assertEquals(
+                sharedFlowResult.firstOrNull(),
+                RegistrationScreenNavRoute.LoginScreen
+            )
+            job.cancel()
             verify(registerUseCase).invoke(name, login, password)
-            assert(viewModel.navigationEvent.value == RegistrationScreenNavRoute.LoginScreen)
         }
 }
