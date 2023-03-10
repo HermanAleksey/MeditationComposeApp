@@ -1,38 +1,11 @@
 <resources>
     <string name="app_name">MeditationComposeApp</string>
-    <string name="welcome">WELCOME</string>
-    <string name="welcome_text">Do meditation. Stay focused.\nLive a healthy life.</string>
-    <string name="login_button">Login With Email</string>
-    <string name="dont_have_account">Don’t have an account?</string>
-    <string name="sign_up">Sign\u00A0Up</string>
-    <string name="sign_in">Sign\u00A0In</string>
-    <string name="sign_in_desc">Sign in now to acces your excercises and saved music.</string>
-    <string name="email_address">Email Address</string>
-    <string name="forgot_password">Forgot Password?</string>
-    <string name="login">Login</string>
-    <string name="password">Password</string>
-    <string name="name">Name</string>
-    <string name="already_have_account">Already have an account?</string>
-    <string name="password_recovery">Password Recovery</string>
-    <string name="password_recovery_desc">An email with a code has been sent to you. Enter the code you received to recover your password.</string>
-    <string name="new_password">New Password</string>
-    <string name="repeat_new_password">Repeat new Password</string>
-    <string name="confirm">Confirm</string>
-    <string name="new_password_desc">Enter a new password and repeat it. The password must contain letters in both cases and at least one number.</string>
-    <string name="enter_login_desc">An email with a code has been sent to you. Enter the code you received to recover your password.</string>
-    <string name="error_field_is_blank">Field can\'t be empty</string>
-    <string name="error_field_is_long">Field is too long</string>
-    <string name="passwords_dont_match">Passwords doesn\'t match!</string>
-    <string name="features">Features</string>
-
-    <string name="update_notes_dialog_title">Update notes!</string>
 
     <string name="home_screen_desc">Home screen</string>
     <string name="beers_screen_desc">Beer screen</string>
     <string name="profile_screen_desc">Profile screen</string>
 
-    <string name="shuffle_puzzle_menu_option">Shuffle Puzzle</string>
-
     <string name="app_update_version">Update: %s</string>
-    <string name="app_update_time">From: %s</string>
+
+    <string name="update_notes_dialog_title">Update notes!</string>
 </resources>

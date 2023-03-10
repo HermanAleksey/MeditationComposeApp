@@ -25,12 +25,6 @@
     <string name="passwords_dont_match">Passwords doesn\'t match!</string>
     <string name="features">Features</string>
 
-    <string name="update_notes_dialog_title">Update notes!</string>
-
-    <string name="home_screen_desc">Home screen</string>
-    <string name="beers_screen_desc">Beer screen</string>
-    <string name="profile_screen_desc">Profile screen</string>
-
     <string name="hide_password">Hide password</string>
     <string name="show_password">Show password</string>
 </resources>
