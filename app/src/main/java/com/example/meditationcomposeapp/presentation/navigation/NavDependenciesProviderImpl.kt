@@ -130,8 +130,10 @@ class NavDependenciesProviderImpl(
                         navController.navigate(MainScreenDestination())
                     },
                     navigateToRegistrationScreen = {
-                        navController.navigate(RegistrationScreenDestination()) {
-                            popUpTo(EnterScreenDestination())
+                        navController.navigate(
+                            direction = RegistrationScreenDestination()
+                        ) {
+                            popUpTo(EnterScreenDestination)
                         }
                     },
                     navigateToEnterCodeScreen = { login ->
@@ -150,7 +152,7 @@ class NavDependenciesProviderImpl(
                 RegistrationScreenNavDependencies(
                     navigateToLoginScreen = {
                         navController.navigate(LoginScreenDestination()) {
-                            popUpTo(EnterScreenDestination())
+                            popUpTo(EnterScreenDestination)
                         }
                     }
                 )

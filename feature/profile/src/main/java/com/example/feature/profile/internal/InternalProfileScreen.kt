@@ -20,8 +20,8 @@ import com.example.feature.profile.api.ProfileScreenViewModel
 internal fun InternalProfileScreen(
     viewModel: ProfileScreenViewModel,
 ) {
-    val navDependencies = ((LocalContext.current as? Activity) as NavDependenciesProvider)
-        .provideDependencies(ProfileScreenNavDependencies::class.java)
+    val navDependencies = ((LocalContext.current as? Activity) as? NavDependenciesProvider)
+        ?.provideDependencies(ProfileScreenNavDependencies::class.java)
 
     LaunchedEffect(key1 = Unit) {
         viewModel.onScreenEntered()
@@ -29,7 +29,11 @@ internal fun InternalProfileScreen(
 
     LaunchedEffect(key1 = viewModel.navigationEvent.collectAsState(null)) {
         viewModel.navigationEvent.collect { event ->
-            event?.tryNavigate(navDependencies)
+            event?.let { navRoute ->
+                navDependencies?.let {
+                    navRoute.tryNavigate(it)
+                }
+            }
         }
     }
 
