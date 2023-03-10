@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="first_brewed">First brewed:</string>
+    <string name="abv_is">ABV:</string>
+    <string name="ebc_is">EBC:</string>
+    <string name="srm_is">SRM:</string>
+    <string name="ph_is">PH:</string>
+    <string name="try_now">Try now</string>
+    <string name="beer_list_title">A lot of beer here!</string>
+    <string name="ibu">IBU</string>
+    <string name="brewers_tips">Brewers tips</string>
+    <string name="beer_params">Beer parameters</string>
+    <string name="contributed_by">"Contributed by: "</string>
+    <string name="food_pairings">Good pairings:</string>
+
+</resources>

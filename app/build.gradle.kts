@@ -7,16 +7,17 @@ plugins {
     id("com.google.devtools.ksp") version LibVersions.ksp_version // Depends on your kotlin version
 }
 
+@Suppress("UnstableApiUsage")
 android {
     namespace = "com.example.meditationcomposeapp"
-    compileSdk = Config.compileSdk
+    compileSdk = Config.COMPILE_SDK
 
     defaultConfig {
-        applicationId = Config.applicationId
-        minSdk = Config.minSdk
-        targetSdk = Config.targetSdk
-        versionName = Config.versionName
-        versionCode = Config.versionCode
+        applicationId = Config.APPLICATION_ID
+        minSdk = Config.MIN_SDK
+        targetSdk = Config.TARGET_SDK
+        versionName = Config.VERSION_NAME
+        versionCode = Config.VERSION_CODE
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -26,15 +27,11 @@ android {
 
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-
-            buildConfigField("String", "SERVER_URL", "\"https://192.168.0.1:5000/\"")
-            buildConfigField("String", "PUNK_API_URL", "\"https://api.punkapi.com/v2/\"")
-            buildConfigField("String", "DATABASE_NAME", "\"MEDITATION_COMPOSE_DB\"")
         }
         getByName("debug") {
             isMinifyEnabled = false
@@ -44,23 +41,9 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-
-            buildConfigField("String", "SERVER_URL", "\"https://192.168.0.1:5000/\"")
-            buildConfigField("String", "PUNK_API_URL", "\"https://api.punkapi.com/v2/\"")
-            buildConfigField("String", "DATABASE_NAME", "\"MEDITATION_COMPOSE_DB\"")
         }
     }
 
-    flavorDimensions.add("default")
-
-    productFlavors {
-        create("demo") {
-            buildConfigField("boolean", "ENABLE_VALIDATION", "false")
-        }
-        create("full") {
-            buildConfigField("boolean", "ENABLE_VALIDATION", "true")
-        }
-    }
     kapt {
         correctErrorTypes = true
     }
@@ -84,6 +67,10 @@ android {
     }
 
     applicationVariants.all {
+        //todo remove when update to Kotlin 1.8  and KSP
+        addJavaSourceFoldersToModel(
+            File(buildDir, "generated/ksp/$name/kotlin")
+        )
         kotlin.sourceSets {
             getByName(name) {
                 kotlin.srcDir("build/generated/ksp/${name}/kotlin")
@@ -93,15 +80,21 @@ android {
 }
 
 dependencies {
-    implementation(project(":shuffle_puzzle"))
+    implementation(project(":feature:main"))
+    implementation(project(":feature:splash_screen"))
+    implementation(project(":feature:beer_sorts"))
+    implementation(project(":feature:shuffle_puzzle"))
+    implementation(project(":feature:authentication"))
+    implementation(project(":feature:profile"))
 
-    implementation(Dependencies.core_ktx)
-    implementation(Dependencies.compose_ui)
+    implementation(project(":core:updates_history"))
+    implementation(project(":core:design_system"))
+    implementation(project(":core:common"))
+    implementation(project(":core:model"))
+
     implementation(Dependencies.compose_material)
     implementation(Dependencies.compose_ui_tooling_preview)
-    implementation(Dependencies.lifecycle_runtime_ktx)
     implementation(Dependencies.activity_compose)
-    implementation(Dependencies.androidx_legacy_support)
 
     implementation(Dependencies.compose_material_icons)
 
@@ -113,10 +106,8 @@ dependencies {
     implementation(Dependencies.firebase_analytics_ktx)
 
     //navigation
-    implementation(Dependencies.navigation_compose)
     implementation(Dependencies.raamcosta_compose_destinations_anim_core)
     ksp(Dependencies.raamcosta_compose_destinations_ksp)
-    testImplementation(Dependencies.testng)
 
     //splash screen
     implementation(Dependencies.splash_screen_core)
@@ -126,41 +117,6 @@ dependencies {
     implementation(Dependencies.hilt_android)
     kapt(Dependencies.hilt_compiler)
 
-    //Gson
-    implementation(Dependencies.gson)
-
-    //retrofit
-    implementation(Dependencies.retrofit)
-    implementation(Dependencies.retrofit_converter_gson)
-
-    //okHttp
-    implementation(Dependencies.okhttp)
-    implementation(Dependencies.okhttp_logging_interceptor)
-
-    //data store
-    implementation(Dependencies.datastore_preferences)
-
-    //paging
-    implementation(Dependencies.paging_common_ktx)
-    implementation(Dependencies.paging_runtime)
-    implementation(Dependencies.paging_compose)
-
-    //glide
-    implementation(Dependencies.glide)
-
-    //room database
-    implementation(Dependencies.room_runtime)
-    implementation(Dependencies.room_ktx)
-    kapt(Dependencies.room_compiler)
-    implementation(Dependencies.room_pager)
-
     implementation(Dependencies.timber)
 
-    //testing
-    testImplementation(Dependencies.junit)
-    testImplementation (Dependencies.mockito)
-    testImplementation (Dependencies.coroutines_test)
-    testImplementation (Dependencies.mockito_kotlin)
-    testImplementation (Dependencies.powermock_reflect)
-    androidTestImplementation(Dependencies.mockito_android)
 }

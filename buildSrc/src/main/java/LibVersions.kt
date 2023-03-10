@@ -3,12 +3,15 @@ object LibVersions {
     const val legacy_support_version = "1.0.0"
 
     const val ktx_version = "1.7.0"
+    //todo update version for https://github.com/raamcosta/compose-destinations
     const val ksp_version = "1.7.10-1.0.6"
     const val kotlin_version = "1.7.10"
 
     const val compose_version = "1.2.1"
     const val lifecycle_runtime_ktx_version = "2.3.1"
     const val compose_compiler_version = "1.3.0"
+
+    const val coroutines_version = "1.3.2"
 
     const val gson_version = "2.9.0"
 
@@ -52,4 +55,6 @@ object LibVersions {
     const val power_mock = "1.6.1"
 
     const val timber_version = "5.0.1"
+
+    const val build_gradle_version = "7.4.2"
 }

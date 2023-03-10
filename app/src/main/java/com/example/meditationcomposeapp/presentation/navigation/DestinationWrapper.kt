@@ -20,7 +20,7 @@ enum class DestinationWrapper(
     DetailedBeerScreen(DetailedBeerScreenDestination, true, true),
     MainScreen(MainScreenDestination, true, true),
     ShufflePuzzleScreen(ShufflePuzzleScreenDestination, true, true),
-    ProfileScreen(TestScreenDestination, true, true),
+    ProfileScreen(ProfileScreenDestination, true, true),
 }
 
 fun <T> TypedDestination<T>.getDestinationWrapper() =

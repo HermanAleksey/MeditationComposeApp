@@ -2,24 +2,25 @@ package com.example.meditationcomposeapp.presentation
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.DisplayMetrics
-import android.view.Window
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.*
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
+import com.example.common.navigation.NavDependencies
+import com.example.common.navigation.NavDependenciesProvider
+import com.example.design_system.AppTheme
 import com.example.meditationcomposeapp.presentation.navigation.MeditationDestinationsNavHost
+import com.example.meditationcomposeapp.presentation.navigation.NavDependenciesProviderImpl
 import com.example.meditationcomposeapp.presentation.navigation.getDestinationWrapper
-import com.example.meditationcomposeapp.presentation.screens.destinations.*
 import com.example.meditationcomposeapp.presentation.ui_controls.bottom_nav_bar.BottomBar
 import com.example.meditationcomposeapp.presentation.ui_controls.bottom_nav_bar.BottomBarController
 import com.example.meditationcomposeapp.presentation.ui_controls.bottom_nav_bar.BottomBarState
@@ -29,35 +30,44 @@ import com.example.meditationcomposeapp.presentation.ui_controls.dialog.Meditati
 import com.example.meditationcomposeapp.presentation.ui_controls.toolbar.ToolBarController
 import com.example.meditationcomposeapp.presentation.ui_controls.toolbar.Toolbar
 import com.example.meditationcomposeapp.presentation.ui_controls.toolbar.ToolbarState
-import com.example.meditationcomposeapp.ui.theme.MeditationComposeAppTheme
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class MainActivity : ComponentActivity() {
+class MainActivity : ComponentActivity(), NavDependenciesProvider {
+
+    private lateinit var navController: NavHostController
+    private var navDepProvider: NavDependenciesProvider? = null
+
+    @OptIn(ExperimentalAnimationApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
 
         setContent {
-            MyApp(window)
+            navController = rememberAnimatedNavController()
+            MyApp(navController)
         }
+    }
+
+    override fun <D : NavDependencies> provideDependencies(clazz: Class<D>): D {
+        if (navDepProvider == null) {
+            navDepProvider = NavDependenciesProviderImpl(navController)
+        }
+
+        return navDepProvider!!.provideDependencies(clazz)
     }
 }
 
-@OptIn(ExperimentalAnimationApi::class, ExperimentalMaterialApi::class)
+@Suppress("LocalVariableName")
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun MyApp(windows: Window) {
-    val displayMetrics = DisplayMetrics()
-    windows.windowManager.defaultDisplay.getMetrics(displayMetrics)
-    val screenWidth = displayMetrics.widthPixels
-
-    val navController = rememberAnimatedNavController()
+fun MyApp(
+    navController: NavHostController,
+) {
     val systemUiController = rememberSystemUiController()
-
 
     var _bottomBarIsVisible by remember {
         mutableStateOf(false)
@@ -133,7 +143,7 @@ fun MyApp(windows: Window) {
         }
     }
 
-    MeditationComposeAppTheme(false) {
+    AppTheme(false) {
         systemUiController.setSystemBarsColor(MaterialTheme.colors.background)
 //        ModalBottomSheetLayout(sheetContent = {
 //
@@ -164,7 +174,6 @@ fun MyApp(windows: Window) {
             Box(modifier = Modifier.padding(innerPadding)) {
                 MeditationDestinationsNavHost(
                     navController = navController,
-                    screenWidth = screenWidth
                 )
 
                 if (_dialogIsVisible)

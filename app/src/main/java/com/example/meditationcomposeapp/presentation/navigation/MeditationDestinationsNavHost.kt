@@ -3,32 +3,31 @@ package com.example.meditationcomposeapp.presentation.navigation
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.example.authentication.api.enter_screen.EnterScreenViewModel
+import com.example.authentication.api.enter_code_screen.EnterCodeScreenViewModel
+import com.example.authentication.api.enter_login_screen.EnterLoginScreenViewModel
+import com.example.authentication.api.login_screen.LoginScreenViewModel
+import com.example.authentication.api.new_password_screen.NewPasswordScreenViewModel
+import com.example.authentication.api.registration_screen.RegistrationScreenViewModel
+import com.example.beer_sorts.api.DetailedBeerScreenViewModel
+import com.example.beer_sorts.api.BeerListScreenViewModel
+import com.example.feature.main.api.MainScreenViewModel
+import com.example.feature.profile.api.ProfileScreenViewModel
 import com.example.meditationcomposeapp.presentation.screens.NavGraphs
 import com.example.meditationcomposeapp.presentation.screens.destinations.*
-import com.example.meditationcomposeapp.presentation.screens.login_flow.enter.EnterScreenViewModel
-import com.example.meditationcomposeapp.presentation.screens.login_flow.enter_code.EnterCodeScreenViewModel
-import com.example.meditationcomposeapp.presentation.screens.login_flow.enter_login.EnterLoginScreenViewModel
-import com.example.meditationcomposeapp.presentation.screens.login_flow.login.LoginScreenViewModel
-import com.example.meditationcomposeapp.presentation.screens.login_flow.new_password.NewPasswordScreenViewModel
-import com.example.meditationcomposeapp.presentation.screens.login_flow.registration.RegistrationScreenViewModel
-import com.example.meditationcomposeapp.presentation.screens.main_flow.beer_list.BeerListScreenViewModel
-import com.example.meditationcomposeapp.presentation.screens.main_flow.detailed_beer.DetailedBeerScreenViewModel
-import com.example.meditationcomposeapp.presentation.screens.main_flow.main_screen.MainScreenViewModel
-import com.example.meditationcomposeapp.presentation.screens.main_flow.shuffle_puzzle.ShufflePuzzleScreenViewModel
-import com.example.meditationcomposeapp.presentation.screens.main_flow.profile_screen.ProfileScreenViewModel
-import com.example.meditationcomposeapp.presentation.screens.splash.SplashScreenViewModel
+import com.example.shuffle_puzzle.api.ShufflePuzzleScreenViewModel
+import com.example.splash_screen.api.SplashScreenViewModel
 import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.navigation.dependency
 
 @Composable
 fun MeditationDestinationsNavHost(
     navController: NavHostController,
-    screenWidth: Int
 ) {
     DestinationsNavHost(
         navGraph = NavGraphs.root,
         navController = navController,
-        engine = MeditationNavHostEngine(screenWidth),
+        engine = MeditationNavHostEngine(),
         dependenciesContainerBuilder = {
             dependency(SplashScreenDestination) { hiltViewModel<SplashScreenViewModel>() }
             dependency(EnterScreenDestination) { hiltViewModel<EnterScreenViewModel>() }
@@ -42,7 +41,7 @@ fun MeditationDestinationsNavHost(
             dependency(BeerListScreenDestination) { hiltViewModel<BeerListScreenViewModel>() }
             dependency(DetailedBeerScreenDestination) { hiltViewModel<DetailedBeerScreenViewModel>() }
             dependency(ShufflePuzzleScreenDestination) { hiltViewModel<ShufflePuzzleScreenViewModel>() }
-            dependency(TestScreenDestination) { hiltViewModel<ProfileScreenViewModel>() }
+            dependency(ProfileScreenDestination) { hiltViewModel<ProfileScreenViewModel>() }
         }
     )
 }

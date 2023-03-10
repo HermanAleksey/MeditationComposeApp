@@ -2,7 +2,7 @@ package com.example.meditationcomposeapp.presentation.ui_controls.toolbar
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.meditationcomposeapp.data_source.repository.update_description.UpdateDescriptionRepository
+import com.example.core.updates_history.source.db.UpdateDescriptionDBRepository
 import com.example.meditationcomposeapp.presentation.ui_controls.dialog.DialogController
 import com.example.meditationcomposeapp.presentation.ui_controls.dialog.DialogType
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,7 +14,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ToolbarViewModel @Inject constructor(
-    private val updateDescriptionRepository: UpdateDescriptionRepository,
+    //todo don't use repo
+    private val updateDescriptionRepository: UpdateDescriptionDBRepository,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(ToolbarViewState())

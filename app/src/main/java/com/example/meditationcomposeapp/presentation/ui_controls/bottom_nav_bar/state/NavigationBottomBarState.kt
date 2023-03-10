@@ -12,13 +12,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.common.utils.UiText
 import com.example.meditationcomposeapp.R
-import com.example.meditationcomposeapp.model.utils.resources.UiText
 import com.example.meditationcomposeapp.presentation.screens.NavGraphs
 import com.example.meditationcomposeapp.presentation.screens.appCurrentDestinationAsState
 import com.example.meditationcomposeapp.presentation.screens.destinations.BeerListScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.MainScreenDestination
-import com.example.meditationcomposeapp.presentation.screens.destinations.TestScreenDestination
+import com.example.meditationcomposeapp.presentation.screens.destinations.ProfileScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.TypedDestination
 import com.example.meditationcomposeapp.presentation.screens.startAppDestination
 import com.ramcosta.composedestinations.navigation.navigate
@@ -41,8 +41,8 @@ enum class BottomBarDestinations(
         icon = Icons.Default.Coffee
     ),
 
-    TestScreen(
-        direction = TestScreenDestination,
+    ProfileScreen(
+        direction = ProfileScreenDestination,
         description = UiText.StringResource(R.string.profile_screen_desc),
         icon = Icons.Default.Logout
     );
