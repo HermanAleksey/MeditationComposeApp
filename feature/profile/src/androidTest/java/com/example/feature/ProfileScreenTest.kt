@@ -12,26 +12,28 @@ import org.junit.Rule
 import org.junit.Test
 
 
+// ./gradlew connectedAndroidTest (to run all tests)
 class ProfileScreenTest {
 
-    @Rule
-    @JvmField
+    @get:Rule(order = 0)
     var composeTestRule: ComposeContentTestRule = createComposeRule()
-//     use createAndroidComposeRule<YourActivity>() if you need access to
-    // an activity
+
+    private val clearAuthDataUseCase = object : ClearAuthDataUseCase {
+        override suspend fun invoke() {
+            //do nothing
+        }
+    }
 
     @Test
-    fun myTest() {
+    fun openScreen_LogOutButtonVisible() {
         // Start the app
         composeTestRule.setContent {
             AppTheme {
-                ProfileScreen(viewModel = ProfileScreenViewModel(
-                    clearAuthDataUseCase = object : ClearAuthDataUseCase {
-                        override suspend fun invoke() {
-                            //mock
-                        }
-                    }
-                ))
+                ProfileScreen(
+                    viewModel = ProfileScreenViewModel(
+                        clearAuthDataUseCase = clearAuthDataUseCase
+                    ),
+                )
             }
         }
 

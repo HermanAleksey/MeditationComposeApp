@@ -58,6 +58,9 @@ dependencies {
     testImplementation(Dependencies.mockito)
     testImplementation(Dependencies.coroutines_test)
     testImplementation(Dependencies.mockito_kotlin)
-    androidTestImplementation(Dependencies.compose_ui_test_junit4)
+
     debugImplementation(Dependencies.compose_ui_test_manifest)
+
+    androidTestImplementation(Dependencies.mockito_kotlin)
+    androidTestImplementation(Dependencies.compose_ui_test_junit4)
 }
