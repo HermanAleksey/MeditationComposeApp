@@ -5,6 +5,8 @@ plugins {
     id("kotlin-parcelize")
     id("dagger.hilt.android.plugin")
     id("com.google.devtools.ksp") version LibVersions.ksp_version // Depends on your kotlin version
+
+    id("org.jlleitschuh.gradle.ktlint")
 }
 
 @Suppress("UnstableApiUsage")

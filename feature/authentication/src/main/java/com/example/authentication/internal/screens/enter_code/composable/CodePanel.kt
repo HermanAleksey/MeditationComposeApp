@@ -127,6 +127,6 @@ internal fun CodePanel(
 fun CodePanelPreview() {
     CodePanel(
         code = arrayOf(1, 3, 2, 3, EMPTY_NUMBER),
-        onCodeDigitChanged = { q, w -> true}
+        onCodeDigitChanged = { _, _ -> true}
     ) { }
 }

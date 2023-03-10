@@ -128,7 +128,7 @@ fun MyApp(
         }
     }
 
-    navController.addOnDestinationChangedListener { controller, destination, args ->
+    navController.addOnDestinationChangedListener { _, destination, _ ->
         destination.getDestinationWrapper()?.let {
             val toolbarShouldBeVisible = it.toolbarVisible
             val bottomBarShouldBeVisible = it.bottomBarVisible

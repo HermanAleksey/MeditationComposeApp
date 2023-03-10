@@ -22,6 +22,7 @@ internal fun BeerParamsTable(
     ph: Double? = null,
     textStyle: TextStyle,
 ) {
+    @Suppress("UNCHECKED_CAST")
     val paramsWithInfo = remember {
         listOf(
             R.string.abv_is to abv,

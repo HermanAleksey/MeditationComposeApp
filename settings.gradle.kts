@@ -18,4 +18,3 @@ include(":feature:beer_sorts")
 include(":feature:splash_screen")
 include(":feature:profile")
 include(":feature:main")
-
