@@ -30,5 +30,3 @@ fun EnterScreen(
 
     com.example.authentication.api.enter_screen.EnterScreen(viewModel = viewModel)
 }
-
-

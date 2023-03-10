@@ -3,7 +3,6 @@ package com.example.meditationcomposeapp.presentation.navigation
 import androidx.navigation.NavDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.*
 
-
 enum class DestinationWrapper(
     val destination: TypedDestination<*>,
     val toolbarVisible: Boolean = false,

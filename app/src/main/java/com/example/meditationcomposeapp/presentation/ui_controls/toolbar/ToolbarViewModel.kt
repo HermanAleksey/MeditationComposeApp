@@ -6,15 +6,15 @@ import com.example.core.updates_history.source.db.UpdateDescriptionDBRepository
 import com.example.meditationcomposeapp.presentation.ui_controls.dialog.DialogController
 import com.example.meditationcomposeapp.presentation.ui_controls.dialog.DialogType
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @HiltViewModel
 class ToolbarViewModel @Inject constructor(
-    //todo don't use repo
+    // todo don't use repo
     private val updateDescriptionRepository: UpdateDescriptionDBRepository,
 ) : ViewModel() {
 

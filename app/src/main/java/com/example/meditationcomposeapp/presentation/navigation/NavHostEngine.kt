@@ -28,13 +28,13 @@ fun MeditationNavHostEngine() =
             },
             exitTransition = {
                 slideOutHorizontally(
-                    targetOffsetX = {  width -> width },
+                    targetOffsetX = { width -> width },
                     animationSpec = tween(ANIMATION_DURATION)
                 )
             },
             popEnterTransition = {
                 slideInHorizontally(
-                    initialOffsetX = {  width -> width },
+                    initialOffsetX = { width -> width },
                     animationSpec = tween(ANIMATION_DURATION)
                 )
             },

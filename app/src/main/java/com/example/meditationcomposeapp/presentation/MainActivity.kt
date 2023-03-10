@@ -4,7 +4,10 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.animation.*
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -33,7 +36,6 @@ import com.example.meditationcomposeapp.presentation.ui_controls.toolbar.Toolbar
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
-
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity(), NavDependenciesProvider {
@@ -133,12 +135,10 @@ fun MyApp(
             val toolbarShouldBeVisible = it.toolbarVisible
             val bottomBarShouldBeVisible = it.bottomBarVisible
 
-            if (toolbarShouldBeVisible)
-                toolBarController.show()
+            if (toolbarShouldBeVisible) toolBarController.show()
             else toolBarController.hide()
 
-            if (bottomBarShouldBeVisible)
-                bottomBarController.show()
+            if (bottomBarShouldBeVisible) bottomBarController.show()
             else bottomBarController.hide()
         }
     }
@@ -150,21 +150,16 @@ fun MyApp(
 //        }) {
         Scaffold(
             topBar = {
-                if (_toolbarIsVisible)
-                    Toolbar(
-                        toolbarState = _toolbarState,
-                        hiltViewModel(),
-                    )
+                if (_toolbarIsVisible) Toolbar(
+                    toolbarState = _toolbarState,
+                    hiltViewModel(),
+                )
             },
             bottomBar = {
                 AnimatedVisibility(
                     visible = _bottomBarIsVisible,
-                    enter = slideInVertically(
-                        initialOffsetY = { it }
-                    ),
-                    exit = slideOutVertically(
-                        targetOffsetY = { it }
-                    ),
+                    enter = slideInVertically(initialOffsetY = { it }),
+                    exit = slideOutVertically(targetOffsetY = { it }),
                 ) {
                     BottomBar(state = _bottomBarState)
                 }
@@ -176,11 +171,9 @@ fun MyApp(
                     navController = navController,
                 )
 
-                if (_dialogIsVisible)
-                    MeditationDialog(
-                        onDismissRequest = { _dialogIsVisible = false },
-                        dialogType = _dialogType
-                    )
+                if (_dialogIsVisible) MeditationDialog(
+                    onDismissRequest = { _dialogIsVisible = false }, dialogType = _dialogType
+                )
             }
         }
 //        }

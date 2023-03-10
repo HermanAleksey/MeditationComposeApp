@@ -108,7 +108,8 @@ fun UpdateDescriptionElement(model: UpdateDescriptionModel) {
 
         Spacer(modifier = Modifier.height(4.dp))
         Text(
-            text = model.updateTitle, style = MaterialTheme.typography.body1.copy(
+            text = model.updateTitle,
+            style = MaterialTheme.typography.body1.copy(
                 color = MaterialTheme.colors.onSurface
             )
         )

@@ -1,3 +1,5 @@
+import kotlin.collections.listOf
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -9,8 +11,7 @@ plugins {
     id("org.jlleitschuh.gradle.ktlint")
 }
 
-@Suppress("UnstableApiUsage")
-android {
+@Suppress("UnstableApiUsage") android {
     namespace = "com.example.meditationcomposeapp"
     compileSdk = Config.COMPILE_SDK
 
@@ -31,8 +32,7 @@ android {
         getByName("release") {
             isMinifyEnabled = true
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
         }
         getByName("debug") {
@@ -40,8 +40,7 @@ android {
             isDebuggable = true
 
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
         }
     }
@@ -71,9 +70,29 @@ android {
     applicationVariants.all {
         kotlin.sourceSets {
             getByName(name) {
-                kotlin.srcDir("build/generated/ksp/${name}/kotlin")
+                kotlin.srcDir("build/generated/ksp/$name/kotlin")
             }
         }
+    }
+
+    lint {
+        baseline = File("lint-baseline.xml")
+    }
+}
+
+ktlint {
+    android.set(true)
+    ignoreFailures.set(false)
+    disabledRules.set(
+        listOf(
+            "File must end with a newline (\\n)",
+            "no-wildcard-imports",
+            "import-ordering",
+        )
+    )
+    reporters {
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.PLAIN)
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
     }
 }
 
@@ -96,21 +115,21 @@ dependencies {
 
     implementation(Dependencies.compose_material_icons)
 
-    //animations
+    // animations
     implementation(Dependencies.accompanist_system_ui_controller)
 
-    //firebase
+    // firebase
     implementation(platform(Dependencies.firebase_bom))
     implementation(Dependencies.firebase_analytics_ktx)
 
-    //navigation
+    // navigation
     implementation(Dependencies.raamcosta_compose_destinations_anim_core)
     ksp(Dependencies.raamcosta_compose_destinations_ksp)
 
-    //splash screen
+    // splash screen
     implementation(Dependencies.splash_screen_core)
 
-    //hilt
+    // hilt
     implementation(Dependencies.hilt_navigation_compose)
     implementation(Dependencies.hilt_android)
     kapt(Dependencies.hilt_compiler)

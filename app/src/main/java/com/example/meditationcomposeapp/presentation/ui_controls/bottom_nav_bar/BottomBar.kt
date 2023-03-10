@@ -6,7 +6,7 @@ import com.example.meditationcomposeapp.presentation.ui_controls.bottom_nav_bar.
 
 sealed class BottomBarState {
 
-    class NavigationBottomBarState(val navController: NavController): BottomBarState()
+    class NavigationBottomBarState(val navController: NavController) : BottomBarState()
 }
 
 @Composable

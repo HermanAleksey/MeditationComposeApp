@@ -19,7 +19,6 @@ sealed class DialogType {
     object EmptyDialog : DialogType()
 
     class UpdateDescriptionDialog(val updatesLog: List<UpdateDescriptionModel>) : DialogType()
-
 }
 
 @Composable

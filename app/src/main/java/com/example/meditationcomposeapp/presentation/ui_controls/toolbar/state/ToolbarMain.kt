@@ -19,12 +19,14 @@ import com.example.meditationcomposeapp.R
 import com.example.meditationcomposeapp.presentation.ui_controls.dialog.DialogController
 import com.example.meditationcomposeapp.presentation.ui_controls.toolbar.ToolbarViewModel
 
-
 @Composable
 fun ToolbarMain(viewModel: ToolbarViewModel, dialogController: DialogController) {
-    LaunchedEffect(key1 = Unit, block = {
-        viewModel.onLaunch(dialogController)
-    })
+    LaunchedEffect(
+        key1 = Unit,
+        block = {
+            viewModel.onLaunch(dialogController)
+        }
+    )
     Row(
         modifier = Modifier
             .fillMaxWidth()

@@ -26,7 +26,9 @@ class NavDependenciesProviderImpl(
             ?: findMainFlowNavDependencies(clazz)
             ?: findBeerSortFlowNavDependencies(clazz)
             ?: findSplashScreenNavDependencies(clazz)
-            ?: throw NotImplementedError("NavDependencies not implemented for class ${clazz.canonicalName}")
+            ?: throw NotImplementedError(
+                "NavDependencies not implemented for class ${clazz.canonicalName}"
+            )
     }
 
     private fun <D : NavDependencies> findMainFlowNavDependencies(clazz: Class<D>): D? {
