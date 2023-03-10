@@ -1,26 +1,28 @@
 object LibVersions {
-    const val activity_ktx_version = "1.6.0"
+    const val activity_ktx_version = "1.6.1"
     const val legacy_support_version = "1.0.0"
 
-    const val ktx_version = "1.7.0"
+    const val ktx_version = "1.9.0"
     //todo update version for https://github.com/raamcosta/compose-destinations
-    const val ksp_version = "1.7.10-1.0.6"
-    const val kotlin_version = "1.7.10"
+    const val ksp_version = "1.8.10-1.0.9"
+    const val kotlin_version = "1.8.10"
 
-    const val compose_version = "1.2.1"
-    const val lifecycle_runtime_ktx_version = "2.3.1"
-    const val compose_compiler_version = "1.3.0"
+    const val compose_ui_version = "1.3.3"
+    const val compose_material_icons_version = "1.3.1"
+    const val compose_material_version = "1.3.1"
+    const val lifecycle_runtime_ktx_version = "2.6.0"
+    const val compose_compiler_version = "1.4.3"
 
-    const val coroutines_version = "1.3.2"
+    const val coroutines_version = "1.6.4"
 
     const val gson_version = "2.9.0"
 
-    const val hilt_version = "2.42"
+    const val hilt_version = "2.45"
     const val hilt_navigation_version = "1.0.0"
 
-    const val navigation_compose_version = "2.5.2"
-    const val compose_destination_version = "1.6.20-beta"
-    const val testng_version = "7.3.0"
+    const val navigation_compose_version = "2.5.3"
+    const val compose_destination_version = "1.8.36-beta"
+    const val testng_version = "7.7.1"
 
     const val splashscreen_version = "1.0.0"
 
@@ -44,7 +46,7 @@ object LibVersions {
     const val room_coroutines_version = "2.4.3"
 
     const val tool_build_gradle = "7.3.1"
-    const val kotlin_gradle_plugin = "1.7.10"
+    const val kotlin_gradle_plugin = "1.8.10"
     const val gms_google_services = "4.3.14"
 
     const val junit = "4.13.2"
@@ -53,6 +55,7 @@ object LibVersions {
     const val mockito_kotlin = "4.0.0"
     const val mockito_android = "4.8.1"
     const val power_mock = "1.6.1"
+    const val compose_ui_test_version = "1.3.3"
 
     const val timber_version = "5.0.1"
 

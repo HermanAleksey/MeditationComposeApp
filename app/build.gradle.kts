@@ -67,10 +67,6 @@ android {
     }
 
     applicationVariants.all {
-        //todo remove when update to Kotlin 1.8  and KSP
-        addJavaSourceFoldersToModel(
-            File(buildDir, "generated/ksp/$name/kotlin")
-        )
         kotlin.sourceSets {
             getByName(name) {
                 kotlin.srcDir("build/generated/ksp/${name}/kotlin")
@@ -118,5 +114,4 @@ dependencies {
     kapt(Dependencies.hilt_compiler)
 
     implementation(Dependencies.timber)
-
 }

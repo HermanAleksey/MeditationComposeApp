@@ -29,6 +29,9 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = LibVersions.compose_compiler_version
     }
+    defaultConfig {
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
 }
 
 dependencies {
@@ -39,11 +42,11 @@ dependencies {
     implementation(project(":core:authentication_source"))
     implementation(project(":core:updates_history"))
 
-
     implementation(Dependencies.activity_compose)
     implementation(Dependencies.compose_ui)
     implementation(Dependencies.compose_material)
     implementation(Dependencies.compose_ui_tooling_preview)
+    debugImplementation(Dependencies.compose_ui_tooling)
 
     //hilt
     implementation(Dependencies.hilt_android)
@@ -52,7 +55,9 @@ dependencies {
     //testing
     testImplementation(project(":core:testing"))
     testImplementation(Dependencies.junit)
-    testImplementation (Dependencies.mockito)
-    testImplementation (Dependencies.coroutines_test)
-    testImplementation (Dependencies.mockito_kotlin)
+    testImplementation(Dependencies.mockito)
+    testImplementation(Dependencies.coroutines_test)
+    testImplementation(Dependencies.mockito_kotlin)
+    androidTestImplementation(Dependencies.compose_ui_test_junit4)
+    debugImplementation(Dependencies.compose_ui_test_manifest)
 }

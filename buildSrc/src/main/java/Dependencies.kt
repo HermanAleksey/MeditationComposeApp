@@ -1,16 +1,18 @@
 object Dependencies {
     const val core_ktx = "androidx.core:core-ktx:${LibVersions.ktx_version}"
-    const val compose_ui = "androidx.compose.ui:ui:${LibVersions.compose_version}"
-    const val compose_material = "androidx.compose.material:material:${LibVersions.compose_version}"
+    const val compose_ui = "androidx.compose.ui:ui:${LibVersions.compose_ui_version}"
+    const val compose_material = "androidx.compose.material:material:${LibVersions.compose_material_version}"
     const val compose_ui_tooling_preview =
-        "androidx.compose.ui:ui-tooling-preview:${LibVersions.compose_version}"
+        "androidx.compose.ui:ui-tooling-preview:${LibVersions.compose_ui_version}"
+    const val compose_ui_tooling =
+        "androidx.compose.ui:ui-tooling:${LibVersions.compose_ui_version}"
     const val lifecycle_runtime_ktx = "androidx.lifecycle:lifecycle-runtime-ktx:${LibVersions.lifecycle_runtime_ktx_version}"
     const val activity_compose =
         "androidx.activity:activity-compose:${LibVersions.activity_ktx_version}"
     const val androidx_legacy_support = "androidx.legacy:legacy-support-v4:${LibVersions.legacy_support_version}"
 
     const val compose_material_icons =
-        "androidx.compose.material:material-icons-extended:${LibVersions.compose_version}"
+        "androidx.compose.material:material-icons-extended:${LibVersions.compose_material_icons_version}"
 
     //coroutines
     const val coroutines_core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${LibVersions.coroutines_version}"
@@ -93,4 +95,7 @@ object Dependencies {
     const val mockito_kotlin = "org.mockito.kotlin:mockito-kotlin:${LibVersions.mockito_kotlin}"
     const val mockito_android = "org.mockito:mockito-android:${LibVersions.mockito_android}"
     const val powermock_reflect = "org.powermock:powermock-reflect:${LibVersions.power_mock}"
+    const val compose_ui_test_manifest = "androidx.compose.ui:ui-test-manifest:${LibVersions.compose_ui_test_version}"
+    const val compose_ui_test_junit4 = "androidx.compose.ui:ui-test-junit4:${LibVersions.compose_ui_test_version}"
+    const val ui_test = "androidx.ui:ui-test:${LibVersions.compose_ui_test_version}"
 }
