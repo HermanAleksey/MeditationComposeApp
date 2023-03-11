@@ -1,6 +1,5 @@
 package com.example.feature.main.api
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.example.common.view_model.NavigationBaseViewModel
 import com.example.feature.main.internal.composable.MenuItem
@@ -14,7 +13,6 @@ class MainScreenViewModel @Inject constructor(
 ) : NavigationBaseViewModel<MainScreenNavRoute>() {
 
     fun onMenuItemClick(menuItem: MenuItem) = viewModelScope.launch {
-        Log.e("TAGG", "onMenuItemClick: clicked")
         navigationEventTransaction {
             when (menuItem) {
                 MenuItem.PUZZLE -> {

@@ -13,8 +13,6 @@ abstract class NavigationBaseViewModel<NavRoute> : ViewModel() {
     protected val _navigationEvent: MutableSharedFlow<NavRoute?> =
         MutableSharedFlow(
             replay = 1,
-            //buffer value = 1 so navigation can be tested
-            extraBufferCapacity = 1,
             onBufferOverflow = BufferOverflow.SUSPEND
         )
     val navigationEvent = _navigationEvent.asSharedFlow()
@@ -37,6 +35,7 @@ abstract class NavigationBaseViewModel<NavRoute> : ViewModel() {
             true
         }
         navigationFun.invoke()
+        delay(TRANSACTION_DURATION_LIMIT)
         _navigationEvent.emit(null)
 
         //close transaction, if it wasn't closed by Entered Screen.
