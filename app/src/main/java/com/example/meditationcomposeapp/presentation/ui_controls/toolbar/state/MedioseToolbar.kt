@@ -15,24 +15,25 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.example.design_system.dialog.DialogController
 import com.example.meditationcomposeapp.R
-import com.example.meditationcomposeapp.presentation.ui_controls.dialog.DialogController
 import com.example.meditationcomposeapp.presentation.ui_controls.toolbar.ToolbarViewModel
 
 @Composable
-fun ToolbarMain(viewModel: ToolbarViewModel, dialogController: DialogController) {
+fun MedioseToolbar(viewModel: ToolbarViewModel, dialogController: DialogController) {
     LaunchedEffect(
         key1 = Unit,
         block = {
             viewModel.onLaunch(dialogController)
         }
     )
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .height(dimensionResource(id = R.dimen.height_toolbar))
             .background(color = MaterialTheme.colors.background)
-            .padding(horizontal = dimensionResource(id = R.dimen.padding_horizontal_main_content)),
+            .padding(horizontal = 24.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Image(

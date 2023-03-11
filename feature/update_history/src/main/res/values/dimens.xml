@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="height_toolbar">55dp</dimen>
+    <dimen name="padding_horizontal_list">16dp</dimen>
 </resources>

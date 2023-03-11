@@ -1,4 +1,4 @@
-package com.example.meditationcomposeapp.presentation.ui_controls.dialog.types
+package com.example.feature.update_history.internal
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -14,15 +14,15 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.common.utils.DateFormat
+import com.example.common.utils.formatMillisIntoDate
 import com.example.core.model.updates.UpdateDescriptionModel
 import com.example.design_system.AppTheme
-import com.example.meditationcomposeapp.R
-import com.example.meditationcomposeapp.presentation.utils.DateFormat
-import com.example.meditationcomposeapp.presentation.utils.formatMillisIntoDate
+import com.example.feature.update_history.R
 
 @Preview
 @Composable
-fun UpdateDescriptionDialogPreview() {
+internal fun UpdateDescriptionDialogPreview() {
     AppTheme(false) {
         UpdateDescriptionDialog(
             listOf(
@@ -33,11 +33,11 @@ fun UpdateDescriptionDialogPreview() {
     }
 }
 
+
 @Composable
-fun UpdateDescriptionDialog(
+internal fun UpdateDescriptionDialog(
     updatesLog: List<UpdateDescriptionModel>,
 ) {
-
     LazyColumn(verticalArrangement = Arrangement.spacedBy(16.dp)) {
         item {
             Spacer(modifier = Modifier.height(16.dp))
@@ -77,7 +77,7 @@ fun UpdateDescriptionDialog(
 }
 
 @Composable
-fun UpdateDescriptionElement(model: UpdateDescriptionModel) {
+internal fun UpdateDescriptionElement(model: UpdateDescriptionModel) {
     val locale = LocalContext.current.resources.configuration.locales[0]
     Column(
         modifier = Modifier

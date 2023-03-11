@@ -103,6 +103,7 @@ dependencies {
     implementation(project(":feature:shuffle_puzzle"))
     implementation(project(":feature:authentication"))
     implementation(project(":feature:profile"))
+    implementation(project(":feature:update_history"))
 
     implementation(project(":core:updates_history"))
     implementation(project(":core:design_system"))

@@ -1,4 +1,4 @@
-package com.example.meditationcomposeapp.presentation.utils
+package com.example.common.utils
 
 import java.text.SimpleDateFormat
 import java.util.Locale

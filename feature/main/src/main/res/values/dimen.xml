@@ -5,7 +5,5 @@
     <dimen name="padding_top_screen_title">46dp</dimen>
     <dimen name="padding_spacing_menu_item">20dp</dimen>
 
-    <dimen name="padding_horizontal_list">16dp</dimen>
-
     <dimen name="padding_horizontal_main_content">24dp</dimen>
 </resources>

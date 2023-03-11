@@ -1,5 +1,6 @@
-package com.example.meditationcomposeapp.presentation.ui_controls.dialog
+package com.example.design_system.dialog
 
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
@@ -10,25 +11,26 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import com.example.core.model.updates.UpdateDescriptionModel
-import com.example.meditationcomposeapp.R
-import com.example.meditationcomposeapp.presentation.ui_controls.dialog.types.UpdateDescriptionDialog
-
-sealed class DialogType {
-
-    object EmptyDialog : DialogType()
-
-    class UpdateDescriptionDialog(val updatesLog: List<UpdateDescriptionModel>) : DialogType()
-}
+import androidx.compose.ui.window.DialogProperties
+import com.example.core.design_system.R
 
 @Composable
-fun MeditationDialog(
+fun MeditationDialogFormer(
     onDismissRequest: () -> Unit,
-    dialogType: DialogType
+    dismissOnBackPress: Boolean = true,
+    dismissOnClickOutside: Boolean = false,
+    dialogContent: @Composable () -> Unit
 ) {
     val screenHeight = LocalConfiguration.current.screenHeightDp.dp
+    Log.e("TAGG", "MeditationDialogFormer: ")
 
-    Dialog(onDismissRequest = onDismissRequest) {
+    Dialog(
+        onDismissRequest = { onDismissRequest() },
+        properties = DialogProperties(
+            dismissOnBackPress = dismissOnBackPress,
+            dismissOnClickOutside = dismissOnClickOutside
+        )
+    ) {
         Card(
             modifier = Modifier
                 .fillMaxWidth()
@@ -38,14 +40,7 @@ fun MeditationDialog(
             shape = RoundedCornerShape(dimensionResource(id = R.dimen.radius_pop_up_corner)),
             elevation = 6.dp
         ) {
-            when (dialogType) {
-                is DialogType.EmptyDialog -> {
-                    Box(modifier = Modifier.fillMaxSize(0.1f))
-                }
-                is DialogType.UpdateDescriptionDialog -> {
-                    UpdateDescriptionDialog(updatesLog = dialogType.updatesLog)
-                }
-            }
+            dialogContent()
         }
     }
 }

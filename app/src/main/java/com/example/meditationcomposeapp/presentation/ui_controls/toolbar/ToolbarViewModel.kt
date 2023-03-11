@@ -3,14 +3,14 @@ package com.example.meditationcomposeapp.presentation.ui_controls.toolbar
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.core.updates_history.source.db.UpdateDescriptionDBRepository
-import com.example.meditationcomposeapp.presentation.ui_controls.dialog.DialogController
-import com.example.meditationcomposeapp.presentation.ui_controls.dialog.DialogType
+import com.example.design_system.dialog.DialogController
+import com.example.feature.update_history.api.UpdateDescriptionDialogProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @HiltViewModel
 class ToolbarViewModel @Inject constructor(
@@ -30,8 +30,9 @@ class ToolbarViewModel @Inject constructor(
                             updateNotesList = listOf(lastUpdateDesc),
                         )
                     }
+
                     dialogController.show(
-                        DialogType.UpdateDescriptionDialog(
+                        UpdateDescriptionDialogProvider(
                             listOf(lastUpdateDesc)
                         )
                     )
@@ -51,7 +52,7 @@ class ToolbarViewModel @Inject constructor(
 
                 if (value.updateNotesList.isNotEmpty())
                     dialogController.show(
-                        DialogType.UpdateDescriptionDialog(
+                        UpdateDescriptionDialogProvider(
                             value.updateNotesList
                         )
                     )

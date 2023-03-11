@@ -30,6 +30,7 @@
             <option value="$PROJECT_DIR$/feature/profile" />
             <option value="$PROJECT_DIR$/feature/shuffle_puzzle" />
             <option value="$PROJECT_DIR$/feature/splash_screen" />
+            <option value="$PROJECT_DIR$/feature/update_history" />
           </set>
         </option>
       </GradleProjectSettings>

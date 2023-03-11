@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 @Composable
 internal fun PuzzleIsSolvedLabel() {
     Card(
-        shape = RoundedCornerShape(2.dp),//todo fix dimensionResource(id =  R.dimen.radius_pop_up_corner)),
+        shape = RoundedCornerShape(20.dp),
         backgroundColor = MaterialTheme.colors.surface
     ) {
         Box(contentAlignment = Alignment.Center) {

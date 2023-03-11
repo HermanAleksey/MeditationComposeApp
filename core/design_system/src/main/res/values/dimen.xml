@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="padding_spacing_menu_item">20dp</dimen>
-    <dimen name="padding_horizontal_list">16dp</dimen>
-
+    <dimen name="radius_pop_up_corner">20dp</dimen>
 </resources>
