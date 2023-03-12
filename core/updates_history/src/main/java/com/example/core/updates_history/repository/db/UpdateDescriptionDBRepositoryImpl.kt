@@ -1,6 +1,6 @@
 package com.example.core.updates_history.repository.db
 
-import com.example.common.mapper.Mapper
+import com.example.common.mapper.BidirectionalMapper
 import com.example.core.model.updates.UpdateDescriptionModel
 import com.example.database.dao.UpdateDescriptionDao
 import com.example.database.model.UpdateDescriptionDBEntity
@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 class UpdateDescriptionDBRepositoryImpl @Inject constructor(
     private val dao: UpdateDescriptionDao,
-    private val mapper: Mapper<UpdateDescriptionModel, UpdateDescriptionDBEntity>
+    private val mapper: BidirectionalMapper<UpdateDescriptionModel, UpdateDescriptionDBEntity>
 ) : UpdateDescriptionDBRepository {
     override suspend fun getAll(): List<UpdateDescriptionModel> {
         return dao.getAll().map {
@@ -26,20 +26,10 @@ class UpdateDescriptionDBRepositoryImpl @Inject constructor(
     }
 
     override suspend fun insertAll(vararg updates: UpdateDescriptionModel) {
-        //todo move to Mapper
-        dao.insertAll(*updates.map { toDbEntity(it) }.toTypedArray())
+        dao.insertAll(*updates.map { mapper.mapTo(it) }.toTypedArray())
     }
 
-    private fun toDbEntity(model: UpdateDescriptionModel): UpdateDescriptionDBEntity =
-    UpdateDescriptionDBEntity(
-        model.versionName,
-        model.updateReleaseTime,
-        model.updateTitle,
-        model.updateDescription,
-    false,
-    )
-
     override suspend fun delete(update: UpdateDescriptionModel) {
-        dao.delete(toDbEntity(update))
+        dao.delete(mapper.mapTo(update))
     }
 }

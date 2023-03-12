@@ -1,12 +1,12 @@
 package com.example.core.updates_history.mapper
 
-import com.example.common.mapper.Mapper
+import com.example.common.mapper.BidirectionalMapper
 import com.example.core.model.updates.UpdateDescriptionModel
 import com.example.database.model.UpdateDescriptionDBEntity
 import javax.inject.Inject
 
 class UpdateDescriptionDBMapper @Inject constructor() :
-    Mapper<UpdateDescriptionModel, UpdateDescriptionDBEntity> {
+    BidirectionalMapper<UpdateDescriptionModel, UpdateDescriptionDBEntity> {
     override fun mapFrom(objectFrom: UpdateDescriptionDBEntity): UpdateDescriptionModel {
         return UpdateDescriptionModel(
             versionName = objectFrom.versionName,
@@ -14,6 +14,16 @@ class UpdateDescriptionDBMapper @Inject constructor() :
             updateTitle = objectFrom.updateTitle,
             updateDescription = objectFrom.updateDescription,
             wasShown = false
+        )
+    }
+
+    override fun mapTo(objectFrom: UpdateDescriptionModel): UpdateDescriptionDBEntity {
+        return UpdateDescriptionDBEntity(
+            objectFrom.versionName,
+            objectFrom.updateReleaseTime,
+            objectFrom.updateTitle,
+            objectFrom.updateDescription,
+            false,
         )
     }
 }

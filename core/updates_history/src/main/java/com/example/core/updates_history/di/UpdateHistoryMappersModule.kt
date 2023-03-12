@@ -1,5 +1,6 @@
 package com.example.core.updates_history.di
 
+import com.example.common.mapper.BidirectionalMapper
 import com.example.common.mapper.Mapper
 import com.example.core.model.updates.UpdateDescriptionModel
 import com.example.core.updates_history.mapper.UpdateDescriptionDBMapper
@@ -21,7 +22,7 @@ abstract class UpdateHistoryMappersModule {
     ): Mapper<UpdateDescriptionModel, UpdateDescriptionResponse>
 
     @Binds
-    abstract fun provideUpdateDescriptionDBMapper(
+    abstract fun provideUpdateDescriptionDBBiMapper(
         implementation: UpdateDescriptionDBMapper
-    ): Mapper<UpdateDescriptionModel, UpdateDescriptionDBEntity>
+    ): BidirectionalMapper<UpdateDescriptionModel, UpdateDescriptionDBEntity>
 }
