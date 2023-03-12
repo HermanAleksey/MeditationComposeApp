@@ -1,13 +1,13 @@
 package com.example.core.updates_history.di
 
-import com.example.common.mapper.Mapper
+import com.example.common.mapper.BidirectionalMapper
 import com.example.core.model.updates.UpdateDescriptionModel
 import com.example.core.updates_history.BuildConfig
-import com.example.core.updates_history.source.UpdatesHistoryApi
 import com.example.core.updates_history.repository.db.UpdateDescriptionDBRepository
 import com.example.core.updates_history.repository.db.UpdateDescriptionDBRepositoryImpl
 import com.example.core.updates_history.repository.web.UpdateDescriptionWebRepository
 import com.example.core.updates_history.repository.web.UpdateDescriptionWebRepositoryImpl
+import com.example.core.updates_history.source.UpdatesHistoryApi
 import com.example.database.dao.UpdateDescriptionDao
 import com.example.database.model.UpdateDescriptionDBEntity
 import dagger.Module
@@ -36,7 +36,7 @@ object HistoryDescriptionSourceModule {
     @Singleton
     fun provideUpdateDescriptionDBRepository(
         dao: UpdateDescriptionDao,
-        mapper: Mapper<UpdateDescriptionModel, UpdateDescriptionDBEntity>
+        mapper: BidirectionalMapper<UpdateDescriptionModel, UpdateDescriptionDBEntity>
     ): UpdateDescriptionDBRepository = UpdateDescriptionDBRepositoryImpl(
         dao, mapper
     )
