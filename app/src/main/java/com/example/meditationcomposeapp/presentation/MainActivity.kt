@@ -1,7 +1,6 @@
 package com.example.meditationcomposeapp.presentation
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.AnimatedVisibility
@@ -90,7 +89,6 @@ fun MyApp(
     val toolbarProvider = viewModel.toolbarProvider.collectAsState()
 
     val toolbarViewModel = hiltViewModel<ToolbarViewModel>()
-    Log.e("TAGG", "MyApp:recomposition ")
     LaunchedEffect(key1 = Unit) {
         viewModel.onLaunch(
             initialToolbarProvider = MedioseToolbarProvider(
