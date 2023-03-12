@@ -88,6 +88,7 @@ ktlint {
             "File must end with a newline (\\n)",
             "no-wildcard-imports",
             "import-ordering",
+            "final-newline"
         )
     )
     reporters {

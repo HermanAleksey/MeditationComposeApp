@@ -8,7 +8,7 @@ import com.example.meditationcomposeapp.presentation.ui_controls.toolbar.state.M
 class MedioseToolbarProvider(
     private val viewModel: ToolbarViewModel,
     private val dialogController: DialogController
-): ToolbarProvider() {
+) : ToolbarProvider() {
 
     @Composable
     override fun Display() {
@@ -17,5 +17,4 @@ class MedioseToolbarProvider(
             dialogController = dialogController
         )
     }
-
 }

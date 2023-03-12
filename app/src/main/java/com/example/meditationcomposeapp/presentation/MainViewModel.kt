@@ -66,7 +66,6 @@ class MainViewModel : ViewModel() {
         }
     }
 
-
 //    private val _dialogType = MutableStateFlow(false)
 //    val dialogType = _dialogType.asStateFlow()
 }
