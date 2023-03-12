@@ -3,8 +3,8 @@ package com.example.mediose
 import com.example.core.authentication_source.api.use_case.LoginUseCase
 import com.example.core.data_store.UserDataStore
 import com.example.core.model.NetworkResponse
-import com.example.core.updates_history.source.db.UpdateDescriptionDBRepository
 import com.example.core.updates_history.use_case.GetAppUpdatesHistoryUseCase
+import com.example.core.updates_history.use_case.InsertAllUpdatesDescriptionsUseCase
 import com.example.coroutines_test.CoroutinesTestRule
 import com.example.splash_screen.api.SplashScreenNavRoute
 import com.example.splash_screen.api.SplashScreenViewModel
@@ -37,7 +37,7 @@ class SplashScreenViewModelTest {
     private lateinit var loginUseCase: LoginUseCase
 
     @Mock
-    private lateinit var updateDescriptionRepository: UpdateDescriptionDBRepository
+    private lateinit var insertAllUpdatesDescriptionsUseCase: InsertAllUpdatesDescriptionsUseCase
 
     @Mock
     private lateinit var getAppUpdatesHistoryUseCase: GetAppUpdatesHistoryUseCase
@@ -49,7 +49,7 @@ class SplashScreenViewModelTest {
         viewModel = SplashScreenViewModel(
             userDataStore,
             loginUseCase,
-            updateDescriptionRepository,
+            insertAllUpdatesDescriptionsUseCase,
             getAppUpdatesHistoryUseCase,
         )
     }
@@ -247,6 +247,6 @@ class SplashScreenViewModelTest {
 
             advanceUntilIdle()
 
-            verify(updateDescriptionRepository).insertAll(*updates.toTypedArray())
+            verify(insertAllUpdatesDescriptionsUseCase).invoke(updates)
         }
 }

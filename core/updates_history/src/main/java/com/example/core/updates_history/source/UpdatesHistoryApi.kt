@@ -1,4 +1,4 @@
-package com.example.core.updates_history
+package com.example.core.updates_history.source
 
 import com.example.core.updates_history.model.UpdateDescriptionResponse
 import retrofit2.http.Field

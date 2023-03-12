@@ -65,7 +65,4 @@ class MainViewModel : ViewModel() {
             initialToolbarProvider
         }
     }
-
-//    private val _dialogType = MutableStateFlow(false)
-//    val dialogType = _dialogType.asStateFlow()
 }

@@ -1,6 +1,6 @@
-package com.example.core.updates_history.source.web
+package com.example.core.updates_history.repository.web
 
-import com.example.core.updates_history.UpdatesHistoryApi
+import com.example.core.updates_history.source.UpdatesHistoryApi
 import com.example.core.updates_history.model.UpdateDescriptionResponse
 import com.example.core.model.NetworkResponse
 import kotlinx.coroutines.delay
@@ -9,11 +9,6 @@ import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
-
-//todo rework BuildConfig
-object BuildConfig {
-    const val ENABLE_VALIDATION = false
-}
 
 class UpdateDescriptionWebRepositoryImpl @Inject constructor(
     private val updatesHistoryApi: UpdatesHistoryApi,
@@ -25,7 +20,8 @@ class UpdateDescriptionWebRepositoryImpl @Inject constructor(
             try {
                 delay(100)
 
-                if (!BuildConfig.ENABLE_VALIDATION) {
+                //mock since don't have backend for now
+                if (true) {
                     val response = getVersionDescriptions(startFromVersion)
                     emit(NetworkResponse.Success(response))
                 } else {

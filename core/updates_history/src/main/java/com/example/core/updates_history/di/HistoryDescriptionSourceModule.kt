@@ -1,11 +1,13 @@
-package com.example.core.updates_history
+package com.example.core.updates_history.di
 
 import com.example.common.mapper.Mapper
 import com.example.core.model.updates.UpdateDescriptionModel
-import com.example.core.updates_history.source.db.UpdateDescriptionDBRepository
-import com.example.core.updates_history.source.db.UpdateDescriptionDBRepositoryImpl
-import com.example.core.updates_history.source.web.UpdateDescriptionWebRepository
-import com.example.core.updates_history.source.web.UpdateDescriptionWebRepositoryImpl
+import com.example.core.updates_history.BuildConfig
+import com.example.core.updates_history.source.UpdatesHistoryApi
+import com.example.core.updates_history.repository.db.UpdateDescriptionDBRepository
+import com.example.core.updates_history.repository.db.UpdateDescriptionDBRepositoryImpl
+import com.example.core.updates_history.repository.web.UpdateDescriptionWebRepository
+import com.example.core.updates_history.repository.web.UpdateDescriptionWebRepositoryImpl
 import com.example.database.dao.UpdateDescriptionDao
 import com.example.database.model.UpdateDescriptionDBEntity
 import dagger.Module
@@ -42,7 +44,7 @@ object HistoryDescriptionSourceModule {
     @Provides
     @Singleton
     fun provideUpdatesHistoryApi(
-        @Qualifiers.UpdatesHistory   retrofit: Retrofit
+        @Qualifiers.UpdatesHistory retrofit: Retrofit
     ): UpdatesHistoryApi = retrofit.create(UpdatesHistoryApi::class.java)
 
     @Provides

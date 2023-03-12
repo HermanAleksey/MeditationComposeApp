@@ -8,13 +8,17 @@ import com.example.feature.update_history.internal.UpdateDescriptionDialog
 
 class UpdateDescriptionDialogProvider(
     private val updatesLog: List<UpdateDescriptionModel>,
+    private val onDismissSideEffect: () -> Unit = {}
 ) : MedioseDialogProvider() {
 
 
     @Composable
     override fun Display() {
         MeditationDialogFormer(
-            onDismissRequest = { onDismiss() },
+            onDismissRequest = {
+                onDismiss()
+                onDismissSideEffect()
+            },
             dismissOnBackPress = true,
             dismissOnClickOutside = true,
             dialogContent = {

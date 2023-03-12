@@ -26,7 +26,7 @@ import com.example.design_system.dialog.MedioseDialogProvider
 import com.example.meditationcomposeapp.presentation.navigation.MeditationDestinationsNavHost
 import com.example.meditationcomposeapp.presentation.navigation.NavDependenciesProviderImpl
 import com.example.meditationcomposeapp.presentation.navigation.getDestinationWrapper
-import com.example.meditationcomposeapp.presentation.ui_controls.bottom_nav_bar.state.NavigationBottomBar
+import com.example.meditationcomposeapp.presentation.ui_controls.bottom_nav_bar.NavigationBottomBar
 import com.example.meditationcomposeapp.presentation.ui_controls.toolbar.MedioseToolbarProvider
 import com.example.meditationcomposeapp.presentation.ui_controls.toolbar.ToolbarViewModel
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController

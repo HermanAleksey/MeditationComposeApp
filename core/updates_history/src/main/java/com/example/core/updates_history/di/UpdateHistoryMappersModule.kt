@@ -1,4 +1,4 @@
-package com.example.core.updates_history
+package com.example.core.updates_history.di
 
 import com.example.common.mapper.Mapper
 import com.example.core.model.updates.UpdateDescriptionModel

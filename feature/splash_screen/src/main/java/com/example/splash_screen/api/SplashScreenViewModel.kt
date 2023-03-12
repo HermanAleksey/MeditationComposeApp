@@ -7,8 +7,8 @@ import com.example.core.data_store.UserDataStore
 import com.example.core.model.NetworkResponse
 import com.example.core.model.updates.CompareResult
 import com.example.core.model.updates.toVersion
-import com.example.core.updates_history.source.db.UpdateDescriptionDBRepository
 import com.example.core.updates_history.use_case.GetAppUpdatesHistoryUseCase
+import com.example.core.updates_history.use_case.InsertAllUpdatesDescriptionsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -18,7 +18,7 @@ import javax.inject.Inject
 class SplashScreenViewModel @Inject constructor(
     private val userDataStore: UserDataStore,
     private val loginUseCase: LoginUseCase,
-    private val updateDescriptionDBRepository: UpdateDescriptionDBRepository,
+    private val insertAllUpdatesDescriptionsUseCase: InsertAllUpdatesDescriptionsUseCase,
     private val getAppUpdatesHistoryUseCase: GetAppUpdatesHistoryUseCase,
 ) : NavigationBaseViewModel<SplashScreenNavRoute>() {
 
@@ -80,8 +80,8 @@ class SplashScreenViewModel @Inject constructor(
         getAppUpdatesHistoryUseCase(lastInstalledVersion)
             .collect {
                 if (it is NetworkResponse.Success) {
-                    it.data?.forEach { update ->
-                        updateDescriptionDBRepository.insertAll(update)
+                    it.data?.let { updates ->
+                        insertAllUpdatesDescriptionsUseCase(updates)
                     }
                 }
             }

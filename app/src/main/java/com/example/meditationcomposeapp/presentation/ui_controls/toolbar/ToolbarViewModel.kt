@@ -1,10 +1,10 @@
 package com.example.meditationcomposeapp.presentation.ui_controls.toolbar
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.core.updates_history.source.db.UpdateDescriptionDBRepository
-import com.example.design_system.dialog.DialogController
-import com.example.feature.update_history.api.UpdateDescriptionDialogProvider
+import com.example.core.updates_history.use_case.GetAllUpdatesDescriptionsUseCase
+import com.example.core.updates_history.use_case.GetLastUpdateDescriptionUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -14,49 +14,43 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ToolbarViewModel @Inject constructor(
-    // todo don't use repo
-    private val updateDescriptionRepository: UpdateDescriptionDBRepository,
+    private val getLastUpdateDescriptionUseCase: GetLastUpdateDescriptionUseCase,
+    private val getAllUpdatesDescriptionsUseCase: GetAllUpdatesDescriptionsUseCase,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(ToolbarViewState())
     val uiState: StateFlow<ToolbarViewState> = _uiState
 
-    fun onLaunch(dialogController: DialogController) {
+    fun onLaunch() {
+        Log.e("TAGG", "invoke: ${Thread.currentThread().name}")
         viewModelScope.launch {
-            updateDescriptionRepository.getLastUpdate()?.let { lastUpdateDesc ->
-                if (!lastUpdateDesc.wasShown) {
-                    _uiState.update { state ->
-                        state.copy(
-                            updateNotesList = listOf(lastUpdateDesc),
-                        )
-                    }
-
-                    dialogController.show(
-                        UpdateDescriptionDialogProvider(
-                            listOf(lastUpdateDesc)
-                        )
+            getLastUpdateDescriptionUseCase()?.let { lastUpdateDesc ->
+                _uiState.update {
+                    it.copy(
+                        lastUpdate = lastUpdateDesc
                     )
                 }
             }
         }
     }
 
-    fun onUpdateHistoryClick(dialogController: DialogController) {
-        viewModelScope.launch {
-            with(_uiState) {
-                update {
-                    it.copy(
-                        updateNotesList = updateDescriptionRepository.getAll().reversed()
-                    )
-                }
-
-                if (value.updateNotesList.isNotEmpty())
-                    dialogController.show(
-                        UpdateDescriptionDialogProvider(
-                            value.updateNotesList
-                        )
-                    )
+    fun onUpdateHistoryClick() = viewModelScope.launch {
+        Log.e("TAGG", "invoke: ${Thread.currentThread().name}")
+        getAllUpdatesDescriptionsUseCase().let { list ->
+            _uiState.update {
+                it.copy(
+                    isDialogShown = true,
+                    updateNotesList = list
+                )
             }
+        }
+    }
+
+    fun onDialogClosed() {
+        _uiState.update {
+            it.copy(
+                isDialogShown = false
+            )
         }
     }
 }

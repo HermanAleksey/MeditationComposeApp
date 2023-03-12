@@ -1,4 +1,4 @@
-package com.example.core.updates_history.source.web
+package com.example.core.updates_history.repository.web
 
 import com.example.core.updates_history.model.UpdateDescriptionResponse
 import com.example.core.model.NetworkResponse
