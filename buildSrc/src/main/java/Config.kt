@@ -5,9 +5,9 @@ object Config {
 
     const val MAJOR_VERSION = 0
     const val MINOR_VERSION = 7
-    const val PATCH_VERSION = 1
+    const val PATCH_VERSION = 2
     const val VERSION_NAME = "$MAJOR_VERSION.$MINOR_VERSION.$PATCH_VERSION"
-    const val VERSION_CODE = 10
+    const val VERSION_CODE = 11
 
     const val MIN_SDK = 26
     const val TARGET_SDK = 33

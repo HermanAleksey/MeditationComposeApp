@@ -73,9 +73,9 @@ fun getVersionDescriptions(startFromVersion: String): List<UpdateDescriptionResp
         updateTitle = "Bug fix",
         updateDescription = "Bug with infinite update description pop-up fixed :)",
     )
-    val version0_6_2 = UpdateDescriptionResponse(
+    val version0_7_2 = UpdateDescriptionResponse(
         id = 5,
-        versionName = "0.6.2",
+        versionName = "0.7.2",
         updateReleaseTime = 1678638488581,
         updateTitle = "Bug fixes",
         updateDescription = "Overall bug fixes and performance improvements",
@@ -85,7 +85,7 @@ fun getVersionDescriptions(startFromVersion: String): List<UpdateDescriptionResp
         "0.5.0" to version0_5_0,
         "0.6.0" to version0_6_0,
         "0.6.1" to version0_6_1,
-        "0.6.2" to version0_6_2,
+        "0.7.2" to version0_7_2,
     )
 
     val list = map.values.toTypedArray().copyOfRange(
