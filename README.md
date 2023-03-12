@@ -5,11 +5,10 @@ This project is used by me to practice new technologies or try to implement some
 My main idea when i was creating this project was to learn how to use Jetpack Compose. But the larger the project, the more important it becomes to write clean code to maintain it. \
 I really hope that I will develop the project further and further and add various functions here, as this will mean that I continue to work on myself and my code ;)
 
-## What is in the project now? 
-
+## What is in the project now?
 Currently stack of project: Jetpack Compose, MVVM, Coroutines, Flow, Dagger-Hilt, Rxjava, Firebase\
 Also used: Splashscreen, Datastore, Accompanist, Compose-destinations, Image-Cropper, Paging, JUnit\
-Setuped CI/CD with running tests task on each PR on master.
+Configured CI/CD: run ktlint and tests. Was thinking about adding UI tests to pipeline, but Firebase solution limits you to only 10 free tests, so i decided not to.
 
 ## What does it look like?
 
@@ -63,5 +62,5 @@ On click user can open Detailed info screen. Nothing really interesting here, bu
 
 
 ### What is next?
-Right now i'm working on maps. The idea is to use google maps and Room database to store markers. \
-User can create marker on map and add description and photos (perhaps in further version) to it. It is possible to add synchronization with the server, either improvised by my own, or using Firebase storage.
+First of all is redesign, especially beer and puzzle features. 
+After it I'm planning to implement music player as next feature.
