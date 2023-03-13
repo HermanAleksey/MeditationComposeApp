@@ -11,7 +11,8 @@ plugins {
     id("org.jlleitschuh.gradle.ktlint")
 }
 
-@Suppress("UnstableApiUsage") android {
+@Suppress("UnstableApiUsage")
+android {
     namespace = "com.example.meditationcomposeapp"
     compileSdk = Config.COMPILE_SDK
 

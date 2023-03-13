@@ -17,7 +17,8 @@ android {
         getByName("release") {
             isMinifyEnabled = true
 
-            buildConfigField("boolean", "ENABLE_VALIDATION", "true")
+            //todo set to true when server is available
+            buildConfigField("boolean", "ENABLE_VALIDATION", "false")
             buildConfigField("String", "AUTHENTICATION_SERVER_URL", "\"https://ok.com\"")
         }
         getByName("debug") {
