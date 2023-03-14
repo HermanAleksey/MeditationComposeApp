@@ -1,8 +1,8 @@
 package com.example.punk_source.api.repository
 
 import com.example.common.mapper.Mapper
-import com.example.core.model.beer_sorts.Beer
 import com.example.core.model.NetworkResponse
+import com.example.core.model.beer_sorts.Beer
 import com.example.punk_source.api.model.web.BeerResponse
 import com.example.punk_source.internal.PunkApi
 import kotlinx.coroutines.flow.Flow
@@ -37,7 +37,7 @@ class PunkWebRepositoryImpl @Inject constructor(
         return flow {
             emit(NetworkResponse.Loading(true))
             try {
-                val response = punkApi.getRandomBeer()
+                val response = punkApi.getRandomBeer().first()
                 emit(NetworkResponse.Success(data = beerMapper.mapFrom(response)))
             } catch (e: IOException) {
                 e.printStackTrace()

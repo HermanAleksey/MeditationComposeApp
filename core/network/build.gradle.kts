@@ -10,6 +10,8 @@ android {
 
     defaultConfig {
         minSdk = Config.MIN_SDK
+
+        consumerProguardFiles ("network-proguard-rules.pro")
     }
 
     compileOptions {

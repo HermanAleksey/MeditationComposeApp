@@ -1,4 +1,6 @@
-import kotlin.collections.listOf
+import java.io.FileInputStream
+import org.jetbrains.kotlin.konan.properties.Properties
+
 
 plugins {
     id("com.android.application")
@@ -32,6 +34,8 @@ android {
     buildTypes {
         getByName("release") {
             isMinifyEnabled = true
+            isDebuggable = false
+
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
@@ -43,6 +47,26 @@ android {
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
+        }
+    }
+
+    val propFile = File("./signing.properties")
+    println(propFile.exists())
+
+    if (propFile.exists()) {
+        val props = Properties()
+        props.load(FileInputStream(propFile))
+
+        signingConfigs {
+            create("release") {
+                storeFile = file(props["STORE_FILE"]?:"")
+                keyAlias = props["KEY_ALIAS"].toString()
+                keyPassword = props["KEY_PASSWORD"].toString()
+                storePassword = props["STORE_PASSWORD"].toString()
+            }
+        }
+        defaultConfig {
+            signingConfig = signingConfigs.getByName("release")
         }
     }
 

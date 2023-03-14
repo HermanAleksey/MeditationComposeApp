@@ -26,7 +26,7 @@ class AuthenticationRepositoryImpl @Inject constructor(
         return flow {
             emit(NetworkResponse.Loading(true))
             try {
-                delay(2000)
+                delay(RESPONSE_DELAY * 2)
 
                 if (!BuildConfig.ENABLE_VALIDATION) {
                     val response = LoginUserResponse(
@@ -60,7 +60,7 @@ class AuthenticationRepositoryImpl @Inject constructor(
         return flow {
             emit(NetworkResponse.Loading(true))
             try {
-                delay(1000)
+                delay(RESPONSE_DELAY)
                 if (!BuildConfig.ENABLE_VALIDATION) {
                     emit(
                         NetworkResponse.Success(
@@ -101,7 +101,7 @@ class AuthenticationRepositoryImpl @Inject constructor(
         return flow {
             emit(NetworkResponse.Loading(true))
             try {
-                delay(1000)
+                delay(RESPONSE_DELAY)
 
                 if (!BuildConfig.ENABLE_VALIDATION) {
                     val response = SuccessInfo(true, null)
@@ -129,7 +129,7 @@ class AuthenticationRepositoryImpl @Inject constructor(
         return flow {
             emit(NetworkResponse.Loading(true))
             try {
-                delay(1000)
+                delay(RESPONSE_DELAY)
 
                 if (!BuildConfig.ENABLE_VALIDATION) {
                     val response = SuccessInfo(true, null)
@@ -157,7 +157,7 @@ class AuthenticationRepositoryImpl @Inject constructor(
         return flow {
             emit(NetworkResponse.Loading(true))
             try {
-                delay(1000)
+                delay(RESPONSE_DELAY)
 
                 if (!BuildConfig.ENABLE_VALIDATION) {
                     val response = SuccessInfo(true, null)
@@ -175,5 +175,9 @@ class AuthenticationRepositoryImpl @Inject constructor(
             }
             emit(NetworkResponse.Loading(false))
         }
+    }
+
+    companion object {
+        private const val RESPONSE_DELAY = 200L
     }
 }

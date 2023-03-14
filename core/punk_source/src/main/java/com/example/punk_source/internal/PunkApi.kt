@@ -15,7 +15,7 @@ interface PunkApi {
     ): List<BeerResponse>
 
     @GET("/v2/beers/random")
-    suspend fun getRandomBeer(): BeerResponse
+    suspend fun getRandomBeer(): List<BeerResponse>
 
     @GET("/v2/beers")
     suspend fun getBeers(
