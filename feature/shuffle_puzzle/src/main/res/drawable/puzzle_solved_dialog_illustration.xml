@@ -2,8 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:width="200dp"
     android:height="200dp"
-    android:viewportWidth="200"
-    android:viewportHeight="200">
+    android:viewportWidth="228"
+    android:viewportHeight="228">
   <path
       android:pathData="M40.02,194.71C81.17,218.97 147.85,218.97 188.99,194.71C230.13,170.45 230.13,131.08 188.99,106.8C147.85,82.53 81.16,82.53 40.02,106.8C-1.11,131.08 -1.11,170.42 40.02,194.71Z"
       android:fillColor="#F5F5F5"/>
