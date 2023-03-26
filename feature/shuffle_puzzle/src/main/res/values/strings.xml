@@ -7,4 +7,6 @@
     <string name="select_puzzle_size">Select puzzle size:</string>
     <string name="select_puzzle_image_from_gallery_text">Click <b>here</b> to select\nphoto for puzzle from\nyour gallery</string>
     <string name="restart">Restart:</string>
+    <string name="skip">Skip</string>
+    <string name="congratulations_text">Hurrah! You won!</string>
 </resources>

@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import com.example.design_system.common_composables.ColorBackground
 import com.example.shuffle_puzzle.api.ShufflePuzzleScreenViewModel
 import com.example.shuffle_puzzle.internal.presentation.composables.PuzzleBoardWithCounter
-import com.example.shuffle_puzzle.internal.presentation.composables.PuzzleIsSolvedLabel
+import com.example.shuffle_puzzle.internal.presentation.composables.PuzzleIsSolvedDialog
 
 @Composable
 internal fun InternalShufflePuzzleScreen(
@@ -46,7 +46,10 @@ internal fun InternalShufflePuzzleScreen(
                 isTimerActivated = uiState.value.isTimerActive,
             )
             if (uiState.value.isPuzzleSolved) {
-                PuzzleIsSolvedLabel()
+                PuzzleIsSolvedDialog(
+                    movesDone = 1,
+                    onResetClick = { viewModel.onRestartPuzzleClicked() }
+                )
             }
         }
     }
