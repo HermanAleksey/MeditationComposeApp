@@ -4,9 +4,10 @@
     <string name="moves_done">Moves done</string>
     <string name="time_passed">Time passed</string>
     <string name="select_puzzle">Select puzzle</string>
-    <string name="select_puzzle_size">Select puzzle size:</string>
+    <string name="select_puzzle_size">Select puzzle size</string>
     <string name="select_puzzle_image_from_gallery_text">Click <b>here</b> to select\nphoto for puzzle from\nyour gallery</string>
     <string name="restart">Restart:</string>
     <string name="skip">Skip</string>
     <string name="congratulations_text">Hurrah! You won!</string>
+    <string name="restart_game">Restart game</string>
 </resources>

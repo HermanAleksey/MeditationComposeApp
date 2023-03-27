@@ -20,7 +20,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -41,14 +40,6 @@ internal fun PuzzleIsSolvedDialog(
                 .padding(horizontal = 33.dp, vertical = 7.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(
-                text = stringResource(id = R.string.skip),
-                modifier = Modifier.align(Alignment.End),
-                style = MaterialTheme.typography.body2.copy(
-                    color = Color.Black,
-                    fontWeight = FontWeight.SemiBold
-                ),
-            )
             Spacer(modifier = Modifier.height(7.dp))
             Image(
                 painter = painterResource(id = R.drawable.puzzle_solved_dialog_illustration),
@@ -88,7 +79,7 @@ internal fun PuzzleIsSolvedDialog(
 
 @Preview
 @Composable
-fun PuzzleIsSolvedDialogPreview() {
+internal fun PuzzleIsSolvedDialogPreview() {
     AppTheme {
         PuzzleIsSolvedDialog(5) {}
     }

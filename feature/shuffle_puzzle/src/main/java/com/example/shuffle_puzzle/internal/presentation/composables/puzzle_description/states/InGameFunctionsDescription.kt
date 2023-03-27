@@ -3,42 +3,31 @@ package com.example.shuffle_puzzle.internal.presentation.composables.puzzle_desc
 import android.text.format.DateUtils
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.feature.shuffle_puzzle.R
-import kotlinx.coroutines.delay
 
 @Composable
 internal fun InGameFunctionsDescription(
     timerValueSec: Long,
-    onTimerSecTick: () -> Unit,
-    isTimerActivated: Boolean,
     movesDone: Int,
     onRestartPuzzle: () -> Unit,
 ) {
-    LaunchedEffect(key1 = isTimerActivated) {
-        while (isTimerActivated) {
-            delay(1000L)
-            onTimerSecTick()
-        }
-    }
-
-    fun formatDuration(seconds: Long): String = if (seconds < 60) {
-        seconds.toString()
-    } else {
-        DateUtils.formatElapsedTime(seconds)
-    }
-
-
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -52,7 +41,11 @@ internal fun InGameFunctionsDescription(
             ),
         )
         Text(
-            text = stringResource(id = R.string.time_passed) + ": ${formatDuration(timerValueSec)}",
+            text = stringResource(id = R.string.time_passed) + ": ${
+                DateUtils.formatElapsedTime(
+                    timerValueSec
+                )
+            }",
             style = MaterialTheme.typography.body1.copy(
                 color = MaterialTheme.colors.onSurface,
                 fontSize = 20.sp,
@@ -72,12 +65,13 @@ internal fun InGameFunctionsDescription(
             Spacer(modifier = Modifier.width(10.dp))
             Image(
                 painter = painterResource(id = R.drawable.ic_restart),
-                contentDescription = "Restart game",
+                contentDescription = stringResource(R.string.restart_game),
                 modifier = Modifier
                     .size(24.dp)
                     .clickable {
                         onRestartPuzzle()
-                    }
+                    },
+                colorFilter = ColorFilter.tint(color = MaterialTheme.colors.onSurface)
             )
         }
     }

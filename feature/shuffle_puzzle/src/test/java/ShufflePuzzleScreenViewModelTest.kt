@@ -40,17 +40,6 @@ class ShufflePuzzleScreenViewModelTest {
     }
 
     @Test
-    fun `onTimerTick, time increases`() {
-        viewModel.onTimerTick()
-
-        assert(viewModel.uiState.value.solvingTimerSec == 1L)
-
-        viewModel.onTimerTick()
-
-        assert(viewModel.uiState.value.solvingTimerSec == 2L)
-    }
-
-    @Test
     fun `onMovePerformed, puzzle solved, do nothing`() {
         Whitebox.setInternalState(
             viewModel, "_uiState",

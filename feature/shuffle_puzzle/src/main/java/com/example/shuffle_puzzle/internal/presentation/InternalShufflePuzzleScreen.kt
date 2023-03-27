@@ -23,31 +23,17 @@ internal fun InternalShufflePuzzleScreen(
         lockScreenWhenLoading = true,
         isLoading = uiState.value.isLoading
     ) {
-        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
             PuzzleBoardWithCounter(
-                isPuzzleCreated = uiState.value.puzzle != null,
-                movesDone = uiState.value.movesDone,
-                onMovePerformed = {
-                    viewModel.onMovePerformed(it)
-                },
+                viewModel = viewModel,
                 puzzle = uiState.value.puzzle,
-                onCreatePuzzleClick = { bitmap ->
-                    viewModel.onCreatePuzzleClick(bitmap)
-                },
-                puzzleSize = uiState.value.puzzleSize,
-                onPuzzleSizeChanged = {
-                    viewModel.onPuzzleSizeChanged(it)
-                },
-                onRestartPuzzle = {
-                    viewModel.onRestartPuzzleClicked()
-                },
-                timerValueSec = uiState.value.solvingTimerSec,
-                onTimerSecTick = { viewModel.onTimerTick() },
-                isTimerActivated = uiState.value.isTimerActive,
             )
             if (uiState.value.isPuzzleSolved) {
                 PuzzleIsSolvedDialog(
-                    movesDone = 1,
+                    movesDone = uiState.value.movesDone,
                     onResetClick = { viewModel.onRestartPuzzleClicked() }
                 )
             }

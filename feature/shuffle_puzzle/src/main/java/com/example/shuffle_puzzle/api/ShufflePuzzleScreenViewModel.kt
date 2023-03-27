@@ -6,6 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.shuffle_puzzle.api.model.Puzzle
 import com.example.shuffle_puzzle.internal.presentation.ShufflePuzzleState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -18,10 +20,23 @@ class ShufflePuzzleScreenViewModel @Inject constructor() : ViewModel() {
     private val _uiState = MutableStateFlow(ShufflePuzzleState())
     val uiState: StateFlow<ShufflePuzzleState> = _uiState
 
-    fun onTimerTick() {
+    init {
+        viewModelScope.launch {
+            launch(Dispatchers.IO) {
+                _uiState.collect {
+                    if (it.isTimerActive) {
+                        delay(1_000)
+                        onTimerTick()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun onTimerTick() {
         _uiState.update {
             it.copy(
-                solvingTimerSec = _uiState.value.solvingTimerSec + 1
+                solvingTimerSec = it.solvingTimerSec + 1
             )
         }
     }
