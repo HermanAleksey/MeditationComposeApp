@@ -12,7 +12,16 @@ class HopsMapper @Inject constructor(
         return Ingredients.Hops(
             name = objectFrom.name!!,
             amount = amountMapper.mapFrom(objectFrom.amount!!),
-            add = objectFrom.add!!,
+            add = objectFrom.add.let {
+                if (it.isNullOrBlank()) {
+                    Ingredients.AddOrder.NA
+                } else when (it.lowercase()) {
+                    "start" -> Ingredients.AddOrder.START
+                    "middle" -> Ingredients.AddOrder.MIDDLE
+                    "end" -> Ingredients.AddOrder.END
+                    else -> Ingredients.AddOrder.NA
+                }
+            },
             attribute = objectFrom.attribute!!,
         )
     }
