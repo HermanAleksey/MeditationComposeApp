@@ -318,8 +318,17 @@ private fun IngredientsDescriptionList(ingredients: Ingredients) {
         .apply {
             ingredients.hops.forEachIndexed { index, hop ->
                 append(
-                    stringResource(
-                        id = R.string.hops_information,
+                    if (hop.add.toFormatString().isBlank())
+                        stringResource(
+                            id = R.string.hops_information,
+                            formatArgs = arrayOf(
+                                hop.name,
+                                hop.amount.value.toFloat(),
+                                hop.amount.unit.toAbbreviation()
+                            )
+                        )
+                    else stringResource(
+                        id = R.string.hops_information_with_order,
                         formatArgs = arrayOf(
                             hop.name,
                             hop.amount.value.toFloat(),

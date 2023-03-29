@@ -29,7 +29,8 @@
     <string name="hops_is">Hops:</string>
 
     <string name="malt_information">%1$s (%2$.1f&#160;%3$s)</string>
-    <string name="hops_information">%1$s (%2$.1f&#160;%3$s) at %4$s</string>
+    <string name="hops_information">%1$s (%2$.1f&#160;%3$s)</string>
+    <string name="hops_information_with_order">%1$s (%2$.1f&#160;%3$s) at %4$s</string>
     <string-array name="measurement_units">
         <item />
         <item>L</item>
@@ -42,5 +43,6 @@
         <item>start</item>
         <item>middle</item>
         <item>end</item>
+        <item />
     </string-array>
 </resources>
