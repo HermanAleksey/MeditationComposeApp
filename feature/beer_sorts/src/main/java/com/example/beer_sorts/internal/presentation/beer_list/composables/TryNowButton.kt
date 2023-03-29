@@ -4,7 +4,13 @@ import android.app.SearchManager
 import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
@@ -16,15 +22,20 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat.startActivity
+import com.example.design_system.AppTheme
 import com.example.feature.beer_sorts.R
 
 
 @Composable
-internal fun TryNowButton(beerName: String, tagline: String) {
+internal fun TryNowButton(
+    beerName: String,
+    tagline: String,
+) {
     val context = LocalContext.current
 
     Card(
@@ -51,7 +62,8 @@ internal fun TryNowButton(beerName: String, tagline: String) {
             Text(
                 text = stringResource(id = R.string.try_now),
                 fontSize = 18.sp,
-                color = Color.White
+                color = Color.White,
+                textAlign = TextAlign.End
             )
             Spacer(modifier = Modifier.width(6.dp))
             Image(
@@ -66,5 +78,7 @@ internal fun TryNowButton(beerName: String, tagline: String) {
 @Preview
 @Composable
 fun PreviewTryNowButton() {
-    TryNowButton("Beer", "tagline")
+    AppTheme {
+        TryNowButton("Beer", "tagline")
+    }
 }
