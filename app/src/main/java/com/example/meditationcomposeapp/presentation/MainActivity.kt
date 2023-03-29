@@ -114,7 +114,7 @@ fun MyApp(
             bottomBar = {
                 AnimatedVisibility(
                     visible = bottomBarIsVisible.value,
-                    enter = slideInVertically(initialOffsetY = { it }),
+                    enter = slideInVertically(initialOffsetY = { it },),
                     exit = slideOutVertically(targetOffsetY = { it }),
                 ) {
                     NavigationBottomBar(navController)
