@@ -79,6 +79,7 @@ class ShufflePuzzleScreenViewModel @Inject constructor() : ViewModel() {
                 isPuzzleSolved = false,
                 puzzle = null,
                 movesDone = 0,
+                isTimerActive = false
             )
         }
     }
