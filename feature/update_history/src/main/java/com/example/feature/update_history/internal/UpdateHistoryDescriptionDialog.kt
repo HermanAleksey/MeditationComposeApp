@@ -1,7 +1,15 @@
 package com.example.feature.update_history.internal
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.MaterialTheme
@@ -18,17 +26,30 @@ import com.example.common.utils.DateFormat
 import com.example.common.utils.formatMillisIntoDate
 import com.example.core.model.updates.UpdateDescriptionModel
 import com.example.design_system.AppTheme
+import com.example.design_system.dialog.MeditationDialogFormer
 import com.example.feature.update_history.R
 
 @Preview
 @Composable
 internal fun UpdateDescriptionDialogPreview() {
-    AppTheme(false) {
-        UpdateDescriptionDialog(
-            listOf(
-                UpdateDescriptionModel("10.10.10", 1667045395445, "title", "desc", true),
-                UpdateDescriptionModel("10.10.10", 1667045395445, "title", "desc", true)
-            )
+    AppTheme {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colors.surface)
+        )
+        MeditationDialogFormer(
+            onDismissRequest = { },
+            dismissOnBackPress = true,
+            dismissOnClickOutside = true,
+            dialogContent = {
+                UpdateDescriptionDialog(
+                    listOf(
+                        UpdateDescriptionModel("10.10.10", 1667045395445, "title", "desc", true),
+                        UpdateDescriptionModel("10.10.10", 1667045395445, "title", "desc", true)
+                    )
+                )
+            }
         )
     }
 }
@@ -43,7 +64,7 @@ internal fun UpdateDescriptionDialog(
             Spacer(modifier = Modifier.height(16.dp))
             Text(
                 text = stringResource(R.string.update_notes_dialog_title),
-                style = MaterialTheme.typography.h2.copy(
+                style = MaterialTheme.typography.h4.copy(
                     color = MaterialTheme.colors.onSurface
                 ),
                 modifier = Modifier
@@ -87,7 +108,7 @@ internal fun UpdateDescriptionElement(model: UpdateDescriptionModel) {
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
             Text(
                 text = stringResource(id = R.string.app_update_version, model.versionName),
-                style = MaterialTheme.typography.caption.copy(
+                style = MaterialTheme.typography.body1.copy(
                     color = MaterialTheme.colors.onSurface
                 )
             )
@@ -100,7 +121,7 @@ internal fun UpdateDescriptionElement(model: UpdateDescriptionModel) {
                         locale = locale
                     )
                 ),
-                style = MaterialTheme.typography.caption.copy(
+                style = MaterialTheme.typography.body1.copy(
                     color = MaterialTheme.colors.onSurface
                 )
             )
@@ -109,14 +130,14 @@ internal fun UpdateDescriptionElement(model: UpdateDescriptionModel) {
         Spacer(modifier = Modifier.height(4.dp))
         Text(
             text = model.updateTitle,
-            style = MaterialTheme.typography.body1.copy(
+            style = MaterialTheme.typography.h6.copy(
                 color = MaterialTheme.colors.onSurface
             )
         )
         Spacer(modifier = Modifier.height(4.dp))
         Text(
             text = model.updateDescription,
-            style = MaterialTheme.typography.body2.copy(
+            style = MaterialTheme.typography.body1.copy(
                 color = MaterialTheme.colors.onSurface
             )
         )

@@ -1,7 +1,6 @@
 package com.example.authentication.api.registration_screen
 
 import androidx.lifecycle.viewModelScope
-import com.example.authentication.internal.screens.registration.RegistrationScreenState
 import com.example.authentication.internal.validation.LoginField
 import com.example.authentication.internal.validation.NameField
 import com.example.authentication.internal.validation.PasswordField

@@ -10,7 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.authentication.internal.screens.enter_code.EnterCodeScreenState.Companion.EMPTY_NUMBER
+import com.example.authentication.api.enter_code_screen.EnterCodeScreenState.Companion.EMPTY_NUMBER
+import com.example.design_system.AppTheme
 
 @Composable
 internal fun CodePanel(
@@ -124,9 +125,11 @@ internal fun CodePanel(
 
 @Composable
 @Preview
-fun CodePanelPreview() {
-    CodePanel(
-        code = arrayOf(1, 3, 2, 3, EMPTY_NUMBER),
-        onCodeDigitChanged = { _, _ -> true}
-    ) { }
+private fun CodePanelPreview() {
+    AppTheme {
+        CodePanel(
+            code = arrayOf(1, 3, 2, 3, EMPTY_NUMBER),
+            onCodeDigitChanged = { _, _ -> true }
+        ) { }
+    }
 }

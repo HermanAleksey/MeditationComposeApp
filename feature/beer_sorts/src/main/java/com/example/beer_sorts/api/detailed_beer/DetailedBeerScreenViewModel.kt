@@ -1,8 +1,7 @@
-package com.example.beer_sorts.api
+package com.example.beer_sorts.api.detailed_beer
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.beer_sorts.internal.presentation.beer_details.DetailedBeerScreenState
 import com.example.core.model.NetworkResponse
 import com.example.punk_source.api.use_case.punk.network.GetBeerByIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel

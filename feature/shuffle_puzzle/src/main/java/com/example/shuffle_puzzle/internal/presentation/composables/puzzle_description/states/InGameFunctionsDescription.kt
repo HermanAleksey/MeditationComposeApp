@@ -2,12 +2,16 @@ package com.example.shuffle_puzzle.internal.presentation.composables.puzzle_desc
 
 import android.text.format.DateUtils
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.MaterialTheme
@@ -15,11 +19,13 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.example.design_system.AppTheme
 import com.example.feature.shuffle_puzzle.R
 
 @Composable
@@ -35,9 +41,8 @@ internal fun InGameFunctionsDescription(
     ) {
         Text(
             text = stringResource(id = R.string.moves_done) + ": $movesDone",
-            style = MaterialTheme.typography.body1.copy(
+            style = MaterialTheme.typography.h6.copy(
                 color = MaterialTheme.colors.onSurface,
-                fontSize = 20.sp,
             ),
         )
         Text(
@@ -46,9 +51,8 @@ internal fun InGameFunctionsDescription(
                     timerValueSec
                 )
             }",
-            style = MaterialTheme.typography.body1.copy(
+            style = MaterialTheme.typography.h6.copy(
                 color = MaterialTheme.colors.onSurface,
-                fontSize = 20.sp,
             ),
         )
 
@@ -57,9 +61,8 @@ internal fun InGameFunctionsDescription(
         ) {
             Text(
                 text = stringResource(id = R.string.restart),
-                style = MaterialTheme.typography.body1.copy(
+                style = MaterialTheme.typography.h6.copy(
                     color = MaterialTheme.colors.onSurface,
-                    fontSize = 20.sp,
                 ),
             )
             Spacer(modifier = Modifier.width(10.dp))
@@ -72,6 +75,23 @@ internal fun InGameFunctionsDescription(
                         onRestartPuzzle()
                     },
                 colorFilter = ColorFilter.tint(color = MaterialTheme.colors.onSurface)
+            )
+        }
+    }
+}
+
+@Preview
+@Composable
+fun InGameFunctionsDescriptionPreview() {
+    AppTheme {
+        Box(modifier = Modifier
+            .fillMaxWidth()
+            .height(150.dp)
+            .background(Color.White)) {
+            InGameFunctionsDescription(
+                timerValueSec = 123,
+                movesDone = 123,
+                onRestartPuzzle = {}
             )
         }
     }

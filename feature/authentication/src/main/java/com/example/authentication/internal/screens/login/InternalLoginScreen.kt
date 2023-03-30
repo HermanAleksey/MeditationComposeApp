@@ -2,7 +2,14 @@ package com.example.authentication.internal.screens.login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
@@ -23,10 +30,10 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
 import com.example.authentication.api.login_screen.LoginScreenViewModel
+import com.example.authentication.internal.common.LoginFlowBackground
+import com.example.authentication.internal.common.LoginFlowInputField
+import com.example.authentication.internal.common.LoginMainButton
 import com.example.authentication.internal.screens.enter.composable.DontHaveAccountText
-import com.example.authentication.internal.screens.enter.composable.LoginMainButton
-import com.example.authentication.internal.screens.login.composable.LoginFlowBackground
-import com.example.authentication.internal.screens.login.composable.LoginFlowInputField
 import com.example.feature.authentication.R
 
 @Composable
@@ -58,16 +65,17 @@ internal fun InternalLoginScreen(
             )
             Text(
                 text = stringResource(id = R.string.sign_in),
-                style = MaterialTheme.typography.h2,
+                style = MaterialTheme.typography.h4,
                 modifier = Modifier.padding(top = 31.dp)
             )
             Text(
                 text = stringResource(id = R.string.sign_in_desc),
-                style = MaterialTheme.typography.body1,
+                style = MaterialTheme.typography.h5,
                 modifier = Modifier
                     .padding(top = 4.dp)
                     .alpha(0.7F)
             )
+            Spacer(modifier = Modifier.height(40.dp))
             LoginFlowInputField(
                 isEnabled = !uiState.value.isLoading,
                 textFieldValue = uiState.value.login,
@@ -81,6 +89,7 @@ internal fun InternalLoginScreen(
                     passwordFocusRequester.requestFocus()
                 },
             )
+            Spacer(modifier = Modifier.height(30.dp))
             LoginFlowInputField(
                 isEnabled = !uiState.value.isLoading,
                 textFieldValue = uiState.value.password,
@@ -103,7 +112,7 @@ internal fun InternalLoginScreen(
             ) {
                 Text(
                     text = stringResource(id = R.string.forgot_password),
-                    style = MaterialTheme.typography.caption,
+                    style = MaterialTheme.typography.subtitle1,
                     modifier = Modifier
                         .padding(top = 9.dp)
                         .clickable {
@@ -127,12 +136,11 @@ internal fun InternalLoginScreen(
                     .padding(top = 20.dp),
                 contentAlignment = Alignment.Center
             ) {
+                Spacer(modifier = Modifier.height(18.dp))
                 DontHaveAccountText(
-                    modifier = Modifier
-                        .padding(top = 18.dp)
-                        .clickable {
-                            viewModel.onSignUpClicked()
-                        }
+                    onClick = {
+                        viewModel.onSignUpClicked()
+                    }
                 )
             }
             Spacer(modifier = Modifier.padding(top = 80.dp))

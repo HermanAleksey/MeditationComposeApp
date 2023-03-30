@@ -44,6 +44,7 @@ dependencies {
     implementation(Dependencies.activity_compose)
     implementation(Dependencies.compose_ui)
     implementation(Dependencies.compose_material)
+    implementation(Dependencies.compose_ui_tooling)
     implementation(Dependencies.compose_ui_tooling_preview)
 
     //hilt

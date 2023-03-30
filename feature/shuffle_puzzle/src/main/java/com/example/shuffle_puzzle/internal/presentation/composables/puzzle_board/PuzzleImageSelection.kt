@@ -8,10 +8,14 @@ import android.os.Build.VERSION_CODES
 import android.provider.MediaStore
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -21,10 +25,12 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.tooling.preview.Preview
 import com.canhub.cropper.CropImageContract
 import com.canhub.cropper.CropImageView
 import com.canhub.cropper.options
+import com.example.design_system.AppTheme
+import com.example.design_system.ColorPalette
 import com.example.feature.shuffle_puzzle.R
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.PermissionStatus
@@ -36,7 +42,7 @@ internal fun SelectPuzzleImageFromGalleryCard(
     modifier: Modifier,
     onImageSelected: (Bitmap) -> Unit,
 ) {
-    val context = LocalContext.current
+    val contentResolver = LocalContext.current.contentResolver
 
     val cropImage = rememberLauncherForActivityResult(CropImageContract()) { result ->
         if (result.isSuccessful) {
@@ -45,12 +51,12 @@ internal fun SelectPuzzleImageFromGalleryCard(
                     val bitmap: Bitmap = if (Build.VERSION.SDK_INT < VERSION_CODES.P) {
                         @Suppress("DEPRECATION")
                         MediaStore.Images.Media.getBitmap(
-                            context.contentResolver,
+                            contentResolver,
                             it
                         )
                     } else {
                         val source = ImageDecoder.createSource(
-                            context.contentResolver,
+                            contentResolver,
                             it
                         )
                         ImageDecoder.decodeBitmap(source)
@@ -92,7 +98,7 @@ internal fun SelectPuzzleImageFromGalleryCard(
     ) {
         Image(
             painter = painterResource(id = R.drawable.image_selection),
-            contentDescription = "Select image from gallery"
+            contentDescription = stringResource(id = R.string.select_puzzle_image_from_gallery_text)
         )
 
         val selectPuzzleImageFromGalleryLabel =
@@ -101,8 +107,25 @@ internal fun SelectPuzzleImageFromGalleryCard(
             text = selectPuzzleImageFromGalleryLabel,
             modifier = Modifier.wrapContentWidth(),
             textAlign = TextAlign.Center,
-            fontSize = 16.sp,
-            color = Color.Black
+            style = MaterialTheme.typography.h6.copy(
+                color = Color.Black
+            ),
         )
+    }
+}
+
+@Preview
+@Composable
+internal fun SelectPuzzleImageFromGalleryCardPreview() {
+    AppTheme {
+        Box(
+            modifier = Modifier
+                .background(ColorPalette)
+                .fillMaxWidth()
+        ) {
+            SelectPuzzleImageFromGalleryCard(modifier = Modifier,
+                onImageSelected = {})
+        }
+
     }
 }

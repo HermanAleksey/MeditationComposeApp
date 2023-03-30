@@ -7,7 +7,7 @@ import com.example.authentication.api.enter_screen.EnterScreenNavDependencies
 import com.example.authentication.api.login_screen.LoginScreenNavDependencies
 import com.example.authentication.api.new_password_screen.NewPasswordScreenNavDependencies
 import com.example.authentication.api.registration_screen.RegistrationScreenNavDependencies
-import com.example.beer_sorts.api.BeerListNavDependencies
+import com.example.beer_sorts.api.beer_list.BeerListNavDependencies
 import com.example.common.navigation.NavDependencies
 import com.example.common.navigation.NavDependenciesProvider
 import com.example.feature.main.api.MainScreenNavDependencies

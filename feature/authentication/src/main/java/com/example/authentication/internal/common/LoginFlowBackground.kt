@@ -1,6 +1,7 @@
-package com.example.authentication.internal.screens.login.composable
+package com.example.authentication.internal.common
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,13 +12,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
+import com.example.design_system.AppTheme
 import com.example.design_system.common_composables.ColorBackground
 import com.example.feature.authentication.R
 
 @Composable
 internal fun LoginFlowBackground(
     isLoading: Boolean = false,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     ColorBackground(
         content = {
@@ -39,7 +42,7 @@ private fun DecorationLeavesBottom() {
     ) {
         Image(
             painter = painterResource(id = R.drawable.background_login_leaves),
-            contentDescription = "Background image",
+            contentDescription = null,
             contentScale = ContentScale.FillWidth,
             modifier = Modifier
                 .fillMaxWidth(1.2f)
@@ -57,11 +60,27 @@ private fun DecorationLeavesTop() {
     ) {
         Image(
             painter = painterResource(id = R.drawable.single_plant_top),
-            contentDescription = "Background image",
+            contentDescription = null,
             contentScale = ContentScale.FillWidth,
             modifier = Modifier
                 .fillMaxWidth(0.75f)
                 .wrapContentHeight()
         )
+    }
+}
+
+@Preview
+@Composable
+private fun LoginMainButtonPreview() {
+    AppTheme {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(MaterialTheme.colors.background)
+        ) {
+            LoginFlowBackground(
+                isLoading = false
+            ) {}
+        }
     }
 }

@@ -1,7 +1,13 @@
 package com.example.authentication.internal.screens.enter_login
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
@@ -23,9 +29,10 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
 import com.example.authentication.api.enter_login_screen.EnterLoginScreenViewModel
-import com.example.authentication.internal.screens.enter.composable.LoginMainButton
-import com.example.authentication.internal.screens.login.composable.LoginFlowBackground
-import com.example.authentication.internal.screens.login.composable.LoginFlowInputField
+import com.example.authentication.internal.common.LoginFlowBackground
+import com.example.authentication.internal.common.LoginFlowInputField
+import com.example.authentication.internal.common.LoginMainButton
+import com.example.common.utils.emptyString
 import com.example.feature.authentication.R
 
 @Composable
@@ -39,7 +46,7 @@ internal fun InternalEnterLoginScreen(
     val uiState = viewModel.uiState.collectAsState()
 
     LaunchedEffect(key1 = Unit) {
-        viewModel.onScreenOpened(initialLoginValue ?: "")
+        viewModel.onScreenOpened(initialLoginValue ?: emptyString())
     }
 
     LoginFlowBackground(
@@ -62,16 +69,17 @@ internal fun InternalEnterLoginScreen(
             )
             Text(
                 text = stringResource(id = R.string.password_recovery),
-                style = MaterialTheme.typography.h2,
+                style = MaterialTheme.typography.h4,
                 modifier = Modifier.padding(top = 31.dp)
             )
             Text(
                 text = stringResource(id = R.string.enter_login_desc),
-                style = MaterialTheme.typography.body1,
+                style = MaterialTheme.typography.h5,
                 modifier = Modifier
                     .padding(top = 4.dp)
                     .alpha(0.7F)
             )
+            Spacer(modifier = Modifier.height(40.dp))
             LoginFlowInputField(
                 isEnabled = !uiState.value.isLoading,
                 textFieldValue = uiState.value.login,

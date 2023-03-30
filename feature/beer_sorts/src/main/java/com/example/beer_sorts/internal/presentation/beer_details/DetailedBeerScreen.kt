@@ -15,7 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import com.example.beer_sorts.api.DetailedBeerScreenViewModel
+import com.example.beer_sorts.api.detailed_beer.DetailedBeerScreenViewModel
 import com.example.beer_sorts.internal.presentation.beer_details.composables.BeerDescriptionCard
 import com.example.design_system.common_composables.ColorBackground
 import com.skydoves.landscapist.ImageOptions

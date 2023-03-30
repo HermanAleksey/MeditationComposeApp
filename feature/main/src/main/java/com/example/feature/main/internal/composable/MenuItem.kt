@@ -8,6 +8,8 @@ import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Extension
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,9 +20,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.common.utils.UiText
+import com.example.design_system.AppTheme
 import com.example.feature.main.R
 
 internal data class MenuItemModel(
@@ -58,7 +61,7 @@ internal fun MenuItem(modifier: Modifier, model: MenuItemModel) {
                 Spacer(modifier = Modifier.width(9.dp))
                 Text(
                     text = model.title.asString(),
-                    style = MaterialTheme.typography.body1.copy(fontSize = 20.sp),
+                    style = MaterialTheme.typography.h6
                 )
             }
         }
@@ -96,6 +99,25 @@ internal fun MenuItemBackground(backgroundColor: Color, colorForeground: Color) 
             color = colorForeground,
             size = Size(width = size.width, height = size.height / 3),
             topLeft = Offset(x = 0f, y = size.height / 3 * 2)
+        )
+    }
+}
+
+@Preview
+@Composable
+private fun MenuItemPreview() {
+    AppTheme {
+        MenuItem(
+            modifier = Modifier
+                .height(115.dp)
+                .width(170.dp),
+            MenuItemModel(
+                title = UiText.StringResource(R.string.shuffle_puzzle_menu_option),
+                icon = Icons.Default.Extension,
+                backgroundColor = Color(169, 213, 113),
+                foregroundColor = Color(106, 174, 114),
+                onClick = { },
+            )
         )
     }
 }

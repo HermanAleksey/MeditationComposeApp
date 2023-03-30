@@ -1,4 +1,4 @@
-package com.example.authentication.internal.screens.new_password
+package com.example.authentication.api.new_password_screen
 
 import com.example.common.utils.UiText
 

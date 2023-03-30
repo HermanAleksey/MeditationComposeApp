@@ -1,6 +1,5 @@
 package com.example.shuffle_puzzle.internal.presentation
 
-import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,7 +19,6 @@ internal fun InternalShufflePuzzleScreen(
 ) {
     val uiState = viewModel.uiState.collectAsState()
 
-    Log.e("TAGG", "InternalShufflePuzzleScreen: ${uiState.value.isTimerActive}")
     BackHandler(enabled = uiState.value.isTimerActive, onBack = {
         //back handling
         viewModel.onRestartPuzzleClicked()

@@ -1,7 +1,11 @@
 package com.example.authentication.internal.screens.enter_code
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
@@ -16,8 +20,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.authentication.api.enter_code_screen.EnterCodeScreenViewModel
+import com.example.authentication.internal.common.LoginFlowBackground
 import com.example.authentication.internal.screens.enter_code.composable.CodePanel
-import com.example.authentication.internal.screens.login.composable.LoginFlowBackground
 import com.example.feature.authentication.R
 
 @Composable
@@ -47,12 +51,12 @@ internal fun InternalEnterCodeScreen(
             )
             Text(
                 text = stringResource(id = R.string.password_recovery),
-                style = MaterialTheme.typography.h2,
+                style = MaterialTheme.typography.h4,
                 modifier = Modifier.padding(top = 31.dp)
             )
             Text(
                 text = stringResource(id = R.string.password_recovery_desc),
-                style = MaterialTheme.typography.body1,
+                style = MaterialTheme.typography.h5,
                 modifier = Modifier
                     .padding(top = 4.dp)
                     .alpha(0.7F)
@@ -72,12 +76,17 @@ internal fun InternalEnterCodeScreen(
                      * also serve as callback for event when
                      * last digit on CodePanel was filled
                      * */
+                    /**
+                     * Use to transmit navigation method and
+                     * also serve as callback for event when
+                     * last digit on CodePanel was filled
+                     * */
                     viewModel.onLastDigitFilled(
                         login
                     )
                 }
             )
-            Spacer(modifier = Modifier.padding(top = 80.dp))
+            Spacer(modifier = Modifier.height(80.dp))
         }
     }
 }

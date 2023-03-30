@@ -6,6 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -47,12 +48,12 @@ internal fun PuzzleIsSolvedDialog(
             )
             Text(
                 text = stringResource(id = R.string.congratulations_text),
-                style = MaterialTheme.typography.body1.copy(color = Color.Black),
+                style = MaterialTheme.typography.h5.copy(color = Color.Black),
                 textAlign = TextAlign.Center,
             )
             Text(
                 text = "${stringResource(id = R.string.moves_done)}: $movesDone",
-                style = MaterialTheme.typography.body2.copy(color = Color.Black),
+                style = MaterialTheme.typography.h6.copy(color = Color.Black),
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(top = 4.dp)
             )
@@ -81,6 +82,14 @@ internal fun PuzzleIsSolvedDialog(
 @Composable
 internal fun PuzzleIsSolvedDialogPreview() {
     AppTheme {
-        PuzzleIsSolvedDialog(5) {}
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colors.background),
+            contentAlignment = Alignment.Center
+        ) {
+
+            PuzzleIsSolvedDialog(5) {}
+        }
     }
 }

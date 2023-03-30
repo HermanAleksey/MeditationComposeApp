@@ -31,6 +31,7 @@ android {
     }
 
     lint {
+        @Suppress("UnstableApiUsage")
         baseline = File("lint-baseline.xml")
     }
 }
@@ -46,6 +47,7 @@ dependencies {
     implementation(Dependencies.core_ktx)
     implementation(Dependencies.compose_ui)
     implementation(Dependencies.compose_material)
+    implementation(Dependencies.compose_ui_tooling)
     implementation(Dependencies.compose_ui_tooling_preview)
     implementation(Dependencies.compose_material_icons)
 

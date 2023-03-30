@@ -16,8 +16,9 @@ import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
-import com.example.beer_sorts.api.BeerListScreenViewModel
+import com.example.beer_sorts.api.beer_list.BeerListScreenViewModel
 import com.example.beer_sorts.internal.presentation.beer_list.composables.BeerItem
+import com.example.common.utils.emptyString
 import com.example.database.model.BeerListItem
 import com.example.design_system.common_composables.ColorBackground
 import com.example.feature.beer_sorts.R
@@ -58,7 +59,7 @@ internal fun BeerList(
             Spacer(modifier = Modifier.height(16.dp))
             Text(
                 text = stringResource(id = R.string.beer_list_title),
-                style = MaterialTheme.typography.h2
+                style = MaterialTheme.typography.h4
             )
             Spacer(modifier = Modifier.height(16.dp))
         }
@@ -68,7 +69,7 @@ internal fun BeerList(
                 LoadingState()
             }
             is LoadState.Error -> {
-                Error(message = state.error.message ?: "")
+                Error(message = state.error.message ?: emptyString())
             }
             else -> {}
         }
@@ -78,7 +79,7 @@ internal fun BeerList(
                 LoadingState()
             }
             is LoadState.Error -> {
-                Error(message = state.error.message ?: "")
+                Error(message = state.error.message ?: emptyString())
             }
             else -> {}
         }

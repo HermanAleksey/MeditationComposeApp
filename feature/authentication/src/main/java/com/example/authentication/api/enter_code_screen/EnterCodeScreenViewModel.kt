@@ -1,7 +1,6 @@
 package com.example.authentication.api.enter_code_screen
 
 import androidx.lifecycle.viewModelScope
-import com.example.authentication.internal.screens.enter_code.EnterCodeScreenState
 import com.example.common.view_model.NavigationBaseViewModel
 import com.example.core.authentication_source.api.use_case.VerifyCodeUseCase
 import com.example.core.model.NetworkResponse

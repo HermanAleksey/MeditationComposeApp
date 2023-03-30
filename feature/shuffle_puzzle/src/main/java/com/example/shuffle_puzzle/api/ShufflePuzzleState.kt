@@ -1,4 +1,4 @@
-package com.example.shuffle_puzzle.internal.presentation
+package com.example.shuffle_puzzle.api
 
 import com.example.shuffle_puzzle.api.model.Puzzle
 
