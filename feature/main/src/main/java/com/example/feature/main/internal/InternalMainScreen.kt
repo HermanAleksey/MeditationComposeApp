@@ -2,7 +2,16 @@ package com.example.feature.main.internal
 
 import android.app.Activity
 import androidx.activity.compose.BackHandler
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -37,7 +46,7 @@ internal fun InternalMainScreen(
         ) {
             Text(
                 text = stringResource(id = R.string.features),
-                style = MaterialTheme.typography.h2,
+                style = MaterialTheme.typography.h4,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(
                     top = dimensionResource(id = R.dimen.padding_top_screen_title),
@@ -51,7 +60,9 @@ internal fun InternalMainScreen(
 }
 
 @Composable
-internal fun MainMenu(menuItems: List<MenuItemModel>) {
+internal fun MainMenu(
+    menuItems: List<MenuItemModel>
+) {
     for (item in menuItems.indices step 2) {
         val rowHasTwoItems = item + 1 < menuItems.size
         val spacingMenuItem = dimensionResource(R.dimen.padding_spacing_menu_item)
