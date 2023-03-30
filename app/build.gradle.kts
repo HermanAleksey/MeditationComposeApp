@@ -1,5 +1,6 @@
-import java.io.FileInputStream
 import org.jetbrains.kotlin.konan.properties.Properties
+
+import java.io.FileInputStream
 
 plugins {
     id("com.android.application")

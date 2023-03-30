@@ -3,15 +3,46 @@
 
     <string name="first_brewed">First brewed:</string>
     <string name="abv_is">ABV:</string>
+    <string name="abv">ABV</string>
     <string name="ebc_is">EBC:</string>
+    <string name="ebc">EBC</string>
     <string name="srm_is">SRM:</string>
+    <string name="srm">SRM</string>
     <string name="ph_is">PH:</string>
+    <string name="ph">PH</string>
+    <string name="og">OG</string>
+    <string name="fg">FG</string>
+    <string name="attenuation_level">Attenuation</string>
+
+    <string name="description_title">Description</string>
+
     <string name="try_now">Try now</string>
     <string name="beer_list_title">A lot of beer here!</string>
     <string name="ibu">IBU</string>
     <string name="brewers_tips">Brewers tips</string>
     <string name="beer_params">Beer parameters</string>
     <string name="contributed_by">"Contributed by: "</string>
-    <string name="food_pairings">Good pairings:</string>
+    <string name="food_pairings">Good pairings</string>
+    <string name="paragraph">"   "</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="malts_is">Malts:</string>
+    <string name="hops_is">Hops:</string>
 
+    <string name="malt_information">%1$s (%2$.1f&#160;%3$s)</string>
+    <string name="hops_information">%1$s (%2$.1f&#160;%3$s)</string>
+    <string name="hops_information_with_order">%1$s (%2$.1f&#160;%3$s) at %4$s</string>
+    <string-array name="measurement_units">
+        <item />
+        <item>L</item>
+        <item>KG</item>
+        <item>g</item>
+        <item>°C</item>
+        <item>TTL</item>
+    </string-array>
+    <string-array name="add_order_values">
+        <item>start</item>
+        <item>middle</item>
+        <item>end</item>
+        <item />
+    </string-array>
 </resources>

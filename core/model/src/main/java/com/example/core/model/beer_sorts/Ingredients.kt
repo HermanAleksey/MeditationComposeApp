@@ -25,7 +25,13 @@ data class Ingredients(
     data class Hops(
         var name: String,
         var amount: Amount,
-        var add: String,
+        var add: AddOrder,
         var attribute: String,
     ) : Parcelable
+
+    enum class AddOrder {
+        START, MIDDLE, END,
+        //NA might occur since api is not really stable
+        NA
+    }
 }
