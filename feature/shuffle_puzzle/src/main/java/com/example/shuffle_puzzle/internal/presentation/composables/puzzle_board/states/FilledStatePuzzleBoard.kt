@@ -1,5 +1,6 @@
 package com.example.shuffle_puzzle.internal.presentation.composables.puzzle_board.states
 
+import android.graphics.Bitmap
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,7 +24,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.design_system.AppTheme
 import com.example.shuffle_puzzle.api.model.Puzzle
 import com.example.shuffle_puzzle.internal.presentation.composables.PuzzlePiece
 
@@ -38,9 +41,7 @@ internal fun FilledStatePuzzleBoard(
     val localDensity = LocalDensity.current
 
     Box(
-        modifier = Modifier
-            .fillMaxSize(),
-        contentAlignment = Alignment.Center
+        modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
     ) {
         Card(
             modifier = Modifier
@@ -48,24 +49,20 @@ internal fun FilledStatePuzzleBoard(
                 .background(MaterialTheme.colors.background),
             shape = RoundedCornerShape(8.dp),
         ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .onGloballyPositioned {
-                        puzzleBoardWidth = with(localDensity) { it.size.width.toDp() }
-                    }
-                    .aspectRatio(1f)
-            ) {
+            Row(modifier = Modifier
+                .fillMaxWidth()
+                .onGloballyPositioned {
+                    puzzleBoardWidth = with(localDensity) { it.size.width.toDp() }
+                }
+                .aspectRatio(1f)) {
                 val pieceSizeDp = puzzleBoardWidth / puzzle.size
 
                 puzzle.board.forEachIndexed { row, array ->
-                    if (row > 0)
-                        Spacer(modifier = Modifier.width(1.dp))
+                    if (row > 0) Spacer(modifier = Modifier.width(1.dp))
 
                     Column(modifier = Modifier.fillMaxHeight()) {
                         array.forEachIndexed { column, piece ->
-                            if (column > 0)
-                                Spacer(modifier = Modifier.height(1.dp))
+                            if (column > 0) Spacer(modifier = Modifier.height(1.dp))
 
                             PuzzlePiece(piece = piece.value, sizeDp = pieceSizeDp) {
                                 onPieceClicked(row, column)
@@ -76,5 +73,24 @@ internal fun FilledStatePuzzleBoard(
                 }
             }
         }
+    }
+}
+
+@Preview
+@Composable
+internal fun FilledStatePuzzleBoardPreview() {
+    AppTheme {
+        Box(
+            modifier = Modifier
+                .background(MaterialTheme.colors.background)
+                .fillMaxWidth()
+        ) {
+            FilledStatePuzzleBoard(
+                puzzle = Puzzle(
+                    4, Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888)
+                ), onPieceClicked = { _, _ -> }
+            )
+        }
+
     }
 }

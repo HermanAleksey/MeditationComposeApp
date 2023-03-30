@@ -79,7 +79,7 @@ internal fun EmptyStatePuzzleBoard(
             ) {
                 Text(
                     text = stringResource(id = R.string.select_puzzle),
-                    style = MaterialTheme.typography.body1
+                    style = MaterialTheme.typography.button
                 )
             }
         }

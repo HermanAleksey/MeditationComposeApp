@@ -20,7 +20,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.integerArrayResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -44,9 +43,8 @@ internal fun PuzzleSizeSelection(
     ) {
         Text(
             text = stringResource(id = R.string.select_puzzle_size),
-            style = MaterialTheme.typography.body1.copy(
+            style = MaterialTheme.typography.h6.copy(
                 color = MaterialTheme.colors.onSurface,
-                fontWeight = FontWeight.W400
             ),
             textAlign = TextAlign.Center
         )
@@ -69,7 +67,7 @@ internal fun PuzzleSizeSelection(
                     Spacer(modifier = Modifier.height(3.dp))
                     Text(
                         text = "${size}x$size",
-                        style = MaterialTheme.typography.body1.copy(
+                        style = MaterialTheme.typography.subtitle1.copy(
                             color = MaterialTheme.colors.onSurface
                         ),
                     )
