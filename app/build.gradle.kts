@@ -1,7 +1,6 @@
 import java.io.FileInputStream
 import org.jetbrains.kotlin.konan.properties.Properties
 
-
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -59,7 +58,7 @@ android {
 
         signingConfigs {
             create("release") {
-                storeFile = file(props["STORE_FILE"]?:"")
+                storeFile = file(props["STORE_FILE"] ?: "")
                 keyAlias = props["KEY_ALIAS"].toString()
                 keyPassword = props["KEY_PASSWORD"].toString()
                 storePassword = props["STORE_PASSWORD"].toString()

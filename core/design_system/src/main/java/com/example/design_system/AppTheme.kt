@@ -20,11 +20,11 @@ private val LightColorPalette = lightColors(
     //used to provide accents
     secondary = Green300,
     //screen background uses it
-    surface = ColorPlatinum,
+    surface = ColorPalette,
     onSurface = Green700,
     //app background uses it
     background = Green700,
-    onBackground = ColorPlatinum
+    onBackground = ColorPalette
 
 
     //Material also defines "on" colors—colors to use for content on top of one of the named colors
