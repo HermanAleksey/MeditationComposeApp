@@ -1,4 +1,4 @@
-package com.example.beer_sorts.api
+package com.example.beer_sorts.api.beer_list
 
 import com.example.common.navigation.NavDependencies
 import com.example.common.navigation.NavRoute

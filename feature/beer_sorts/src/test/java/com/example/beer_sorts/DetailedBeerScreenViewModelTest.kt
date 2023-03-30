@@ -1,7 +1,7 @@
 package com.example.beer_sorts
 
 import FakeObjects.getFakeBeer
-import com.example.beer_sorts.api.DetailedBeerScreenViewModel
+import com.example.beer_sorts.api.detailed_beer.DetailedBeerScreenViewModel
 import com.example.core.model.NetworkResponse
 import com.example.coroutines_test.CoroutinesTestRule
 import com.example.punk_source.api.use_case.punk.network.GetBeerByIdUseCase

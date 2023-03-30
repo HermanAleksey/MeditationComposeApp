@@ -103,20 +103,22 @@ private fun DescriptionHeader(
     ) {
         Column {
             Text(
-                text = beer.name, style = MaterialTheme.typography.body1.copy(
+                text = beer.name, style = MaterialTheme.typography.h5.copy(
                     color = MaterialTheme.colors.onSurface
                 )
             )
             Text(
-                text = beer.tagline, style = MaterialTheme.typography.body1.copy(
-                    color = MaterialTheme.colors.onSurface
-                )
+                text = beer.tagline, style = MaterialTheme.typography.h6.copy(
+                    color = MaterialTheme.colors.onSurface.copy(
+                        alpha = 0.5f
+                    ),
+                ),
             )
         }
         beer.ibu?.let { ibu ->
             Text(
                 text = "${ibu.roundToInt()} ${stringResource(id = R.string.ibu)}",
-                style = MaterialTheme.typography.body1.copy(
+                style = MaterialTheme.typography.h4.copy(
                     color = MaterialTheme.colors.onSurface
                 )
             )
@@ -181,17 +183,15 @@ private fun ParameterItem(title: String, value: String) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Text(
             text = title,
-            style = MaterialTheme.typography.body1.copy(
+            style = MaterialTheme.typography.subtitle1.copy(
                 color = MaterialTheme.colors.onSurface,
-                fontSize = TextUnit(15.0f, TextUnitType.Sp),
                 fontWeight = FontWeight.SemiBold
             )
         )
         Text(
             text = value,
-            style = MaterialTheme.typography.body1.copy(
+            style = MaterialTheme.typography.body2.copy(
                 color = MaterialTheme.colors.onSurface,
-                fontSize = TextUnit(16.0f, TextUnitType.Sp),
             )
         )
     }
@@ -206,9 +206,8 @@ private fun AuthorsDescription(beerDescription: String) {
     ) {
         Text(
             text = stringResource(id = R.string.description_title),
-            style = MaterialTheme.typography.body1.copy(
+            style = MaterialTheme.typography.h6.copy(
                 color = MaterialTheme.colors.onSurface,
-                fontSize = TextUnit(18.0f, TextUnitType.Sp),
                 fontWeight = FontWeight.SemiBold
             )
         )
@@ -217,7 +216,6 @@ private fun AuthorsDescription(beerDescription: String) {
             text = "${stringResource(id = R.string.paragraph)}$beerDescription",
             style = MaterialTheme.typography.body1.copy(
                 color = MaterialTheme.colors.onSurface,
-                fontSize = TextUnit(16.0f, TextUnitType.Sp),
             )
         )
     }
@@ -232,9 +230,8 @@ private fun BrewersTips(tips: String) {
     ) {
         Text(
             text = stringResource(id = R.string.brewers_tips),
-            style = MaterialTheme.typography.body1.copy(
+            style = MaterialTheme.typography.h6.copy(
                 color = MaterialTheme.colors.onSurface,
-                fontSize = TextUnit(18.0f, TextUnitType.Sp),
                 fontWeight = FontWeight.SemiBold
             )
         )
@@ -243,7 +240,6 @@ private fun BrewersTips(tips: String) {
             text = "${stringResource(id = R.string.paragraph)}$tips",
             style = MaterialTheme.typography.body1.copy(
                 color = MaterialTheme.colors.onSurface,
-                fontSize = TextUnit(16.0f, TextUnitType.Sp),
             )
         )
     }
@@ -258,9 +254,8 @@ private fun FoodPairingsList(foodPairings: List<String>) {
     ) {
         Text(
             text = stringResource(id = R.string.food_pairings),
-            style = MaterialTheme.typography.body1.copy(
+            style = MaterialTheme.typography.h6.copy(
                 color = MaterialTheme.colors.onSurface,
-                fontSize = TextUnit(18.0f, TextUnitType.Sp),
                 fontWeight = FontWeight.SemiBold
             )
         )
@@ -273,7 +268,6 @@ private fun FoodPairingsList(foodPairings: List<String>) {
                 },
             style = MaterialTheme.typography.body1.copy(
                 color = MaterialTheme.colors.onSurface,
-                fontSize = TextUnit(16.0f, TextUnitType.Sp),
             )
         )
     }
@@ -350,9 +344,8 @@ private fun IngredientsDescriptionList(ingredients: Ingredients) {
     ) {
         Text(
             text = stringResource(id = R.string.ingredients),
-            style = MaterialTheme.typography.body1.copy(
+            style = MaterialTheme.typography.h6.copy(
                 color = MaterialTheme.colors.onSurface,
-                fontSize = TextUnit(18.0f, TextUnitType.Sp),
                 fontWeight = FontWeight.SemiBold
             )
         )
@@ -361,7 +354,6 @@ private fun IngredientsDescriptionList(ingredients: Ingredients) {
             text = malts.toString(),
             style = MaterialTheme.typography.body1.copy(
                 color = MaterialTheme.colors.onSurface,
-                fontSize = TextUnit(16.0f, TextUnitType.Sp),
             )
         )
         Spacer(modifier = Modifier.height(2.dp))

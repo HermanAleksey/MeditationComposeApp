@@ -16,7 +16,7 @@ import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
-import com.example.beer_sorts.api.BeerListScreenViewModel
+import com.example.beer_sorts.api.beer_list.BeerListScreenViewModel
 import com.example.beer_sorts.internal.presentation.beer_list.composables.BeerItem
 import com.example.database.model.BeerListItem
 import com.example.design_system.common_composables.ColorBackground

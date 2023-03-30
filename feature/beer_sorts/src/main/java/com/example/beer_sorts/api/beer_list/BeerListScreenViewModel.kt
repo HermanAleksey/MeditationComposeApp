@@ -1,4 +1,4 @@
-package com.example.beer_sorts.api
+package com.example.beer_sorts.api.beer_list
 
 import androidx.lifecycle.viewModelScope
 import androidx.paging.*
