@@ -38,6 +38,7 @@ dependencies {
     implementation(Dependencies.compose_ui)
     implementation(Dependencies.compose_material)
     implementation(Dependencies.compose_ui_tooling_preview)
+    implementation(Dependencies.compose_ui_tooling)
 
     implementation(Dependencies.accompanist_pager)
     implementation(Dependencies.accompanist_permissions)

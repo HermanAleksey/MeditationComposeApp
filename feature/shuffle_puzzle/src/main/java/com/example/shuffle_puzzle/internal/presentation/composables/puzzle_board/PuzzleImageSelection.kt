@@ -4,6 +4,7 @@ import android.Manifest
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.os.Build
+import android.os.Build.VERSION_CODES
 import android.provider.MediaStore
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.compose.foundation.Image
@@ -41,7 +42,7 @@ internal fun SelectPuzzleImageFromGalleryCard(
         if (result.isSuccessful) {
             try {
                 result.uriContent?.let {
-                    val bitmap: Bitmap = if (Build.VERSION.SDK_INT < 28) {
+                    val bitmap: Bitmap = if (Build.VERSION.SDK_INT < VERSION_CODES.P) {
                         @Suppress("DEPRECATION")
                         MediaStore.Images.Media.getBitmap(
                             context.contentResolver,
@@ -75,10 +76,8 @@ internal fun SelectPuzzleImageFromGalleryCard(
         })
     }
 
-
     val externalStoragePermission =
         rememberPermissionState(Manifest.permission.READ_EXTERNAL_STORAGE)
-
 
     Column(
         modifier = modifier
@@ -91,10 +90,13 @@ internal fun SelectPuzzleImageFromGalleryCard(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Image(painter = painterResource(id = R.drawable.image_selection),
-            contentDescription = "Select image from gallery")
+        Image(
+            painter = painterResource(id = R.drawable.image_selection),
+            contentDescription = "Select image from gallery"
+        )
 
-        val selectPuzzleImageFromGalleryLabel = stringResource(id = R.string.select_puzzle_image_from_gallery_text)
+        val selectPuzzleImageFromGalleryLabel =
+            stringResource(id = R.string.select_puzzle_image_from_gallery_text)
         Text(
             text = selectPuzzleImageFromGalleryLabel,
             modifier = Modifier.wrapContentWidth(),
