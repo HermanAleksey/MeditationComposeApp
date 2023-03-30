@@ -42,7 +42,7 @@ internal fun InternalEnterCodeScreen(
                 .verticalScroll(rememberScrollState())
         ) {
             Image(
-                painter = painterResource(id = R.drawable.ic_logo_white),
+                painter = painterResource(id = com.example.core.design_system.R.drawable.ic_app_icon),
                 contentDescription = null,
                 contentScale = ContentScale.FillHeight,
                 modifier = Modifier
