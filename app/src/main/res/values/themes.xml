@@ -6,7 +6,7 @@
 
     <style name="Theme.AppSplash" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/colorIconBackground</item>
-        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash_screen_foreground</item>
         <item name="postSplashScreenTheme">@style/Theme.MeditationComposeApp</item>
     </style>
 
