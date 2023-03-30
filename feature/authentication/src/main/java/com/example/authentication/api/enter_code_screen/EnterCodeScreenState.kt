@@ -1,4 +1,4 @@
-package com.example.authentication.internal.screens.enter_code
+package com.example.authentication.api.enter_code_screen
 
 data class EnterCodeScreenState(
     val isLoading: Boolean = false,

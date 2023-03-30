@@ -1,7 +1,11 @@
 package com.example.authentication.internal.screens.enter_code
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
@@ -47,12 +51,12 @@ internal fun InternalEnterCodeScreen(
             )
             Text(
                 text = stringResource(id = R.string.password_recovery),
-                style = MaterialTheme.typography.h2,
+                style = MaterialTheme.typography.h4,
                 modifier = Modifier.padding(top = 31.dp)
             )
             Text(
                 text = stringResource(id = R.string.password_recovery_desc),
-                style = MaterialTheme.typography.body1,
+                style = MaterialTheme.typography.h5,
                 modifier = Modifier
                     .padding(top = 4.dp)
                     .alpha(0.7F)
@@ -77,7 +81,7 @@ internal fun InternalEnterCodeScreen(
                     )
                 }
             )
-            Spacer(modifier = Modifier.padding(top = 80.dp))
+            Spacer(modifier = Modifier.height(80.dp))
         }
     }
 }

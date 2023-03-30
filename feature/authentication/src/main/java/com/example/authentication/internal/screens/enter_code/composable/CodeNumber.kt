@@ -22,7 +22,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.text.isDigitsOnly
-import com.example.authentication.internal.screens.enter_code.EnterCodeScreenState.Companion.EMPTY_NUMBER
+import com.example.authentication.api.enter_code_screen.EnterCodeScreenState.Companion.EMPTY_NUMBER
+import com.example.common.utils.emptyString
 import com.example.design_system.Montserrat
 
 /**
@@ -31,13 +32,6 @@ import com.example.design_system.Montserrat
  * Fields:
  * [value] contains current number, written in cell;
  * if value is empty - set's value to -1
- * [position] contains ordered position of cell;
- * used for setting value of cell to map
- * [onCodeDigitChanged] method from @CodePanel that set's value of cell
- * [focusManager] allows to work with focus, change it
- * [focusRequester] used to be able to focus on current view
- * [nextFocusRequester] used to change focus to next cell
- * [previousFocusRequester] used to change focus to previous cell
  * */
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -63,7 +57,7 @@ internal fun CodeNumber(
 
     TextField(
         value = value.let {
-            if (it == EMPTY_NUMBER) "" else it.toString()
+            if (it == EMPTY_NUMBER) emptyString() else it.toString()
         },
         enabled = isEnabled,
         textStyle = TextStyle(
@@ -97,7 +91,7 @@ internal fun CodeNumber(
 
 @Composable
 @Preview
-fun CodeNumberPreview() {
+private fun CodeNumberPreview() {
     CodeNumber(
         value = 3,
         isEnabled = true,
