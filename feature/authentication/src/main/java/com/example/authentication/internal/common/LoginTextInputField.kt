@@ -3,7 +3,6 @@ package com.example.authentication.internal.common
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
@@ -32,7 +31,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.design_system.AppTheme
 import com.example.design_system.ColorPlatinum
@@ -120,7 +118,6 @@ internal fun LoginFlowInputField(
             }
         },
         modifier = Modifier
-            .padding(top = 50.dp)
             .fillMaxWidth()
             .focusRequester(focusRequester ?: FocusRequester())
             .onFocusChanged { focusState ->

@@ -75,6 +75,7 @@ internal fun InternalLoginScreen(
                     .padding(top = 4.dp)
                     .alpha(0.7F)
             )
+            Spacer(modifier = Modifier.height(40.dp))
             LoginFlowInputField(
                 isEnabled = !uiState.value.isLoading,
                 textFieldValue = uiState.value.login,
@@ -88,6 +89,7 @@ internal fun InternalLoginScreen(
                     passwordFocusRequester.requestFocus()
                 },
             )
+            Spacer(modifier = Modifier.height(30.dp))
             LoginFlowInputField(
                 isEnabled = !uiState.value.isLoading,
                 textFieldValue = uiState.value.password,

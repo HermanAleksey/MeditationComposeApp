@@ -2,6 +2,7 @@ package com.example.authentication.internal.screens.enter_login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -78,6 +79,7 @@ internal fun InternalEnterLoginScreen(
                     .padding(top = 4.dp)
                     .alpha(0.7F)
             )
+            Spacer(modifier = Modifier.height(40.dp))
             LoginFlowInputField(
                 isEnabled = !uiState.value.isLoading,
                 textFieldValue = uiState.value.login,

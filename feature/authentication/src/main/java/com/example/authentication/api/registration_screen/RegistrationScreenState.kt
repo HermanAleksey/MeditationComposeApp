@@ -1,4 +1,4 @@
-package com.example.authentication.internal.screens.registration
+package com.example.authentication.api.registration_screen
 
 import com.example.common.utils.UiText
 

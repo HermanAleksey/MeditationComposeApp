@@ -1,7 +1,6 @@
 package com.example.authentication.internal.screens.registration
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -66,16 +65,17 @@ internal fun InternalRegistrationScreen(
             )
             Text(
                 text = stringResource(id = R.string.sign_up),
-                style = MaterialTheme.typography.h2,
+                style = MaterialTheme.typography.h4,
                 modifier = Modifier.padding(top = 31.dp)
             )
             Text(
                 text = stringResource(id = R.string.sign_in_desc),
-                style = MaterialTheme.typography.body1,
+                style = MaterialTheme.typography.h5,
                 modifier = Modifier
                     .padding(top = 4.dp)
                     .alpha(0.7F)
             )
+            Spacer(modifier = Modifier.height(40.dp))
             LoginFlowInputField(
                 isEnabled = !uiState.value.isLoading,
                 textFieldValue = uiState.value.name,
@@ -89,6 +89,7 @@ internal fun InternalRegistrationScreen(
                     emailFocusRequester.requestFocus()
                 },
             )
+            Spacer(modifier = Modifier.height(30.dp))
             LoginFlowInputField(
                 isEnabled = !uiState.value.isLoading,
                 textFieldValue = uiState.value.login,
@@ -103,6 +104,7 @@ internal fun InternalRegistrationScreen(
                 },
                 focusRequester = emailFocusRequester,
             )
+            Spacer(modifier = Modifier.height(30.dp))
             LoginFlowInputField(
                 isEnabled = !uiState.value.isLoading,
                 textFieldValue = uiState.value.password,
@@ -117,15 +119,16 @@ internal fun InternalRegistrationScreen(
                 },
                 focusRequester = passwordFocusRequester,
             )
+            Spacer(modifier = Modifier.height(28.dp))
             LoginMainButton(
                 text = stringResource(id = R.string.sign_up).toUpperCase(Locale.current),
                 modifier = Modifier
                     .fillMaxWidth()
                     .wrapContentHeight()
-                    .padding(top = 28.dp)
             ) {
                 viewModel.onSignUpClicked()
             }
+            Spacer(modifier = Modifier.height(18.dp))
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -134,11 +137,9 @@ internal fun InternalRegistrationScreen(
                 contentAlignment = Alignment.Center
             ) {
                 AlreadyHaveAccountText(
-                    modifier = Modifier
-                        .padding(top = 18.dp)
-                        .clickable {
-                            viewModel.onSignInClicked()
-                        }
+                    onClick = {
+                        viewModel.onSignInClicked()
+                    }
                 )
             }
             Spacer(modifier = Modifier.padding(top = 80.dp))
