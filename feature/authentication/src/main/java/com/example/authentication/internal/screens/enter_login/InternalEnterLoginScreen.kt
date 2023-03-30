@@ -31,6 +31,7 @@ import com.example.authentication.api.enter_login_screen.EnterLoginScreenViewMod
 import com.example.authentication.internal.common.LoginMainButton
 import com.example.authentication.internal.screens.login.composable.LoginFlowBackground
 import com.example.authentication.internal.screens.login.composable.LoginFlowInputField
+import com.example.common.utils.emptyString
 import com.example.feature.authentication.R
 
 @Composable
@@ -44,7 +45,7 @@ internal fun InternalEnterLoginScreen(
     val uiState = viewModel.uiState.collectAsState()
 
     LaunchedEffect(key1 = Unit) {
-        viewModel.onScreenOpened(initialLoginValue ?: "")
+        viewModel.onScreenOpened(initialLoginValue ?: emptyString())
     }
 
     LoginFlowBackground(
@@ -67,12 +68,12 @@ internal fun InternalEnterLoginScreen(
             )
             Text(
                 text = stringResource(id = R.string.password_recovery),
-                style = MaterialTheme.typography.h2,
+                style = MaterialTheme.typography.h4,
                 modifier = Modifier.padding(top = 31.dp)
             )
             Text(
                 text = stringResource(id = R.string.enter_login_desc),
-                style = MaterialTheme.typography.body1,
+                style = MaterialTheme.typography.h5,
                 modifier = Modifier
                     .padding(top = 4.dp)
                     .alpha(0.7F)

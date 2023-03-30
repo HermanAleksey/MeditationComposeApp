@@ -1,7 +1,6 @@
 package com.example.authentication.api.enter_login_screen
 
 import androidx.lifecycle.viewModelScope
-import com.example.authentication.internal.screens.enter_login.EnterLoginScreenState
 import com.example.authentication.internal.validation.LoginField
 import com.example.common.view_model.NavigationBaseViewModel
 import com.example.core.authentication_source.api.use_case.RequestPasswordRestorationUseCase

@@ -1,4 +1,4 @@
-package com.example.authentication.internal.screens.enter_login
+package com.example.authentication.api.enter_login_screen
 
 import com.example.common.utils.UiText
 
