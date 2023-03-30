@@ -28,9 +28,9 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
 import com.example.authentication.api.enter_login_screen.EnterLoginScreenViewModel
+import com.example.authentication.internal.common.LoginFlowBackground
+import com.example.authentication.internal.common.LoginFlowInputField
 import com.example.authentication.internal.common.LoginMainButton
-import com.example.authentication.internal.screens.login.composable.LoginFlowBackground
-import com.example.authentication.internal.screens.login.composable.LoginFlowInputField
 import com.example.common.utils.emptyString
 import com.example.feature.authentication.R
 

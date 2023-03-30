@@ -20,8 +20,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.authentication.api.enter_code_screen.EnterCodeScreenViewModel
+import com.example.authentication.internal.common.LoginFlowBackground
 import com.example.authentication.internal.screens.enter_code.composable.CodePanel
-import com.example.authentication.internal.screens.login.composable.LoginFlowBackground
 import com.example.feature.authentication.R
 
 @Composable
@@ -71,6 +71,11 @@ internal fun InternalEnterCodeScreen(
                     )
                 },
                 onLastDigitFilled = fun() {
+                    /**
+                     * Use to transmit navigation method and
+                     * also serve as callback for event when
+                     * last digit on CodePanel was filled
+                     * */
                     /**
                      * Use to transmit navigation method and
                      * also serve as callback for event when

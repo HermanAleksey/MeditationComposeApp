@@ -30,10 +30,10 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
 import com.example.authentication.api.login_screen.LoginScreenViewModel
+import com.example.authentication.internal.common.LoginFlowBackground
+import com.example.authentication.internal.common.LoginFlowInputField
 import com.example.authentication.internal.common.LoginMainButton
 import com.example.authentication.internal.screens.enter.composable.DontHaveAccountText
-import com.example.authentication.internal.screens.login.composable.LoginFlowBackground
-import com.example.authentication.internal.screens.login.composable.LoginFlowInputField
 import com.example.feature.authentication.R
 
 @Composable
@@ -65,12 +65,12 @@ internal fun InternalLoginScreen(
             )
             Text(
                 text = stringResource(id = R.string.sign_in),
-                style = MaterialTheme.typography.h2,
+                style = MaterialTheme.typography.h4,
                 modifier = Modifier.padding(top = 31.dp)
             )
             Text(
                 text = stringResource(id = R.string.sign_in_desc),
-                style = MaterialTheme.typography.body1,
+                style = MaterialTheme.typography.h5,
                 modifier = Modifier
                     .padding(top = 4.dp)
                     .alpha(0.7F)
@@ -110,7 +110,7 @@ internal fun InternalLoginScreen(
             ) {
                 Text(
                     text = stringResource(id = R.string.forgot_password),
-                    style = MaterialTheme.typography.caption,
+                    style = MaterialTheme.typography.subtitle1,
                     modifier = Modifier
                         .padding(top = 9.dp)
                         .clickable {
