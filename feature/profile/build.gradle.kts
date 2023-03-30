@@ -46,7 +46,7 @@ dependencies {
     implementation(Dependencies.compose_ui)
     implementation(Dependencies.compose_material)
     implementation(Dependencies.compose_ui_tooling_preview)
-    debugImplementation(Dependencies.compose_ui_tooling)
+    implementation(Dependencies.compose_ui_tooling)
 
     //hilt
     implementation(Dependencies.hilt_android)
