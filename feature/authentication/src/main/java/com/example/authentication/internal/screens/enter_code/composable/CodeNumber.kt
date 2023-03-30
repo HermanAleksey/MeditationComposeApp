@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.sp
 import androidx.core.text.isDigitsOnly
 import com.example.authentication.api.enter_code_screen.EnterCodeScreenState.Companion.EMPTY_NUMBER
 import com.example.common.utils.emptyString
+import com.example.design_system.AppTheme
 import com.example.design_system.Montserrat
 
 /**
@@ -92,11 +93,13 @@ internal fun CodeNumber(
 @Composable
 @Preview
 private fun CodeNumberPreview() {
-    CodeNumber(
-        value = 3,
-        isEnabled = true,
-        focusRequester = FocusRequester(),
-        onBackspaceToPrevious = {},
-        onDigitInputted = {}
-    )
+    AppTheme {
+        CodeNumber(
+            value = 3,
+            isEnabled = true,
+            focusRequester = FocusRequester(),
+            onBackspaceToPrevious = {},
+            onDigitInputted = {}
+        )
+    }
 }

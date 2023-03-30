@@ -190,7 +190,7 @@ private fun ParameterItem(title: String, value: String) {
         )
         Text(
             text = value,
-            style = MaterialTheme.typography.body2.copy(
+            style = MaterialTheme.typography.body1.copy(
                 color = MaterialTheme.colors.onSurface,
             )
         )
