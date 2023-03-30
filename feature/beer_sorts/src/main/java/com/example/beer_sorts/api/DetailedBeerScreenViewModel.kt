@@ -1,6 +1,5 @@
 package com.example.beer_sorts.api
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.beer_sorts.internal.presentation.beer_details.DetailedBeerScreenState
@@ -26,7 +25,6 @@ class DetailedBeerScreenViewModel @Inject constructor(
         getBeerByIdUseCase(beerId).collect { response ->
             when (response) {
                 is NetworkResponse.Success<*> -> {
-                    Log.e("TAGG", "onScreenOpened: ${response.data}")
                     _uiState.update {
                         it.copy(
                             beer = response.data
