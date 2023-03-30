@@ -62,12 +62,12 @@ internal fun InternalNewPasswordScreen(
             )
             Text(
                 text = stringResource(id = R.string.password_recovery),
-                style = MaterialTheme.typography.h2,
+                style = MaterialTheme.typography.h4,
                 modifier = Modifier.padding(top = 31.dp)
             )
             Text(
                 text = stringResource(id = R.string.new_password_desc),
-                style = MaterialTheme.typography.body1,
+                style = MaterialTheme.typography.h5,
                 modifier = Modifier
                     .padding(top = 4.dp)
                     .alpha(0.7F)
