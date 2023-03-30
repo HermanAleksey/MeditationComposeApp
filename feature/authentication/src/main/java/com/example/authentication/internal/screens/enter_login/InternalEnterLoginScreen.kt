@@ -1,7 +1,12 @@
 package com.example.authentication.internal.screens.enter_login
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
@@ -23,7 +28,7 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
 import com.example.authentication.api.enter_login_screen.EnterLoginScreenViewModel
-import com.example.authentication.internal.screens.enter.composable.LoginMainButton
+import com.example.authentication.internal.common.LoginMainButton
 import com.example.authentication.internal.screens.login.composable.LoginFlowBackground
 import com.example.authentication.internal.screens.login.composable.LoginFlowInputField
 import com.example.feature.authentication.R

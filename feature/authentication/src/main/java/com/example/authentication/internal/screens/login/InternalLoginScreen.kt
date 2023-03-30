@@ -2,7 +2,14 @@ package com.example.authentication.internal.screens.login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
@@ -23,8 +30,8 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
 import com.example.authentication.api.login_screen.LoginScreenViewModel
+import com.example.authentication.internal.common.LoginMainButton
 import com.example.authentication.internal.screens.enter.composable.DontHaveAccountText
-import com.example.authentication.internal.screens.enter.composable.LoginMainButton
 import com.example.authentication.internal.screens.login.composable.LoginFlowBackground
 import com.example.authentication.internal.screens.login.composable.LoginFlowInputField
 import com.example.feature.authentication.R
@@ -127,12 +134,11 @@ internal fun InternalLoginScreen(
                     .padding(top = 20.dp),
                 contentAlignment = Alignment.Center
             ) {
+                Spacer(modifier = Modifier.height(18.dp))
                 DontHaveAccountText(
-                    modifier = Modifier
-                        .padding(top = 18.dp)
-                        .clickable {
-                            viewModel.onSignUpClicked()
-                        }
+                    onClick = {
+                        viewModel.onSignUpClicked()
+                    }
                 )
             }
             Spacer(modifier = Modifier.padding(top = 80.dp))
