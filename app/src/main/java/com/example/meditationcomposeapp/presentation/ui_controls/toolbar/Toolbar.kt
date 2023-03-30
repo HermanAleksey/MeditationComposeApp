@@ -6,11 +6,10 @@ import androidx.compose.runtime.collectAsState
 import com.example.design_system.dialog.DialogController
 import com.example.design_system.toolbar.ToolbarProvider
 import com.example.feature.update_history.api.UpdateDescriptionDialogProvider
-import com.example.meditationcomposeapp.presentation.ui_controls.toolbar.state.MedioseToolbar
 
 class MedioseToolbarProvider(
     private val viewModel: ToolbarViewModel,
-    private val dialogController: DialogController
+    private val dialogController: DialogController,
 ) : ToolbarProvider() {
 
     @Composable
@@ -34,7 +33,10 @@ class MedioseToolbarProvider(
             }
         }
 
-        LaunchedEffect(key1 = uiState.value.updateNotesList, key2 = uiState.value.isDialogShown) {
+        LaunchedEffect(
+            key1 = uiState.value.updateNotesList,
+            key2 = uiState.value.isDialogShown
+        ) {
             if (uiState.value.updateNotesList.isNotEmpty() && uiState.value.isDialogShown)
                 dialogController.show(
                     UpdateDescriptionDialogProvider(

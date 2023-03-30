@@ -1,6 +1,5 @@
 package com.example.meditationcomposeapp.presentation.ui_controls.toolbar
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.core.updates_history.use_case.GetAllUpdatesDescriptionsUseCase
@@ -22,7 +21,6 @@ class ToolbarViewModel @Inject constructor(
     val uiState: StateFlow<ToolbarViewState> = _uiState
 
     fun onLaunch() {
-        Log.e("TAGG", "invoke: ${Thread.currentThread().name}")
         viewModelScope.launch {
             getLastUpdateDescriptionUseCase()?.let { lastUpdateDesc ->
                 _uiState.update {
@@ -35,7 +33,6 @@ class ToolbarViewModel @Inject constructor(
     }
 
     fun onUpdateHistoryClick() = viewModelScope.launch {
-        Log.e("TAGG", "invoke: ${Thread.currentThread().name}")
         getAllUpdatesDescriptionsUseCase().let { list ->
             _uiState.update {
                 it.copy(

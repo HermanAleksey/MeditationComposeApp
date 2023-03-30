@@ -13,7 +13,7 @@ class UpdateDescriptionDBMapper @Inject constructor() :
             updateReleaseTime = objectFrom.updateReleaseTime,
             updateTitle = objectFrom.updateTitle,
             updateDescription = objectFrom.updateDescription,
-            wasShown = false
+            wasShown = objectFrom.isUpdateWasShown
         )
     }
 
@@ -23,7 +23,7 @@ class UpdateDescriptionDBMapper @Inject constructor() :
             objectFrom.updateReleaseTime,
             objectFrom.updateTitle,
             objectFrom.updateDescription,
-            false,
+            objectFrom.wasShown,
         )
     }
 }
