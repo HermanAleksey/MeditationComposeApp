@@ -1,9 +1,14 @@
-package com.example.meditationcomposeapp.presentation.ui_controls.toolbar.state
+package com.example.meditationcomposeapp.presentation.ui_controls.toolbar
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Newspaper
@@ -15,7 +20,6 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.meditationcomposeapp.R
-import com.example.meditationcomposeapp.presentation.ui_controls.toolbar.ToolbarViewModel
 
 @Composable
 fun MedioseToolbar(viewModel: ToolbarViewModel) {
