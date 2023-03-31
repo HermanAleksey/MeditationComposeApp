@@ -6,7 +6,6 @@ import androidx.activity.compose.setContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -114,8 +113,7 @@ fun MyApp(
             bottomBar = {
                 AnimatedVisibility(
                     visible = bottomBarIsVisible.value,
-                    enter = slideInVertically(initialOffsetY = { it },),
-                    exit = slideOutVertically(targetOffsetY = { it }),
+                    enter = slideInVertically(initialOffsetY = { it }),
                 ) {
                     NavigationBottomBar(navController)
                 }
