@@ -1,7 +1,7 @@
 package com.example.design_system.dialog
 
-import android.util.Log
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
@@ -22,7 +22,6 @@ fun MeditationDialogFormer(
     dialogContent: @Composable () -> Unit
 ) {
     val screenHeight = LocalConfiguration.current.screenHeightDp.dp
-    Log.e("TAGG", "MeditationDialogFormer: ")
 
     Dialog(
         onDismissRequest = { onDismissRequest() },
@@ -33,8 +32,7 @@ fun MeditationDialogFormer(
     ) {
         Card(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 20.dp)
+                .width(294.dp)
                 .heightIn(max = screenHeight.value.times(0.8).dp),
             backgroundColor = MaterialTheme.colors.surface,
             shape = RoundedCornerShape(dimensionResource(id = R.dimen.radius_pop_up_corner)),
