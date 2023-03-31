@@ -8,6 +8,9 @@ import com.example.feature.update_history.internal.InternalUpdatesDescriptionScr
 fun UpdatesDescriptionScreen(
     viewModel: UpdatesDescriptionViewModel,
 ) {
-    val updatesList = viewModel.updateList.collectAsState()
-    InternalUpdatesDescriptionScreen(updatesList.value)
+    val updatesList = viewModel.uiState.collectAsState()
+    InternalUpdatesDescriptionScreen(
+        uiState = updatesList.value,
+        onCancelRateUsClick = viewModel::onCancelRateUsClick
+    )
 }

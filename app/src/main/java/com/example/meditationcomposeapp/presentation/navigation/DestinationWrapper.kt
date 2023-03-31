@@ -13,6 +13,7 @@ import com.example.meditationcomposeapp.presentation.screens.destinations.Profil
 import com.example.meditationcomposeapp.presentation.screens.destinations.RegistrationScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.ShufflePuzzleScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.TypedDestination
+import com.example.meditationcomposeapp.presentation.screens.destinations.UpdatesHistoryScreenDestination
 
 enum class DestinationWrapper(
     val destination: TypedDestination<*>,
@@ -31,6 +32,7 @@ enum class DestinationWrapper(
     MainScreen(MainScreenDestination, true, true),
     ShufflePuzzleScreen(ShufflePuzzleScreenDestination, true, true),
     ProfileScreen(ProfileScreenDestination, true, true),
+    UpdateHistoryScreen(UpdatesHistoryScreenDestination, true, false),
 }
 
 fun NavDestination.getDestinationWrapper() =

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="update_notes_dialog_title">Update notes!</string>
-    <string name="app_update_version">Update: %s</string>
+    <string name="app_update_version">Version: %s</string>
     <string name="app_update_time">From: %s</string>
+    <string name="cancel">Cancel</string>
+    <string name="rate_us">Rate us</string>
+    <string name="share_opinion_label">You can share your opinion with us?</string>
+    <string name="do_you_like_app">Do you like the app?</string>
 </resources>

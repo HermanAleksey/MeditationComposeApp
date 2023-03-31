@@ -2,7 +2,6 @@ package com.example.feature.update_history.api
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.core.model.updates.UpdateDescriptionModel
 import com.example.core.updates_history.use_case.GetAllUpdatesDescriptionsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,17 +15,27 @@ class UpdatesDescriptionViewModel @Inject constructor(
     private val getAllUpdatesDescriptionsUseCase: GetAllUpdatesDescriptionsUseCase,
 ) : ViewModel() {
 
-    private val _updatesList: MutableStateFlow<List<UpdateDescriptionModel>> =
-        MutableStateFlow(emptyList())
-    val updateList = _updatesList.asStateFlow()
+    private val _uiState: MutableStateFlow<UpdatesDescriptionViewState> =
+        MutableStateFlow(UpdatesDescriptionViewState())
+    val uiState = _uiState.asStateFlow()
 
     init {
         viewModelScope.launch {
             getAllUpdatesDescriptionsUseCase().let { list ->
-                _updatesList.update {
-                    list
+                _uiState.update {
+                    it.copy(
+                        updatesList = list
+                    )
                 }
             }
+        }
+    }
+
+    fun onCancelRateUsClick() {
+        _uiState.update {
+            it.copy(
+                isRateUsCardVisible = false
+            )
         }
     }
 }

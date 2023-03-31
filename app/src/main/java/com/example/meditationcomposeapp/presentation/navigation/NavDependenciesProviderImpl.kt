@@ -55,6 +55,9 @@ class NavDependenciesProviderImpl(
             ToolbarNavDependencies::class.java.name -> {
                 ToolbarNavDependencies(
                     navigateToUpdatesHistory = {
+                        if (navController.currentDestination?.route == UpdatesHistoryScreenDestination.route)
+                            return@ToolbarNavDependencies
+
                         navController.navigate(UpdatesHistoryScreenDestination()) {
                             popUpTo(UpdatesHistoryScreenDestination) {
                                 inclusive = true
