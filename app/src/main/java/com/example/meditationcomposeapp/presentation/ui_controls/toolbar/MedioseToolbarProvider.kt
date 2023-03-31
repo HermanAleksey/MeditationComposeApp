@@ -53,7 +53,6 @@ class MedioseToolbarProvider(
             }
         }
 
-
         val uiState = viewModel.uiState.collectAsState()
 
         LaunchedEffect(key1 = Unit) {
@@ -102,7 +101,9 @@ class MedioseToolbarProvider(
             )
             Spacer(modifier = Modifier.weight(1f))
             Image(
-                painter = painterResource(id = com.example.core.design_system.R.drawable.ic_app_icon),
+                painter = painterResource(
+                    id = com.example.core.design_system.R.drawable.ic_app_icon
+                ),
                 contentDescription = null,
                 modifier = Modifier.size(40.dp)
             )

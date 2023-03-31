@@ -61,7 +61,9 @@ fun MeditationDestinationsNavHost(
                 hiltViewModel<ShufflePuzzleScreenViewModel>()
             }
             dependency(ProfileScreenDestination) { hiltViewModel<ProfileScreenViewModel>() }
-            dependency(UpdatesHistoryScreenDestination) { hiltViewModel<UpdatesDescriptionViewModel>() }
+            dependency(UpdatesHistoryScreenDestination) {
+                hiltViewModel<UpdatesDescriptionViewModel>()
+            }
         }
     )
 }
