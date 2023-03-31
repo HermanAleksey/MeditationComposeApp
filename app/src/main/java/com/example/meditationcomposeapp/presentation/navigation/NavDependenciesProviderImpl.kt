@@ -11,7 +11,6 @@ import com.example.beer_sorts.api.beer_list.BeerListNavDependencies
 import com.example.common.navigation.NavDependencies
 import com.example.common.navigation.NavDependenciesProvider
 import com.example.feature.main.api.MainScreenNavDependencies
-import com.example.feature.profile.api.ProfileScreenNavDependencies
 import com.example.meditationcomposeapp.presentation.screens.destinations.*
 import com.example.meditationcomposeapp.presentation.ui_controls.toolbar.ToolbarNavDependencies
 import com.example.splash_screen.api.SplashScreenNavDependencies
@@ -41,17 +40,6 @@ class NavDependenciesProviderImpl(
                     },
                 )
             }
-            ProfileScreenNavDependencies::class.java.name -> {
-                ProfileScreenNavDependencies(
-                    navigateToEnterScreen = {
-                        navController.navigate(
-                            EnterScreenDestination()
-                        ) {
-                            popUpTo(EnterScreenDestination)
-                        }
-                    }
-                )
-            }
             ToolbarNavDependencies::class.java.name -> {
                 ToolbarNavDependencies(
                     navigateToUpdatesHistory = {
@@ -66,6 +54,13 @@ class NavDependenciesProviderImpl(
                             }
                         }
                     },
+                    navigateToEnterScreen = {
+                        navController.navigate(
+                            EnterScreenDestination()
+                        ) {
+                            popUpTo(EnterScreenDestination)
+                        }
+                    }
                 )
             }
             else -> null

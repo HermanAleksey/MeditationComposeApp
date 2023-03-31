@@ -9,7 +9,6 @@ import com.example.meditationcomposeapp.presentation.screens.destinations.EnterS
 import com.example.meditationcomposeapp.presentation.screens.destinations.LoginScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.MainScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.NewPasswordScreenDestination
-import com.example.meditationcomposeapp.presentation.screens.destinations.ProfileScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.RegistrationScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.ShufflePuzzleScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.TypedDestination
@@ -31,7 +30,6 @@ enum class DestinationWrapper(
     DetailedBeerScreen(DetailedBeerScreenDestination, true, false),
     MainScreen(MainScreenDestination, true, true),
     ShufflePuzzleScreen(ShufflePuzzleScreenDestination, true, true),
-    ProfileScreen(ProfileScreenDestination, true, true),
     UpdateHistoryScreen(UpdatesHistoryScreenDestination, true, false),
 }
 

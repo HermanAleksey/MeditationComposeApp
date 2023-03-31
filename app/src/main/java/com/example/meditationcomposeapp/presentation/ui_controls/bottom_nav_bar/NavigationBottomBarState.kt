@@ -2,11 +2,15 @@ package com.example.meditationcomposeapp.presentation.ui_controls.bottom_nav_bar
 
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.*
+import androidx.compose.material.BottomNavigation
+import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.ContentAlpha
+import androidx.compose.material.Icon
+import androidx.compose.material.LocalContentColor
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Coffee
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Logout
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -18,7 +22,6 @@ import com.example.meditationcomposeapp.presentation.screens.NavGraphs
 import com.example.meditationcomposeapp.presentation.screens.appCurrentDestinationAsState
 import com.example.meditationcomposeapp.presentation.screens.destinations.BeerListScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.MainScreenDestination
-import com.example.meditationcomposeapp.presentation.screens.destinations.ProfileScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.TypedDestination
 import com.example.meditationcomposeapp.presentation.screens.startAppDestination
 import com.ramcosta.composedestinations.navigation.navigate
@@ -41,11 +44,6 @@ enum class BottomBarDestinations(
         icon = Icons.Default.Coffee
     ),
 
-    ProfileScreen(
-        direction = ProfileScreenDestination,
-        description = UiText.StringResource(R.string.profile_screen_desc),
-        icon = Icons.Default.Logout
-    );
 }
 
 @Composable

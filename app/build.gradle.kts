@@ -128,13 +128,13 @@ dependencies {
     implementation(project(":feature:beer_sorts"))
     implementation(project(":feature:shuffle_puzzle"))
     implementation(project(":feature:authentication"))
-    implementation(project(":feature:profile"))
     implementation(project(":feature:update_history"))
 
     implementation(project(":core:updates_history"))
     implementation(project(":core:design_system"))
     implementation(project(":core:common"))
     implementation(project(":core:model"))
+    implementation(project(":core:data_store"))
 
     implementation(Dependencies.compose_material)
     implementation(Dependencies.compose_ui_tooling_preview)

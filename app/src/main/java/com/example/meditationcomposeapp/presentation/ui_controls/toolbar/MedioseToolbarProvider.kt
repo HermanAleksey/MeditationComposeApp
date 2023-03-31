@@ -4,14 +4,16 @@ import android.app.Activity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Logout
 import androidx.compose.material.icons.rounded.Newspaper
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -24,6 +26,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.common.navigation.NavDependenciesProvider
+import com.example.design_system.clickableWithoutRipple
 import com.example.design_system.dialog.DialogController
 import com.example.design_system.toolbar.ToolbarProvider
 import com.example.feature.update_history.api.UpdateDescriptionDialogProvider
@@ -92,22 +95,9 @@ class MedioseToolbarProvider(
                 .height(dimensionResource(id = R.dimen.height_toolbar))
                 .background(color = MaterialTheme.colors.background)
                 .padding(horizontal = 24.dp),
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.ic_hamburger),
-                contentDescription = "ic_hamburger image",
-                modifier = Modifier.size(22.dp)
-            )
-            Spacer(modifier = Modifier.weight(1f))
-            Image(
-                painter = painterResource(
-                    id = com.example.core.design_system.R.drawable.ic_app_icon
-                ),
-                contentDescription = null,
-                modifier = Modifier.size(40.dp)
-            )
-            Spacer(modifier = Modifier.weight(1f))
             Image(
                 imageVector = Icons.Rounded.Newspaper,
                 contentDescription = "Updates news",
@@ -117,6 +107,22 @@ class MedioseToolbarProvider(
                         viewModel.onUpdateHistoryClick()
                     },
                 colorFilter = ColorFilter.tint(color = MaterialTheme.colors.onBackground)
+            )
+            Image(
+                painter = painterResource(
+                    id = com.example.core.design_system.R.drawable.ic_app_icon
+                ),
+                contentDescription = null,
+                modifier = Modifier.size(40.dp)
+            )
+            Icon(
+                imageVector = Icons.Default.Logout,
+                contentDescription = "Log out",
+                modifier = Modifier
+                    .size(28.dp)
+                    .clickableWithoutRipple {
+                        viewModel.onLogOutClicked()
+                    }
             )
         }
     }

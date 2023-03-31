@@ -2,6 +2,7 @@ package com.example.meditationcomposeapp.presentation.ui_controls.toolbar
 
 import androidx.lifecycle.viewModelScope
 import com.example.common.view_model.NavigationBaseViewModel
+import com.example.core.data_store.use_case.ClearAuthDataUseCase
 import com.example.core.updates_history.use_case.GetLastUpdateDescriptionUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,6 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ToolbarViewModel @Inject constructor(
     private val getLastUpdateDescriptionUseCase: GetLastUpdateDescriptionUseCase,
+    private val clearAuthDataUseCase: ClearAuthDataUseCase,
 ) : NavigationBaseViewModel<ToolbarNavRoute>() {
 
     private val _uiState = MutableStateFlow(ToolbarViewState())
@@ -43,6 +45,17 @@ class ToolbarViewModel @Inject constructor(
             it.copy(
                 isDialogShown = false
             )
+        }
+    }
+
+    fun onLogOutClicked() {
+        viewModelScope.launch {
+            clearAuthDataUseCase()
+            navigationEventTransaction {
+                _navigationEvent.emit(
+                    ToolbarNavRoute.EnterScreen
+                )
+            }
         }
     }
 }
