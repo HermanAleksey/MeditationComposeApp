@@ -29,32 +29,6 @@ import com.example.design_system.AppTheme
 import com.example.design_system.dialog.MeditationDialogFormer
 import com.example.feature.update_history.R
 
-@Preview
-@Composable
-internal fun UpdateDescriptionDialogPreview() {
-    AppTheme {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colors.surface)
-        )
-        MeditationDialogFormer(
-            onDismissRequest = { },
-            dismissOnBackPress = true,
-            dismissOnClickOutside = true,
-            dialogContent = {
-                UpdateDescriptionDialog(
-                    listOf(
-                        UpdateDescriptionModel("10.10.10", 1667045395445, "title", "desc", true),
-                        UpdateDescriptionModel("10.10.10", 1667045395445, "title", "desc", true)
-                    )
-                )
-            }
-        )
-    }
-}
-
-
 @Composable
 internal fun UpdateDescriptionDialog(
     updatesLog: List<UpdateDescriptionModel>,
@@ -140,6 +114,46 @@ internal fun UpdateDescriptionElement(model: UpdateDescriptionModel) {
             style = MaterialTheme.typography.body1.copy(
                 color = MaterialTheme.colors.onSurface
             )
+        )
+    }
+}
+
+@Preview
+@Composable
+internal fun UpdateDescriptionElementPreview() {
+    AppTheme {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colors.surface)
+        )
+        UpdateDescriptionElement(
+            UpdateDescriptionModel("10.10.10", 1667045395445, "title", "desc", true),
+        )
+    }
+}
+
+@Preview
+@Composable
+internal fun UpdateDescriptionDialogPreview() {
+    AppTheme {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colors.surface)
+        )
+        MeditationDialogFormer(
+            onDismissRequest = { },
+            dismissOnBackPress = true,
+            dismissOnClickOutside = true,
+            dialogContent = {
+                UpdateDescriptionDialog(
+                    listOf(
+                        UpdateDescriptionModel("10.10.10", 1667045395445, "title", "desc", true),
+                        UpdateDescriptionModel("10.10.10", 1667045395445, "title", "desc", true)
+                    )
+                )
+            }
         )
     }
 }
