@@ -13,12 +13,13 @@ import com.example.common.navigation.NavDependenciesProvider
 import com.example.feature.main.api.MainScreenNavDependencies
 import com.example.feature.profile.api.ProfileScreenNavDependencies
 import com.example.meditationcomposeapp.presentation.screens.destinations.*
+import com.example.meditationcomposeapp.presentation.ui_controls.toolbar.ToolbarNavDependencies
 import com.example.splash_screen.api.SplashScreenNavDependencies
 import com.ramcosta.composedestinations.navigation.navigate
 import com.ramcosta.composedestinations.navigation.popUpTo
 
 class NavDependenciesProviderImpl(
-    private val navController: NavHostController
+    private val navController: NavHostController,
 ) : NavDependenciesProvider {
 
     override fun <D : NavDependencies> provideDependencies(clazz: Class<D>): D {
@@ -49,6 +50,20 @@ class NavDependenciesProviderImpl(
                             popUpTo(EnterScreenDestination)
                         }
                     }
+                )
+            }
+            ToolbarNavDependencies::class.java.name -> {
+                ToolbarNavDependencies(
+                    navigateToUpdatesHistory = {
+                        if (navController.currentDestination?.route == UpdatesHistoryScreenDestination.route)
+                            return@ToolbarNavDependencies
+
+                        navController.navigate(UpdatesHistoryScreenDestination()) {
+                            popUpTo(UpdatesHistoryScreenDestination) {
+                                inclusive = true
+                            }
+                        }
+                    },
                 )
             }
             else -> null

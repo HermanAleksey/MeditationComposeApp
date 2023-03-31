@@ -13,6 +13,7 @@ import com.example.beer_sorts.api.beer_list.BeerListScreenViewModel
 import com.example.beer_sorts.api.detailed_beer.DetailedBeerScreenViewModel
 import com.example.feature.main.api.MainScreenViewModel
 import com.example.feature.profile.api.ProfileScreenViewModel
+import com.example.feature.update_history.api.UpdatesDescriptionViewModel
 import com.example.meditationcomposeapp.presentation.screens.NavGraphs
 import com.example.meditationcomposeapp.presentation.screens.destinations.BeerListScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.DetailedBeerScreenDestination
@@ -26,6 +27,7 @@ import com.example.meditationcomposeapp.presentation.screens.destinations.Profil
 import com.example.meditationcomposeapp.presentation.screens.destinations.RegistrationScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.ShufflePuzzleScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.SplashScreenDestination
+import com.example.meditationcomposeapp.presentation.screens.destinations.UpdatesHistoryScreenDestination
 import com.example.shuffle_puzzle.api.ShufflePuzzleScreenViewModel
 import com.example.splash_screen.api.SplashScreenViewModel
 import com.ramcosta.composedestinations.DestinationsNavHost
@@ -59,6 +61,7 @@ fun MeditationDestinationsNavHost(
                 hiltViewModel<ShufflePuzzleScreenViewModel>()
             }
             dependency(ProfileScreenDestination) { hiltViewModel<ProfileScreenViewModel>() }
+            dependency(UpdatesHistoryScreenDestination) { hiltViewModel<UpdatesDescriptionViewModel>() }
         }
     )
 }

@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -44,4 +45,8 @@ dependencies {
     implementation(Dependencies.compose_material)
     implementation(Dependencies.compose_ui_tooling_preview)
     implementation(Dependencies.compose_ui_tooling)
+
+    //hilt
+    implementation(Dependencies.hilt_android)
+    kapt(Dependencies.hilt_compiler)
 }
