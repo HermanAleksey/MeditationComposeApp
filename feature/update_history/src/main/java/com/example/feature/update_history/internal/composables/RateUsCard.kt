@@ -1,5 +1,10 @@
 package com.example.feature.update_history.internal.composables
 
+import android.content.ActivityNotFoundException
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -18,12 +23,15 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.design_system.AppTheme
 import com.example.design_system.clickableWithoutRipple
 import com.example.feature.update_history.R
+
 
 @Composable
 internal fun RateUsCard(
@@ -31,6 +39,7 @@ internal fun RateUsCard(
     onCancelClick: () -> Unit,
     onRateUsClick: () -> Unit,
 ) {
+    val context = LocalContext.current
     Card(
         modifier = modifier
             .fillMaxWidth(),
@@ -82,12 +91,34 @@ internal fun RateUsCard(
                 text = stringResource(R.string.share_opinion_label),
                 style = MaterialTheme.typography.subtitle1,
                 modifier = Modifier.clickableWithoutRipple {
-                    //todo open mail to address 'justparocq@gmail.com'
-                }
+                    context.sendMail(context.getString(R.string.mail_subject_rate_us))
+                },
+                textDecoration = TextDecoration.Underline
             )
         }
     }
 }
+
+private fun Context.sendMail(subject: String) {
+    try {
+        val selectorIntent = Intent(Intent.ACTION_SENDTO)
+        selectorIntent.data = Uri.parse("mailto:$FEEDBACK_EMAIL_ADDRESS")
+
+        Intent(Intent.ACTION_SEND).apply {
+            putExtra(Intent.EXTRA_EMAIL, arrayOf(FEEDBACK_EMAIL_ADDRESS))
+            putExtra(Intent.EXTRA_SUBJECT, subject)
+            selector = selectorIntent
+        }.let {
+            startActivity(it)
+        }
+    } catch (e: ActivityNotFoundException) {
+        Log.e("RateUsCard", "sendMail: don't have Activity to send email")
+    } catch (t: Throwable) {
+        Log.e("RateUsCard", "sendMail: e:$t")
+    }
+}
+
+const val FEEDBACK_EMAIL_ADDRESS: String = "justparocq@gmail.com"
 
 @Preview
 @Composable

@@ -1,5 +1,8 @@
 package com.example.feature.update_history.internal
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.slideOut
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -15,6 +18,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.example.core.model.updates.UpdateDescriptionModel
 import com.example.design_system.AppTheme
@@ -23,6 +27,7 @@ import com.example.feature.update_history.api.UpdatesDescriptionViewState
 import com.example.feature.update_history.internal.composables.RateUsCard
 import com.example.feature.update_history.internal.composables.UpdateDescriptionElement
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun InternalUpdatesDescriptionScreen(
     uiState: UpdatesDescriptionViewState,
@@ -36,28 +41,39 @@ internal fun InternalUpdatesDescriptionScreen(
             Spacer(modifier = Modifier.height(24.dp))
             LazyColumn(
                 verticalArrangement = Arrangement.spacedBy(16.dp),
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier
+                    .fillMaxSize()
             ) {
-                if (uiState.isRateUsCardVisible)
-                    item {
+                item(key = 0) {
+                    AnimatedVisibility(
+                        visible = uiState.isRateUsCardVisible,
+                        exit = slideOut(targetOffset = { IntOffset(it.width, 0) })
+                    ) {
                         RateUsCard(
-                            modifier = Modifier.padding(horizontal = 24.dp),
+                            modifier = Modifier
+                                .padding(horizontal = 24.dp)
+                                .animateItemPlacement(),
                             onCancelClick = {
                                 onCancelRateUsClick()
                             },
                             onRateUsClick = {
-                                //todo need to add rate logic.
-                                //also track, if user already rated app, so
-                                //this notifications is not shown to those, who did
+                                /**todo need to add rate logic. Pop-up with rating?
+                                also track, if user already rated app, so
+                                this notifications is not shown to those, who did**/
                             }
                         )
                     }
+                }
 
-                itemsIndexed(uiState.updatesList) { index, item ->
+                itemsIndexed(
+                    items = uiState.updatesList,
+                    key = { index: Int, _ -> index + 1 }
+                ) { index, item ->
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(horizontal = 24.dp),
+                            .padding(horizontal = 24.dp)
+                            .animateItemPlacement(),
                         backgroundColor = MaterialTheme.colors.surface,
                         shape = RoundedCornerShape(16.dp)
                     ) {

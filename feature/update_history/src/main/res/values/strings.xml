@@ -7,4 +7,5 @@
     <string name="rate_us">Rate us</string>
     <string name="share_opinion_label">You can share your opinion with us?</string>
     <string name="do_you_like_app">Do you like the app?</string>
+    <string name="mail_subject_rate_us">Mediose app feedback</string>
 </resources>
