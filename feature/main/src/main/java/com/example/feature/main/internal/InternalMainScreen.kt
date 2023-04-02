@@ -19,7 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import com.example.design_system.common_composables.ColorBackground
 import com.example.feature.main.R
 import com.example.feature.main.api.MainScreenViewModel
@@ -44,12 +44,11 @@ internal fun InternalMainScreen(
         Column(
             modifier = Modifier.fillMaxSize()
         ) {
+            Spacer(modifier = Modifier.height(46.dp))
             Text(
                 text = stringResource(id = R.string.features),
                 style = MaterialTheme.typography.h4,
-                textAlign = TextAlign.Center,
                 modifier = Modifier.padding(
-                    top = dimensionResource(id = R.dimen.padding_top_screen_title),
                     start = dimensionResource(id = R.dimen.padding_horizontal_main_content)
                 )
             )
@@ -61,7 +60,7 @@ internal fun InternalMainScreen(
 
 @Composable
 internal fun MainMenu(
-    menuItems: List<MenuItemModel>
+    menuItems: List<MenuItemModel>,
 ) {
     for (item in menuItems.indices step 2) {
         val rowHasTwoItems = item + 1 < menuItems.size

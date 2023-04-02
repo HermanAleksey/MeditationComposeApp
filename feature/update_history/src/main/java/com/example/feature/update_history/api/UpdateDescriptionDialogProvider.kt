@@ -11,7 +11,6 @@ class UpdateDescriptionDialogProvider(
     private val onDismissSideEffect: () -> Unit = {}
 ) : MedioseDialogProvider() {
 
-
     @Composable
     override fun Display() {
         MeditationDialogFormer(
@@ -28,5 +27,4 @@ class UpdateDescriptionDialogProvider(
             }
         )
     }
-
 }

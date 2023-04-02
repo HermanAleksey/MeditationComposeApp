@@ -4,4 +4,8 @@
     <string name="home_screen_desc">Home screen</string>
     <string name="beers_screen_desc">Beer screen</string>
     <string name="profile_screen_desc">Profile screen</string>
+    <string name="cancel">Cancel</string>
+    <string name="submit">Submit</string>
+    <string name="want_to_log_out_dialog_description">Are you sure you want to Log Out?</string>
+    <string name="log_out_title">Log Out</string>
 </resources>

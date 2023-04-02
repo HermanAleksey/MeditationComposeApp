@@ -48,7 +48,7 @@ class ToolbarViewModel @Inject constructor(
         }
     }
 
-    fun onLogOutClicked() {
+    fun onSubmitLogOut() {
         viewModelScope.launch {
             clearAuthDataUseCase()
             navigationEventTransaction {
@@ -56,6 +56,14 @@ class ToolbarViewModel @Inject constructor(
                     ToolbarNavRoute.EnterScreen
                 )
             }
+        }
+    }
+
+    fun onLogOutIconClicked() {
+        _uiState.update {
+            it.copy(
+                isDialogShown = true
+            )
         }
     }
 }

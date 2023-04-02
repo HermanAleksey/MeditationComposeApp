@@ -31,6 +31,7 @@ import com.example.design_system.dialog.DialogController
 import com.example.design_system.toolbar.ToolbarProvider
 import com.example.feature.update_history.api.UpdateDescriptionDialogProvider
 import com.example.meditationcomposeapp.R
+import com.example.meditationcomposeapp.presentation.ui_controls.toolbar.dialog.ExitAppDialogProvider
 
 class MedioseToolbarProvider(
     private val viewModel: ToolbarViewModel,
@@ -75,13 +76,14 @@ class MedioseToolbarProvider(
         }
 
         LaunchedEffect(
-            key1 = uiState.value.updateNotesList,
-            key2 = uiState.value.isDialogShown
+            key1 = uiState.value.isDialogShown,
         ) {
-            if (uiState.value.updateNotesList.isNotEmpty() && uiState.value.isDialogShown)
+            if (uiState.value.isDialogShown)
                 dialogController.show(
-                    UpdateDescriptionDialogProvider(
-                        uiState.value.updateNotesList,
+                    ExitAppDialogProvider(
+                        onSubmit = {
+                            viewModel.onSubmitLogOut()
+                        },
                         onDismissSideEffect = {
                             viewModel.onDialogClosed()
                         }
@@ -121,7 +123,7 @@ class MedioseToolbarProvider(
                 modifier = Modifier
                     .size(28.dp)
                     .clickableWithoutRipple {
-                        viewModel.onLogOutClicked()
+                        viewModel.onLogOutIconClicked()
                     }
             )
         }

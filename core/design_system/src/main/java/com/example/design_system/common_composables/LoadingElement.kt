@@ -9,7 +9,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.design_system.ColorLoadingProgress
+import com.example.design_system.SilverSand
 
 @Composable
 fun LoadingElement() {
@@ -20,7 +20,7 @@ fun LoadingElement() {
             .size(90.dp)
     ) {
         CircularProgressIndicator(
-            color = ColorLoadingProgress,
+            color = SilverSand,
             strokeWidth = 7.dp,
             modifier = Modifier
                 .fillMaxSize()
