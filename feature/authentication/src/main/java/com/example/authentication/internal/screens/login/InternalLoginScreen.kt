@@ -15,6 +15,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,22 +29,24 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toUpperCase
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.authentication.api.login_screen.LoginScreenViewModel
+import com.example.authentication.api.login_screen.LoginScreenState
 import com.example.authentication.internal.common.LoginFlowBackground
 import com.example.authentication.internal.common.LoginFlowInputField
 import com.example.authentication.internal.common.LoginMainButton
 import com.example.authentication.internal.screens.enter.composable.DontHaveAccountText
+import com.example.design_system.AppTheme
 import com.example.feature.authentication.R
+import kotlinx.coroutines.flow.MutableStateFlow
 
 @Composable
 internal fun InternalLoginScreen(
-    viewModel: LoginScreenViewModel,
+    uiState: State<LoginScreenState>,
+    processAction: (LoginAction) -> Unit,
 ) {
     val focusManager = LocalFocusManager.current
     val passwordFocusRequester = FocusRequester()
-
-    val uiState = viewModel.uiState.collectAsState()
 
     LoginFlowBackground(
         isLoading = uiState.value.isLoading
@@ -82,7 +85,7 @@ internal fun InternalLoginScreen(
                 label = stringResource(id = R.string.email_address),
                 isError = uiState.value.loginError != null,
                 errorValue = uiState.value.loginError?.asString(),
-                onValueChanged = { viewModel.onLoginTextChanged(it) },
+                onValueChanged = { processAction(LoginAction.OnLoginTextChanged(it)) },
                 imeAction = ImeAction.Next,
                 keyboardType = KeyboardType.Email,
                 onKeyboardActions = {
@@ -96,7 +99,7 @@ internal fun InternalLoginScreen(
                 label = stringResource(id = R.string.password),
                 isError = uiState.value.passwordError != null,
                 errorValue = uiState.value.passwordError?.asString(),
-                onValueChanged = { viewModel.onPasswordTextChanged(it) },
+                onValueChanged = { processAction(LoginAction.OnPasswordTextChanged(it)) },
                 imeAction = ImeAction.Done,
                 keyboardType = KeyboardType.Password,
                 onKeyboardActions = {
@@ -116,7 +119,7 @@ internal fun InternalLoginScreen(
                     modifier = Modifier
                         .padding(top = 9.dp)
                         .clickable {
-                            viewModel.onForgotPasswordClicked()
+                            processAction(LoginAction.OnForgotPasswordClicked)
                         }
                 )
             }
@@ -127,7 +130,7 @@ internal fun InternalLoginScreen(
                     .wrapContentHeight()
                     .padding(top = 28.dp)
             ) {
-                viewModel.onLoginClicked()
+                processAction(LoginAction.OnLoginClicked)
             }
             Box(
                 modifier = Modifier
@@ -139,11 +142,22 @@ internal fun InternalLoginScreen(
                 Spacer(modifier = Modifier.height(18.dp))
                 DontHaveAccountText(
                     onClick = {
-                        viewModel.onSignUpClicked()
+                        processAction(LoginAction.OnSignUpClicked)
                     }
                 )
             }
             Spacer(modifier = Modifier.padding(top = 80.dp))
         }
+    }
+}
+
+@Preview
+@Composable
+fun InternalLoginScreenPreview() {
+    AppTheme {
+        InternalLoginScreen(
+            uiState = MutableStateFlow(LoginScreenState()).collectAsState(),
+            processAction = {}
+        )
     }
 }

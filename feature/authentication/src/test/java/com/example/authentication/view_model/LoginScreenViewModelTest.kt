@@ -3,6 +3,8 @@ package com.example.authentication.view_model
 import com.example.authentication.FakeObjects.getFakeProfile
 import com.example.authentication.api.login_screen.LoginScreenNavRoute
 import com.example.authentication.api.login_screen.LoginScreenViewModel
+import com.example.authentication.internal.screens.enter_login.EnterLoginAction
+import com.example.authentication.internal.screens.login.LoginAction
 import com.example.core.authentication_source.api.use_case.LoginUseCase
 import com.example.core.data_store.UserDataStore
 import com.example.core.model.NetworkResponse
@@ -57,7 +59,7 @@ class LoginScreenViewModelTest {
     fun `onLoginTextChanged, login changed`() {
         val login = "qwerwe"
 
-        viewModel.onLoginTextChanged(login)
+        viewModel.processAction(EnterLoginAction.OnLoginTextChanged(login))
 
         assert(viewModel.uiState.value.login == login)
     }
@@ -136,7 +138,7 @@ class LoginScreenViewModelTest {
         val login = "qeww"
         val password = "qeww243"
 
-        viewModel.onLoginTextChanged(login)
+        viewModel.processAction(EnterLoginAction.OnLoginTextChanged(login))
         viewModel.onPasswordTextChanged(password)
         whenever(loginUseCase(login, password))
             .thenReturn(flow {
@@ -167,7 +169,7 @@ class LoginScreenViewModelTest {
         val login = "qeww"
         val password = "qeww243"
 
-        viewModel.onLoginTextChanged(login)
+        viewModel.processAction(EnterLoginAction.OnLoginTextChanged(login))
         viewModel.onPasswordTextChanged(password)
         whenever(loginUseCase(login, password))
             .thenReturn(flow {
@@ -197,7 +199,7 @@ class LoginScreenViewModelTest {
             val login = "qeww"
             val password = "qeww243"
 
-            viewModel.onLoginTextChanged(login)
+            viewModel.processAction(EnterLoginAction.OnLoginTextChanged(login))
             viewModel.onPasswordTextChanged(password)
             whenever(loginUseCase(login, password))
                 .thenReturn(flow {
@@ -229,8 +231,8 @@ class LoginScreenViewModelTest {
     fun `onForgotPasswordClicked, navigate to EnterLoginScreen`() = runTest {
         val login = "wefwefwe"
 
-        viewModel.onLoginTextChanged(login)
-        viewModel.onForgotPasswordClicked()
+        viewModel.processAction(EnterLoginAction.OnLoginTextChanged(login))
+        viewModel.processAction(LoginAction.OnForgotPasswordClicked)
 
         val sharedFlowResult = mutableListOf<LoginScreenNavRoute?>()
         val job = launch {
@@ -258,7 +260,7 @@ class LoginScreenViewModelTest {
     fun `onLoginTextChanged, uiState update login`() {
         val login = "wefwefwe"
 
-        viewModel.onLoginTextChanged(login)
+        viewModel.processAction(EnterLoginAction.OnLoginTextChanged(login))
 
         assert(viewModel.uiState.value.login == login)
     }

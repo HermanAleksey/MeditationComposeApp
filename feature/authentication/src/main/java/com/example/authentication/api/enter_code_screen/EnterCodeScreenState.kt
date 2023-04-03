@@ -1,6 +1,6 @@
 package com.example.authentication.api.enter_code_screen
 
-import com.example.common.mvi.State
+import com.example.common.mvi.MviState
 import com.example.common.utils.emptyString
 
 data class EnterCodeScreenState(
@@ -14,7 +14,7 @@ data class EnterCodeScreenState(
         EMPTY_NUMBER,
         EMPTY_NUMBER
     ),
-) : State {
+) : MviState {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false

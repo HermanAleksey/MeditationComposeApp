@@ -2,7 +2,7 @@ package com.example.common.mvi
 
 import kotlinx.coroutines.flow.StateFlow
 
-interface MviViewModel <S: State> {
+interface MviViewModel <S: MviState> {
 
     val uiState: StateFlow<S>
 

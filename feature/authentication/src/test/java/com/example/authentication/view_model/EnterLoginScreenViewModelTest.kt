@@ -2,6 +2,7 @@ package com.example.authentication.view_model
 
 import com.example.authentication.api.enter_login_screen.EnterLoginScreenNavRoute
 import com.example.authentication.api.enter_login_screen.EnterLoginScreenViewModel
+import com.example.authentication.internal.screens.enter_login.EnterLoginAction
 import com.example.core.authentication_source.api.use_case.RequestPasswordRestorationUseCase
 import com.example.core.model.NetworkResponse
 import com.example.coroutines_test.CoroutinesTestRule
@@ -52,7 +53,7 @@ class EnterLoginScreenViewModelTest {
     fun `onLoginTextChanged, update login`() {
         val login = "qweqwe"
 
-        viewModel.onLoginTextChanged(login)
+        viewModel.processAction(EnterLoginAction.OnLoginTextChanged(login))
 
         assert(viewModel.uiState.value.login == login)
     }
@@ -71,9 +72,9 @@ class EnterLoginScreenViewModelTest {
                     )
                 )
             })
-        viewModel.onLoginTextChanged(login)
+        viewModel.processAction(EnterLoginAction.OnLoginTextChanged(login))
 
-        viewModel.onConfirmClick()
+        viewModel.processAction(EnterLoginAction.OnConfirmClick)
 
         val sharedFlowResult = mutableListOf<EnterLoginScreenNavRoute?>()
         val job = launch {
@@ -100,9 +101,9 @@ class EnterLoginScreenViewModelTest {
                     )
                 )
             })
-        viewModel.onLoginTextChanged(login)
+        viewModel.processAction(EnterLoginAction.OnLoginTextChanged(login))
 
-        viewModel.onConfirmClick()
+        viewModel.processAction(EnterLoginAction.OnConfirmClick)
 
         val sharedFlowResult = mutableListOf<EnterLoginScreenNavRoute?>()
         val job = launch {
@@ -129,9 +130,9 @@ class EnterLoginScreenViewModelTest {
                     )
                 )
             })
-        viewModel.onLoginTextChanged(login)
+        viewModel.processAction(EnterLoginAction.OnLoginTextChanged(login))
 
-        viewModel.onConfirmClick()
+        viewModel.processAction(EnterLoginAction.OnConfirmClick)
 
         val sharedFlowResult = mutableListOf<EnterLoginScreenNavRoute?>()
         val job = launch {
