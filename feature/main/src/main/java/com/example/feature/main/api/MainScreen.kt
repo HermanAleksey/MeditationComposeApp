@@ -7,5 +7,5 @@ import com.example.feature.main.internal.InternalMainScreen
 fun MainScreen(
     viewModel: MainScreenViewModel
 ) {
-    InternalMainScreen(viewModel = viewModel)
+    InternalMainScreen(onMenuItemClick = viewModel::onMenuItemClick)
 }
