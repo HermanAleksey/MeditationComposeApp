@@ -11,6 +11,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
@@ -30,9 +31,14 @@ import kotlinx.coroutines.flow.MutableStateFlow
 
 @Composable
 internal fun InternalEnterCodeScreen(
+    login: String,
     uiState: State<EnterCodeScreenState>,
     processAction: (EnterCodeAction) -> Unit,
 ) {
+    LaunchedEffect(key1 = Unit) {
+        processAction(EnterCodeAction.OnScreenEntered(login))
+    }
+
     LoginFlowBackground(
         isLoading = uiState.value.isLoading
     ) {
@@ -89,7 +95,8 @@ fun InternalEnterCodeScreenPreview() {
     AppTheme {
         InternalEnterCodeScreen(
             uiState = MutableStateFlow(EnterCodeScreenState()).collectAsState(),
-            processAction = {}
+            processAction = {},
+            login = "login"
         )
     }
 }

@@ -14,6 +14,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,27 +28,28 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toUpperCase
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.authentication.api.enter_login_screen.EnterLoginScreenViewModel
+import com.example.authentication.api.enter_login_screen.EnterLoginScreenState
 import com.example.authentication.internal.common.LoginFlowBackground
 import com.example.authentication.internal.common.LoginFlowInputField
 import com.example.authentication.internal.common.LoginMainButton
-import com.example.common.utils.emptyString
+import com.example.design_system.AppTheme
 import com.example.feature.authentication.R
+import kotlinx.coroutines.flow.MutableStateFlow
 
 @Composable
 internal fun InternalEnterLoginScreen(
-    initialLoginValue: String?,
-    viewModel: EnterLoginScreenViewModel,
+    initialLoginValue: String,
+    processAction: (EnterLoginAction) -> Unit,
+    uiState: State<EnterLoginScreenState>,
 ) {
+    LaunchedEffect(key1 = Unit) {
+        processAction(EnterLoginAction.OnScreenEntered(initialLoginValue))
+    }
+
     val focusManager = LocalFocusManager.current
     val repeatPasswordFocusRequester = FocusRequester()
-
-    val uiState = viewModel.uiState.collectAsState()
-
-    LaunchedEffect(key1 = Unit) {
-        viewModel.onScreenOpened(initialLoginValue ?: emptyString())
-    }
 
     LoginFlowBackground(
         isLoading = uiState.value.isLoading
@@ -86,7 +88,7 @@ internal fun InternalEnterLoginScreen(
                 label = stringResource(id = R.string.email_address),
                 isError = uiState.value.loginError != null,
                 errorValue = uiState.value.loginError?.asString(),
-                onValueChanged = { viewModel.onLoginTextChanged(it) },
+                onValueChanged = { processAction(EnterLoginAction.OnLoginTextChanged(it)) },
                 imeAction = ImeAction.Done,
                 keyboardType = KeyboardType.Email,
                 focusRequester = repeatPasswordFocusRequester,
@@ -101,8 +103,20 @@ internal fun InternalEnterLoginScreen(
                     .wrapContentHeight()
                     .padding(top = 28.dp)
             ) {
-                viewModel.onConfirmClick()
+                processAction(EnterLoginAction.OnConfirmClick)
             }
         }
+    }
+}
+
+@Preview
+@Composable
+fun EnterLoginScreenPreview() {
+    AppTheme {
+        InternalEnterLoginScreen(
+            initialLoginValue = "",
+            processAction = {},
+            uiState = MutableStateFlow(EnterLoginScreenState()).collectAsState()
+        )
     }
 }

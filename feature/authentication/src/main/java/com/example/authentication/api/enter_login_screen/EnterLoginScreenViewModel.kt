@@ -1,7 +1,10 @@
 package com.example.authentication.api.enter_login_screen
 
 import androidx.lifecycle.viewModelScope
+import com.example.authentication.internal.screens.enter_login.EnterLoginAction
 import com.example.authentication.internal.validation.LoginField
+import com.example.common.mvi.Action
+import com.example.common.mvi.MviViewModel
 import com.example.common.view_model.NavigationBaseViewModel
 import com.example.core.authentication_source.api.use_case.RequestPasswordRestorationUseCase
 import com.example.core.model.NetworkResponse
@@ -14,25 +17,39 @@ import javax.inject.Inject
 
 @HiltViewModel
 class EnterLoginScreenViewModel @Inject constructor(
-    private val requestPasswordRestorationUseCase: RequestPasswordRestorationUseCase
-) : NavigationBaseViewModel<EnterLoginScreenNavRoute>() {
+    private val requestPasswordRestorationUseCase: RequestPasswordRestorationUseCase,
+) : NavigationBaseViewModel<EnterLoginScreenNavRoute>(), MviViewModel<EnterLoginScreenState> {
 
     private val _uiState = MutableStateFlow(EnterLoginScreenState())
-    val uiState: StateFlow<EnterLoginScreenState> = _uiState
+    override val uiState: StateFlow<EnterLoginScreenState> = _uiState
 
-    fun onScreenOpened(initialLogin: String) {
+    override fun processAction(action: Action) {
+        when (action) {
+            is EnterLoginAction.OnScreenEntered -> {
+                onScreenOpened(action.initialLogin)
+            }
+            is EnterLoginAction.OnLoginTextChanged -> {
+                onLoginTextChanged(action.text)
+            }
+            is EnterLoginAction.OnConfirmClick -> {
+                onConfirmClick()
+            }
+        }
+    }
+
+    private fun onScreenOpened(initialLogin: String) {
         _uiState.update {
             it.copy(login = initialLogin)
         }
     }
 
-    fun onLoginTextChanged(value: String) {
+    private fun onLoginTextChanged(value: String) {
         _uiState.update {
             it.copy(login = value)
         }
     }
 
-    fun onConfirmClick() {
+    private fun onConfirmClick() {
         viewModelScope.launch {
             if (isEmailValid())
                 requestPasswordRestorationUseCase.invoke(_uiState.value.login).collect {
