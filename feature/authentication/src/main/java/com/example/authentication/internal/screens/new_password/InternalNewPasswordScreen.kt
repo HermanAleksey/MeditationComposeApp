@@ -13,6 +13,8 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -26,22 +28,28 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toUpperCase
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.authentication.api.new_password_screen.NewPasswordScreenViewModel
+import com.example.authentication.api.new_password_screen.NewPasswordScreenState
 import com.example.authentication.internal.common.LoginFlowBackground
 import com.example.authentication.internal.common.LoginFlowInputField
 import com.example.authentication.internal.common.LoginMainButton
+import com.example.design_system.AppTheme
 import com.example.feature.authentication.R
+import kotlinx.coroutines.flow.MutableStateFlow
 
 @Composable
 internal fun InternalNewPasswordScreen(
-    viewModel: NewPasswordScreenViewModel,
     login: String,
+    uiState: State<NewPasswordScreenState>,
+    processAction: (NewPasswordAction) -> Unit,
 ) {
     val focusManager = LocalFocusManager.current
     val repeatPasswordFocusRequester = FocusRequester()
 
-    val uiState = viewModel.uiState.collectAsState()
+    LaunchedEffect(key1 = Unit) {
+        processAction(NewPasswordAction.FirstLaunch(login))
+    }
 
     LoginFlowBackground(
         isLoading = uiState.value.isLoading
@@ -80,7 +88,9 @@ internal fun InternalNewPasswordScreen(
                 label = stringResource(id = R.string.new_password),
                 isError = uiState.value.newPasswordError != null,
                 errorValue = uiState.value.newPasswordError?.asString(),
-                onValueChanged = { viewModel.onNewPasswordTextChanged(it) },
+                onValueChanged = {
+                    processAction(NewPasswordAction.NewPasswordTextChanged(it))
+                },
                 imeAction = ImeAction.Next,
                 keyboardType = KeyboardType.Password,
                 onKeyboardActions = {
@@ -94,7 +104,9 @@ internal fun InternalNewPasswordScreen(
                 label = stringResource(id = R.string.repeat_new_password),
                 isError = uiState.value.repeatPasswordError != null,
                 errorValue = uiState.value.repeatPasswordError?.asString(),
-                onValueChanged = { viewModel.onRepeatPasswordTextChanged(it) },
+                onValueChanged = {
+                    processAction(NewPasswordAction.RepeatPasswordTextChanged(it))
+                },
                 imeAction = ImeAction.Done,
                 keyboardType = KeyboardType.Password,
                 onKeyboardActions = {
@@ -109,8 +121,20 @@ internal fun InternalNewPasswordScreen(
                     .wrapContentHeight()
                     .padding(top = 28.dp)
             ) {
-                viewModel.onConfirmClick(login)
+                processAction(NewPasswordAction.ConfirmClick)
             }
         }
+    }
+}
+
+@Preview
+@Composable
+fun InternalNewPasswordScreenPreview() {
+    AppTheme {
+        InternalNewPasswordScreen(
+            login = "",
+            uiState = MutableStateFlow(NewPasswordScreenState()).collectAsState(),
+            processAction = {}
+        )
     }
 }

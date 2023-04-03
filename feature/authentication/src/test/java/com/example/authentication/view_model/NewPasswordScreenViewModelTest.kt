@@ -2,6 +2,7 @@ package com.example.authentication.view_model
 
 import com.example.authentication.api.new_password_screen.NewPasswordScreenNavRoute
 import com.example.authentication.api.new_password_screen.NewPasswordScreenViewModel
+import com.example.authentication.internal.screens.new_password.NewPasswordAction
 import com.example.core.authentication_source.api.use_case.SetNewPasswordUseCase
 import com.example.core.model.NetworkResponse
 import com.example.coroutines_test.CoroutinesTestRule
@@ -71,10 +72,9 @@ class NewPasswordScreenViewModelTest {
 
     @Test
     fun `onConfirmClick, new password is not valid, don't navigate`() = runTest {
-        val login = "lo5gin"
         viewModel.onNewPasswordTextChanged("")
 
-        viewModel.onConfirmClick(login)
+        viewModel.processAction(NewPasswordAction.ConfirmClick)
 
         val sharedFlowResult = mutableListOf<NewPasswordScreenNavRoute?>()
         val job = launch {
@@ -93,11 +93,10 @@ class NewPasswordScreenViewModelTest {
     @Test
     fun `onConfirmClick, new password is valid, passwords dont match, dont call request`() =
         runTest {
-            val login = "lo4gin"
             viewModel.onNewPasswordTextChanged("wdwddw")
             viewModel.onRepeatPasswordTextChanged("212")
 
-            viewModel.onConfirmClick(login)
+            viewModel.processAction(NewPasswordAction.ConfirmClick)
 
             val sharedFlowResult = mutableListOf<NewPasswordScreenNavRoute?>()
             val job = launch {
@@ -130,7 +129,7 @@ class NewPasswordScreenViewModelTest {
                 }
             )
 
-        viewModel.onConfirmClick(login)
+        viewModel.processAction(NewPasswordAction.ConfirmClick)
 
         val sharedFlowResult = mutableListOf<NewPasswordScreenNavRoute?>()
         val job = launch {
@@ -166,7 +165,7 @@ class NewPasswordScreenViewModelTest {
                     }
                 )
 
-            viewModel.onConfirmClick(login)
+            viewModel.processAction(NewPasswordAction.ConfirmClick)
 
             val sharedFlowResult = mutableListOf<NewPasswordScreenNavRoute?>()
             val job = launch {
@@ -202,7 +201,7 @@ class NewPasswordScreenViewModelTest {
                     }
                 )
 
-            viewModel.onConfirmClick(login)
+            viewModel.processAction(NewPasswordAction.ConfirmClick)
 
             val sharedFlowResult = mutableListOf<NewPasswordScreenNavRoute?>()
             val job = launch {

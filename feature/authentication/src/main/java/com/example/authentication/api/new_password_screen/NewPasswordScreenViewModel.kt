@@ -1,7 +1,10 @@
 package com.example.authentication.api.new_password_screen
 
 import androidx.lifecycle.viewModelScope
+import com.example.authentication.internal.screens.new_password.NewPasswordAction
 import com.example.authentication.internal.validation.PasswordField
+import com.example.common.mvi.MviAction
+import com.example.common.mvi.MviViewModel
 import com.example.common.utils.UiText
 import com.example.common.view_model.NavigationBaseViewModel
 import com.example.core.authentication_source.api.use_case.SetNewPasswordUseCase
@@ -16,11 +19,36 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NewPasswordScreenViewModel @Inject constructor(
-    private val setNewPasswordUseCase: SetNewPasswordUseCase
-) : NavigationBaseViewModel<NewPasswordScreenNavRoute>() {
+    private val setNewPasswordUseCase: SetNewPasswordUseCase,
+) : NavigationBaseViewModel<NewPasswordScreenNavRoute>(), MviViewModel<NewPasswordScreenState> {
 
     private val _uiState = MutableStateFlow(NewPasswordScreenState())
-    val uiState: StateFlow<NewPasswordScreenState> = _uiState
+    override val uiState: StateFlow<NewPasswordScreenState> = _uiState
+
+    override fun processAction(action: MviAction) {
+        when (action) {
+            is NewPasswordAction.FirstLaunch -> {
+                onFirstLaunch(action.login)
+            }
+            is NewPasswordAction.NewPasswordTextChanged -> {
+                onNewPasswordTextChanged(action.text)
+            }
+            is NewPasswordAction.RepeatPasswordTextChanged -> {
+                onRepeatPasswordTextChanged(action.text)
+            }
+            is NewPasswordAction.ConfirmClick -> {
+                onConfirmClick()
+            }
+        }
+    }
+
+    private fun onFirstLaunch(login: String) {
+        _uiState.update {
+            it.copy(
+                login = login
+            )
+        }
+    }
 
     private fun setLoading(isLoading: Boolean) {
         _uiState.update {
@@ -40,30 +68,31 @@ class NewPasswordScreenViewModel @Inject constructor(
         }
     }
 
-    fun onConfirmClick(login: String) {
+    fun onConfirmClick() {
         viewModelScope.launch {
             if (isNewPasswordValid())
-                setNewPasswordUseCase.invoke(login, _uiState.value.newPassword).collect {
-                    when (it) {
-                        is NetworkResponse.Success<*> -> {
-                            if (it.data!!.success)
-                                navigationEventTransaction {
-                                    _navigationEvent.emit(
-                                        NewPasswordScreenNavRoute.LoginScreen
-                                    )
+                setNewPasswordUseCase.invoke(uiState.value.login, uiState.value.newPassword)
+                    .collect {
+                        when (it) {
+                            is NetworkResponse.Success<*> -> {
+                                if (it.data!!.success)
+                                    navigationEventTransaction {
+                                        _navigationEvent.emit(
+                                            NewPasswordScreenNavRoute.LoginScreen
+                                        )
+                                    }
+                                else {
+                                    //displayError()
                                 }
-                            else {
-                                //displayError()
+                            }
+                            is NetworkResponse.Failure<*> -> {
+                                //on error show pop-up
+                            }
+                            is NetworkResponse.Loading<*> -> {
+                                setLoading(it.isLoading)
                             }
                         }
-                        is NetworkResponse.Failure<*> -> {
-                            //on error show pop-up
-                        }
-                        is NetworkResponse.Loading<*> -> {
-                            setLoading(it.isLoading)
-                        }
                     }
-                }
         }
     }
 

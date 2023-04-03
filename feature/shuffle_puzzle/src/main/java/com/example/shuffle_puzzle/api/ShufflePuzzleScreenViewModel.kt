@@ -3,7 +3,7 @@ package com.example.shuffle_puzzle.api
 import android.graphics.Bitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.common.mvi.Action
+import com.example.common.mvi.MviAction
 import com.example.common.mvi.MviViewModel
 import com.example.shuffle_puzzle.api.model.Puzzle
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -35,7 +35,7 @@ class ShufflePuzzleScreenViewModel @Inject constructor() : ViewModel(),
         }
     }
 
-    override fun processAction(action: Action) {
+    override fun processAction(action: MviAction) {
         when (action) {
             is ShufflePuzzleAction.OnRestartClicked -> {
                 onRestartPuzzleClicked()

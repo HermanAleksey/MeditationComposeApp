@@ -1,3 +1,3 @@
 package com.example.common.mvi
 
-interface Action
+interface MviAction

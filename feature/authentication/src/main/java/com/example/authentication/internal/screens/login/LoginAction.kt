@@ -1,8 +1,8 @@
 package com.example.authentication.internal.screens.login
 
-import com.example.common.mvi.Action
+import com.example.common.mvi.MviAction
 
-internal sealed interface LoginAction : Action {
+internal sealed interface LoginAction : MviAction {
 
     data class OnLoginTextChanged(
         val text: String,

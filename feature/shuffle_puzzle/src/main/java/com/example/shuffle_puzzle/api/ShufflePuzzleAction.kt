@@ -1,9 +1,9 @@
 package com.example.shuffle_puzzle.api
 
 import android.graphics.Bitmap
-import com.example.common.mvi.Action
+import com.example.common.mvi.MviAction
 
-internal sealed interface ShufflePuzzleAction : Action {
+internal sealed interface ShufflePuzzleAction : MviAction {
 
     object OnRestartClicked : ShufflePuzzleAction
 
