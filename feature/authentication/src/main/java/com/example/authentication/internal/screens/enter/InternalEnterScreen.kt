@@ -21,16 +21,18 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.authentication.api.enter_screen.EnterScreenViewModel
 import com.example.authentication.internal.common.LoginMainButton
 import com.example.authentication.internal.screens.enter.composable.DontHaveAccountText
+import com.example.design_system.AppTheme
 import com.example.design_system.common_composables.ImageBackground
 import com.example.feature.authentication.R
 
 @Composable
 internal fun InternalEnterScreen(
-    viewModel: EnterScreenViewModel,
+    onDontHaveAccountClick: () -> Unit,
+    onEnterClick: () -> Unit,
 ) {
     val activity = LocalContext.current as? Activity
     BackHandler(enabled = true, onBack = {
@@ -74,14 +76,22 @@ internal fun InternalEnterScreen(
                     .fillMaxWidth(0.8F)
                     .wrapContentHeight()
             ) {
-                viewModel.onEnterClick()
+                onEnterClick()
             }
             Spacer(modifier = Modifier.height(18.dp))
             DontHaveAccountText(
-                onClick = { viewModel.onDontHaveAccountClick() }
+                onClick = {
+                    onDontHaveAccountClick()
+                }
             )
         }
     }
 }
 
-
+@Preview
+@Composable
+fun InternalEnterScreenPreview() {
+    AppTheme {
+        InternalEnterScreen({}, {})
+    }
+}
