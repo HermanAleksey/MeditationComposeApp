@@ -16,8 +16,9 @@ import com.example.design_system.AppTheme
 @Composable
 internal fun CodePanel(
     isEnabled: Boolean = true,
+    isCodeFullyInputted: Boolean = false,
     code: Array<Int>,
-    onCodeDigitChanged: (position: Int, inputtedDigit: Int) -> Boolean,
+    onCodeDigitChanged: (position: Int, inputtedDigit: Int) -> Unit,
     onLastDigitFilled: () -> Unit,
 ) {
     val focusRequesters = mapOf(
@@ -33,9 +34,7 @@ internal fun CodePanel(
         focusRequesters[notFilledCellIndex]?.requestFocus()
     }
 
-    fun onDigitInputted(position: Int, value: Int) {
-        val isCodeFullyInputted = onCodeDigitChanged(position, value)
-
+    LaunchedEffect(key1 = isCodeFullyInputted){
         if (isCodeFullyInputted) {
             onLastDigitFilled()
         } else {
@@ -59,7 +58,7 @@ internal fun CodePanel(
             focusRequester = focusRequesters[0]!!,
             onBackspaceToPrevious = { },
             onDigitInputted = { inputtedDigit ->
-                onDigitInputted(0, inputtedDigit)
+                onCodeDigitChanged(0, inputtedDigit)
                 if (inputtedDigit != EMPTY_NUMBER)
                     focusRequesters[1]?.requestFocus()
 
@@ -74,7 +73,7 @@ internal fun CodePanel(
                 onCodeDigitChanged(0, EMPTY_NUMBER)
             },
             onDigitInputted = { inputtedDigit ->
-                onDigitInputted(1, inputtedDigit)
+                onCodeDigitChanged(1, inputtedDigit)
                 if (inputtedDigit != EMPTY_NUMBER)
                     focusRequesters[2]?.requestFocus()
 
@@ -89,7 +88,7 @@ internal fun CodePanel(
                 onCodeDigitChanged(1, EMPTY_NUMBER)
             },
             onDigitInputted = { inputtedDigit ->
-                onDigitInputted(2, inputtedDigit)
+                onCodeDigitChanged(2, inputtedDigit)
                 if (inputtedDigit != EMPTY_NUMBER)
                     focusRequesters[3]?.requestFocus()
             }
@@ -103,7 +102,7 @@ internal fun CodePanel(
                 onCodeDigitChanged(2, EMPTY_NUMBER)
             },
             onDigitInputted = { inputtedDigit ->
-                onDigitInputted(3, inputtedDigit)
+                onCodeDigitChanged(3, inputtedDigit)
                 if (inputtedDigit != EMPTY_NUMBER)
                     focusRequesters[4]?.requestFocus()
             }
@@ -117,7 +116,7 @@ internal fun CodePanel(
                 onCodeDigitChanged(3, EMPTY_NUMBER)
             },
             onDigitInputted = { inputtedDigit ->
-                onDigitInputted(4, inputtedDigit)
+                onCodeDigitChanged(4, inputtedDigit)
             }
         )
     }
@@ -129,7 +128,7 @@ private fun CodePanelPreview() {
     AppTheme {
         CodePanel(
             code = arrayOf(1, 3, 2, 3, EMPTY_NUMBER),
-            onCodeDigitChanged = { _, _ -> true }
+            onCodeDigitChanged = { _, _ ->  }
         ) { }
     }
 }

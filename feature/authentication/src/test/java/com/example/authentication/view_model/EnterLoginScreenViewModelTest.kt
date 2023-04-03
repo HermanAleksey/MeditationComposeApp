@@ -1,5 +1,6 @@
 package com.example.authentication.view_model
 
+import com.example.authentication.api.enter_login_screen.EnterLoginAction
 import com.example.authentication.api.enter_login_screen.EnterLoginScreenNavRoute
 import com.example.authentication.api.enter_login_screen.EnterLoginScreenViewModel
 import com.example.core.authentication_source.api.use_case.RequestPasswordRestorationUseCase
@@ -52,7 +53,7 @@ class EnterLoginScreenViewModelTest {
     fun `onLoginTextChanged, update login`() {
         val login = "qweqwe"
 
-        viewModel.onLoginTextChanged(login)
+        viewModel.processAction(EnterLoginAction.LoginTextChanged(login))
 
         assert(viewModel.uiState.value.login == login)
     }
@@ -71,9 +72,9 @@ class EnterLoginScreenViewModelTest {
                     )
                 )
             })
-        viewModel.onLoginTextChanged(login)
+        viewModel.processAction(EnterLoginAction.LoginTextChanged(login))
 
-        viewModel.onConfirmClick()
+        viewModel.processAction(EnterLoginAction.ConfirmClick)
 
         val sharedFlowResult = mutableListOf<EnterLoginScreenNavRoute?>()
         val job = launch {
@@ -100,9 +101,9 @@ class EnterLoginScreenViewModelTest {
                     )
                 )
             })
-        viewModel.onLoginTextChanged(login)
+        viewModel.processAction(EnterLoginAction.LoginTextChanged(login))
 
-        viewModel.onConfirmClick()
+        viewModel.processAction(EnterLoginAction.ConfirmClick)
 
         val sharedFlowResult = mutableListOf<EnterLoginScreenNavRoute?>()
         val job = launch {
@@ -129,9 +130,9 @@ class EnterLoginScreenViewModelTest {
                     )
                 )
             })
-        viewModel.onLoginTextChanged(login)
+        viewModel.processAction(EnterLoginAction.LoginTextChanged(login))
 
-        viewModel.onConfirmClick()
+        viewModel.processAction(EnterLoginAction.ConfirmClick)
 
         val sharedFlowResult = mutableListOf<EnterLoginScreenNavRoute?>()
         val job = launch {

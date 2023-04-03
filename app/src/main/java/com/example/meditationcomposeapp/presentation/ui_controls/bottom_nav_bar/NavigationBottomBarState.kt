@@ -43,7 +43,6 @@ enum class BottomBarDestinations(
         description = UiText.StringResource(R.string.beers_screen_desc),
         icon = Icons.Default.Coffee
     ),
-
 }
 
 @Composable

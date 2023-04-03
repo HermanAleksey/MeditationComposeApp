@@ -8,5 +8,7 @@ fun SplashScreen(
     viewModel: SplashScreenViewModel,
     currentVersionName: String
 ) {
-    InternalSplashScreen(viewModel, currentVersionName = currentVersionName)
+    InternalSplashScreen(onLaunch = {
+        viewModel.onLaunchSplashScreen(currentVersionName)
+    })
 }

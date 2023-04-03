@@ -1,5 +1,6 @@
 package com.example.authentication.view_model
 
+import com.example.authentication.api.new_password_screen.NewPasswordAction
 import com.example.authentication.api.new_password_screen.NewPasswordScreenNavRoute
 import com.example.authentication.api.new_password_screen.NewPasswordScreenViewModel
 import com.example.core.authentication_source.api.use_case.SetNewPasswordUseCase
@@ -55,26 +56,25 @@ class NewPasswordScreenViewModelTest {
     fun `onNewPasswordTextChanged, password is set`() {
         val newPass = "qww"
 
-        viewModel.onNewPasswordTextChanged(newPass)
+        viewModel.processAction(NewPasswordAction.NewPasswordTextChanged(newPass))
 
-        assert(viewModel.uiState.value.newPassword == newPass)
+        assertEquals(viewModel.uiState.value.newPassword, newPass)
     }
 
     @Test
     fun `onRepeatPasswordTextChanged, rep password is set`() {
         val repPass = "qww"
 
-        viewModel.onRepeatPasswordTextChanged(repPass)
+        viewModel.processAction(NewPasswordAction.RepeatPasswordTextChanged(repPass))
 
-        assert(viewModel.uiState.value.repeatPassword == repPass)
+        assertEquals(viewModel.uiState.value.repeatPassword, repPass)
     }
 
     @Test
     fun `onConfirmClick, new password is not valid, don't navigate`() = runTest {
-        val login = "lo5gin"
-        viewModel.onNewPasswordTextChanged("")
+        viewModel.processAction(NewPasswordAction.NewPasswordTextChanged(""))
 
-        viewModel.onConfirmClick(login)
+        viewModel.processAction(NewPasswordAction.ConfirmClick)
 
         val sharedFlowResult = mutableListOf<NewPasswordScreenNavRoute?>()
         val job = launch {
@@ -93,11 +93,10 @@ class NewPasswordScreenViewModelTest {
     @Test
     fun `onConfirmClick, new password is valid, passwords dont match, dont call request`() =
         runTest {
-            val login = "lo4gin"
-            viewModel.onNewPasswordTextChanged("wdwddw")
-            viewModel.onRepeatPasswordTextChanged("212")
+            viewModel.processAction(NewPasswordAction.NewPasswordTextChanged("newPass"))
+            viewModel.processAction(NewPasswordAction.RepeatPasswordTextChanged("dq"))
 
-            viewModel.onConfirmClick(login)
+            viewModel.processAction(NewPasswordAction.ConfirmClick)
 
             val sharedFlowResult = mutableListOf<NewPasswordScreenNavRoute?>()
             val job = launch {
@@ -117,8 +116,9 @@ class NewPasswordScreenViewModelTest {
     fun `onConfirmClick, new password is valid, request fail, don't navigate`() = runTest {
         val login = "logi4n"
         val password = "password"
-        viewModel.onNewPasswordTextChanged(password)
-        viewModel.onRepeatPasswordTextChanged(password)
+        viewModel.processAction(NewPasswordAction.FirstLaunch(login))
+        viewModel.processAction(NewPasswordAction.NewPasswordTextChanged(password))
+        viewModel.processAction(NewPasswordAction.RepeatPasswordTextChanged(password))
         whenever(setNewPasswordUseCase(anyString(), anyString()))
             .thenReturn(
                 flow {
@@ -130,7 +130,7 @@ class NewPasswordScreenViewModelTest {
                 }
             )
 
-        viewModel.onConfirmClick(login)
+        viewModel.processAction(NewPasswordAction.ConfirmClick)
 
         val sharedFlowResult = mutableListOf<NewPasswordScreenNavRoute?>()
         val job = launch {
@@ -151,8 +151,9 @@ class NewPasswordScreenViewModelTest {
         runTest {
             val login = "qweeqw"
             val password = "password"
-            viewModel.onNewPasswordTextChanged(password)
-            viewModel.onRepeatPasswordTextChanged(password)
+            viewModel.processAction(NewPasswordAction.FirstLaunch(login))
+            viewModel.processAction(NewPasswordAction.NewPasswordTextChanged(password))
+            viewModel.processAction(NewPasswordAction.RepeatPasswordTextChanged(password))
             whenever(setNewPasswordUseCase(anyString(), anyString()))
                 .thenReturn(
                     flow {
@@ -166,7 +167,7 @@ class NewPasswordScreenViewModelTest {
                     }
                 )
 
-            viewModel.onConfirmClick(login)
+            viewModel.processAction(NewPasswordAction.ConfirmClick)
 
             val sharedFlowResult = mutableListOf<NewPasswordScreenNavRoute?>()
             val job = launch {
@@ -187,8 +188,9 @@ class NewPasswordScreenViewModelTest {
         runTest {
             val login = "login"
             val password = "rebrtjn"
-            viewModel.onNewPasswordTextChanged(password)
-            viewModel.onRepeatPasswordTextChanged(password)
+            viewModel.processAction(NewPasswordAction.FirstLaunch(login))
+            viewModel.processAction(NewPasswordAction.NewPasswordTextChanged(password))
+            viewModel.processAction(NewPasswordAction.RepeatPasswordTextChanged(password))
             whenever(setNewPasswordUseCase(anyString(), anyString()))
                 .thenReturn(
                     flow {
@@ -202,7 +204,7 @@ class NewPasswordScreenViewModelTest {
                     }
                 )
 
-            viewModel.onConfirmClick(login)
+            viewModel.processAction(NewPasswordAction.ConfirmClick)
 
             val sharedFlowResult = mutableListOf<NewPasswordScreenNavRoute?>()
             val job = launch {

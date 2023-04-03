@@ -3,6 +3,7 @@ package com.example.authentication.api.login_screen
 import androidx.lifecycle.viewModelScope
 import com.example.authentication.internal.validation.LoginField
 import com.example.authentication.internal.validation.PasswordField
+import com.example.common.mvi.MviViewModel
 import com.example.common.view_model.NavigationBaseViewModel
 import com.example.core.authentication_source.api.use_case.LoginUseCase
 import com.example.core.data_store.UserDataStore
@@ -18,24 +19,44 @@ import javax.inject.Inject
 class LoginScreenViewModel @Inject constructor(
     private val userDataStore: UserDataStore,
     private val loginUseCase: LoginUseCase,
-) : NavigationBaseViewModel<LoginScreenNavRoute>() {
+) : NavigationBaseViewModel<LoginScreenNavRoute>(), MviViewModel<LoginScreenState, LoginAction> {
 
     private val _uiState = MutableStateFlow(LoginScreenState())
-    val uiState: StateFlow<LoginScreenState> = _uiState
+    override val uiState: StateFlow<LoginScreenState> = _uiState
 
-    fun onLoginTextChanged(value: String) {
+    override fun processAction(action: LoginAction) {
+        when (action) {
+            is LoginAction.LoginTextChanged -> {
+                onLoginTextChanged(action.text)
+            }
+            is LoginAction.PasswordTextChanged -> {
+                onPasswordTextChanged(action.text)
+            }
+            is LoginAction.LoginClick -> {
+                onLoginClicked()
+            }
+            is LoginAction.ForgotPasswordClick -> {
+                onForgotPasswordClicked()
+            }
+            is LoginAction.SignUpClick -> {
+                onSignUpClicked()
+            }
+        }
+    }
+
+    private fun onLoginTextChanged(value: String) {
         _uiState.update {
             it.copy(login = value)
         }
     }
 
-    fun onPasswordTextChanged(value: String) {
+    private fun onPasswordTextChanged(value: String) {
         _uiState.update { state ->
             state.copy(password = value)
         }
     }
 
-    fun onForgotPasswordClicked() = viewModelScope.launch {
+    private fun onForgotPasswordClicked() = viewModelScope.launch {
         navigationEventTransaction {
             _navigationEvent.emit(
                 LoginScreenNavRoute.EnterLoginScreen(_uiState.value.login)
@@ -43,7 +64,7 @@ class LoginScreenViewModel @Inject constructor(
         }
     }
 
-    fun onLoginClicked() {
+    private fun onLoginClicked() {
         val login = _uiState.value.login
         val password = _uiState.value.password
 
@@ -78,7 +99,7 @@ class LoginScreenViewModel @Inject constructor(
 
     private suspend fun saveCreditsOnDataStore(
         login: String,
-        password: String
+        password: String,
     ) {
         with(userDataStore) {
             writeLogin(login)
@@ -104,7 +125,7 @@ class LoginScreenViewModel @Inject constructor(
         }
     }
 
-    fun onSignUpClicked() = viewModelScope.launch {
+    private fun onSignUpClicked() = viewModelScope.launch {
         navigationEventTransaction {
             _navigationEvent.emit(
                 LoginScreenNavRoute.RegistrationScreen

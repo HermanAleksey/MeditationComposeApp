@@ -7,5 +7,8 @@ import com.example.authentication.internal.screens.enter.InternalEnterScreen
 fun EnterScreen(
     viewModel: EnterScreenViewModel,
 ) {
-    InternalEnterScreen(viewModel)
+    InternalEnterScreen(
+        onEnterClick = viewModel::onEnterClick,
+        onDontHaveAccountClick = viewModel::onDontHaveAccountClick
+    )
 }

@@ -1,6 +1,8 @@
 package com.example.authentication.api.enter_code_screen
 
 import androidx.lifecycle.viewModelScope
+import com.example.common.mvi.MviViewModel
+import com.example.common.utils.emptyString
 import com.example.common.view_model.NavigationBaseViewModel
 import com.example.core.authentication_source.api.use_case.VerifyCodeUseCase
 import com.example.core.model.NetworkResponse
@@ -14,40 +16,62 @@ import javax.inject.Inject
 @HiltViewModel
 class EnterCodeScreenViewModel @Inject constructor(
     private val verifyCodeUseCase: VerifyCodeUseCase,
-) : NavigationBaseViewModel<EnterCodeScreenNavRoute>() {
+) : NavigationBaseViewModel<EnterCodeScreenNavRoute>(),
+    MviViewModel<EnterCodeScreenState, EnterCodeAction> {
 
     private val _uiState = MutableStateFlow(EnterCodeScreenState())
-    val uiState: StateFlow<EnterCodeScreenState> = _uiState
+    override val uiState: StateFlow<EnterCodeScreenState> = _uiState
 
-    private fun isCodeFullyInputted() =
-        _uiState.value.code.all { it != EnterCodeScreenState.EMPTY_NUMBER }
+    override fun processAction(action: EnterCodeAction) {
+        when (action) {
+            is EnterCodeAction.FirstLaunch -> {
+                _uiState.update {
+                    it.copy(
+                        login = action.login
+                    )
+                }
+            }
+            is EnterCodeAction.CodeDigitChanged -> {
+                onCodeDigitChanged(action.position, action.number)
+            }
+            is EnterCodeAction.LastDigitFilled -> {
+                onLastDigitFilled()
+            }
+        }
+    }
 
-    fun onCodeDigitChanged(index: Int, value: Int): Boolean {
+    private fun isCodeFullyInputted(code: Array<Int>) =
+        code.all { it != EnterCodeScreenState.EMPTY_NUMBER }
+
+    private fun onCodeDigitChanged(index: Int, value: Int) {
         if (index < 0 || index >= _uiState.value.code.size) {
-            return isCodeFullyInputted()
+            _uiState.update {
+                it.copy(
+                    isCodeFullyInputted = isCodeFullyInputted(_uiState.value.code)
+                )
+            }
+            return
         }
         val newCodeState = _uiState.value.code.copyOf()
         newCodeState[index] = value
 
         _uiState.update {
             it.copy(
-                code = newCodeState
+                code = newCodeState,
+                isCodeFullyInputted = isCodeFullyInputted(newCodeState)
             )
         }
-        return isCodeFullyInputted()
     }
 
-    fun onLastDigitFilled(
-        login: String
-    ) {
+    private fun onLastDigitFilled() {
         viewModelScope.launch {
-            verifyCodeUseCase.invoke(login, getCodeAsString()).collect {
+            verifyCodeUseCase.invoke(uiState.value.login, getCodeAsString()).collect {
                 when (it) {
                     is NetworkResponse.Success<*> -> {
                         if (it.data!!.success) {
                             navigationEventTransaction {
                                 _navigationEvent.emit(
-                                    EnterCodeScreenNavRoute.NewPasswordScreen(login)
+                                    EnterCodeScreenNavRoute.NewPasswordScreen(uiState.value.login)
                                 )
                             }
                         } else {
@@ -79,7 +103,7 @@ class EnterCodeScreenViewModel @Inject constructor(
     }
 
     private fun getCodeAsString(): String {
-        val code = StringBuilder("")
+        val code = StringBuilder(emptyString())
         _uiState.value.code.forEach {
             code.append(it.toString())
         }

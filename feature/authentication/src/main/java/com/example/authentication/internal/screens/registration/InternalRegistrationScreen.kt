@@ -14,6 +14,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,23 +28,26 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.toUpperCase
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.authentication.api.registration_screen.RegistrationScreenViewModel
+import com.example.authentication.api.registration_screen.RegistrationAction
+import com.example.authentication.api.registration_screen.RegistrationScreenState
 import com.example.authentication.internal.common.LoginFlowBackground
 import com.example.authentication.internal.common.LoginFlowInputField
 import com.example.authentication.internal.common.LoginMainButton
 import com.example.authentication.internal.screens.registration.composable.AlreadyHaveAccountText
+import com.example.design_system.AppTheme
 import com.example.feature.authentication.R
+import kotlinx.coroutines.flow.MutableStateFlow
 
 @Composable
 internal fun InternalRegistrationScreen(
-    viewModel: RegistrationScreenViewModel,
+    uiState: State<RegistrationScreenState>,
+    processAction: (RegistrationAction) -> Unit,
 ) {
     val focusManager = LocalFocusManager.current
     val passwordFocusRequester = FocusRequester()
     val emailFocusRequester = FocusRequester()
-
-    val uiState = viewModel.uiState.collectAsState()
 
     LoginFlowBackground(
         isLoading = uiState.value.isLoading
@@ -82,7 +86,9 @@ internal fun InternalRegistrationScreen(
                 isError = uiState.value.nameError != null,
                 errorValue = uiState.value.nameError?.asString(),
                 label = stringResource(id = R.string.name),
-                onValueChanged = { viewModel.onNameTextChanged(it) },
+                onValueChanged = {
+                    processAction(RegistrationAction.NameTextChanged(it))
+                },
                 imeAction = ImeAction.Next,
                 keyboardType = KeyboardType.Text,
                 onKeyboardActions = {
@@ -96,7 +102,9 @@ internal fun InternalRegistrationScreen(
                 isError = uiState.value.loginError != null,
                 errorValue = uiState.value.loginError?.asString(),
                 label = stringResource(id = R.string.email_address),
-                onValueChanged = { viewModel.onLoginTextChanged(it) },
+                onValueChanged = {
+                    processAction(RegistrationAction.LoginTextChanged(it))
+                },
                 imeAction = ImeAction.Next,
                 keyboardType = KeyboardType.Email,
                 onKeyboardActions = {
@@ -111,7 +119,9 @@ internal fun InternalRegistrationScreen(
                 isError = uiState.value.passwordError != null,
                 errorValue = uiState.value.passwordError?.asString(),
                 label = stringResource(id = R.string.password),
-                onValueChanged = { viewModel.onPasswordTextChanged(it) },
+                onValueChanged = {
+                    processAction(RegistrationAction.PasswordTextChanged(it))
+                },
                 imeAction = ImeAction.Done,
                 keyboardType = KeyboardType.Password,
                 onKeyboardActions = {
@@ -126,7 +136,7 @@ internal fun InternalRegistrationScreen(
                     .fillMaxWidth()
                     .wrapContentHeight()
             ) {
-                viewModel.onSignUpClicked()
+                processAction(RegistrationAction.SignUpClick)
             }
             Spacer(modifier = Modifier.height(18.dp))
             Box(
@@ -138,11 +148,22 @@ internal fun InternalRegistrationScreen(
             ) {
                 AlreadyHaveAccountText(
                     onClick = {
-                        viewModel.onSignInClicked()
+                        processAction(RegistrationAction.SignInClick)
                     }
                 )
             }
             Spacer(modifier = Modifier.padding(top = 80.dp))
         }
+    }
+}
+
+@Preview
+@Composable
+fun InternalRegistrationScreenPreview() {
+    AppTheme {
+        InternalRegistrationScreen(
+            uiState = MutableStateFlow(RegistrationScreenState()).collectAsState(),
+            processAction = {}
+        )
     }
 }

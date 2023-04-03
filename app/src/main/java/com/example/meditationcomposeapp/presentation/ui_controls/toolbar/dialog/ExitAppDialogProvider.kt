@@ -41,6 +41,6 @@ class ExitAppDialogProvider(
 @Composable
 fun ExitAppDialogProviderPreview() {
     AppTheme {
-        ExitAppDialogProvider({},{}).Display()
+        ExitAppDialogProvider({}, {}).Display()
     }
 }

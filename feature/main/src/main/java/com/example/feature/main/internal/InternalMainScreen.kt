@@ -19,17 +19,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.design_system.AppTheme
 import com.example.design_system.common_composables.ColorBackground
 import com.example.feature.main.R
-import com.example.feature.main.api.MainScreenViewModel
 import com.example.feature.main.internal.composable.MenuItem
 import com.example.feature.main.internal.composable.MenuItemModel
 import com.example.feature.main.internal.composable.getMenuItemsList
 
 @Composable
 internal fun InternalMainScreen(
-    viewModel: MainScreenViewModel,
+    onMenuItemClick: (MenuItem) -> Unit,
 ) {
     val activity = LocalContext.current as? Activity
     BackHandler(enabled = true, onBack = {
@@ -37,7 +38,7 @@ internal fun InternalMainScreen(
     })
 
     val menuItems = getMenuItemsList {
-        viewModel.onMenuItemClick(it)
+        onMenuItemClick(it)
     }
 
     ColorBackground(color = MaterialTheme.colors.background) {
@@ -95,5 +96,13 @@ internal fun MainMenu(
             }
         }
         Spacer(modifier = Modifier.height(spacingMenuItem))
+    }
+}
+
+@Preview
+@Composable
+fun InternalMainScreenPreview() {
+    AppTheme {
+        InternalMainScreen {}
     }
 }

@@ -1,6 +1,7 @@
 package com.example.authentication.view_model
 
 import com.example.authentication.FakeObjects.getFakeProfile
+import com.example.authentication.api.login_screen.LoginAction
 import com.example.authentication.api.login_screen.LoginScreenNavRoute
 import com.example.authentication.api.login_screen.LoginScreenViewModel
 import com.example.core.authentication_source.api.use_case.LoginUseCase
@@ -57,7 +58,7 @@ class LoginScreenViewModelTest {
     fun `onLoginTextChanged, login changed`() {
         val login = "qwerwe"
 
-        viewModel.onLoginTextChanged(login)
+        viewModel.processAction(LoginAction.LoginTextChanged(login))
 
         assert(viewModel.uiState.value.login == login)
     }
@@ -66,15 +67,15 @@ class LoginScreenViewModelTest {
     fun `onPasswordTextChanged, password changed`() {
         val pass = "qwerwe"
 
-        viewModel.onPasswordTextChanged(pass)
+        viewModel.processAction(LoginAction.PasswordTextChanged(pass))
 
-        assert(viewModel.uiState.value.password == pass)
+        assertEquals(viewModel.uiState.value.password, pass)
     }
 
 
     @Test
     fun `onSignUpClicked, navigation invoked`() = runTest {
-        viewModel.onSignUpClicked()
+        viewModel.processAction(LoginAction.SignUpClick)
 
         val sharedFlowResult = mutableListOf<LoginScreenNavRoute?>()
         val job = launch {
@@ -91,10 +92,10 @@ class LoginScreenViewModelTest {
 
     @Test
     fun `onLoginClicked, login is not valid, pass valid, don't call loginUseCase`() = runTest {
-        viewModel.onLoginTextChanged("")
-        viewModel.onPasswordTextChanged("qwewqeq")
+        viewModel.processAction(LoginAction.LoginTextChanged(""))
+        viewModel.processAction(LoginAction.PasswordTextChanged("qwdq"))
 
-        viewModel.onLoginClicked()
+        viewModel.processAction(LoginAction.LoginClick)
 
         advanceUntilIdle()
 
@@ -113,10 +114,10 @@ class LoginScreenViewModelTest {
 
     @Test
     fun `onLoginClicked, password is not valid, login valid, don't call loginUseCase`() = runTest {
-        viewModel.onLoginTextChanged("wefwefwef")
-        viewModel.onPasswordTextChanged("")
+        viewModel.processAction(LoginAction.LoginTextChanged("qwdq"))
+        viewModel.processAction(LoginAction.PasswordTextChanged(""))
 
-        viewModel.onLoginClicked()
+        viewModel.processAction(LoginAction.LoginClick)
 
         val sharedFlowResult = mutableListOf<LoginScreenNavRoute?>()
         val job = launch {
@@ -136,8 +137,8 @@ class LoginScreenViewModelTest {
         val login = "qeww"
         val password = "qeww243"
 
-        viewModel.onLoginTextChanged(login)
-        viewModel.onPasswordTextChanged(password)
+        viewModel.processAction(LoginAction.LoginTextChanged(login))
+        viewModel.processAction(LoginAction.PasswordTextChanged(password))
         whenever(loginUseCase(login, password))
             .thenReturn(flow {
                 emit(
@@ -147,7 +148,7 @@ class LoginScreenViewModelTest {
                 )
             })
 
-        viewModel.onLoginClicked()
+        viewModel.processAction(LoginAction.LoginClick)
 
         val sharedFlowResult = mutableListOf<LoginScreenNavRoute?>()
         val job = launch {
@@ -167,8 +168,8 @@ class LoginScreenViewModelTest {
         val login = "qeww"
         val password = "qeww243"
 
-        viewModel.onLoginTextChanged(login)
-        viewModel.onPasswordTextChanged(password)
+        viewModel.processAction(LoginAction.LoginTextChanged(login))
+        viewModel.processAction(LoginAction.PasswordTextChanged(password))
         whenever(loginUseCase(login, password))
             .thenReturn(flow {
                 emit(
@@ -179,7 +180,7 @@ class LoginScreenViewModelTest {
                 )
             })
 
-        viewModel.onLoginClicked()
+        viewModel.processAction(LoginAction.LoginClick)
 
         val sharedFlowResult = mutableListOf<LoginScreenNavRoute?>()
         val job = launch {
@@ -197,8 +198,8 @@ class LoginScreenViewModelTest {
             val login = "qeww"
             val password = "qeww243"
 
-            viewModel.onLoginTextChanged(login)
-            viewModel.onPasswordTextChanged(password)
+            viewModel.processAction(LoginAction.LoginTextChanged(login))
+            viewModel.processAction(LoginAction.PasswordTextChanged(password))
             whenever(loginUseCase(login, password))
                 .thenReturn(flow {
                     emit(
@@ -208,7 +209,7 @@ class LoginScreenViewModelTest {
                     )
                 })
 
-            viewModel.onLoginClicked()
+            viewModel.processAction(LoginAction.LoginClick)
 
             val sharedFlowResult = mutableListOf<LoginScreenNavRoute?>()
             val job = launch {
@@ -229,8 +230,8 @@ class LoginScreenViewModelTest {
     fun `onForgotPasswordClicked, navigate to EnterLoginScreen`() = runTest {
         val login = "wefwefwe"
 
-        viewModel.onLoginTextChanged(login)
-        viewModel.onForgotPasswordClicked()
+        viewModel.processAction(LoginAction.LoginTextChanged(login))
+        viewModel.processAction(LoginAction.ForgotPasswordClick)
 
         val sharedFlowResult = mutableListOf<LoginScreenNavRoute?>()
         val job = launch {
@@ -246,20 +247,22 @@ class LoginScreenViewModelTest {
     }
 
     @Test
-    fun `onPasswordTextChanged, uiState update password`() {
+    fun `onPasswordTextChanged, uiState update password`() = runTest {
         val password = "wefwefwe"
 
-        viewModel.onPasswordTextChanged(password)
+        viewModel.processAction(LoginAction.PasswordTextChanged(password))
 
-        assert(viewModel.uiState.value.password == password)
+        advanceUntilIdle()
+
+        assertEquals(password, viewModel.uiState.value.password)
     }
 
     @Test
     fun `onLoginTextChanged, uiState update login`() {
         val login = "wefwefwe"
 
-        viewModel.onLoginTextChanged(login)
+        viewModel.processAction(LoginAction.LoginTextChanged(login))
 
-        assert(viewModel.uiState.value.login == login)
+        assertEquals(login, viewModel.uiState.value.login)
     }
 }

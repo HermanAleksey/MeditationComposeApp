@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.authentication.internal.validation.LoginField
 import com.example.authentication.internal.validation.NameField
 import com.example.authentication.internal.validation.PasswordField
+import com.example.common.mvi.MviViewModel
 import com.example.common.view_model.NavigationBaseViewModel
 import com.example.core.authentication_source.api.use_case.RegisterUseCase
 import com.example.core.model.NetworkResponse
@@ -16,14 +17,34 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RegistrationScreenViewModel @Inject constructor(
-    private val registerUseCase: RegisterUseCase
-) : NavigationBaseViewModel<RegistrationScreenNavRoute>() {
+    private val registerUseCase: RegisterUseCase,
+) : NavigationBaseViewModel<RegistrationScreenNavRoute>(),
+    MviViewModel<RegistrationScreenState, RegistrationAction> {
 
     private val _uiState = MutableStateFlow(RegistrationScreenState())
-    val uiState: StateFlow<RegistrationScreenState> = _uiState
+    override val uiState: StateFlow<RegistrationScreenState> = _uiState
 
+    override fun processAction(action: RegistrationAction) {
+        when (action) {
+            is RegistrationAction.LoginTextChanged -> {
+                onLoginTextChanged(action.text)
+            }
+            is RegistrationAction.PasswordTextChanged -> {
+                onPasswordTextChanged(action.text)
+            }
+            is RegistrationAction.NameTextChanged -> {
+                onNameTextChanged(action.text)
+            }
+            is RegistrationAction.SignInClick -> {
+                onSignInClicked()
+            }
+            is RegistrationAction.SignUpClick -> {
+                onSignUpClicked()
+            }
+        }
+    }
 
-    fun onNameTextChanged(value: String) {
+    private fun onNameTextChanged(value: String) {
         _uiState.update {
             it.copy(
                 name = value
@@ -31,7 +52,7 @@ class RegistrationScreenViewModel @Inject constructor(
         }
     }
 
-    fun onLoginTextChanged(value: String) {
+    private fun onLoginTextChanged(value: String) {
         _uiState.update {
             it.copy(
                 login = value
@@ -39,7 +60,7 @@ class RegistrationScreenViewModel @Inject constructor(
         }
     }
 
-    fun onPasswordTextChanged(value: String) {
+    private fun onPasswordTextChanged(value: String) {
         _uiState.update {
             it.copy(
                 password = value
@@ -47,7 +68,7 @@ class RegistrationScreenViewModel @Inject constructor(
         }
     }
 
-    fun onSignUpClicked() {
+    private fun onSignUpClicked() {
         viewModelScope.launch {
             if (
                 isNameFieldValid() &&
@@ -111,7 +132,7 @@ class RegistrationScreenViewModel @Inject constructor(
         }
     }
 
-    fun onSignInClicked() = viewModelScope.launch {
+    private fun onSignInClicked() = viewModelScope.launch {
         navigationEventTransaction {
             _navigationEvent.emit(
                 RegistrationScreenNavRoute.LoginScreen
