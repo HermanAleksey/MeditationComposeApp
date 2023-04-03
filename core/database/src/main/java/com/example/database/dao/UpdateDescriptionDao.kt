@@ -11,7 +11,7 @@ interface UpdateDescriptionDao {
     @Query("SELECT * FROM updates_log")
     suspend fun getAll(): List<UpdateDescriptionDBEntity>
 
-    @Query("SELECT * FROM updates_log WHERE release_time = (SELECT MAX(release_time) FROM updates_log) ")
+    @Query("SELECT * FROM updates_log WHERE id  = (SELECT MAX(id) FROM updates_log) ")
     suspend fun getLastUpdate(): UpdateDescriptionDBEntity?
 
     @Query("UPDATE updates_log SET shown = (:wasShown) WHERE version_name = (:versionName)")
