@@ -116,6 +116,7 @@ class NewPasswordScreenViewModelTest {
     fun `onConfirmClick, new password is valid, request fail, don't navigate`() = runTest {
         val login = "logi4n"
         val password = "password"
+        viewModel.processAction(NewPasswordAction.FirstLaunch(login))
         viewModel.processAction(NewPasswordAction.NewPasswordTextChanged(password))
         viewModel.processAction(NewPasswordAction.RepeatPasswordTextChanged(password))
         whenever(setNewPasswordUseCase(anyString(), anyString()))
@@ -150,7 +151,8 @@ class NewPasswordScreenViewModelTest {
         runTest {
             val login = "qweeqw"
             val password = "password"
-            viewModel.processAction(NewPasswordAction.NewPasswordTextChanged(login))
+            viewModel.processAction(NewPasswordAction.FirstLaunch(login))
+            viewModel.processAction(NewPasswordAction.NewPasswordTextChanged(password))
             viewModel.processAction(NewPasswordAction.RepeatPasswordTextChanged(password))
             whenever(setNewPasswordUseCase(anyString(), anyString()))
                 .thenReturn(
@@ -186,6 +188,7 @@ class NewPasswordScreenViewModelTest {
         runTest {
             val login = "login"
             val password = "rebrtjn"
+            viewModel.processAction(NewPasswordAction.FirstLaunch(login))
             viewModel.processAction(NewPasswordAction.NewPasswordTextChanged(password))
             viewModel.processAction(NewPasswordAction.RepeatPasswordTextChanged(password))
             whenever(setNewPasswordUseCase(anyString(), anyString()))
