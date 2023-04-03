@@ -20,6 +20,7 @@ class UpdateDescriptionDBMapper @Inject constructor() :
 
     override fun mapTo(objectFrom: UpdateDescriptionModel): UpdateDescriptionDBEntity {
         return UpdateDescriptionDBEntity(
+            id = 0,
             versionName = objectFrom.version.toString(),
             updateReleaseTime = objectFrom.updateReleaseTime,
             updateTitle = objectFrom.updateTitle,

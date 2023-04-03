@@ -3,7 +3,6 @@ package com.example.core.updates_history.model
 import com.google.gson.annotations.SerializedName
 
 data class UpdateDescriptionResponse(
-    @SerializedName("id") val id: Int,
     @SerializedName("name") val versionName: String,
     @SerializedName("release_time") val updateReleaseTime: Long,
     @SerializedName("title") val updateTitle: String,
