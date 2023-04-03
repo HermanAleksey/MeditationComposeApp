@@ -1,8 +1,8 @@
 package com.example.core.updates_history.repository.web
 
-import com.example.core.updates_history.source.UpdatesHistoryApi
-import com.example.core.updates_history.model.UpdateDescriptionResponse
 import com.example.core.model.NetworkResponse
+import com.example.core.updates_history.model.UpdateDescriptionResponse
+import com.example.core.updates_history.source.UpdatesHistoryApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -44,14 +44,12 @@ class UpdateDescriptionWebRepositoryImpl @Inject constructor(
 //improvised response from back-end
 fun getVersionDescriptions(startFromVersion: String): List<UpdateDescriptionResponse> {
     val version0_0_1 = UpdateDescriptionResponse(
-        id = 1,
         versionName = "0.0.1",
         updateReleaseTime = 1667034395445,
         updateTitle = "Project initialization!",
         updateDescription = "Project was created. This update created in order to show origin.",
     )
     val version0_5_0 = UpdateDescriptionResponse(
-        id = 2,
         versionName = "0.5.0",
         updateReleaseTime = 1667034395445,
         updateTitle = "A lot of Beer!",
@@ -60,25 +58,30 @@ fun getVersionDescriptions(startFromVersion: String): List<UpdateDescriptionResp
                 "beer page on an online store or similar.",
     )
     val version0_6_0 = UpdateDescriptionResponse(
-        id = 3,
         versionName = "0.6.0",
         updateReleaseTime = 1667138968792,
         updateTitle = "Update notes!",
         updateDescription = "Now you can see what is new in the app with less effort! Also you can check updates history.",
     )
     val version0_6_1 = UpdateDescriptionResponse(
-        id = 4,
         versionName = "0.6.1",
         updateReleaseTime = 1667152000868,
         updateTitle = "Bug fix",
         updateDescription = "Bug with infinite update description pop-up fixed :)",
     )
     val version0_7_2 = UpdateDescriptionResponse(
-        id = 5,
         versionName = "0.7.2",
         updateReleaseTime = 1678638488581,
         updateTitle = "Bug fixes",
         updateDescription = "Overall bug fixes and performance improvements",
+    )
+    val version0_8_1 = UpdateDescriptionResponse(
+        versionName = "0.8.1",
+        updateReleaseTime = 1680528009127,
+        updateTitle = "Design update",
+        updateDescription = "App design update: new typography, some color palette changes.\n" +
+                "Changed the work of \"Update History\".\n" +
+                "Removed profile screen since it was unnecessary.",
     )
     val map = mapOf(
         "0.0.1" to version0_0_1,
@@ -86,6 +89,7 @@ fun getVersionDescriptions(startFromVersion: String): List<UpdateDescriptionResp
         "0.6.0" to version0_6_0,
         "0.6.1" to version0_6_1,
         "0.7.2" to version0_7_2,
+        "0.8.1" to version0_8_1,
     )
 
     val list = map.values.toTypedArray().copyOfRange(
