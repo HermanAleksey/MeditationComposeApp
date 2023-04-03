@@ -1,7 +1,12 @@
 package com.example.authentication.api.enter_code_screen
 
+import com.example.common.mvi.State
+import com.example.common.utils.emptyString
+
 data class EnterCodeScreenState(
     val isLoading: Boolean = false,
+    val login: String = emptyString(),
+    val isCodeFullyInputted: Boolean = false,
     val code: Array<Int> = arrayOf(
         EMPTY_NUMBER,
         EMPTY_NUMBER,
@@ -9,7 +14,7 @@ data class EnterCodeScreenState(
         EMPTY_NUMBER,
         EMPTY_NUMBER
     ),
-) {
+) : State {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
@@ -31,7 +36,7 @@ data class EnterCodeScreenState(
     companion object {
         const val EMPTY_NUMBER = -1
 
-       val EMPTY_CODE_VALUE = arrayOf(
+        val EMPTY_CODE_VALUE = arrayOf(
             EMPTY_NUMBER,
             EMPTY_NUMBER,
             EMPTY_NUMBER,
