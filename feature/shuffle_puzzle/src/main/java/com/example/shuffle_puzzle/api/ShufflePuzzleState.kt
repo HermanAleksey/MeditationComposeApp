@@ -1,5 +1,6 @@
 package com.example.shuffle_puzzle.api
 
+import com.example.common.mvi.State
 import com.example.shuffle_puzzle.api.model.Puzzle
 
 data class ShufflePuzzleState(
@@ -10,4 +11,4 @@ data class ShufflePuzzleState(
     val isPuzzleSolved: Boolean = false,
     val isTimerActive: Boolean = false,
     val solvingTimerSec: Long = 0,
-)
+): State

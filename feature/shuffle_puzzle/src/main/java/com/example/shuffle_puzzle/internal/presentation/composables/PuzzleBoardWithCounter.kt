@@ -9,38 +9,44 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.design_system.AppTheme
-import com.example.shuffle_puzzle.api.ShufflePuzzleScreenViewModel
-import com.example.shuffle_puzzle.api.model.Puzzle
+import com.example.shuffle_puzzle.api.ShufflePuzzleAction
+import com.example.shuffle_puzzle.api.ShufflePuzzleState
 import com.example.shuffle_puzzle.internal.presentation.composables.puzzle_board.PuzzleBoard
+import kotlinx.coroutines.flow.MutableStateFlow
 
 @Composable
 internal fun PuzzleBoardWithCounter(
-    viewModel: ShufflePuzzleScreenViewModel,
-    puzzle: Puzzle?,
+    processAction: (ShufflePuzzleAction) -> Unit,
+    uiState: State<ShufflePuzzleState>,
 ) {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Top
     ) {
         PuzzleGameDescriptionCard(
-            viewModel = viewModel,
             modifier = Modifier
                 .padding(start = 18.dp, end = 18.dp, top = 18.dp)
                 .fillMaxWidth()
-                .height(150.dp)
+                .height(150.dp),
+            processAction = processAction,
+            uiState = uiState
         )
 
         Spacer(modifier = Modifier.height(10.dp))
 
         PuzzleBoard(
-            puzzle = puzzle,
-            onCreatePuzzleClick = { viewModel.onCreatePuzzleClick(it) },
+            puzzle = uiState.value.puzzle,
+            onCreatePuzzleClick = { bitmap ->
+                processAction(ShufflePuzzleAction.OnCreatePuzzleClick(bitmap))
+            },
             onMovePerformed = { success ->
-                viewModel.onMovePerformed(success)
+                processAction(ShufflePuzzleAction.OnMovePerformed(success))
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -54,8 +60,8 @@ internal fun PuzzleBoardWithCounter(
 internal fun PuzzleBoardWithCounterPreview() {
     AppTheme {
         PuzzleBoardWithCounter(
-            viewModel = ShufflePuzzleScreenViewModel(),
-            puzzle = null,
+            processAction = { },
+            uiState = MutableStateFlow(ShufflePuzzleState()).collectAsState(),
         )
     }
 }

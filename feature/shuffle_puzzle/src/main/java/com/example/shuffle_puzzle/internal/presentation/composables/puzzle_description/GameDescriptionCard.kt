@@ -13,6 +13,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -24,17 +25,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.design_system.AppTheme
 import com.example.feature.shuffle_puzzle.R
-import com.example.shuffle_puzzle.api.ShufflePuzzleScreenViewModel
+import com.example.shuffle_puzzle.api.ShufflePuzzleAction
+import com.example.shuffle_puzzle.api.ShufflePuzzleState
 import com.example.shuffle_puzzle.internal.presentation.composables.puzzle_description.states.InGameFunctionsDescription
 import com.example.shuffle_puzzle.internal.presentation.composables.puzzle_description.states.PuzzleSizeSelection
+import kotlinx.coroutines.flow.MutableStateFlow
 
 @Composable
 internal fun PuzzleGameDescriptionCard(
     modifier: Modifier,
-    viewModel: ShufflePuzzleScreenViewModel,
+    processAction: (ShufflePuzzleAction) -> Unit,
+    uiState: State<ShufflePuzzleState>,
 ) {
-    val uiState = viewModel.uiState.collectAsState()
-
     Card(
         modifier = modifier
             .background(MaterialTheme.colors.onSurface)
@@ -77,12 +79,14 @@ internal fun PuzzleGameDescriptionCard(
                     InGameFunctionsDescription(
                         timerValueSec = uiState.value.solvingTimerSec,
                         movesDone = uiState.value.movesDone,
-                        onRestartPuzzle = { viewModel.onRestartPuzzleClicked() }
+                        onRestartPuzzle = { processAction(ShufflePuzzleAction.OnRestartClicked) }
                     )
                 else
                     PuzzleSizeSelection(
                         puzzleSize = uiState.value.puzzleSize,
-                        updateSelectedSizeValue = { viewModel.onPuzzleSizeChanged(it) }
+                        updateSelectedSizeValue = { size ->
+                            processAction(ShufflePuzzleAction.OnPuzzleSizeChanged(size))
+                        }
                     )
             }
         }
@@ -94,11 +98,12 @@ internal fun PuzzleGameDescriptionCard(
 internal fun PuzzleBoardWithCounterPreview() {
     AppTheme {
         PuzzleGameDescriptionCard(
-            viewModel = ShufflePuzzleScreenViewModel(),
             modifier = Modifier
                 .padding(start = 18.dp, end = 18.dp, top = 18.dp)
                 .fillMaxWidth()
-                .height(150.dp)
+                .height(150.dp),
+            processAction = { },
+            uiState = MutableStateFlow(ShufflePuzzleState()).collectAsState(),
         )
     }
 }

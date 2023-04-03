@@ -3,6 +3,8 @@ package com.example.shuffle_puzzle.api
 import android.graphics.Bitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.common.mvi.Action
+import com.example.common.mvi.MviViewModel
 import com.example.shuffle_puzzle.api.model.Puzzle
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -14,10 +16,11 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ShufflePuzzleScreenViewModel @Inject constructor() : ViewModel() {
+class ShufflePuzzleScreenViewModel @Inject constructor() : ViewModel(),
+    MviViewModel<ShufflePuzzleState> {
 
     private val _uiState = MutableStateFlow(ShufflePuzzleState())
-    val uiState: StateFlow<ShufflePuzzleState> = _uiState
+    override val uiState: StateFlow<ShufflePuzzleState> = _uiState
 
     init {
         viewModelScope.launch {
@@ -32,6 +35,23 @@ class ShufflePuzzleScreenViewModel @Inject constructor() : ViewModel() {
         }
     }
 
+    override fun processAction(action: Action) {
+        when (action) {
+            is ShufflePuzzleAction.OnRestartClicked -> {
+                onRestartPuzzleClicked()
+            }
+            is ShufflePuzzleAction.OnCreatePuzzleClick -> {
+                onCreatePuzzleClick(action.bitmap)
+            }
+            is ShufflePuzzleAction.OnMovePerformed -> {
+                onMovePerformed(action.success)
+            }
+            is ShufflePuzzleAction.OnPuzzleSizeChanged -> {
+                onPuzzleSizeChanged(action.size)
+            }
+        }
+    }
+
     private fun onTimerTick() {
         _uiState.update {
             it.copy(
@@ -40,7 +60,7 @@ class ShufflePuzzleScreenViewModel @Inject constructor() : ViewModel() {
         }
     }
 
-    fun onMovePerformed(success: Boolean) = with(_uiState) {
+    private fun onMovePerformed(success: Boolean) = with(_uiState) {
         if (value.isPuzzleSolved) return
 
         if (success) update {
@@ -61,7 +81,7 @@ class ShufflePuzzleScreenViewModel @Inject constructor() : ViewModel() {
         }
     }
 
-    fun onCreatePuzzleClick(bitmap: Bitmap) {
+    private fun onCreatePuzzleClick(bitmap: Bitmap) {
         _uiState.update {
             it.copy(
                 solvingTimerSec = 0,
@@ -71,7 +91,7 @@ class ShufflePuzzleScreenViewModel @Inject constructor() : ViewModel() {
         }
     }
 
-    fun onRestartPuzzleClicked() {
+    private fun onRestartPuzzleClicked() {
         _uiState.update {
             it.copy(
                 solvingTimerSec = 0,
@@ -83,7 +103,7 @@ class ShufflePuzzleScreenViewModel @Inject constructor() : ViewModel() {
         }
     }
 
-    fun onPuzzleSizeChanged(size: Int) {
+    private fun onPuzzleSizeChanged(size: Int) {
         _uiState.update {
             it.copy(
                 puzzleSize = size
