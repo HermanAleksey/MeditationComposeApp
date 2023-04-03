@@ -1,8 +1,8 @@
-package com.example.authentication.internal.screens.registration
+package com.example.authentication.api.registration_screen
 
 import com.example.common.mvi.MviAction
 
-internal sealed interface RegistrationAction : MviAction {
+sealed interface RegistrationAction : MviAction {
 
     data class NameTextChanged(
         val text: String,

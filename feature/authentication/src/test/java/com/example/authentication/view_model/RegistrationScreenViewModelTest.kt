@@ -1,9 +1,8 @@
 package com.example.authentication.view_model
 
+import com.example.authentication.api.registration_screen.RegistrationAction
 import com.example.authentication.api.registration_screen.RegistrationScreenNavRoute
 import com.example.authentication.api.registration_screen.RegistrationScreenViewModel
-import com.example.authentication.internal.screens.enter_login.EnterLoginAction
-import com.example.authentication.internal.screens.registration.RegistrationAction
 import com.example.core.authentication_source.api.use_case.RegisterUseCase
 import com.example.core.model.NetworkResponse
 import com.example.coroutines_test.CoroutinesTestRule
@@ -68,7 +67,7 @@ class RegistrationScreenViewModelTest {
     fun `onLoginTextChanged, name changed`() {
         val login = "wefwe"
 
-        viewModel.processAction(EnterLoginAction.LoginTextChanged(login))
+        viewModel.processAction(RegistrationAction.LoginTextChanged(login))
 
         assert(viewModel.uiState.value.login == login)
     }
@@ -106,7 +105,7 @@ class RegistrationScreenViewModelTest {
             val password = ""
             val name = ""
             viewModel.processAction(RegistrationAction.NameTextChanged(name))
-            viewModel.processAction(EnterLoginAction.LoginTextChanged(login))
+            viewModel.processAction(RegistrationAction.LoginTextChanged(login))
             viewModel.processAction(RegistrationAction.PasswordTextChanged(password))
 
             viewModel.processAction(RegistrationAction.SignUpClick)
@@ -132,7 +131,7 @@ class RegistrationScreenViewModelTest {
             val password = ""
             val name = ""
             viewModel.processAction(RegistrationAction.NameTextChanged(name))
-            viewModel.processAction(EnterLoginAction.LoginTextChanged(login))
+            viewModel.processAction(RegistrationAction.LoginTextChanged(login))
             viewModel.processAction(RegistrationAction.PasswordTextChanged(password))
 
             viewModel.processAction(RegistrationAction.SignUpClick)
@@ -158,7 +157,7 @@ class RegistrationScreenViewModelTest {
             val password = "qweqwe"
             val name = ""
             viewModel.processAction(RegistrationAction.NameTextChanged(name))
-            viewModel.processAction(EnterLoginAction.LoginTextChanged(login))
+            viewModel.processAction(RegistrationAction.LoginTextChanged(login))
             viewModel.processAction(RegistrationAction.PasswordTextChanged(password))
 
             viewModel.processAction(RegistrationAction.SignUpClick)
@@ -185,7 +184,7 @@ class RegistrationScreenViewModelTest {
             val password = ""
             val name = "qwdqwd"
             viewModel.processAction(RegistrationAction.NameTextChanged(name))
-            viewModel.processAction(EnterLoginAction.LoginTextChanged(login))
+            viewModel.processAction(RegistrationAction.LoginTextChanged(login))
             viewModel.processAction(RegistrationAction.PasswordTextChanged(password))
 
             viewModel.processAction(RegistrationAction.SignUpClick)
@@ -212,7 +211,7 @@ class RegistrationScreenViewModelTest {
             val password = "qwewqe"
             val name = ""
             viewModel.processAction(RegistrationAction.NameTextChanged(name))
-            viewModel.processAction(EnterLoginAction.LoginTextChanged(login))
+            viewModel.processAction(RegistrationAction.LoginTextChanged(login))
             viewModel.processAction(RegistrationAction.PasswordTextChanged(password))
 
             viewModel.processAction(RegistrationAction.SignUpClick)
@@ -238,7 +237,7 @@ class RegistrationScreenViewModelTest {
             val password = ""
             val name = "breerbe"
             viewModel.processAction(RegistrationAction.NameTextChanged(name))
-            viewModel.processAction(EnterLoginAction.LoginTextChanged(login))
+            viewModel.processAction(RegistrationAction.LoginTextChanged(login))
             viewModel.processAction(RegistrationAction.PasswordTextChanged(password))
 
             viewModel.processAction(RegistrationAction.SignUpClick)
@@ -265,7 +264,7 @@ class RegistrationScreenViewModelTest {
             val password = "btrtnre"
             val name = "dfccnc"
             viewModel.processAction(RegistrationAction.NameTextChanged(name))
-            viewModel.processAction(EnterLoginAction.LoginTextChanged(login))
+            viewModel.processAction(RegistrationAction.LoginTextChanged(login))
             viewModel.processAction(RegistrationAction.PasswordTextChanged(password))
 
             viewModel.processAction(RegistrationAction.SignUpClick)
@@ -291,7 +290,7 @@ class RegistrationScreenViewModelTest {
             val password = "yumtymf"
             val name = "fghmfmy"
             viewModel.processAction(RegistrationAction.NameTextChanged(name))
-            viewModel.processAction(EnterLoginAction.LoginTextChanged(login))
+            viewModel.processAction(RegistrationAction.LoginTextChanged(login))
             viewModel.processAction(RegistrationAction.PasswordTextChanged(password))
             whenever(registerUseCase(name, login, password))
                 .thenReturn(
@@ -323,7 +322,7 @@ class RegistrationScreenViewModelTest {
             val password = "yumtymf"
             val name = "fghmfmy"
             viewModel.processAction(RegistrationAction.NameTextChanged(name))
-            viewModel.processAction(EnterLoginAction.LoginTextChanged(login))
+            viewModel.processAction(RegistrationAction.LoginTextChanged(login))
             viewModel.processAction(RegistrationAction.PasswordTextChanged(password))
             whenever(registerUseCase(name, login, password))
                 .thenReturn(
@@ -362,7 +361,7 @@ class RegistrationScreenViewModelTest {
             val password = "yumtymf"
             val name = "fghmfmy"
             viewModel.processAction(RegistrationAction.NameTextChanged(name))
-            viewModel.processAction(EnterLoginAction.LoginTextChanged(login))
+            viewModel.processAction(RegistrationAction.LoginTextChanged(login))
             viewModel.processAction(RegistrationAction.PasswordTextChanged(password))
             whenever(registerUseCase(name, login, password))
                 .thenReturn(

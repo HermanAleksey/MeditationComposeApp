@@ -1,9 +1,7 @@
 package com.example.authentication.api.enter_login_screen
 
 import androidx.lifecycle.viewModelScope
-import com.example.authentication.internal.screens.enter_login.EnterLoginAction
 import com.example.authentication.internal.validation.LoginField
-import com.example.common.mvi.MviAction
 import com.example.common.mvi.MviViewModel
 import com.example.common.view_model.NavigationBaseViewModel
 import com.example.core.authentication_source.api.use_case.RequestPasswordRestorationUseCase
@@ -18,12 +16,13 @@ import javax.inject.Inject
 @HiltViewModel
 class EnterLoginScreenViewModel @Inject constructor(
     private val requestPasswordRestorationUseCase: RequestPasswordRestorationUseCase,
-) : NavigationBaseViewModel<EnterLoginScreenNavRoute>(), MviViewModel<EnterLoginScreenState> {
+) : NavigationBaseViewModel<EnterLoginScreenNavRoute>(),
+    MviViewModel<EnterLoginScreenState, EnterLoginAction> {
 
     private val _uiState = MutableStateFlow(EnterLoginScreenState())
     override val uiState: StateFlow<EnterLoginScreenState> = _uiState
 
-    override fun processAction(action: MviAction) {
+    override fun processAction(action: EnterLoginAction) {
         when (action) {
             is EnterLoginAction.FirstLaunch -> {
                 onScreenOpened(action.initialLogin)

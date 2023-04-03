@@ -1,8 +1,8 @@
-package com.example.authentication.internal.screens.new_password
+package com.example.authentication.api.new_password_screen
 
 import com.example.common.mvi.MviAction
 
-internal sealed interface NewPasswordAction : MviAction {
+sealed interface NewPasswordAction : MviAction {
 
     data class FirstLaunch(
         val login: String,

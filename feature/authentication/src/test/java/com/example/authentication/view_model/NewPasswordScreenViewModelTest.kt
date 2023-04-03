@@ -1,8 +1,8 @@
 package com.example.authentication.view_model
 
+import com.example.authentication.api.new_password_screen.NewPasswordAction
 import com.example.authentication.api.new_password_screen.NewPasswordScreenNavRoute
 import com.example.authentication.api.new_password_screen.NewPasswordScreenViewModel
-import com.example.authentication.internal.screens.new_password.NewPasswordAction
 import com.example.core.authentication_source.api.use_case.SetNewPasswordUseCase
 import com.example.core.model.NetworkResponse
 import com.example.coroutines_test.CoroutinesTestRule
@@ -150,7 +150,7 @@ class NewPasswordScreenViewModelTest {
         runTest {
             val login = "qweeqw"
             val password = "password"
-            viewModel.processAction(NewPasswordAction.NewPasswordTextChanged(password))
+            viewModel.processAction(NewPasswordAction.NewPasswordTextChanged(login))
             viewModel.processAction(NewPasswordAction.RepeatPasswordTextChanged(password))
             whenever(setNewPasswordUseCase(anyString(), anyString()))
                 .thenReturn(

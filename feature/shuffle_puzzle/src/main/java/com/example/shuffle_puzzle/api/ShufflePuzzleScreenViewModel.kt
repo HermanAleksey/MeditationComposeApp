@@ -3,7 +3,6 @@ package com.example.shuffle_puzzle.api
 import android.graphics.Bitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.common.mvi.MviAction
 import com.example.common.mvi.MviViewModel
 import com.example.shuffle_puzzle.api.model.Puzzle
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ShufflePuzzleScreenViewModel @Inject constructor() : ViewModel(),
-    MviViewModel<ShufflePuzzleState> {
+    MviViewModel<ShufflePuzzleState, ShufflePuzzleAction> {
 
     private val _uiState = MutableStateFlow(ShufflePuzzleState())
     override val uiState: StateFlow<ShufflePuzzleState> = _uiState
@@ -35,7 +34,7 @@ class ShufflePuzzleScreenViewModel @Inject constructor() : ViewModel(),
         }
     }
 
-    override fun processAction(action: MviAction) {
+    override fun processAction(action: ShufflePuzzleAction) {
         when (action) {
             is ShufflePuzzleAction.OnRestartClicked -> {
                 onRestartPuzzleClicked()

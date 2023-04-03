@@ -1,9 +1,9 @@
 package com.example.authentication.view_model
 
+import com.example.authentication.api.enter_code_screen.EnterCodeAction
 import com.example.authentication.api.enter_code_screen.EnterCodeScreenNavRoute
 import com.example.authentication.api.enter_code_screen.EnterCodeScreenState
 import com.example.authentication.api.enter_code_screen.EnterCodeScreenViewModel
-import com.example.authentication.internal.screens.enter_code.EnterCodeAction
 import com.example.core.authentication_source.api.use_case.VerifyCodeUseCase
 import com.example.core.model.NetworkResponse
 import com.example.coroutines_test.CoroutinesTestRule

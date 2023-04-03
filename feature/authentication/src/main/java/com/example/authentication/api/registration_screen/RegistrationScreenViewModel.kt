@@ -1,11 +1,9 @@
 package com.example.authentication.api.registration_screen
 
 import androidx.lifecycle.viewModelScope
-import com.example.authentication.internal.screens.registration.RegistrationAction
 import com.example.authentication.internal.validation.LoginField
 import com.example.authentication.internal.validation.NameField
 import com.example.authentication.internal.validation.PasswordField
-import com.example.common.mvi.MviAction
 import com.example.common.mvi.MviViewModel
 import com.example.common.view_model.NavigationBaseViewModel
 import com.example.core.authentication_source.api.use_case.RegisterUseCase
@@ -20,12 +18,13 @@ import javax.inject.Inject
 @HiltViewModel
 class RegistrationScreenViewModel @Inject constructor(
     private val registerUseCase: RegisterUseCase,
-) : NavigationBaseViewModel<RegistrationScreenNavRoute>(), MviViewModel<RegistrationScreenState> {
+) : NavigationBaseViewModel<RegistrationScreenNavRoute>(),
+    MviViewModel<RegistrationScreenState, RegistrationAction> {
 
     private val _uiState = MutableStateFlow(RegistrationScreenState())
     override val uiState: StateFlow<RegistrationScreenState> = _uiState
 
-    override fun processAction(action: MviAction) {
+    override fun processAction(action: RegistrationAction) {
         when (action) {
             is RegistrationAction.LoginTextChanged -> {
                 onLoginTextChanged(action.text)

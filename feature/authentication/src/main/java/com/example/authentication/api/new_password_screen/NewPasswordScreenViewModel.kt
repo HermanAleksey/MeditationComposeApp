@@ -1,9 +1,7 @@
 package com.example.authentication.api.new_password_screen
 
 import androidx.lifecycle.viewModelScope
-import com.example.authentication.internal.screens.new_password.NewPasswordAction
 import com.example.authentication.internal.validation.PasswordField
-import com.example.common.mvi.MviAction
 import com.example.common.mvi.MviViewModel
 import com.example.common.utils.UiText
 import com.example.common.view_model.NavigationBaseViewModel
@@ -20,12 +18,13 @@ import javax.inject.Inject
 @HiltViewModel
 class NewPasswordScreenViewModel @Inject constructor(
     private val setNewPasswordUseCase: SetNewPasswordUseCase,
-) : NavigationBaseViewModel<NewPasswordScreenNavRoute>(), MviViewModel<NewPasswordScreenState> {
+) : NavigationBaseViewModel<NewPasswordScreenNavRoute>(),
+    MviViewModel<NewPasswordScreenState, NewPasswordAction> {
 
     private val _uiState = MutableStateFlow(NewPasswordScreenState())
     override val uiState: StateFlow<NewPasswordScreenState> = _uiState
 
-    override fun processAction(action: MviAction) {
+    override fun processAction(action: NewPasswordAction) {
         when (action) {
             is NewPasswordAction.FirstLaunch -> {
                 onFirstLaunch(action.login)

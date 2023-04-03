@@ -1,8 +1,6 @@
 package com.example.authentication.api.enter_code_screen
 
 import androidx.lifecycle.viewModelScope
-import com.example.authentication.internal.screens.enter_code.EnterCodeAction
-import com.example.common.mvi.MviAction
 import com.example.common.mvi.MviViewModel
 import com.example.common.utils.emptyString
 import com.example.common.view_model.NavigationBaseViewModel
@@ -18,12 +16,13 @@ import javax.inject.Inject
 @HiltViewModel
 class EnterCodeScreenViewModel @Inject constructor(
     private val verifyCodeUseCase: VerifyCodeUseCase,
-) : NavigationBaseViewModel<EnterCodeScreenNavRoute>(), MviViewModel<EnterCodeScreenState> {
+) : NavigationBaseViewModel<EnterCodeScreenNavRoute>(),
+    MviViewModel<EnterCodeScreenState, EnterCodeAction> {
 
     private val _uiState = MutableStateFlow(EnterCodeScreenState())
     override val uiState: StateFlow<EnterCodeScreenState> = _uiState
 
-    override fun processAction(action: MviAction) {
+    override fun processAction(action: EnterCodeAction) {
         when (action) {
             is EnterCodeAction.FirstLaunch -> {
                 _uiState.update {

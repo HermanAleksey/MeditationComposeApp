@@ -1,10 +1,8 @@
 package com.example.authentication.api.login_screen
 
 import androidx.lifecycle.viewModelScope
-import com.example.authentication.internal.screens.login.LoginAction
 import com.example.authentication.internal.validation.LoginField
 import com.example.authentication.internal.validation.PasswordField
-import com.example.common.mvi.MviAction
 import com.example.common.mvi.MviViewModel
 import com.example.common.view_model.NavigationBaseViewModel
 import com.example.core.authentication_source.api.use_case.LoginUseCase
@@ -21,12 +19,12 @@ import javax.inject.Inject
 class LoginScreenViewModel @Inject constructor(
     private val userDataStore: UserDataStore,
     private val loginUseCase: LoginUseCase,
-) : NavigationBaseViewModel<LoginScreenNavRoute>(), MviViewModel<LoginScreenState> {
+) : NavigationBaseViewModel<LoginScreenNavRoute>(), MviViewModel<LoginScreenState, LoginAction> {
 
     private val _uiState = MutableStateFlow(LoginScreenState())
     override val uiState: StateFlow<LoginScreenState> = _uiState
 
-    override fun processAction(action: MviAction) {
+    override fun processAction(action: LoginAction) {
         when (action) {
             is LoginAction.LoginTextChanged -> {
                 onLoginTextChanged(action.text)

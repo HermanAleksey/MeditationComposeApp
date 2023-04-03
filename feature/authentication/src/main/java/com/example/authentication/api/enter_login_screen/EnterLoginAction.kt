@@ -1,8 +1,8 @@
-package com.example.authentication.internal.screens.enter_login
+package com.example.authentication.api.enter_login_screen
 
 import com.example.common.mvi.MviAction
 
-internal sealed interface EnterLoginAction : MviAction {
+sealed interface EnterLoginAction : MviAction {
 
     data class FirstLaunch(
         val initialLogin: String
