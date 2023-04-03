@@ -48,7 +48,7 @@ class EnterCodeScreenViewModelTest {
     @Before
     fun setup() {
         viewModel = EnterCodeScreenViewModel(verifyCodeUseCase)
-        viewModel.processAction(EnterCodeAction.OnScreenEntered(login))
+        viewModel.processAction(EnterCodeAction.FirstLaunch(login))
     }
 
     @Test
@@ -68,11 +68,11 @@ class EnterCodeScreenViewModelTest {
         uiState.code[3] = 1
         uiState.code[4] = 1
 
-        viewModel.processAction(EnterCodeAction.OnCodeDigitChanged(0, 1))
-        viewModel.processAction(EnterCodeAction.OnCodeDigitChanged(1, 1))
-        viewModel.processAction(EnterCodeAction.OnCodeDigitChanged(2, 1))
-        viewModel.processAction(EnterCodeAction.OnCodeDigitChanged(3, 1))
-        viewModel.processAction(EnterCodeAction.OnCodeDigitChanged(4, 1))
+        viewModel.processAction(EnterCodeAction.CodeDigitChanged(0, 1))
+        viewModel.processAction(EnterCodeAction.CodeDigitChanged(1, 1))
+        viewModel.processAction(EnterCodeAction.CodeDigitChanged(2, 1))
+        viewModel.processAction(EnterCodeAction.CodeDigitChanged(3, 1))
+        viewModel.processAction(EnterCodeAction.CodeDigitChanged(4, 1))
 
         assert(viewModel.uiState.value.code.contentToString() == uiState.code.contentToString())
         assert(viewModel.uiState.value.isCodeFullyInputted)
@@ -85,7 +85,7 @@ class EnterCodeScreenViewModelTest {
         val uiState = EnterCodeScreenState()
         uiState.code[index] = value
 
-        viewModel.processAction(EnterCodeAction.OnCodeDigitChanged(index, value))
+        viewModel.processAction(EnterCodeAction.CodeDigitChanged(index, value))
 
         assert(viewModel.uiState.value.code.contentToString() == uiState.code.contentToString())
         assert(!viewModel.uiState.value.isCodeFullyInputted)
@@ -97,7 +97,7 @@ class EnterCodeScreenViewModelTest {
         val value = 8
         val uiState = EnterCodeScreenState()
 
-        viewModel.processAction(EnterCodeAction.OnCodeDigitChanged(index, value))
+        viewModel.processAction(EnterCodeAction.CodeDigitChanged(index, value))
 
         assert(viewModel.uiState.value.code.contentToString() == uiState.code.contentToString())
         assert(!viewModel.uiState.value.isCodeFullyInputted)
@@ -110,7 +110,7 @@ class EnterCodeScreenViewModelTest {
             val value = 8
             val uiState = EnterCodeScreenState()
 
-            viewModel.processAction(EnterCodeAction.OnCodeDigitChanged(index, value))
+            viewModel.processAction(EnterCodeAction.CodeDigitChanged(index, value))
 
             advanceUntilIdle()
 
@@ -121,11 +121,11 @@ class EnterCodeScreenViewModelTest {
     @Test
     fun `onLastDigitFilled, call with inputted code`() = runTest {
         val codeAsString = "12341"
-        viewModel.processAction(EnterCodeAction.OnCodeDigitChanged(0, 1))
-        viewModel.processAction(EnterCodeAction.OnCodeDigitChanged(1, 2))
-        viewModel.processAction(EnterCodeAction.OnCodeDigitChanged(2, 3))
-        viewModel.processAction(EnterCodeAction.OnCodeDigitChanged(3, 4))
-        viewModel.processAction(EnterCodeAction.OnCodeDigitChanged(4, 1))
+        viewModel.processAction(EnterCodeAction.CodeDigitChanged(0, 1))
+        viewModel.processAction(EnterCodeAction.CodeDigitChanged(1, 2))
+        viewModel.processAction(EnterCodeAction.CodeDigitChanged(2, 3))
+        viewModel.processAction(EnterCodeAction.CodeDigitChanged(3, 4))
+        viewModel.processAction(EnterCodeAction.CodeDigitChanged(4, 1))
 
         whenever(verifyCodeUseCase(anyString(), anyString())).thenReturn(
             flow {
@@ -133,7 +133,7 @@ class EnterCodeScreenViewModelTest {
             }
         )
 
-        viewModel.processAction(EnterCodeAction.OnLastDigitFilled)
+        viewModel.processAction(EnterCodeAction.LastDigitFilled)
 
         advanceUntilIdle()
 
@@ -150,7 +150,7 @@ class EnterCodeScreenViewModelTest {
             }
         )
 
-        viewModel.processAction(EnterCodeAction.OnLastDigitFilled)
+        viewModel.processAction(EnterCodeAction.LastDigitFilled)
 
         advanceUntilIdle()
 
@@ -168,7 +168,7 @@ class EnterCodeScreenViewModelTest {
                 }
             )
 
-            viewModel.processAction(EnterCodeAction.OnLastDigitFilled)
+            viewModel.processAction(EnterCodeAction.LastDigitFilled)
 
             val sharedFlowResult = mutableListOf<EnterCodeScreenNavRoute?>()
             val job = launch {
@@ -192,7 +192,7 @@ class EnterCodeScreenViewModelTest {
                 }
             )
 
-            viewModel.processAction(EnterCodeAction.OnLastDigitFilled)
+            viewModel.processAction(EnterCodeAction.LastDigitFilled)
 
             val sharedFlowResult = mutableListOf<EnterCodeScreenNavRoute?>()
             val job = launch {
@@ -221,7 +221,7 @@ class EnterCodeScreenViewModelTest {
                 }
             )
 
-            viewModel.processAction(EnterCodeAction.OnLastDigitFilled)
+            viewModel.processAction(EnterCodeAction.LastDigitFilled)
 
             val sharedFlowResult = mutableListOf<EnterCodeScreenNavRoute?>()
             val job = launch {
@@ -244,7 +244,7 @@ class EnterCodeScreenViewModelTest {
                 }
             )
 
-            viewModel.processAction(EnterCodeAction.OnLastDigitFilled)
+            viewModel.processAction(EnterCodeAction.LastDigitFilled)
 
             val sharedFlowResult = mutableListOf<EnterCodeScreenNavRoute?>()
             val job = launch {
@@ -267,7 +267,7 @@ class EnterCodeScreenViewModelTest {
                 }
             )
 
-            viewModel.processAction(EnterCodeAction.OnLastDigitFilled)
+            viewModel.processAction(EnterCodeAction.LastDigitFilled)
 
             val sharedFlowResult = mutableListOf<EnterCodeScreenNavRoute?>()
             val job = launch {

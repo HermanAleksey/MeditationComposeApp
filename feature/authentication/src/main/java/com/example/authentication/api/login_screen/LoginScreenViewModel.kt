@@ -28,19 +28,19 @@ class LoginScreenViewModel @Inject constructor(
 
     override fun processAction(action: MviAction) {
         when (action) {
-            is LoginAction.OnLoginTextChanged -> {
+            is LoginAction.LoginTextChanged -> {
                 onLoginTextChanged(action.text)
             }
-            is LoginAction.OnPasswordTextChanged -> {
+            is LoginAction.PasswordTextChanged -> {
                 onPasswordTextChanged(action.text)
             }
-            is LoginAction.OnLoginClicked -> {
+            is LoginAction.LoginClick -> {
                 onLoginClicked()
             }
-            is LoginAction.OnForgotPasswordClicked -> {
+            is LoginAction.ForgotPasswordClick -> {
                 onForgotPasswordClicked()
             }
-            is LoginAction.OnSignUpClicked -> {
+            is LoginAction.SignUpClick -> {
                 onSignUpClicked()
             }
         }

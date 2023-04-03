@@ -25,13 +25,13 @@ class EnterLoginScreenViewModel @Inject constructor(
 
     override fun processAction(action: MviAction) {
         when (action) {
-            is EnterLoginAction.OnScreenEntered -> {
+            is EnterLoginAction.FirstLaunch -> {
                 onScreenOpened(action.initialLogin)
             }
-            is EnterLoginAction.OnLoginTextChanged -> {
+            is EnterLoginAction.LoginTextChanged -> {
                 onLoginTextChanged(action.text)
             }
-            is EnterLoginAction.OnConfirmClick -> {
+            is EnterLoginAction.ConfirmClick -> {
                 onConfirmClick()
             }
         }

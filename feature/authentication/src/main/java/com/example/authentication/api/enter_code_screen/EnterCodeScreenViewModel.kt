@@ -25,17 +25,17 @@ class EnterCodeScreenViewModel @Inject constructor(
 
     override fun processAction(action: MviAction) {
         when (action) {
-            is EnterCodeAction.OnScreenEntered -> {
+            is EnterCodeAction.FirstLaunch -> {
                 _uiState.update {
                     it.copy(
                         login = action.login
                     )
                 }
             }
-            is EnterCodeAction.OnCodeDigitChanged -> {
+            is EnterCodeAction.CodeDigitChanged -> {
                 onCodeDigitChanged(action.position, action.number)
             }
-            is EnterCodeAction.OnLastDigitFilled -> {
+            is EnterCodeAction.LastDigitFilled -> {
                 onLastDigitFilled()
             }
         }

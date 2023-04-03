@@ -1,5 +1,6 @@
 package com.example.authentication.api.registration_screen
 
+import com.example.common.mvi.MviState
 import com.example.common.utils.UiText
 
 data class RegistrationScreenState(
@@ -10,4 +11,4 @@ data class RegistrationScreenState(
     val loginError: UiText? = null,
     val password: String = "",
     val passwordError: UiText? = null
-)
+): MviState

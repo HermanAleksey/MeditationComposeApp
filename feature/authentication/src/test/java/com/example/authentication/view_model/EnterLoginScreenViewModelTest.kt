@@ -53,7 +53,7 @@ class EnterLoginScreenViewModelTest {
     fun `onLoginTextChanged, update login`() {
         val login = "qweqwe"
 
-        viewModel.processAction(EnterLoginAction.OnLoginTextChanged(login))
+        viewModel.processAction(EnterLoginAction.LoginTextChanged(login))
 
         assert(viewModel.uiState.value.login == login)
     }
@@ -72,9 +72,9 @@ class EnterLoginScreenViewModelTest {
                     )
                 )
             })
-        viewModel.processAction(EnterLoginAction.OnLoginTextChanged(login))
+        viewModel.processAction(EnterLoginAction.LoginTextChanged(login))
 
-        viewModel.processAction(EnterLoginAction.OnConfirmClick)
+        viewModel.processAction(EnterLoginAction.ConfirmClick)
 
         val sharedFlowResult = mutableListOf<EnterLoginScreenNavRoute?>()
         val job = launch {
@@ -101,9 +101,9 @@ class EnterLoginScreenViewModelTest {
                     )
                 )
             })
-        viewModel.processAction(EnterLoginAction.OnLoginTextChanged(login))
+        viewModel.processAction(EnterLoginAction.LoginTextChanged(login))
 
-        viewModel.processAction(EnterLoginAction.OnConfirmClick)
+        viewModel.processAction(EnterLoginAction.ConfirmClick)
 
         val sharedFlowResult = mutableListOf<EnterLoginScreenNavRoute?>()
         val job = launch {
@@ -130,9 +130,9 @@ class EnterLoginScreenViewModelTest {
                     )
                 )
             })
-        viewModel.processAction(EnterLoginAction.OnLoginTextChanged(login))
+        viewModel.processAction(EnterLoginAction.LoginTextChanged(login))
 
-        viewModel.processAction(EnterLoginAction.OnConfirmClick)
+        viewModel.processAction(EnterLoginAction.ConfirmClick)
 
         val sharedFlowResult = mutableListOf<EnterLoginScreenNavRoute?>()
         val job = launch {

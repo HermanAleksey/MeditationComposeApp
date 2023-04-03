@@ -85,7 +85,7 @@ internal fun InternalLoginScreen(
                 label = stringResource(id = R.string.email_address),
                 isError = uiState.value.loginError != null,
                 errorValue = uiState.value.loginError?.asString(),
-                onValueChanged = { processAction(LoginAction.OnLoginTextChanged(it)) },
+                onValueChanged = { processAction(LoginAction.LoginTextChanged(it)) },
                 imeAction = ImeAction.Next,
                 keyboardType = KeyboardType.Email,
                 onKeyboardActions = {
@@ -99,7 +99,7 @@ internal fun InternalLoginScreen(
                 label = stringResource(id = R.string.password),
                 isError = uiState.value.passwordError != null,
                 errorValue = uiState.value.passwordError?.asString(),
-                onValueChanged = { processAction(LoginAction.OnPasswordTextChanged(it)) },
+                onValueChanged = { processAction(LoginAction.PasswordTextChanged(it)) },
                 imeAction = ImeAction.Done,
                 keyboardType = KeyboardType.Password,
                 onKeyboardActions = {
@@ -119,7 +119,7 @@ internal fun InternalLoginScreen(
                     modifier = Modifier
                         .padding(top = 9.dp)
                         .clickable {
-                            processAction(LoginAction.OnForgotPasswordClicked)
+                            processAction(LoginAction.ForgotPasswordClick)
                         }
                 )
             }
@@ -130,7 +130,7 @@ internal fun InternalLoginScreen(
                     .wrapContentHeight()
                     .padding(top = 28.dp)
             ) {
-                processAction(LoginAction.OnLoginClicked)
+                processAction(LoginAction.LoginClick)
             }
             Box(
                 modifier = Modifier
@@ -142,7 +142,7 @@ internal fun InternalLoginScreen(
                 Spacer(modifier = Modifier.height(18.dp))
                 DontHaveAccountText(
                     onClick = {
-                        processAction(LoginAction.OnSignUpClicked)
+                        processAction(LoginAction.SignUpClick)
                     }
                 )
             }

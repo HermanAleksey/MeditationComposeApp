@@ -45,7 +45,7 @@ internal fun InternalEnterLoginScreen(
     uiState: State<EnterLoginScreenState>,
 ) {
     LaunchedEffect(key1 = Unit) {
-        processAction(EnterLoginAction.OnScreenEntered(initialLoginValue))
+        processAction(EnterLoginAction.FirstLaunch(initialLoginValue))
     }
 
     val focusManager = LocalFocusManager.current
@@ -88,7 +88,7 @@ internal fun InternalEnterLoginScreen(
                 label = stringResource(id = R.string.email_address),
                 isError = uiState.value.loginError != null,
                 errorValue = uiState.value.loginError?.asString(),
-                onValueChanged = { processAction(EnterLoginAction.OnLoginTextChanged(it)) },
+                onValueChanged = { processAction(EnterLoginAction.LoginTextChanged(it)) },
                 imeAction = ImeAction.Done,
                 keyboardType = KeyboardType.Email,
                 focusRequester = repeatPasswordFocusRequester,
@@ -103,7 +103,7 @@ internal fun InternalEnterLoginScreen(
                     .wrapContentHeight()
                     .padding(top = 28.dp)
             ) {
-                processAction(EnterLoginAction.OnConfirmClick)
+                processAction(EnterLoginAction.ConfirmClick)
             }
         }
     }

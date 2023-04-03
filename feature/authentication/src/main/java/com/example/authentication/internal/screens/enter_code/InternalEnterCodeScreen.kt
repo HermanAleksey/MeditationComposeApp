@@ -36,7 +36,7 @@ internal fun InternalEnterCodeScreen(
     processAction: (EnterCodeAction) -> Unit,
 ) {
     LaunchedEffect(key1 = Unit) {
-        processAction(EnterCodeAction.OnScreenEntered(login))
+        processAction(EnterCodeAction.FirstLaunch(login))
     }
 
     LoginFlowBackground(
@@ -74,7 +74,7 @@ internal fun InternalEnterCodeScreen(
                 isCodeFullyInputted = uiState.value.isCodeFullyInputted,
                 code = uiState.value.code,
                 onCodeDigitChanged = { position, number ->
-                    processAction(EnterCodeAction.OnCodeDigitChanged(position, number))
+                    processAction(EnterCodeAction.CodeDigitChanged(position, number))
                 },
                 onLastDigitFilled = fun() {
                     /**
@@ -82,7 +82,7 @@ internal fun InternalEnterCodeScreen(
                      * also serve as callback for event when
                      * last digit on CodePanel was filled
                      * */
-                    processAction(EnterCodeAction.OnLastDigitFilled)
+                    processAction(EnterCodeAction.LastDigitFilled)
                 })
             Spacer(modifier = Modifier.height(80.dp))
         }

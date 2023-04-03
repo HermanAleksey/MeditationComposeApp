@@ -4,13 +4,13 @@ import com.example.common.mvi.MviAction
 
 internal sealed interface EnterLoginAction : MviAction {
 
-    data class OnScreenEntered(
+    data class FirstLaunch(
         val initialLogin: String
     ): EnterLoginAction
 
-    object OnConfirmClick: EnterLoginAction
+    object ConfirmClick: EnterLoginAction
 
-    data class OnLoginTextChanged(
+    data class LoginTextChanged(
         val text: String
     ): EnterLoginAction
 }

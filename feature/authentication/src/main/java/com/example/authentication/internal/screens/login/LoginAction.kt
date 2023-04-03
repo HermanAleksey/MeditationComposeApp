@@ -4,17 +4,17 @@ import com.example.common.mvi.MviAction
 
 internal sealed interface LoginAction : MviAction {
 
-    data class OnLoginTextChanged(
+    data class LoginTextChanged(
         val text: String,
     ) : LoginAction
 
-    data class OnPasswordTextChanged(
+    data class PasswordTextChanged(
         val text: String,
     ) : LoginAction
 
-    object OnForgotPasswordClicked : LoginAction
+    object ForgotPasswordClick : LoginAction
 
-    object OnLoginClicked : LoginAction
+    object LoginClick : LoginAction
 
-    object OnSignUpClicked : LoginAction
+    object SignUpClick : LoginAction
 }

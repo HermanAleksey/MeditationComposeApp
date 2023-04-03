@@ -4,14 +4,14 @@ import com.example.common.mvi.MviAction
 
 internal sealed interface EnterCodeAction : MviAction {
 
-    data class OnScreenEntered(
+    data class FirstLaunch(
         val login: String
     ) : EnterCodeAction
 
-    data class OnCodeDigitChanged(
+    data class CodeDigitChanged(
         val position: Int,
         val number: Int,
     ) : EnterCodeAction
 
-    object OnLastDigitFilled : EnterCodeAction
+    object LastDigitFilled : EnterCodeAction
 }

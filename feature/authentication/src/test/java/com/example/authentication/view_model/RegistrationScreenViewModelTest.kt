@@ -2,6 +2,8 @@ package com.example.authentication.view_model
 
 import com.example.authentication.api.registration_screen.RegistrationScreenNavRoute
 import com.example.authentication.api.registration_screen.RegistrationScreenViewModel
+import com.example.authentication.internal.screens.enter_login.EnterLoginAction
+import com.example.authentication.internal.screens.registration.RegistrationAction
 import com.example.core.authentication_source.api.use_case.RegisterUseCase
 import com.example.core.model.NetworkResponse
 import com.example.coroutines_test.CoroutinesTestRule
@@ -57,7 +59,7 @@ class RegistrationScreenViewModelTest {
     fun `onNameTextChanged, name changed`() {
         val name = "wefwe"
 
-        viewModel.onNameTextChanged(name)
+        viewModel.processAction(RegistrationAction.NameTextChanged(name))
 
         assert(viewModel.uiState.value.name == name)
     }
@@ -66,7 +68,7 @@ class RegistrationScreenViewModelTest {
     fun `onLoginTextChanged, name changed`() {
         val login = "wefwe"
 
-        viewModel.processAction(EnterLoginAction.OnLoginTextChanged(login))
+        viewModel.processAction(EnterLoginAction.LoginTextChanged(login))
 
         assert(viewModel.uiState.value.login == login)
     }
@@ -75,14 +77,14 @@ class RegistrationScreenViewModelTest {
     fun `onPasswordTextChanged, name changed`() {
         val password = "wefwe"
 
-        viewModel.onPasswordTextChanged(password)
+        viewModel.processAction(RegistrationAction.PasswordTextChanged(password))
 
         assert(viewModel.uiState.value.password == password)
     }
 
     @Test
     fun `onSignInClicked, navigate to login screen`() = runTest {
-        viewModel.onSignInClicked()
+        viewModel.processAction(RegistrationAction.SignInClick)
 
         val sharedFlowResult = mutableListOf<RegistrationScreenNavRoute?>()
         val job = launch {
@@ -103,11 +105,11 @@ class RegistrationScreenViewModelTest {
             val login = ""
             val password = ""
             val name = ""
-            viewModel.onNameTextChanged(name)
-            viewModel.processAction(EnterLoginAction.OnLoginTextChanged(login))
-            viewModel.onPasswordTextChanged(password)
+            viewModel.processAction(RegistrationAction.NameTextChanged(name))
+            viewModel.processAction(EnterLoginAction.LoginTextChanged(login))
+            viewModel.processAction(RegistrationAction.PasswordTextChanged(password))
 
-            viewModel.onSignUpClicked()
+            viewModel.processAction(RegistrationAction.SignUpClick)
 
             val sharedFlowResult = mutableListOf<RegistrationScreenNavRoute?>()
             val job = launch {
@@ -129,11 +131,11 @@ class RegistrationScreenViewModelTest {
             val login = "qwewqe"
             val password = ""
             val name = ""
-            viewModel.onNameTextChanged(name)
-            viewModel.processAction(EnterLoginAction.OnLoginTextChanged(login))
-            viewModel.onPasswordTextChanged(password)
+            viewModel.processAction(RegistrationAction.NameTextChanged(name))
+            viewModel.processAction(EnterLoginAction.LoginTextChanged(login))
+            viewModel.processAction(RegistrationAction.PasswordTextChanged(password))
 
-            viewModel.onSignUpClicked()
+            viewModel.processAction(RegistrationAction.SignUpClick)
 
             val sharedFlowResult = mutableListOf<RegistrationScreenNavRoute?>()
             val job = launch {
@@ -155,11 +157,11 @@ class RegistrationScreenViewModelTest {
             val login = ""
             val password = "qweqwe"
             val name = ""
-            viewModel.onNameTextChanged(name)
-            viewModel.processAction(EnterLoginAction.OnLoginTextChanged(login))
-            viewModel.onPasswordTextChanged(password)
+            viewModel.processAction(RegistrationAction.NameTextChanged(name))
+            viewModel.processAction(EnterLoginAction.LoginTextChanged(login))
+            viewModel.processAction(RegistrationAction.PasswordTextChanged(password))
 
-            viewModel.onSignUpClicked()
+            viewModel.processAction(RegistrationAction.SignUpClick)
 
             val sharedFlowResult = mutableListOf<RegistrationScreenNavRoute?>()
             val job = launch {
@@ -182,11 +184,11 @@ class RegistrationScreenViewModelTest {
             val login = ""
             val password = ""
             val name = "qwdqwd"
-            viewModel.onNameTextChanged(name)
-            viewModel.processAction(EnterLoginAction.OnLoginTextChanged(login))
-            viewModel.onPasswordTextChanged(password)
+            viewModel.processAction(RegistrationAction.NameTextChanged(name))
+            viewModel.processAction(EnterLoginAction.LoginTextChanged(login))
+            viewModel.processAction(RegistrationAction.PasswordTextChanged(password))
 
-            viewModel.onSignUpClicked()
+            viewModel.processAction(RegistrationAction.SignUpClick)
 
             val sharedFlowResult = mutableListOf<RegistrationScreenNavRoute?>()
             val job = launch {
@@ -209,11 +211,11 @@ class RegistrationScreenViewModelTest {
             val login = "qwewqe"
             val password = "qwewqe"
             val name = ""
-            viewModel.onNameTextChanged(name)
-            viewModel.processAction(EnterLoginAction.OnLoginTextChanged(login))
-            viewModel.onPasswordTextChanged(password)
+            viewModel.processAction(RegistrationAction.NameTextChanged(name))
+            viewModel.processAction(EnterLoginAction.LoginTextChanged(login))
+            viewModel.processAction(RegistrationAction.PasswordTextChanged(password))
 
-            viewModel.onSignUpClicked()
+            viewModel.processAction(RegistrationAction.SignUpClick)
 
             val sharedFlowResult = mutableListOf<RegistrationScreenNavRoute?>()
             val job = launch {
@@ -235,11 +237,11 @@ class RegistrationScreenViewModelTest {
             val login = "qwewqe"
             val password = ""
             val name = "breerbe"
-            viewModel.onNameTextChanged(name)
-            viewModel.processAction(EnterLoginAction.OnLoginTextChanged(login))
-            viewModel.onPasswordTextChanged(password)
+            viewModel.processAction(RegistrationAction.NameTextChanged(name))
+            viewModel.processAction(EnterLoginAction.LoginTextChanged(login))
+            viewModel.processAction(RegistrationAction.PasswordTextChanged(password))
 
-            viewModel.onSignUpClicked()
+            viewModel.processAction(RegistrationAction.SignUpClick)
 
             val sharedFlowResult = mutableListOf<RegistrationScreenNavRoute?>()
             val job = launch {
@@ -262,11 +264,11 @@ class RegistrationScreenViewModelTest {
             val login = ""
             val password = "btrtnre"
             val name = "dfccnc"
-            viewModel.onNameTextChanged(name)
-            viewModel.processAction(EnterLoginAction.OnLoginTextChanged(login))
-            viewModel.onPasswordTextChanged(password)
+            viewModel.processAction(RegistrationAction.NameTextChanged(name))
+            viewModel.processAction(EnterLoginAction.LoginTextChanged(login))
+            viewModel.processAction(RegistrationAction.PasswordTextChanged(password))
 
-            viewModel.onSignUpClicked()
+            viewModel.processAction(RegistrationAction.SignUpClick)
 
             val sharedFlowResult = mutableListOf<RegistrationScreenNavRoute?>()
             val job = launch {
@@ -288,9 +290,9 @@ class RegistrationScreenViewModelTest {
             val login = "qwewqe"
             val password = "yumtymf"
             val name = "fghmfmy"
-            viewModel.onNameTextChanged(name)
-            viewModel.processAction(EnterLoginAction.OnLoginTextChanged(login))
-            viewModel.onPasswordTextChanged(password)
+            viewModel.processAction(RegistrationAction.NameTextChanged(name))
+            viewModel.processAction(EnterLoginAction.LoginTextChanged(login))
+            viewModel.processAction(RegistrationAction.PasswordTextChanged(password))
             whenever(registerUseCase(name, login, password))
                 .thenReturn(
                     flow {
@@ -298,7 +300,7 @@ class RegistrationScreenViewModelTest {
                     }
                 )
 
-            viewModel.onSignUpClicked()
+            viewModel.processAction(RegistrationAction.SignUpClick)
 
             val sharedFlowResult = mutableListOf<RegistrationScreenNavRoute?>()
             val job = launch {
@@ -320,9 +322,9 @@ class RegistrationScreenViewModelTest {
             val login = "qwewqe"
             val password = "yumtymf"
             val name = "fghmfmy"
-            viewModel.onNameTextChanged(name)
-            viewModel.processAction(EnterLoginAction.OnLoginTextChanged(login))
-            viewModel.onPasswordTextChanged(password)
+            viewModel.processAction(RegistrationAction.NameTextChanged(name))
+            viewModel.processAction(EnterLoginAction.LoginTextChanged(login))
+            viewModel.processAction(RegistrationAction.PasswordTextChanged(password))
             whenever(registerUseCase(name, login, password))
                 .thenReturn(
                     flow {
@@ -336,7 +338,7 @@ class RegistrationScreenViewModelTest {
                     }
                 )
 
-            viewModel.onSignUpClicked()
+            viewModel.processAction(RegistrationAction.SignUpClick)
 
             val sharedFlowResult = mutableListOf<RegistrationScreenNavRoute?>()
             val job = launch {
@@ -359,9 +361,9 @@ class RegistrationScreenViewModelTest {
             val login = "qwewqe"
             val password = "yumtymf"
             val name = "fghmfmy"
-            viewModel.onNameTextChanged(name)
-            viewModel.processAction(EnterLoginAction.OnLoginTextChanged(login))
-            viewModel.onPasswordTextChanged(password)
+            viewModel.processAction(RegistrationAction.NameTextChanged(name))
+            viewModel.processAction(EnterLoginAction.LoginTextChanged(login))
+            viewModel.processAction(RegistrationAction.PasswordTextChanged(password))
             whenever(registerUseCase(name, login, password))
                 .thenReturn(
                     flow {
@@ -375,7 +377,7 @@ class RegistrationScreenViewModelTest {
                     }
                 )
 
-            viewModel.onSignUpClicked()
+            viewModel.processAction(RegistrationAction.SignUpClick)
 
             val sharedFlowResult = mutableListOf<RegistrationScreenNavRoute?>()
             val job = launch {
