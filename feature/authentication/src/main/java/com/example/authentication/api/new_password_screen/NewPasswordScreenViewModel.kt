@@ -56,19 +56,19 @@ class NewPasswordScreenViewModel @Inject constructor(
         }
     }
 
-    fun onNewPasswordTextChanged(value: String) {
+    private fun onNewPasswordTextChanged(value: String) {
         _uiState.update {
             it.copy(newPassword = value)
         }
     }
 
-    fun onRepeatPasswordTextChanged(value: String) {
+    private fun onRepeatPasswordTextChanged(value: String) {
         _uiState.update {
             it.copy(repeatPassword = value)
         }
     }
 
-    fun onConfirmClick() {
+    private fun onConfirmClick() {
         viewModelScope.launch {
             if (isNewPasswordValid())
                 setNewPasswordUseCase.invoke(uiState.value.login, uiState.value.newPassword)

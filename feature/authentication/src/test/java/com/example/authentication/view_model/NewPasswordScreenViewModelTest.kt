@@ -56,23 +56,23 @@ class NewPasswordScreenViewModelTest {
     fun `onNewPasswordTextChanged, password is set`() {
         val newPass = "qww"
 
-        viewModel.onNewPasswordTextChanged(newPass)
+        viewModel.processAction(NewPasswordAction.NewPasswordTextChanged(newPass))
 
-        assert(viewModel.uiState.value.newPassword == newPass)
+        assertEquals(viewModel.uiState.value.newPassword, newPass)
     }
 
     @Test
     fun `onRepeatPasswordTextChanged, rep password is set`() {
         val repPass = "qww"
 
-        viewModel.onRepeatPasswordTextChanged(repPass)
+        viewModel.processAction(NewPasswordAction.RepeatPasswordTextChanged(repPass))
 
-        assert(viewModel.uiState.value.repeatPassword == repPass)
+        assertEquals(viewModel.uiState.value.repeatPassword, repPass)
     }
 
     @Test
     fun `onConfirmClick, new password is not valid, don't navigate`() = runTest {
-        viewModel.onNewPasswordTextChanged("")
+        viewModel.processAction(NewPasswordAction.NewPasswordTextChanged(""))
 
         viewModel.processAction(NewPasswordAction.ConfirmClick)
 
@@ -93,8 +93,8 @@ class NewPasswordScreenViewModelTest {
     @Test
     fun `onConfirmClick, new password is valid, passwords dont match, dont call request`() =
         runTest {
-            viewModel.onNewPasswordTextChanged("wdwddw")
-            viewModel.onRepeatPasswordTextChanged("212")
+            viewModel.processAction(NewPasswordAction.NewPasswordTextChanged("newPass"))
+            viewModel.processAction(NewPasswordAction.RepeatPasswordTextChanged("dq"))
 
             viewModel.processAction(NewPasswordAction.ConfirmClick)
 
@@ -116,8 +116,8 @@ class NewPasswordScreenViewModelTest {
     fun `onConfirmClick, new password is valid, request fail, don't navigate`() = runTest {
         val login = "logi4n"
         val password = "password"
-        viewModel.onNewPasswordTextChanged(password)
-        viewModel.onRepeatPasswordTextChanged(password)
+        viewModel.processAction(NewPasswordAction.NewPasswordTextChanged(password))
+        viewModel.processAction(NewPasswordAction.RepeatPasswordTextChanged(password))
         whenever(setNewPasswordUseCase(anyString(), anyString()))
             .thenReturn(
                 flow {
@@ -150,8 +150,8 @@ class NewPasswordScreenViewModelTest {
         runTest {
             val login = "qweeqw"
             val password = "password"
-            viewModel.onNewPasswordTextChanged(password)
-            viewModel.onRepeatPasswordTextChanged(password)
+            viewModel.processAction(NewPasswordAction.NewPasswordTextChanged(password))
+            viewModel.processAction(NewPasswordAction.RepeatPasswordTextChanged(password))
             whenever(setNewPasswordUseCase(anyString(), anyString()))
                 .thenReturn(
                     flow {
@@ -186,8 +186,8 @@ class NewPasswordScreenViewModelTest {
         runTest {
             val login = "login"
             val password = "rebrtjn"
-            viewModel.onNewPasswordTextChanged(password)
-            viewModel.onRepeatPasswordTextChanged(password)
+            viewModel.processAction(NewPasswordAction.NewPasswordTextChanged(password))
+            viewModel.processAction(NewPasswordAction.RepeatPasswordTextChanged(password))
             whenever(setNewPasswordUseCase(anyString(), anyString()))
                 .thenReturn(
                     flow {

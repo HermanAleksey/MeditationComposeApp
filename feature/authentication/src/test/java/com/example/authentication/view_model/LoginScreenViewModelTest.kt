@@ -69,9 +69,9 @@ class LoginScreenViewModelTest {
     fun `onPasswordTextChanged, password changed`() {
         val pass = "qwerwe"
 
-        viewModel.onPasswordTextChanged(pass)
+        viewModel.processAction(LoginAction.PasswordTextChanged(pass))
 
-        assert(viewModel.uiState.value.password == pass)
+        assertEquals(viewModel.uiState.value.password, pass)
     }
 
 
@@ -94,10 +94,10 @@ class LoginScreenViewModelTest {
 
     @Test
     fun `onLoginClicked, login is not valid, pass valid, don't call loginUseCase`() = runTest {
-        viewModel.onLoginTextChanged("")
-        viewModel.onPasswordTextChanged("qwewqeq")
+        viewModel.processAction(LoginAction.LoginTextChanged(""))
+        viewModel.processAction(LoginAction.PasswordTextChanged("qwdq"))
 
-        viewModel.onLoginClicked()
+        viewModel.processAction(LoginAction.LoginClick)
 
         advanceUntilIdle()
 
@@ -116,10 +116,10 @@ class LoginScreenViewModelTest {
 
     @Test
     fun `onLoginClicked, password is not valid, login valid, don't call loginUseCase`() = runTest {
-        viewModel.onLoginTextChanged("wefwefwef")
-        viewModel.onPasswordTextChanged("")
+        viewModel.processAction(LoginAction.LoginTextChanged("qwdq"))
+        viewModel.processAction(LoginAction.PasswordTextChanged(""))
 
-        viewModel.onLoginClicked()
+        viewModel.processAction(LoginAction.LoginClick)
 
         val sharedFlowResult = mutableListOf<LoginScreenNavRoute?>()
         val job = launch {
@@ -150,7 +150,7 @@ class LoginScreenViewModelTest {
                 )
             })
 
-        viewModel.onLoginClicked()
+        viewModel.processAction(LoginAction.LoginClick)
 
         val sharedFlowResult = mutableListOf<LoginScreenNavRoute?>()
         val job = launch {
@@ -182,7 +182,7 @@ class LoginScreenViewModelTest {
                 )
             })
 
-        viewModel.onLoginClicked()
+        viewModel.processAction(LoginAction.LoginClick)
 
         val sharedFlowResult = mutableListOf<LoginScreenNavRoute?>()
         val job = launch {
@@ -211,7 +211,7 @@ class LoginScreenViewModelTest {
                     )
                 })
 
-            viewModel.onLoginClicked()
+            viewModel.processAction(LoginAction.LoginClick)
 
             val sharedFlowResult = mutableListOf<LoginScreenNavRoute?>()
             val job = launch {
@@ -249,12 +249,14 @@ class LoginScreenViewModelTest {
     }
 
     @Test
-    fun `onPasswordTextChanged, uiState update password`() {
+    fun `onPasswordTextChanged, uiState update password`() = runTest {
         val password = "wefwefwe"
 
         viewModel.processAction(RegistrationAction.PasswordTextChanged(password))
 
-        assert(viewModel.uiState.value.password == password)
+        advanceUntilIdle()
+
+        assertEquals(password, viewModel.uiState.value.password)
     }
 
     @Test
@@ -263,6 +265,6 @@ class LoginScreenViewModelTest {
 
         viewModel.processAction(EnterLoginAction.LoginTextChanged(login))
 
-        assert(viewModel.uiState.value.login == login)
+        assertEquals(login, viewModel.uiState.value.login)
     }
 }

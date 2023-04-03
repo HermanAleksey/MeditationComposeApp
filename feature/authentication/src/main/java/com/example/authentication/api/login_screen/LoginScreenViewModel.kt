@@ -46,13 +46,13 @@ class LoginScreenViewModel @Inject constructor(
         }
     }
 
-    fun onLoginTextChanged(value: String) {
+    private fun onLoginTextChanged(value: String) {
         _uiState.update {
             it.copy(login = value)
         }
     }
 
-    fun onPasswordTextChanged(value: String) {
+    private fun onPasswordTextChanged(value: String) {
         _uiState.update { state ->
             state.copy(password = value)
         }
@@ -66,7 +66,7 @@ class LoginScreenViewModel @Inject constructor(
         }
     }
 
-    fun onLoginClicked() {
+    private fun onLoginClicked() {
         val login = _uiState.value.login
         val password = _uiState.value.password
 
@@ -127,7 +127,7 @@ class LoginScreenViewModel @Inject constructor(
         }
     }
 
-    fun onSignUpClicked() = viewModelScope.launch {
+    private fun onSignUpClicked() = viewModelScope.launch {
         navigationEventTransaction {
             _navigationEvent.emit(
                 LoginScreenNavRoute.RegistrationScreen
