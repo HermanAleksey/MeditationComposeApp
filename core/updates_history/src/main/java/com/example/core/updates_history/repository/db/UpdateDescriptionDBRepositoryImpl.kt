@@ -8,20 +8,22 @@ import javax.inject.Inject
 
 class UpdateDescriptionDBRepositoryImpl @Inject constructor(
     private val dao: UpdateDescriptionDao,
-    private val mapper: BidirectionalMapper<UpdateDescriptionModel, UpdateDescriptionDBEntity>
+    private val mapper: BidirectionalMapper<UpdateDescriptionModel, UpdateDescriptionDBEntity>,
 ) : UpdateDescriptionDBRepository {
     override suspend fun getAll(): List<UpdateDescriptionModel> {
-        return dao.getAll().map {
-            if (!it.isUpdateWasShown)
-                dao.setIsShown(it.versionName, true)
-            mapper.mapFrom(it)
+        return dao.getAll().map { update ->
+            if (!update.isShown)
+                setIsShown(update)
+
+            mapper.mapFrom(update)
         }
     }
 
     override suspend fun getLastUpdate(): UpdateDescriptionModel? {
         val lastUpdate = dao.getLastUpdate()
-        if (lastUpdate?.isUpdateWasShown == false)
-            dao.setIsShown(lastUpdate.versionName, true)
+        if (lastUpdate?.isShown == false)
+            setIsShown(lastUpdate)
+
         return lastUpdate?.let { mapper.mapFrom(lastUpdate) }
     }
 
@@ -31,5 +33,12 @@ class UpdateDescriptionDBRepositoryImpl @Inject constructor(
 
     override suspend fun delete(update: UpdateDescriptionModel) {
         dao.delete(mapper.mapTo(update))
+    }
+
+    private suspend fun setIsShown(update: UpdateDescriptionDBEntity) {
+        dao.setIsShown(
+            versionName = update.versionName,
+            wasShown = true
+        )
     }
 }

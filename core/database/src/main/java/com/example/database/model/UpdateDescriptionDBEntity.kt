@@ -11,5 +11,5 @@ data class UpdateDescriptionDBEntity(
     @ColumnInfo(name = "title") val updateTitle: String,
     @ColumnInfo(name = "description") val updateDescription: String,
 
-    @ColumnInfo(name = "shown") val isUpdateWasShown: Boolean,
+    @ColumnInfo(name = "shown") val isShown: Boolean,
 )

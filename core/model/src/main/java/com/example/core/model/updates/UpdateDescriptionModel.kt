@@ -1,11 +1,11 @@
 package com.example.core.model.updates
 
 data class UpdateDescriptionModel(
-    val versionName: String,
+    val version: Version,
     val updateReleaseTime: Long,
     val updateTitle: String,
     val updateDescription: String,
-    val wasShown: Boolean
+    val wasShown: Boolean,
 )
 
 enum class CompareResult {
@@ -17,8 +17,9 @@ data class Version(
     val minor: Int,
     val patch: Int,
 ) {
-    fun toString(version: Version) =
-        with(version) { "$major.$minor.$patch" }
+    override fun toString(): String {
+        return "$major.$minor.$patch"
+    }
 
     fun compare(version: Version): CompareResult {
         if (major > version.major) return CompareResult.BIGGER

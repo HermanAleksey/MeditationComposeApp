@@ -20,6 +20,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.core.model.updates.UpdateDescriptionModel
+import com.example.core.model.updates.Version
 import com.example.design_system.AppTheme
 import com.example.design_system.dialog.MeditationDialogFormer
 import com.example.feature.update_history.R
@@ -83,8 +84,8 @@ internal fun UpdateDescriptionDialogPreview() {
             dialogContent = {
                 UpdateDescriptionDialog(
                     listOf(
-                        UpdateDescriptionModel("10.10.10", 1667045395445, "title", "desc", true),
-                        UpdateDescriptionModel("10.10.10", 1667045395445, "title", "desc", true)
+                        UpdateDescriptionModel(Version(1,0,1), 1667045395445, "title", "desc", true),
+                        UpdateDescriptionModel(Version(1,0,5), 1667045395445, "title", "desc", true)
                     )
                 )
             }

@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import com.example.common.utils.DateFormat
 import com.example.common.utils.formatMillisIntoDate
 import com.example.core.model.updates.UpdateDescriptionModel
+import com.example.core.model.updates.Version
 import com.example.design_system.AppTheme
 import com.example.feature.update_history.R
 
@@ -36,7 +37,7 @@ internal fun UpdateDescriptionElement(model: UpdateDescriptionModel) {
     ) {
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
             Text(
-                text = stringResource(id = R.string.app_update_version, model.versionName),
+                text = stringResource(id = R.string.app_update_version, model.version.toString()),
                 style = MaterialTheme.typography.body1.copy(
                     color = MaterialTheme.colors.onSurface
                 )
@@ -83,7 +84,7 @@ internal fun UpdateDescriptionElementPreview() {
                 .background(MaterialTheme.colors.surface)
         )
         UpdateDescriptionElement(
-            UpdateDescriptionModel("10.10.10", 1667045395445, "title", "desc", true),
+            UpdateDescriptionModel(Version(1, 2, 0), 1667045395445, "title", "desc", true),
         )
     }
 }

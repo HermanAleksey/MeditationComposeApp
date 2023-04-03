@@ -21,6 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.example.core.model.updates.UpdateDescriptionModel
+import com.example.core.model.updates.Version
 import com.example.design_system.AppTheme
 import com.example.design_system.common_composables.ColorBackground
 import com.example.feature.update_history.api.UpdatesDescriptionViewState
@@ -100,21 +101,21 @@ private fun UpdatesDescriptionScreenPreview() {
             UpdatesDescriptionViewState(
                 updatesList = listOf(
                     UpdateDescriptionModel(
-                        "0.0.1",
+                        Version(0, 0, 1),
                         1667045335445,
                         "First release!",
                         "First attempt of doing smt. Added nothing for user!!! ",
                         true
                     ),
                     UpdateDescriptionModel(
-                        "1.0.0",
+                        Version(0,0,2),
                         1667045395445,
                         "Update design system",
                         "Update fonts, colors and many other things! Hurry up and try out all new stuff by yourself!",
                         true
                     ),
                     UpdateDescriptionModel(
-                        "1.0.1",
+                        Version(0,1,3),
                         1680264843000,
                         "Update design system",
                         "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).",
