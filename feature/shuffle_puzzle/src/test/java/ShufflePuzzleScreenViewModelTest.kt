@@ -1,4 +1,5 @@
 import com.example.coroutines_test.CoroutinesTestRule
+import com.example.shuffle_puzzle.api.ShufflePuzzleAction
 import com.example.shuffle_puzzle.api.ShufflePuzzleScreenViewModel
 import com.example.shuffle_puzzle.api.ShufflePuzzleState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -50,7 +51,7 @@ class ShufflePuzzleScreenViewModelTest {
             )
         )
 
-        viewModel.onMovePerformed(false)
+        viewModel.processAction(ShufflePuzzleAction.OnMovePerformed(false))
 
         with(viewModel.uiState.value) {
             assert(movesDone == 0)
