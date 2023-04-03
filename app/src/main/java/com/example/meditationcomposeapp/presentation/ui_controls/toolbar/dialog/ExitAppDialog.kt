@@ -83,7 +83,6 @@ fun ExitAppDialogPreview() {
     AppTheme {
         Card(modifier = Modifier, backgroundColor = MaterialTheme.colors.surface) {
             ExitAppDialog(onSubmitClick = {}, onDismissRequest = { })
-
         }
     }
 }
