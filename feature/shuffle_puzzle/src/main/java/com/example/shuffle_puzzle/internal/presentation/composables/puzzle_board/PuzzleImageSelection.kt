@@ -1,6 +1,5 @@
 package com.example.shuffle_puzzle.internal.presentation.composables.puzzle_board
 
-import android.Manifest
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.os.Build
@@ -21,22 +20,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.canhub.cropper.CropImageContract
+import com.canhub.cropper.CropImageContractOptions
+import com.canhub.cropper.CropImageOptions
 import com.canhub.cropper.CropImageView
-import com.canhub.cropper.options
 import com.example.design_system.AppTheme
 import com.example.design_system.ColorPalette
 import com.example.feature.shuffle_puzzle.R
-import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import com.google.accompanist.permissions.PermissionStatus
-import com.google.accompanist.permissions.rememberPermissionState
 
-@OptIn(ExperimentalPermissionsApi::class)
 @Composable
 internal fun SelectPuzzleImageFromGalleryCard(
     modifier: Modifier,
@@ -44,7 +41,7 @@ internal fun SelectPuzzleImageFromGalleryCard(
 ) {
     val contentResolver = LocalContext.current.contentResolver
 
-    val cropImage = rememberLauncherForActivityResult(CropImageContract()) { result ->
+    val imageCropLauncher = rememberLauncherForActivityResult(CropImageContract()) { result ->
         if (result.isSuccessful) {
             try {
                 result.uriContent?.let {
@@ -73,25 +70,28 @@ internal fun SelectPuzzleImageFromGalleryCard(
         }
     }
 
-    fun startCrop() {
-        // start picker to get image for cropping and then use the image in cropping activity
-        cropImage.launch(options {
-            setAspectRatio(1, 1)
-            setImageSource(includeGallery = true, includeCamera = false)
-            setGuidelines(CropImageView.Guidelines.ON)
-        })
-    }
-
-    val externalStoragePermission =
-        rememberPermissionState(Manifest.permission.READ_EXTERNAL_STORAGE)
-
+    val colorSurface = MaterialTheme.colors.surface
+    val title = stringResource(R.string.crop_image_toolbar_title)
     Column(
         modifier = modifier
             .clickable {
-                externalStoragePermission.launchPermissionRequest()
-                if (externalStoragePermission.status == PermissionStatus.Granted) {
-                    startCrop()
-                }
+                imageCropLauncher.launch(CropImageContractOptions(null, CropImageOptions().apply {
+                    aspectRatioX = 1
+                    aspectRatioY = 1
+                    fixAspectRatio = true
+
+                    imageSourceIncludeCamera = false
+                    imageSourceIncludeGallery = true
+
+                    allowRotation = false
+                    activityBackgroundColor = Color.Black.toArgb()
+                    toolbarColor = Color.Black.toArgb()
+                    progressBarColor = colorSurface.toArgb()
+                    activityTitle = title
+                    guidelines = CropImageView.Guidelines.ON_TOUCH
+
+                    outputCompressQuality = 100
+                }))
             },
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
