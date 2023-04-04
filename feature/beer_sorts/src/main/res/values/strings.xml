@@ -45,4 +45,6 @@
         <item>end</item>
         <item />
     </string-array>
+
+    <string name="text_is_copied">Text is copied!</string>
 </resources>

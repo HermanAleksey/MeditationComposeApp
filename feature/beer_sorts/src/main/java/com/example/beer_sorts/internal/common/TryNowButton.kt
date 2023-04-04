@@ -1,7 +1,9 @@
-package com.example.beer_sorts.internal.presentation.beer_list.composables
+package com.example.beer_sorts.internal.common
 
 import android.app.SearchManager
+import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -19,9 +21,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.ClipboardManager
+import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -37,6 +42,8 @@ internal fun TryNowButton(
     tagline: String,
 ) {
     val context = LocalContext.current
+    val clipboardManager: ClipboardManager = LocalClipboardManager.current
+    val toastLabel = stringResource(R.string.text_is_copied)
 
     Card(
         shape = RoundedCornerShape(10.dp),
@@ -44,13 +51,22 @@ internal fun TryNowButton(
             .height(45.dp)
             .width(140.dp)
             .clickable {
-                Intent(Intent.ACTION_WEB_SEARCH)
-                    .apply {
-                        putExtra(SearchManager.QUERY, "$beerName, $tagline")
-                    }
-                    .let {
-                        startActivity(context, it, null)
-                    }
+                val beerTitle = "$beerName, $tagline"
+
+                try {
+                    Intent(Intent.ACTION_WEB_SEARCH)
+                        .apply {
+                            putExtra(SearchManager.QUERY, beerTitle)
+                        }
+                        .let {
+                            startActivity(context, it, null)
+                        }
+                } catch (e: ActivityNotFoundException) {
+                    clipboardManager.setText(AnnotatedString((beerTitle)))
+                    Toast
+                        .makeText(context, toastLabel, Toast.LENGTH_SHORT)
+                        .show()
+                }
             },
         backgroundColor = MaterialTheme.colors.secondary,
     ) {
