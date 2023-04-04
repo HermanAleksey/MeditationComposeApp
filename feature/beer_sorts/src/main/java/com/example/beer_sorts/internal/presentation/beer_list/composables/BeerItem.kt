@@ -17,6 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.beer_sorts.internal.common.TryNowButton
 import com.example.database.model.BeerListItem
 import com.example.design_system.AppTheme
 import com.example.feature.beer_sorts.R

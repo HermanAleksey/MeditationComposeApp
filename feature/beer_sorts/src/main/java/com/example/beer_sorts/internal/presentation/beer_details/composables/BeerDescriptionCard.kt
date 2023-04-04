@@ -30,7 +30,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
-import com.example.beer_sorts.internal.presentation.beer_list.composables.TryNowButton
+import com.example.beer_sorts.internal.common.TryNowButton
 import com.example.core.model.beer_sorts.Beer
 import com.example.core.model.beer_sorts.Ingredients
 import com.example.core.model.beer_sorts.MeasurementUnit

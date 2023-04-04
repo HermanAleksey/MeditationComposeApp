@@ -44,26 +44,21 @@ internal fun BeerParamsTable(
 
     Column {
         for (index in paramsWithInfo.indices step 2) {
-            val paramLabel1 =
-                stringResource(paramsWithInfo[index].first) +
-                        " " + paramsWithInfo[index].second
-            val paramLabel2 =
-                stringResource(paramsWithInfo[index + 1].first) +
-                        " " + paramsWithInfo[index + 1].second
-
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = paramLabel1,
+                    text = stringResource(paramsWithInfo[index].first) +
+                            " " + paramsWithInfo[index].second,
                     modifier = Modifier.weight(1f),
                     style = textStyle,
                 )
                 if (paramsWithInfo.lastIndex != index) {
                     Text(
-                        text = paramLabel2,
+                        text = stringResource(paramsWithInfo[index + 1].first) +
+                                " " + paramsWithInfo[index + 1].second,
                         modifier = Modifier.weight(1f),
                         style = textStyle,
                     )
