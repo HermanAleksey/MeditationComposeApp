@@ -42,7 +42,6 @@ dependencies {
     implementation(Dependencies.compose_ui_tooling)
 
     implementation(Dependencies.accompanist_pager)
-    implementation(Dependencies.accompanist_permissions)
 
     implementation(Dependencies.canhub_image_cropper)
 
