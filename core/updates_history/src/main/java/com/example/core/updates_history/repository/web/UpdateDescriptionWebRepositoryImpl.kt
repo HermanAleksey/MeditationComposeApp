@@ -83,17 +83,24 @@ fun getVersionDescriptions(startFromVersion: String): List<UpdateDescriptionResp
                 "Changed the work of \"Update History\".\n" +
                 "Removed profile screen since it was unnecessary.",
     )
-    val map = mapOf(
-        "0.0.1" to version0_0_1,
-        "0.5.0" to version0_5_0,
-        "0.6.0" to version0_6_0,
-        "0.6.1" to version0_6_1,
-        "0.7.2" to version0_7_2,
-        "0.8.1" to version0_8_1,
+    val version0_8_2 = UpdateDescriptionResponse(
+        versionName = "0.8.2",
+        updateReleaseTime = 1680595025001,
+        updateTitle = "Bug fixes",
+        updateDescription = "Support of custom image selection for the shuffle puzzle on all versions of Android",
+    )
+    val map = listOf(
+        version0_0_1,
+        version0_5_0,
+        version0_6_0,
+        version0_6_1,
+        version0_7_2,
+        version0_8_1,
+        version0_8_2,
     )
 
-    val list = map.values.toTypedArray().copyOfRange(
-        map.keys.indexOf(startFromVersion) + 1,
+    val list = map.toTypedArray().copyOfRange(
+        map.indexOfFirst { it.versionName == startFromVersion } + 1,
         map.size
     )
 
