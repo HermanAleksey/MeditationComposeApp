@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">MeditationComposeApp</string>
     <string name="welcome">WELCOME</string>
     <string name="dont_have_account">Don’t have an account?</string>
     <string name="sign_up">Sign\u00A0Up</string>

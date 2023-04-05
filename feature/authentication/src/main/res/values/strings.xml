@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">MeditationComposeApp</string>
     <string name="welcome">WELCOME</string>
     <string name="welcome_text">Do meditation. Stay focused.\nLive a healthy life.</string>
     <string name="login_button">Login With Email</string>
