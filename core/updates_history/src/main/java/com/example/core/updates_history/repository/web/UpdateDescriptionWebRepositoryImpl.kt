@@ -89,6 +89,12 @@ fun getVersionDescriptions(startFromVersion: String): List<UpdateDescriptionResp
         updateTitle = "Bug fixes",
         updateDescription = "Support of custom image selection for the shuffle puzzle on all versions of Android",
     )
+    val version0_9_1 = UpdateDescriptionResponse(
+        versionName = "0.9.1",
+        updateReleaseTime = 1680714815957,
+        updateTitle = "No internet screen",
+        updateDescription = "Added a screen that displays the network status when trying to connect to the server without an internet connection. Bug fixes.",
+    )
     val map = listOf(
         version0_0_1,
         version0_5_0,
@@ -97,6 +103,7 @@ fun getVersionDescriptions(startFromVersion: String): List<UpdateDescriptionResp
         version0_7_2,
         version0_8_1,
         version0_8_2,
+        version0_9_1
     )
 
     val list = map.toTypedArray().copyOfRange(
