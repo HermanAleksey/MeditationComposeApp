@@ -25,10 +25,12 @@ class BeerListScreenViewModel @Inject constructor(
         getBeerPagingSourceUseCase()
     }.flow.cachedIn(viewModelScope)
 
-    fun onBeerItemClicked(beerId: Int) = viewModelScope.launch {
+    fun onBeerItemClicked(beerId: Int, isInternetAvailable: Boolean) = viewModelScope.launch {
         navigationEventTransaction {
             _navigationEvent.emit(
-                BeerListNavRoute.DetailedBeerScreen(beerId)
+                if (isInternetAvailable)
+                    BeerListNavRoute.DetailedBeerScreen(beerId)
+                else BeerListNavRoute.NoInternetScreen
             )
         }
     }

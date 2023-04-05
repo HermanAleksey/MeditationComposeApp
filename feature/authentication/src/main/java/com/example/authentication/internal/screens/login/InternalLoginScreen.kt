@@ -33,11 +33,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.authentication.api.login_screen.LoginAction
 import com.example.authentication.api.login_screen.LoginScreenState
-import com.example.authentication.internal.common.LoginFlowBackground
 import com.example.authentication.internal.common.LoginFlowInputField
 import com.example.authentication.internal.common.LoginMainButton
 import com.example.authentication.internal.screens.enter.composable.DontHaveAccountText
 import com.example.design_system.AppTheme
+import com.example.design_system.common_composables.DefaultAppBackground
 import com.example.feature.authentication.R
 import kotlinx.coroutines.flow.MutableStateFlow
 
@@ -49,7 +49,7 @@ internal fun InternalLoginScreen(
     val focusManager = LocalFocusManager.current
     val passwordFocusRequester = FocusRequester()
 
-    LoginFlowBackground(
+    DefaultAppBackground(
         isLoading = uiState.value.isLoading
     ) {
         Column(

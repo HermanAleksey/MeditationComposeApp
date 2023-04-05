@@ -24,9 +24,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.authentication.api.enter_code_screen.EnterCodeAction
 import com.example.authentication.api.enter_code_screen.EnterCodeScreenState
-import com.example.authentication.internal.common.LoginFlowBackground
 import com.example.authentication.internal.screens.enter_code.composable.CodePanel
 import com.example.design_system.AppTheme
+import com.example.design_system.common_composables.DefaultAppBackground
 import com.example.feature.authentication.R
 import kotlinx.coroutines.flow.MutableStateFlow
 
@@ -40,7 +40,7 @@ internal fun InternalEnterCodeScreen(
         processAction(EnterCodeAction.FirstLaunch(login))
     }
 
-    LoginFlowBackground(
+    DefaultAppBackground(
         isLoading = uiState.value.isLoading
     ) {
         Column(
@@ -78,6 +78,11 @@ internal fun InternalEnterCodeScreen(
                     processAction(EnterCodeAction.CodeDigitChanged(position, number))
                 },
                 onLastDigitFilled = fun() {
+                    /**
+                     * Use to transmit navigation method and
+                     * also serve as callback for event when
+                     * last digit on CodePanel was filled
+                     * */
                     /**
                      * Use to transmit navigation method and
                      * also serve as callback for event when
