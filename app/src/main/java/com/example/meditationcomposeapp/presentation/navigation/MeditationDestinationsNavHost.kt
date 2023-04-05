@@ -42,7 +42,9 @@ fun MeditationDestinationsNavHost(
         navController = navController,
         engine = MeditationNavHostEngine(),
         dependenciesContainerBuilder = {
-            dependency(NoInternetConnectionScreenDestination) { hiltViewModel<NoInternetConnectionViewModel>() }
+            dependency(NoInternetConnectionScreenDestination) {
+                hiltViewModel<NoInternetConnectionViewModel>()
+            }
             dependency(SplashScreenDestination) { hiltViewModel<SplashScreenViewModel>() }
 
             dependency(EnterScreenDestination) { hiltViewModel<EnterScreenViewModel>() }
