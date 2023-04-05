@@ -86,10 +86,9 @@ class NavDependenciesProviderImpl(
                     }
                 )
             }
-            NoInternetConnectionScreenDestination::class.java.name -> {
+            NoInternetConnectionNavDependencies::class.java.name -> {
                 NoInternetConnectionNavDependencies(
                     navigateBack = {
-                        navController.popBackStack()
                         navController.popBackStack()
                     }
                 )
@@ -107,6 +106,11 @@ class NavDependenciesProviderImpl(
                     navigateToBeerDetails = { beerId ->
                         navController.navigate(
                             DetailedBeerScreenDestination(beerId)
+                        )
+                    },
+                    navigateToNoInternetScreen = {
+                        navController.navigate(
+                            NoInternetConnectionScreenDestination()
                         )
                     }
                 )
