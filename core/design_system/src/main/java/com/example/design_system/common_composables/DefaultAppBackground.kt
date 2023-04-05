@@ -1,4 +1,4 @@
-package com.example.authentication.internal.common
+package com.example.design_system.common_composables
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -13,12 +13,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.core.design_system.R
 import com.example.design_system.AppTheme
-import com.example.design_system.common_composables.ColorBackground
-import com.example.feature.authentication.R
 
 @Composable
-internal fun LoginFlowBackground(
+fun DefaultAppBackground(
     isLoading: Boolean = false,
     content: @Composable () -> Unit,
 ) {
@@ -41,7 +40,7 @@ private fun DecorationLeavesBottom() {
             .fillMaxSize()
     ) {
         Image(
-            painter = painterResource(id = R.drawable.background_login_leaves),
+            painter = painterResource(id = R.drawable.background_bottom_leaves),
             contentDescription = null,
             contentScale = ContentScale.FillWidth,
             modifier = Modifier
@@ -78,7 +77,7 @@ private fun LoginMainButtonPreview() {
                 .fillMaxWidth()
                 .background(MaterialTheme.colors.background)
         ) {
-            LoginFlowBackground(
+            DefaultAppBackground(
                 isLoading = false
             ) {}
         }

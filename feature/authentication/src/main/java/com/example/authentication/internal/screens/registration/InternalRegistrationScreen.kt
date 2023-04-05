@@ -32,11 +32,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.authentication.api.registration_screen.RegistrationAction
 import com.example.authentication.api.registration_screen.RegistrationScreenState
-import com.example.authentication.internal.common.LoginFlowBackground
 import com.example.authentication.internal.common.LoginFlowInputField
 import com.example.authentication.internal.common.LoginMainButton
 import com.example.authentication.internal.screens.registration.composable.AlreadyHaveAccountText
 import com.example.design_system.AppTheme
+import com.example.design_system.common_composables.DefaultAppBackground
 import com.example.feature.authentication.R
 import kotlinx.coroutines.flow.MutableStateFlow
 
@@ -49,7 +49,7 @@ internal fun InternalRegistrationScreen(
     val passwordFocusRequester = FocusRequester()
     val emailFocusRequester = FocusRequester()
 
-    LoginFlowBackground(
+    DefaultAppBackground(
         isLoading = uiState.value.isLoading
     ) {
         Column(
