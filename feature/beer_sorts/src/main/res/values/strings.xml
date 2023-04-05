@@ -47,4 +47,5 @@
     </string-array>
 
     <string name="text_is_copied">Text is copied!</string>
+    <string name="error_state_text">Something went wrong…</string>
 </resources>

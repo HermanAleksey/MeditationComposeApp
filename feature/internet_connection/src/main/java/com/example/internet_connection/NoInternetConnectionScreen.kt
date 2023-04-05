@@ -1,6 +1,5 @@
 package com.example.internet_connection
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,7 +15,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -52,7 +50,8 @@ fun NoInternetConnectionScreen(onReturnButton: () -> Unit) {
                 shape = RoundedCornerShape(10.dp),
             ) {
                 Text(
-                    text = stringResource(R.string.return_label), style = MaterialTheme.typography.button,
+                    text = stringResource(R.string.return_label),
+                    style = MaterialTheme.typography.button,
                     modifier = Modifier.padding(vertical = 10.dp, horizontal = 45.dp),
                 )
             }
@@ -60,37 +59,12 @@ fun NoInternetConnectionScreen(onReturnButton: () -> Unit) {
     }
 }
 
-@Composable
-internal fun NoInternetConnectionImage() {
-    Box(modifier = Modifier, contentAlignment = Alignment.Center) {
-        Image(
-            painter = painterResource(id = R.drawable.no_internet_connection),
-            contentDescription = null
-        )
-        Image(
-            painter = painterResource(id = R.drawable.meditating_girl),
-            contentDescription = null
-        )
-    }
-}
-
-
 @Preview
 @Composable
 internal fun NoInternetConnectionScreenPreview() {
     AppTheme {
         Box(Modifier.background(MaterialTheme.colors.background)) {
             NoInternetConnectionScreen {}
-        }
-    }
-}
-
-@Preview
-@Composable
-internal fun NoInternetConnectionImagePreview() {
-    AppTheme {
-        Box(Modifier.background(MaterialTheme.colors.background)) {
-            NoInternetConnectionImage()
         }
     }
 }

@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
@@ -19,11 +20,11 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
 import com.example.beer_sorts.internal.presentation.beer_list.composables.BeerItem
-import com.example.common.utils.emptyString
 import com.example.database.model.BeerListItem
 import com.example.design_system.AppTheme
 import com.example.design_system.common_composables.ColorBackground
 import com.example.feature.beer_sorts.R
+import com.example.internet_connection.NoInternetConnectionImage
 import kotlinx.coroutines.flow.flowOf
 
 @Composable
@@ -65,39 +66,40 @@ internal fun BeerList(
             )
             Spacer(modifier = Modifier.height(16.dp))
         }
-        when (val state = beers.loadState.prepend) {
+        when (beers.loadState.prepend) {
             is LoadState.NotLoading -> Unit
             is LoadState.Loading -> {
                 LoadingState()
             }
             is LoadState.Error -> {
-                Error(message = state.error.message ?: emptyString())
+                ErrorState()
             }
             else -> {}
         }
-        when (val state = beers.loadState.refresh) {
+        when (beers.loadState.refresh) {
             is LoadState.NotLoading -> Unit
             is LoadState.Loading -> {
                 LoadingState()
             }
             is LoadState.Error -> {
-                Error(message = state.error.message ?: emptyString())
+                ErrorState()
             }
             else -> {}
         }
+
         items(items = beers, key = { it.id }) { item ->
             item?.let {
                 BeerItem(beer = it, onClick = { onBeerItemClicked(it.id) })
             }
         }
 
-        when (val state = beers.loadState.append) {
+        when (beers.loadState.append) {
             is LoadState.NotLoading -> Unit
             is LoadState.Loading -> {
                 LoadingState()
             }
             is LoadState.Error -> {
-                Error(message = state.error.message ?: "")
+                ErrorState()
             }
             else -> {}
         }
@@ -115,21 +117,37 @@ private fun LazyListScope.LoadingState() {
 }
 
 @Suppress("FunctionName")
-private fun LazyListScope.Error(
-    message: String,
-) {
+private fun LazyListScope.ErrorState() {
     item {
-        Text(
-            text = message,
-            style = MaterialTheme.typography.body1,
-            color = MaterialTheme.colors.error
-        )
+        Column(
+            modifier = Modifier.padding(horizontal = 32.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Spacer(modifier = Modifier.height(32.dp))
+            NoInternetConnectionImage()
+            Text(
+                text = stringResource(R.string.error_state_text),
+                style = MaterialTheme.typography.h4,
+                color = MaterialTheme.colors.onBackground,
+                textAlign = TextAlign.Center
+            )
+        }
     }
 }
 
 @Preview
 @Composable
-fun InternalBeerListScreenPreview() {
+fun ErrorStatePreview() {
+    AppTheme {
+        LazyColumn {
+            ErrorState()
+        }
+    }
+}
+
+@Preview
+@Composable
+private fun InternalBeerListScreenPreview() {
     AppTheme {
         InternalBeerListScreen(
             beersPaging = flowOf(

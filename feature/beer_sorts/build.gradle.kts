@@ -37,6 +37,8 @@ dependencies {
     implementation(project(":core:model"))
     implementation(project(":core:punk_source"))
 
+    implementation(project(":feature:internet_connection"))
+
     implementation(Dependencies.compose_ui)
     implementation(Dependencies.compose_material)
     implementation(Dependencies.compose_ui_tooling_preview)
