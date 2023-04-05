@@ -43,10 +43,10 @@ class BeerListScreenViewModelTest {
     }
 
     @Test
-    fun `onBeerItemClicked, navigate to detailed beer screen`() = runTest {
+    fun `onBeerItemClicked, have internet, navigate to detailed beer screen`() = runTest {
         val beerId = 213
 
-        viewModel.onBeerItemClicked(beerId)
+        viewModel.onBeerItemClicked(beerId, true)
 
         val sharedFlowResult = mutableListOf<BeerListNavRoute?>()
         val job = launch {
@@ -57,6 +57,25 @@ class BeerListScreenViewModelTest {
         assertEquals(
             sharedFlowResult.firstOrNull(),
             BeerListNavRoute.DetailedBeerScreen(beerId)
+        )
+        job.cancel()
+    }
+
+    @Test
+    fun `onBeerItemClicked, don't have internet, navigate to detailed beer screen`() = runTest {
+        val beerId = 213
+
+        viewModel.onBeerItemClicked(beerId, false)
+
+        val sharedFlowResult = mutableListOf<BeerListNavRoute?>()
+        val job = launch {
+            viewModel.navigationEvent.toList(sharedFlowResult)
+        }
+        advanceUntilIdle()
+
+        assertEquals(
+            sharedFlowResult.firstOrNull(),
+            BeerListNavRoute.NoInternetScreen
         )
         job.cancel()
     }
