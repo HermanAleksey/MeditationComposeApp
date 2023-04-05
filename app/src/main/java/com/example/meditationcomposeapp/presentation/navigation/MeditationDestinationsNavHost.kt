@@ -13,6 +13,7 @@ import com.example.beer_sorts.api.beer_list.BeerListScreenViewModel
 import com.example.beer_sorts.api.detailed_beer.DetailedBeerScreenViewModel
 import com.example.feature.main.api.MainScreenViewModel
 import com.example.feature.update_history.api.UpdatesDescriptionViewModel
+import com.example.internet_connection.NoInternetConnectionViewModel
 import com.example.meditationcomposeapp.presentation.screens.NavGraphs
 import com.example.meditationcomposeapp.presentation.screens.destinations.BeerListScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.DetailedBeerScreenDestination
@@ -22,6 +23,7 @@ import com.example.meditationcomposeapp.presentation.screens.destinations.EnterS
 import com.example.meditationcomposeapp.presentation.screens.destinations.LoginScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.MainScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.NewPasswordScreenDestination
+import com.example.meditationcomposeapp.presentation.screens.destinations.NoInternetConnectionScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.RegistrationScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.ShufflePuzzleScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.SplashScreenDestination
@@ -40,7 +42,9 @@ fun MeditationDestinationsNavHost(
         navController = navController,
         engine = MeditationNavHostEngine(),
         dependenciesContainerBuilder = {
+            dependency(NoInternetConnectionScreenDestination) { hiltViewModel<NoInternetConnectionViewModel>() }
             dependency(SplashScreenDestination) { hiltViewModel<SplashScreenViewModel>() }
+
             dependency(EnterScreenDestination) { hiltViewModel<EnterScreenViewModel>() }
             dependency(EnterCodeScreenDestination) { hiltViewModel<EnterCodeScreenViewModel>() }
             dependency(EnterLoginScreenDestination) { hiltViewModel<EnterLoginScreenViewModel>() }

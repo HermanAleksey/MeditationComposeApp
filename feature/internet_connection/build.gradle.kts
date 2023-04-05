@@ -31,6 +31,7 @@ android {
 
 dependencies {
     implementation(project(":core:design_system"))
+    implementation(project(":core:common"))
 
     implementation(Dependencies.activity_compose)
     implementation(Dependencies.compose_ui)

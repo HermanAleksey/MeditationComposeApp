@@ -9,6 +9,7 @@ import com.example.meditationcomposeapp.presentation.screens.destinations.EnterS
 import com.example.meditationcomposeapp.presentation.screens.destinations.LoginScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.MainScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.NewPasswordScreenDestination
+import com.example.meditationcomposeapp.presentation.screens.destinations.NoInternetConnectionScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.RegistrationScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.ShufflePuzzleScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.TypedDestination
@@ -19,6 +20,8 @@ enum class DestinationWrapper(
     val toolbarVisible: Boolean = false,
     val bottomBarVisible: Boolean = false,
 ) {
+    NoInternetConnectionScreen(NoInternetConnectionScreenDestination),
+
     EnterScreen(EnterScreenDestination),
     EnterCodeScreen(EnterCodeScreenDestination),
     EnterLoginScreen(EnterLoginScreenDestination),

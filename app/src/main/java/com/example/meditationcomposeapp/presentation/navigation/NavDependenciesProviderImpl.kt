@@ -11,6 +11,7 @@ import com.example.beer_sorts.api.beer_list.BeerListNavDependencies
 import com.example.common.navigation.NavDependencies
 import com.example.common.navigation.NavDependenciesProvider
 import com.example.feature.main.api.MainScreenNavDependencies
+import com.example.internet_connection.NoInternetConnectionNavDependencies
 import com.example.meditationcomposeapp.presentation.screens.destinations.*
 import com.example.meditationcomposeapp.presentation.ui_controls.toolbar.ToolbarNavDependencies
 import com.example.splash_screen.api.SplashScreenNavDependencies
@@ -25,7 +26,7 @@ class NavDependenciesProviderImpl(
         return findAuthFlowNavDependencies(clazz)
             ?: findMainFlowNavDependencies(clazz)
             ?: findBeerSortFlowNavDependencies(clazz)
-            ?: findSplashScreenNavDependencies(clazz)
+            ?: findOtherScreensNavDependencies(clazz)
             ?: throw NotImplementedError(
                 "NavDependencies not implemented for class ${clazz.canonicalName}"
             )
@@ -69,7 +70,7 @@ class NavDependenciesProviderImpl(
         return dependencies as D?
     }
 
-    private fun <D : NavDependencies> findSplashScreenNavDependencies(clazz: Class<D>): D? {
+    private fun <D : NavDependencies> findOtherScreensNavDependencies(clazz: Class<D>): D? {
         val dependencies = when (clazz.name) {
             SplashScreenNavDependencies::class.java.name -> {
                 SplashScreenNavDependencies(
@@ -82,6 +83,14 @@ class NavDependenciesProviderImpl(
                         navController.navigate(
                             EnterScreenDestination()
                         )
+                    }
+                )
+            }
+            NoInternetConnectionScreenDestination::class.java.name -> {
+                NoInternetConnectionNavDependencies(
+                    navigateBack = {
+                        navController.popBackStack()
+                        navController.popBackStack()
                     }
                 )
             }
