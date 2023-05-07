@@ -60,4 +60,6 @@ object LibVersions {
     const val timber_version = "5.0.1"
 
     const val build_gradle_version = "7.4.2"
+
+    const val exoplayer_version = "2.14.1"
 }

@@ -28,6 +28,7 @@
             <option value="$PROJECT_DIR$/feature/beer_sorts" />
             <option value="$PROJECT_DIR$/feature/internet_connection" />
             <option value="$PROJECT_DIR$/feature/main" />
+            <option value="$PROJECT_DIR$/feature/music_player" />
             <option value="$PROJECT_DIR$/feature/shuffle_puzzle" />
             <option value="$PROJECT_DIR$/feature/splash_screen" />
             <option value="$PROJECT_DIR$/feature/update_history" />
