@@ -20,3 +20,6 @@ include(":feature:main")
 include(":feature:update_history")
 include(":feature:internet_connection")
 include(":feature:music_player")
+
+include(":sample:music_player")
+include(":sample:design_system")

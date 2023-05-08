@@ -22,12 +22,12 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import coil.compose.rememberAsyncImagePainter
 import com.example.design_system.AppTheme
 import com.example.feature.music_player.R
 import com.example.feature.music_player.data.entities.MediaDataSource
 import com.example.feature.music_player.data.entities.Song
 import com.example.feature.music_player.ui.viewmodels.MusicAction
-import com.google.accompanist.coil.rememberCoilPainter
 import kotlin.math.roundToInt
 
 private const val DRAG_DETECTION_OFFSET = 100f
@@ -112,7 +112,7 @@ private fun MusicPlayerWidgetContent(
     ) {
         val albumImagePainter = when (song.imageSource) {
             is MediaDataSource.WebSource -> {
-                rememberCoilPainter(song.imageSource.url)
+                rememberAsyncImagePainter(song.imageSource.url)
             }
             is MediaDataSource.LocalSource -> {
                 painterResource(id = song.imageSource.resId)
@@ -154,8 +154,8 @@ private fun MusicPlayerWidgetContent(
         }
 
         Image(
-            painter = rememberCoilPainter(
-                request = if (isPlaying) {
+            painter = rememberAsyncImagePainter(
+                if (isPlaying) {
                     R.drawable.ic_round_pause
                 } else {
                     R.drawable.ic_round_play_arrow

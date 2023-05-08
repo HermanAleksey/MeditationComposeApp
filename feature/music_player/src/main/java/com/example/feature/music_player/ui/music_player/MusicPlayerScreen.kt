@@ -1,6 +1,5 @@
 package com.example.feature.music_player.ui.music_player
 
-import android.graphics.Bitmap
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.slideInVertically
@@ -13,6 +12,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.IconButton
 import androidx.compose.material.LocalContentColor
@@ -24,7 +24,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
@@ -33,11 +32,8 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.palette.graphics.Palette
-import coil.bitmap.BitmapPool
+import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
-import coil.size.Size
-import coil.transform.Transformation
 import com.example.feature.music_player.data.entities.MediaDataSource
 import com.example.feature.music_player.data.entities.Song
 import com.example.feature.music_player.data.parsers.toSong
@@ -46,8 +42,6 @@ import com.example.feature.music_player.ui.music_player.composables.PlaybackBar
 import com.example.feature.music_player.ui.music_player.composables.SpinDiskAnimation
 import com.example.feature.music_player.ui.viewmodels.MainViewState
 import com.example.feature.music_player.ui.viewmodels.MusicAction
-import com.google.accompanist.coil.rememberCoilPainter
-import com.google.accompanist.insets.systemBarsPadding
 
 @ExperimentalMaterialApi
 @Composable
@@ -83,11 +77,11 @@ fun MusicPlayerScreen(
 private fun SongScreenContent(
     song: Song,
     processAction: (MusicAction) -> Unit,
-    uiState: MainViewState
+    uiState: MainViewState,
 ) {
     val backgroundColor = MaterialTheme.colors.background
 
-    var dominantColor by remember {
+    val dominantColor by remember {
         mutableStateOf(backgroundColor)
     }
 
@@ -104,31 +98,8 @@ private fun SongScreenContent(
         }
     }
 
-    val imagePainter = rememberCoilPainter(
-        request = request,
-        requestBuilder = {
-            transformations(
-                object : Transformation {
-                    override fun key(): String {
-                        return song.imageSource.hashCode().toString()
-                    }
-
-                    override suspend fun transform(
-                        pool: BitmapPool,
-                        input: Bitmap,
-                        size: Size,
-                    ): Bitmap {
-                        Palette.from(input).generate { palette ->
-                            palette?.dominantSwatch?.rgb?.let { colorValue ->
-                                dominantColor = Color(colorValue)
-                            }
-                        }
-                        return input
-                    }
-                }
-            )
-        },
-        fadeIn = true
+    val imagePainter = rememberAsyncImagePainter(
+        model = request,
     )
 
     Box(

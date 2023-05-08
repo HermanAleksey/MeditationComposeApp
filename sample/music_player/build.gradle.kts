@@ -1,16 +1,53 @@
 plugins {
-    id("com.android.library")
+    id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
+    id("kotlin-parcelize")
+    id("dagger.hilt.android.plugin")
     id("com.google.devtools.ksp") version LibVersions.ksp_version // Depends on your kotlin version
+
+    id("org.jlleitschuh.gradle.ktlint")
 }
 
+
+@Suppress("UnstableApiUsage")
 android {
-    namespace = "com.example.feature.music_player"
+    namespace = "com.example.sample.media_player"
     compileSdk = Config.COMPILE_SDK
 
     defaultConfig {
+        applicationId = Config.APPLICATION_ID
         minSdk = Config.MIN_SDK
+        targetSdk = Config.TARGET_SDK
+        versionName = Config.VERSION_NAME
+        versionCode = Config.VERSION_CODE
+
+        vectorDrawables {
+            useSupportLibrary = true
+        }
+    }
+
+    buildTypes {
+        getByName("release") {
+            isMinifyEnabled = true
+            isDebuggable = false
+
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+            )
+        }
+        getByName("debug") {
+            isMinifyEnabled = false
+            isDebuggable = true
+
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+            )
+        }
+    }
+
+    kapt {
+        correctErrorTypes = true
     }
 
     compileOptions {
@@ -20,18 +57,26 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_11.toString()
     }
-
-    @Suppress("UnstableApiUsage")
     buildFeatures {
         compose = true
     }
-    @Suppress("UnstableApiUsage")
     composeOptions {
         kotlinCompilerExtensionVersion = LibVersions.compose_compiler_version
     }
+
+    applicationVariants.all {
+        kotlin.sourceSets {
+            getByName(name) {
+                kotlin.srcDir("build/generated/ksp/$name/kotlin")
+            }
+        }
+    }
+
 }
 
+
 dependencies {
+//    implementation(project(":feature:music_player"))
     implementation(project(":core:design_system"))
     implementation(project(":core:common"))
 
@@ -44,6 +89,10 @@ dependencies {
     // animations
     implementation(Dependencies.accompanist_system_ui_controller)
 
+    // firebase
+    implementation(platform(Dependencies.firebase_bom))
+    implementation(Dependencies.firebase_analytics_ktx)
+
     // navigation
     implementation(Dependencies.raamcosta_compose_destinations_anim_core)
     ksp(Dependencies.raamcosta_compose_destinations_ksp)
@@ -55,24 +104,6 @@ dependencies {
     implementation(Dependencies.hilt_navigation_compose)
     implementation(Dependencies.hilt_android)
     kapt(Dependencies.hilt_compiler)
-
-    //coil
-    implementation("io.coil-kt:coil-compose:2.3.0")
-
-    // Coroutines
-    implementation(Dependencies.coroutines_core)
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${LibVersions.coroutines_version}")
-
-//    implementation("com.google.dagger:hilt-android:$hilt_version")
-//    kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
-//    implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03")
-//    kapt("androidx.hilt:hilt-compiler:$hiltCompilerVersion")
-//    implementation("androidx.hilt:hilt-navigation-compose:1.0.0-alpha03")
-
-    // ExoPlayer
-    api(Dependencies.exoplayer_core)
-    api(Dependencies.exoplayer_ui)
-    api(Dependencies.exoplayer_extension_mediasession)
 
     implementation(Dependencies.timber)
 }

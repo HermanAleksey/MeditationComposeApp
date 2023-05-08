@@ -22,4 +22,5 @@ allprojects {
 
 plugins {
     id("org.jlleitschuh.gradle.ktlint") version "10.0.0"
+    id("com.google.dagger.hilt.android") version LibVersions.hilt_version apply false
 }
