@@ -1,4 +1,4 @@
-package com.example.musicplayer.ui.music_player
+package com.example.feature.music_player.ui.music_player
 
 import android.graphics.Bitmap
 import androidx.activity.compose.BackHandler
@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.IconButton
 import androidx.compose.material.LocalContentColor
 import androidx.compose.material.MaterialTheme
@@ -43,13 +42,12 @@ import com.example.feature.music_player.data.entities.MediaDataSource
 import com.example.feature.music_player.data.entities.Song
 import com.example.feature.music_player.data.parsers.toSong
 import com.example.feature.music_player.ui.music_player.composables.MusicControlPanel
+import com.example.feature.music_player.ui.music_player.composables.PlaybackBar
+import com.example.feature.music_player.ui.music_player.composables.SpinDiskAnimation
+import com.example.feature.music_player.ui.viewmodels.MainViewState
 import com.example.feature.music_player.ui.viewmodels.MusicAction
-import com.example.musicplayer.ui.music_player.composables.PlaybackBar
-import com.example.musicplayer.ui.music_player.composables.SpinDiskAnimation
-import com.example.musicplayer.ui.viewmodels.MainViewState
 import com.google.accompanist.coil.rememberCoilPainter
 
-@ExperimentalMaterialApi
 @Composable
 fun MusicPlayerScreen(
     uiState: MainViewState,
@@ -78,12 +76,11 @@ fun MusicPlayerScreen(
     }
 }
 
-@ExperimentalMaterialApi
 @Composable
 private fun SongScreenContent(
     song: Song,
     processAction: (MusicAction) -> Unit,
-    uiState: MainViewState
+    uiState: MainViewState,
 ) {
     val backgroundColor = MaterialTheme.colors.background
 

@@ -17,6 +17,9 @@ object Dependencies {
     const val compose_material_icons =
         "androidx.compose.material:material-icons-extended:${LibVersions.compose_material_icons_version}"
 
+    const val androidx_palette_ktx =
+        "androidx.palette:palette-ktx:${LibVersions.palette_ktx_version}"
+
     //coroutines
     const val coroutines_core =
         "org.jetbrains.kotlinx:kotlinx-coroutines-core:${LibVersions.coroutines_version}"
@@ -76,8 +79,9 @@ object Dependencies {
     const val paging_compose =
         "androidx.paging:paging-compose:${LibVersions.paging_compose_version}"
 
-    //glide
+    //glide, coil
     const val glide = "com.github.skydoves:landscapist-glide:${LibVersions.glide_version}"
+    const val coil = "io.coil-kt:coil:${LibVersions.coil_version}"
 
     //image cropper
     const val canhub_image_cropper =

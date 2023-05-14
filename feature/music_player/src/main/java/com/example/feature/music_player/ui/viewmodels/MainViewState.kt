@@ -1,4 +1,4 @@
-package com.example.musicplayer.ui.viewmodels
+package com.example.feature.music_player.ui.viewmodels
 
 import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.PlaybackStateCompat

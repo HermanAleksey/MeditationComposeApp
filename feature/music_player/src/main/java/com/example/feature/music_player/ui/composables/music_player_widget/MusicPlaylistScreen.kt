@@ -1,4 +1,4 @@
-package com.example.musicplayer.ui.composables.music_player_widget
+package com.example.feature.music_player.ui.composables.music_player_widget
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -31,8 +31,8 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.example.feature.music_player.data.entities.Song
 import com.example.feature.music_player.other.Resource
+import com.example.feature.music_player.ui.viewmodels.MainViewState
 import com.example.feature.music_player.ui.viewmodels.MusicAction
-import com.example.musicplayer.ui.viewmodels.MainViewState
 import com.google.accompanist.coil.rememberCoilPainter
 
 @Composable
@@ -149,6 +149,7 @@ fun MusicListItem(
                     bottom.linkTo(parent.bottom, 16.dp)
                 }
         )
+
 
         Text(
             text = song.title,

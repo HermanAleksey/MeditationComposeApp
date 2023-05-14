@@ -22,11 +22,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.design_system.AppTheme
 import com.example.feature.music_player.R
 import com.example.feature.music_player.data.entities.MediaDataSource
 import com.example.feature.music_player.data.entities.Song
 import com.example.feature.music_player.ui.viewmodels.MusicAction
-import com.example.musicplayer.ui.theme.MusicPlayerTheme
 
 @Composable
 internal fun MusicControlPanel(
@@ -108,7 +108,7 @@ internal fun MusicControlPanel(
 @Preview
 @Composable
 fun MusicControlPanelPreview() {
-    MusicPlayerTheme {
+    AppTheme {
         MusicControlPanel(
             song = Song(
                 mediaId = "11",

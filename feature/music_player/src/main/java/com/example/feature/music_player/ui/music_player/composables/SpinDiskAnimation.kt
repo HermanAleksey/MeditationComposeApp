@@ -1,4 +1,4 @@
-package com.example.musicplayer.ui.music_player.composables
+package com.example.feature.music_player.ui.music_player.composables
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearEasing
@@ -23,7 +23,7 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import com.example.feature.music_player.R
-import com.example.musicplayer.ui.theme.roundedShape
+import com.example.feature.music_player.ui.theme.roundedShape
 
 private const val STOP_ANIMATION_DURATION = 1000
 private const val CIRCLE_SPIN_ANIMATION_DURATION = 3000

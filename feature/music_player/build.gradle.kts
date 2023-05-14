@@ -36,26 +36,24 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:design_system"))
     implementation(Dependencies.core_ktx)
 
     implementation(Dependencies.compose_material)
     implementation(Dependencies.compose_ui_tooling_preview)
     implementation(Dependencies.activity_compose)
-    implementation("com.google.android.material:material:1.4.0")
     val constraintlayout_compose_version = "1.0.1"
     implementation("androidx.constraintlayout:constraintlayout-compose:$constraintlayout_compose_version")
 
     //accompanist
     implementation(Dependencies.accompanist_pager)
-    //todo add?
-//    implementation("com.google.accompanist:accompanist-insets:${LibVersions.accompanist_version}")
+    implementation("com.google.accompanist:accompanist-coil:0.13.0")
 
     //icons
     implementation(Dependencies.compose_material)
     implementation(Dependencies.compose_material_icons)
 
-    val palette_ktx_version = "1.0.0"
-    implementation("androidx.palette:palette-ktx:$palette_ktx_version")
+    implementation(Dependencies.androidx_palette_ktx)
 
     // Coroutines
     implementation(Dependencies.coroutines_core)
@@ -65,15 +63,12 @@ dependencies {
 
     // Coil
     val coil_version = "1.3.0"
-    implementation("io.coil-kt:coil:$coil_version")
+    implementation("io.coil-kt:coil-compose:$coil_version")
 
     //Accompanist
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.13.0")
-    implementation("com.google.accompanist:accompanist-coil:0.13.0")
+//    implementation("com.google.accompanist:accompanist-systemuicontroller:0.13.0") add status bar colors
 
     // Glide
-//    implementation("com.github.bumptech.glide:glide:4.10.0")
-//    kapt("com.github.bumptech.glide:compiler:4.10.0")
     implementation(Dependencies.glide)
 
     // Dagger - Hilt
@@ -90,9 +85,12 @@ dependencies {
     api("com.google.android.exoplayer:exoplayer-ui:$exo_player_version")
     api("com.google.android.exoplayer:extension-mediasession:$exo_player_version")
 
-    //tests
-    testImplementation("junit:junit:4.+")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:1.0.0-rc01")
+    //testing
+//    testImplementation(project(":core:testing"))
+//    testImplementation(Dependencies.junit)
+//    testImplementation (Dependencies.mockito)
+//    testImplementation (Dependencies.coroutines_test)
+//    testImplementation (Dependencies.mockito_kotlin)
+//    testImplementation (Dependencies.powermock_reflect)
+//    androidTestImplementation(Dependencies.mockito_android)
 }

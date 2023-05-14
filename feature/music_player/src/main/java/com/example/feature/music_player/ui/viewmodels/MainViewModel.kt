@@ -1,4 +1,4 @@
-package com.example.musicplayer.ui.viewmodels
+package com.example.feature.music_player.ui.viewmodels
 
 
 import android.support.v4.media.MediaBrowserCompat
@@ -15,7 +15,6 @@ import com.example.feature.music_player.exoplayer.isPrepared
 import com.example.feature.music_player.extensions.combine
 import com.example.feature.music_player.other.Constants.MEDIA_ROOT_ID
 import com.example.feature.music_player.other.Resource
-import com.example.feature.music_player.ui.viewmodels.MusicAction
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
