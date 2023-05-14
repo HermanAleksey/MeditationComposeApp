@@ -1,11 +1,10 @@
-package com.example.feature.music_player.data.parsers
+package com.example.musicplayer.data.parsers
 
 import android.support.v4.media.MediaMetadataCompat
-import com.example.common.utils.emptyString
-import com.example.feature.music_player.data.entities.MediaDataSource
-import com.example.feature.music_player.data.entities.Song
-import com.example.feature.music_player.data.entities.SongSource
-import com.example.feature.music_player.data.entities.toSongSourceType
+import com.example.musicplayer.data.entities.MediaDataSource
+import com.example.musicplayer.data.entities.Song
+import com.example.musicplayer.data.entities.SongSource
+import com.example.musicplayer.data.entities.toSongSourceType
 
 
 fun MediaMetadataCompat.toSong(): Song? {
@@ -13,7 +12,7 @@ fun MediaMetadataCompat.toSong(): Song? {
         val songSource = it.mediaUri.toSongSourceType()
 
         Song(
-            mediaId = it.mediaId ?: emptyString(),
+            mediaId = it.mediaId ?: "",
             title = it.title.toString(),
             subtitle = it.subtitle.toString(),
             songSource = when (songSource) {

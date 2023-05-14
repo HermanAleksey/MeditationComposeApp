@@ -1,6 +1,6 @@
-package com.example.feature.music_player.data.remote
+package com.example.musicplayer.data.remote
 
-import com.example.feature.music_player.data.entities.Song
+import com.example.musicplayer.data.entities.Song
 
 interface MusicSource {
 

@@ -1,4 +1,4 @@
-package com.example.feature.music_player.other
+package com.example.musicplayer.other
 
 sealed class Resource<T>(val data: T? = null, val message: String? = null) {
     class Success<T>(data: T): Resource<T>(data)

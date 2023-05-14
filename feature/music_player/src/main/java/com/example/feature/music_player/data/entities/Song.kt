@@ -1,4 +1,4 @@
-package com.example.feature.music_player.data.entities
+package com.example.musicplayer.data.entities
 
 class LocalSong(
     val mediaId: String = "",

@@ -1,26 +1,13 @@
 package com.example.feature.music_player.data.remote
 
-//class MusicWebSource: MusicSource {
-//
-//    private val db = FirebaseFirestore.getInstance()
-//
-//    private val songCollection = db.collection(SONG_COLLECTION)
-//
-//    override suspend fun getMusic(): List<Song> {
-//        return try {
-//            songCollection
-//                .get()
-//                .await()
-//                .toObjects(WebSong::class.java)
-//                .map {
-//                    Log.e("TAGG", "getMusic: $it")
-//                    it.toSong()
-//                }
-//        } catch (e: Exception) {
-//            emptyList()
-//        }
-//    }
-//}
+import com.example.musicplayer.data.entities.Song
+import com.example.musicplayer.data.remote.MusicSource
+
+class MusicWebSource: MusicSource {
+    override suspend fun getMusic(): List<Song> {
+        return emptyList()
+    }
+}
 
 /**
 * getAllSongs: Song(mediaId=1, title=Met You, subtitle=if found, songUrl=https://firebasestorage.googleapis.com/v0/b/musicplayer-2672e.appspot.com/o/if%20found%20-%20Met%20You%20%5BNCS%20Release%5D.mp3?alt=media&token=d3d487ae-5894-4430-a19a-24aeb0c2a520, imageUrl=https://firebasestorage.googleapis.com/v0/b/musicplayer-2672e.appspot.com/o/Met%20you.jpg?alt=media&token=ab5c00ea-86e7-4f70-a7bf-f7a79b93d6bd)

@@ -1,6 +1,7 @@
 package com.example.feature.music_player.exoplayer
 
 import android.app.PendingIntent
+import android.app.PendingIntent.FLAG_IMMUTABLE
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.media.MediaBrowserCompat
@@ -9,13 +10,14 @@ import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaSessionCompat
 import android.util.Log
 import androidx.media.MediaBrowserServiceCompat
-import com.example.feature.music_player.di.Web
-import com.example.feature.music_player.exoplayer.callbacks.MusicPlaybackPrepared
-import com.example.feature.music_player.exoplayer.callbacks.MusicPlayerEventListener
-import com.example.feature.music_player.exoplayer.callbacks.MusicPlayerNotificationListener
-import com.example.feature.music_player.exoplayer.music_source.MusicProvider
 import com.example.feature.music_player.other.Constants.MEDIA_ROOT_ID
 import com.example.feature.music_player.other.Constants.NETWORK_FAILURE
+import com.example.musicplayer.di.Local
+import com.example.musicplayer.exoplayer.MusicNotificationManger
+import com.example.musicplayer.exoplayer.callbacks.MusicPlaybackPrepared
+import com.example.musicplayer.exoplayer.callbacks.MusicPlayerEventListener
+import com.example.musicplayer.exoplayer.callbacks.MusicPlayerNotificationListener
+import com.example.musicplayer.exoplayer.music_source.MusicProvider
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
@@ -35,7 +37,7 @@ class MusicService : MediaBrowserServiceCompat() {
     lateinit var exoPlayer: SimpleExoPlayer
 
     @Inject
-    @Web
+    @Local
     lateinit var musicProvider: MusicProvider
 
     private val serviceJob = Job()
@@ -75,7 +77,7 @@ class MusicService : MediaBrowserServiceCompat() {
 
     private fun configureMediaSessionCompat() {
         val activityIntent = packageManager?.getLaunchIntentForPackage(packageName)?.let {
-            PendingIntent.getActivity(this, 0, it, 0)
+            PendingIntent.getActivity(this, 0, it, FLAG_IMMUTABLE)
         }
         mediaSessionCompat = MediaSessionCompat(this, SERVICE_TAG).apply {
             setSessionActivity(activityIntent)
@@ -107,7 +109,7 @@ class MusicService : MediaBrowserServiceCompat() {
             sessionToken = mediaSessionCompat.sessionToken,
             notificationListener = MusicPlayerNotificationListener(this),
             newSongCallback = {
-                Log.e("TAGG", "showNotification: newSongCallback ${currentSongDuration}")
+                Log.e("TAGG", "showNotification: newSongCallback $currentSongDuration")
                 currentSongDuration = exoPlayer.duration
             }
         ).showNotification(exoPlayer)

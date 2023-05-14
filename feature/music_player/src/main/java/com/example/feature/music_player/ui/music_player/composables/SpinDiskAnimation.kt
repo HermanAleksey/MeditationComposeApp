@@ -1,4 +1,4 @@
-package com.example.feature.music_player.ui.music_player.composables
+package com.example.musicplayer.ui.music_player.composables
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearEasing
@@ -10,7 +10,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -24,6 +23,7 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import com.example.feature.music_player.R
+import com.example.musicplayer.ui.theme.roundedShape
 
 private const val STOP_ANIMATION_DURATION = 1000
 private const val CIRCLE_SPIN_ANIMATION_DURATION = 3000
@@ -74,7 +74,7 @@ internal fun SpinDiskAnimation(
     Box(
         modifier = modifier
             .aspectRatio(1.0f)
-            .clip(MaterialTheme.shapes.small)
+            .clip(roundedShape)
     ) {
         Image(
             modifier = Modifier
@@ -90,7 +90,7 @@ internal fun SpinDiskAnimation(
                 .rotate(rotation.value)
                 .aspectRatio(1.0f)
                 .align(Alignment.Center)
-                .clip(MaterialTheme.shapes.small),
+                .clip(roundedShape),
             painter = albumPainter,
             contentDescription = "Song cover"
         )

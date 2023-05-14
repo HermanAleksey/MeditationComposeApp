@@ -1,11 +1,13 @@
-package com.example.feature.music_player.di
+package com.example.musicplayer.di
 
 import android.content.Context
-import com.example.feature.music_player.data.remote.MusicLocalSource
-import com.example.feature.music_player.data.remote.MusicSource
-import com.example.feature.music_player.exoplayer.music_source.MusicProvider
+import com.example.feature.music_player.data.remote.MusicWebSource
+import com.example.musicplayer.data.remote.MusicLocalSource
+import com.example.musicplayer.data.remote.MusicSource
+import com.example.musicplayer.exoplayer.music_source.MusicProvider
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.SimpleExoPlayer
+import com.google.android.exoplayer2.audio.AudioAttributes
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.util.Util
 import dagger.Module
@@ -27,6 +29,11 @@ annotation class Local
 @Module
 @InstallIn(ServiceComponent::class)
 object ServiceModule {
+
+    @ServiceScoped
+    @Provides
+    @Web
+    fun provideMusicDatabase(): MusicSource = MusicWebSource()
 
     @ServiceScoped
     @Provides
@@ -55,8 +62,8 @@ object ServiceModule {
 
     @ServiceScoped
     @Provides
-    fun provideAudioAttributes() = com.google.android.exoplayer2.audio.AudioAttributes.Builder()
-        .setContentType(C.CONTENT_TYPE_MUSIC)
+    fun provideAudioAttributes(): AudioAttributes = AudioAttributes.Builder()
+        .setContentType(C.AUDIO_CONTENT_TYPE_MUSIC)
         .setUsage(C.USAGE_MEDIA)
         .build()
 
@@ -64,7 +71,7 @@ object ServiceModule {
     @Provides
     fun provideExoPlayer(
         @ApplicationContext context: Context,
-        audioAttributes: com.google.android.exoplayer2.audio.AudioAttributes
+        audioAttributes: AudioAttributes
     ) = SimpleExoPlayer.Builder(context).build().apply {
         setAudioAttributes(audioAttributes, true)
         setHandleAudioBecomingNoisy(true)

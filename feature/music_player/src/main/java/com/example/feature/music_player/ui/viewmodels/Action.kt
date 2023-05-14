@@ -1,6 +1,6 @@
 package com.example.feature.music_player.ui.viewmodels
 
-import com.example.feature.music_player.data.entities.Song
+import com.example.musicplayer.data.entities.Song
 
 sealed interface MusicAction {
 

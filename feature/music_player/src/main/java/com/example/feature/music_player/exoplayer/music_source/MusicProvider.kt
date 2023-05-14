@@ -1,12 +1,12 @@
-package com.example.feature.music_player.exoplayer.music_source
+package com.example.musicplayer.exoplayer.music_source
 
 import android.support.v4.media.MediaBrowserCompat
 import android.support.v4.media.MediaDescriptionCompat
 import android.support.v4.media.MediaMetadataCompat
-import com.example.feature.music_player.data.entities.SongSource
-import com.example.feature.music_player.data.entities.toSongSourceType
-import com.example.feature.music_player.data.parsers.toMediaMetadataCompat
-import com.example.feature.music_player.data.remote.MusicSource
+import com.example.musicplayer.data.entities.SongSource
+import com.example.musicplayer.data.entities.toSongSourceType
+import com.example.musicplayer.data.parsers.toMediaMetadataCompat
+import com.example.musicplayer.data.remote.MusicSource
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.source.ConcatenatingMediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource

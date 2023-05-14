@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -50,11 +52,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:updates_history"))
     implementation(project(":core:design_system"))
     implementation(project(":core:common"))
-    implementation(project(":core:model"))
-    implementation(project(":core:data_store"))
 
     implementation(Dependencies.compose_material)
     implementation(Dependencies.compose_ui_tooling_preview)

@@ -1,8 +1,8 @@
-package com.example.feature.music_player.exoplayer.callbacks
+package com.example.musicplayer.exoplayer.callbacks
 
 import android.widget.Toast
 import com.example.feature.music_player.exoplayer.MusicService
-import com.google.android.exoplayer2.ExoPlaybackException
+import com.google.android.exoplayer2.PlaybackException
 import com.google.android.exoplayer2.Player
 
 class MusicPlayerEventListener(
@@ -16,7 +16,7 @@ class MusicPlayerEventListener(
         }
     }
 
-    override fun onPlayerError(error: ExoPlaybackException) {
+    override fun onPlayerError(error: PlaybackException) {
         super.onPlayerError(error)
         Toast.makeText(musicService, error.message, Toast.LENGTH_LONG).show()
     }

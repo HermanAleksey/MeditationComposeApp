@@ -1,20 +1,20 @@
-package com.example.feature.music_player.ui.viewmodels
+package com.example.musicplayer.ui.viewmodels
 
 
 import android.support.v4.media.MediaBrowserCompat
 import android.support.v4.media.MediaMetadataCompat.METADATA_KEY_MEDIA_ID
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.feature.music_player.data.entities.Song
-import com.example.feature.music_player.data.parsers.toSong
-import com.example.feature.music_player.exoplayer.MusicServiceConnection
-import com.example.feature.music_player.exoplayer.currentPlaybackPosition
-import com.example.feature.music_player.exoplayer.isPlayEnabled
-import com.example.feature.music_player.exoplayer.isPlaying
-import com.example.feature.music_player.exoplayer.isPrepared
-import com.example.feature.music_player.extensions.combine
 import com.example.feature.music_player.other.Constants.MEDIA_ROOT_ID
-import com.example.feature.music_player.other.Resource
+import com.example.feature.music_player.ui.viewmodels.MusicAction
+import com.example.musicplayer.data.entities.Song
+import com.example.musicplayer.data.parsers.toSong
+import com.example.musicplayer.exoplayer.MusicServiceConnection
+import com.example.musicplayer.exoplayer.currentPlaybackPosition
+import com.example.musicplayer.exoplayer.isPlayEnabled
+import com.example.musicplayer.exoplayer.isPlaying
+import com.example.musicplayer.exoplayer.isPrepared
+import com.example.musicplayer.other.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -35,7 +35,7 @@ class MainViewModel @Inject constructor(
     private val _isFullScreen = MutableStateFlow(false)
     private val _currentPlaybackPosition = MutableStateFlow(0L)
 
-    val uiState: StateFlow<MainViewState> = combine(
+    val uiState: StateFlow<MainViewState> = com.example.musicplayer.extensions.combine(
         _isFullScreen,
         _mediaItems,
         _currentPlaybackPosition,

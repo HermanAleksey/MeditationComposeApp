@@ -1,4 +1,4 @@
-package com.example.feature.music_player.ui.music_player.composables
+package com.example.musicplayer.ui.music_player.composables
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
@@ -24,9 +24,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.design_system.AppTheme
-import com.example.feature.music_player.extensions.toTimeString
 import com.example.feature.music_player.ui.viewmodels.MusicAction
+import com.example.musicplayer.extensions.toTimeString
+import com.example.musicplayer.ui.theme.MusicPlayerTheme
 
 @Composable
 fun PlaybackBar(
@@ -104,7 +104,7 @@ fun PlaybackBar(
 @Preview
 @Composable
 fun PlaybackBarPreview() {
-    AppTheme {
+    MusicPlayerTheme {
         PlaybackBar(
             dominantColor = Color.Cyan,
             currentTimeMillis = 100,

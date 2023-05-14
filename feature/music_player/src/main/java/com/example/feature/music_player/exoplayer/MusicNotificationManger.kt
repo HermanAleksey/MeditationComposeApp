@@ -1,4 +1,4 @@
-package com.example.feature.music_player.exoplayer
+package com.example.musicplayer.exoplayer
 
 import android.app.PendingIntent
 import android.content.Context

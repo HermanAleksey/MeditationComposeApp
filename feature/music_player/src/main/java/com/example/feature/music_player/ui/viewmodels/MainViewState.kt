@@ -1,11 +1,11 @@
-package com.example.feature.music_player.ui.viewmodels
+package com.example.musicplayer.ui.viewmodels
 
 import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.PlaybackStateCompat
-import com.example.feature.music_player.data.entities.Song
 import com.example.feature.music_player.exoplayer.MusicService
-import com.example.feature.music_player.exoplayer.isPlaying
-import com.example.feature.music_player.other.Resource
+import com.example.musicplayer.data.entities.Song
+import com.example.musicplayer.exoplayer.isPlaying
+import com.example.musicplayer.other.Resource
 
 data class MainViewState(
     val showPlayerFullScreen: Boolean = false,

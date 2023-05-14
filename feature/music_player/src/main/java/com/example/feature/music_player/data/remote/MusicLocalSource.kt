@@ -1,8 +1,8 @@
-package com.example.feature.music_player.data.remote
+package com.example.musicplayer.data.remote
 
 import com.example.feature.music_player.R
-import com.example.feature.music_player.data.entities.LocalSong
-import com.example.feature.music_player.data.entities.Song
+import com.example.musicplayer.data.entities.LocalSong
+import com.example.musicplayer.data.entities.Song
 
 class MusicLocalSource : MusicSource {
 
@@ -14,7 +14,7 @@ class MusicLocalSource : MusicSource {
                 title = "Test",
                 subtitle = "subtitle",
                 songResId = R.raw.sound_rain,
-                imageResId = R.drawable.ic_music
+                imageResId = R.drawable.ic_music//todo check icons
             )
         ).map {
             it.toSong()
