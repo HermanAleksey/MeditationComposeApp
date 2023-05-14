@@ -39,11 +39,11 @@ import coil.bitmap.BitmapPool
 import coil.request.ImageRequest
 import coil.size.Size
 import coil.transform.Transformation
+import com.example.feature.music_player.data.entities.MediaDataSource
+import com.example.feature.music_player.data.entities.Song
+import com.example.feature.music_player.data.parsers.toSong
 import com.example.feature.music_player.ui.music_player.composables.MusicControlPanel
 import com.example.feature.music_player.ui.viewmodels.MusicAction
-import com.example.musicplayer.data.entities.MediaDataSource
-import com.example.musicplayer.data.entities.Song
-import com.example.musicplayer.data.parsers.toSong
 import com.example.musicplayer.ui.music_player.composables.PlaybackBar
 import com.example.musicplayer.ui.music_player.composables.SpinDiskAnimation
 import com.example.musicplayer.ui.viewmodels.MainViewState

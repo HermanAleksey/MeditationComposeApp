@@ -1,4 +1,4 @@
-package com.example.musicplayer.exoplayer
+package com.example.feature.music_player.exoplayer
 
 import android.os.SystemClock
 import android.support.v4.media.session.PlaybackStateCompat

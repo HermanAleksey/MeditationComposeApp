@@ -8,18 +8,16 @@ import android.support.v4.media.MediaBrowserCompat
 import android.support.v4.media.MediaDescriptionCompat
 import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaSessionCompat
-import android.util.Log
 import androidx.media.MediaBrowserServiceCompat
+import com.example.feature.music_player.di.Local
+import com.example.feature.music_player.exoplayer.callbacks.MusicPlaybackPrepared
+import com.example.feature.music_player.exoplayer.callbacks.MusicPlayerEventListener
+import com.example.feature.music_player.exoplayer.callbacks.MusicPlayerNotificationListener
+import com.example.feature.music_player.exoplayer.music_source.MusicProvider
 import com.example.feature.music_player.other.Constants.MEDIA_ROOT_ID
 import com.example.feature.music_player.other.Constants.NETWORK_FAILURE
-import com.example.musicplayer.di.Local
-import com.example.musicplayer.exoplayer.MusicNotificationManger
-import com.example.musicplayer.exoplayer.callbacks.MusicPlaybackPrepared
-import com.example.musicplayer.exoplayer.callbacks.MusicPlayerEventListener
-import com.example.musicplayer.exoplayer.callbacks.MusicPlayerNotificationListener
-import com.example.musicplayer.exoplayer.music_source.MusicProvider
+import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.Player
-import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
 import com.google.android.exoplayer2.ext.mediasession.TimelineQueueNavigator
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,13 +26,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MusicService : MediaBrowserServiceCompat() {
 
     @Inject
-    lateinit var exoPlayer: SimpleExoPlayer
+    lateinit var exoPlayer: ExoPlayer
 
     @Inject
     @Local
@@ -109,7 +108,7 @@ class MusicService : MediaBrowserServiceCompat() {
             sessionToken = mediaSessionCompat.sessionToken,
             notificationListener = MusicPlayerNotificationListener(this),
             newSongCallback = {
-                Log.e("TAGG", "showNotification: newSongCallback $currentSongDuration")
+                Timber.tag("TAGG").e("showNotification: newSongCallback %s", currentSongDuration)
                 currentSongDuration = exoPlayer.duration
             }
         ).showNotification(exoPlayer)

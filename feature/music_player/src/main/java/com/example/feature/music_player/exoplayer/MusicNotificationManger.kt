@@ -1,4 +1,4 @@
-package com.example.musicplayer.exoplayer
+package com.example.feature.music_player.exoplayer
 
 import android.app.PendingIntent
 import android.content.Context
@@ -19,7 +19,7 @@ class MusicNotificationManger(
     private val context: Context,
     sessionToken: MediaSessionCompat.Token,
     notificationListener: PlayerNotificationManager.NotificationListener,
-    private val newSongCallback: () -> Unit
+    private val newSongCallback: () -> Unit,
 ) {
 
     private val notificationManager: PlayerNotificationManager
@@ -29,9 +29,9 @@ class MusicNotificationManger(
         notificationManager = PlayerNotificationManager.Builder(
             context,
             NOTIFICATION_ID,
-            NOTIFICATION_CHANNEL_ID,
-            DescriptionAdapter(mediaController)
+            NOTIFICATION_CHANNEL_ID
         )
+            .setMediaDescriptionAdapter(DescriptionAdapter(mediaController))
             .setSmallIconResourceId(R.drawable.ic_music)
             .setNotificationListener(notificationListener)
             .setChannelNameResourceId(R.string.notification_channel_name)
@@ -44,7 +44,7 @@ class MusicNotificationManger(
     }
 
     private inner class DescriptionAdapter(
-        private val mediaController: MediaControllerCompat
+        private val mediaController: MediaControllerCompat,
     ) : PlayerNotificationManager.MediaDescriptionAdapter {
 
         override fun getCurrentContentTitle(player: Player): CharSequence {
@@ -62,14 +62,14 @@ class MusicNotificationManger(
 
         override fun getCurrentLargeIcon(
             player: Player,
-            callback: PlayerNotificationManager.BitmapCallback
+            callback: PlayerNotificationManager.BitmapCallback,
         ): Bitmap? {
             Glide.with(context).asBitmap()
                 .load(mediaController.metadata.description.iconUri)
                 .into(object : CustomTarget<Bitmap>() {
                     override fun onResourceReady(
                         resource: Bitmap,
-                        transition: Transition<in Bitmap>?
+                        transition: Transition<in Bitmap>?,
                     ) {
                         callback.onBitmap(resource)
                     }

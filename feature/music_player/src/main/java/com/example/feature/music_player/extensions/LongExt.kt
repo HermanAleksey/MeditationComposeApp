@@ -1,4 +1,4 @@
-package com.example.musicplayer.extensions
+package com.example.feature.music_player.extensions
 
 import java.text.SimpleDateFormat
 import java.util.*

@@ -1,4 +1,4 @@
-package com.example.musicplayer.data.entities
+package com.example.feature.music_player.data.entities
 
 class LocalSong(
     val mediaId: String = "",
@@ -14,24 +14,6 @@ class LocalSong(
             subtitle = subtitle,
             songSource = MediaDataSource.LocalSource(songResId),
             imageSource = MediaDataSource.LocalSource(imageResId)
-        )
-    }
-}
-
-data class WebSong(
-    val mediaId: String = "",
-    val title: String = "",
-    val subtitle: String = "",
-    val songUrl: String = "",
-    val imageUrl: String = "",
-) {
-    fun toSong(): Song {
-       return Song(
-            mediaId = mediaId,
-            title = title,
-            subtitle = subtitle,
-            songSource = MediaDataSource.WebSource(songUrl),
-            imageSource = MediaDataSource.WebSource(imageUrl)
         )
     }
 }

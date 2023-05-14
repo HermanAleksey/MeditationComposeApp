@@ -1,15 +1,14 @@
-package com.example.musicplayer.di
+package com.example.feature.music_player.di
 
 import android.content.Context
-import com.example.feature.music_player.data.remote.MusicWebSource
-import com.example.musicplayer.data.remote.MusicLocalSource
-import com.example.musicplayer.data.remote.MusicSource
-import com.example.musicplayer.exoplayer.music_source.MusicProvider
+import com.example.feature.music_player.data.source.MusicLocalSource
+import com.example.feature.music_player.data.source.MusicSource
+import com.example.feature.music_player.data.source.MusicWebSource
+import com.example.feature.music_player.exoplayer.music_source.MusicProvider
 import com.google.android.exoplayer2.C
-import com.google.android.exoplayer2.SimpleExoPlayer
+import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.audio.AudioAttributes
-import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
-import com.google.android.exoplayer2.util.Util
+import com.google.android.exoplayer2.upstream.DefaultDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -45,7 +44,7 @@ object ServiceModule {
     @Local
     fun provideLocalMusicSource(
         @Local musicSource: MusicSource,
-        factory: DefaultDataSourceFactory,
+        factory: DefaultDataSource.Factory,
     ): MusicProvider = MusicProvider(
         musicSource, factory
     )
@@ -55,24 +54,26 @@ object ServiceModule {
     @Web
     fun provideWebMusicSource(
         @Web musicSource: MusicSource,
-        factory: DefaultDataSourceFactory,
+        factory: DefaultDataSource.Factory,
     ): MusicProvider = MusicProvider(
         musicSource, factory
     )
 
     @ServiceScoped
     @Provides
-    fun provideAudioAttributes(): AudioAttributes = AudioAttributes.Builder()
-        .setContentType(C.AUDIO_CONTENT_TYPE_MUSIC)
-        .setUsage(C.USAGE_MEDIA)
-        .build()
+    fun provideAudioAttributes(): AudioAttributes {
+        return AudioAttributes.Builder()
+            .setContentType(C.AUDIO_CONTENT_TYPE_MUSIC)
+            .setUsage(C.USAGE_MEDIA)
+            .build()
+    }
 
     @ServiceScoped
     @Provides
     fun provideExoPlayer(
         @ApplicationContext context: Context,
-        audioAttributes: AudioAttributes
-    ) = SimpleExoPlayer.Builder(context).build().apply {
+        audioAttributes: AudioAttributes,
+    ) = ExoPlayer.Builder(context).build().apply {
         setAudioAttributes(audioAttributes, true)
         setHandleAudioBecomingNoisy(true)
     }
@@ -80,8 +81,6 @@ object ServiceModule {
     @ServiceScoped
     @Provides
     fun provideDateSourceFactory(
-        @ApplicationContext context: Context
-    ) = DefaultDataSourceFactory(context, Util.getUserAgent(context, APP_NAME))
+        @ApplicationContext context: Context,
+    ) = DefaultDataSource.Factory(context)
 }
-
-const val APP_NAME = "Music App"

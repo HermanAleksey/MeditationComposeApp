@@ -1,4 +1,4 @@
-package com.example.musicplayer.exoplayer
+package com.example.feature.music_player.exoplayer
 
 import android.content.ComponentName
 import android.content.Context
@@ -7,9 +7,8 @@ import android.support.v4.media.MediaBrowserCompat
 import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaControllerCompat
 import android.support.v4.media.session.PlaybackStateCompat
-import com.example.feature.music_player.exoplayer.MusicService
 import com.example.feature.music_player.other.Constants.NETWORK_FAILURE
-import com.example.musicplayer.other.Resource
+import com.example.feature.music_player.other.Resource
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update

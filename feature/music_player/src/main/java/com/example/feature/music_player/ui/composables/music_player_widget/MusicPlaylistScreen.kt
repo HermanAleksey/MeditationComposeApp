@@ -29,9 +29,9 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
+import com.example.feature.music_player.data.entities.Song
+import com.example.feature.music_player.other.Resource
 import com.example.feature.music_player.ui.viewmodels.MusicAction
-import com.example.musicplayer.data.entities.Song
-import com.example.musicplayer.other.Resource
 import com.example.musicplayer.ui.viewmodels.MainViewState
 import com.google.accompanist.coil.rememberCoilPainter
 
@@ -124,7 +124,7 @@ fun MusicListItem(
             .fillMaxWidth()
     ) {
         val (
-            divider, songTitle, songSubtitle, image, playIcon,
+            divider, songTitle, songSubtitle, image, _,
         ) = createRefs()
 
         Divider(

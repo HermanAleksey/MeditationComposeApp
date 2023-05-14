@@ -1,10 +1,10 @@
-package com.example.musicplayer.data.parsers
+package com.example.feature.music_player.data.parsers
 
 import android.support.v4.media.MediaBrowserCompat
-import com.example.musicplayer.data.entities.MediaDataSource
-import com.example.musicplayer.data.entities.Song
-import com.example.musicplayer.data.entities.SongSource
-import com.example.musicplayer.data.entities.toSongSourceType
+import com.example.feature.music_player.data.entities.MediaDataSource
+import com.example.feature.music_player.data.entities.Song
+import com.example.feature.music_player.data.entities.SongSource
+import com.example.feature.music_player.data.entities.toSongSourceType
 
 fun MediaBrowserCompat.MediaItem.toSong(): Song {
     val songSource = description.mediaUri.toSongSourceType()

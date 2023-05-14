@@ -12,8 +12,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.design_system.AppTheme
-import com.example.musicplayer.data.parsers.toSong
-import com.example.musicplayer.ui.composables.music_player_widget.MusicPlayerWidget
+import com.example.feature.music_player.data.parsers.toSong
+import com.example.feature.music_player.ui.composables.music_player_widget.MusicPlayerWidget
 import com.example.musicplayer.ui.composables.music_player_widget.MusicPlaylistScreen
 import com.example.musicplayer.ui.music_player.MusicPlayerScreen
 import com.example.musicplayer.ui.viewmodels.MainViewModel

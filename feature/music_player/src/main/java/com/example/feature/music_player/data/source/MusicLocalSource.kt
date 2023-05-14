@@ -1,8 +1,8 @@
-package com.example.musicplayer.data.remote
+package com.example.feature.music_player.data.source
 
 import com.example.feature.music_player.R
-import com.example.musicplayer.data.entities.LocalSong
-import com.example.musicplayer.data.entities.Song
+import com.example.feature.music_player.data.entities.LocalSong
+import com.example.feature.music_player.data.entities.Song
 
 class MusicLocalSource : MusicSource {
 

@@ -1,7 +1,6 @@
-package com.example.feature.music_player.data.remote
+package com.example.feature.music_player.data.source
 
-import com.example.musicplayer.data.entities.Song
-import com.example.musicplayer.data.remote.MusicSource
+import com.example.feature.music_player.data.entities.Song
 
 class MusicWebSource: MusicSource {
     override suspend fun getMusic(): List<Song> {

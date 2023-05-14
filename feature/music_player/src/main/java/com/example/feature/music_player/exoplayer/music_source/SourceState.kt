@@ -1,4 +1,4 @@
-package com.example.musicplayer.exoplayer.music_source
+package com.example.feature.music_player.exoplayer.music_source
 
 enum class SourceState {
     CREATED,

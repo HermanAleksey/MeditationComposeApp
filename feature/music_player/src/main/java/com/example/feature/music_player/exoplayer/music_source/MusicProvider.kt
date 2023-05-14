@@ -1,23 +1,23 @@
-package com.example.musicplayer.exoplayer.music_source
+package com.example.feature.music_player.exoplayer.music_source
 
 import android.support.v4.media.MediaBrowserCompat
 import android.support.v4.media.MediaDescriptionCompat
 import android.support.v4.media.MediaMetadataCompat
-import com.example.musicplayer.data.entities.SongSource
-import com.example.musicplayer.data.entities.toSongSourceType
-import com.example.musicplayer.data.parsers.toMediaMetadataCompat
-import com.example.musicplayer.data.remote.MusicSource
+import com.example.feature.music_player.data.entities.SongSource
+import com.example.feature.music_player.data.entities.toSongSourceType
+import com.example.feature.music_player.data.parsers.toMediaMetadataCompat
+import com.example.feature.music_player.data.source.MusicSource
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.source.ConcatenatingMediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
-import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
+import com.google.android.exoplayer2.upstream.DefaultDataSource
 import com.google.android.exoplayer2.upstream.RawResourceDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class MusicProvider(
     private val source: MusicSource,
-    private val dataSourceFactory: DefaultDataSourceFactory
+    private val dataSourceFactory: DefaultDataSource.Factory
 ) {
     private val onReadyListeners = mutableListOf<(Boolean) -> Unit>()
     var mediaMetadataCompats = emptyList<MediaMetadataCompat>()

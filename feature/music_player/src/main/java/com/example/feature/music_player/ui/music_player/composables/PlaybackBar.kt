@@ -24,8 +24,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.feature.music_player.extensions.toTimeString
 import com.example.feature.music_player.ui.viewmodels.MusicAction
-import com.example.musicplayer.extensions.toTimeString
 import com.example.musicplayer.ui.theme.MusicPlayerTheme
 
 @Composable
