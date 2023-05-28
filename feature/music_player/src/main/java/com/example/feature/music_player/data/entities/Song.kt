@@ -32,6 +32,7 @@ sealed interface MediaDataSource {
         val url: String
     ) : MediaDataSource
 
+    //todo replace resId with path or smth. Add DB
     data class LocalSource(
         val resId: Int
     ) : MediaDataSource

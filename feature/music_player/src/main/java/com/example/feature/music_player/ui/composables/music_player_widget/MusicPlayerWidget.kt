@@ -3,6 +3,7 @@ package com.example.feature.music_player.ui.composables.music_player_widget
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
@@ -30,6 +32,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
@@ -39,7 +42,8 @@ import com.example.feature.music_player.R
 import com.example.feature.music_player.data.entities.MediaDataSource
 import com.example.feature.music_player.data.entities.Song
 import com.example.feature.music_player.ui.viewmodels.MusicAction
-import com.google.accompanist.coil.rememberCoilPainter
+import com.skydoves.landscapist.ImageOptions
+import com.skydoves.landscapist.glide.GlideImage
 import kotlin.math.roundToInt
 
 private const val DRAG_DETECTION_OFFSET = 100f
@@ -113,30 +117,34 @@ private fun MusicPlayerWidgetContent(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier
-            .fillMaxWidth()
-            .height(64.dp)
+            .fillMaxSize()
             .clickable(
                 onClick = {
                     showPlayerFullScreen(true)
                 }
             )
     ) {
-        val albumImagePainter = when (song.imageSource) {
-            is MediaDataSource.WebSource -> {
-                rememberCoilPainter(song.imageSource.url)
-            }
+        when (song.imageSource) {
             is MediaDataSource.LocalSource -> {
-                painterResource(id = song.imageSource.resId)
+                Image(
+                    painter = painterResource(id = song.imageSource.resId),
+                    contentDescription = stringResource(id = R.string.album_cover),
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .size(48.dp)
+                        .offset(16.dp)
+                )
+            }
+            is MediaDataSource.WebSource -> {
+                GlideImage(
+                    imageModel = { song.imageSource.url }, // loading a network image using an URL.
+                    imageOptions = ImageOptions(
+                        contentScale = ContentScale.Crop,
+                        alignment = Alignment.Center
+                    )
+                )
             }
         }
-        Image(
-            painter = albumImagePainter,
-            contentDescription = song.title,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .size(48.dp)
-                .offset(16.dp)
-        )
 
         Column(
             verticalArrangement = Arrangement.Center,
@@ -146,7 +154,7 @@ private fun MusicPlayerWidgetContent(
                 .padding(vertical = 8.dp, horizontal = 32.dp),
         ) {
             Text(
-                song.title,
+                text = song.title,
                 style = MaterialTheme.typography.body2,
                 color = MaterialTheme.colors.onBackground,
                 maxLines = 1,
@@ -154,7 +162,7 @@ private fun MusicPlayerWidgetContent(
             )
 
             Text(
-                song.subtitle,
+                text = song.subtitle,
                 style = MaterialTheme.typography.body2,
                 color = MaterialTheme.colors.onBackground,
                 maxLines = 1,
@@ -165,8 +173,8 @@ private fun MusicPlayerWidgetContent(
         }
 
         Image(
-            painter = rememberCoilPainter(
-                request = if (isPlaying) {
+            painter = painterResource(
+                if (isPlaying) {
                     R.drawable.ic_round_pause
                 } else {
                     R.drawable.ic_round_play_arrow
@@ -176,7 +184,7 @@ private fun MusicPlayerWidgetContent(
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .padding(end = 16.dp)
-                .size(48.dp)
+                .size(36.dp)
                 .clickable(
                     interactionSource = remember {
                         MutableInteractionSource()
@@ -198,13 +206,16 @@ private fun MusicPlayerWidgetContent(
 fun MusicPlayerWidgetPreview() {
     AppTheme {
         MusicPlayerWidget(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(60.dp)
+                .background(MaterialTheme.colors.background),
             currentSong = Song(
                 mediaId = "11",
                 title = "Title",
                 subtitle = "Subtitle",
                 songSource = MediaDataSource.WebSource(""),
-                imageSource = MediaDataSource.WebSource(""),
+                imageSource = MediaDataSource.LocalSource(R.drawable.ic_music),
             ),
             songIsPlaying = true,
             processAction = {}

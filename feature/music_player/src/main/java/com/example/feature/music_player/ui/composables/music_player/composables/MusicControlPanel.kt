@@ -1,4 +1,4 @@
-package com.example.feature.music_player.ui.music_player.composables
+package com.example.feature.music_player.ui.composables.music_player.composables
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -44,23 +44,23 @@ internal fun MusicControlPanel(
         Icon(
             imageVector = Icons.Rounded.SkipPrevious,
             contentDescription = "Skip Previous",
+            tint = MaterialTheme.colors.onBackground,
             modifier = Modifier
                 .clip(CircleShape)
                 .clickable(onClick = {
                     processAction(MusicAction.PreviousTrack)
                 })
-                .padding(12.dp)
-                .size(32.dp)
+                .size(32.dp),
         )
         Icon(
             imageVector = Icons.Rounded.Replay10,
             contentDescription = "Replay 10 seconds",
+            tint = MaterialTheme.colors.onBackground,
             modifier = Modifier
                 .clip(CircleShape)
                 .clickable(onClick = {
                     processAction(MusicAction.Rewind)
                 })
-                .padding(12.dp)
                 .size(32.dp)
         )
         Icon(
@@ -82,24 +82,24 @@ internal fun MusicControlPanel(
         Icon(
             imageVector = Icons.Rounded.Forward10,
             contentDescription = "Forward 10 seconds",
+            tint = MaterialTheme.colors.onBackground,
             modifier = Modifier
                 .clip(CircleShape)
                 .clickable(onClick = {
                     processAction(MusicAction.FastForward)
 
                 })
-                .padding(12.dp)
                 .size(32.dp)
         )
         Icon(
             imageVector = Icons.Rounded.SkipNext,
             contentDescription = "Skip Next",
+            tint = MaterialTheme.colors.onBackground,
             modifier = Modifier
                 .clip(CircleShape)
                 .clickable(onClick = {
                     processAction(MusicAction.NextTrack)
                 })
-                .padding(12.dp)
                 .size(32.dp)
         )
     }

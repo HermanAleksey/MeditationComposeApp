@@ -39,8 +39,7 @@ class MusicService : MediaBrowserServiceCompat() {
     @Local
     lateinit var musicProvider: MusicProvider
 
-    private val serviceJob = Job()
-    private val serviceScope = CoroutineScope(Dispatchers.Main + serviceJob)
+    private val serviceScope = CoroutineScope(Dispatchers.Main + Job())
 
     private lateinit var mediaSessionCompat: MediaSessionCompat
 
@@ -127,7 +126,7 @@ class MusicService : MediaBrowserServiceCompat() {
     ) {
         val curSongIndex = if (currentPlayingSong == null) 0 else songs.indexOf(itemToPlay)
         with(exoPlayer) {
-            setMediaSource(musicProvider.asConcatenatedMediaSource())
+            setMediaSource(musicProvider.getConcatenatedMediaSource())
             prepare()
             seekTo(curSongIndex, 0L)
             playWhenReady = playNow

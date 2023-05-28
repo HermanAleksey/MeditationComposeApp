@@ -1,4 +1,4 @@
-package com.example.feature.music_player.ui.music_player.composables
+package com.example.feature.music_player.ui.composables.music_player.composables
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearEasing
@@ -20,10 +20,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
+import com.example.design_system.AppTheme
 import com.example.feature.music_player.R
+import com.example.feature.music_player.data.entities.MediaDataSource
 import com.example.feature.music_player.ui.theme.roundedShape
+import com.skydoves.landscapist.ImageOptions
+import com.skydoves.landscapist.glide.GlideImage
 
 private const val STOP_ANIMATION_DURATION = 1000
 private const val CIRCLE_SPIN_ANIMATION_DURATION = 3000
@@ -32,7 +37,7 @@ private const val CIRCLE_SPIN_ANIMATION_DURATION = 3000
 internal fun SpinDiskAnimation(
     modifier: Modifier = Modifier,
     isSpinning: Boolean = true,
-    albumPainter: Painter,
+    imageSource: MediaDataSource,
 ) {
     var currentRotation by remember {
         mutableStateOf(0f)
@@ -84,15 +89,35 @@ internal fun SpinDiskAnimation(
             contentDescription = null
         )
 
-        Image(
+        GlideImage(
+            imageModel = {
+                when (imageSource) {
+                    is MediaDataSource.LocalSource -> imageSource.resId
+                    is MediaDataSource.WebSource -> imageSource.url
+                }
+            },
+            imageOptions = ImageOptions(
+                contentScale = ContentScale.Crop,
+                alignment = Alignment.Center
+            ),
             modifier = Modifier
                 .fillMaxSize(0.5f)
                 .rotate(rotation.value)
                 .aspectRatio(1.0f)
                 .align(Alignment.Center)
                 .clip(roundedShape),
-            painter = albumPainter,
-            contentDescription = "Song cover"
+        )
+    }
+}
+
+@Preview
+@Composable
+fun SpinDiskAnimationPreview() {
+    AppTheme {
+        SpinDiskAnimation(
+            modifier = Modifier,
+            isSpinning = false,
+            imageSource = MediaDataSource.LocalSource(R.drawable.vinyl_background)
         )
     }
 }

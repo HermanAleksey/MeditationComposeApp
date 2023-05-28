@@ -47,7 +47,7 @@ class MusicProvider(
         MediaBrowserCompat.MediaItem(desc, MediaBrowserCompat.MediaItem.FLAG_PLAYABLE)
     }.toMutableList()
 
-    fun asConcatenatedMediaSource(): ConcatenatingMediaSource {
+    fun getConcatenatedMediaSource(): ConcatenatingMediaSource {
         val concatenatingMediaSource = ConcatenatingMediaSource()
         mediaMetadataCompats.forEach { metadataCompat ->
             when (metadataCompat.description.mediaUri.toSongSourceType()) {

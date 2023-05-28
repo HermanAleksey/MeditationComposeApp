@@ -70,6 +70,9 @@ dependencies {
 
     implementation(project(":feature:music_player"))
 
+    implementation(Dependencies.compose_ui)
+    implementation(Dependencies.compose_material)
+
     // Dagger - Hilt
     implementation(Dependencies.hilt_android)
     implementation(Dependencies.hilt_navigation_compose)

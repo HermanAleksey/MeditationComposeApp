@@ -40,6 +40,7 @@ dependencies {
     implementation(Dependencies.core_ktx)
 
     implementation(Dependencies.compose_material)
+    implementation(Dependencies.compose_ui_tooling)
     implementation(Dependencies.compose_ui_tooling_preview)
     implementation(Dependencies.activity_compose)
     val constraintlayout_compose_version = "1.0.1"

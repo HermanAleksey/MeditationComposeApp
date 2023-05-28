@@ -7,15 +7,36 @@ import com.example.feature.music_player.data.entities.Song
 class MusicLocalSource : MusicSource {
 
     override suspend fun getMusic(): List<Song> {
-        //todo replace mock
+        //todo replace mocks
         return listOf(
             LocalSong(
                 mediaId = "1",
-                title = "Test",
+                title = "Test1",
                 subtitle = "subtitle",
                 songResId = R.raw.sound_rain,
-                imageResId = R.drawable.ic_music//todo check icons
-            )
+                imageResId = R.drawable.lovely_desert
+            ),
+            LocalSong(
+                mediaId = "2",
+                title = "Test2",
+                subtitle = "subtitle",
+                songResId = R.raw.fire_in_fireplace,
+                imageResId = R.drawable.mountaineers
+            ),
+            LocalSong(
+                mediaId = "3",
+                title = "Test3",
+                subtitle = "subtitle",
+                songResId = R.raw.sound_rain,
+                imageResId = R.drawable.painting_forest
+            ),
+            LocalSong(
+                mediaId = "4",
+                title = "Test4",
+                subtitle = "subtitle",
+                songResId = R.raw.sound_rain,
+                imageResId = R.drawable.the_hill_sides
+            ),
         ).map {
             it.toSong()
         }

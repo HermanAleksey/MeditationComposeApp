@@ -3,4 +3,6 @@
     <string name="cd_play">Play</string>
     <string name="notification_channel_name">Music Channel</string>
     <string name="notification_channel_description">Shows the currently playing music</string>
+    <string name="album_cover">Album cover</string>
+    <string name="favourite_button_content_desc">Mark as Favourite</string>
 </resources>
