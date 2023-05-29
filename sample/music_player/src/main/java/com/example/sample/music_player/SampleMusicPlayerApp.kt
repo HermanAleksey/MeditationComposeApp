@@ -4,4 +4,4 @@ import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class SampleMusicPlayerApp: Application()
+class SampleMusicPlayerApp : Application()

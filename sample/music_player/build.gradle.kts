@@ -2,12 +2,11 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.dagger.hilt.android")
-    id("kotlin-android")//?
+    id("kotlin-android")
     id("kotlin-kapt")
 
     id("org.jlleitschuh.gradle.ktlint")
 }
-
 
 @Suppress("UnstableApiUsage")
 android {
@@ -77,5 +76,4 @@ dependencies {
     implementation(Dependencies.hilt_android)
     implementation(Dependencies.hilt_navigation_compose)
     kapt(Dependencies.hilt_compiler)
-
 }
