@@ -19,6 +19,7 @@ class AuthenticationRepositoryImpl @Inject constructor(
     private val authApi: AuthenticationApi,
     private val profileMapper: ProfileMapper,
 ) : AuthenticationRepository {
+
     override fun login(
         login: String,
         password: String,
