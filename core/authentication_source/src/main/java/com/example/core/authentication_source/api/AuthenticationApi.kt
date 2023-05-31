@@ -28,7 +28,7 @@ interface AuthenticationApi {
 
     @GET("auth/verify_code")
     suspend fun verifyCode(
-        @Field("first_name") login: String,
+        @Field("login") login: String,
         @Field("code") code: String
     ): SuccessInfo
 
