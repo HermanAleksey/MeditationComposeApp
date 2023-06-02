@@ -1,10 +1,13 @@
 package com.example.core.authentication_source.api
 
+import com.example.core.authentication_source.api.model.LoginRequest
 import com.example.core.authentication_source.api.model.LoginUserResponse
 import com.example.core.authentication_source.api.model.RegistrationRequest
+import com.example.core.authentication_source.api.model.ResetPasswordRequest
+import com.example.core.authentication_source.api.model.RestorePasswordRequest
+import com.example.core.authentication_source.api.model.VerifyCodeRequest
 import com.example.network.SuccessInfo
 import retrofit2.http.Body
-import retrofit2.http.Field
 import retrofit2.http.GET
 import retrofit2.http.POST
 
@@ -12,8 +15,7 @@ interface AuthenticationApi {
 
     @GET("auth/login")
     suspend fun login(
-        @Field("login") login: String,
-        @Field("password") password: String
+        @Body loginRequest: LoginRequest,
     ): LoginUserResponse
 
     @POST("auth/registration")
@@ -21,20 +23,18 @@ interface AuthenticationApi {
         @Body registrationRequest: RegistrationRequest
     ): SuccessInfo
 
-    @GET("auth/request_password_restore")
+    @GET("auth/restore")
     suspend fun requestPasswordRestore(
-        @Field("login") login: String
+        @Body restoreRequest: RestorePasswordRequest,
     ): SuccessInfo
 
-    @GET("auth/verify_code")
+    @GET("auth/code")
     suspend fun verifyCode(
-        @Field("login") login: String,
-        @Field("code") code: String
+        @Body verifyCodeRequest: VerifyCodeRequest,
     ): SuccessInfo
 
-    @POST("auth/reset_password")
+    @POST("auth/reset")
     suspend fun setNewPassword(
-        @Field("login") login: String,
-        @Body newPassword: String
+        @Body resetPasswordRequest: ResetPasswordRequest,
     ): SuccessInfo
 }
