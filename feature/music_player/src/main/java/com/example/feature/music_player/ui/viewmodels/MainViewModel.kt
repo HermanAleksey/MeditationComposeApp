@@ -2,18 +2,17 @@ package com.example.feature.music_player.ui.viewmodels
 
 
 import android.support.v4.media.MediaBrowserCompat
-import android.support.v4.media.MediaMetadataCompat.METADATA_KEY_MEDIA_ID
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.feature.music_player.data.entities.Song
-import com.example.feature.music_player.data.parsers.toSong
+import com.example.feature.music_player.data.parser.SongParser
+import com.example.feature.music_player.exoplayer.MusicService
 import com.example.feature.music_player.exoplayer.MusicServiceConnection
 import com.example.feature.music_player.exoplayer.currentPlaybackPosition
 import com.example.feature.music_player.exoplayer.isPlayEnabled
 import com.example.feature.music_player.exoplayer.isPlaying
 import com.example.feature.music_player.exoplayer.isPrepared
 import com.example.feature.music_player.extensions.combine
-import com.example.feature.music_player.other.Constants.MEDIA_ROOT_ID
 import com.example.feature.music_player.other.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
@@ -29,6 +28,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val musicServiceConnection: MusicServiceConnection,
+    private val songParser: SongParser,
 ) : ViewModel() {
 
     private val _mediaItems = MutableStateFlow<Resource<List<Song>>>(Resource.Loading(null))
@@ -43,9 +43,14 @@ class MainViewModel @Inject constructor(
         musicServiceConnection.networkFailure,
         musicServiceConnection.playbackState,
         musicServiceConnection.currentPlayingSong,
-    ) { isFullScreen, mediaItems, currentPlaybackPosition,
-        isConnected, isNetworkFailure, playbackState, currentPLayingSong ->
+    ) {
+            isFullScreen, mediaItems, currentPlaybackPosition,
+            isConnected, isNetworkFailure, playbackState, currentPLayingSong,
+        ->
 
+        val song = currentPLayingSong?.let { metadata ->
+            songParser.parse(metadata)
+        }
         MainViewState(
             showPlayerFullScreen = isFullScreen,
             mediaItems = mediaItems,
@@ -53,7 +58,7 @@ class MainViewModel @Inject constructor(
             isConnected = isConnected,
             networkError = isNetworkFailure,
             playbackState = playbackState,
-            currentPlayingSong = currentPLayingSong
+            currentPlayingSong = song
         )
     }.stateIn(
         viewModelScope,
@@ -63,7 +68,7 @@ class MainViewModel @Inject constructor(
 
     init {
         musicServiceConnection.subscribe(
-            MEDIA_ROOT_ID,
+            MusicService.MEDIA_ROOT_ID,
             object : MediaBrowserCompat.SubscriptionCallback() {
                 override fun onChildrenLoaded(
                     parentId: String,
@@ -71,7 +76,7 @@ class MainViewModel @Inject constructor(
                 ) {
                     super.onChildrenLoaded(parentId, children)
                     val items = children.map {
-                        it.toSong()
+                        songParser.parse(it)
                     }
                     _mediaItems.update {
                         Resource.Success(items)
@@ -141,9 +146,7 @@ class MainViewModel @Inject constructor(
 
     private fun toggleSong(song: Song) {
         val isPrepared = uiState.value.playbackState?.isPrepared ?: false
-        if (isPrepared && song.mediaId ==
-            uiState.value.currentPlayingSong?.getString(METADATA_KEY_MEDIA_ID)
-        ) {
+        if (isPrepared && song.mediaId == uiState.value.currentPlayingSong?.mediaId) {
             uiState.value.playbackState?.let { playbackState ->
                 when {
                     playbackState.isPlaying -> {
@@ -176,7 +179,7 @@ class MainViewModel @Inject constructor(
     override fun onCleared() {
         super.onCleared()
         musicServiceConnection.unsubscribe(
-            MEDIA_ROOT_ID,
+            MusicService.MEDIA_ROOT_ID,
             object : MediaBrowserCompat.SubscriptionCallback() {}
         )
     }

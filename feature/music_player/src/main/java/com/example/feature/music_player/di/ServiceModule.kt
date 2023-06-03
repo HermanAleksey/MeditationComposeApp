@@ -1,10 +1,11 @@
 package com.example.feature.music_player.di
 
 import android.content.Context
-import com.example.feature.music_player.data.source.MusicLocalSource
-import com.example.feature.music_player.data.source.MusicSource
-import com.example.feature.music_player.data.source.MusicWebSource
-import com.example.feature.music_player.exoplayer.music_source.MusicProvider
+import com.example.feature.music_player.data.parser.SongParser
+import com.example.feature.music_player.data.provider.MusicLocalProvider
+import com.example.feature.music_player.data.provider.MusicWebProvider
+import com.example.feature.music_player.exoplayer.MusicServiceConnection
+import com.example.feature.music_player.exoplayer.music_source.MusicSource
 import com.google.android.exoplayer2.C
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.audio.AudioAttributes
@@ -32,31 +33,48 @@ object ServiceModule {
     @ServiceScoped
     @Provides
     @Web
-    fun provideMusicDatabase(): MusicSource = MusicWebSource()
+    fun provideMusicDatabase(
+        songParser: SongParser,
+    ): com.example.feature.music_player.data.provider.MusicProvider = MusicWebProvider(songParser)
 
     @ServiceScoped
     @Provides
     @Local
-    fun provideLocalMusicDatabase(): MusicSource = MusicLocalSource()
+    fun provideLocalMusicDatabase(
+        songParser: SongParser,
+    ): com.example.feature.music_player.data.provider.MusicProvider = MusicLocalProvider(songParser)
+
+    @ServiceScoped
+    @Provides
+    fun provideSongParser(): SongParser = SongParser()
+
+    @ServiceScoped
+    @Provides
+    fun provideMusicServiceConnection(
+        @ApplicationContext context: Context,
+    ): MusicServiceConnection = MusicServiceConnection(context)
+
 
     @ServiceScoped
     @Provides
     @Local
     fun provideLocalMusicSource(
-        @Local musicSource: MusicSource,
+        @Local musicProvider: com.example.feature.music_player.data.provider.MusicProvider,
         factory: DefaultDataSource.Factory,
-    ): MusicProvider = MusicProvider(
-        musicSource, factory
+        songParser: SongParser,
+    ): MusicSource = MusicSource(
+        musicProvider, factory, songParser
     )
 
     @ServiceScoped
     @Provides
     @Web
     fun provideWebMusicSource(
-        @Web musicSource: MusicSource,
+        @Web musicProvider: com.example.feature.music_player.data.provider.MusicProvider,
         factory: DefaultDataSource.Factory,
-    ): MusicProvider = MusicProvider(
-        musicSource, factory
+        songParser: SongParser,
+    ): MusicSource = MusicSource(
+        musicProvider, factory, songParser
     )
 
     @ServiceScoped

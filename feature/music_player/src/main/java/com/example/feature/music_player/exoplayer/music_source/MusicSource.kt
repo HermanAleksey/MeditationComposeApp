@@ -1,12 +1,12 @@
 package com.example.feature.music_player.exoplayer.music_source
 
 import android.support.v4.media.MediaMetadataCompat
-import com.example.feature.music_player.data.entities.DataSourceMapper
 import com.example.feature.music_player.data.entities.LocalRes
 import com.example.feature.music_player.data.entities.LocalURL
+import com.example.feature.music_player.data.entities.Song
 import com.example.feature.music_player.data.entities.WebURL
-import com.example.feature.music_player.data.parsers.toMediaMetadataCompat
-import com.example.feature.music_player.data.source.MusicSource
+import com.example.feature.music_player.data.parser.SongParser
+import com.example.feature.music_player.data.provider.MusicProvider
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.source.ConcatenatingMediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
@@ -15,9 +15,10 @@ import com.google.android.exoplayer2.upstream.RawResourceDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class MusicProvider(
-    private val source: MusicSource,
+class MusicSource(
+    private val source: MusicProvider,
     private val dataSourceFactory: DefaultDataSource.Factory,
+    private val songParser: SongParser,
 ) {
     private val onReadyListeners = mutableListOf<(Boolean) -> Unit>()
     var mediaMetadataCompats = emptyList<MediaMetadataCompat>()
@@ -37,17 +38,16 @@ class MusicProvider(
     fun getConcatenatedMediaSource(): ConcatenatingMediaSource {
         val concatenatingMediaSource = ConcatenatingMediaSource()
         mediaMetadataCompats.forEach { metadataCompat ->
-            val songDataSource = metadataCompat.description.mediaUri?.toString()?.let {
-                DataSourceMapper().getDataSourceType(it)
-            } ?: throw Exception("Can't cast URI to data source")
+            songParser.parse(metadataCompat)
+            val songDataSource = songParser.parse(metadataCompat) ?: throw Throwable("Hello")
 
-            val mediaSource = when (songDataSource) {
+            val mediaSource = when (songDataSource.songSource) {
                 is LocalRes -> {
-                    val rawResId = songDataSource.resId
+                    val rawResId = songDataSource.songSource.resId
                     parseLocalSongToMediaSource(rawResId)
                 }
                 is WebURL -> {
-                    val url = songDataSource.url
+                    val url = songDataSource.songSource.url
                     parseWebSongToMediaSource(url)
                 }
                 is LocalURL -> throw Throwable("Not implemented yet")
@@ -79,12 +79,29 @@ class MusicProvider(
         val allSongs = source.getMusic()
 
         mediaMetadataCompats = allSongs.map { song ->
-            song.toMediaMetadataCompat()
+            parseSongToMetadataCompat(song)
         }
 
         withContext(Dispatchers.Main) {
             sourceState = SourceState.INITIALIZED
         }
+    }
+
+    private fun parseSongToMetadataCompat(song: Song): MediaMetadataCompat = with(song) {
+        return MediaMetadataCompat.Builder()
+            .putString(MediaMetadataCompat.METADATA_KEY_TITLE, title)
+            .putString(MediaMetadataCompat.METADATA_KEY_DISPLAY_TITLE, title)
+            .putString(MediaMetadataCompat.METADATA_KEY_ARTIST, subtitle)
+            .putString(MediaMetadataCompat.METADATA_KEY_DISPLAY_SUBTITLE, subtitle)
+            .putString(MediaMetadataCompat.METADATA_KEY_MEDIA_ID, mediaId)
+            .putString(MediaMetadataCompat.METADATA_KEY_MEDIA_URI, songSource.getTypedValue())
+            .putString(
+                MediaMetadataCompat.METADATA_KEY_DISPLAY_ICON_URI,
+                imageSource.getTypedValue()
+            )
+            .putString(MediaMetadataCompat.METADATA_KEY_ALBUM_ART_URI, imageSource.getTypedValue())
+            .putString(MediaMetadataCompat.METADATA_KEY_DISPLAY_DESCRIPTION, subtitle)
+            .build()
     }
 
     fun addOnReadyListener(action: (isSuccessful: Boolean) -> Unit): Boolean {

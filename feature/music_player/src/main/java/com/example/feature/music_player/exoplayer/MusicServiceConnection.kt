@@ -7,7 +7,6 @@ import android.support.v4.media.MediaBrowserCompat
 import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaControllerCompat
 import android.support.v4.media.session.PlaybackStateCompat
-import com.example.feature.music_player.other.Constants.NETWORK_FAILURE
 import com.example.feature.music_player.other.Resource
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -18,7 +17,7 @@ import kotlinx.coroutines.flow.update
  * and state of it
  * */
 class MusicServiceConnection(
-    context: Context
+    context: Context,
 ) {
     private val _isConnected =
         MutableStateFlow<Resource<Boolean>>(Resource.Loading(null))
@@ -64,7 +63,7 @@ class MusicServiceConnection(
     }
 
     private inner class MediaBrowserConnectionCallback(
-        private val context: Context
+        private val context: Context,
     ) : MediaBrowserCompat.ConnectionCallback() {
 
         override fun onConnected() {
@@ -109,7 +108,7 @@ class MusicServiceConnection(
         override fun onSessionEvent(event: String?, extras: Bundle?) {
             super.onSessionEvent(event, extras)
             when (event) {
-                NETWORK_FAILURE -> _networkFailure.update {
+                MusicService.NETWORK_ERROR -> _networkFailure.update {
                     Resource.Error(
                         "Couldn't connect to the server. Please check your internet connection.",
                         null

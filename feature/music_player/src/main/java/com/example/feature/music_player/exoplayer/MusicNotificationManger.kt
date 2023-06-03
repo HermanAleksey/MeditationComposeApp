@@ -8,13 +8,10 @@ import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.support.v4.media.session.MediaControllerCompat
 import android.support.v4.media.session.MediaSessionCompat
-import android.util.Log
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.example.feature.music_player.R
-import com.example.feature.music_player.other.Constants.NOTIFICATION_CHANNEL_ID
-import com.example.feature.music_player.other.Constants.NOTIFICATION_ID
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
 
@@ -22,10 +19,15 @@ class MusicNotificationManger(
     private val context: Context,
     sessionToken: MediaSessionCompat.Token,
     notificationListener: PlayerNotificationManager.NotificationListener,
-    private val newSongCallback: () -> Unit,
+    private val onNewSongStarted: () -> Unit,
 ) {
 
     private val notificationManager: PlayerNotificationManager
+
+    companion object {
+        const val NOTIFICATION_ID = 1
+        const val NOTIFICATION_CHANNEL_ID = "Music App"
+    }
 
     init {
         val mediaController = MediaControllerCompat(context, sessionToken)
@@ -51,7 +53,7 @@ class MusicNotificationManger(
     ) : PlayerNotificationManager.MediaDescriptionAdapter {
 
         override fun getCurrentContentTitle(player: Player): CharSequence {
-            newSongCallback()
+            onNewSongStarted()
             return mediaController.metadata.description.title.toString()
         }
 
@@ -67,11 +69,6 @@ class MusicNotificationManger(
             player: Player,
             callback: PlayerNotificationManager.BitmapCallback,
         ): Bitmap? {
-            Log.e(
-                this.javaClass.name.toString(),
-                "getCurrentLargeIcon; player:$player, " +
-                        "mediaController.metadata.description.iconUri:${mediaController.metadata.description.iconUri}"
-            )
             val bitmap = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888)
             val mCanvas = Canvas(bitmap)
             mCanvas.drawColor(Color.GREEN)

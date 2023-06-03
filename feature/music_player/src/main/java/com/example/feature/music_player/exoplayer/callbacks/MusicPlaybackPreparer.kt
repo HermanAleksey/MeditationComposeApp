@@ -4,14 +4,10 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.ResultReceiver
 import android.support.v4.media.session.PlaybackStateCompat
-import com.example.feature.music_player.exoplayer.music_source.MusicProvider
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
 
-class MusicPlaybackPrepared(
-    private val musicSource: MusicProvider,
-    private val onPlayerPrepared: (String) -> Unit,
-) : MediaSessionConnector.PlaybackPreparer {
+class MusicPlaybackPreparer : MediaSessionConnector.PlaybackPreparer {
 
     override fun onCommand(
         player: Player,
@@ -30,9 +26,10 @@ class MusicPlaybackPrepared(
     override fun onPrepare(playWhenReady: Boolean) = Unit
 
     override fun onPrepareFromMediaId(mediaId: String, playWhenReady: Boolean, extras: Bundle?) {
-        musicSource.addOnReadyListener {
-            onPlayerPrepared(mediaId)
-        }
+        //todo to be overriden
+//        musicSource.addOnReadyListener {
+//            onPlayerPrepared(mediaId)
+//        }
     }
 
     override fun onPrepareFromSearch(query: String, playWhenReady: Boolean, extras: Bundle?) = Unit

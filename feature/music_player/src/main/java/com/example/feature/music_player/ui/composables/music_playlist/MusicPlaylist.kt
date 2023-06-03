@@ -29,7 +29,7 @@ import androidx.compose.ui.unit.dp
 import com.example.design_system.AppTheme
 import com.example.design_system.clickableWithoutRipple
 import com.example.feature.music_player.R
-import com.example.feature.music_player.data.entities.LocalSong
+import com.example.feature.music_player.data.entities.LocalRes
 import com.example.feature.music_player.data.entities.Song
 import com.example.feature.music_player.ui.composables.MediaResourceGlideImage
 import com.example.feature.music_player.ui.composables.music_playlist.composables.FavouriteCheckbox
@@ -113,13 +113,13 @@ fun MusicListItem(
 fun MusicListItemPreview() {
     AppTheme {
         MusicListItem(
-            song = LocalSong(
+            song = Song(
                 mediaId = "1",
                 title = "Test",
                 subtitle = "subtitle",
-                songResId = R.raw.sound_rain,
-                imageResId = R.drawable.lovely_desert
-            ).toSong(),
+                songSource = LocalRes(R.raw.sound_rain),
+                imageSource = LocalRes(R.drawable.lovely_desert)
+            ),
             onSongClick = {}
         )
     }

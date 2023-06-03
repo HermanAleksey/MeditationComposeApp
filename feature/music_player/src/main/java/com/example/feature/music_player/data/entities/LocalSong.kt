@@ -6,14 +6,4 @@ class LocalSong(
     val subtitle: String = "",
     val songResId: Int,
     val imageResId: Int,
-) {
-    fun toSong(): Song {
-        return Song(
-            mediaId = mediaId,
-            title = title,
-            subtitle = subtitle,
-            songSource = LocalRes(songResId),
-            imageSource = LocalRes(imageResId)
-        )
-    }
-}
+)

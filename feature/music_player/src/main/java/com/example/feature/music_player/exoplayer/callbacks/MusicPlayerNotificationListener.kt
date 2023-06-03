@@ -4,8 +4,8 @@ import android.app.Notification
 import android.app.Service.STOP_FOREGROUND_REMOVE
 import android.content.Intent
 import androidx.core.content.ContextCompat
+import com.example.feature.music_player.exoplayer.MusicNotificationManger
 import com.example.feature.music_player.exoplayer.MusicService
-import com.example.feature.music_player.other.Constants.NOTIFICATION_ID
 import com.google.android.exoplayer2.ui.PlayerNotificationManager
 
 class MusicPlayerNotificationListener(
@@ -33,7 +33,7 @@ class MusicPlayerNotificationListener(
                     this,
                     Intent(applicationContext, this::class.java)
                 )
-                startForeground(NOTIFICATION_ID, notification)
+                startForeground(MusicNotificationManger.NOTIFICATION_ID, notification)
                 isForegroundService = true
             }
         }

@@ -1,10 +1,13 @@
-package com.example.feature.music_player.data.source
+package com.example.feature.music_player.data.provider
 
 import com.example.feature.music_player.R
 import com.example.feature.music_player.data.entities.LocalSong
 import com.example.feature.music_player.data.entities.Song
+import com.example.feature.music_player.data.parser.SongParser
 
-class MusicLocalSource : MusicSource {
+class MusicLocalProvider(
+    private val songParser: SongParser,
+) : MusicProvider {
 
     override suspend fun getMusic(): List<Song> {
         //todo replace mocks
@@ -38,7 +41,7 @@ class MusicLocalSource : MusicSource {
                 imageResId = R.drawable.the_hill_sides
             ),
         ).map {
-            it.toSong()
+            songParser.parse(it)
         }
     }
 }

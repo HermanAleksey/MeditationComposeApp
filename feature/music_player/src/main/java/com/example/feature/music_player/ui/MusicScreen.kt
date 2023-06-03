@@ -24,7 +24,6 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.feature.music_player.data.parsers.toSong
 import com.example.feature.music_player.ui.composables.music_player.SongScreenContent
 import com.example.feature.music_player.ui.composables.music_player_widget.MusicPlayerWidget
 import com.example.feature.music_player.ui.composables.music_playlist.MusicPlaylist
@@ -78,7 +77,7 @@ fun MusicScreen(
                     mainViewModel.processAction(MusicAction.CloseFullScreenPlayer)
                 }
 
-                val song = uiState.value.currentPlayingSong?.toSong()
+                val song = uiState.value.currentPlayingSong
                 if (song != null) {
                     SongScreenContent(
                         song = song,
@@ -107,7 +106,7 @@ fun MusicScreen(
                             .height(64.dp)
                             .background(MaterialTheme.colors.secondary),
                         processAction = mainViewModel::processAction,
-                        currentSong = uiState.value.currentPlayingSong?.toSong(),
+                        currentSong = uiState.value.currentPlayingSong,
                         songIsPlaying = uiState.value.isSongPlaying
                     )
                 }

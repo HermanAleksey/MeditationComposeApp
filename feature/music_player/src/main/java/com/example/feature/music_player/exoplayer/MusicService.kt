@@ -10,12 +10,10 @@ import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaSessionCompat
 import androidx.media.MediaBrowserServiceCompat
 import com.example.feature.music_player.di.Local
-import com.example.feature.music_player.exoplayer.callbacks.MusicPlaybackPrepared
+import com.example.feature.music_player.exoplayer.callbacks.MusicPlaybackPreparer
 import com.example.feature.music_player.exoplayer.callbacks.MusicPlayerEventListener
 import com.example.feature.music_player.exoplayer.callbacks.MusicPlayerNotificationListener
-import com.example.feature.music_player.exoplayer.music_source.MusicProvider
-import com.example.feature.music_player.other.Constants.MEDIA_ROOT_ID
-import com.example.feature.music_player.other.Constants.NETWORK_FAILURE
+import com.example.feature.music_player.exoplayer.music_source.MusicSource
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
@@ -29,14 +27,15 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MusicService : MediaBrowserServiceCompat() {
+class MusicService : MediaBrowserServiceCompat(),
+    MediaSessionConnector.PlaybackPreparer by MusicPlaybackPreparer() {
 
     @Inject
     lateinit var exoPlayer: ExoPlayer
 
     @Inject
     @Local
-    lateinit var musicProvider: MusicProvider
+    lateinit var musicSource: MusicSource
 
     private val serviceScope = CoroutineScope(Dispatchers.Main + Job())
 
@@ -48,25 +47,19 @@ class MusicService : MediaBrowserServiceCompat() {
 
     private var isPlayerInitialize = false
 
-    private lateinit var musicPlayerListener: MusicPlayerEventListener
+    private var musicPlayerListener: MusicPlayerEventListener = MusicPlayerEventListener(this)
 
-    companion object {
-        var currentSongDuration = 0L
-            private set
-
-        private const val SERVICE_TAG = "MusicService"
-    }
+    private val playerNotificationListener = MusicPlayerNotificationListener(this)
 
     override fun onCreate() {
         super.onCreate()
         serviceScope.launch {
-            musicProvider.fetchMediaData()
+            musicSource.fetchMediaData()
         }
 
         configureMediaSessionCompat()
         configureMediaSessionConnector()
 
-        musicPlayerListener = MusicPlayerEventListener(this)
         exoPlayer.addListener(musicPlayerListener)
 
         showNotification()
@@ -84,17 +77,16 @@ class MusicService : MediaBrowserServiceCompat() {
     }
 
     private fun configureMediaSessionConnector() {
-        val musicPlaybackPreparer = MusicPlaybackPrepared(
-            musicSource = musicProvider,
-            onPlayerPrepared = {
-                switchSong(mediaId = it)
-            }
-        )
-
         MediaSessionConnector(mediaSessionCompat).apply {
-            setPlaybackPreparer(musicPlaybackPreparer)
+            setPlaybackPreparer(this@MusicService)
             setQueueNavigator(MusicQueueNavigator())
             setPlayer(exoPlayer)
+        }
+    }
+
+    override fun onPrepareFromMediaId(mediaId: String, playWhenReady: Boolean, extras: Bundle?) {
+        musicSource.addOnReadyListener {
+            switchSong(mediaId)
         }
     }
 
@@ -102,8 +94,8 @@ class MusicService : MediaBrowserServiceCompat() {
         MusicNotificationManger(
             context = this,
             sessionToken = mediaSessionCompat.sessionToken,
-            notificationListener = MusicPlayerNotificationListener(this),
-            newSongCallback = {
+            notificationListener = playerNotificationListener,
+            onNewSongStarted = {
                 currentSongDuration = exoPlayer.duration
             }
         ).showNotification(exoPlayer)
@@ -111,14 +103,14 @@ class MusicService : MediaBrowserServiceCompat() {
 
     private inner class MusicQueueNavigator : TimelineQueueNavigator(mediaSessionCompat) {
         override fun getMediaDescription(player: Player, windowIndex: Int): MediaDescriptionCompat {
-            return musicProvider.mediaMetadataCompats[windowIndex].description
+            return musicSource.mediaMetadataCompats[windowIndex].description
         }
     }
 
     //call when launch player with playlist for the first time
-    private fun initialPreparePlayer(    ) {
+    private fun initialPreparePlayer() {
         with(exoPlayer) {
-            setMediaSource(musicProvider.getConcatenatedMediaSource())
+            setMediaSource(musicSource.getConcatenatedMediaSource())
             prepare()
             seekTo(0, 0L)
             playWhenReady = false
@@ -128,12 +120,12 @@ class MusicService : MediaBrowserServiceCompat() {
     private fun switchSong(
         mediaId: String,
     ) {
-        musicProvider.mediaMetadataCompats.find {
+        musicSource.mediaMetadataCompats.find {
             mediaId == it.description.mediaId
         }.let { media ->
             currentPlayingSong = media
             exoPlayer.seekTo(
-                musicProvider.mediaMetadataCompats.indexOf(media),
+                musicSource.mediaMetadataCompats.indexOf(media),
                 0L
             )
             exoPlayer.playWhenReady = true
@@ -166,9 +158,9 @@ class MusicService : MediaBrowserServiceCompat() {
     ) {
         when (parentId) {
             MEDIA_ROOT_ID -> {
-                val resultsSent = musicProvider.addOnReadyListener { isInitialized ->
+                val resultsSent = musicSource.addOnReadyListener { isInitialized ->
                     if (isInitialized) {
-                        val mediaItems = musicProvider.mediaMetadataCompats.map {
+                        val mediaItems = musicSource.mediaMetadataCompats.map {
                             MediaBrowserCompat.MediaItem(
                                 it.description,
                                 MediaBrowserCompat.MediaItem.FLAG_PLAYABLE
@@ -180,7 +172,7 @@ class MusicService : MediaBrowserServiceCompat() {
                             isPlayerInitialize = true
                         }
                     } else {
-                        mediaSessionCompat.sendSessionEvent(NETWORK_FAILURE, null)
+                        mediaSessionCompat.sendSessionEvent(NETWORK_ERROR, null)
                         result.sendResult(null)
                     }
                 }
@@ -189,5 +181,14 @@ class MusicService : MediaBrowserServiceCompat() {
                 }
             }
         }
+    }
+
+    companion object {
+        var currentSongDuration = 0L
+            private set
+
+        private const val SERVICE_TAG = "MusicService"
+        const val NETWORK_ERROR = "NETWORK_ERROR"
+        const val MEDIA_ROOT_ID = "MEDIA_ROOT_ID"
     }
 }

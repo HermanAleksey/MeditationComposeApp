@@ -1,8 +1,8 @@
-package com.example.feature.music_player.data.source
+package com.example.feature.music_player.data.provider
 
 import com.example.feature.music_player.data.entities.Song
 
-interface MusicSource {
+interface MusicProvider {
 
     suspend fun getMusic(): List<Song>
 }
