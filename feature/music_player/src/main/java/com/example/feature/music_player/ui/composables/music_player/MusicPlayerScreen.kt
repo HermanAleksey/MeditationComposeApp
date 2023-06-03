@@ -43,7 +43,8 @@ fun SongScreenContent(
         IconButton(
             onClick = {
                 processAction(MusicAction.CloseFullScreenPlayer)
-            }
+            },
+            modifier = Modifier.padding(start = 8.dp)
         ) {
             Image(
                 imageVector = Icons.Rounded.KeyboardArrowDown,

@@ -69,7 +69,7 @@ internal fun MusicControlPanel(
                 else R.drawable.ic_round_play_arrow
             ),
             contentDescription = "Play",
-            tint = MaterialTheme.colors.background,
+            tint = MaterialTheme.colors.secondary,
             modifier = Modifier
                 .clip(CircleShape)
                 .background(MaterialTheme.colors.onBackground)
