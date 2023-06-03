@@ -27,21 +27,21 @@ import androidx.compose.ui.unit.dp
 import com.example.feature.music_player.ui.composables.music_player.SongScreenContent
 import com.example.feature.music_player.ui.composables.music_player_widget.MusicPlayerWidget
 import com.example.feature.music_player.ui.composables.music_playlist.MusicPlaylist
-import com.example.feature.music_player.ui.viewmodels.MainViewModel
 import com.example.feature.music_player.ui.viewmodels.MusicAction
+import com.example.feature.music_player.ui.viewmodels.MusicScreenViewModel
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun MusicScreen(
-    mainViewModel: MainViewModel,
+    musicScreenViewModel: MusicScreenViewModel,
 ) {
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(color = MaterialTheme.colors.background),
     ) {
-        val uiState = mainViewModel.uiState.collectAsState()
+        val uiState = musicScreenViewModel.uiState.collectAsState()
         val coroutineScope = rememberCoroutineScope()
         val modalSheetState = rememberModalBottomSheetState(
             initialValue = ModalBottomSheetValue.Hidden,
@@ -65,7 +65,7 @@ fun MusicScreen(
         }
         LaunchedEffect(modalSheetState) {
             snapshotFlow { modalSheetState.isVisible }.collect { isVisible ->
-                if (!isVisible) mainViewModel.processAction(MusicAction.CloseFullScreenPlayer)
+                if (!isVisible) musicScreenViewModel.processAction(MusicAction.CloseFullScreenPlayer)
             }
         }
 
@@ -74,7 +74,7 @@ fun MusicScreen(
             sheetShape = RoundedCornerShape(topStart = 36.dp, topEnd = 36.dp),
             sheetContent = {
                 BackHandler {
-                    mainViewModel.processAction(MusicAction.CloseFullScreenPlayer)
+                    musicScreenViewModel.processAction(MusicAction.CloseFullScreenPlayer)
                 }
 
                 val song = uiState.value.currentPlayingSong
@@ -84,7 +84,7 @@ fun MusicScreen(
                         isSongPlaying = uiState.value.isSongPlaying,
                         currentTime = uiState.value.currentPlaybackPosition,
                         totalTime = uiState.value.currentSongDuration,
-                        processAction = mainViewModel::processAction,
+                        processAction = musicScreenViewModel::processAction,
                     )
                 }
             }
@@ -96,7 +96,7 @@ fun MusicScreen(
                             .padding(bottom = 60.dp)
                             .fillMaxSize(),
                         uiState = uiState.value,
-                        processAction = mainViewModel::processAction
+                        processAction = musicScreenViewModel::processAction
                     )
 
                     MusicPlayerWidget(
@@ -105,7 +105,7 @@ fun MusicScreen(
                             .fillMaxWidth()
                             .height(64.dp)
                             .background(MaterialTheme.colors.secondary),
-                        processAction = mainViewModel::processAction,
+                        processAction = musicScreenViewModel::processAction,
                         currentSong = uiState.value.currentPlayingSong,
                         songIsPlaying = uiState.value.isSongPlaying
                     )

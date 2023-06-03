@@ -12,6 +12,7 @@ import com.example.authentication.api.registration_screen.RegistrationScreenView
 import com.example.beer_sorts.api.beer_list.BeerListScreenViewModel
 import com.example.beer_sorts.api.detailed_beer.DetailedBeerScreenViewModel
 import com.example.feature.main.api.MainScreenViewModel
+import com.example.feature.music_player.ui.viewmodels.MusicScreenViewModel
 import com.example.feature.update_history.api.UpdatesDescriptionViewModel
 import com.example.internet_connection.NoInternetConnectionViewModel
 import com.example.meditationcomposeapp.presentation.screens.NavGraphs
@@ -22,6 +23,7 @@ import com.example.meditationcomposeapp.presentation.screens.destinations.EnterL
 import com.example.meditationcomposeapp.presentation.screens.destinations.EnterScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.LoginScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.MainScreenDestination
+import com.example.meditationcomposeapp.presentation.screens.destinations.MusicScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.NewPasswordScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.NoInternetConnectionScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.RegistrationScreenDestination
@@ -66,6 +68,9 @@ fun MeditationDestinationsNavHost(
             }
             dependency(UpdatesHistoryScreenDestination) {
                 hiltViewModel<UpdatesDescriptionViewModel>()
+            }
+            dependency(MusicScreenDestination) {
+                hiltViewModel<MusicScreenViewModel>()
             }
         }
     )

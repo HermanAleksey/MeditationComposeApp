@@ -1,13 +1,17 @@
 package com.example.feature.main.internal.composable
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.filled.AcUnit
+import androidx.compose.material.icons.filled.CameraAlt
+import androidx.compose.material.icons.filled.Extension
+import androidx.compose.material.icons.filled.Map
+import androidx.compose.material.icons.filled.MusicNote
 import androidx.compose.ui.graphics.Color
 import com.example.common.utils.UiText
 import com.example.feature.main.R
 
 enum class MenuItem {
-    PUZZLE,
+    PUZZLE, MUSIC,
 }
 
 internal fun getMenuItemsList(onMenuItemClick: (MenuItem) -> Unit) = listOf(
@@ -22,7 +26,8 @@ internal fun getMenuItemsList(onMenuItemClick: (MenuItem) -> Unit) = listOf(
         title = UiText.StringResource(R.string.menu_item_coming_soon),
         icon = Icons.Default.Map,
         backgroundColor = Color(104, 175, 156),
-        foregroundColor = Color(73, 138, 120)
+        foregroundColor = Color(73, 138, 120),
+        onClick = { onMenuItemClick(MenuItem.MUSIC) },
     ),
     MenuItemModel(
         title = UiText.StringResource(R.string.menu_item_coming_soon),
