@@ -73,7 +73,7 @@ fun MusicScreen(
             sheetState = modalSheetState,
             sheetShape = RoundedCornerShape(topStart = 36.dp, topEnd = 36.dp),
             sheetContent = {
-                BackHandler {
+                BackHandler(uiState.value.showPlayerFullScreen) {
                     musicScreenViewModel.processAction(MusicAction.CloseFullScreenPlayer)
                 }
 
