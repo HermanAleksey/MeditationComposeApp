@@ -25,7 +25,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.design_system.AppTheme
 import com.example.feature.music_player.R
-import com.example.feature.music_player.data.entities.MediaDataSource
+import com.example.feature.music_player.data.entities.DataSource
+import com.example.feature.music_player.data.entities.LocalRes
+import com.example.feature.music_player.data.entities.LocalURL
+import com.example.feature.music_player.data.entities.WebURL
 import com.example.feature.music_player.ui.theme.roundedShape
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
@@ -37,7 +40,7 @@ private const val CIRCLE_SPIN_ANIMATION_DURATION = 3000
 internal fun SpinDiskAnimation(
     modifier: Modifier = Modifier,
     isSpinning: Boolean = true,
-    imageSource: MediaDataSource,
+    imageSource: DataSource,
 ) {
     var currentRotation by remember {
         mutableStateOf(0f)
@@ -92,8 +95,9 @@ internal fun SpinDiskAnimation(
         GlideImage(
             imageModel = {
                 when (imageSource) {
-                    is MediaDataSource.LocalSource -> imageSource.resId
-                    is MediaDataSource.WebSource -> imageSource.url
+                    is LocalRes -> imageSource.resId
+                    is WebURL -> imageSource.url
+                    is LocalURL -> throw Throwable("error")
                 }
             },
             imageOptions = ImageOptions(
@@ -117,7 +121,7 @@ fun SpinDiskAnimationPreview() {
         SpinDiskAnimation(
             modifier = Modifier,
             isSpinning = false,
-            imageSource = MediaDataSource.LocalSource(R.drawable.vinyl_background)
+            imageSource = LocalRes(R.drawable.vinyl_background)
         )
     }
 }

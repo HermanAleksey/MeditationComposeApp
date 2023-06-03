@@ -1,8 +1,10 @@
 package com.example.feature.music_player.exoplayer.music_source
 
 import android.support.v4.media.MediaMetadataCompat
-import com.example.feature.music_player.data.entities.SongSource
-import com.example.feature.music_player.data.entities.toSongSourceType
+import com.example.feature.music_player.data.entities.DataSourceMapper
+import com.example.feature.music_player.data.entities.LocalRes
+import com.example.feature.music_player.data.entities.LocalURL
+import com.example.feature.music_player.data.entities.WebURL
 import com.example.feature.music_player.data.parsers.toMediaMetadataCompat
 import com.example.feature.music_player.data.source.MusicSource
 import com.google.android.exoplayer2.MediaItem
@@ -35,40 +37,38 @@ class MusicProvider(
     fun getConcatenatedMediaSource(): ConcatenatingMediaSource {
         val concatenatingMediaSource = ConcatenatingMediaSource()
         mediaMetadataCompats.forEach { metadataCompat ->
-            when (metadataCompat.description.mediaUri.toSongSourceType()) {
-                SongSource.LOCAL -> {
-                    val mediaSourceLocal = parseLocalSongToMediaSource(metadataCompat)
-                    concatenatingMediaSource.addMediaSource(mediaSourceLocal)
+            val songDataSource = metadataCompat.description.mediaUri?.toString()?.let {
+                DataSourceMapper().getDataSourceType(it)
+            } ?: throw Exception("Can't cast URI to data source")
+
+            val mediaSource = when (songDataSource) {
+                is LocalRes -> {
+                    val rawResId = songDataSource.resId
+                    parseLocalSongToMediaSource(rawResId)
                 }
-                SongSource.WEB -> {
-                    val mediaSource = parseWebSongToMediaSource(metadataCompat)
-                    concatenatingMediaSource.addMediaSource(mediaSource)
+                is WebURL -> {
+                    val url = songDataSource.url
+                    parseWebSongToMediaSource(url)
                 }
+                is LocalURL -> throw Throwable("Not implemented yet")
             }
+            concatenatingMediaSource.addMediaSource(mediaSource)
         }
         return concatenatingMediaSource
     }
 
-    private fun parseLocalSongToMediaSource(metadataCompat: MediaMetadataCompat) =
+    private fun parseLocalSongToMediaSource(rawResId: Int) =
         ProgressiveMediaSource.Factory(dataSourceFactory)
             .createMediaSource(
                 MediaItem.fromUri(
-                    RawResourceDataSource.buildRawResourceUri(
-                        metadataCompat.getString(
-                            MediaMetadataCompat.METADATA_KEY_MEDIA_URI
-                        ).toInt()
-                    )
+                    RawResourceDataSource.buildRawResourceUri(rawResId)
                 )
             )
 
-    private fun parseWebSongToMediaSource(metadataCompat: MediaMetadataCompat) =
+    private fun parseWebSongToMediaSource(uri: String) =
         ProgressiveMediaSource.Factory(dataSourceFactory)
             .createMediaSource(
-                MediaItem.fromUri(
-                    metadataCompat.getString(
-                        MediaMetadataCompat.METADATA_KEY_MEDIA_URI
-                    )
-                )
+                MediaItem.fromUri(uri)
             )
 
     suspend fun fetchMediaData() = withContext(Dispatchers.IO) {

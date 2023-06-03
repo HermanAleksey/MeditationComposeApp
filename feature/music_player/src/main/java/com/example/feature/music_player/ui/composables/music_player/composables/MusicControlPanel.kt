@@ -24,8 +24,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.design_system.AppTheme
 import com.example.feature.music_player.R
-import com.example.feature.music_player.data.entities.MediaDataSource
 import com.example.feature.music_player.data.entities.Song
+import com.example.feature.music_player.data.entities.WebURL
 import com.example.feature.music_player.ui.viewmodels.MusicAction
 
 @Composable
@@ -114,8 +114,8 @@ fun MusicControlPanelPreview() {
                 mediaId = "11",
                 title = "Title",
                 subtitle = "Subtitle",
-                songSource = MediaDataSource.WebSource(""),
-                imageSource = MediaDataSource.WebSource(""),
+                songSource = WebURL(""),
+                imageSource = WebURL(""),
             ),
             isSongPlaying = true,
             processAction = {}

@@ -39,8 +39,10 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.example.design_system.AppTheme
 import com.example.feature.music_player.R
-import com.example.feature.music_player.data.entities.MediaDataSource
+import com.example.feature.music_player.data.entities.LocalRes
+import com.example.feature.music_player.data.entities.LocalURL
 import com.example.feature.music_player.data.entities.Song
+import com.example.feature.music_player.data.entities.WebURL
 import com.example.feature.music_player.ui.viewmodels.MusicAction
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
@@ -125,7 +127,7 @@ private fun MusicPlayerWidgetContent(
             )
     ) {
         when (song.imageSource) {
-            is MediaDataSource.LocalSource -> {
+            is LocalRes -> {
                 Image(
                     painter = painterResource(id = song.imageSource.resId),
                     contentDescription = stringResource(id = R.string.album_cover),
@@ -135,7 +137,7 @@ private fun MusicPlayerWidgetContent(
                         .offset(16.dp)
                 )
             }
-            is MediaDataSource.WebSource -> {
+            is WebURL -> {
                 GlideImage(
                     imageModel = { song.imageSource.url }, // loading a network image using an URL.
                     imageOptions = ImageOptions(
@@ -144,6 +146,7 @@ private fun MusicPlayerWidgetContent(
                     )
                 )
             }
+            is LocalURL -> throw Throwable("error")
         }
 
         Column(
@@ -214,8 +217,8 @@ fun MusicPlayerWidgetPreview() {
                 mediaId = "11",
                 title = "Title",
                 subtitle = "Subtitle",
-                songSource = MediaDataSource.WebSource(""),
-                imageSource = MediaDataSource.LocalSource(R.drawable.ic_music),
+                songSource = WebURL(""),
+                imageSource = LocalRes(R.drawable.ic_music),
             ),
             songIsPlaying = true,
             processAction = {}

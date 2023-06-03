@@ -1,9 +1,9 @@
 package com.example.feature.music_player.data.entities
 
-data class Song(
+class WebSong(
     val mediaId: String = "",
     val title: String = "",
     val subtitle: String = "",
-    val songSource: DataSource,
-    val imageSource: DataSource
+    val songUrl: String,
+    val imageUrl: String,
 )

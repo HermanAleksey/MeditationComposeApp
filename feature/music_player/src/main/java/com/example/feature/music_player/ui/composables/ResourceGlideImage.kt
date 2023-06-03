@@ -4,20 +4,24 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import com.example.feature.music_player.data.entities.MediaDataSource
+import com.example.feature.music_player.data.entities.DataSource
+import com.example.feature.music_player.data.entities.LocalRes
+import com.example.feature.music_player.data.entities.LocalURL
+import com.example.feature.music_player.data.entities.WebURL
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
 
 @Composable
 fun MediaResourceGlideImage(
     modifier: Modifier = Modifier,
-    imageSource: MediaDataSource
+    imageSource: DataSource
 ) {
     GlideImage(
         imageModel = {
             when (imageSource) {
-                is MediaDataSource.LocalSource -> imageSource.resId
-                is MediaDataSource.WebSource -> imageSource.url
+                is LocalRes -> imageSource.resId
+                is WebURL -> imageSource.url
+                is LocalURL -> throw Throwable("error")
             }
         },
         imageOptions = ImageOptions(
