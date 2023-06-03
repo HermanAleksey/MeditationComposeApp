@@ -1,6 +1,8 @@
 package com.example.feature.music_player.data.entities
 
-class DataSourceMapper {
+import javax.inject.Inject
+
+class DataSourceMapper @Inject constructor() {
 
     fun getDataSourceType(str: String): DataSource {
         return when {

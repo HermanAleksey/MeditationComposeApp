@@ -1,10 +1,9 @@
 plugins {
     id("com.android.library")//application in source
     id("org.jetbrains.kotlin.android")
-    id("kotlin-android")//?
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
-    id("com.google.devtools.ksp") version LibVersions.ksp_version // Depends on your kotlin version
+    id("com.google.devtools.ksp") version LibVersions.ksp_version
 }
 
 @Suppress("UnstableApiUsage")
@@ -43,8 +42,6 @@ dependencies {
     implementation(Dependencies.compose_ui_tooling)
     implementation(Dependencies.compose_ui_tooling_preview)
     implementation(Dependencies.activity_compose)
-    val constraintlayout_compose_version = "1.0.1"
-    implementation("androidx.constraintlayout:constraintlayout-compose:$constraintlayout_compose_version")
 
     //accompanist
     implementation(Dependencies.accompanist_pager)

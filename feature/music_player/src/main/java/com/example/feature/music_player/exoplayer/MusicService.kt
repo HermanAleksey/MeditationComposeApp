@@ -9,6 +9,7 @@ import android.support.v4.media.MediaDescriptionCompat
 import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaSessionCompat
 import androidx.media.MediaBrowserServiceCompat
+import com.example.feature.music_player.data.entities.DataSourceMapper
 import com.example.feature.music_player.di.Local
 import com.example.feature.music_player.exoplayer.callbacks.MusicPlaybackPreparer
 import com.example.feature.music_player.exoplayer.callbacks.MusicPlayerEventListener
@@ -36,6 +37,9 @@ class MusicService : MediaBrowserServiceCompat(),
     @Inject
     @Local
     lateinit var musicSource: MusicSource
+
+    @Inject
+    lateinit var dataSourceMapper: DataSourceMapper
 
     private val serviceScope = CoroutineScope(Dispatchers.Main + Job())
 
@@ -97,7 +101,8 @@ class MusicService : MediaBrowserServiceCompat(),
             notificationListener = playerNotificationListener,
             onNewSongStarted = {
                 currentSongDuration = exoPlayer.duration
-            }
+            },
+            dataSourceMapper = dataSourceMapper,
         ).showNotification(exoPlayer)
     }
 
