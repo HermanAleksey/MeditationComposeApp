@@ -26,7 +26,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -85,14 +84,12 @@ class MusicService : MediaBrowserServiceCompat() {
     }
 
     private fun configureMediaSessionConnector() {
-        val musicPlaybackPreparer = MusicPlaybackPrepared(musicProvider) {
-            currentPlayingSong = it
-            preparePlayer(
-                songs = musicProvider.mediaMetadataCompats,
-                itemToPlay = it,
-                playNow = true
-            )
-        }
+        val musicPlaybackPreparer = MusicPlaybackPrepared(
+            musicSource = musicProvider,
+            onPlayerPrepared = {
+                switchSong(mediaId = it)
+            }
+        )
 
         MediaSessionConnector(mediaSessionCompat).apply {
             setPlaybackPreparer(musicPlaybackPreparer)
@@ -107,7 +104,6 @@ class MusicService : MediaBrowserServiceCompat() {
             sessionToken = mediaSessionCompat.sessionToken,
             notificationListener = MusicPlayerNotificationListener(this),
             newSongCallback = {
-                Timber.tag("TAGG").e("showNotification: newSongCallback %s", currentSongDuration)
                 currentSongDuration = exoPlayer.duration
             }
         ).showNotification(exoPlayer)
@@ -119,17 +115,28 @@ class MusicService : MediaBrowserServiceCompat() {
         }
     }
 
-    private fun preparePlayer(
-        songs: List<MediaMetadataCompat>,
-        itemToPlay: MediaMetadataCompat?,
-        playNow: Boolean,
-    ) {
-        val curSongIndex = if (currentPlayingSong == null) 0 else songs.indexOf(itemToPlay)
+    //call when launch player with playlist for the first time
+    private fun initialPreparePlayer(    ) {
         with(exoPlayer) {
             setMediaSource(musicProvider.getConcatenatedMediaSource())
             prepare()
-            seekTo(curSongIndex, 0L)
-            playWhenReady = playNow
+            seekTo(0, 0L)
+            playWhenReady = false
+        }
+    }
+
+    private fun switchSong(
+        mediaId: String,
+    ) {
+        musicProvider.mediaMetadataCompats.find {
+            mediaId == it.description.mediaId
+        }.let { media ->
+            currentPlayingSong = media
+            exoPlayer.seekTo(
+                musicProvider.mediaMetadataCompats.indexOf(media),
+                0L
+            )
+            exoPlayer.playWhenReady = true
         }
     }
 
@@ -161,13 +168,15 @@ class MusicService : MediaBrowserServiceCompat() {
             MEDIA_ROOT_ID -> {
                 val resultsSent = musicProvider.addOnReadyListener { isInitialized ->
                     if (isInitialized) {
-                        result.sendResult(musicProvider.asMediaItems())
-                        if (!isPlayerInitialize && musicProvider.mediaMetadataCompats.isNotEmpty()) {
-                            preparePlayer(
-                                musicProvider.mediaMetadataCompats,
-                                musicProvider.mediaMetadataCompats[0],
-                                false
+                        val mediaItems = musicProvider.mediaMetadataCompats.map {
+                            MediaBrowserCompat.MediaItem(
+                                it.description,
+                                MediaBrowserCompat.MediaItem.FLAG_PLAYABLE
                             )
+                        }.toMutableList()
+                        result.sendResult(mediaItems)
+                        if (!isPlayerInitialize && mediaItems.isNotEmpty()) {
+                            initialPreparePlayer()
                             isPlayerInitialize = true
                         }
                     } else {

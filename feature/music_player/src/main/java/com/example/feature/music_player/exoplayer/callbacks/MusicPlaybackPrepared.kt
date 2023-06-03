@@ -3,7 +3,6 @@ package com.example.feature.music_player.exoplayer.callbacks
 import android.net.Uri
 import android.os.Bundle
 import android.os.ResultReceiver
-import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.PlaybackStateCompat
 import com.example.feature.music_player.exoplayer.music_source.MusicProvider
 import com.google.android.exoplayer2.Player
@@ -11,7 +10,7 @@ import com.google.android.exoplayer2.ext.mediasession.MediaSessionConnector
 
 class MusicPlaybackPrepared(
     private val musicSource: MusicProvider,
-    private val onPlayerPrepared: (MediaMetadataCompat?) -> Unit,
+    private val onPlayerPrepared: (String) -> Unit,
 ) : MediaSessionConnector.PlaybackPreparer {
 
     override fun onCommand(
@@ -32,10 +31,7 @@ class MusicPlaybackPrepared(
 
     override fun onPrepareFromMediaId(mediaId: String, playWhenReady: Boolean, extras: Bundle?) {
         musicSource.addOnReadyListener {
-            val itemToPlay = musicSource.mediaMetadataCompats.find {
-                mediaId == it.description.mediaId
-            }
-            onPlayerPrepared(itemToPlay)
+            onPlayerPrepared(mediaId)
         }
     }
 

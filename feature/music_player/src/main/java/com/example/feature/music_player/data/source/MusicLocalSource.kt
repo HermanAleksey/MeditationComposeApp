@@ -10,7 +10,7 @@ class MusicLocalSource : MusicSource {
         //todo replace mocks
         return listOf(
             LocalSong(
-                mediaId = "1",
+                mediaId = "100",
                 title = "Test1",
                 subtitle = "subtitle",
                 songResId = R.raw.sound_rain,

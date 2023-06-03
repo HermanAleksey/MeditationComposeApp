@@ -3,9 +3,12 @@ package com.example.feature.music_player.exoplayer
 import android.app.PendingIntent
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.support.v4.media.session.MediaControllerCompat
 import android.support.v4.media.session.MediaSessionCompat
+import android.util.Log
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
@@ -64,6 +67,16 @@ class MusicNotificationManger(
             player: Player,
             callback: PlayerNotificationManager.BitmapCallback,
         ): Bitmap? {
+            Log.e(
+                this.javaClass.name.toString(),
+                "getCurrentLargeIcon; player:$player, " +
+                        "mediaController.metadata.description.iconUri:${mediaController.metadata.description.iconUri}"
+            )
+            val bitmap = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888)
+            val mCanvas = Canvas(bitmap)
+            mCanvas.drawColor(Color.GREEN)
+
+            //todo here pass bitmap for notification
             Glide.with(context).asBitmap()
                 .load(mediaController.metadata.description.iconUri)
                 .into(object : CustomTarget<Bitmap>() {
@@ -71,12 +84,16 @@ class MusicNotificationManger(
                         resource: Bitmap,
                         transition: Transition<in Bitmap>?,
                     ) {
-                        callback.onBitmap(resource)
+                        callback.onBitmap(bitmap)
                     }
 
                     override fun onLoadCleared(placeholder: Drawable?) = Unit
                 })
-            return null
+            return bitmap
         }
+    }
+
+    fun sourceToBitmap(str: String) {
+
     }
 }

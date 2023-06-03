@@ -1,7 +1,5 @@
 package com.example.feature.music_player.exoplayer.music_source
 
-import android.support.v4.media.MediaBrowserCompat
-import android.support.v4.media.MediaDescriptionCompat
 import android.support.v4.media.MediaMetadataCompat
 import com.example.feature.music_player.data.entities.SongSource
 import com.example.feature.music_player.data.entities.toSongSourceType
@@ -17,7 +15,7 @@ import kotlinx.coroutines.withContext
 
 class MusicProvider(
     private val source: MusicSource,
-    private val dataSourceFactory: DefaultDataSource.Factory
+    private val dataSourceFactory: DefaultDataSource.Factory,
 ) {
     private val onReadyListeners = mutableListOf<(Boolean) -> Unit>()
     var mediaMetadataCompats = emptyList<MediaMetadataCompat>()
@@ -33,19 +31,6 @@ class MusicProvider(
                 }
             }
         }
-
-
-    fun asMediaItems() = mediaMetadataCompats.map { mediaMetadataCompat ->
-        val desc = MediaDescriptionCompat.Builder()
-            .setMediaUri(mediaMetadataCompat.description.mediaUri)
-            .setTitle(mediaMetadataCompat.description.title)
-            .setSubtitle(mediaMetadataCompat.description.subtitle)
-            .setMediaId(mediaMetadataCompat.description.mediaId)
-            .setIconUri(mediaMetadataCompat.description.iconUri)
-            .build()
-
-        MediaBrowserCompat.MediaItem(desc, MediaBrowserCompat.MediaItem.FLAG_PLAYABLE)
-    }.toMutableList()
 
     fun getConcatenatedMediaSource(): ConcatenatingMediaSource {
         val concatenatingMediaSource = ConcatenatingMediaSource()
