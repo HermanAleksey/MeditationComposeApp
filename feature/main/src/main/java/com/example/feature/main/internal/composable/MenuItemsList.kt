@@ -23,15 +23,15 @@ internal fun getMenuItemsList(onMenuItemClick: (MenuItem) -> Unit) = listOf(
         onClick = { onMenuItemClick(MenuItem.PUZZLE) },
     ),
     MenuItemModel(
-        title = UiText.StringResource(R.string.menu_item_coming_soon),
-        icon = Icons.Default.Map,
+        title = UiText.StringResource(R.string.music_menu_option),
+        icon = Icons.Default.MusicNote,
         backgroundColor = Color(104, 175, 156),
         foregroundColor = Color(73, 138, 120),
         onClick = { onMenuItemClick(MenuItem.MUSIC) },
     ),
     MenuItemModel(
         title = UiText.StringResource(R.string.menu_item_coming_soon),
-        icon = Icons.Default.MusicNote,
+        icon = Icons.Default.Map,
         backgroundColor = Color(62, 132, 105),
         foregroundColor = Color(43, 91, 84)
     ),
