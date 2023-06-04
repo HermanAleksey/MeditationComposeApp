@@ -3,8 +3,12 @@ package com.example.core.authentication_source.api.repository
 import com.example.core.authentication_api.BuildConfig
 import com.example.core.authentication_source.api.AuthenticationApi
 import com.example.core.authentication_source.api.mapper.ProfileMapper
+import com.example.core.authentication_source.api.model.LoginRequest
 import com.example.core.authentication_source.api.model.LoginUserResponse
 import com.example.core.authentication_source.api.model.RegistrationRequest
+import com.example.core.authentication_source.api.model.ResetPasswordRequest
+import com.example.core.authentication_source.api.model.RestorePasswordRequest
+import com.example.core.authentication_source.api.model.VerifyCodeRequest
 import com.example.core.model.NetworkResponse
 import com.example.core.model.authentication.Profile
 import com.example.network.SuccessInfo
@@ -19,6 +23,7 @@ class AuthenticationRepositoryImpl @Inject constructor(
     private val authApi: AuthenticationApi,
     private val profileMapper: ProfileMapper,
 ) : AuthenticationRepository {
+
     override fun login(
         login: String,
         password: String,
@@ -37,7 +42,9 @@ class AuthenticationRepositoryImpl @Inject constructor(
                     )
                     emit(NetworkResponse.Success(data = profileMapper.mapFrom(response)))
                 } else {
-                    val response = authApi.login(login, password)
+                    val response = authApi.login(
+                        LoginRequest(login, password)
+                    )
                     emit(NetworkResponse.Success(data = profileMapper.mapFrom(response)))
                 }
 
@@ -107,7 +114,7 @@ class AuthenticationRepositoryImpl @Inject constructor(
                     val response = SuccessInfo(true, null)
                     emit(NetworkResponse.Success(response))
                 } else {
-                    val response = authApi.requestPasswordRestore(login = login)
+                    val response = authApi.requestPasswordRestore(RestorePasswordRequest(login))
                     emit(NetworkResponse.Success(response))
                 }
 
@@ -135,7 +142,7 @@ class AuthenticationRepositoryImpl @Inject constructor(
                     val response = SuccessInfo(true, null)
                     emit(NetworkResponse.Success(response))
                 } else {
-                    val response = authApi.setNewPassword(login = login, newPassword = newPassword)
+                    val response = authApi.setNewPassword(ResetPasswordRequest(login, newPassword))
                     emit(NetworkResponse.Success(response))
                 }
 
@@ -163,7 +170,7 @@ class AuthenticationRepositoryImpl @Inject constructor(
                     val response = SuccessInfo(true, null)
                     emit(NetworkResponse.Success(response))
                 } else {
-                    val response = authApi.verifyCode(login = login, code = code)
+                    val response = authApi.verifyCode(VerifyCodeRequest(login, code))
                     emit(NetworkResponse.Success(response))
                 }
             } catch (e: IOException) {
