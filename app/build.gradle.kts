@@ -130,6 +130,7 @@ dependencies {
     implementation(project(":feature:authentication"))
     implementation(project(":feature:update_history"))
     implementation(project(":feature:internet_connection"))
+    implementation(project(":feature:music_player"))
 
     implementation(project(":core:updates_history"))
     implementation(project(":core:design_system"))

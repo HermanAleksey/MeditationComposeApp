@@ -8,6 +8,7 @@ import com.example.meditationcomposeapp.presentation.screens.destinations.EnterL
 import com.example.meditationcomposeapp.presentation.screens.destinations.EnterScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.LoginScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.MainScreenDestination
+import com.example.meditationcomposeapp.presentation.screens.destinations.MusicScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.NewPasswordScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.NoInternetConnectionScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.RegistrationScreenDestination
@@ -34,6 +35,7 @@ enum class DestinationWrapper(
     MainScreen(MainScreenDestination, true, true),
     ShufflePuzzleScreen(ShufflePuzzleScreenDestination, true, true),
     UpdateHistoryScreen(UpdatesHistoryScreenDestination, true, false),
+    MusicScreen(MusicScreenDestination, true, false),
 }
 
 fun NavDestination.getDestinationWrapper() =

@@ -20,7 +20,7 @@ interface AuthenticationApi {
 
     @POST("auth/registration")
     suspend fun registration(
-        @Body registrationRequest: RegistrationRequest
+        @Body registrationRequest: RegistrationRequest,
     ): SuccessInfo
 
     @GET("auth/restore")

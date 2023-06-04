@@ -13,6 +13,8 @@ object LibVersions {
     const val lifecycle_runtime_ktx_version = "2.6.0"
     const val compose_compiler_version = "1.4.3"
 
+    const val palette_ktx_version = "1.0.0"
+
     const val coroutines_version = "1.6.4"
 
     const val gson_version = "2.9.0"
@@ -41,6 +43,7 @@ object LibVersions {
     const val paging_compose_version = "1.0.0-alpha16"
 
     const val glide_version = "2.0.2"
+    const val coil_version = "1.3.0"
 
     const val room_version = "2.4.3"
     const val room_coroutines_version = "2.4.3"
@@ -60,4 +63,6 @@ object LibVersions {
     const val timber_version = "5.0.1"
 
     const val build_gradle_version = "7.4.2"
+
+    const val exoplayer_version = "2.14.1"
 }

@@ -39,6 +39,9 @@ class NavDependenciesProviderImpl(
                     navigateToPuzzleScreen = {
                         navController.navigate(ShufflePuzzleScreenDestination())
                     },
+                    navigateToMusicScreen = {
+                        navController.navigate(MusicScreenDestination())
+                    }
                 )
             }
             ToolbarNavDependencies::class.java.name -> {
