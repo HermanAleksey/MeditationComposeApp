@@ -4,6 +4,12 @@ import com.example.feature.music_player.data.entities.Song
 import com.example.feature.music_player.data.entities.WebSong
 import com.example.feature.music_player.data.parser.SongParser
 
+/**
+ * Currently web source is not working, but logic of passing
+ * urls for images and songs is done.
+ *
+ * Need to create web source that will provide urls
+ * */
 class MusicWebProvider(
     private val songParser: SongParser,
 ) : MusicProvider {
@@ -40,9 +46,9 @@ class MusicWebProvider(
             ),
             WebSong(
                 mediaId = "5",
-                title = "Feelings",
+                title = "From server",
                 subtitle = "Diviners & Azertion",
-                songUrl = "https://firebasestorage.googleapis.com/v0/b/musicplayer-2672e.appspot.com/o/Cartoon%20x%20nublu%20x%20Gameboy%20Tetris%20-%20Biology%20%5BNCS%20Release%5D.mp3?alt=media&token=acb1b206-c8ad-4405-9ee4-ec50bdae2309",
+                songUrl = "http://0.0.0.0:8580/song/stream",
                 imageUrl = "https://firebasestorage.googleapis.com/v0/b/musicplayer-2672e.appspot.com/o/Biology.jpg?alt=media&token=21322f8d-26e3-4983-97a4-2f911a4d0007"
             )
         ).map {
