@@ -10,34 +10,33 @@ class MusicLocalProvider(
 ) : MusicProvider {
 
     override suspend fun getMusic(): List<Song> {
-        //todo replace mocks
         return listOf(
             LocalSong(
-                mediaId = "100",
-                title = "Test1",
-                subtitle = "subtitle",
-                songResId = R.raw.sound_rain,
+                mediaId = "1",
+                title = "Fire camp",
+                subtitle = "With cacao",
+                songResId = R.raw.fire_in_fireplace,
                 imageResId = R.drawable.lovely_desert
             ),
             LocalSong(
                 mediaId = "2",
-                title = "Test2",
-                subtitle = "subtitle",
-                songResId = R.raw.fire_in_fireplace,
+                title = "Zikadens",
+                subtitle = "In the evening",
+                songResId = R.raw.zikadens,
                 imageResId = R.drawable.mountaineers
             ),
             LocalSong(
                 mediaId = "3",
-                title = "Test3",
-                subtitle = "subtitle",
+                title = "Rain",
+                subtitle = "Tropical",
                 songResId = R.raw.sound_rain,
                 imageResId = R.drawable.painting_forest
             ),
             LocalSong(
                 mediaId = "4",
-                title = "Test4",
-                subtitle = "subtitle",
-                songResId = R.raw.sound_rain,
+                title = "Clouds",
+                subtitle = "And wind",
+                songResId = R.raw.clouds_n_wind,
                 imageResId = R.drawable.the_hill_sides
             ),
         ).map {
