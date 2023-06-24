@@ -6,7 +6,7 @@ import com.example.common.navigation.NavRoute
 
 class LoginScreenNavDependencies(
     val navigateToMainScreen: () -> Unit,
-    val navigateToEnterCodeScreen: (login: String) -> Unit,
+    val navigateToEnterLoginScreen: (login: String) -> Unit,
     val navigateToRegistrationScreen: () -> Unit,
 ) : NavDependencies
 
@@ -19,7 +19,7 @@ sealed class LoginScreenNavRoute : NavRoute<LoginScreenNavDependencies>() {
 
     data class EnterLoginScreen(private val login: String) : LoginScreenNavRoute() {
         override fun navigate(navDependencies: LoginScreenNavDependencies) {
-            navDependencies.navigateToEnterCodeScreen(login)
+            navDependencies.navigateToEnterLoginScreen(login)
         }
     }
 

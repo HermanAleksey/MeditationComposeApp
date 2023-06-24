@@ -166,8 +166,8 @@ class NavDependenciesProviderImpl(
                             popUpTo(EnterScreenDestination)
                         }
                     },
-                    navigateToEnterCodeScreen = { login ->
-                        navController.navigate(EnterCodeScreenDestination(login))
+                    navigateToEnterLoginScreen = { login ->
+                        navController.navigate(EnterLoginScreenDestination(login))
                     }
                 )
             }
