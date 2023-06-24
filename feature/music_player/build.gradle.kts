@@ -45,7 +45,7 @@ dependencies {
 
     //accompanist
     implementation(Dependencies.accompanist_pager)
-    implementation("com.google.accompanist:accompanist-coil:0.13.0")
+    implementation(Dependencies.accompanist_coil)
 
     //icons
     implementation(Dependencies.compose_material)
@@ -60,11 +60,7 @@ dependencies {
     implementation(Dependencies.lifecycle_runtime_ktx)
 
     // Coil
-    val coil_version = "1.3.0"
-    implementation("io.coil-kt:coil-compose:$coil_version")
-
-    //Accompanist
-//    implementation("com.google.accompanist:accompanist-systemuicontroller:0.13.0") add status bar colors
+    implementation(Dependencies.coil)
 
     // Glide
     implementation(Dependencies.glide)
@@ -78,17 +74,7 @@ dependencies {
     implementation(Dependencies.timber)
 
     // ExoPlayer
-    val exo_player_version = "2.18.6"
-    api("com.google.android.exoplayer:exoplayer-core:$exo_player_version")
-    api("com.google.android.exoplayer:exoplayer-ui:$exo_player_version")
-    api("com.google.android.exoplayer:extension-mediasession:$exo_player_version")
-
-    //testing
-//    testImplementation(project(":core:testing"))
-//    testImplementation(Dependencies.junit)
-//    testImplementation (Dependencies.mockito)
-//    testImplementation (Dependencies.coroutines_test)
-//    testImplementation (Dependencies.mockito_kotlin)
-//    testImplementation (Dependencies.powermock_reflect)
-//    androidTestImplementation(Dependencies.mockito_android)
+    implementation(Dependencies.exoplayer_ui)
+    implementation(Dependencies.exoplayer_core)
+    implementation(Dependencies.exoplayer_extension_mediasession)
 }

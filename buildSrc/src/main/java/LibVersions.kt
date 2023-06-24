@@ -33,6 +33,7 @@ object LibVersions {
     const val fb_bom_version = "30.4.1"
 
     const val accompanist_version = "0.26.4-beta"
+    const val accompanist_coil_version = "0.13.0"
 
     const val retrofit_version = "2.9.0"
     const val okhttp_version = "4.9.3"
@@ -64,5 +65,5 @@ object LibVersions {
 
     const val build_gradle_version = "7.4.2"
 
-    const val exoplayer_version = "2.14.1"
+    const val exoplayer_version = "2.18.6"
 }

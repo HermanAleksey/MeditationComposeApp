@@ -32,6 +32,8 @@ object Dependencies {
         "com.google.accompanist:accompanist-pager:${LibVersions.accompanist_version}"
     const val accompanist_permissions =
         "com.google.accompanist:accompanist-permissions:${LibVersions.accompanist_version}"
+    const val accompanist_coil =
+        "com.google.accompanist:accompanist-coil:${LibVersions.accompanist_coil_version}"
 
     //firebase
     const val firebase_bom = "com.google.firebase:firebase-bom:${LibVersions.fb_bom_version}"
