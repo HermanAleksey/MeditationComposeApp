@@ -18,49 +18,67 @@ Talking about what's already been done.
 
 Splash screen              |   Enter screen            |   Sing in screen  |   Sign up screen
 :-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
-<img src="https://user-images.githubusercontent.com/68656704/200169516-fd215ff2-69f5-4de0-bfb4-96d0469c70c7.jpg" width="200"> | <img src="https://user-images.githubusercontent.com/68656704/200169788-bb8f7cf7-e0b4-419b-ace6-1a2f03afbeec.jpg" width="200">| <img src="https://user-images.githubusercontent.com/68656704/200169685-e77e1e3f-6365-4663-9656-24b80dde3796.jpg" width="200"> | <img src="https://user-images.githubusercontent.com/68656704/200169651-a80d5578-8f2c-4e7e-ac35-ede031c21496.jpg" width="200"> 
+<img src="https://github.com/HermanAleksey/MeditationComposeApp/blob/master/feature/splash_screen/screenshots/splash_screen.png" width="200"> | <img src="https://github.com/HermanAleksey/MeditationComposeApp/blob/master/feature/authentication/screenshots/enter_screen.png" width="200"> | <img src="https://github.com/HermanAleksey/MeditationComposeApp/blob/master/feature/authentication/screenshots/sign_in_screen.png" width="200"> | <img src="https://github.com/HermanAleksey/MeditationComposeApp/blob/master/feature/authentication/screenshots/sign_up_screen.png" width="200"> 
 
-Password recovery screen  |   Enter email for code     |   Code input screen  
+Enter email for code  |    Code input screen    |    Password recovery screen 
 :-------------------------:|:-------------------------:|:-------------------------:
-<img src="https://user-images.githubusercontent.com/68656704/200169812-653e2739-0e63-43a0-9808-43269aa4173f.jpg" width="200"> | <img src="https://user-images.githubusercontent.com/68656704/200169861-94bcc669-5382-4ec3-bcce-66cd361e84c2.jpg" width="200">| <img src="https://user-images.githubusercontent.com/68656704/200169836-94a70bc1-8f81-4a30-9f7f-221c71c01f09.jpg" width="200">
+<img src="https://github.com/HermanAleksey/MeditationComposeApp/blob/master/feature/authentication/screenshots/enter_login_screen.png" width="200"> | <img src="https://github.com/HermanAleksey/MeditationComposeApp/blob/master/feature/authentication/screenshots/code_input_screen.png" width="200">| <img src="https://github.com/HermanAleksey/MeditationComposeApp/blob/master/feature/authentication/screenshots/new_password_screen.png" width="200">
 
-Implement a standard user script for entering and registering into the application.
+Implement a standard user script for entering and registering into the application. \
+This whole script can use real web requests, but they are currently covered in data in the repositories. Later I will make a small server and feature-toogles to switch between data sources for this flow (and not only for this, hopefully) \
 The most interesting part of it is the code entry screen: it implements additional logic for switching focus between cells and automatically "sending" the entered code.
 
-On the main screen implemented BottomNavigationBar. \
-Cards on main screen are drawn using Canvas, not png images.
 
 ### Main screen
 
-Main screen              |   Update pop-ups            
-:-------------------------:|:-------------------------:
-<img src="https://user-images.githubusercontent.com/68656704/200170265-cb9016bd-7edc-4fe2-87c0-db058e5661f1.jpg" width="200"> |  <img src="https://user-images.githubusercontent.com/68656704/200170454-c3364eae-950d-4d47-bc42-d4e69e74a0f5.jpg" width="200">
+On the main screen implemented `BottomNavigationBar`. \
+Cards on main screen are drawn using Canvas, not png images.
+
+Main screen                |        Update pop-up      |   Update notes screen            
+:-------------------------:|:-------------------------:|:-------------------------:
+<img src="https://github.com/HermanAleksey/MeditationComposeApp/blob/master/feature/main/screenshots/main_screen.png" width="200"> |  <img src="https://github.com/HermanAleksey/MeditationComposeApp/blob/master/feature/update_history/screenshots/update_notes_pop_up.png" width="200"> | <img src="https://github.com/HermanAleksey/MeditationComposeApp/blob/master/feature/update_history/screenshots/update_notes_screen.png" width="200">
 
 The main screen contains all the features that I implement in the application. \
 Of the interesting, you can highlight the feature cards with icons. The drawing on them is done by drawing on canvas. \
-The application has a bottom navigation bar. It has the ability to switch to the beer list and profile screens. \
-The profile screen is a dummy for now. All it contains at the moment is an logout button.
+The application has a bottom navigation bar. I put navigation to one of the features to bottom navigation bar just to use it, but later it might be more convinient to place some "Profile" feature there. \
 The application database stores a history of all changes in "release" versions. When the application is updated, a dialog appears describing the changes made.
+Right not it works on mocks, but repositories and api for Retrofit is already written, so later on i might add it to server and add feature-toogle to swith sources.
+
 
 ### Shuffle puzzle
 
-Image select screen     |  Game      |     Picking image from gallery       |  Permission request
-:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
-<img src="https://user-images.githubusercontent.com/68656704/200193557-30c38ad4-2dca-4652-85b7-adf5ba0e538c.jpg" width="200">  | <img src="https://user-images.githubusercontent.com/68656704/200193582-d6ea2a4b-93ba-4ebe-a5e2-e0f00bfc33f0.jpg" width="200">  | <img src="https://user-images.githubusercontent.com/68656704/200193634-f14eaf17-9f6b-40c5-90ac-a23891b368c1.jpg" width="200">  | <img src="https://user-images.githubusercontent.com/68656704/200193649-e23969f5-4c0c-4342-a5cc-8c80498821bb.jpg" width="200"> 
+Image select screen     |  Game   |     Picking image from gallery 
+:-------------------------:|:-------------------------:|:-------------------------:
+<img src="https://github.com/HermanAleksey/MeditationComposeApp/blob/master/feature/shuffle_puzzle/screenshots/image_select_screen.png" width="200">  | <img src="https://github.com/HermanAleksey/MeditationComposeApp/blob/master/feature/shuffle_puzzle/screenshots/game_screen.png" width="200">  | <img src="https://github.com/HermanAleksey/MeditationComposeApp/blob/master/feature/shuffle_puzzle/screenshots/pick_from_gallery.png" width="200"> 
 
 Shuffle puzzle game added. User can select one of default images, or select image from his gallery. For cropping images i used  `com.github.CanHub:Android-Image-Cropper` (pictures must be square in order for the game to look nice. The logic allows you to divide the picture not only into squares, but also any other resolutions, however, I added functions to the application itself only for sizes 3x3, 4x4 and 5x5.) \
-In order to access gallery - added permisions request via `accompanist`.
+In order to access gallery - added permisions request via `accompanist`. 
+
 
 ### Pagination with with open punk-api
 
-Paging list screen         |   Detailed info screen            
-:-------------------------:|:-------------------------:
-<img src="https://user-images.githubusercontent.com/68656704/200193098-d4e25705-417f-40a2-86e0-d3f8493b2a8e.jpg" width="200"> |  <img src="https://user-images.githubusercontent.com/68656704/200193111-82ff34b4-7256-459a-ac52-ee1eb2d895a0.jpg" width="200">
+   Paging list screen      |   Detailed info screen    |    No internet    
+:-------------------------:|:-------------------------:|:--------------------:
+<img src="https://github.com/HermanAleksey/MeditationComposeApp/blob/master/feature/beer_sorts/screenshots/beer_paging_screen.png" width="200"> |  <img src="https://github.com/HermanAleksey/MeditationComposeApp/blob/master/feature/beer_sorts/screenshots/beer_details_screen.png" width="200"> | <img src="https://github.com/HermanAleksey/MeditationComposeApp/blob/master/feature/internet_connection/screenshots/no_internet_connection_state.png" width="200">
 
-List of beers implemented with usage of Pagination. (Used api: `https://punkapi.com/documentation/v2`) \
-On click user can open Detailed info screen. Nothing really interesting here, but in my opinion pagination is a must to know thing, so i have to add something.
+List of beers implemented with usage of `Pagination`. (As data source used api: `https://punkapi.com/documentation/v2`) \
+On click user can open Detailed info screen. Nothing really interesting here, but in my opinion pagination is a must to know thing, so i just had to try and add something like that. \
+Also i used `NoInternetConnection`screen (that can be used independently, it's in separate module) there for cases, when there is nor internet connection nor cached data available.
 
 
-### What is next?
-First of all is redesign, especially beer and puzzle features. 
-After it I'm planning to implement music player as next feature.
+### Music player
+
+   Music list screen       |      Music player sheet   |     Notification
+:-------------------------:|:-------------------------:|:-------------------:
+<img src="https://github.com/HermanAleksey/MeditationComposeApp/blob/master/feature/music_player/screenshots/music_list_screen.png" width="200"> | <img src="https://github.com/HermanAleksey/MeditationComposeApp/blob/master/feature/music_player/screenshots/music_player_sheet.png" width="200"> | <img src="https://github.com/HermanAleksey/MeditationComposeApp/blob/master/feature/music_player/screenshots/music_player_notification.png" width="200">
+
+Latest feature is music player. \
+This is actually only one screen with `bottom sheet`. I am using the `EchoPlayer` library to play audio. There is a convenient pop-up, which, thanks to the libraries, was not difficult to create. What i really like is this spinning vinyl disc with simple animation on Start and on Stop of playing. Player works with different data sources is provided:
+- audio from the Internet (using urls)
+- local files located in the `raw` folder in resources
+
+And this data can be obtained from database or from web. BUT currently I've just hardcoded few songs into the `Repository` just not to overcomplicate logic (and songs are stored in `raw` folder). Maybe I'll come back to this later, but for now I'm done with this feature.
+
+## What is next?
+Most likely i will create some screen with `Feature-Toogles` and slowly work on ktor server, so this app can work not only on mocks :)
+Perhaps i will dig into jacoco and stuff like that.
