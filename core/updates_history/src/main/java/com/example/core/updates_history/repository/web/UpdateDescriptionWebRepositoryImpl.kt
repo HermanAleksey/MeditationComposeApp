@@ -95,6 +95,12 @@ fun getVersionDescriptions(startFromVersion: String): List<UpdateDescriptionResp
         updateTitle = "No internet screen",
         updateDescription = "Added a screen that displays the network status when trying to connect to the server without an internet connection. Bug fixes.",
     )
+    val version0_10_0 = UpdateDescriptionResponse(
+        versionName = "0.10.0",
+        updateReleaseTime = 1687585888352,
+        updateTitle = "Music player",
+        updateDescription = "Added music player. Only local app songs are available right now.",
+    )
     val map = listOf(
         version0_0_1,
         version0_5_0,
@@ -103,7 +109,8 @@ fun getVersionDescriptions(startFromVersion: String): List<UpdateDescriptionResp
         version0_7_2,
         version0_8_1,
         version0_8_2,
-        version0_9_1
+        version0_9_1,
+        version0_10_0,
     )
 
     val list = map.toTypedArray().copyOfRange(
