@@ -164,4 +164,11 @@ dependencies {
     kapt(Dependencies.hilt_compiler)
 
     implementation(Dependencies.timber)
+
+    //ui tests
+    // Test rules and transitive dependencies:
+    androidTestImplementation("androidx.test:core:1.5.0")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:${LibVersions.compose_ui_version}")
+    // Needed for createAndroidComposeRule, but not createComposeRule:
+    debugImplementation("androidx.compose.ui:ui-test-manifest:${LibVersions.compose_ui_version}")
 }

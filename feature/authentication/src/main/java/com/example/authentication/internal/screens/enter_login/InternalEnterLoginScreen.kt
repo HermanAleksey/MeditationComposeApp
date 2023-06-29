@@ -53,7 +53,8 @@ internal fun InternalEnterLoginScreen(
     val repeatPasswordFocusRequester = FocusRequester()
 
     DefaultAppBackground(
-        isLoading = uiState.value.isLoading
+        isLoading = uiState.value.isLoading,
+        testTag = stringResource(id = R.string.enter_login_screen_test_tag)
     ) {
         Column(
             horizontalAlignment = Alignment.Start,
@@ -95,7 +96,8 @@ internal fun InternalEnterLoginScreen(
                 focusRequester = repeatPasswordFocusRequester,
                 onKeyboardActions = {
                     focusManager.clearFocus()
-                }
+                },
+                testTag = stringResource(id = R.string.login_field_enter_login_screen_test_tag)
             )
             LoginMainButton(
                 text = stringResource(id = R.string.confirm).toUpperCase(Locale.current),

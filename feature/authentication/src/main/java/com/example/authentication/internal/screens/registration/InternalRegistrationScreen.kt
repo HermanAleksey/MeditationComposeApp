@@ -50,7 +50,8 @@ internal fun InternalRegistrationScreen(
     val emailFocusRequester = FocusRequester()
 
     DefaultAppBackground(
-        isLoading = uiState.value.isLoading
+        isLoading = uiState.value.isLoading,
+        testTag = stringResource(id = R.string.registration_screen_test_tag)
     ) {
         Column(
             horizontalAlignment = Alignment.Start,
