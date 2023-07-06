@@ -118,4 +118,11 @@ object Dependencies {
         "com.google.android.exoplayer:exoplayer-ui:${LibVersions.exoplayer_version}"
     const val exoplayer_extension_mediasession =
         "com.google.android.exoplayer:extension-mediasession:${LibVersions.exoplayer_version}"
+
+    //ui tests
+    const val androidx_test_core = "androidx.test:core:${LibVersions.androidx_test_core_version}"
+    const val androidx_compose_ui_test_junit4 =
+        "androidx.compose.ui:ui-test-junit4:${LibVersions.compose_ui_version}"
+    const val androidx_compose_ui_test_manifest =
+        "androidx.compose.ui:ui-test-manifest:${LibVersions.compose_ui_version}"
 }

@@ -50,7 +50,8 @@ internal fun InternalLoginScreen(
     val passwordFocusRequester = FocusRequester()
 
     DefaultAppBackground(
-        isLoading = uiState.value.isLoading
+        isLoading = uiState.value.isLoading,
+        testTag = stringResource(id = R.string.login_screen_test_tag)
     ) {
         Column(
             horizontalAlignment = Alignment.Start,
@@ -92,6 +93,7 @@ internal fun InternalLoginScreen(
                 onKeyboardActions = {
                     passwordFocusRequester.requestFocus()
                 },
+                testTag = stringResource(id = R.string.login_field_login_screen_test_tag)
             )
             Spacer(modifier = Modifier.height(30.dp))
             LoginFlowInputField(

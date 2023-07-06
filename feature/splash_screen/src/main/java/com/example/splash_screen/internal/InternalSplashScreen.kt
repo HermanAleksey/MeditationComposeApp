@@ -2,6 +2,7 @@ package com.example.splash_screen.internal
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.design_system.AppTheme
 import com.example.design_system.common_composables.ImageBackground
@@ -16,8 +17,10 @@ internal fun InternalSplashScreen(
     }
 
     ImageBackground(
-        imageRes = R.drawable.background_login
-    ) {}
+        imageRes = R.drawable.background_login,
+        testTag = stringResource(id = R.string.splash_screen_test_tag),
+        content = {}
+    )
 }
 
 @Preview

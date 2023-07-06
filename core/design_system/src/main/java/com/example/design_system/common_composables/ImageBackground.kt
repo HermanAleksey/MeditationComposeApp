@@ -6,11 +6,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 
 @Composable
 fun ImageBackground(
     imageRes: Int,
+    testTag: String = "",
     content: @Composable () -> Unit,
 ) {
     Box {
@@ -18,7 +20,9 @@ fun ImageBackground(
             painter = painterResource(id = imageRes),
             contentDescription = null,
             contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
+                .testTag(testTag)
         )
         content()
     }

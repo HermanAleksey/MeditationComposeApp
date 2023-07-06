@@ -40,7 +40,8 @@ internal fun InternalEnterScreen(
     })
 
     ImageBackground(
-        imageRes = R.drawable.background_login
+        imageRes = R.drawable.background_login,
+        testTag = stringResource(id = R.string.enter_screen_test_tag)
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
