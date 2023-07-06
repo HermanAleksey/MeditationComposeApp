@@ -165,7 +165,7 @@ dependencies {
 
     implementation(Dependencies.timber)
 
-    //ui tests
+    // ui tests
     // Test rules and transitive dependencies:
     androidTestImplementation("androidx.test:core:1.5.0")
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:${LibVersions.compose_ui_version}")

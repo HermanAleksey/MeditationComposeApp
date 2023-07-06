@@ -8,11 +8,11 @@ import org.junit.Test
 import com.example.feature.authentication.R as authR
 
 @Suppress("SimpleRedundantLet")
-internal class EnterScreenTest: UiTest() {
+internal class EnterScreenTest : UiTest() {
 
     @Test
     fun verify_enterScreenHasAllLabels() {
-        //enter screen test
+        // enter screen test
         testRule.onNode(
             hasTestTag(getStringRes(authR.string.enter_screen_test_tag)),
             useUnmergedTree = true
@@ -47,14 +47,14 @@ internal class EnterScreenTest: UiTest() {
 
     @Test
     fun verify_enterScreen_canNavigateLoginAndBackwards() {
-        //enter screen displayed
+        // enter screen displayed
         testRule.onNode(
             hasTestTag(getStringRes(authR.string.enter_screen_test_tag)),
             useUnmergedTree = true
         ).let { enterScreen ->
             enterScreen.assertIsDisplayed()
         }
-        //click on login button
+        // click on login button
         testRule.onNode(
             hasText(getStringRes(authR.string.login_button)),
             useUnmergedTree = true
@@ -63,15 +63,15 @@ internal class EnterScreenTest: UiTest() {
             enterScreenLoginButton.performClick()
         }
 
-        //displayed login screen
+        // displayed login screen
         testRule.onNode(
             hasTestTag(getStringRes(authR.string.login_screen_test_tag)),
             useUnmergedTree = true
         ).let { loginScreen ->
             loginScreen.assertIsDisplayed()
         }
-        //todo как тестировать бэк клик?
-        //back pressed
+        // todo как тестировать бэк клик?
+        // back pressed
 //        composeTestRule.activity.onBackPressedDispatcher.onBackPressed()
 //        //enter screen displayed
 //        composeTestRule.onNode(
@@ -84,14 +84,14 @@ internal class EnterScreenTest: UiTest() {
 
     @Test
     fun verify_enterScreen_canNavigateSignUpAndBackwards() {
-        //enter screen displayed
+        // enter screen displayed
         testRule.onNode(
             hasTestTag(getStringRes(authR.string.enter_screen_test_tag)),
             useUnmergedTree = true
         ).let { enterScreen ->
             enterScreen.assertIsDisplayed()
         }
-        //click sign up
+        // click sign up
         testRule.onNode(
             hasText(getStringRes(authR.string.sign_up), substring = true),
             useUnmergedTree = true
@@ -100,14 +100,14 @@ internal class EnterScreenTest: UiTest() {
             enterScreenLoginButton.performClick()
         }
 
-        //displayed sign up screen
+        // displayed sign up screen
         testRule.onNode(
             hasTestTag(getStringRes(authR.string.registration_screen_test_tag)),
             useUnmergedTree = true
         ).let { loginScreen ->
             loginScreen.assertIsDisplayed()
         }
-            //todo разобраться
+        // todo разобраться
 //        //back pressed
 //        composeTestRule.activity.onBackPressedDispatcher.onBackPressed()
 //        //enter screen displayed

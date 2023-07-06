@@ -15,7 +15,7 @@ internal class LoginScreenTest : UiTest() {
 
     @Before
     fun openScreen() {
-        //navigate to screen
+        // navigate to screen
         testRule.onNode(
             hasText(getStringRes(authR.string.login_button)),
             useUnmergedTree = true
@@ -73,7 +73,7 @@ internal class LoginScreenTest : UiTest() {
 
     @Test
     fun verify_signUpNavigateToSignUpScreen() {
-        //click on assert
+        // click on assert
         testRule.onNode(
             hasText(getStringRes(authR.string.sign_up), substring = true),
             useUnmergedTree = true
@@ -81,7 +81,7 @@ internal class LoginScreenTest : UiTest() {
             signUpLabel.assertIsDisplayed()
             signUpLabel.performClick()
         }
-        //sign up screen is displayed
+        // sign up screen is displayed
         testRule.onNode(
             hasTestTag(getStringRes(authR.string.registration_screen_test_tag)),
             useUnmergedTree = true
@@ -93,7 +93,7 @@ internal class LoginScreenTest : UiTest() {
     @Test
     fun verify_ForgotPasswordNavigateRestoreScreen_andSetLoginValue() {
         val inputtedLogin = "parokq@github.com"
-        //input login
+        // input login
         testRule.onNode(
             hasTestTag(getStringRes(authR.string.login_field_login_screen_test_tag)),
             useUnmergedTree = true
@@ -101,7 +101,7 @@ internal class LoginScreenTest : UiTest() {
             loginInputField.assertIsDisplayed()
             loginInputField.performTextInput(inputtedLogin)
         }
-        //click forgot password
+        // click forgot password
         testRule.onNode(
             hasText(getStringRes(authR.string.forgot_password)),
             useUnmergedTree = true
@@ -110,14 +110,14 @@ internal class LoginScreenTest : UiTest() {
             signUpLabel.performClick()
         }
 
-        //sign up screen is displayed
+        // sign up screen is displayed
         testRule.onNode(
             hasTestTag(getStringRes(authR.string.enter_login_screen_test_tag)),
             useUnmergedTree = true
         ).let { passwordRecoveryScreen ->
             passwordRecoveryScreen.assertIsDisplayed()
         }
-        //login inputted into recovery screen
+        // login inputted into recovery screen
         testRule.onNode(
             hasTestTag(getStringRes(authR.string.login_field_enter_login_screen_test_tag)),
             useUnmergedTree = true
