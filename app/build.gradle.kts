@@ -167,8 +167,8 @@ dependencies {
 
     // ui tests
     // Test rules and transitive dependencies:
-    androidTestImplementation("androidx.test:core:1.5.0")
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:${LibVersions.compose_ui_version}")
+    androidTestImplementation(Dependencies.androidx_test_core)
+    androidTestImplementation(Dependencies.androidx_compose_ui_test_junit4)
     // Needed for createAndroidComposeRule, but not createComposeRule:
-    debugImplementation("androidx.compose.ui:ui-test-manifest:${LibVersions.compose_ui_version}")
+    debugImplementation(Dependencies.androidx_compose_ui_test_manifest)
 }
