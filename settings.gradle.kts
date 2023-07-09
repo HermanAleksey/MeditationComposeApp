@@ -23,3 +23,4 @@ include(":feature:music_player")
 
 include(":sample:music_player")
 include(":sample:design_system")
+include(":sample:charts")
