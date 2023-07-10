@@ -15,6 +15,5 @@ data class PieChartData(
   data class Slice(
     val value: Float,
     val color: Color,
-    var isSelected: Boolean = false
   )
 }

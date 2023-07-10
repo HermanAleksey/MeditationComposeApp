@@ -1,6 +1,6 @@
 package com.justparokq.graphs.test_drawers
 
-import android.util.Log
+import android.graphics.PointF
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.animation.core.TweenSpec
@@ -16,25 +16,16 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Paint
 import androidx.compose.ui.graphics.PaintingStyle
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
-import androidx.compose.ui.graphics.drawscope.rotate
-import androidx.compose.ui.graphics.drawscope.scale
-import androidx.compose.ui.graphics.nativeCanvas
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.sp
-import java.math.RoundingMode
-import kotlin.math.PI
-import kotlin.math.acos
-import kotlin.math.pow
-import kotlin.math.sqrt
 
-private const val FULL_CIRCLE_DEGREES: Float = 360.0F
+private const val FULL_CIRCLE_DEGREES: Float = 360F
+private const val INITIAL_STARTING_ANGLE: Float = -180f
+private const val DEFAULT_SLIDE_SCALE: Float = 1f
 
 @Composable
 fun PieChart(
@@ -49,134 +40,131 @@ fun PieChart(
         transitionProgress.animateTo(1f, animationSpec = animation)
     }
 
-    var data by remember {
-        mutableStateOf(-1)
+    var selectedSlice: PieChartData.Slice? by remember {
+        mutableStateOf(null)
     }
 
     DrawChart(
         pieChartData = pieChartData,
-        selectedSlice = data,
-        selectedSliceChanged = { data++ },
+        selectedSlice = selectedSlice,
+        selectedSliceChanged = { newSlice ->
+            selectedSlice = if (newSlice == selectedSlice) {
+                null
+            } else {
+                newSlice
+            }
+        },
         modifier = modifier.fillMaxSize(),
         animationProgress = transitionProgress.value,
     )
 }
 
-
 @Composable
 private fun DrawChart(
     pieChartData: PieChartData,
-    selectedSlice: Int,
-    selectedSliceChanged: () -> Unit,
-    modifier: Modifier,
+    selectedSlice: PieChartData.Slice?,
+    selectedSliceChanged: (slice: PieChartData.Slice) -> Unit,
     animationProgress: Float,
-    percentsLabelFormatter: (Float) -> String = { percents ->
-        val roundedPercents = percents.toBigDecimal().setScale(1, RoundingMode.DOWN)
-        "$roundedPercents%"
-    },
+    pieChartConfig: PieChartConfig = PieChartConfig(),
+    modifier: Modifier,
 ) {
     val slices = pieChartData.slices
-    val padding = 60f
-    val map = mutableMapOf<PieChartData.Slice, Pair<Float, Float>>()
-
-    fun isPointInsideCircle(x: Float, y: Float, a: Float, b: Float, r: Float): Boolean {
-        return (x - a).pow(2) + (y - b).pow(2) <= r.pow(2)
+    val slicesToAnglesMap = remember {
+        mutableMapOf<PieChartData.Slice, Pair<Float, Float>>()
     }
 
-    fun segmentLength(x1: Float, y1: Float, x2: Float, y2: Float): Float {
-        return sqrt((x2 - x1).pow(2) + (y2 - y1).pow(2))
+    var canvasCenterPoint = remember {
+        PointF(0.0f, 0.0f)
     }
-
-    var centerX: Float = 0.0f
-    var centerY: Float = 0.0f
     var radius: Float = 0.0f
     Canvas(
         modifier = modifier
             .pointerInput(true) {
                 detectTapGestures {
-                    val inZone = isPointInsideCircle(it.x, it.y, centerX, centerY, radius)
+                    val inZone = isPointInsideCircle(
+                        pointX = it.x,
+                        pointY = it.y,
+                        circleX = canvasCenterPoint.x,
+                        circleY = canvasCenterPoint.y,
+                        circleRadius = radius
+                    )
                     if (!inZone) return@detectTapGestures
 
-                    val a = radius
-                    val b = segmentLength(it.x, it.y, centerX, centerY)
-                    val c = segmentLength(it.x, it.y, centerX - radius, centerY)
-                    val angleCos = (a.pow(2) + b.pow(2) - c.pow(2)) / (2 * a * b)
-                    var angle = acos(angleCos) * 180 / PI
-                    //invert if click in bottom part
-                    if (it.y > centerY) {
+                    var angle = calculateAngleBetweenSegments(
+                        segmentALength = radius,
+                        segmentBLength = calculateSegmentLength(
+                            x1 = it.x,
+                            y1 = it.y,
+                            x2 = canvasCenterPoint.x,
+                            y2 = canvasCenterPoint.y
+                        ),
+                        segmentCLength = calculateSegmentLength(
+                            x1 = it.x,
+                            y1 = it.y,
+                            x2 = canvasCenterPoint.x - radius,
+                            y2 = canvasCenterPoint.y
+                        )
+                    )
+
+                    //invert angle value if click in bottom part
+                    if (it.y > canvasCenterPoint.y) {
                         angle = 360f - angle
                     }
 
                     //getSlice
-                    map.forEach { pair ->
+                    slicesToAnglesMap.forEach { pair ->
                         if (pair.value.first < angle && pair.value.second >= angle) {
-                            Log.e("TAGG", "DrawChart: ${pair.key} angle:$angle")
-                            pair.key.isSelected = !pair.key.isSelected
-                            selectedSliceChanged()
+                            selectedSliceChanged(pair.key)
                         }
                     }
                 }
             }
     ) {
         drawIntoCanvas { canvas ->
-            var currentStartAngle = -180f
+            var currentStartAngle = INITIAL_STARTING_ANGLE
             var currentStartAngleWithoutAnimation = 0f
             val anglePerValue = FULL_CIRCLE_DEGREES / pieChartData.totalSize
+            val diameter = minOf(size.width, size.height)
+            val horizontalOffset = (size.width - diameter) / 2
+            val verticalOffset = (size.height - diameter) / 2
+            canvasCenterPoint =
+                PointF(diameter / 2 + horizontalOffset, diameter / 2 + verticalOffset)
+            radius = diameter / 2
 
             slices.forEach { slice ->
-                val scale = if (slice.isSelected) 1.1f else 1.0f
+                val scale = if (slice == selectedSlice)
+                    pieChartConfig.selectedSliceScale else DEFAULT_SLIDE_SCALE
                 val arcAngleValue = anglePerValue * slice.value
                 val arcAngleValueWithProgress = arcAngleValue * animationProgress
 
-                //drawing pie
-                val diameter = minOf(size.width, size.height)
-                val horizontalOffset = (size.width - diameter) / 2
-                val verticalOffset = (size.height - diameter) / 2
-                val squareToDrawIn = Rect(
-                    left = horizontalOffset + padding,
-                    top = verticalOffset + padding,
-                    right = size.width - horizontalOffset - padding,
-                    bottom = size.height - verticalOffset - padding,
+                drawPieSlice(
+                    canvas = canvas,
+                    padding = pieChartConfig.padding,
+                    horizontalOffset = horizontalOffset,
+                    verticalOffset = verticalOffset,
+                    currentStartAngle = currentStartAngle,
+                    arcAngleValue = arcAngleValueWithProgress,
+                    slicePaint = Paint().apply {
+                        isAntiAlias = true
+                        style = PaintingStyle.Fill
+                        color = slice.color
+                    },
+                    scale = scale
                 )
-
-                scale(scale) {
-                    canvas.drawArc(
-                        rect = squareToDrawIn,
-                        paint = Paint().apply {
-                            isAntiAlias = true
-                            style = PaintingStyle.Fill
-                            color = slice.color
-                        },
-                        startAngle = currentStartAngle,
-                        sweepAngle = arcAngleValueWithProgress,
-                        useCenter = true
-                    )
-                }
-                map[slice] = Pair(
+                slicesToAnglesMap[slice] = Pair(
                     currentStartAngleWithoutAnimation,
                     currentStartAngleWithoutAnimation + arcAngleValue
                 )
 
                 //draw labels %
                 val arcPercentsValue = (slice.value / pieChartData.totalSize * 100)
-                var textRotateAngle = (currentStartAngle + arcAngleValue / 2f) + 90f
-                Log.e("TAGG", "DrawChart: $textRotateAngle")
-
-                centerX = diameter / 2 + horizontalOffset
-                centerY = diameter / 2 + verticalOffset
-                radius = diameter / 2
-                val labelOffset = diameter / 4 //half of radius
-
-                rotate(textRotateAngle) {
-                    drawContext.canvas.nativeCanvas.drawText(
-                        percentsLabelFormatter(arcPercentsValue),
-                        centerX,
-                        centerY - labelOffset,
-                        android.graphics.Paint().apply {
-                            textSize = 20.sp.toPx()
-                            textAlign = android.graphics.Paint.Align.CENTER
-                            color = Color.Black.toArgb()
-                        }
+                if (arcPercentsValue >= pieChartConfig.showPercentsThreshold) {
+                    drawPercentLabel(
+                        arcPercentsValue = arcPercentsValue,
+                        labelOffset = diameter / 4,
+                        labelFormatter = pieChartConfig.percentsLabelFormatter,
+                        textRotateAngle = (currentStartAngle + arcAngleValue / 2f) + 90f,
+                        canvasCenterPoint = canvasCenterPoint
                     )
                 }
 

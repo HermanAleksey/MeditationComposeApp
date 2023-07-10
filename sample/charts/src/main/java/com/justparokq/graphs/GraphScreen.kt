@@ -21,7 +21,7 @@ fun GraphScreen() {
             pieChartData = PieChartData(
                 slices = listOf(
                     PieChartData.Slice(20f, Color.Red),
-                    PieChartData.Slice(30f, Color.Blue, isSelected = true),
+                    PieChartData.Slice(30f, Color.Blue),
                     PieChartData.Slice(50f, Color.Green)
                 )
             ),
