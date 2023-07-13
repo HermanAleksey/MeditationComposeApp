@@ -2,26 +2,18 @@ package com.justparokq.graphs.test_drawers
 
 import android.graphics.PointF
 import androidx.compose.animation.core.Animatable
-import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.animation.core.TweenSpec
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Paint
 import androidx.compose.ui.graphics.PaintingStyle
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.tooling.preview.Preview
 
 private const val FULL_CIRCLE_DEGREES: Float = 360F
 private const val INITIAL_STARTING_ANGLE: Float = -180f
@@ -30,42 +22,35 @@ private const val DEFAULT_SLIDE_SCALE: Float = 1f
 @Composable
 fun PieChart(
     pieChartData: PieChartData,
+    selectedSlice: PieChartData.Slice?,
+    onSelectedSliceChanged: (PieChartData.Slice) -> Unit,
     modifier: Modifier = Modifier,
-    animation: AnimationSpec<Float> = TweenSpec(durationMillis = 500),
+    pieChartConfig: PieChartConfig = PieChartConfig(),
 ) {
     val transitionProgress = remember(pieChartData.slices) { Animatable(initialValue = 0f) }
 
     // When slices value changes we want to re-animated the chart.
     LaunchedEffect(pieChartData.slices) {
-        transitionProgress.animateTo(1f, animationSpec = animation)
+        transitionProgress.animateTo(1f, animationSpec = TweenSpec(durationMillis = 500))
     }
 
-    var selectedSlice: PieChartData.Slice? by remember {
-        mutableStateOf(null)
-    }
-
-    DrawChart(
+    PieChartWithoutAnimation(
         pieChartData = pieChartData,
         selectedSlice = selectedSlice,
-        selectedSliceChanged = { newSlice ->
-            selectedSlice = if (newSlice == selectedSlice) {
-                null
-            } else {
-                newSlice
-            }
-        },
+        selectedSliceChanged = onSelectedSliceChanged,
         modifier = modifier.fillMaxSize(),
         animationProgress = transitionProgress.value,
+        pieChartConfig = pieChartConfig,
     )
 }
 
 @Composable
-private fun DrawChart(
+private fun PieChartWithoutAnimation(
     pieChartData: PieChartData,
     selectedSlice: PieChartData.Slice?,
     selectedSliceChanged: (slice: PieChartData.Slice) -> Unit,
     animationProgress: Float,
-    pieChartConfig: PieChartConfig = PieChartConfig(),
+    pieChartConfig: PieChartConfig,
     modifier: Modifier,
 ) {
     val slices = pieChartData.slices
@@ -76,7 +61,7 @@ private fun DrawChart(
     var canvasCenterPoint = remember {
         PointF(0.0f, 0.0f)
     }
-    var radius: Float = 0.0f
+    var radius = 0.0f
     Canvas(
         modifier = modifier
             .pointerInput(true) {
@@ -172,22 +157,5 @@ private fun DrawChart(
                 currentStartAngleWithoutAnimation += arcAngleValue
             }
         }
-    }
-}
-
-@Preview
-@Composable
-fun PieChartPreview() {
-    Box(modifier = Modifier.fillMaxWidth()) {
-        PieChart(
-            pieChartData = PieChartData(
-                slices = listOf(
-                    PieChartData.Slice(25f, Color.Red),
-                    PieChartData.Slice(42f, Color.Blue),
-                    PieChartData.Slice(23f, Color.Green)
-                )
-            ),
-            modifier = Modifier.fillMaxWidth()
-        )
     }
 }
