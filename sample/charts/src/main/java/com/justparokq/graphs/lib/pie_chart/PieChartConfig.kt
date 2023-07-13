@@ -1,5 +1,6 @@
-package com.justparokq.graphs.test_drawers
+package com.justparokq.graphs.lib.pie_chart
 
+import com.justparokq.graphs.test_drawers.LabelFormatter
 import java.math.RoundingMode
 
 private const val DEFAULT_PIE_PADDING = 60
@@ -14,7 +15,7 @@ data class PieChartConfig(
     val padding: Int = DEFAULT_PIE_PADDING,
     val showPercentsThreshold: Int = DEFAULT_PERCENTS_THRESHOLD,
     val selectedSliceScale: Float = DEFAULT_SELECTED_SLICE_SCALE,
-    val percentsLabelFormatter: (Float) -> String = { percents ->
+    val percentsLabelFormatter: LabelFormatter = { percents ->
         val roundedPercents = percents.toBigDecimal().setScale(1, RoundingMode.DOWN)
         "$roundedPercents%"
     },

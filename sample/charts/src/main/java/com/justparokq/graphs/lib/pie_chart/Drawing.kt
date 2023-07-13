@@ -1,4 +1,4 @@
-package com.justparokq.graphs.test_drawers
+package com.justparokq.graphs.lib.pie_chart
 
 import android.graphics.PointF
 import androidx.compose.ui.geometry.Rect

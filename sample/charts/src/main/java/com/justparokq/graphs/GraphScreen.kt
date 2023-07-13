@@ -12,8 +12,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.justparokq.graphs.test_drawers.PieChart
-import com.justparokq.graphs.test_drawers.PieChartData
+import com.justparokq.graphs.lib.pie_chart.PieChart
+import com.justparokq.graphs.lib.pie_chart.PieChartData
 
 @Composable
 internal fun GraphScreen() {

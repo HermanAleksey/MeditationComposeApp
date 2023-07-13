@@ -1,4 +1,4 @@
-package com.justparokq.graphs.test_drawers
+package com.justparokq.graphs.lib.pie_chart
 
 import kotlin.math.PI
 import kotlin.math.acos
