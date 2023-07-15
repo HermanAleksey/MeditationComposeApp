@@ -71,8 +71,12 @@ internal fun GraphScreen() {
 
 @Composable
 fun BarChartPanel() {
+    val barChartData = remember {
+        getTestBarChartData()
+    }
+
     BarChart(
-        barChartData = getTestBarChartData(),
+        barChartData = barChartData,
         labelDrawer = SimpleValueDrawer(drawLocation = SimpleValueDrawer.DrawLocation.Inside)
     )
 }
@@ -82,9 +86,12 @@ fun PieChartPanel() {
     var selectedSlice: PieChartData.Slice? by remember {
         mutableStateOf(null)
     }
+    val pieChartData = remember {
+        getTestPieChartData()
+    }
 
     PieChart(
-        pieChartData = getTestPieChartData(),
+        pieChartData = pieChartData,
         modifier = Modifier.fillMaxWidth(),
         selectedSlice = selectedSlice,
         onSelectedSliceChanged = { newSlice ->
