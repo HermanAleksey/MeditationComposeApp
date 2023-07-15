@@ -17,11 +17,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.github.tehras.charts.bar.BarChart
+import com.justparokq.graphs.lib.bar_chart.BarChart
+import com.justparokq.graphs.lib.bar_chart.renderer.label.SimpleValueDrawer
 import com.justparokq.graphs.lib.pie_chart.PieChart
 import com.justparokq.graphs.lib.pie_chart.PieChartData
-import com.justparokq.graphs.test_drawers.BarChartDataModel
-import com.justparokq.graphs.test_drawers.getTestPieChartData
+import com.justparokq.graphs.test_data.getTestBarChartData
+import com.justparokq.graphs.test_data.getTestPieChartData
 
 enum class GraphType {
     PIE, BAR, LINE
@@ -45,6 +46,9 @@ internal fun GraphScreen() {
             Button(onClick = { showedChart = GraphType.BAR }) {
                 Text(text = "Гистограмма", fontSize = 14.sp)
             }
+            Button(onClick = { showedChart = GraphType.LINE }) {
+                Text(text = "Online line", fontSize = 14.sp)
+            }
         }
         Box(
             modifier = Modifier
@@ -67,10 +71,9 @@ internal fun GraphScreen() {
 
 @Composable
 fun BarChartPanel() {
-    val barChartDataModel = BarChartDataModel()
     BarChart(
-        barChartData = barChartDataModel.barChartData,
-        labelDrawer = barChartDataModel.labelDrawer
+        barChartData = getTestBarChartData(),
+        labelDrawer = SimpleValueDrawer(drawLocation = SimpleValueDrawer.DrawLocation.Inside)
     )
 }
 

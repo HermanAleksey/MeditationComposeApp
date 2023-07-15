@@ -1,10 +1,10 @@
-package com.github.tehras.charts.bar.renderer.bar
+package com.justparokq.graphs.lib.bar_chart.renderer.bar
 
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Canvas
 import androidx.compose.ui.graphics.Paint
 import androidx.compose.ui.graphics.drawscope.DrawScope
-import com.github.tehras.charts.bar.BarChartData
+import com.justparokq.graphs.lib.bar_chart.BarChartData
 
 class SimpleBarDrawer : BarDrawer {
     private val barPaint = Paint().apply {

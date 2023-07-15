@@ -1,6 +1,6 @@
 package com.justparokq.graphs.lib.pie_chart
 
-import com.justparokq.graphs.test_drawers.LabelFormatter
+import com.justparokq.graphs.lib.LabelFormatter
 import java.math.RoundingMode
 
 private const val DEFAULT_PIE_PADDING = 60

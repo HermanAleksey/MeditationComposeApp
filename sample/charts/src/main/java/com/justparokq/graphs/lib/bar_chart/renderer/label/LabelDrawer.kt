@@ -1,4 +1,4 @@
-package com.github.tehras.charts.bar.renderer.label
+package com.justparokq.graphs.lib.bar_chart.renderer.label
 
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Canvas

@@ -1,4 +1,4 @@
-package com.github.tehras.charts.bar
+package com.justparokq.graphs.lib.bar_chart
 
 import androidx.compose.ui.graphics.Color
 

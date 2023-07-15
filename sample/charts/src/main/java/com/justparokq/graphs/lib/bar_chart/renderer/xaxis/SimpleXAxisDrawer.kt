@@ -1,4 +1,4 @@
-package com.github.tehras.charts.bar.renderer.xaxis
+package com.justparokq.graphs.lib.bar_chart.renderer.xaxis
 
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect

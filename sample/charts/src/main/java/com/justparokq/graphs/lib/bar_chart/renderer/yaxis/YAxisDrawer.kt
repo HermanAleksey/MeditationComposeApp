@@ -1,4 +1,4 @@
-package com.github.tehras.charts.bar.renderer.yaxis
+package com.justparokq.graphs.lib.bar_chart.renderer.yaxis
 
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Canvas

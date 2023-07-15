@@ -1,4 +1,4 @@
-package com.github.tehras.charts.bar.renderer.label
+package com.justparokq.graphs.lib.bar_chart.renderer.label
 
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Canvas
@@ -7,7 +7,7 @@ import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
-import com.github.tehras.charts.bar.renderer.label.SimpleValueDrawer.DrawLocation.*
+import com.justparokq.graphs.lib.bar_chart.renderer.label.SimpleValueDrawer.DrawLocation.*
 
 
 fun Color.toLegacyInt(): Int {

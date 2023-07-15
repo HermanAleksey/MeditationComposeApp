@@ -1,4 +1,4 @@
-package com.github.tehras.charts.bar
+package com.justparokq.graphs.lib.bar_chart
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.AnimationSpec
@@ -11,23 +11,23 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
-import com.github.tehras.charts.bar.BarChartUtils.axisAreas
-import com.github.tehras.charts.bar.BarChartUtils.barDrawableArea
-import com.github.tehras.charts.bar.BarChartUtils.forEachWithArea
-import com.github.tehras.charts.bar.renderer.bar.BarDrawer
-import com.github.tehras.charts.bar.renderer.bar.SimpleBarDrawer
-import com.github.tehras.charts.bar.renderer.label.LabelDrawer
-import com.github.tehras.charts.bar.renderer.label.SimpleValueDrawer
-import com.github.tehras.charts.bar.renderer.xaxis.SimpleXAxisDrawer
-import com.github.tehras.charts.bar.renderer.xaxis.XAxisDrawer
-import com.github.tehras.charts.bar.renderer.yaxis.SimpleYAxisDrawer
-import com.github.tehras.charts.bar.renderer.yaxis.YAxisDrawer
+import com.justparokq.graphs.lib.bar_chart.BarChartUtils.axisAreas
+import com.justparokq.graphs.lib.bar_chart.BarChartUtils.barDrawableArea
+import com.justparokq.graphs.lib.bar_chart.BarChartUtils.forEachWithArea
+import com.justparokq.graphs.lib.bar_chart.renderer.bar.BarDrawer
+import com.justparokq.graphs.lib.bar_chart.renderer.bar.SimpleBarDrawer
+import com.justparokq.graphs.lib.bar_chart.renderer.label.LabelDrawer
+import com.justparokq.graphs.lib.bar_chart.renderer.label.SimpleValueDrawer
+import com.justparokq.graphs.lib.bar_chart.renderer.xaxis.SimpleXAxisDrawer
+import com.justparokq.graphs.lib.bar_chart.renderer.xaxis.XAxisDrawer
+import com.justparokq.graphs.lib.bar_chart.renderer.yaxis.SimpleYAxisDrawer
+import com.justparokq.graphs.lib.bar_chart.renderer.yaxis.YAxisDrawer
 
 @Composable
 fun BarChart(
     barChartData: BarChartData,
     modifier: Modifier = Modifier,
-    animation: AnimationSpec<Float> = TweenSpec<Float>(durationMillis = 500),
+    animation: AnimationSpec<Float> = TweenSpec(durationMillis = 500),
     barDrawer: BarDrawer = SimpleBarDrawer(),
     xAxisDrawer: XAxisDrawer = SimpleXAxisDrawer(),
     yAxisDrawer: YAxisDrawer = SimpleYAxisDrawer(),

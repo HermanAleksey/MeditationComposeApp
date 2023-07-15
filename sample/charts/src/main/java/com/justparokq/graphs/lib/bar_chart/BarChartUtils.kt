@@ -1,11 +1,11 @@
-package com.github.tehras.charts.bar
+package com.justparokq.graphs.lib.bar_chart
 
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.unit.dp
-import com.github.tehras.charts.bar.renderer.label.LabelDrawer
-import com.github.tehras.charts.bar.renderer.xaxis.XAxisDrawer
+import com.justparokq.graphs.lib.bar_chart.renderer.label.LabelDrawer
+import com.justparokq.graphs.lib.bar_chart.renderer.xaxis.XAxisDrawer
 
 internal object BarChartUtils {
     fun axisAreas(
