@@ -1,6 +1,7 @@
 package com.justparokq.graphs.lib.pie_chart
 
 import android.graphics.PointF
+import android.util.Log
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.TweenSpec
 import androidx.compose.foundation.Canvas
@@ -143,6 +144,7 @@ private fun PieChartWithoutAnimation(
 
                 //draw labels %
                 val arcPercentsValue = (slice.value / pieChartData.totalSize * 100)
+                Log.e("TAGG", "PieChartWithoutAnimation: arcPercentsValue:$arcPercentsValue")
                 if (arcPercentsValue >= pieChartConfig.showPercentsThreshold) {
                     drawPercentLabel(
                         arcPercentsValue = arcPercentsValue,

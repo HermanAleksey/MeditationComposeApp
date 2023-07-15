@@ -54,6 +54,9 @@ internal fun DrawScope.drawPieSlice(
     }
 }
 
+/**
+ * [textRotateAngle] starts between first and second quarter
+ * */
 internal fun DrawScope.drawPercentLabel(
     arcPercentsValue: Float,
     labelOffset: Float,
@@ -72,7 +75,7 @@ internal fun DrawScope.drawPercentLabel(
     } else {
         canvasCenterPoint.y - labelOffset
     }
-    val rotationAngle = if (!isInBottomPart) textRotateAngle else 0f
+    val rotationAngle = if (!isInBottomPart) textRotateAngle else (textRotateAngle - 180)
 
     rotate(rotationAngle) {
         drawContext.canvas.nativeCanvas.drawText(
