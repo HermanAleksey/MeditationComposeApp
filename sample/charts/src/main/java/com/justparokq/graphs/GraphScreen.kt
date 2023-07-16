@@ -19,9 +19,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.justparokq.graphs.lib.bar_chart.BarChart
 import com.justparokq.graphs.lib.bar_chart.renderer.label.SimpleValueDrawer
+import com.justparokq.graphs.lib.line_chart.LineChart
+import com.justparokq.graphs.lib.line_chart.LineChartConfig
+import com.justparokq.graphs.lib.line_chart.LineChartData
 import com.justparokq.graphs.lib.pie_chart.PieChart
 import com.justparokq.graphs.lib.pie_chart.PieChartData
 import com.justparokq.graphs.test_data.getTestBarChartData
+import com.justparokq.graphs.test_data.getTestLineChartData
 import com.justparokq.graphs.test_data.getTestPieChartData
 
 enum class GraphType {
@@ -62,11 +66,34 @@ internal fun GraphScreen() {
                 GraphType.BAR -> {
                     BarChartPanel()
                 }
-                GraphType.LINE -> {}
+                GraphType.LINE -> {
+                    LineChartPanel()
+                }
                 null -> {}
             }
         }
     }
+}
+
+@Composable
+fun LineChartPanel() {
+    val lineChartData = remember {
+        LineChartData(
+            capacity = LineChartData.ChartCapacity(10, 10),
+            autoCapacityX = false,
+            autoCapacityY = false,
+            elements = getTestLineChartData()
+        )
+    }
+    val lineChartConfig = remember {
+        LineChartConfig(10)
+    }
+
+    LineChart(
+        data = lineChartData,
+        config = lineChartConfig,
+        modifier = Modifier.fillMaxSize()
+    )
 }
 
 @Composable
