@@ -66,7 +66,7 @@ dependencies {
     implementation(project(":core:design_system"))
     implementation(project(":core:common"))
 
-//    implementation(project(":feature:graph"))
+    implementation(project(":feature:charts"))
 
     implementation(Dependencies.activity_compose)
     implementation(Dependencies.compose_ui)

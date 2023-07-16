@@ -14,7 +14,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -22,13 +21,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.justparokq.graphs.lib.bar_chart.BarChart
-import com.justparokq.graphs.lib.bar_chart.renderer.label.SimpleValueDrawer
-import com.justparokq.graphs.lib.line_chart.LineChart
-import com.justparokq.graphs.lib.line_chart.view_model.LineChartViewModelImpl
-import com.justparokq.graphs.lib.line_chart.view_model.LineChartViewState
-import com.justparokq.graphs.lib.pie_chart.PieChart
-import com.justparokq.graphs.lib.pie_chart.PieChartData
+import com.example.charts.bar_chart.BarChart
+import com.example.charts.bar_chart.renderer.label.SimpleValueDrawer
+import com.example.charts.line_chart.LineChart
+import com.example.charts.line_chart.view_model.LineChartViewModelImpl
+import com.example.charts.pie_chart.PieChart
+import com.example.charts.pie_chart.PieChartData
 import com.justparokq.graphs.test_data.getTestBarChartData
 import com.justparokq.graphs.test_data.getTestPieChartData
 import kotlinx.coroutines.delay
