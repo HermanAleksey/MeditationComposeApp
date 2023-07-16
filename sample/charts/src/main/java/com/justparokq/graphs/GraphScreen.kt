@@ -1,5 +1,6 @@
 package com.justparokq.graphs
 
+import android.graphics.Point
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,9 +11,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -20,13 +25,14 @@ import androidx.compose.ui.unit.sp
 import com.justparokq.graphs.lib.bar_chart.BarChart
 import com.justparokq.graphs.lib.bar_chart.renderer.label.SimpleValueDrawer
 import com.justparokq.graphs.lib.line_chart.LineChart
-import com.justparokq.graphs.lib.line_chart.LineChartConfig
-import com.justparokq.graphs.lib.line_chart.LineChartData
+import com.justparokq.graphs.lib.line_chart.view_model.LineChartViewModelImpl
+import com.justparokq.graphs.lib.line_chart.view_model.LineChartViewState
 import com.justparokq.graphs.lib.pie_chart.PieChart
 import com.justparokq.graphs.lib.pie_chart.PieChartData
 import com.justparokq.graphs.test_data.getTestBarChartData
-import com.justparokq.graphs.test_data.getTestLineChartData
 import com.justparokq.graphs.test_data.getTestPieChartData
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 enum class GraphType {
     PIE, BAR, LINE
@@ -77,21 +83,30 @@ internal fun GraphScreen() {
 
 @Composable
 fun LineChartPanel() {
-    val lineChartData = remember {
-        LineChartData(
-            capacity = LineChartData.ChartCapacity(10, 10),
-            autoCapacityX = false,
-            autoCapacityY = false,
-            elements = getTestLineChartData()
-        )
+    val a = rememberCoroutineScope()
+    val lineChartViewModel = remember {
+        LineChartViewModelImpl()
     }
-    val lineChartConfig = remember {
-        LineChartConfig(10)
+
+    val points = lineChartViewModel.lineChartPoints.collectAsState()
+    val lineChartViewState = lineChartViewModel.lineChartViewState.collectAsState()
+
+    LaunchedEffect(key1 = Unit) {
+        a.launch {
+            var x = 0
+            var y = 0
+            while (true) {
+                lineChartViewModel.addPoint(Point(x, y))
+                x++
+                y = (y + 1).mod(10)
+                delay(300)
+            }
+        }
     }
 
     LineChart(
-        data = lineChartData,
-        config = lineChartConfig,
+        data = lineChartViewState.value,
+        points = points.value,
         modifier = Modifier.fillMaxSize()
     )
 }
