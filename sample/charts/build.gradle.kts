@@ -73,5 +73,4 @@ dependencies {
     implementation(Dependencies.compose_material)
     implementation(Dependencies.compose_ui_tooling)
     implementation(Dependencies.compose_ui_tooling_preview)
-
 }
