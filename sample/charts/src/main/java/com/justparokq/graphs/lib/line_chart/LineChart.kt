@@ -22,12 +22,23 @@ fun LineChart(
 
     Canvas(
         modifier = modifier,
-        onDraw = {
-            val workingAreaXAxis = size.width - data.offset * 2
-            val workingAreaYAxis = size.height - data.offset * 2
-            val xAtomDistance = workingAreaXAxis / data.viewPort.xCapacity
-            val yAtomDistance = workingAreaYAxis / data.viewPort.yCapacity
+    ) {
+        val workingAreaXAxis = size.width - data.offset * 2
+        val workingAreaYAxis = size.height - data.offset * 2
+        val xAtomDistance = workingAreaXAxis / data.viewPort.xCapacity
+        val yAtomDistance = workingAreaYAxis / data.viewPort.yCapacity
 
+        //draw lines
+        drawGraphLines(data, elementsOffset, displayedPoints, xAtomDistance, yAtomDistance)
+        //draw points
+        if (data.drawPoints) {
+            drawPoints(data, elementsOffset, displayedPoints, xAtomDistance, yAtomDistance)
+        }
+    }
+
+    Canvas(
+        modifier = modifier,
+        onDraw = {
             //draw axis
             data.axisDrawer.drawAxis(this, data.offset.toFloat())
 
@@ -37,13 +48,6 @@ fun LineChart(
 //                text = AnnotatedString("Hello"),
 ////                topLeft = Offset()
 //            )
-
-            //draw lines
-            drawGraphLines(data, elementsOffset, displayedPoints, xAtomDistance, yAtomDistance)
-            //draw points
-            if (data.drawPoints) {
-                drawPoints(data, elementsOffset, displayedPoints, xAtomDistance, yAtomDistance)
-            }
         }
     )
 }
