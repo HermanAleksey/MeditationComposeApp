@@ -7,8 +7,11 @@ import com.example.meditationcomposeapp.presentation.navigation.DestinationWrapp
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import javax.inject.Inject
 
-class MainViewModel : ViewModel() {
+class MainViewModel @Inject constructor(
+    private val featureToggleProvider: FeatureToggleProviderImpl
+) : ViewModel() {
 
     private val _bottomBarIsVisible = MutableStateFlow(false)
     val bottomBarIsVisible = _bottomBarIsVisible.asStateFlow()

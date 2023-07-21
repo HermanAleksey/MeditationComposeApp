@@ -15,7 +15,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavHostController
 import com.example.common.navigation.NavDependencies
 import com.example.common.navigation.NavDependenciesProvider
@@ -31,11 +30,16 @@ import com.example.meditationcomposeapp.presentation.ui_controls.toolbar.Toolbar
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity(), NavDependenciesProvider, DialogController {
 
-    private lateinit var mainViewModel: MainViewModel
+    @Inject
+    lateinit var featureToggleProvider: FeatureToggleProviderImpl
+
+    @Inject
+    lateinit var mainViewModel: MainViewModel
     private lateinit var navController: NavHostController
     private var navDepProvider: NavDependenciesProvider? = null
 
@@ -43,14 +47,13 @@ class MainActivity : ComponentActivity(), NavDependenciesProvider, DialogControl
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
-        mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
         setContent {
             navController = rememberAnimatedNavController()
             MyApp(
                 navController = navController,
                 viewModel = mainViewModel,
-                dialogController = this as DialogController
+                dialogController = this as DialogController,
             )
         }
     }
