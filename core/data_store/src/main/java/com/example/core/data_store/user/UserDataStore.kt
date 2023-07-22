@@ -1,4 +1,4 @@
-package com.example.core.data_store
+package com.example.core.data_store.user
 
 import kotlinx.coroutines.flow.Flow
 
@@ -8,6 +8,7 @@ interface UserDataStore {
 
     fun readLogin(): Flow<String>
 
+    //todo replace all work with passwords to hashCode
     suspend fun writePassword(value: String)
 
     fun readPassword(): Flow<String>

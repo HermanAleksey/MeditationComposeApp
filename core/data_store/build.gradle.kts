@@ -22,6 +22,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:common"))
+
     //data store
     implementation(Dependencies.datastore_preferences)
 

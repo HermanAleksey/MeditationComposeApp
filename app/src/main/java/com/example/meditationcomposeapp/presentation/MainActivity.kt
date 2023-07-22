@@ -36,9 +36,6 @@ import javax.inject.Inject
 class MainActivity : ComponentActivity(), NavDependenciesProvider, DialogController {
 
     @Inject
-    lateinit var featureToggleProvider: FeatureToggleProviderImpl
-
-    @Inject
     lateinit var mainViewModel: MainViewModel
     private lateinit var navController: NavHostController
     private var navDepProvider: NavDependenciesProvider? = null

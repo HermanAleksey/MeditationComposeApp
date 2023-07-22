@@ -2,7 +2,7 @@ package com.example.meditationcomposeapp.presentation.ui_controls.toolbar
 
 import androidx.lifecycle.viewModelScope
 import com.example.common.view_model.NavigationBaseViewModel
-import com.example.core.data_store.use_case.ClearAuthDataUseCase
+import com.example.core.data_store.user.use_case.ClearAuthDataUseCase
 import com.example.core.updates_history.use_case.GetLastUpdateDescriptionUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

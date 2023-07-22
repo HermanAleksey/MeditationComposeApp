@@ -9,9 +9,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
-class MainViewModel @Inject constructor(
-    private val featureToggleProvider: FeatureToggleProviderImpl
-) : ViewModel() {
+class MainViewModel @Inject constructor() : ViewModel() {
 
     private val _bottomBarIsVisible = MutableStateFlow(false)
     val bottomBarIsVisible = _bottomBarIsVisible.asStateFlow()
@@ -61,9 +59,7 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun onLaunch(
-        initialToolbarProvider: ToolbarProvider
-    ) {
+    fun onLaunch(initialToolbarProvider: ToolbarProvider) {
         _toolbarProvider.update {
             initialToolbarProvider
         }
