@@ -5,4 +5,6 @@ interface FeatureToggle {
     fun getKey(): String = this.javaClass.canonicalName ?: ""
 
     fun getDefaultValue(): Boolean
+
+    fun getDescription(): String
 }
