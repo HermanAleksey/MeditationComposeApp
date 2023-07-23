@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.feature.splash_screen"
+    namespace = "com.example.feature_toggle"
     compileSdk = Config.COMPILE_SDK
 
     defaultConfig {
@@ -34,10 +34,6 @@ android {
 dependencies {
     implementation(project(":core:design_system"))
     implementation(project(":core:common"))
-    implementation(project(":core:model"))
-    implementation(project(":core:data_store"))
-    implementation(project(":core:authentication_source"))
-    implementation(project(":core:updates_history"))
 
     implementation(Dependencies.activity_compose)
     implementation(Dependencies.compose_ui)
@@ -49,10 +45,4 @@ dependencies {
     implementation(Dependencies.hilt_android)
     kapt(Dependencies.hilt_compiler)
 
-    //testing
-    testImplementation(project(":core:testing"))
-    testImplementation(Dependencies.junit)
-    testImplementation (Dependencies.mockito)
-    testImplementation (Dependencies.coroutines_test)
-    testImplementation (Dependencies.mockito_kotlin)
 }
