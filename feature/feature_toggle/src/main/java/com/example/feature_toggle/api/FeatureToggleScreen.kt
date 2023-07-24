@@ -6,7 +6,7 @@ import com.example.feature_toggle.internal.presentation.InternalFeatureToggleScr
 
 @Composable
 fun FeatureToggleScreen(
-    viewModel: FeatureToggleViewModel,
+    viewModel: FeatureToggleScreenViewModel,
 ) {
     InternalFeatureToggleScreen(
         uiState = viewModel.uiState.collectAsState(),

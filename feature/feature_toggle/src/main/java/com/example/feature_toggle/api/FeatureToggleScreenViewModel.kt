@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
-class FeatureToggleViewModel @Inject constructor() : ViewModel(),
+class FeatureToggleScreenViewModel @Inject constructor() : ViewModel(),
     MviViewModel<FeatureToggleScreenState, FeatureToggleAction> {
 
     private val _uiState = MutableStateFlow(FeatureToggleScreenState())

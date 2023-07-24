@@ -6,6 +6,7 @@ import com.example.common.navigation.NavRoute
 class MainScreenNavDependencies(
     val navigateToPuzzleScreen: () -> Unit,
     val navigateToMusicScreen: () -> Unit,
+    val navigateToFeatureToggleScreen: () -> Unit,
 ) : NavDependencies
 
 sealed class MainScreenNavRoute : NavRoute<MainScreenNavDependencies>() {
@@ -20,6 +21,12 @@ sealed class MainScreenNavRoute : NavRoute<MainScreenNavDependencies>() {
 
         override fun navigate(navDependencies: MainScreenNavDependencies) {
             navDependencies.navigateToMusicScreen()
+        }
+    }
+
+    class FeatureToggleScreen : MainScreenNavRoute() {
+        override fun navigate(navDependencies: MainScreenNavDependencies) {
+            navDependencies.navigateToFeatureToggleScreen()
         }
     }
 }

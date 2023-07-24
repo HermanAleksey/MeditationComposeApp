@@ -2,6 +2,7 @@ package com.example.feature.main.internal
 
 import android.app.Activity
 import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,6 +17,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
@@ -24,13 +26,14 @@ import androidx.compose.ui.unit.dp
 import com.example.design_system.AppTheme
 import com.example.design_system.common_composables.ColorBackground
 import com.example.feature.main.R
+import com.example.feature.main.api.MainScreenAction
 import com.example.feature.main.internal.composable.MenuItem
 import com.example.feature.main.internal.composable.MenuItemModel
 import com.example.feature.main.internal.composable.getMenuItemsList
 
 @Composable
 internal fun InternalMainScreen(
-    onMenuItemClick: (MenuItem) -> Unit,
+    processAction: (MainScreenAction) -> Unit,
 ) {
     val activity = LocalContext.current as? Activity
     BackHandler(enabled = true, onBack = {
@@ -38,7 +41,7 @@ internal fun InternalMainScreen(
     })
 
     val menuItems = getMenuItemsList {
-        onMenuItemClick(it)
+        processAction(MainScreenAction.MenuItemClick(it))
     }
 
     ColorBackground(color = MaterialTheme.colors.background) {
@@ -49,9 +52,17 @@ internal fun InternalMainScreen(
             Text(
                 text = stringResource(id = R.string.features),
                 style = MaterialTheme.typography.h4,
-                modifier = Modifier.padding(
-                    start = dimensionResource(id = R.dimen.padding_horizontal_main_content)
-                )
+                modifier = Modifier
+                    .padding(
+                        start = dimensionResource(id = R.dimen.padding_horizontal_main_content)
+                    )
+                    .pointerInput(Unit) {
+                        detectTapGestures(
+                            onLongPress = {
+                                processAction(MainScreenAction.TitleLongClick)
+                            }
+                        )
+                    }
             )
             Spacer(modifier = Modifier.padding(top = dimensionResource(id = R.dimen.padding_spacing_menu_item)))
             MainMenu(menuItems = menuItems)

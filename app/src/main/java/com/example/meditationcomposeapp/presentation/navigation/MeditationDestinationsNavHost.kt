@@ -14,6 +14,7 @@ import com.example.beer_sorts.api.detailed_beer.DetailedBeerScreenViewModel
 import com.example.feature.main.api.MainScreenViewModel
 import com.example.feature.music_player.ui.viewmodels.MusicScreenViewModel
 import com.example.feature.update_history.api.UpdatesDescriptionViewModel
+import com.example.feature_toggle.api.FeatureToggleScreenViewModel
 import com.example.internet_connection.NoInternetConnectionViewModel
 import com.example.meditationcomposeapp.presentation.screens.NavGraphs
 import com.example.meditationcomposeapp.presentation.screens.destinations.BeerListScreenDestination
@@ -21,6 +22,7 @@ import com.example.meditationcomposeapp.presentation.screens.destinations.Detail
 import com.example.meditationcomposeapp.presentation.screens.destinations.EnterCodeScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.EnterLoginScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.EnterScreenDestination
+import com.example.meditationcomposeapp.presentation.screens.destinations.FeatureToggleScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.LoginScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.MainScreenDestination
 import com.example.meditationcomposeapp.presentation.screens.destinations.MusicScreenDestination
@@ -71,6 +73,9 @@ fun MeditationDestinationsNavHost(
             }
             dependency(MusicScreenDestination) {
                 hiltViewModel<MusicScreenViewModel>()
+            }
+            dependency(FeatureToggleScreenDestination) {
+                hiltViewModel<FeatureToggleScreenViewModel>()
             }
         }
     )
