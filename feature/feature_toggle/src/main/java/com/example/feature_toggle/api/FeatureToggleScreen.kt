@@ -6,7 +6,6 @@ import com.example.feature_toggle.internal.presentation.InternalFeatureToggleScr
 
 @Composable
 fun FeatureToggleScreen(
-    login: String,
     viewModel: FeatureToggleViewModel,
 ) {
     InternalFeatureToggleScreen(

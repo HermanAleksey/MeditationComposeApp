@@ -1,11 +1,15 @@
 package com.example.feature_toggle.api
 
-import com.example.common.feature_toggle.FeatureToggle
 import com.example.common.mvi.MviAction
+import com.example.feature_toggle.internal.model.FeatureToggleUiItem
 
 interface FeatureToggleAction : MviAction {
 
     data class ToggleClicked(
-        val featureToggle: FeatureToggle
-    ): FeatureToggleAction
+        val featureToggle: FeatureToggleUiItem,
+    ) : FeatureToggleAction
+
+    data class ItemLongHold(
+        val featureToggle: FeatureToggleUiItem,
+    ) : FeatureToggleAction
 }
