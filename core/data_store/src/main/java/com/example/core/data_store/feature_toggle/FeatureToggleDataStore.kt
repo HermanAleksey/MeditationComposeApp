@@ -7,7 +7,7 @@ interface FeatureToggleDataStore {
 
     suspend fun writeFeatureToggle(featureToggle: FeatureToggle, active: Boolean)
 
-    fun checkFeatureToggle(featureToggle: FeatureToggle): Flow<Any>
+    fun checkFeatureToggle(featureToggle: FeatureToggle): Flow<Boolean>
 
     suspend fun resetDefaultState()
 }

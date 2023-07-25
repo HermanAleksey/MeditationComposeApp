@@ -1,4 +1,4 @@
-package com.example.feature_toggle.internal.model
+package com.example.feature_toggle.internal.entity
 
 class FeatureToggleUiItem(
     val isChecked: Boolean,

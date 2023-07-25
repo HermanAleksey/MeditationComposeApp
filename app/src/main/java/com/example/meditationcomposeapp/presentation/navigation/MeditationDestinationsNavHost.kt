@@ -74,7 +74,13 @@ fun MeditationDestinationsNavHost(
             dependency(MusicScreenDestination) {
                 hiltViewModel<MusicScreenViewModel>()
             }
+
             dependency(FeatureToggleScreenDestination) {
+                //todo do with di?
+//                FeatureToggleScreenViewModel(
+//                    getAllFeatureTogglesUseCase = ,
+//                    updateFeatureToggleStateUseCase = ,
+//                )
                 hiltViewModel<FeatureToggleScreenViewModel>()
             }
         }

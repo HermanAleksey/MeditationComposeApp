@@ -22,6 +22,7 @@ import com.example.design_system.common_composables.ColorBackground
 import com.example.feature_toggle.R
 import com.example.feature_toggle.api.FeatureToggleAction
 import com.example.feature_toggle.api.FeatureToggleScreenState
+import com.example.feature_toggle.internal.presentation.composable.FeatureToggleItem
 
 @Composable
 internal fun InternalFeatureToggleScreen(
@@ -45,8 +46,8 @@ internal fun InternalFeatureToggleScreen(
             items(uiState.value.list) { ftItem ->
                 FeatureToggleItem(
                     ftItem,
-                    onClickItem = {
-                        processAction(FeatureToggleAction.ToggleClicked(ftItem))
+                    onClickItem = { isSelected ->
+                        processAction(FeatureToggleAction.ToggleClicked(ftItem, isSelected))
                     },
                     onItemLongClick = {
                         processAction(FeatureToggleAction.ItemLongClick(ftItem))

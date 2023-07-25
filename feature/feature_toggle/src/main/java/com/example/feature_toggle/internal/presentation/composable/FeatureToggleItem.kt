@@ -1,4 +1,4 @@
-package com.example.feature_toggle.internal.presentation
+package com.example.feature_toggle.internal.presentation.composable
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -15,6 +15,10 @@ import androidx.compose.material.Switch
 import androidx.compose.material.SwitchDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -22,21 +26,24 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.design_system.AppTheme
-import com.example.feature_toggle.internal.model.FeatureToggleUiItem
+import com.example.feature_toggle.internal.entity.FeatureToggleUiItem
 
 @Composable
 fun FeatureToggleItem(
     item: FeatureToggleUiItem,
-    onClickItem: (FeatureToggleUiItem) -> Unit,
-    onItemLongClick: (FeatureToggleUiItem) -> Unit,
+    onClickItem: (isSelected: Boolean) -> Unit,
+    onItemLongClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    var isChecked by remember {
+        mutableStateOf(item.isChecked)
+    }
     Card(
         modifier = modifier
             .pointerInput(Unit) {
                 detectTapGestures(
                     onLongPress = {
-                        onItemLongClick(item)
+                        onItemLongClick()
                     }
                 )
             },
@@ -57,8 +64,11 @@ fun FeatureToggleItem(
                 )
             )
             Switch(
-                checked = item.isChecked,
-                onCheckedChange = { onClickItem(item) },
+                checked = isChecked,
+                onCheckedChange = {
+                    isChecked = !isChecked
+                    onClickItem(isChecked)
+                },
                 //todo add colors according to theme
                 colors = SwitchDefaults.colors()
             )

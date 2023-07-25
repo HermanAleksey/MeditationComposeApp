@@ -26,7 +26,7 @@ class FeatureToggleDataStoreImpl @Inject constructor(
         }
     }
 
-    override fun checkFeatureToggle(featureToggle: FeatureToggle): Flow<Any> {
+    override fun checkFeatureToggle(featureToggle: FeatureToggle): Flow<Boolean> {
         val featureToggleKey = booleanPreferencesKey(featureToggle.getKey())
         return context.ftDataStore.data.map { preferences ->
             preferences[featureToggleKey] ?: featureToggle.getDefaultValue()

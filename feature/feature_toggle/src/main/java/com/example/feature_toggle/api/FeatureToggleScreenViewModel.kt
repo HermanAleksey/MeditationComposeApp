@@ -1,23 +1,21 @@
 package com.example.feature_toggle.api
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.common.mvi.MviViewModel
 import com.example.common.utils.emptyString
-import com.example.core.data_store.feature_toggle.FeatureToggleDataStore
-import com.example.feature_toggle.internal.model.FeatureToggleUiItem
-import dagger.hilt.android.lifecycle.HiltViewModel
+import com.example.feature_toggle.internal.entity.FeatureToggleUiItem
+import com.example.feature_toggle.internal.model.use_case.GetAllFeatureTogglesUseCase
+import com.example.feature_toggle.internal.model.use_case.UpdateFeatureToggleStateUseCase
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class FeatureToggleScreenViewModel @Inject constructor(
-    private val featureToggleDataStore: FeatureToggleDataStore,
+class FeatureToggleScreenViewModel constructor(
+    private val getAllFeatureTogglesUseCase: GetAllFeatureTogglesUseCase,
+    private val updateFeatureToggleStateUseCase: UpdateFeatureToggleStateUseCase,
 ) : ViewModel(), MviViewModel<FeatureToggleScreenState, FeatureToggleAction> {
 
     private val _uiState = MutableStateFlow(FeatureToggleScreenState())
@@ -30,7 +28,7 @@ class FeatureToggleScreenViewModel @Inject constructor(
     override fun processAction(action: FeatureToggleAction) {
         when (action) {
             is FeatureToggleAction.ToggleClicked -> {
-                processToggleClicked(action.featureToggle)
+                processToggleClicked(action.featureToggle, action.isSelected)
             }
             is FeatureToggleAction.ItemLongClick -> {
                 processItemLongClick(action.featureToggle)
@@ -38,13 +36,8 @@ class FeatureToggleScreenViewModel @Inject constructor(
         }
     }
 
-    private fun processToggleClicked(featureToggle: FeatureToggleUiItem) {
-        Log.e("TAG", "InternalFeatureToggleScreen: onClickItem")
-//        _uiState.update { state ->
-//            val a = state.list.
-//            state
-//        }
-//        featureToggleDataStore.writeFeatureToggle()
+    private fun processToggleClicked(featureToggle: FeatureToggleUiItem, isSelected: Boolean) {
+        updateFeatureToggleStateUseCase(featureToggle, isSelected)
     }
 
     private fun processItemLongClick(featureToggle: FeatureToggleUiItem) {
@@ -62,29 +55,11 @@ class FeatureToggleScreenViewModel @Inject constructor(
     }
 
     private fun updateFeatureTogglesList() {
-        //todo remove
         _uiState.update {
             it.copy(
-                list = listOf(
-                    FeatureToggleUiItem(
-                        isChecked = true,
-                        title = "Web auth flow",
-                        description = "When turned on - use web data source for auth flow"
-                    ),
-                    FeatureToggleUiItem(
-                        isChecked = true,
-                        title = "Test1",
-                        description = "Desc1"
-                    ),
-                    FeatureToggleUiItem(
-                        isChecked = false,
-                        title = "test2",
-                        description = "Desc2"
-                    ),
-                )
+                list = getAllFeatureTogglesUseCase.invoke()
             )
         }
-//        featureToggleDataStore.checkFeatureToggle()
     }
 
     companion object {
