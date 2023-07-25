@@ -9,7 +9,7 @@ interface FeatureToggleAction : MviAction {
         val featureToggle: FeatureToggleUiItem,
     ) : FeatureToggleAction
 
-    data class ItemLongHold(
+    data class ItemLongClick(
         val featureToggle: FeatureToggleUiItem,
     ) : FeatureToggleAction
 }

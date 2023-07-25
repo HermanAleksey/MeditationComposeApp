@@ -1,7 +1,6 @@
 package com.example.feature_toggle.internal.presentation
 
-import android.icu.util.Calendar
-import androidx.compose.foundation.background
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -25,43 +24,38 @@ import androidx.compose.ui.unit.dp
 import com.example.design_system.AppTheme
 import com.example.feature_toggle.internal.model.FeatureToggleUiItem
 
-private const val REQUIRED_TAP_DURATION = 1_000
-
 @Composable
 fun FeatureToggleItem(
     item: FeatureToggleUiItem,
     onClickItem: (FeatureToggleUiItem) -> Unit,
-    onItemPressAndHold: (FeatureToggleUiItem) -> Unit,
+    onItemLongClick: (FeatureToggleUiItem) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Card(
         modifier = modifier
             .pointerInput(Unit) {
                 detectTapGestures(
-                    onPress = {
-                        val tapStartTime: Long = Calendar.getInstance().timeInMillis
-                        val tapEndTime: Long
-                        try {
-                            awaitRelease()
-                        } finally {
-                            tapEndTime = Calendar.getInstance().timeInMillis
-                            val tapDuration = tapEndTime - tapStartTime
-                            if (tapDuration > REQUIRED_TAP_DURATION)
-                                onItemPressAndHold(item)
-                        }
-                    },
+                    onLongPress = {
+                        onItemLongClick(item)
+                    }
                 )
-            }
+            },
+        shape = RoundedCornerShape(20.dp),
+        backgroundColor = MaterialTheme.colors.background,
+        border = BorderStroke(2.dp, MaterialTheme.colors.onBackground)
     ) {
         Row(
             modifier = Modifier
                 .fillMaxSize()
-                .background(color = MaterialTheme.colors.background)
                 .padding(horizontal = 16.dp),
             Arrangement.SpaceBetween,
             Alignment.CenterVertically,
         ) {
-            Text(text = item.title, style = MaterialTheme.typography.h5)
+            Text(
+                text = item.title, style = MaterialTheme.typography.h5.copy(
+                    color = MaterialTheme.colors.onBackground
+                )
+            )
             Switch(
                 checked = item.isChecked,
                 onCheckedChange = { onClickItem(item) },
@@ -88,7 +82,7 @@ fun FeatureToggleItemPreviewOn() {
                 description = "turn on..."
             ),
             onClickItem = {},
-            onItemPressAndHold = {}
+            onItemLongClick = {}
         )
     }
 }
