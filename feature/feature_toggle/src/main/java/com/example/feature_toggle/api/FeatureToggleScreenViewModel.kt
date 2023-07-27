@@ -5,17 +5,18 @@ import androidx.lifecycle.viewModelScope
 import com.example.common.mvi.MviViewModel
 import com.example.common.utils.emptyString
 import com.example.feature_toggle.internal.entity.FeatureToggleUiItem
-import com.example.feature_toggle.internal.model.use_case.GetAllFeatureTogglesUseCase
-import com.example.feature_toggle.internal.model.use_case.UpdateFeatureToggleStateUseCase
+import com.example.feature_toggle.internal.model.interactor.FeatureToggleUiItemInteractor
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class FeatureToggleScreenViewModel constructor(
-    private val getAllFeatureTogglesUseCase: GetAllFeatureTogglesUseCase,
-    private val updateFeatureToggleStateUseCase: UpdateFeatureToggleStateUseCase,
+@HiltViewModel
+class FeatureToggleScreenViewModel @Inject constructor(
+    private val featureToggleUiItemInteractor: FeatureToggleUiItemInteractor,
 ) : ViewModel(), MviViewModel<FeatureToggleScreenState, FeatureToggleAction> {
 
     private val _uiState = MutableStateFlow(FeatureToggleScreenState())
@@ -37,7 +38,9 @@ class FeatureToggleScreenViewModel constructor(
     }
 
     private fun processToggleClicked(featureToggle: FeatureToggleUiItem, isSelected: Boolean) {
-        updateFeatureToggleStateUseCase(featureToggle, isSelected)
+        viewModelScope.launch {
+            featureToggleUiItemInteractor.updateFeatureToggleState(featureToggle, isSelected)
+        }
     }
 
     private fun processItemLongClick(featureToggle: FeatureToggleUiItem) {
@@ -55,10 +58,12 @@ class FeatureToggleScreenViewModel constructor(
     }
 
     private fun updateFeatureTogglesList() {
-        _uiState.update {
-            it.copy(
-                list = getAllFeatureTogglesUseCase.invoke()
-            )
+        viewModelScope.launch {
+            _uiState.update {
+                it.copy(
+                    list = featureToggleUiItemInteractor.getAllFeatureToggles()
+                )
+            }
         }
     }
 

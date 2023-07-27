@@ -6,5 +6,7 @@ interface FeatureToggle {
 
     fun getDefaultValue(): Boolean
 
+    fun getName(): String
+
     fun getDescription(): String
 }
