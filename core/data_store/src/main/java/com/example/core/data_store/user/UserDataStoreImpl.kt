@@ -1,4 +1,4 @@
-package com.example.core.data_store
+package com.example.core.data_store.user
 
 import android.content.Context
 import androidx.datastore.core.DataStore
@@ -6,24 +6,20 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import com.example.core.data_store.DataStoreName.USER_DATA_STORE
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
+const val USER_DATA_STORE = "data_store.USER_DATA_STORE"
 val Context.userDataStore: DataStore<Preferences> by preferencesDataStore(name = USER_DATA_STORE)
-
-object DataStoreName {
-    const val USER_DATA_STORE = "data_store.USER_DATA_STORE"
-}
 
 enum class UserDataStoreField {
     LOGIN, PASSWORD, LAST_UPDATE_VERSION
 }
 
 class UserDataStoreImpl @Inject constructor(
-    @ApplicationContext private val context: Context
+    @ApplicationContext private val context: Context,
 ) : UserDataStore {
     override suspend fun writeLogin(value: String) {
         context.userDataStore.edit { preferences ->

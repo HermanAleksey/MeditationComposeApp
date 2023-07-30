@@ -1,7 +1,7 @@
 package com.example.mediose
 
 import com.example.core.authentication_source.api.use_case.LoginUseCase
-import com.example.core.data_store.UserDataStore
+import com.example.core.data_store.user.UserDataStore
 import com.example.core.model.NetworkResponse
 import com.example.core.updates_history.use_case.GetAppUpdatesHistoryUseCase
 import com.example.core.updates_history.use_case.InsertAllUpdatesDescriptionsUseCase

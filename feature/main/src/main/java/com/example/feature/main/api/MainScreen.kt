@@ -5,7 +5,9 @@ import com.example.feature.main.internal.InternalMainScreen
 
 @Composable
 fun MainScreen(
-    viewModel: MainScreenViewModel
+    viewModel: MainScreenViewModel,
 ) {
-    InternalMainScreen(onMenuItemClick = viewModel::onMenuItemClick)
+    InternalMainScreen(
+        processAction = viewModel::processAction
+    )
 }
