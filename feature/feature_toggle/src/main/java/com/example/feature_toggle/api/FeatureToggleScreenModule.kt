@@ -1,9 +1,11 @@
 package com.example.feature_toggle.api
 
+import com.example.common.feature_toggle.FeatureToggle
+import com.example.common.mapper.BidirectionalSuspendableMapper
+import com.example.feature_toggle.internal.entity.FeatureToggleUiItem
 import com.example.feature_toggle.internal.model.interactor.FeatureToggleUiItemInteractor
 import com.example.feature_toggle.internal.model.interactor.FeatureToggleUiItemInteractorImpl
-import com.example.feature_toggle.internal.model.use_case.MapFeatureToggleToUiItemUseCase
-import com.example.feature_toggle.internal.model.use_case.MapFeatureToggleToUiItemUseCaseImpl
+import com.example.feature_toggle.internal.model.mapper.FeatureToggleMapper
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -20,6 +22,6 @@ abstract class FeatureToggleScreenModule {
 
     @Binds
     abstract fun provideMapFeatureToggleToUiItemUseCase(
-        implementation: MapFeatureToggleToUiItemUseCaseImpl,
-    ): MapFeatureToggleToUiItemUseCase
+        implementation: FeatureToggleMapper,
+    ): BidirectionalSuspendableMapper<FeatureToggle, FeatureToggleUiItem>
 }

@@ -14,6 +14,7 @@ class GetAllFeatureTogglesUseCaseImpl @Inject constructor(
         featureToggleDataStore
         return listOf(
             AuthFeatureToggle.WebDataSourceFT,
+            AuthFeatureToggle.AuthFlowValidationFT,
         )
     }
 }

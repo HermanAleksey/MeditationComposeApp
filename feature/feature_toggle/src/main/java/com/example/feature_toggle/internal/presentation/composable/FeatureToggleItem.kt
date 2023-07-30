@@ -1,10 +1,8 @@
 package com.example.feature_toggle.internal.presentation.composable
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -49,19 +47,20 @@ fun FeatureToggleItem(
             },
         shape = RoundedCornerShape(20.dp),
         backgroundColor = MaterialTheme.colors.background,
-        border = BorderStroke(2.dp, MaterialTheme.colors.onBackground)
     ) {
         Row(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(horizontal = 16.dp),
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 4.dp),
             Arrangement.SpaceBetween,
             Alignment.CenterVertically,
         ) {
             Text(
-                text = item.title, style = MaterialTheme.typography.h5.copy(
+                text = item.title,
+                style = MaterialTheme.typography.h5.copy(
                     color = MaterialTheme.colors.onBackground
-                )
+                ),
+                modifier = Modifier.fillMaxWidth(0.8f)
             )
             Switch(
                 checked = isChecked,
@@ -69,10 +68,11 @@ fun FeatureToggleItem(
                     isChecked = !isChecked
                     onClickItem(isChecked)
                 },
-                //todo add colors according to theme
+                //add other colors?
                 colors = SwitchDefaults.colors()
             )
         }
+
     }
 
 }
@@ -84,11 +84,49 @@ fun FeatureToggleItemPreviewOn() {
         FeatureToggleItem(
             modifier = Modifier
                 .fillMaxWidth()
+                .clip(RoundedCornerShape(8.dp)),
+            item = FeatureToggleUiItem(
+                isChecked = true,
+                title = "AUTH_WEB_SOURCE_FLOW",
+                description = "turn on..."
+            ),
+            onClickItem = {},
+            onItemLongClick = {}
+        )
+    }
+}
+
+@Preview(name = "Switch turned off")
+@Composable
+fun FeatureToggleItemPreviewOff() {
+    AppTheme {
+        FeatureToggleItem(
+            modifier = Modifier
+                .fillMaxWidth()
                 .clip(RoundedCornerShape(8.dp))
                 .height(70.dp),
             item = FeatureToggleUiItem(
                 isChecked = true,
-                title = "Auth web flow",
+                title = "AUTH_WEB_SOURCE_FLOW",
+                description = "turn on..."
+            ),
+            onClickItem = {},
+            onItemLongClick = {}
+        )
+    }
+}
+
+@Preview(name = "Switch two lines")
+@Composable
+fun FeatureToggleItemTwoLinesPreviewOn() {
+    AppTheme {
+        FeatureToggleItem(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(8.dp)),
+            item = FeatureToggleUiItem(
+                isChecked = true,
+                title = "AUTH_WEB_SOURCE_FLOW_TWO_LINES_BIG_TEXT",
                 description = "turn on..."
             ),
             onClickItem = {},
