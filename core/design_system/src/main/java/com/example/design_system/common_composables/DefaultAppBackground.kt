@@ -19,6 +19,7 @@ import com.example.design_system.AppTheme
 @Composable
 fun DefaultAppBackground(
     isLoading: Boolean = false,
+    testTag: String = "",
     content: @Composable () -> Unit,
 ) {
     ColorBackground(
@@ -28,7 +29,8 @@ fun DefaultAppBackground(
             content()
         },
         color = MaterialTheme.colors.background,
-        isLoading = isLoading
+        isLoading = isLoading,
+        testTag = testTag
     )
 }
 

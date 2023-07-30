@@ -8,12 +8,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 
 @Composable
 fun ColorBackground(
     isLoading: Boolean = false,
     lockScreenWhenLoading: Boolean = true,
     color: Color,
+    testTag: String = "",
     content: @Composable BoxScope.() -> Unit,
 ) {
     Box(
@@ -21,6 +23,7 @@ fun ColorBackground(
         modifier = Modifier
             .background(color = color)
             .fillMaxSize()
+            .testTag(testTag)
     ) {
         content()
 
