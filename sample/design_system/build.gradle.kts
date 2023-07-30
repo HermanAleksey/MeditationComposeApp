@@ -55,6 +55,8 @@ dependencies {
     implementation(project(":core:design_system"))
     implementation(project(":core:common"))
 
+    implementation(project(":feature:feature_toggle"))
+
     implementation(Dependencies.compose_material)
     implementation(Dependencies.compose_ui_tooling_preview)
     implementation(Dependencies.activity_compose)

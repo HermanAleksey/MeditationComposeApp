@@ -131,6 +131,7 @@ dependencies {
     implementation(project(":feature:update_history"))
     implementation(project(":feature:internet_connection"))
     implementation(project(":feature:music_player"))
+    implementation(project(":feature:feature_toggle"))
 
     implementation(project(":core:updates_history"))
     implementation(project(":core:design_system"))
@@ -164,4 +165,11 @@ dependencies {
     kapt(Dependencies.hilt_compiler)
 
     implementation(Dependencies.timber)
+
+    // ui tests
+    // Test rules and transitive dependencies:
+    androidTestImplementation(Dependencies.androidx_test_core)
+    androidTestImplementation(Dependencies.androidx_compose_ui_test_junit4)
+    // Needed for createAndroidComposeRule, but not createComposeRule:
+    debugImplementation(Dependencies.androidx_compose_ui_test_manifest)
 }

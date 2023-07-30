@@ -26,4 +26,10 @@
 
     <string name="hide_password">Hide password</string>
     <string name="show_password">Show password</string>
+    <string name="enter_screen_test_tag">enter_screen_test_tag</string>
+    <string name="enter_login_screen_test_tag">enter_login_screen_test_tag</string>
+    <string name="login_screen_test_tag">login_screen_test_tag</string>
+    <string name="registration_screen_test_tag">registration_screen_test_tag</string>
+    <string name="login_field_login_screen_test_tag">login_field_login_screen_test_tag</string>
+    <string name="login_field_enter_login_screen_test_tag">login_field_enter_login_screen_test_tag</string>
 </resources>

@@ -5,7 +5,7 @@ import com.example.authentication.api.login_screen.LoginAction
 import com.example.authentication.api.login_screen.LoginScreenNavRoute
 import com.example.authentication.api.login_screen.LoginScreenViewModel
 import com.example.core.authentication_source.api.use_case.LoginUseCase
-import com.example.core.data_store.UserDataStore
+import com.example.core.data_store.user.UserDataStore
 import com.example.core.model.NetworkResponse
 import com.example.coroutines_test.CoroutinesTestRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi

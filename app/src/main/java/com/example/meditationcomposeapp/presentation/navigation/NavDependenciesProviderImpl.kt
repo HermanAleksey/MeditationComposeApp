@@ -41,6 +41,9 @@ class NavDependenciesProviderImpl(
                     },
                     navigateToMusicScreen = {
                         navController.navigate(MusicScreenDestination())
+                    },
+                    navigateToFeatureToggleScreen = {
+                        navController.navigate(FeatureToggleScreenDestination())
                     }
                 )
             }

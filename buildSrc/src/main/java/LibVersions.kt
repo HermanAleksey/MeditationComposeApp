@@ -66,4 +66,6 @@ object LibVersions {
     const val build_gradle_version = "7.4.2"
 
     const val exoplayer_version = "2.18.6"
+
+    const val androidx_test_core_version = "1.5.0"
 }

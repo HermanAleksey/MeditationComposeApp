@@ -20,8 +20,9 @@ include(":feature:main")
 include(":feature:update_history")
 include(":feature:internet_connection")
 include(":feature:charts")
-
 include(":feature:music_player")
+include(":feature:feature_toggle")
+
 include(":sample:music_player")
 include(":sample:design_system")
 include(":sample:charts")

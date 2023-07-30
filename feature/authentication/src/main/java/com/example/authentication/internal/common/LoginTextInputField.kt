@@ -25,6 +25,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -47,6 +48,7 @@ internal fun LoginFlowInputField(
     focusRequester: FocusRequester? = null,
     imeAction: ImeAction = ImeAction.Done,
     keyboardType: KeyboardType = KeyboardType.Text,
+    testTag: String = "",
     onKeyboardActions: () -> Unit,
 ) {
     val isPasswordField = remember {
@@ -129,6 +131,7 @@ internal fun LoginFlowInputField(
                     labelFontSize = 15
                 }
             }
+            .testTag(testTag)
     )
     if (errorValue != null) {
         Text(
