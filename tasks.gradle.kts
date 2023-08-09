@@ -116,7 +116,7 @@ fun createBaseModuleClasses(
         val manifestTemplate = file("$TEMPLATES_DIR_PATH/AndroidManifest.xml")
         copyTemplate(manifestTemplate, this)
     }
-    
+
     with(file("settings.gradle.kts")) {
         val content = this.readText()
         val includeString = "include(\":${moduleType.path}:$featureName\")"
