@@ -1,0 +1,17 @@
+package #{NAMESPACE}#.api
+
+import com.example.common.navigation.NavDependencies
+import com.example.common.navigation.NavRoute
+
+class #{SCREEN_NAME}#NavDependencies(
+//    val navigateTo: () -> Unit,
+) : NavDependencies
+
+sealed class #{SCREEN_NAME}#NavRoute : NavRoute<#{SCREEN_NAME}#NavDependencies>() {
+
+//    class Example : #{SCREEN_NAME}#NavRoute() {
+//        override fun navigate(navDependencies: #{SCREEN_NAME}#NavDependencies) {
+//            navDependencies.navigateToPuzzleScreen()
+//        }
+//    }
+}

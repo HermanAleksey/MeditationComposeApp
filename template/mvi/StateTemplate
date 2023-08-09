@@ -1,0 +1,5 @@
+package #{NAMESPACE}#.api
+
+import com.example.common.mvi.MviState
+
+class #{SCREEN_NAME}#State : MviState

@@ -1,0 +1,8 @@
+package #{NAMESPACE}#.api
+
+import com.example.common.mvi.MviAction
+
+interface #{SCREEN_NAME}#Action : MviAction {
+
+
+}
