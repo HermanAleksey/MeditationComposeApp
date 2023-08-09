@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.feature_toggle"
+    namespace = "com.justparokq.feature.feature_toggle"
     compileSdk = Config.COMPILE_SDK
 
     defaultConfig {

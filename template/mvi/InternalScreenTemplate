@@ -1,0 +1,11 @@
+package #{NAMESPACE}#.internal
+
+import androidx.compose.runtime.Composable
+import #{NAMESPACE}#.internal.InternalMainScreen
+
+@Composable
+fun Internal#{SCREEN_NAME}#(
+    viewModel: #{SCREEN_NAME}#ViewModel,
+) {
+
+}

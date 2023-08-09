@@ -1,0 +1,13 @@
+package #{NAMESPACE}#.api
+
+import androidx.compose.runtime.Composable
+import #{NAMESPACE}#.internal.Internal#{SCREEN_NAME}#
+
+@Composable
+fun #{SCREEN_NAME}#(
+    viewModel: #{SCREEN_NAME}#ViewModel,
+) {
+    Internal#{SCREEN_NAME}#(
+        processAction = viewModel::processAction
+    )
+}

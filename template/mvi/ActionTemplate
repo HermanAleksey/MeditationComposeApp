@@ -1,0 +1,8 @@
+package #{NAMESPACE}#.api
+
+import com.justparokq.core.common.mvi.MviAction
+
+interface #{SCREEN_NAME}#Action : MviAction {
+
+
+}

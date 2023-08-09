@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.core.authentication_api"
+    namespace = "com.justparokq.core.authentication_api"
     compileSdk = Config.COMPILE_SDK
 
     defaultConfig {

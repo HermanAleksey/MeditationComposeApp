@@ -8,7 +8,7 @@ plugins {
 
 @Suppress("UnstableApiUsage")
 android {
-    namespace = "com.example.feature.music_player"
+    namespace = "com.justparokq.feature.music_player"
     compileSdk = Config.COMPILE_SDK
 
     defaultConfig {

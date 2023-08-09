@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.sample.test"
+    namespace = "com.justparokq.sample.design_system"
     compileSdk = Config.COMPILE_SDK
 
     defaultConfig {
-        applicationId = "com.example.sample.test"
+        applicationId = "com.example.sample.design_system"
         minSdk = Config.MIN_SDK
         targetSdk = Config.TARGET_SDK
         versionName = Config.VERSION_NAME

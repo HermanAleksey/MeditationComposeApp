@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.core.punk_source"
+    namespace = "com.justparokq.core.punk_source"
     compileSdk = Config.COMPILE_SDK
 
     defaultConfig {

@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.database"
+    namespace = "com.justparokq.core.database"
     compileSdk = Config.COMPILE_SDK
 
     defaultConfig {

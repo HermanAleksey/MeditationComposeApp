@@ -10,11 +10,11 @@ plugins {
 
 @Suppress("UnstableApiUsage")
 android {
-    namespace = "com.example.sample.media_player"
+    namespace = "com.justparokq.sample.media_player"
     compileSdk = Config.COMPILE_SDK
 
     defaultConfig {
-        applicationId = "com.example.sample.media_player"
+        applicationId = "com.justparokq.sample.media_player"
         minSdk = Config.MIN_SDK
         targetSdk = Config.TARGET_SDK
         versionName = Config.VERSION_NAME
