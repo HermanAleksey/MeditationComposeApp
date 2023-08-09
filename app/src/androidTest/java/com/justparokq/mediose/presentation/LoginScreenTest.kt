@@ -1,4 +1,4 @@
-package com.justparokq.mediose.presentation
+package com.example.mediose.presentation
 
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertTextEquals
@@ -6,9 +6,10 @@ import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
+import com.justparokq.mediose.presentation.UiTest
 import org.junit.Before
 import org.junit.Test
-import com.example.feature.authentication.R as authR
+import com.justparokq.feature.authentication.R as authR
 
 @Suppress("SimpleRedundantLet")
 internal class LoginScreenTest : UiTest() {

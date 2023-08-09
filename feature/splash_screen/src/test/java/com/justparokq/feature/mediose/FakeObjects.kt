@@ -1,4 +1,4 @@
-package com.justparokq.mediose
+package com.justparokq.feature.mediose
 
 import com.justparokq.core.model.authentication.Profile
 import com.justparokq.core.model.updates.UpdateDescriptionModel

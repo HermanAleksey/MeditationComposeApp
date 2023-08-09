@@ -1,13 +1,13 @@
 package com.justparokq.feature.authentication.view_model
 
+import com.example.coroutines_test.CoroutinesTestRule
+import com.example.network.SuccessInfo
+import com.justparokq.core.authentication_source.api.use_case.VerifyCodeUseCase
+import com.justparokq.core.model.NetworkResponse
 import com.justparokq.feature.authentication.api.enter_code_screen.EnterCodeAction
 import com.justparokq.feature.authentication.api.enter_code_screen.EnterCodeScreenNavRoute
 import com.justparokq.feature.authentication.api.enter_code_screen.EnterCodeScreenState
 import com.justparokq.feature.authentication.api.enter_code_screen.EnterCodeScreenViewModel
-import com.justparokq.core.authentication_source.api.use_case.VerifyCodeUseCase
-import com.justparokq.core.model.NetworkResponse
-import com.example.coroutines_test.CoroutinesTestRule
-import com.example.network.SuccessInfo
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.toList
@@ -26,7 +26,6 @@ import org.mockito.junit.MockitoJUnitRunner
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 import java.util.*
-
 
 @RunWith(MockitoJUnitRunner::class)
 @OptIn(ExperimentalCoroutinesApi::class)

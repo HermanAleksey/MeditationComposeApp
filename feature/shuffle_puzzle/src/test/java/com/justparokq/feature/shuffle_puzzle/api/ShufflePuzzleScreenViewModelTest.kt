@@ -1,10 +1,8 @@
+package com.justparokq.feature.shuffle_puzzle.api
+
 import com.example.coroutines_test.CoroutinesTestRule
-import com.justparokq.feature.shuffle_puzzle.api.ShufflePuzzleAction
-import com.justparokq.feature.shuffle_puzzle.api.ShufflePuzzleScreenViewModel
-import com.justparokq.feature.shuffle_puzzle.api.ShufflePuzzleState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
-import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

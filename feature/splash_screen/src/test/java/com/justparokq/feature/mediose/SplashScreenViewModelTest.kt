@@ -1,11 +1,11 @@
-package com.justparokq.mediose
+package com.justparokq.feature.mediose
 
+import com.example.coroutines_test.CoroutinesTestRule
 import com.justparokq.core.authentication_source.api.use_case.LoginUseCase
 import com.justparokq.core.data_store.user.UserDataStore
 import com.justparokq.core.model.NetworkResponse
 import com.justparokq.core.updates_history.use_case.GetAppUpdatesHistoryUseCase
 import com.justparokq.core.updates_history.use_case.InsertAllUpdatesDescriptionsUseCase
-import com.example.coroutines_test.CoroutinesTestRule
 import com.justparokq.feature.splash_screen.api.SplashScreenNavRoute
 import com.justparokq.feature.splash_screen.api.SplashScreenViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
