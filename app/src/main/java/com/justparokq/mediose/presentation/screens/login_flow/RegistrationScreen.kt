@@ -7,7 +7,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.platform.LocalContext
 import com.example.authentication.api.registration_screen.RegistrationScreenNavDependencies
 import com.example.authentication.api.registration_screen.RegistrationScreenViewModel
-import com.example.common.navigation.NavDependenciesProvider
+import com.justparokq.core.common.navigation.NavDependenciesProvider
 import com.ramcosta.composedestinations.annotation.Destination
 
 @Destination

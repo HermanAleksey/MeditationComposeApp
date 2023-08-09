@@ -1,6 +1,6 @@
 package com.example.punk_source.api.mapper
 
-import com.example.common.mapper.Mapper
+import com.justparokq.core.common.mapper.Mapper
 import com.example.core.model.beer_sorts.BoilVolume
 import com.example.core.model.beer_sorts.convertToMeasurementUnit
 import com.example.punk_source.api.model.web.BeerResponse

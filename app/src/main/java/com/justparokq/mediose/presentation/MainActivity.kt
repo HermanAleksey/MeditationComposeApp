@@ -16,8 +16,8 @@ import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.example.common.navigation.NavDependencies
-import com.example.common.navigation.NavDependenciesProvider
+import com.justparokq.core.common.navigation.NavDependencies
+import com.justparokq.core.common.navigation.NavDependenciesProvider
 import com.example.design_system.AppTheme
 import com.example.design_system.dialog.DialogController
 import com.example.design_system.dialog.MedioseDialogProvider

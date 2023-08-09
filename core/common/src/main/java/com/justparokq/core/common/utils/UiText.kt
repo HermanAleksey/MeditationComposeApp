@@ -1,4 +1,4 @@
-package com.example.common.utils
+package com.justparokq.core.common.utils
 
 import android.content.Context
 import androidx.annotation.StringRes

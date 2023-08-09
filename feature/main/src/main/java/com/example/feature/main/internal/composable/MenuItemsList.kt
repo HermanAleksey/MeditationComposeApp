@@ -7,7 +7,7 @@ import androidx.compose.material.icons.filled.Extension
 import androidx.compose.material.icons.filled.Map
 import androidx.compose.material.icons.filled.MusicNote
 import androidx.compose.ui.graphics.Color
-import com.example.common.utils.UiText
+import com.justparokq.core.common.utils.UiText
 import com.example.feature.main.R
 
 enum class MenuItem {

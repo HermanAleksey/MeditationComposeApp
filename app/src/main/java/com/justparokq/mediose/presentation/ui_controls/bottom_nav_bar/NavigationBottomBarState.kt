@@ -16,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.common.utils.UiText
+import com.justparokq.core.common.utils.UiText
 import com.justparokq.mediose.R
 import com.justparokq.mediose.presentation.screens.NavGraphs
 import com.justparokq.mediose.presentation.screens.appCurrentDestinationAsState

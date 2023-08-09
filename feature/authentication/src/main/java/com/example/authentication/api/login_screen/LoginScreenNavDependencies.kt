@@ -1,8 +1,8 @@
 package com.example.authentication.api.login_screen
 
 import android.util.Log
-import com.example.common.navigation.NavDependencies
-import com.example.common.navigation.NavRoute
+import com.justparokq.core.common.navigation.NavDependencies
+import com.justparokq.core.common.navigation.NavRoute
 
 class LoginScreenNavDependencies(
     val navigateToMainScreen: () -> Unit,

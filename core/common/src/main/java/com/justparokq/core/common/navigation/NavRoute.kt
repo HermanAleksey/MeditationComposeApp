@@ -1,4 +1,4 @@
-package com.example.common.navigation
+package com.justparokq.core.common.navigation
 
 import java.util.concurrent.atomic.AtomicBoolean
 

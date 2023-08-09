@@ -1,5 +1,5 @@
 package #{NAMESPACE}#.api
 
-import com.example.common.mvi.MviState
+import com.justparokq.core.common.mvi.MviState
 
 class #{SCREEN_NAME}#State : MviState

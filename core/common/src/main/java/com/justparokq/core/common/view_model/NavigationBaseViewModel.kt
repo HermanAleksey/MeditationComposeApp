@@ -1,4 +1,4 @@
-package com.example.common.view_model
+package com.justparokq.core.common.view_model
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

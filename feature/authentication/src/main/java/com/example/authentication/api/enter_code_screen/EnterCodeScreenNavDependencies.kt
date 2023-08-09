@@ -1,7 +1,7 @@
 package com.example.authentication.api.enter_code_screen
 
-import com.example.common.navigation.NavDependencies
-import com.example.common.navigation.NavRoute
+import com.justparokq.core.common.navigation.NavDependencies
+import com.justparokq.core.common.navigation.NavRoute
 
 class EnterCodeScreenNavDependencies(
     val navigateToNewPasswordScreen: (login: String) -> Unit,

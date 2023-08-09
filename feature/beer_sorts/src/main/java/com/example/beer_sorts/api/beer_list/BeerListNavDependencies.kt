@@ -1,7 +1,7 @@
 package com.example.beer_sorts.api.beer_list
 
-import com.example.common.navigation.NavDependencies
-import com.example.common.navigation.NavRoute
+import com.justparokq.core.common.navigation.NavDependencies
+import com.justparokq.core.common.navigation.NavRoute
 
 class BeerListNavDependencies(
     val navigateToBeerDetails: (beerId: Int) -> Unit,

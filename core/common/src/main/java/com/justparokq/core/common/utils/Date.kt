@@ -1,4 +1,4 @@
-package com.example.common.utils
+package com.justparokq.core.common.utils
 
 import java.text.SimpleDateFormat
 import java.util.Locale

@@ -1,6 +1,6 @@
 package com.example.punk_source.internal
 
-import com.example.common.mapper.Mapper
+import com.justparokq.core.common.mapper.Mapper
 import com.example.core.model.beer_sorts.*
 import com.example.punk_source.api.mapper.*
 import com.example.database.model.BeerListItem

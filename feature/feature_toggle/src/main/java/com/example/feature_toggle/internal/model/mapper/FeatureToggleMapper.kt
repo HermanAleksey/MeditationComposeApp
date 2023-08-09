@@ -1,7 +1,7 @@
 package com.example.feature_toggle.internal.model.mapper
 
-import com.example.common.feature_toggle.FeatureToggle
-import com.example.common.mapper.BidirectionalSuspendableMapper
+import com.justparokq.core.common.feature_toggle.FeatureToggle
+import com.justparokq.core.common.mapper.BidirectionalSuspendableMapper
 import com.example.core.data_store.feature_toggle.FeatureToggleDataStore
 import com.example.feature_toggle.internal.entity.FeatureToggleUiItem
 import com.example.feature_toggle.internal.model.use_case.GetAllFeatureTogglesUseCase

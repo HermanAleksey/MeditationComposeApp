@@ -1,4 +1,4 @@
-package com.example.common.navigation
+package com.justparokq.core.common.navigation
 
 interface NavDependenciesProvider {
 

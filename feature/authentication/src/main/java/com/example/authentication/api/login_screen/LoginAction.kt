@@ -1,6 +1,6 @@
 package com.example.authentication.api.login_screen
 
-import com.example.common.mvi.MviAction
+import com.justparokq.core.common.mvi.MviAction
 
 sealed interface LoginAction : MviAction {
 

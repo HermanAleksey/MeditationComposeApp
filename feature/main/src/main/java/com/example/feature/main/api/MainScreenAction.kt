@@ -1,6 +1,6 @@
 package com.example.feature.main.api
 
-import com.example.common.mvi.MviAction
+import com.justparokq.core.common.mvi.MviAction
 import com.example.feature.main.internal.composable.MenuItem
 
 interface MainScreenAction : MviAction {

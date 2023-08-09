@@ -1,6 +1,6 @@
 package com.example.authentication.api
 
-import com.example.common.feature_toggle.FeatureToggle
+import com.justparokq.core.common.feature_toggle.FeatureToggle
 
 interface AuthFeatureToggle : FeatureToggle {
 

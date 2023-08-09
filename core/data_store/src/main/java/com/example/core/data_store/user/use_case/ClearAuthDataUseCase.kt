@@ -1,6 +1,6 @@
 package com.example.core.data_store.user.use_case
 
-import com.example.common.utils.emptyString
+import com.justparokq.core.common.utils.emptyString
 import com.example.core.data_store.user.UserDataStore
 import javax.inject.Inject
 

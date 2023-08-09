@@ -19,8 +19,8 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.common.utils.DateFormat
-import com.example.common.utils.formatMillisIntoDate
+import com.justparokq.core.common.utils.DateFormat
+import com.justparokq.core.common.utils.formatMillisIntoDate
 import com.example.core.model.updates.UpdateDescriptionModel
 import com.example.core.model.updates.Version
 import com.example.design_system.AppTheme

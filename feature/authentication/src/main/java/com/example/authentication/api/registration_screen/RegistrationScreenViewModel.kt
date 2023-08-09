@@ -4,8 +4,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.authentication.internal.validation.LoginField
 import com.example.authentication.internal.validation.NameField
 import com.example.authentication.internal.validation.PasswordField
-import com.example.common.mvi.MviViewModel
-import com.example.common.view_model.NavigationBaseViewModel
+import com.justparokq.core.common.mvi.MviViewModel
+import com.justparokq.core.common.view_model.NavigationBaseViewModel
 import com.justparokq.core.authentication_source.api.use_case.RegisterUseCase
 import com.example.core.model.NetworkResponse
 import dagger.hilt.android.lifecycle.HiltViewModel

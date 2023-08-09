@@ -1,7 +1,7 @@
 package com.example.authentication.api.new_password_screen
 
-import com.example.common.mvi.MviState
-import com.example.common.utils.UiText
+import com.justparokq.core.common.mvi.MviState
+import com.justparokq.core.common.utils.UiText
 
 data class NewPasswordScreenState(
     val isLoading: Boolean = false,

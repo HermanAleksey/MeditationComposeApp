@@ -2,9 +2,9 @@ package com.example.authentication.api.new_password_screen
 
 import androidx.lifecycle.viewModelScope
 import com.example.authentication.internal.validation.PasswordField
-import com.example.common.mvi.MviViewModel
-import com.example.common.utils.UiText
-import com.example.common.view_model.NavigationBaseViewModel
+import com.justparokq.core.common.mvi.MviViewModel
+import com.justparokq.core.common.utils.UiText
+import com.justparokq.core.common.view_model.NavigationBaseViewModel
 import com.justparokq.core.authentication_source.api.use_case.SetNewPasswordUseCase
 import com.example.core.model.NetworkResponse
 import com.example.feature.authentication.R

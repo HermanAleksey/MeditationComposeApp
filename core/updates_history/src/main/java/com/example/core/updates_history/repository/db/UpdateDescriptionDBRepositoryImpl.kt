@@ -1,6 +1,6 @@
 package com.example.core.updates_history.repository.db
 
-import com.example.common.mapper.BidirectionalMapper
+import com.justparokq.core.common.mapper.BidirectionalMapper
 import com.example.core.model.updates.UpdateDescriptionModel
 import com.example.database.dao.UpdateDescriptionDao
 import com.example.database.model.UpdateDescriptionDBEntity

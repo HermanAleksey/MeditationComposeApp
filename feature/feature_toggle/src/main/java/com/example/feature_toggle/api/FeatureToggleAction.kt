@@ -1,6 +1,6 @@
 package com.example.feature_toggle.api
 
-import com.example.common.mvi.MviAction
+import com.justparokq.core.common.mvi.MviAction
 import com.example.feature_toggle.internal.entity.FeatureToggleUiItem
 
 interface FeatureToggleAction : MviAction {

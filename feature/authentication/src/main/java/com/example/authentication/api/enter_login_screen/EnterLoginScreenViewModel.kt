@@ -2,8 +2,8 @@ package com.example.authentication.api.enter_login_screen
 
 import androidx.lifecycle.viewModelScope
 import com.example.authentication.internal.validation.LoginField
-import com.example.common.mvi.MviViewModel
-import com.example.common.view_model.NavigationBaseViewModel
+import com.justparokq.core.common.mvi.MviViewModel
+import com.justparokq.core.common.view_model.NavigationBaseViewModel
 import com.justparokq.core.authentication_source.api.use_case.RequestPasswordRestorationUseCase
 import com.example.core.model.NetworkResponse
 import dagger.hilt.android.lifecycle.HiltViewModel

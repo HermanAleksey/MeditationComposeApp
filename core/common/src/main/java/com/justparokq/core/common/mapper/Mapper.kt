@@ -1,4 +1,4 @@
-package com.example.common.mapper
+package com.justparokq.core.common.mapper
 
 interface Mapper<T, K> {
     fun mapFrom(objectFrom: K): T

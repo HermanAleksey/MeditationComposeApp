@@ -1,6 +1,6 @@
 package com.example.core.updates_history.di
 
-import com.example.common.mapper.BidirectionalMapper
+import com.justparokq.core.common.mapper.BidirectionalMapper
 import com.example.core.model.updates.UpdateDescriptionModel
 import com.example.core.updates_history.BuildConfig
 import com.example.core.updates_history.repository.db.UpdateDescriptionDBRepository

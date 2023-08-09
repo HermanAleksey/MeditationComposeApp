@@ -1,4 +1,4 @@
-package com.example.common.feature_toggle
+package com.justparokq.core.common.feature_toggle
 
 interface FeatureToggle {
 

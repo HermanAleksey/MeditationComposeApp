@@ -2,8 +2,8 @@ package com.example.feature.main.api
 
 import android.util.Log
 import androidx.lifecycle.viewModelScope
-import com.example.common.mvi.MviViewModel
-import com.example.common.view_model.NavigationBaseViewModel
+import com.justparokq.core.common.mvi.MviViewModel
+import com.justparokq.core.common.view_model.NavigationBaseViewModel
 import com.example.feature.main.BuildConfig
 import com.example.feature.main.internal.composable.MenuItem
 import dagger.hilt.android.lifecycle.HiltViewModel

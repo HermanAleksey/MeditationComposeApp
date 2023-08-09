@@ -1,7 +1,7 @@
 package com.example.authentication.api.enter_login_screen
 
-import com.example.common.mvi.MviState
-import com.example.common.utils.UiText
+import com.justparokq.core.common.mvi.MviState
+import com.justparokq.core.common.utils.UiText
 
 data class EnterLoginScreenState(
     val isLoading: Boolean = false,

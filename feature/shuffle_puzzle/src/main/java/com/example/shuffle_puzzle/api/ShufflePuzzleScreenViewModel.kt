@@ -3,7 +3,7 @@ package com.example.shuffle_puzzle.api
 import android.graphics.Bitmap
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.common.mvi.MviViewModel
+import com.justparokq.core.common.mvi.MviViewModel
 import com.example.shuffle_puzzle.api.model.Puzzle
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

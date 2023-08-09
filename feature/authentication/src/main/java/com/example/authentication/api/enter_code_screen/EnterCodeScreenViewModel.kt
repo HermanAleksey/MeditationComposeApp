@@ -1,9 +1,9 @@
 package com.example.authentication.api.enter_code_screen
 
 import androidx.lifecycle.viewModelScope
-import com.example.common.mvi.MviViewModel
-import com.example.common.utils.emptyString
-import com.example.common.view_model.NavigationBaseViewModel
+import com.justparokq.core.common.mvi.MviViewModel
+import com.justparokq.core.common.utils.emptyString
+import com.justparokq.core.common.view_model.NavigationBaseViewModel
 import com.justparokq.core.authentication_source.api.use_case.VerifyCodeUseCase
 import com.example.core.model.NetworkResponse
 import dagger.hilt.android.lifecycle.HiltViewModel

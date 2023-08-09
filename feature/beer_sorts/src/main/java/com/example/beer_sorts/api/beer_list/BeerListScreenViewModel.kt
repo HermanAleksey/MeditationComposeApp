@@ -2,7 +2,7 @@ package com.example.beer_sorts.api.beer_list
 
 import androidx.lifecycle.viewModelScope
 import androidx.paging.*
-import com.example.common.view_model.NavigationBaseViewModel
+import com.justparokq.core.common.view_model.NavigationBaseViewModel
 import com.example.database.model.BeerListItem
 import com.example.punk_source.api.use_case.punk.GetBeerPagingRemoteMediatorUseCase
 import com.example.punk_source.api.use_case.punk.db.GetBeerPagingSourceUseCase

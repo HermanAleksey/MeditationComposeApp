@@ -1,5 +1,5 @@
 package com.example.feature.main.api
 
-import com.example.common.mvi.MviState
+import com.justparokq.core.common.mvi.MviState
 
 class MainScreenState : MviState

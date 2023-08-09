@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.beer_sorts.internal.presentation.beer_list.InternalBeerListScreen
-import com.example.common.utils.isInternetAvailable
+import com.justparokq.core.common.utils.isInternetAvailable
 
 @Composable
 fun BeerListScreen(

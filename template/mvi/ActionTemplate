@@ -1,6 +1,6 @@
 package #{NAMESPACE}#.api
 
-import com.example.common.mvi.MviAction
+import com.justparokq.core.common.mvi.MviAction
 
 interface #{SCREEN_NAME}#Action : MviAction {
 

@@ -1,7 +1,7 @@
 package #{NAMESPACE}#.api
 
-import com.example.common.navigation.NavDependencies
-import com.example.common.navigation.NavRoute
+import com.justparokq.core.common.navigation.NavDependencies
+import com.justparokq.core.common.navigation.NavRoute
 
 class #{SCREEN_NAME}#NavDependencies(
 //    val navigateTo: () -> Unit,

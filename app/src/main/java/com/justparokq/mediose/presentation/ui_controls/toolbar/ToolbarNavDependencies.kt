@@ -1,7 +1,7 @@
 package com.justparokq.mediose.presentation.ui_controls.toolbar
 
-import com.example.common.navigation.NavDependencies
-import com.example.common.navigation.NavRoute
+import com.justparokq.core.common.navigation.NavDependencies
+import com.justparokq.core.common.navigation.NavRoute
 
 class ToolbarNavDependencies(
     val navigateToUpdatesHistory: () -> Unit,

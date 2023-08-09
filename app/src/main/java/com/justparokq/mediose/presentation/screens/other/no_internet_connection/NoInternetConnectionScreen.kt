@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.platform.LocalContext
-import com.example.common.navigation.NavDependenciesProvider
+import com.justparokq.core.common.navigation.NavDependenciesProvider
 import com.example.internet_connection.NoInternetConnectionNavDependencies
 import com.example.internet_connection.NoInternetConnectionViewModel
 import com.ramcosta.composedestinations.annotation.Destination

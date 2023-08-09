@@ -1,7 +1,7 @@
 package com.example.shuffle_puzzle.api
 
 import android.graphics.Bitmap
-import com.example.common.mvi.MviAction
+import com.justparokq.core.common.mvi.MviAction
 
 sealed interface ShufflePuzzleAction : MviAction {
 

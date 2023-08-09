@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.platform.LocalContext
-import com.example.common.navigation.NavDependenciesProvider
+import com.justparokq.core.common.navigation.NavDependenciesProvider
 import com.example.feature.main.api.MainScreenNavDependencies
 import com.example.feature.main.api.MainScreenViewModel
 import com.ramcosta.composedestinations.annotation.Destination

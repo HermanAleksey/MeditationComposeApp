@@ -1,6 +1,6 @@
 package com.example.core.data_store.feature_toggle
 
-import com.example.common.feature_toggle.FeatureToggle
+import com.justparokq.core.common.feature_toggle.FeatureToggle
 import kotlinx.coroutines.flow.Flow
 
 interface FeatureToggleDataStore {

@@ -22,7 +22,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.common.utils.UiText
+import com.justparokq.core.common.utils.UiText
 import com.example.design_system.AppTheme
 import com.example.feature.main.R
 

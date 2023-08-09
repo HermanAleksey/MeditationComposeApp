@@ -1,6 +1,6 @@
 package com.justparokq.core.authentication_source.api.mapper
 
-import com.example.common.mapper.Mapper
+import com.justparokq.core.common.mapper.Mapper
 import com.justparokq.core.authentication_source.api.model.LoginUserResponse
 import com.example.core.model.authentication.Profile
 import javax.inject.Inject

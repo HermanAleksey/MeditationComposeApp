@@ -1,4 +1,4 @@
-package com.example.common.mvi
+package com.justparokq.core.common.mvi
 
 import kotlinx.coroutines.flow.StateFlow
 

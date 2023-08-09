@@ -1,6 +1,6 @@
 package com.example.core.updates_history.use_case
 
-import com.example.common.mapper.Mapper
+import com.justparokq.core.common.mapper.Mapper
 import com.example.core.model.NetworkResponse
 import com.example.core.model.updates.UpdateDescriptionModel
 import com.example.core.updates_history.model.UpdateDescriptionResponse

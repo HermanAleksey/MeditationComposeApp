@@ -1,7 +1,7 @@
 package com.example.internet_connection
 
-import com.example.common.navigation.NavDependencies
-import com.example.common.navigation.NavRoute
+import com.justparokq.core.common.navigation.NavDependencies
+import com.justparokq.core.common.navigation.NavRoute
 
 class NoInternetConnectionNavDependencies(
     val navigateBack: () -> Unit,

@@ -2,8 +2,8 @@ package com.example.feature_toggle.api
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.common.mvi.MviViewModel
-import com.example.common.utils.emptyString
+import com.justparokq.core.common.mvi.MviViewModel
+import com.justparokq.core.common.utils.emptyString
 import com.example.feature_toggle.internal.entity.FeatureToggleUiItem
 import com.example.feature_toggle.internal.model.interactor.FeatureToggleUiItemInteractor
 import dagger.hilt.android.lifecycle.HiltViewModel
