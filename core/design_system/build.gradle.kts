@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.core.design_system"
+    namespace = "com.justparokq.core.design_system"
     compileSdk = Config.COMPILE_SDK
 
     defaultConfig {

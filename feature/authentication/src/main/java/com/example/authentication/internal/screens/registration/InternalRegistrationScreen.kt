@@ -61,7 +61,7 @@ internal fun InternalRegistrationScreen(
                 .verticalScroll(rememberScrollState())
         ) {
             Image(
-                painter = painterResource(id = com.example.core.design_system.R.drawable.ic_app_icon),
+                painter = painterResource(id = com.justparokq.core.design_system.R.drawable.ic_app_icon),
                 contentDescription = null,
                 contentScale = ContentScale.FillHeight,
                 modifier = Modifier

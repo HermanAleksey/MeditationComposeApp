@@ -19,9 +19,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.beer_sorts.api.detailed_beer.DetailedBeerScreenState
 import com.example.beer_sorts.internal.presentation.beer_details.composables.BeerDescriptionCard
-import com.example.core.model.beer_sorts.Beer
-import com.example.core.model.beer_sorts.Ingredients
-import com.example.core.model.beer_sorts.MeasurementUnit
+import com.justparokq.core.model.beer_sorts.Beer
+import com.justparokq.core.model.beer_sorts.Ingredients
+import com.justparokq.core.model.beer_sorts.MeasurementUnit
 import com.example.design_system.AppTheme
 import com.example.design_system.common_composables.ColorBackground
 import com.skydoves.landscapist.ImageOptions

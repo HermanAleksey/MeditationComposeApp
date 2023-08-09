@@ -4,7 +4,7 @@ import com.example.authentication.api.enter_login_screen.EnterLoginAction
 import com.example.authentication.api.enter_login_screen.EnterLoginScreenNavRoute
 import com.example.authentication.api.enter_login_screen.EnterLoginScreenViewModel
 import com.justparokq.core.authentication_source.api.use_case.RequestPasswordRestorationUseCase
-import com.example.core.model.NetworkResponse
+import com.justparokq.core.model.NetworkResponse
 import com.example.coroutines_test.CoroutinesTestRule
 import com.example.network.SuccessInfo
 import kotlinx.coroutines.ExperimentalCoroutinesApi

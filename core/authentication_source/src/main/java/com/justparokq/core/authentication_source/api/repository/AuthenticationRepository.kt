@@ -1,7 +1,7 @@
 package com.justparokq.core.authentication_source.api.repository
 
-import com.example.core.model.authentication.Profile
-import com.example.core.model.NetworkResponse
+import com.justparokq.core.model.authentication.Profile
+import com.justparokq.core.model.NetworkResponse
 import com.example.network.SuccessInfo
 import kotlinx.coroutines.flow.Flow
 

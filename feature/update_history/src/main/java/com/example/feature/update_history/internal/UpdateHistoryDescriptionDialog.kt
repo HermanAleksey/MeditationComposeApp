@@ -19,8 +19,8 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.core.model.updates.UpdateDescriptionModel
-import com.example.core.model.updates.Version
+import com.justparokq.core.model.updates.UpdateDescriptionModel
+import com.justparokq.core.model.updates.Version
 import com.example.design_system.AppTheme
 import com.example.design_system.dialog.MeditationDialogFormer
 import com.example.feature.update_history.R

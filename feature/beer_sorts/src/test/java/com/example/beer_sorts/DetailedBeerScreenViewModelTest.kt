@@ -2,9 +2,9 @@ package com.example.beer_sorts
 
 import FakeObjects.getFakeBeer
 import com.example.beer_sorts.api.detailed_beer.DetailedBeerScreenViewModel
-import com.example.core.model.NetworkResponse
+import com.justparokq.core.model.NetworkResponse
 import com.example.coroutines_test.CoroutinesTestRule
-import com.example.punk_source.api.use_case.punk.network.GetBeerByIdUseCase
+import com.justparokq.core.punk_source.api.use_case.punk.network.GetBeerByIdUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.advanceUntilIdle

@@ -31,9 +31,9 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import com.example.beer_sorts.internal.common.TryNowButton
-import com.example.core.model.beer_sorts.Beer
-import com.example.core.model.beer_sorts.Ingredients
-import com.example.core.model.beer_sorts.MeasurementUnit
+import com.justparokq.core.model.beer_sorts.Beer
+import com.justparokq.core.model.beer_sorts.Ingredients
+import com.justparokq.core.model.beer_sorts.MeasurementUnit
 import com.example.design_system.AppTheme
 import com.example.feature.beer_sorts.R
 import kotlin.math.roundToInt

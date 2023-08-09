@@ -1,6 +1,6 @@
 package com.example.authentication
 
-import com.example.core.model.authentication.Profile
+import com.justparokq.core.model.authentication.Profile
 
 object FakeObjects {
     fun getFakeProfile(

@@ -4,7 +4,7 @@ import com.example.authentication.api.registration_screen.RegistrationAction
 import com.example.authentication.api.registration_screen.RegistrationScreenNavRoute
 import com.example.authentication.api.registration_screen.RegistrationScreenViewModel
 import com.justparokq.core.authentication_source.api.use_case.RegisterUseCase
-import com.example.core.model.NetworkResponse
+import com.justparokq.core.model.NetworkResponse
 import com.example.coroutines_test.CoroutinesTestRule
 import com.example.network.SuccessInfo
 import kotlinx.coroutines.ExperimentalCoroutinesApi

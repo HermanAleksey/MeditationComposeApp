@@ -2,7 +2,7 @@ package com.example.feature.update_history.api
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.core.updates_history.use_case.GetAllUpdatesDescriptionsUseCase
+import com.justparokq.core.updates_history.use_case.GetAllUpdatesDescriptionsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

@@ -112,7 +112,7 @@ class MedioseToolbarProvider(
             )
             Image(
                 painter = painterResource(
-                    id = com.example.core.design_system.R.drawable.ic_app_icon
+                    id = com.justparokq.core.design_system.R.drawable.ic_app_icon
                 ),
                 contentDescription = null,
                 modifier = Modifier.size(40.dp)

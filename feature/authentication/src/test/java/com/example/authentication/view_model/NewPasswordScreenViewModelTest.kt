@@ -4,7 +4,7 @@ import com.example.authentication.api.new_password_screen.NewPasswordAction
 import com.example.authentication.api.new_password_screen.NewPasswordScreenNavRoute
 import com.example.authentication.api.new_password_screen.NewPasswordScreenViewModel
 import com.justparokq.core.authentication_source.api.use_case.SetNewPasswordUseCase
-import com.example.core.model.NetworkResponse
+import com.justparokq.core.model.NetworkResponse
 import com.example.coroutines_test.CoroutinesTestRule
 import com.example.network.SuccessInfo
 import kotlinx.coroutines.ExperimentalCoroutinesApi

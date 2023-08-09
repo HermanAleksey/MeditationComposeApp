@@ -1,8 +1,8 @@
 package com.justparokq.core.authentication_source.api.use_case
 
 import com.justparokq.core.authentication_source.api.repository.AuthenticationRepository
-import com.example.core.model.NetworkResponse
-import com.example.core.model.authentication.Profile
+import com.justparokq.core.model.NetworkResponse
+import com.justparokq.core.model.authentication.Profile
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

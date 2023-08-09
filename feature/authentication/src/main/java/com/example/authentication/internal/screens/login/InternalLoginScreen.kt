@@ -36,9 +36,9 @@ import com.example.authentication.api.login_screen.LoginScreenState
 import com.example.authentication.internal.common.LoginFlowInputField
 import com.example.authentication.internal.common.LoginMainButton
 import com.example.authentication.internal.screens.enter.composable.DontHaveAccountText
-import com.example.design_system.AppTheme
-import com.example.design_system.common_composables.DefaultAppBackground
 import com.example.feature.authentication.R
+import com.justparokq.core.design_system.AppTheme
+import com.justparokq.core.design_system.common_composables.DefaultAppBackground
 import kotlinx.coroutines.flow.MutableStateFlow
 
 @Composable
@@ -61,7 +61,7 @@ internal fun InternalLoginScreen(
                 .verticalScroll(rememberScrollState())
         ) {
             Image(
-                painter = painterResource(id = com.example.core.design_system.R.drawable.ic_app_icon),
+                painter = painterResource(id = com.justparokq.core.design_system.R.drawable.ic_app_icon),
                 contentDescription = null,
                 contentScale = ContentScale.FillHeight,
                 modifier = Modifier

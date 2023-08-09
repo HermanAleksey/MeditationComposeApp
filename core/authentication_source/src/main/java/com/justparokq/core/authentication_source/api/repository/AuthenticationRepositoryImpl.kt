@@ -1,6 +1,7 @@
 package com.justparokq.core.authentication_source.api.repository
 
-import com.example.core.authentication_api.BuildConfig
+import com.example.network.SuccessInfo
+import com.justparokq.core.authentication_api.BuildConfig
 import com.justparokq.core.authentication_source.api.AuthenticationApi
 import com.justparokq.core.authentication_source.api.mapper.ProfileMapper
 import com.justparokq.core.authentication_source.api.model.LoginRequest
@@ -9,9 +10,8 @@ import com.justparokq.core.authentication_source.api.model.RegistrationRequest
 import com.justparokq.core.authentication_source.api.model.ResetPasswordRequest
 import com.justparokq.core.authentication_source.api.model.RestorePasswordRequest
 import com.justparokq.core.authentication_source.api.model.VerifyCodeRequest
-import com.example.core.model.NetworkResponse
-import com.example.core.model.authentication.Profile
-import com.example.network.SuccessInfo
+import com.justparokq.core.model.NetworkResponse
+import com.justparokq.core.model.authentication.Profile
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

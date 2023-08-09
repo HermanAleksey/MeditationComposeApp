@@ -2,8 +2,8 @@ package com.example.beer_sorts.api.detailed_beer
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.core.model.NetworkResponse
-import com.example.punk_source.api.use_case.punk.network.GetBeerByIdUseCase
+import com.justparokq.core.model.NetworkResponse
+import com.justparokq.core.punk_source.api.use_case.punk.network.GetBeerByIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

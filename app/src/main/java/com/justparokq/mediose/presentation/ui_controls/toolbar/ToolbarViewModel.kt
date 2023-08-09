@@ -2,8 +2,8 @@ package com.justparokq.mediose.presentation.ui_controls.toolbar
 
 import androidx.lifecycle.viewModelScope
 import com.justparokq.core.common.view_model.NavigationBaseViewModel
-import com.example.core.data_store.user.use_case.ClearAuthDataUseCase
-import com.example.core.updates_history.use_case.GetLastUpdateDescriptionUseCase
+import com.justparokq.core.data_store.user.use_case.ClearAuthDataUseCase
+import com.justparokq.core.updates_history.use_case.GetLastUpdateDescriptionUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

@@ -20,8 +20,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import com.example.core.model.updates.UpdateDescriptionModel
-import com.example.core.model.updates.Version
+import com.justparokq.core.model.updates.UpdateDescriptionModel
+import com.justparokq.core.model.updates.Version
 import com.example.design_system.AppTheme
 import com.example.design_system.common_composables.ColorBackground
 import com.example.feature.update_history.api.UpdatesDescriptionViewState

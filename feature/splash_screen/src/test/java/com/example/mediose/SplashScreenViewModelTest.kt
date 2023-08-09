@@ -1,10 +1,10 @@
 package com.justparokq.mediose
 
 import com.justparokq.core.authentication_source.api.use_case.LoginUseCase
-import com.example.core.data_store.user.UserDataStore
-import com.example.core.model.NetworkResponse
-import com.example.core.updates_history.use_case.GetAppUpdatesHistoryUseCase
-import com.example.core.updates_history.use_case.InsertAllUpdatesDescriptionsUseCase
+import com.justparokq.core.data_store.user.UserDataStore
+import com.justparokq.core.model.NetworkResponse
+import com.justparokq.core.updates_history.use_case.GetAppUpdatesHistoryUseCase
+import com.justparokq.core.updates_history.use_case.InsertAllUpdatesDescriptionsUseCase
 import com.example.coroutines_test.CoroutinesTestRule
 import com.example.splash_screen.api.SplashScreenNavRoute
 import com.example.splash_screen.api.SplashScreenViewModel

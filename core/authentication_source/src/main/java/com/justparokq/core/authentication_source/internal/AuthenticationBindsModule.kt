@@ -6,7 +6,7 @@ import com.justparokq.core.authentication_source.api.model.LoginUserResponse
 import com.justparokq.core.authentication_source.api.repository.AuthenticationRepository
 import com.justparokq.core.authentication_source.api.repository.AuthenticationRepositoryImpl
 import com.justparokq.core.authentication_source.api.use_case.*
-import com.example.core.model.authentication.Profile
+import com.justparokq.core.model.authentication.Profile
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

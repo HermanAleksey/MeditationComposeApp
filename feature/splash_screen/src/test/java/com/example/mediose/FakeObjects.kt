@@ -1,8 +1,8 @@
 package com.justparokq.mediose
 
-import com.example.core.model.authentication.Profile
-import com.example.core.model.updates.UpdateDescriptionModel
-import com.example.core.model.updates.Version
+import com.justparokq.core.model.authentication.Profile
+import com.justparokq.core.model.updates.UpdateDescriptionModel
+import com.justparokq.core.model.updates.Version
 
 object FakeObjects {
     fun getFakeProfile(
