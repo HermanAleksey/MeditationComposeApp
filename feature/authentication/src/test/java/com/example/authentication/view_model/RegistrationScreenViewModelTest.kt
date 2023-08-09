@@ -1,8 +1,8 @@
-package com.example.authentication.view_model
+package com.justparokq.feature.authentication.view_model
 
-import com.example.authentication.api.registration_screen.RegistrationAction
-import com.example.authentication.api.registration_screen.RegistrationScreenNavRoute
-import com.example.authentication.api.registration_screen.RegistrationScreenViewModel
+import com.justparokq.feature.authentication.api.registration_screen.RegistrationAction
+import com.justparokq.feature.authentication.api.registration_screen.RegistrationScreenNavRoute
+import com.justparokq.feature.authentication.api.registration_screen.RegistrationScreenViewModel
 import com.justparokq.core.authentication_source.api.use_case.RegisterUseCase
 import com.justparokq.core.model.NetworkResponse
 import com.example.coroutines_test.CoroutinesTestRule

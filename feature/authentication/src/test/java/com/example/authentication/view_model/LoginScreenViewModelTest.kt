@@ -1,9 +1,9 @@
-package com.example.authentication.view_model
+package com.justparokq.feature.authentication.view_model
 
-import com.example.authentication.FakeObjects.getFakeProfile
-import com.example.authentication.api.login_screen.LoginAction
-import com.example.authentication.api.login_screen.LoginScreenNavRoute
-import com.example.authentication.api.login_screen.LoginScreenViewModel
+import com.justparokq.feature.authentication.FakeObjects.getFakeProfile
+import com.justparokq.feature.authentication.api.login_screen.LoginAction
+import com.justparokq.feature.authentication.api.login_screen.LoginScreenNavRoute
+import com.justparokq.feature.authentication.api.login_screen.LoginScreenViewModel
 import com.justparokq.core.authentication_source.api.use_case.LoginUseCase
 import com.justparokq.core.data_store.user.UserDataStore
 import com.justparokq.core.model.NetworkResponse

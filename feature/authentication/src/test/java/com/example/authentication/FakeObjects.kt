@@ -1,4 +1,4 @@
-package com.example.authentication
+package com.justparokq.feature.authentication
 
 import com.justparokq.core.model.authentication.Profile
 

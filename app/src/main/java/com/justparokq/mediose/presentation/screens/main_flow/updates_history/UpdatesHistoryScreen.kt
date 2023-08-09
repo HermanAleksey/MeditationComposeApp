@@ -1,8 +1,8 @@
 package com.justparokq.mediose.presentation.screens.main_flow.updates_history
 
 import androidx.compose.runtime.Composable
-import com.example.feature.update_history.api.UpdatesDescriptionScreen
-import com.example.feature.update_history.api.UpdatesDescriptionViewModel
+import com.justparokq.feature.update_history.api.UpdatesDescriptionScreen
+import com.justparokq.feature.update_history.api.UpdatesDescriptionViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 
 @Destination

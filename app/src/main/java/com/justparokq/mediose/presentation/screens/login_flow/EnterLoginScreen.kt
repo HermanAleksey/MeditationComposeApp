@@ -5,8 +5,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.platform.LocalContext
-import com.example.authentication.api.enter_login_screen.EnterLoginScreenNavDependencies
-import com.example.authentication.api.enter_login_screen.EnterLoginScreenViewModel
+import com.justparokq.feature.authentication.api.enter_login_screen.EnterLoginScreenNavDependencies
+import com.justparokq.feature.authentication.api.enter_login_screen.EnterLoginScreenViewModel
 import com.justparokq.core.common.navigation.NavDependenciesProvider
 import com.ramcosta.composedestinations.annotation.Destination
 
@@ -29,7 +29,7 @@ fun EnterLoginScreen(
         }
     }
 
-    com.example.authentication.api.enter_login_screen.EnterLoginScreen(
+    com.justparokq.feature.authentication.api.enter_login_screen.EnterLoginScreen(
         initialLoginValue = initialLoginValue,
         viewModel = viewModel,
     )

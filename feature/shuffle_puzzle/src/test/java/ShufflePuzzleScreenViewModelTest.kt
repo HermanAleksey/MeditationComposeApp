@@ -1,7 +1,7 @@
 import com.example.coroutines_test.CoroutinesTestRule
-import com.example.shuffle_puzzle.api.ShufflePuzzleAction
-import com.example.shuffle_puzzle.api.ShufflePuzzleScreenViewModel
-import com.example.shuffle_puzzle.api.ShufflePuzzleState
+import com.justparokq.feature.shuffle_puzzle.api.ShufflePuzzleAction
+import com.justparokq.feature.shuffle_puzzle.api.ShufflePuzzleScreenViewModel
+import com.justparokq.feature.shuffle_puzzle.api.ShufflePuzzleState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import org.junit.Assert.*

@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.feature.splash_screen"
+    namespace = "com.justparokq.feature.splash_screen"
     compileSdk = Config.COMPILE_SDK
 
     defaultConfig {

@@ -1,9 +1,9 @@
-package com.example.authentication.view_model
+package com.justparokq.feature.authentication.view_model
 
-import com.example.authentication.api.enter_code_screen.EnterCodeAction
-import com.example.authentication.api.enter_code_screen.EnterCodeScreenNavRoute
-import com.example.authentication.api.enter_code_screen.EnterCodeScreenState
-import com.example.authentication.api.enter_code_screen.EnterCodeScreenViewModel
+import com.justparokq.feature.authentication.api.enter_code_screen.EnterCodeAction
+import com.justparokq.feature.authentication.api.enter_code_screen.EnterCodeScreenNavRoute
+import com.justparokq.feature.authentication.api.enter_code_screen.EnterCodeScreenState
+import com.justparokq.feature.authentication.api.enter_code_screen.EnterCodeScreenViewModel
 import com.justparokq.core.authentication_source.api.use_case.VerifyCodeUseCase
 import com.justparokq.core.model.NetworkResponse
 import com.example.coroutines_test.CoroutinesTestRule

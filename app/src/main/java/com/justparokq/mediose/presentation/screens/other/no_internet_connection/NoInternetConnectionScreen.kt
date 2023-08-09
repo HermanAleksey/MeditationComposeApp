@@ -6,8 +6,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.platform.LocalContext
 import com.justparokq.core.common.navigation.NavDependenciesProvider
-import com.example.internet_connection.NoInternetConnectionNavDependencies
-import com.example.internet_connection.NoInternetConnectionViewModel
+import com.justparokq.feature.internet_connection.NoInternetConnectionNavDependencies
+import com.justparokq.feature.internet_connection.NoInternetConnectionViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 
 @Destination
@@ -28,7 +28,7 @@ fun NoInternetConnectionScreen(
         }
     }
 
-    com.example.internet_connection.NoInternetConnectionScreen(
+    com.justparokq.feature.internet_connection.NoInternetConnectionScreen(
         onReturnButton = {
             viewModel.onBackClick()
         }

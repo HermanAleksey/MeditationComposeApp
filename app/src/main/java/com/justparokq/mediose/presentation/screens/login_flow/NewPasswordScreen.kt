@@ -5,8 +5,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.platform.LocalContext
-import com.example.authentication.api.new_password_screen.NewPasswordScreenNavDependencies
-import com.example.authentication.api.new_password_screen.NewPasswordScreenViewModel
+import com.justparokq.feature.authentication.api.new_password_screen.NewPasswordScreenNavDependencies
+import com.justparokq.feature.authentication.api.new_password_screen.NewPasswordScreenViewModel
 import com.justparokq.core.common.navigation.NavDependenciesProvider
 import com.ramcosta.composedestinations.annotation.Destination
 
@@ -29,7 +29,7 @@ fun NewPasswordScreen(
         }
     }
 
-    com.example.authentication.api.new_password_screen.NewPasswordScreen(
+    com.justparokq.feature.authentication.api.new_password_screen.NewPasswordScreen(
         viewModel = viewModel,
         login = login,
     )

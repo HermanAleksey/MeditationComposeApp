@@ -1,7 +1,7 @@
-package com.example.beer_sorts
+package com.justparokq.feature.beer_sorts
 
-import com.example.beer_sorts.api.beer_list.BeerListNavRoute
-import com.example.beer_sorts.api.beer_list.BeerListScreenViewModel
+import com.justparokq.feature.beer_sorts.api.beer_list.BeerListNavRoute
+import com.justparokq.feature.beer_sorts.api.beer_list.BeerListScreenViewModel
 import com.example.coroutines_test.CoroutinesTestRule
 import com.justparokq.core.punk_source.api.use_case.punk.GetBeerPagingRemoteMediatorUseCase
 import com.justparokq.core.punk_source.api.use_case.punk.db.GetBeerPagingSourceUseCase

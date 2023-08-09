@@ -1,7 +1,7 @@
-package com.example.authentication.view_model
+package com.justparokq.feature.authentication.view_model
 
-import com.example.authentication.api.enter_screen.EnterScreenNavRoute
-import com.example.authentication.api.enter_screen.EnterScreenViewModel
+import com.justparokq.feature.authentication.api.enter_screen.EnterScreenNavRoute
+import com.justparokq.feature.authentication.api.enter_screen.EnterScreenViewModel
 import com.example.coroutines_test.CoroutinesTestRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.toList

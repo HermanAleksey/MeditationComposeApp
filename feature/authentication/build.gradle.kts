@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.feature.authentication"
+    namespace = "com.justparokq.feature.authentication"
     compileSdk = Config.COMPILE_SDK
 
     defaultConfig {

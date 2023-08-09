@@ -5,8 +5,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.platform.LocalContext
-import com.example.authentication.api.enter_code_screen.EnterCodeScreenNavDependencies
-import com.example.authentication.api.enter_code_screen.EnterCodeScreenViewModel
+import com.justparokq.feature.authentication.api.enter_code_screen.EnterCodeScreenNavDependencies
+import com.justparokq.feature.authentication.api.enter_code_screen.EnterCodeScreenViewModel
 import com.justparokq.core.common.navigation.NavDependenciesProvider
 import com.ramcosta.composedestinations.annotation.Destination
 
@@ -29,7 +29,7 @@ fun EnterCodeScreen(
         }
     }
 
-    com.example.authentication.api.enter_code_screen.EnterCodeScreen(
+    com.justparokq.feature.authentication.api.enter_code_screen.EnterCodeScreen(
         viewModel = viewModel,
         login = login
     )

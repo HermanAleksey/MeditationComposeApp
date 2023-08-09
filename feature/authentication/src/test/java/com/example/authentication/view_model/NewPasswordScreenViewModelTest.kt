@@ -1,8 +1,8 @@
-package com.example.authentication.view_model
+package com.justparokq.feature.authentication.view_model
 
-import com.example.authentication.api.new_password_screen.NewPasswordAction
-import com.example.authentication.api.new_password_screen.NewPasswordScreenNavRoute
-import com.example.authentication.api.new_password_screen.NewPasswordScreenViewModel
+import com.justparokq.feature.authentication.api.new_password_screen.NewPasswordAction
+import com.justparokq.feature.authentication.api.new_password_screen.NewPasswordScreenNavRoute
+import com.justparokq.feature.authentication.api.new_password_screen.NewPasswordScreenViewModel
 import com.justparokq.core.authentication_source.api.use_case.SetNewPasswordUseCase
 import com.justparokq.core.model.NetworkResponse
 import com.example.coroutines_test.CoroutinesTestRule

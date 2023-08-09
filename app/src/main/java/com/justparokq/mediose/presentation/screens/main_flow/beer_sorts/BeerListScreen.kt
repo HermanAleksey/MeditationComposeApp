@@ -5,8 +5,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.platform.LocalContext
-import com.example.beer_sorts.api.beer_list.BeerListNavDependencies
-import com.example.beer_sorts.api.beer_list.BeerListScreenViewModel
+import com.justparokq.feature.beer_sorts.api.beer_list.BeerListNavDependencies
+import com.justparokq.feature.beer_sorts.api.beer_list.BeerListScreenViewModel
 import com.justparokq.core.common.navigation.NavDependenciesProvider
 import com.ramcosta.composedestinations.annotation.Destination
 
@@ -28,7 +28,7 @@ fun BeerListScreen(
         }
     }
 
-    com.example.beer_sorts.api.beer_list.BeerListScreen(
+    com.justparokq.feature.beer_sorts.api.beer_list.BeerListScreen(
         viewModel = viewModel,
     )
 }

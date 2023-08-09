@@ -7,8 +7,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.platform.LocalContext
 import com.justparokq.core.common.navigation.NavDependenciesProvider
 import com.justparokq.mediose.BuildConfig
-import com.example.splash_screen.api.SplashScreenNavDependencies
-import com.example.splash_screen.api.SplashScreenViewModel
+import com.justparokq.feature.splash_screen.api.SplashScreenNavDependencies
+import com.justparokq.feature.splash_screen.api.SplashScreenViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 
@@ -31,7 +31,7 @@ fun SplashScreen(
         }
     }
 
-    com.example.splash_screen.api.SplashScreen(
+    com.justparokq.feature.splash_screen.api.SplashScreen(
         viewModel = viewModel,
         currentVersionName = BuildConfig.VERSION_NAME
     )

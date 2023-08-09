@@ -1,9 +1,9 @@
 package com.justparokq.mediose.model.use_case.feature_toggle
 
-import com.example.authentication.api.AuthFeatureToggle
+import com.justparokq.feature.authentication.api.AuthFeatureToggle
 import com.justparokq.core.common.feature_toggle.FeatureToggle
 import com.justparokq.core.data_store.feature_toggle.FeatureToggleDataStore
-import com.example.feature_toggle.internal.model.use_case.GetAllFeatureTogglesUseCase
+import com.justparokq.feature.feature_toggle.internal.model.use_case.GetAllFeatureTogglesUseCase
 import javax.inject.Inject
 
 class GetAllFeatureTogglesUseCaseImpl @Inject constructor(

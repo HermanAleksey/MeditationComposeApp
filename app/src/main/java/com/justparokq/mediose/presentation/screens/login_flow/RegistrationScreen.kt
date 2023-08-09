@@ -5,8 +5,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.platform.LocalContext
-import com.example.authentication.api.registration_screen.RegistrationScreenNavDependencies
-import com.example.authentication.api.registration_screen.RegistrationScreenViewModel
+import com.justparokq.feature.authentication.api.registration_screen.RegistrationScreenNavDependencies
+import com.justparokq.feature.authentication.api.registration_screen.RegistrationScreenViewModel
 import com.justparokq.core.common.navigation.NavDependenciesProvider
 import com.ramcosta.composedestinations.annotation.Destination
 
@@ -28,7 +28,7 @@ fun RegistrationScreen(
         }
     }
 
-    com.example.authentication.api.registration_screen.RegistrationScreen(
+    com.justparokq.feature.authentication.api.registration_screen.RegistrationScreen(
         viewModel = viewModel
     )
 }

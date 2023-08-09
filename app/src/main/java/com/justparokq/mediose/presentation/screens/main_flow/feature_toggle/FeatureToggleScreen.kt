@@ -1,7 +1,7 @@
 package com.justparokq.mediose.presentation.screens.main_flow.feature_toggle
 
 import androidx.compose.runtime.Composable
-import com.example.feature_toggle.api.FeatureToggleScreenViewModel
+import com.justparokq.feature.feature_toggle.api.FeatureToggleScreenViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 
 @Destination
@@ -9,5 +9,5 @@ import com.ramcosta.composedestinations.annotation.Destination
 fun FeatureToggleScreen(
     viewModel: FeatureToggleScreenViewModel,
 ) {
-    com.example.feature_toggle.api.FeatureToggleScreen(viewModel = viewModel)
+    com.justparokq.feature.feature_toggle.api.FeatureToggleScreen(viewModel = viewModel)
 }

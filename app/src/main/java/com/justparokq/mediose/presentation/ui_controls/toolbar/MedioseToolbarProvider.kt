@@ -26,10 +26,10 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.justparokq.core.common.navigation.NavDependenciesProvider
-import com.example.design_system.clickableWithoutRipple
-import com.example.design_system.dialog.DialogController
-import com.example.design_system.toolbar.ToolbarProvider
-import com.example.feature.update_history.api.UpdateDescriptionDialogProvider
+import com.justparokq.core.design_system.clickableWithoutRipple
+import com.justparokq.core.design_system.dialog.DialogController
+import com.justparokq.core.design_system.toolbar.ToolbarProvider
+import com.justparokq.feature.update_history.api.UpdateDescriptionDialogProvider
 import com.justparokq.mediose.R
 import com.justparokq.mediose.presentation.ui_controls.toolbar.dialog.ExitAppDialogProvider
 

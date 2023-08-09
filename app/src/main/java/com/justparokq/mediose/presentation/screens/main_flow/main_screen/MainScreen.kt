@@ -6,8 +6,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.platform.LocalContext
 import com.justparokq.core.common.navigation.NavDependenciesProvider
-import com.example.feature.main.api.MainScreenNavDependencies
-import com.example.feature.main.api.MainScreenViewModel
+import com.justparokq.feature.main.api.MainScreenNavDependencies
+import com.justparokq.feature.main.api.MainScreenViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 
 @Destination
@@ -28,5 +28,5 @@ fun MainScreen(
         }
     }
 
-    com.example.feature.main.api.MainScreen(viewModel = viewModel)
+    com.justparokq.feature.main.api.MainScreen(viewModel = viewModel)
 }

@@ -6,8 +6,8 @@ import com.justparokq.core.model.NetworkResponse
 import com.justparokq.core.updates_history.use_case.GetAppUpdatesHistoryUseCase
 import com.justparokq.core.updates_history.use_case.InsertAllUpdatesDescriptionsUseCase
 import com.example.coroutines_test.CoroutinesTestRule
-import com.example.splash_screen.api.SplashScreenNavRoute
-import com.example.splash_screen.api.SplashScreenViewModel
+import com.justparokq.feature.splash_screen.api.SplashScreenNavRoute
+import com.justparokq.feature.splash_screen.api.SplashScreenViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.toList
