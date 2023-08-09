@@ -16,19 +16,19 @@ import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.google.accompanist.navigation.animation.rememberAnimatedNavController
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.justparokq.core.common.navigation.NavDependencies
 import com.justparokq.core.common.navigation.NavDependenciesProvider
-import com.example.design_system.AppTheme
-import com.example.design_system.dialog.DialogController
-import com.example.design_system.dialog.MedioseDialogProvider
+import com.justparokq.core.design_system.AppTheme
+import com.justparokq.core.design_system.dialog.DialogController
+import com.justparokq.core.design_system.dialog.MedioseDialogProvider
 import com.justparokq.mediose.presentation.navigation.MeditationDestinationsNavHost
 import com.justparokq.mediose.presentation.navigation.NavDependenciesProviderImpl
 import com.justparokq.mediose.presentation.navigation.getDestinationWrapper
 import com.justparokq.mediose.presentation.ui_controls.bottom_nav_bar.NavigationBottomBar
 import com.justparokq.mediose.presentation.ui_controls.toolbar.MedioseToolbarProvider
 import com.justparokq.mediose.presentation.ui_controls.toolbar.ToolbarViewModel
-import com.google.accompanist.navigation.animation.rememberAnimatedNavController
-import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

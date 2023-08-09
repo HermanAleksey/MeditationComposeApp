@@ -1,9 +1,9 @@
 package com.justparokq.core.updates_history.mapper
 
 import com.justparokq.core.common.mapper.BidirectionalMapper
+import com.justparokq.core.database.model.UpdateDescriptionDBEntity
 import com.justparokq.core.model.updates.UpdateDescriptionModel
 import com.justparokq.core.model.updates.toVersion
-import com.example.database.model.UpdateDescriptionDBEntity
 import javax.inject.Inject
 
 class UpdateDescriptionDBMapper @Inject constructor() :

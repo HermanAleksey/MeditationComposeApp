@@ -1,8 +1,8 @@
 package com.justparokq.mediose.presentation
 
 import androidx.lifecycle.ViewModel
-import com.example.design_system.dialog.MedioseDialogProvider
-import com.example.design_system.toolbar.ToolbarProvider
+import com.justparokq.core.design_system.dialog.MedioseDialogProvider
+import com.justparokq.core.design_system.toolbar.ToolbarProvider
 import com.justparokq.mediose.presentation.navigation.DestinationWrapper
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

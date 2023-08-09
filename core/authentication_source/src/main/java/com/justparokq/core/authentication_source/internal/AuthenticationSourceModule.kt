@@ -1,5 +1,6 @@
 package com.justparokq.core.authentication_source.internal
 
+import com.justparokq.core.authentication_api.BuildConfig
 import com.justparokq.core.authentication_source.api.AuthenticationApi
 import com.justparokq.core.authentication_source.api.Qualifiers
 import dagger.Module

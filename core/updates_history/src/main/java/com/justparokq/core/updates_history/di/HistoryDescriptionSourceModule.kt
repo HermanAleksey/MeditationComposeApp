@@ -1,6 +1,8 @@
 package com.justparokq.core.updates_history.di
 
 import com.justparokq.core.common.mapper.BidirectionalMapper
+import com.justparokq.core.database.dao.UpdateDescriptionDao
+import com.justparokq.core.database.model.UpdateDescriptionDBEntity
 import com.justparokq.core.model.updates.UpdateDescriptionModel
 import com.justparokq.core.updates_history.BuildConfig
 import com.justparokq.core.updates_history.repository.db.UpdateDescriptionDBRepository
@@ -8,8 +10,6 @@ import com.justparokq.core.updates_history.repository.db.UpdateDescriptionDBRepo
 import com.justparokq.core.updates_history.repository.web.UpdateDescriptionWebRepository
 import com.justparokq.core.updates_history.repository.web.UpdateDescriptionWebRepositoryImpl
 import com.justparokq.core.updates_history.source.UpdatesHistoryApi
-import com.example.database.dao.UpdateDescriptionDao
-import com.example.database.model.UpdateDescriptionDBEntity
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -12,7 +12,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import com.example.core.design_system.R
+import com.justparokq.core.design_system.R
 
 @Composable
 fun MeditationDialogFormer(

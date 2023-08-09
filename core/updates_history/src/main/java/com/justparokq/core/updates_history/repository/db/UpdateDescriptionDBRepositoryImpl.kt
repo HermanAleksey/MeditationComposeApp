@@ -1,9 +1,9 @@
 package com.justparokq.core.updates_history.repository.db
 
 import com.justparokq.core.common.mapper.BidirectionalMapper
+import com.justparokq.core.database.dao.UpdateDescriptionDao
+import com.justparokq.core.database.model.UpdateDescriptionDBEntity
 import com.justparokq.core.model.updates.UpdateDescriptionModel
-import com.example.database.dao.UpdateDescriptionDao
-import com.example.database.model.UpdateDescriptionDBEntity
 import javax.inject.Inject
 
 class UpdateDescriptionDBRepositoryImpl @Inject constructor(

@@ -8,7 +8,6 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import com.example.core.design_system.R
 
 val CrimsonText = FontFamily(
     Font(R.font.crimsontext_regular, FontWeight.W400, FontStyle.Normal),

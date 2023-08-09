@@ -13,8 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.justparokq.core..design_system.R
 import com.justparokq.core.design_system.AppTheme
+import com.justparokq.core.design_system.R
 
 @Composable
 fun DefaultAppBackground(
