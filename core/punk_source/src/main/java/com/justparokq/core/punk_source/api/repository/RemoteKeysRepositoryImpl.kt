@@ -1,7 +1,8 @@
-package com.example.punk_source.api.repository
+package com.justparokq.core.punk_source.api.repository
 
-import com.example.database.dao.RemoteKeysDao
-import com.example.database.model.RemoteKeys
+import com.justparokq.core.punk_source.api.repository.RemoteKeysRepository
+import com.justparokq.core.database.dao.RemoteKeysDao
+import com.justparokq.core.database.model.RemoteKeys
 import javax.inject.Inject
 
 class RemoteKeysRepositoryImpl @Inject constructor(

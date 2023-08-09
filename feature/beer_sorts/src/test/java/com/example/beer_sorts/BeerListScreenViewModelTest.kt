@@ -3,8 +3,8 @@ package com.example.beer_sorts
 import com.example.beer_sorts.api.beer_list.BeerListNavRoute
 import com.example.beer_sorts.api.beer_list.BeerListScreenViewModel
 import com.example.coroutines_test.CoroutinesTestRule
-import com.example.punk_source.api.use_case.punk.GetBeerPagingRemoteMediatorUseCase
-import com.example.punk_source.api.use_case.punk.db.GetBeerPagingSourceUseCase
+import com.justparokq.core.punk_source.api.use_case.punk.GetBeerPagingRemoteMediatorUseCase
+import com.justparokq.core.punk_source.api.use_case.punk.db.GetBeerPagingSourceUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch

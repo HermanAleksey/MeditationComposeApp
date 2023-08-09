@@ -4,8 +4,8 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.*
 import com.justparokq.core.common.view_model.NavigationBaseViewModel
 import com.example.database.model.BeerListItem
-import com.example.punk_source.api.use_case.punk.GetBeerPagingRemoteMediatorUseCase
-import com.example.punk_source.api.use_case.punk.db.GetBeerPagingSourceUseCase
+import com.justparokq.core.punk_source.api.use_case.punk.GetBeerPagingRemoteMediatorUseCase
+import com.justparokq.core.punk_source.api.use_case.punk.db.GetBeerPagingSourceUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
