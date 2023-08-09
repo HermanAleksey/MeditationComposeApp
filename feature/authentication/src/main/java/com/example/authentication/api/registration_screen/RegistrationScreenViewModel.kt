@@ -6,7 +6,7 @@ import com.example.authentication.internal.validation.NameField
 import com.example.authentication.internal.validation.PasswordField
 import com.example.common.mvi.MviViewModel
 import com.example.common.view_model.NavigationBaseViewModel
-import com.example.core.authentication_source.api.use_case.RegisterUseCase
+import com.justparokq.core.authentication_source.api.use_case.RegisterUseCase
 import com.example.core.model.NetworkResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

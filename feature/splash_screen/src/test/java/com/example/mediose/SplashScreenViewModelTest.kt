@@ -1,6 +1,6 @@
-package com.example.mediose
+package com.justparokq.mediose
 
-import com.example.core.authentication_source.api.use_case.LoginUseCase
+import com.justparokq.core.authentication_source.api.use_case.LoginUseCase
 import com.example.core.data_store.user.UserDataStore
 import com.example.core.model.NetworkResponse
 import com.example.core.updates_history.use_case.GetAppUpdatesHistoryUseCase

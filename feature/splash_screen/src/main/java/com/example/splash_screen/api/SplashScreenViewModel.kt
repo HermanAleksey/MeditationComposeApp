@@ -2,7 +2,7 @@ package com.example.splash_screen.api
 
 import androidx.lifecycle.viewModelScope
 import com.example.common.view_model.NavigationBaseViewModel
-import com.example.core.authentication_source.api.use_case.LoginUseCase
+import com.justparokq.core.authentication_source.api.use_case.LoginUseCase
 import com.example.core.data_store.user.UserDataStore
 import com.example.core.model.NetworkResponse
 import com.example.core.model.updates.CompareResult
