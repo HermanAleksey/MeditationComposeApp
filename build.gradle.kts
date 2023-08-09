@@ -25,10 +25,10 @@ plugins {
 }
 
 tasks {
-    val type: String by project //type of module
-    val nName: String by project //module name
-    val tests: String? by project //create test folder?
-    val screenName: String? by project //create test folder?
+    val type: String by project // type of module
+    val nName: String by project // module name
+    val tests: String? by project // create test folder?
+    val screenName: String? by project // create test folder?
 
     task("createModule") {
         doFirst {
@@ -75,7 +75,6 @@ tasks {
     }
 }
 
-
 enum class ModuleType(val path: String) {
     FEATURE("feature"), CORE("core"), SAMPLE("sample")
 }
@@ -104,7 +103,7 @@ fun logTaskParams(type: String, nName: String, createTestFolder: Boolean, screen
                 create mvi screen = ${!screenName.isNullOrEmpty()} 
                 ${if (!screenName.isNullOrEmpty()) "mvi screen name= $screenName" else "Not specified"}  
                 -------------------------------------------
-                """.trimIndent()
+        """.trimIndent()
     )
 }
 
@@ -168,7 +167,7 @@ fun createMviClasses(namespace: String, modulePath: String, screenName: String) 
     file(internalDirectoryPath).mkdirs()
 
     createFilesFromTemplate(
-        newFilePath = apiDirectoryPath + "/${screenName}.kt",
+        newFilePath = "$apiDirectoryPath/$screenName.kt",
         templatePath = "$TEMPLATES_MVI_DIR_PATH/ScreenTemplate",
         screenName = screenName,
         namespace = namespace,
@@ -196,7 +195,7 @@ fun createMviClasses(namespace: String, modulePath: String, screenName: String) 
     )
 
     createFilesFromTemplate(
-        newFilePath = internalDirectoryPath + "/Internal${screenName}.kt",
+        newFilePath = "$internalDirectoryPath/Internal$screenName.kt",
         templatePath = "$TEMPLATES_MVI_DIR_PATH/InternalScreenTemplate",
         screenName = screenName,
         namespace = namespace,
