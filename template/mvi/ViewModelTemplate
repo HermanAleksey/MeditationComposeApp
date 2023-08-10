@@ -1,0 +1,26 @@
+package #{NAMESPACE}#.api
+
+import androidx.lifecycle.viewModelScope
+import com.justparokq.core.common.mvi.MviViewModel
+import com.justparokq.core.common.view_model.NavigationBaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
+import javax.inject.Inject
+
+@HiltViewModel
+class #{SCREEN_NAME}#ViewModel @Inject constructor(
+
+) : NavigationBaseViewModel<#{SCREEN_NAME}#NavRoute>(), MviViewModel<#{SCREEN_NAME}#State, #{SCREEN_NAME}#Action> {
+
+    override val uiState: StateFlow<#{SCREEN_NAME}#State> =
+        MutableStateFlow(#{SCREEN_NAME}#State()).asStateFlow()
+
+    override fun processAction(action: #{SCREEN_NAME}#Action) {
+        when (action) {
+
+        }
+    }
+}

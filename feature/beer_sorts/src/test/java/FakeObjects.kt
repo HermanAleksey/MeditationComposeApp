@@ -1,4 +1,4 @@
-import com.example.core.model.beer_sorts.*
+import com.justparokq.core.model.beer_sorts.*
 
 object FakeObjects {
     fun getFakeBeer(

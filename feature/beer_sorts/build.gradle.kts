@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.feature.beer_sorts"
+    namespace = "com.justparokq.feature.beer_sorts"
     compileSdk = Config.COMPILE_SDK
 
     defaultConfig {

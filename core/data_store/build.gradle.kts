@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.core.data_store"
+    namespace = "com.justparokq.core.data_store"
     compileSdk = Config.COMPILE_SDK
 
     defaultConfig {

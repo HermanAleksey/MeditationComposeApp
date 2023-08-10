@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.internet_connection"
+    namespace = "com.justparokq.feature.internet_connection"
     compileSdk = Config.COMPILE_SDK
 
     defaultConfig {

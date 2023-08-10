@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.core.testing"
+    namespace = "com.justparokq.core.testing"
     compileSdk = Config.COMPILE_SDK
 
     defaultConfig {

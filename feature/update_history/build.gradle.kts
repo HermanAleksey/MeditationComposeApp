@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.feature.update_history"
+    namespace = "com.justparokq.feature.update_history"
     compileSdk = Config.COMPILE_SDK
 
     defaultConfig {

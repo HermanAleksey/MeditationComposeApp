@@ -15,7 +15,7 @@ plugins {
 
 @Suppress("UnstableApiUsage")
 android {
-    namespace = "com.example.meditationcomposeapp"
+    namespace = "com.justparokq.mediose"
     compileSdk = Config.COMPILE_SDK
 
     defaultConfig {

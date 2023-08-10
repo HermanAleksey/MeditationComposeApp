@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
-        android:name="com.example.sample.music_player.SampleMusicPlayerApp"
+        android:name="com.justparokq.sample.music_player.SampleMusicPlayerApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MeditationComposeApp">
         <activity
-            android:name="com.example.sample.music_player.MainActivity"
+            android:name="com.justparokq.sample.music_player.MainActivity"
             android:exported="true"
             android:label="Music sample"
             android:theme="@style/Theme.MeditationComposeApp">

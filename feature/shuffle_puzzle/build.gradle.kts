@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.feature.shuffle_puzzle"
+    namespace = "com.justparokq.feature.shuffle_puzzle"
     compileSdk = Config.COMPILE_SDK
 
     defaultConfig {
