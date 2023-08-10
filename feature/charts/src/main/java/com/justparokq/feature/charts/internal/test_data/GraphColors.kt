@@ -1,8 +1,8 @@
-package com.justparokq.graphs.test_data
+package com.justparokq.feature.charts.internal.test_data
 
 import androidx.compose.ui.graphics.Color
 
-object GraphColors {
+internal object GraphColors {
     var colors = listOf(
         Color(0XFFF44336),
         Color(0XFFE91E63),

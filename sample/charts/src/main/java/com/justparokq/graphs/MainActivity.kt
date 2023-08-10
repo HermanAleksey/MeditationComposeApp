@@ -2,7 +2,8 @@ package com.justparokq.graphs
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
-import com.example.design_system.AppTheme
+import com.justparokq.core.design_system.AppTheme
+import com.justparokq.feature.charts.api.screen.ChartsDemoScreen
 
 
 class MainActivity : androidx.activity.ComponentActivity() {
@@ -11,7 +12,7 @@ class MainActivity : androidx.activity.ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AppTheme {
-                GraphScreen()
+                ChartsDemoScreen()
             }
         }
     }

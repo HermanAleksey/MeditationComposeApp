@@ -1,11 +1,11 @@
-package com.justparokq.graphs.test_data
+package com.justparokq.feature.charts.internal.test_data
 
 import com.justparokq.feature.charts.api.chart.bar.BarChartData
 import com.justparokq.feature.charts.api.chart.pie.PieChartData
 
 private fun randomValue(): Float = (100 * Math.random() + 25).toFloat()
 
-fun getTestPieChartData() = PieChartData(
+internal fun getTestPieChartData() = PieChartData(
     slices = listOf(
         PieChartData.Slice(
             randomValue(),
@@ -22,7 +22,7 @@ fun getTestPieChartData() = PieChartData(
     )
 )
 
-fun getTestBarChartData(): BarChartData {
+internal fun getTestBarChartData(): BarChartData {
     return BarChartData(
         bars = listOf(
             BarChartData.Bar(
