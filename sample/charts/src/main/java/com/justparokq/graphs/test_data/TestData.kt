@@ -1,8 +1,7 @@
 package com.justparokq.graphs.test_data
 
-import android.graphics.Point
-import com.example.charts.bar_chart.BarChartData
-import com.example.charts.pie_chart.PieChartData
+import com.justparokq.feature.charts.api.chart.bar.BarChartData
+import com.justparokq.feature.charts.api.chart.pie.PieChartData
 
 private fun randomValue(): Float = (100 * Math.random() + 25).toFloat()
 
