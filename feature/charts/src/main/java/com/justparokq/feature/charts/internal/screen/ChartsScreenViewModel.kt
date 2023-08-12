@@ -59,7 +59,7 @@ class ChartsScreenViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             isFeatureToggleActiveUseCase(ChartsFeatureToggle.WebDataSourceFT).let {
-                if (it) {
+                if (true) {
                     subscribeToWebPoints()
                 } else {
                     producePointsForLineChart()

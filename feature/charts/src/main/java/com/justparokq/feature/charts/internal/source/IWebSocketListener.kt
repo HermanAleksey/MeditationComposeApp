@@ -2,6 +2,7 @@ package com.justparokq.feature.charts.internal.source
 
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.Response
 import okhttp3.WebSocket
 import okhttp3.WebSocketListener
 
@@ -23,6 +24,11 @@ class WebSocketListenerImpl(
         override fun onMessage(webSocket: WebSocket, text: String) {
             super.onMessage(webSocket, text)
             onMessageReceived?.invoke(text)
+        }
+
+        override fun onFailure(webSocket: WebSocket, t: Throwable, response: Response?) {
+            super.onFailure(webSocket, t, response)
+            t.printStackTrace()
         }
     }
 
