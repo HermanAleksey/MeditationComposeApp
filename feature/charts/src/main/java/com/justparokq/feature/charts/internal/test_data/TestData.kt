@@ -19,7 +19,8 @@ internal fun getTestPieChartData() = PieChartData(
             randomValue(),
             GraphColors.getRandomColor()
         )
-    )
+    ),
+    selectedSlice = null
 )
 
 internal fun getTestBarChartData(): BarChartData {

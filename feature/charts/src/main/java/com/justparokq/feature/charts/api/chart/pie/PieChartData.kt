@@ -4,6 +4,7 @@ import androidx.compose.ui.graphics.Color
 
 data class PieChartData(
     val slices: List<Slice>,
+    val selectedSlice: Slice?,
 ) {
     internal val totalSize: Float
         get() {

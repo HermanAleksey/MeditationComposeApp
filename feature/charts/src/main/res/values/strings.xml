@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pie_chart_button">Pie</string>
+    <string name="bar_chart_button">Bar</string>
+    <string name="line_chart_button">Line</string>
+</resources>
