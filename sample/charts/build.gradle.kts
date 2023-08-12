@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-android")
     id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
 
     id("org.jlleitschuh.gradle.ktlint")
 }
@@ -73,4 +74,8 @@ dependencies {
     implementation(Dependencies.compose_material)
     implementation(Dependencies.compose_ui_tooling)
     implementation(Dependencies.compose_ui_tooling_preview)
+
+    //hilt
+    implementation(Dependencies.hilt_android)
+    kapt(Dependencies.hilt_compiler)
 }

@@ -8,7 +8,7 @@ import com.justparokq.feature.charts.internal.screen.InternalChartsDemoScreen
 
 @Composable
 fun ChartsDemoScreen(
-    viewModel: ChartsScreenViewModel = ChartsScreenViewModel(),
+    viewModel: ChartsScreenViewModel,
 ) {
     InternalChartsDemoScreen(
         uiState = viewModel.uiState.collectAsState(),

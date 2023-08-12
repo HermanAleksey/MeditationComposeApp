@@ -28,10 +28,19 @@ android {
 dependencies {
     implementation(project(":core:design_system"))
     implementation(project(":core:common"))
+    implementation(project(":core:data_store"))
 
     implementation(Dependencies.activity_compose)
     implementation(Dependencies.compose_ui)
     implementation(Dependencies.compose_material)
     implementation(Dependencies.compose_ui_tooling)
     implementation(Dependencies.compose_ui_tooling_preview)
+
+    //hilt
+    implementation(Dependencies.hilt_android)
+    kapt(Dependencies.hilt_compiler)
+
+    //retrofit
+    implementation(Dependencies.retrofit)
+    implementation(Dependencies.retrofit_converter_gson)
 }

@@ -132,6 +132,7 @@ dependencies {
     implementation(project(":feature:internet_connection"))
     implementation(project(":feature:music_player"))
     implementation(project(":feature:feature_toggle"))
+    implementation(project(":feature:charts"))
 
     implementation(project(":core:updates_history"))
     implementation(project(":core:design_system"))
