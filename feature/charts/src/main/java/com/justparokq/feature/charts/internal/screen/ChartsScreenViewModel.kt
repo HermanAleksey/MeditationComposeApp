@@ -9,6 +9,7 @@ import com.justparokq.feature.charts.api.ChartsFeatureToggle
 import com.justparokq.feature.charts.api.chart.line.view_model.ILineChartViewModel
 import com.justparokq.feature.charts.api.chart.line.view_model.LineChartViewModelImpl
 import com.justparokq.feature.charts.api.chart.pie.PieChartData
+import com.justparokq.feature.charts.api.di.Charts
 import com.justparokq.feature.charts.internal.source.IWebSocketListener
 import com.justparokq.feature.charts.internal.source.WebSocketListenerImpl
 import com.justparokq.feature.charts.internal.test_data.getTestBarChartData
@@ -33,7 +34,7 @@ enum class ChartType {
 @HiltViewModel
 class ChartsScreenViewModel @Inject constructor(
     isFeatureToggleActiveUseCase: IsFeatureToggleActiveUseCase,
-    private val okHttpClient: OkHttpClient,
+    @Charts private val okHttpClient: OkHttpClient,
     private val request: Request,
 ) : MviViewModel<ChartsScreenState, ChartsScreenAction>,
     ILineChartViewModel by LineChartViewModelImpl(), ViewModel() {
@@ -59,7 +60,7 @@ class ChartsScreenViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             isFeatureToggleActiveUseCase(ChartsFeatureToggle.WebDataSourceFT).let {
-                if (true) {
+                if (it) {
                     subscribeToWebPoints()
                 } else {
                     producePointsForLineChart()

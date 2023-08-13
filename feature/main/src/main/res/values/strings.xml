@@ -24,5 +24,6 @@
 
     <string name="shuffle_puzzle_menu_option">Shuffle Puzzle</string>
     <string name="music_menu_option">Music player</string>
+    <string name="charts_demo_menu_option">Charts demo</string>
     <string name="menu_item_coming_soon">Coming soon</string>
 </resources>

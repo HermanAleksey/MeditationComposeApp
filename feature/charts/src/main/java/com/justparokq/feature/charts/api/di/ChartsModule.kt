@@ -19,6 +19,7 @@ object ChartsModule {
     }
 
     @Provides
+    @Charts
     fun provideOkHttpClient(): OkHttpClient {
         return OkHttpClient()
     }

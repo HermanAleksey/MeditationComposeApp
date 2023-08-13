@@ -58,6 +58,11 @@ class MainScreenViewModel @Inject constructor(
                         MainScreenNavRoute.MusicScreen()
                     )
                 }
+                MenuItem.CHARTS_DEMO -> {
+                    _navigationEvent.emit(
+                        MainScreenNavRoute.ChartsDemoScreen()
+                    )
+                }
             }
         }
     }
