@@ -1,6 +1,6 @@
 package com.justparokq.feature.shuffle_puzzle.api
 
-import com.example.coroutines_test.CoroutinesTestRule
+import com.justparokq.core.coroutines_test.CoroutinesTestRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import org.junit.Before

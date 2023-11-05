@@ -2,7 +2,7 @@ package com.justparokq.feature.beer_sorts
 
 import com.justparokq.feature.beer_sorts.api.beer_list.BeerListNavRoute
 import com.justparokq.feature.beer_sorts.api.beer_list.BeerListScreenViewModel
-import com.example.coroutines_test.CoroutinesTestRule
+import com.justparokq.core.coroutines_test.CoroutinesTestRule
 import com.justparokq.core.punk_source.api.use_case.punk.GetBeerPagingRemoteMediatorUseCase
 import com.justparokq.core.punk_source.api.use_case.punk.db.GetBeerPagingSourceUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi

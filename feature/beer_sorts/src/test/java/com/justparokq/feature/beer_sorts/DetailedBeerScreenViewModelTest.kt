@@ -3,7 +3,7 @@ package com.justparokq.feature.beer_sorts
 import FakeObjects.getFakeBeer
 import com.justparokq.feature.beer_sorts.api.detailed_beer.DetailedBeerScreenViewModel
 import com.justparokq.core.model.NetworkResponse
-import com.example.coroutines_test.CoroutinesTestRule
+import com.justparokq.core.coroutines_test.CoroutinesTestRule
 import com.justparokq.core.punk_source.api.use_case.punk.network.GetBeerByIdUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow

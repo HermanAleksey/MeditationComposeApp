@@ -1,4 +1,4 @@
-package com.example.coroutines_test
+package com.justparokq.core.coroutines_test
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

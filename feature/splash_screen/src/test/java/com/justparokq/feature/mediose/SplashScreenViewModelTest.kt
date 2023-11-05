@@ -1,6 +1,6 @@
 package com.justparokq.feature.mediose
 
-import com.example.coroutines_test.CoroutinesTestRule
+import com.justparokq.core.coroutines_test.CoroutinesTestRule
 import com.justparokq.core.authentication_source.api.use_case.LoginUseCase
 import com.justparokq.core.data_store.user.UserDataStore
 import com.justparokq.core.model.NetworkResponse
