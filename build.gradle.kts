@@ -22,6 +22,11 @@ allprojects {
 
 plugins {
     id("org.jlleitschuh.gradle.ktlint") version "10.0.0"
+    id("org.jetbrains.kotlinx.kover") version "0.7.4"
+}
+
+allprojects {
+    apply(plugin = "org.jetbrains.kotlinx.kover")
 }
 
 tasks {

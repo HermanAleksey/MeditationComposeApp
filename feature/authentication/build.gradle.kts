@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id("com.google.devtools.ksp") version LibVersions.ksp_version
+    id("org.jetbrains.kotlinx.kover")
 }
 
 android {
@@ -37,6 +38,8 @@ android {
 }
 
 dependencies {
+    kover(project(":feature:authentication"))
+
     implementation(project(":core:design_system"))
     implementation(project(":core:common"))
     implementation(project(":core:data_store"))
