@@ -26,6 +26,7 @@
             <option value="$PROJECT_DIR$/feature" />
             <option value="$PROJECT_DIR$/feature/authentication" />
             <option value="$PROJECT_DIR$/feature/beer_sorts" />
+            <option value="$PROJECT_DIR$/feature/charts" />
             <option value="$PROJECT_DIR$/feature/feature_toggle" />
             <option value="$PROJECT_DIR$/feature/internet_connection" />
             <option value="$PROJECT_DIR$/feature/main" />
@@ -34,6 +35,7 @@
             <option value="$PROJECT_DIR$/feature/splash_screen" />
             <option value="$PROJECT_DIR$/feature/update_history" />
             <option value="$PROJECT_DIR$/sample" />
+            <option value="$PROJECT_DIR$/sample/charts" />
             <option value="$PROJECT_DIR$/sample/design_system" />
             <option value="$PROJECT_DIR$/sample/music_player" />
           </set>

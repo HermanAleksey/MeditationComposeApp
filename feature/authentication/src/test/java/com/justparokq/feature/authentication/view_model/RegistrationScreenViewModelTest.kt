@@ -5,7 +5,7 @@ import com.justparokq.feature.authentication.api.registration_screen.Registratio
 import com.justparokq.feature.authentication.api.registration_screen.RegistrationScreenViewModel
 import com.justparokq.core.authentication_source.api.use_case.RegisterUseCase
 import com.justparokq.core.model.NetworkResponse
-import com.example.coroutines_test.CoroutinesTestRule
+import com.justparokq.core.coroutines_test.CoroutinesTestRule
 import com.example.network.SuccessInfo
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow

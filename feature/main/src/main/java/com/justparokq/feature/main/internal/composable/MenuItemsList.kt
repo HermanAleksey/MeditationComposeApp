@@ -4,14 +4,14 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AcUnit
 import androidx.compose.material.icons.filled.CameraAlt
 import androidx.compose.material.icons.filled.Extension
-import androidx.compose.material.icons.filled.Map
 import androidx.compose.material.icons.filled.MusicNote
+import androidx.compose.material.icons.filled.PieChart
 import androidx.compose.ui.graphics.Color
 import com.justparokq.core.common.utils.UiText
 import com.justparokq.feature.main.R
 
 enum class MenuItem {
-    PUZZLE, MUSIC,
+    PUZZLE, MUSIC, CHARTS_DEMO
 }
 
 internal fun getMenuItemsList(onMenuItemClick: (MenuItem) -> Unit) = listOf(
@@ -30,10 +30,11 @@ internal fun getMenuItemsList(onMenuItemClick: (MenuItem) -> Unit) = listOf(
         onClick = { onMenuItemClick(MenuItem.MUSIC) },
     ),
     MenuItemModel(
-        title = UiText.StringResource(R.string.menu_item_coming_soon),
-        icon = Icons.Default.Map,
+        title = UiText.StringResource(R.string.charts_demo_menu_option),
+        icon = Icons.Default.PieChart,
         backgroundColor = Color(62, 132, 105),
-        foregroundColor = Color(43, 91, 84)
+        foregroundColor = Color(43, 91, 84),
+        onClick = { onMenuItemClick(MenuItem.CHARTS_DEMO) },
     ),
     MenuItemModel(
         title = UiText.StringResource(R.string.menu_item_coming_soon),

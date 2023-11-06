@@ -44,6 +44,9 @@ class NavDependenciesProviderImpl(
                     },
                     navigateToFeatureToggleScreen = {
                         navController.navigate(FeatureToggleScreenDestination())
+                    },
+                    navigateToChartsDemoScreen = {
+                        navController.navigate(ChartsDemoScreenDestination())
                     }
                 )
             }

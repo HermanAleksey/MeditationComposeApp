@@ -11,6 +11,7 @@ import com.justparokq.feature.authentication.api.new_password_screen.NewPassword
 import com.justparokq.feature.authentication.api.registration_screen.RegistrationScreenViewModel
 import com.justparokq.feature.beer_sorts.api.beer_list.BeerListScreenViewModel
 import com.justparokq.feature.beer_sorts.api.detailed_beer.DetailedBeerScreenViewModel
+import com.justparokq.feature.charts.internal.screen.ChartsScreenViewModel
 import com.justparokq.feature.feature_toggle.api.FeatureToggleScreenViewModel
 import com.justparokq.feature.internet_connection.NoInternetConnectionViewModel
 import com.justparokq.feature.main.api.MainScreenViewModel
@@ -20,6 +21,7 @@ import com.justparokq.feature.splash_screen.api.SplashScreenViewModel
 import com.justparokq.feature.update_history.api.UpdatesDescriptionViewModel
 import com.justparokq.mediose.presentation.screens.NavGraphs
 import com.justparokq.mediose.presentation.screens.destinations.BeerListScreenDestination
+import com.justparokq.mediose.presentation.screens.destinations.ChartsDemoScreenDestination
 import com.justparokq.mediose.presentation.screens.destinations.DetailedBeerScreenDestination
 import com.justparokq.mediose.presentation.screens.destinations.EnterCodeScreenDestination
 import com.justparokq.mediose.presentation.screens.destinations.EnterLoginScreenDestination
@@ -76,6 +78,9 @@ fun MeditationDestinationsNavHost(
             }
             dependency(FeatureToggleScreenDestination) {
                 hiltViewModel<FeatureToggleScreenViewModel>()
+            }
+            dependency(ChartsDemoScreenDestination) {
+                hiltViewModel<ChartsScreenViewModel>()
             }
         }
     )
