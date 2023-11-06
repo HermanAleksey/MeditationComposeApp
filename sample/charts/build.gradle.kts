@@ -75,7 +75,7 @@ dependencies {
     implementation(Dependencies.compose_ui_tooling)
     implementation(Dependencies.compose_ui_tooling_preview)
 
-    //hilt
+    // hilt
     implementation(Dependencies.hilt_android)
     kapt(Dependencies.hilt_compiler)
 }
