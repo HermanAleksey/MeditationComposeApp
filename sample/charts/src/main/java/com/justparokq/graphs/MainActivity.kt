@@ -8,7 +8,6 @@ import com.justparokq.feature.charts.api.screen.ChartsDemoScreen
 import com.justparokq.feature.charts.internal.screen.ChartsScreenViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
-
 @AndroidEntryPoint
 class MainActivity : androidx.activity.ComponentActivity() {
 
@@ -16,7 +15,7 @@ class MainActivity : androidx.activity.ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             AppTheme {
-                 val exampleViewModel: ChartsScreenViewModel by viewModels()
+                val exampleViewModel: ChartsScreenViewModel by viewModels()
                 ChartsDemoScreen(exampleViewModel)
             }
         }
