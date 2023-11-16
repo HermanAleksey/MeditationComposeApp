@@ -1,5 +1,5 @@
 plugins {
-    id("com.android.library")
+    id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     id("com.google.devtools.ksp") version LibVersions.ksp_version
@@ -44,5 +44,9 @@ dependencies {
 
     //hilt
     implementation(Dependencies.hilt_android)
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("com.google.android.material:material:1.4.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("androidx.compose.ui:ui-viewbinding:${LibVersions.compose_ui_version}")
     kapt(Dependencies.hilt_compiler)
 }

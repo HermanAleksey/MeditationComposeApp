@@ -22,6 +22,7 @@ allprojects {
 
 plugins {
     id("org.jlleitschuh.gradle.ktlint") version "10.0.0"
+    id("org.jetbrains.kotlin.android") version "1.8.0" apply false
 }
 
 //example: ./gradlew create module -Ptype=sample -PnName=animations_demo
