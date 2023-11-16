@@ -24,11 +24,12 @@ plugins {
     id("org.jlleitschuh.gradle.ktlint") version "10.0.0"
 }
 
+//example: ./gradlew create module -Ptype=sample -PnName=animations_demo
 tasks {
     val type: String by project // type of module
     val nName: String by project // module name
     val tests: String? by project // create test folder?
-    val screenName: String? by project // create test folder?
+    val screenName: String? by project // screen name, if module is feature
 
     task("createModule") {
         doFirst {
