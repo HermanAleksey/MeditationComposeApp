@@ -36,11 +36,11 @@ class XmlAnimationsActivity : AppCompatActivity() {
 
         fun setFragment(type: XmlAnimationType) {
             val fragment = when (type) {
-                XmlAnimationType.AnimationDrawable -> AnimationDrawableFragment()
-                XmlAnimationType.AnimateVectorDrawable -> AnimateVectorDrawableFragment()
-                XmlAnimationType.ViewAnimations -> ViewAnimationsFragment()
-                XmlAnimationType.Animator -> AnimatorFragment()
-                XmlAnimationType.MotionLayout -> MotionLayoutFragment()
+                XmlAnimationType.AnimationDrawable -> AnimationDrawableFragment.newInstance()
+                XmlAnimationType.AnimateVectorDrawable -> AnimateVectorDrawableFragment.newInstance()
+                XmlAnimationType.ViewAnimations -> ViewAnimationsFragment.newInstance()
+                XmlAnimationType.Animator -> AnimatorFragment.newInstance()
+                XmlAnimationType.MotionLayout -> MotionLayoutFragment.newInstance()
             }
             changeView?.invoke(fragment)
         }
