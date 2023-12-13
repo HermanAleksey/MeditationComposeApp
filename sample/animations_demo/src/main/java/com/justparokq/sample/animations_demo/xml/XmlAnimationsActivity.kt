@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
@@ -18,6 +19,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.fragment.app.Fragment
@@ -59,7 +61,8 @@ private fun AnimationTypesTabBar(setFragment: (XmlAnimationType) -> Unit) {
     LazyRow(
         modifier = Modifier
             .fillMaxWidth()
-            .scrollable(rememberScrollState(), Orientation.Horizontal),
+            .scrollable(rememberScrollState(), Orientation.Horizontal)
+            .background(Color.Gray),
         horizontalArrangement = Arrangement.spacedBy(10.dp),
         userScrollEnabled = true,
     ) {

@@ -49,4 +49,9 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.compose.ui:ui-viewbinding:${LibVersions.compose_ui_version}")
     kapt(Dependencies.hilt_compiler)
+
+    // motion layout
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    // To use constraintlayout in compose
+//    implementation("androidx.constraintlayout:constraintlayout-compose:1.1.0-alpha13")
 }

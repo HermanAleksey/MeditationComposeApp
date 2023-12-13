@@ -1,14 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".xml.fragment.ViewAnimationsFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:text="ViewAnimationsFragment" />
 
-</FrameLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Анимация анимации может выполнять ряд простых преобразований (положение, размер, поворот и прозрачность) содержимого объекта View. Итак, если у вас есть объект TextView, вы можете перемещать, вращать, увеличивать или уменьшать текст. Если у него есть фоновое изображение, оно будет преобразовано вместе с текстом." />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Позволяют менять внешний вид компонента, но не его на самом деле. Может увеличить View, но зона кликабельности останется прежней. Чтобы применять изменения - нужен `invalidate()`" />
+
+    <TextView
+        android:id="@+id/txt_clickCountViewAnimation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="36dp"
+        android:text="Click counter: "
+        android:textSize="30dp" />
+
+
+    <TextView
+        android:id="@+id/txt_viewAnimationTest"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:background="@color/teal_200"
+        android:gravity="center"
+        android:text="Тестовый текст"
+        android:textSize="28dp" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -17,6 +17,11 @@ class MotionLayoutFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_motion_layout, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+//        val ml = (requireView().rootView as MotionLayout)
+    }
+
     companion object {
 
         @JvmStatic

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/selected"
+    android:oneshot="false">
+    <item
+        android:drawable="@drawable/clock_image_1"
+        android:duration="300" />
+    <item
+        android:drawable="@drawable/clock_image_2"
+        android:duration="300" />
+    <item
+        android:drawable="@drawable/clock_image_4"
+        android:duration="300" />
+    <item
+        android:drawable="@drawable/clock_image_3"
+        android:duration="300" />
+</animation-list>
