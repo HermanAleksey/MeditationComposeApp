@@ -11,6 +11,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.ui.Modifier
 import com.justparokq.core.design_system.AppTheme
+import com.justparokq.sample.animations_demo.lottie.LottieAnimationActivity
 import com.justparokq.sample.animations_demo.xml.XmlAnimationsActivity
 
 class MainActivity : ComponentActivity() {
@@ -28,7 +29,7 @@ class MainActivity : ComponentActivity() {
                     Button(onClick = { }) {
                         Text(text = "Jetpack Compose")
                     }
-                    Button(onClick = { }) {
+                    Button(onClick = { navigateToLottieAnimationsDemoScreen() }) {
                         Text(text = "Lottie animation")
                     }
                 }
@@ -44,5 +45,10 @@ class MainActivity : ComponentActivity() {
 
 private fun Activity.navigateToXmlAnimationsDemoScreen() {
     val intent = Intent(this, XmlAnimationsActivity::class.java)
+    startActivity(intent)
+}
+
+private fun Activity.navigateToLottieAnimationsDemoScreen() {
+    val intent = Intent(this, LottieAnimationActivity::class.java)
     startActivity(intent)
 }

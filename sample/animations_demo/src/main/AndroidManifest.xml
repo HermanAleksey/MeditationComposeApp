@@ -8,6 +8,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight">
         <activity
+            android:name=".lottie.LottieAnimationActivity"
+            android:exported="false" />
+        <activity
             android:name=".xml.XmlAnimationsActivity"
             android:exported="false" />
         <activity

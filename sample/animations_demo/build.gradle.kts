@@ -52,6 +52,6 @@ dependencies {
 
     // motion layout
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    // To use constraintlayout in compose
-//    implementation("androidx.constraintlayout:constraintlayout-compose:1.1.0-alpha13")
+    //lottie
+    implementation("com.airbnb.android:lottie:6.2.0")
 }
