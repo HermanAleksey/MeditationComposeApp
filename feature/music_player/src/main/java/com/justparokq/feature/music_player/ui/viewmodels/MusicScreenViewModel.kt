@@ -146,15 +146,18 @@ class MusicScreenViewModel @Inject constructor(
 
     private fun toggleSong(song: Song) {
         val isPrepared = uiState.value.playbackState?.isPrepared ?: false
-        if (isPrepared && song.mediaId == uiState.value.currentPlayingSong?.mediaId) {
+        val currentlyPlayingThisSong = song.mediaId == uiState.value.currentPlayingSong?.mediaId
+        if (isPrepared && currentlyPlayingThisSong) {
             uiState.value.playbackState?.let { playbackState ->
                 when {
                     playbackState.isPlaying -> {
                         musicServiceConnection.transportController.pause()
                     }
+
                     playbackState.isPlayEnabled -> {
                         musicServiceConnection.transportController.play()
                     }
+
                     else -> Unit
                 }
             }

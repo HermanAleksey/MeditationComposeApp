@@ -1,7 +1,8 @@
 package com.justparokq.feature.music_player.ui.composables.music_player.composables
 
+import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
 import androidx.compose.animation.graphics.ExperimentalAnimationGraphicsApi
 import androidx.compose.animation.graphics.res.animatedVectorResource
 import androidx.compose.animation.graphics.res.rememberAnimatedVectorPainter
@@ -39,6 +40,7 @@ import com.justparokq.feature.music_player.R
 import com.justparokq.feature.music_player.data.entities.Song
 import com.justparokq.feature.music_player.data.entities.WebURL
 import com.justparokq.feature.music_player.ui.viewmodels.MusicAction
+import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalAnimationGraphicsApi::class)
 @Composable
@@ -77,24 +79,25 @@ internal fun MusicControlPanel(
                 .size(32.dp)
         )
 
-        var buttonBoxSize by remember { mutableStateOf(58.dp) }
-        val animatedSize = animateDpAsState(
-            targetValue = buttonBoxSize,
-            animationSpec = spring(stiffness = 50f),
-            label = "",
+        var playButtonBoxSize by remember { mutableStateOf(58.dp) }
+        val playButtonAnimatedSize = animateDpAsState(
+            targetValue = playButtonBoxSize,
+            animationSpec = tween(durationMillis = 100, easing = LinearEasing),
+            label = "playButtonAnimatedSize",
         )
         Box(
             modifier = Modifier
-                .size(animatedSize.value)
+                .size(playButtonAnimatedSize.value)
                 .clip(CircleShape)
                 .background(MaterialTheme.colors.onBackground)
-                .pointerInput(Unit) {
+                .pointerInput(song) {
                     detectTapGestures(
                         onPress = {
-                            buttonBoxSize = 72.dp
+                            playButtonBoxSize = 72.dp
                             processAction(MusicAction.ToggleSongPlayback(song))
-                            tryAwaitRelease()
-                            buttonBoxSize = 58.dp
+                            awaitRelease()
+                            delay(30)
+                            playButtonBoxSize = 58.dp
                         }
                     )
                 },
