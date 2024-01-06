@@ -22,25 +22,25 @@ fun MeditationNavHostEngine() =
         rootDefaultAnimations = RootNavGraphDefaultAnimations(
             enterTransition = {
                 slideInHorizontally(
-                    initialOffsetX = { width -> -width },
+                    initialOffsetX = { width: Int -> -width },
                     animationSpec = tween(ANIMATION_DURATION)
                 )
             },
             exitTransition = {
                 slideOutHorizontally(
-                    targetOffsetX = { width -> width },
+                    targetOffsetX = { width: Int -> width },
                     animationSpec = tween(ANIMATION_DURATION)
                 )
             },
             popEnterTransition = {
                 slideInHorizontally(
-                    initialOffsetX = { width -> width },
+                    initialOffsetX = { width: Int -> width },
                     animationSpec = tween(ANIMATION_DURATION)
                 )
             },
             popExitTransition = {
                 slideOutHorizontally(
-                    targetOffsetX = { width -> -width },
+                    targetOffsetX = { width: Int -> -width },
                     animationSpec = tween(ANIMATION_DURATION)
                 )
             },

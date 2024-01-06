@@ -94,16 +94,3 @@ fun SongScreenContent(
         }
     }
 }
-
-
-//@Preview
-//@Composable
-//fun MusicPlayerScreenPreview() {
-//    AppTheme {
-//        MusicPlayerScreen(
-//            uiState = MainViewState(),
-//            processAction = {}
-//        )
-//    }
-//}
-
