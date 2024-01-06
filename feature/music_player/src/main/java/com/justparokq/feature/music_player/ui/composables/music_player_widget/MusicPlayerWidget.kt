@@ -2,6 +2,10 @@ package com.justparokq.feature.music_player.ui.composables.music_player_widget
 
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.graphics.ExperimentalAnimationGraphicsApi
+import androidx.compose.animation.graphics.res.animatedVectorResource
+import androidx.compose.animation.graphics.res.rememberAnimatedVectorPainter
+import androidx.compose.animation.graphics.vector.AnimatedImageVector
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -77,6 +81,7 @@ fun MusicPlayerWidget(
                                     offsetX > DRAG_DETECTION_OFFSET -> {
                                         processAction(MusicAction.PreviousTrack)
                                     }
+
                                     offsetX < -DRAG_DETECTION_OFFSET -> {
                                         processAction(MusicAction.NextTrack)
                                     }
@@ -108,6 +113,7 @@ fun MusicPlayerWidget(
 }
 
 
+@OptIn(ExperimentalAnimationGraphicsApi::class)
 @Composable
 private fun MusicPlayerWidgetContent(
     song: Song,
@@ -137,6 +143,7 @@ private fun MusicPlayerWidgetContent(
                         .offset(16.dp)
                 )
             }
+
             is WebURL -> {
                 GlideImage(
                     imageModel = { song.imageSource.url }, // loading a network image using an URL.
@@ -146,6 +153,7 @@ private fun MusicPlayerWidgetContent(
                     )
                 )
             }
+
             is LocalURL -> throw Throwable("error")
         }
 
@@ -175,19 +183,14 @@ private fun MusicPlayerWidgetContent(
             )
         }
 
+        val image = AnimatedImageVector.animatedVectorResource(R.drawable.avd_anim)
         Image(
-            painter = painterResource(
-                if (isPlaying) {
-                    R.drawable.ic_round_pause
-                } else {
-                    R.drawable.ic_round_play_arrow
-                }
-            ),
+            painter = rememberAnimatedVectorPainter(image, isPlaying),
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .padding(end = 16.dp)
-                .size(36.dp)
+                .size(24.dp)
                 .clickable(
                     interactionSource = remember {
                         MutableInteractionSource()

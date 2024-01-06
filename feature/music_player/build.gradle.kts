@@ -42,6 +42,7 @@ dependencies {
     implementation(Dependencies.compose_ui_tooling)
     implementation(Dependencies.compose_ui_tooling_preview)
     implementation(Dependencies.activity_compose)
+    implementation(Dependencies.compose_animation_graphics)
 
     //accompanist
     implementation(Dependencies.accompanist_pager)

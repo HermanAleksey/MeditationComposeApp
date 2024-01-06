@@ -1,8 +1,16 @@
 package com.justparokq.feature.music_player.ui.composables.music_player.composables
 
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.graphics.ExperimentalAnimationGraphicsApi
+import androidx.compose.animation.graphics.res.animatedVectorResource
+import androidx.compose.animation.graphics.res.rememberAnimatedVectorPainter
+import androidx.compose.animation.graphics.vector.AnimatedImageVector
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -16,10 +24,14 @@ import androidx.compose.material.icons.rounded.Replay10
 import androidx.compose.material.icons.rounded.SkipNext
 import androidx.compose.material.icons.rounded.SkipPrevious
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.justparokq.core.design_system.AppTheme
@@ -28,6 +40,7 @@ import com.justparokq.feature.music_player.data.entities.Song
 import com.justparokq.feature.music_player.data.entities.WebURL
 import com.justparokq.feature.music_player.ui.viewmodels.MusicAction
 
+@OptIn(ExperimentalAnimationGraphicsApi::class)
 @Composable
 internal fun MusicControlPanel(
     isSongPlaying: Boolean,
@@ -47,9 +60,9 @@ internal fun MusicControlPanel(
             tint = MaterialTheme.colors.onBackground,
             modifier = Modifier
                 .clip(CircleShape)
-                .clickable(onClick = {
+                .clickable {
                     processAction(MusicAction.PreviousTrack)
-                })
+                }
                 .size(32.dp),
         )
         Icon(
@@ -58,37 +71,57 @@ internal fun MusicControlPanel(
             tint = MaterialTheme.colors.onBackground,
             modifier = Modifier
                 .clip(CircleShape)
-                .clickable(onClick = {
+                .clickable {
                     processAction(MusicAction.Rewind)
-                })
+                }
                 .size(32.dp)
         )
-        Icon(
-            painter = painterResource(
-                if (isSongPlaying) R.drawable.ic_round_pause
-                else R.drawable.ic_round_play_arrow
-            ),
-            contentDescription = "Play",
-            tint = MaterialTheme.colors.secondary,
+
+        var buttonBoxSize by remember { mutableStateOf(58.dp) }
+        val animatedSize = animateDpAsState(
+            targetValue = buttonBoxSize,
+            animationSpec = spring(stiffness = 50f),
+            label = "",
+        )
+        Box(
             modifier = Modifier
+                .size(animatedSize.value)
                 .clip(CircleShape)
                 .background(MaterialTheme.colors.onBackground)
-                .clickable(onClick = {
-                    processAction(MusicAction.ToggleSongPlayback(song))
-                })
-                .size(64.dp)
-                .padding(8.dp)
-        )
+                .pointerInput(Unit) {
+                    detectTapGestures(
+                        onPress = {
+                            buttonBoxSize = 72.dp
+                            processAction(MusicAction.ToggleSongPlayback(song))
+                            tryAwaitRelease()
+                            buttonBoxSize = 58.dp
+                        }
+                    )
+                },
+            contentAlignment = Alignment.Center
+        ) {
+            Icon(
+                painter = rememberAnimatedVectorPainter(
+                    AnimatedImageVector.animatedVectorResource(R.drawable.avd_anim),
+                    isSongPlaying
+                ),
+                contentDescription = "Play",
+                tint = MaterialTheme.colors.secondary,
+                modifier = Modifier
+                    .size(48.dp)
+                    .padding(8.dp)
+            )
+        }
         Icon(
             imageVector = Icons.Rounded.Forward10,
             contentDescription = "Forward 10 seconds",
             tint = MaterialTheme.colors.onBackground,
             modifier = Modifier
                 .clip(CircleShape)
-                .clickable(onClick = {
+                .clickable {
                     processAction(MusicAction.FastForward)
 
-                })
+                }
                 .size(32.dp)
         )
         Icon(
@@ -97,9 +130,9 @@ internal fun MusicControlPanel(
             tint = MaterialTheme.colors.onBackground,
             modifier = Modifier
                 .clip(CircleShape)
-                .clickable(onClick = {
+                .clickable {
                     processAction(MusicAction.NextTrack)
-                })
+                }
                 .size(32.dp)
         )
     }
