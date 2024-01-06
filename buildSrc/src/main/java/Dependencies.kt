@@ -3,6 +3,8 @@ object Dependencies {
     const val compose_ui = "androidx.compose.ui:ui:${LibVersions.compose_ui_version}"
     const val compose_material =
         "androidx.compose.material:material:${LibVersions.compose_material_version}"
+    const val compose_animation_graphics =
+        "androidx.compose.animation:animation-graphics:${LibVersions.compose_animation_graphics_version}"
     const val compose_ui_tooling_preview =
         "androidx.compose.ui:ui-tooling-preview:${LibVersions.compose_ui_version}"
     const val compose_ui_tooling =

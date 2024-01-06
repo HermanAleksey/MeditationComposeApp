@@ -10,6 +10,7 @@ object LibVersions {
     const val compose_ui_version = "1.3.3"
     const val compose_material_icons_version = "1.3.1"
     const val compose_material_version = "1.3.1"
+    const val compose_animation_graphics_version = "1.1.0"
     const val lifecycle_runtime_ktx_version = "2.6.0"
     const val compose_compiler_version = "1.4.3"
 
