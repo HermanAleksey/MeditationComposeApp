@@ -1,4 +1,4 @@
-package com.justparokq.feature.chat.internal.presentation
+package com.justparokq.feature.chat.internal.presentation.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,11 +15,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.justparokq.core.design_system.common_composables.DefaultAppBackground
-import com.justparokq.feature.chat.api.ChatScreenViewModel
+import com.justparokq.feature.chat.api.ChatScreenAction
+import com.justparokq.feature.chat.api.ChatScreenState
+import com.justparokq.feature.chat.internal.presentation.model.CurrentUserMessageUIModel
+import com.justparokq.feature.chat.internal.presentation.model.OtherUserMessageUIModel
 
 @Composable
-fun InternalChatScreen(viewModel: ChatScreenViewModel) {
-    DefaultAppBackground() {
+fun InternalChatScreen(
+    uiState: ChatScreenState,
+    processAction: (ChatScreenAction) -> Unit,
+) {
+    DefaultAppBackground {
         Column(modifier = Modifier.fillMaxSize(), Arrangement.Bottom) {
             LazyColumn(
                 verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -31,7 +37,7 @@ fun InternalChatScreen(viewModel: ChatScreenViewModel) {
                 item {
                     Spacer(modifier = Modifier.height(24.dp))
                 }
-                items(viewModel.getMessages()) {
+                items(uiState.messagesList) {
                     MessageItem(message = it)
                 }
                 item {
@@ -40,9 +46,9 @@ fun InternalChatScreen(viewModel: ChatScreenViewModel) {
             }
 
             ChatTextInput(
-                text = viewModel.textInputStr,
-                onTextChanged = { viewModel.updateInput(it) },
-                onSendClicked = { viewModel.onSendClick() }
+                text = uiState.inputMessage,
+                onTextChanged = { processAction(ChatScreenAction.OnTextInputChanged(it)) },
+                onSendClicked = { processAction(ChatScreenAction.OnSendMessageClicked) }
             )
         }
     }
@@ -52,6 +58,23 @@ fun InternalChatScreen(viewModel: ChatScreenViewModel) {
 @Composable
 fun ChatScreenPreview() {
     MaterialTheme {
-        InternalChatScreen(viewModel = ChatScreenViewModel())
+        InternalChatScreen(
+            uiState = ChatScreenState(
+                inputMessage = "",
+                messagesList = listOf(
+                    OtherUserMessageUIModel(
+                        text = "Hello",
+                        time = "13:00",
+                        userName = "P"
+                    ),
+                    CurrentUserMessageUIModel(
+                        text = "HI!",
+                        time = "13:01",
+                        isSent = true
+                    )
+                )
+            ),
+            processAction = {}
+        )
     }
 }

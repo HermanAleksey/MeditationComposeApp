@@ -1,4 +1,4 @@
-package com.justparokq.feature.chat.internal.presentation
+package com.justparokq.feature.chat.internal.presentation.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -22,9 +22,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.justparokq.feature.chat.internal.model.CurrentUserMessageUIModel
-import com.justparokq.feature.chat.internal.model.MessageUiModel
-import com.justparokq.feature.chat.internal.model.OtherUserMessageUIModel
+import com.justparokq.feature.chat.internal.presentation.model.CurrentUserMessageUIModel
+import com.justparokq.feature.chat.internal.presentation.model.MessageUiModel
+import com.justparokq.feature.chat.internal.presentation.model.OtherUserMessageUIModel
 
 @Composable
 internal fun MessageItem(message: MessageUiModel) {

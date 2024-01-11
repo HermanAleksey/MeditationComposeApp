@@ -1,4 +1,4 @@
-package com.justparokq.feature.chat.internal.presentation
+package com.justparokq.feature.chat.internal.presentation.ui
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
