@@ -42,4 +42,7 @@ dependencies {
     // retrofit
     implementation(Dependencies.retrofit)
     implementation(Dependencies.retrofit_converter_gson)
+
+    //web socket
+    implementation("com.squareup.okhttp3:okhttp:4.10.0")
 }
