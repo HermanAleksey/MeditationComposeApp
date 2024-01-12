@@ -9,4 +9,6 @@ sealed interface ChatScreenAction : MviAction {
     class OnTextInputChanged(
         val text: String,
     ) : ChatScreenAction
+
+    object OnTryReconnectButtonClicked : ChatScreenAction
 }
