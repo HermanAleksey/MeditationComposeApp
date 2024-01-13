@@ -5,10 +5,13 @@ plugins {
     id("com.google.devtools.ksp") version LibVersions.ksp_version
 }
 
-@Suppress("UnstableApiUsage")
 android {
-    namespace = "com.justparokq.feature.media_player"
+    namespace = "com.justparokq.feature.chat"
     compileSdk = Config.COMPILE_SDK
+
+    defaultConfig {
+        minSdk = Config.MIN_SDK
+    }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -17,9 +20,12 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_11.toString()
     }
+
+    @Suppress("UnstableApiUsage")
     buildFeatures {
         compose = true
     }
+    @Suppress("UnstableApiUsage")
     composeOptions {
         kotlinCompilerExtensionVersion = LibVersions.compose_compiler_version
     }

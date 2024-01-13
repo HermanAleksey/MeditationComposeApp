@@ -7,7 +7,7 @@ plugins {
 
 @Suppress("UnstableApiUsage")
 android {
-    namespace = "com.justparokq.feature.media_player"
+    namespace = "com.justparokq.feature.charts"
     compileSdk = Config.COMPILE_SDK
 
     compileOptions {
