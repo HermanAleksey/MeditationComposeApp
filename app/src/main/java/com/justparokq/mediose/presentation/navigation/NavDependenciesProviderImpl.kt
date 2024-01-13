@@ -13,7 +13,21 @@ import com.justparokq.feature.beer_sorts.api.beer_list.BeerListNavDependencies
 import com.justparokq.feature.internet_connection.NoInternetConnectionNavDependencies
 import com.justparokq.feature.main.api.MainScreenNavDependencies
 import com.justparokq.feature.splash_screen.api.SplashScreenNavDependencies
-import com.justparokq.mediose.presentation.screens.destinations.*
+import com.justparokq.mediose.presentation.screens.destinations.ChartsDemoScreenDestination
+import com.justparokq.mediose.presentation.screens.destinations.ChatScreenDestination
+import com.justparokq.mediose.presentation.screens.destinations.DetailedBeerScreenDestination
+import com.justparokq.mediose.presentation.screens.destinations.EnterCodeScreenDestination
+import com.justparokq.mediose.presentation.screens.destinations.EnterLoginScreenDestination
+import com.justparokq.mediose.presentation.screens.destinations.EnterScreenDestination
+import com.justparokq.mediose.presentation.screens.destinations.FeatureToggleScreenDestination
+import com.justparokq.mediose.presentation.screens.destinations.LoginScreenDestination
+import com.justparokq.mediose.presentation.screens.destinations.MainScreenDestination
+import com.justparokq.mediose.presentation.screens.destinations.MusicScreenDestination
+import com.justparokq.mediose.presentation.screens.destinations.NewPasswordScreenDestination
+import com.justparokq.mediose.presentation.screens.destinations.NoInternetConnectionScreenDestination
+import com.justparokq.mediose.presentation.screens.destinations.RegistrationScreenDestination
+import com.justparokq.mediose.presentation.screens.destinations.ShufflePuzzleScreenDestination
+import com.justparokq.mediose.presentation.screens.destinations.UpdatesHistoryScreenDestination
 import com.justparokq.mediose.presentation.ui_controls.toolbar.ToolbarNavDependencies
 import com.ramcosta.composedestinations.navigation.navigate
 import com.ramcosta.composedestinations.navigation.popUpTo
@@ -47,6 +61,9 @@ class NavDependenciesProviderImpl(
                     },
                     navigateToChartsDemoScreen = {
                         navController.navigate(ChartsDemoScreenDestination())
+                    },
+                    navigateToChatScreen = {
+                        navController.navigate(ChatScreenDestination())
                     }
                 )
             }

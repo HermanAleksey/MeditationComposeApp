@@ -1,5 +1,6 @@
 package com.justparokq.feature.chat.internal.data.web_socket
 
+import com.justparokq.feature.chat.api.di.Chat
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.WebSocket
@@ -11,7 +12,7 @@ private const val NORMAL_WS_CLOSURE_TEXT = "Canceled manually."
 private const val WEB_SOCKET_URL = "ws://0.0.0.0:8580/chartData"
 
 class WebSocketInteractor @Inject constructor(
-    private val okHttpClient: OkHttpClient,
+    @Chat private val okHttpClient: OkHttpClient,
 ) {
 
     fun createWebSocket(

@@ -2,6 +2,7 @@ package com.justparokq.mediose.presentation.navigation
 
 import androidx.navigation.NavDestination
 import com.justparokq.mediose.presentation.screens.destinations.BeerListScreenDestination
+import com.justparokq.mediose.presentation.screens.destinations.ChatScreenDestination
 import com.justparokq.mediose.presentation.screens.destinations.DetailedBeerScreenDestination
 import com.justparokq.mediose.presentation.screens.destinations.EnterCodeScreenDestination
 import com.justparokq.mediose.presentation.screens.destinations.EnterLoginScreenDestination
@@ -38,6 +39,7 @@ enum class DestinationWrapper(
     UpdateHistoryScreen(UpdatesHistoryScreenDestination, true, false),
     MusicScreen(MusicScreenDestination, true, false),
     FeatureToggleScreen(FeatureToggleScreenDestination, false, false),
+    ChatScreen(ChatScreenDestination, false, false),
 }
 
 fun NavDestination.getDestinationWrapper() =

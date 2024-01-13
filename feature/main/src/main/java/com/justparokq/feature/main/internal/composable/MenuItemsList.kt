@@ -2,7 +2,7 @@ package com.justparokq.feature.main.internal.composable
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AcUnit
-import androidx.compose.material.icons.filled.CameraAlt
+import androidx.compose.material.icons.filled.Chat
 import androidx.compose.material.icons.filled.Extension
 import androidx.compose.material.icons.filled.MusicNote
 import androidx.compose.material.icons.filled.PieChart
@@ -11,7 +11,7 @@ import com.justparokq.core.common.utils.UiText
 import com.justparokq.feature.main.R
 
 enum class MenuItem {
-    PUZZLE, MUSIC, CHARTS_DEMO
+    PUZZLE, MUSIC, CHARTS_DEMO, CHAT
 }
 
 internal fun getMenuItemsList(onMenuItemClick: (MenuItem) -> Unit) = listOf(
@@ -37,10 +37,11 @@ internal fun getMenuItemsList(onMenuItemClick: (MenuItem) -> Unit) = listOf(
         onClick = { onMenuItemClick(MenuItem.CHARTS_DEMO) },
     ),
     MenuItemModel(
-        title = UiText.StringResource(R.string.menu_item_coming_soon),
-        icon = Icons.Default.CameraAlt,
+        title = UiText.StringResource(R.string.chat_menu_option),
+        icon = Icons.Default.Chat,
         backgroundColor = Color(106, 174, 114),
-        foregroundColor = Color(62, 132, 105)
+        foregroundColor = Color(62, 132, 105),
+        onClick = { onMenuItemClick(MenuItem.CHAT) },
     ),
     MenuItemModel(
         title = UiText.StringResource(R.string.menu_item_coming_soon),

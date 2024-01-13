@@ -8,6 +8,7 @@ class MainScreenNavDependencies(
     val navigateToMusicScreen: () -> Unit,
     val navigateToFeatureToggleScreen: () -> Unit,
     val navigateToChartsDemoScreen: () -> Unit,
+    val navigateToChatScreen: () -> Unit,
 ) : NavDependencies
 
 sealed class MainScreenNavRoute : NavRoute<MainScreenNavDependencies>() {
@@ -34,6 +35,12 @@ sealed class MainScreenNavRoute : NavRoute<MainScreenNavDependencies>() {
     class ChartsDemoScreen : MainScreenNavRoute() {
         override fun navigate(navDependencies: MainScreenNavDependencies) {
             navDependencies.navigateToChartsDemoScreen()
+        }
+    }
+
+    class ChatScreen : MainScreenNavRoute() {
+        override fun navigate(navDependencies: MainScreenNavDependencies) {
+            navDependencies.navigateToChatScreen()
         }
     }
 }

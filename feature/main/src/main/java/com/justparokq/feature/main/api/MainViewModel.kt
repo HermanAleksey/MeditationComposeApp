@@ -53,14 +53,22 @@ class MainScreenViewModel @Inject constructor(
                         MainScreenNavRoute.PuzzleScreen()
                     )
                 }
+
                 MenuItem.MUSIC -> {
                     _navigationEvent.emit(
                         MainScreenNavRoute.MusicScreen()
                     )
                 }
+
                 MenuItem.CHARTS_DEMO -> {
                     _navigationEvent.emit(
                         MainScreenNavRoute.ChartsDemoScreen()
+                    )
+                }
+
+                MenuItem.CHAT -> {
+                    _navigationEvent.emit(
+                        MainScreenNavRoute.ChatScreen()
                     )
                 }
             }

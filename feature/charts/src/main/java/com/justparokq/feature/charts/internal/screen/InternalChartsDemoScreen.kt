@@ -21,10 +21,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.justparokq.core.design_system.common_composables.ColorBackground
+import com.justparokq.feature.charts.R
 import com.justparokq.feature.charts.internal.screen.composable.BarChartPanel
 import com.justparokq.feature.charts.internal.screen.composable.LineChartPanel
 import com.justparokq.feature.charts.internal.screen.composable.PieChartPanel
-import com.justparokq.feature.media_player.R
 
 @Composable
 internal fun InternalChartsDemoScreen(
