@@ -1,7 +1,7 @@
 package com.justparokq.mediose.presentation.screens.main_flow.chat
 
 import androidx.compose.runtime.Composable
-import com.justparokq.feature.chat.api.ChatScreenViewModel
+import com.justparokq.feature.chat.api.presentation.ChatScreenViewModel
 import com.ramcosta.composedestinations.annotation.Destination
 
 @Destination
@@ -9,7 +9,7 @@ import com.ramcosta.composedestinations.annotation.Destination
 fun ChatScreen(
     viewModel: ChatScreenViewModel,
 ) {
-    com.justparokq.feature.chat.api.ChatScreen(
+    com.justparokq.feature.chat.api.presentation.ChatScreen(
         viewModel = viewModel,
     )
 }

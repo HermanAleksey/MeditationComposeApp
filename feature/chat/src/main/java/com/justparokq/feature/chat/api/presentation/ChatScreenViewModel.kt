@@ -1,14 +1,16 @@
-package com.justparokq.feature.chat.api
+package com.justparokq.feature.chat.api.presentation
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.justparokq.core.common.mvi.MviViewModel
-import com.justparokq.feature.chat.internal.data.web_socket.ChatWebSocketListener
-import com.justparokq.feature.chat.internal.data.web_socket.WebSocketConnectionStatus
-import com.justparokq.feature.chat.internal.data.web_socket.WebSocketInteractor
+import com.justparokq.feature.chat.api.data.web_socket.ChatWebSocketListener
+import com.justparokq.feature.chat.api.data.web_socket.WebSocketConnectionStatus
+import com.justparokq.feature.chat.api.data.web_socket.WebSocketInteractor
 import com.justparokq.feature.chat.internal.presentation.model.CurrentUserMessageUIModel
 import com.justparokq.feature.chat.internal.presentation.model.OtherUserMessageUIModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -47,6 +49,13 @@ class ChatScreenViewModel @Inject constructor(
     private fun connectAndObserveWebSocket() {
         viewModelScope.launch {
             wsInteractor.createWebSocket(chatWSListener)
+            observeWebSocketConnection()
+            observeWebSocketMessages()
+        }
+    }
+
+    private fun observeWebSocketConnection() {
+        viewModelScope.launch(Dispatchers.Default) {
             chatWSListener.isWebSocketConnected.collectLatest { status ->
                 when (status) {
                     WebSocketConnectionStatus.Connected -> {
@@ -83,8 +92,15 @@ class ChatScreenViewModel @Inject constructor(
                     }
                 }
             }
+        }
+    }
+
+    private fun observeWebSocketMessages() {
+        viewModelScope.launch(Dispatchers.Default) {
             chatWSListener.messagesFlow
                 .map { message -> //todo move mappeing to smwhere else
+                    if (message.isEmpty()) return@map null
+                    Log.e("TAGG", "connectAndObserveWebSocket map: $message")
                     val firstCharEven = (message.first().digitToInt()) % 2 == 0
                     if (firstCharEven)
                         OtherUserMessageUIModel(
@@ -101,6 +117,9 @@ class ChatScreenViewModel @Inject constructor(
                 }
                 .collectLatest { message ->
                     // todo each time recreate uiState? really? refactor it after testing
+                    Log.e("TAGG", "connectAndObserveWebSocket: ")
+                    if (message == null) return@collectLatest
+
                     (_uiState.value as? ChatScreenState.Success)?.let { currentState ->
                         _uiState.update {
                             currentState.copy(
@@ -109,26 +128,6 @@ class ChatScreenViewModel @Inject constructor(
                         }
                     }
                 }
-
-
-            // todo test initial data . remove
-            _uiState.update {
-                ChatScreenState.Success(
-                    inputMessage = "",
-                    messagesList = listOf(
-                        OtherUserMessageUIModel(
-                            text = "Hello",
-                            time = "13:00",
-                            userName = "P"
-                        ),
-                        CurrentUserMessageUIModel(
-                            text = "HI!",
-                            time = "13:01",
-                            isSent = true
-                        )
-                    )
-                )
-            }
         }
     }
 

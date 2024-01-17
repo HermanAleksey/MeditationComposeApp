@@ -1,4 +1,4 @@
-package com.justparokq.feature.chat.api
+package com.justparokq.feature.chat.api.presentation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState

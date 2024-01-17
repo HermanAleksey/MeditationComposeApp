@@ -1,4 +1,4 @@
-package com.justparokq.feature.chat.internal.data.web_socket
+package com.justparokq.feature.chat.api.data.web_socket
 
 import okhttp3.Response
 

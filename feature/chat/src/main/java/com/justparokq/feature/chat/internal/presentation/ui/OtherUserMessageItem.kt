@@ -60,21 +60,7 @@ private fun OtherUserMessageItem(message: OtherUserMessageUIModel) {
                 .wrapContentWidth()
                 .padding(end = 72.dp)
         ) {
-            Row(
-                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
-            ) {
-
-                Column(horizontalAlignment = Alignment.End) {
-                    Text(
-                        text = message.text,
-                        style = MaterialTheme.typography.body1,
-                    )
-                    Text(
-                        text = message.time,
-                        style = MaterialTheme.typography.caption,
-                    )
-                }
-            }
+            MessageTextAndTime(message)
         }
     }
 }
@@ -96,21 +82,29 @@ private fun CurrentUserMessageItem(message: CurrentUserMessageUIModel) {
             modifier = Modifier
                 .wrapContentWidth()
         ) {
-            Row(
-                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
-            ) {
+            MessageTextAndTime(message)
+        }
+    }
+}
 
-                Column(horizontalAlignment = Alignment.End) {
-                    Text(
-                        text = message.text,
-                        style = MaterialTheme.typography.body1,
-                    )
-                    Text(
-                        text = message.time,
-                        style = MaterialTheme.typography.caption,
-                    )
-                }
-            }
+@Composable
+private fun MessageTextAndTime(message: MessageUiModel) {
+    Row(
+        modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+    ) {
+        Column(horizontalAlignment = Alignment.End) {
+            Text(
+                text = message.text,
+                style = MaterialTheme.typography.body1.copy(
+                    color = Color.Black
+                ),
+            )
+            Text(
+                text = message.time,
+                style = MaterialTheme.typography.caption.copy(
+                    color = Color.Black
+                ),
+            )
         }
     }
 }

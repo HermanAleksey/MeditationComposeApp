@@ -12,7 +12,7 @@ import com.justparokq.feature.authentication.api.registration_screen.Registratio
 import com.justparokq.feature.beer_sorts.api.beer_list.BeerListScreenViewModel
 import com.justparokq.feature.beer_sorts.api.detailed_beer.DetailedBeerScreenViewModel
 import com.justparokq.feature.charts.internal.screen.ChartsScreenViewModel
-import com.justparokq.feature.chat.api.ChatScreenViewModel
+import com.justparokq.feature.chat.api.presentation.ChatScreenViewModel
 import com.justparokq.feature.feature_toggle.api.FeatureToggleScreenViewModel
 import com.justparokq.feature.internet_connection.NoInternetConnectionViewModel
 import com.justparokq.feature.main.api.MainScreenViewModel

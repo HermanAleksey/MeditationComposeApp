@@ -1,4 +1,4 @@
-package com.justparokq.feature.chat.api
+package com.justparokq.feature.chat.api.presentation
 
 import com.justparokq.core.common.mvi.MviState
 import com.justparokq.feature.chat.internal.presentation.model.MessageUiModel

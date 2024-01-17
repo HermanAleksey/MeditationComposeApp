@@ -1,4 +1,4 @@
-package com.justparokq.feature.chat.internal.data.web_socket
+package com.justparokq.feature.chat.api.data.web_socket
 
 import android.util.Log
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -30,7 +30,7 @@ class ChatWebSocketListener @Inject constructor() : WebSocketListener() {
 
     override fun onMessage(webSocket: WebSocket, text: String) {
         super.onMessage(webSocket, text)
-        _messagesFlow.update { text }
+        _messagesFlow.tryEmit(text)
         Log.d(TAG, "onMessage: $text")
     }
 

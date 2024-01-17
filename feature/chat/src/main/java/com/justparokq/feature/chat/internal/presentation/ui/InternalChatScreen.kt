@@ -17,13 +17,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.justparokq.core.design_system.common_composables.DefaultAppBackground
-import com.justparokq.feature.chat.api.ChatScreenAction
-import com.justparokq.feature.chat.api.ChatScreenState
+import com.justparokq.feature.chat.api.presentation.ChatScreenAction
+import com.justparokq.feature.chat.api.presentation.ChatScreenState
 import com.justparokq.feature.chat.internal.presentation.model.CurrentUserMessageUIModel
 import com.justparokq.feature.chat.internal.presentation.model.OtherUserMessageUIModel
 
 @Composable
-fun InternalChatScreen(
+internal fun InternalChatScreen(
     uiState: ChatScreenState,
     processAction: (ChatScreenAction) -> Unit,
 ) {
@@ -80,7 +80,10 @@ private fun ErrorChatScreen(
 ) {
     Column {
         Text(text = "Error text: ${uiState.errorText}")
-        Button(onClick = { processAction(ChatScreenAction.OnTryReconnectButtonClicked) }) {
+        Button(onClick = {
+            processAction(ChatScreenAction.OnTryReconnectButtonClicked)
+        }
+        ) {
             Text(text = "Retry")
         }
     }

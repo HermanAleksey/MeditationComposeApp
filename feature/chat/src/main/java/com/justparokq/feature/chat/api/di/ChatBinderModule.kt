@@ -1,6 +1,6 @@
 package com.justparokq.feature.chat.api.di
 
-import com.justparokq.feature.chat.internal.data.web_socket.ChatWebSocketListener
+import com.justparokq.feature.chat.api.data.web_socket.ChatWebSocketListener
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -15,5 +15,4 @@ abstract class ChatBinderModule {
     abstract fun provideWebSocketListener(
         implementation: ChatWebSocketListener,
     ): WebSocketListener
-
 }
