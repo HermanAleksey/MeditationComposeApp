@@ -74,10 +74,6 @@ private fun CurrentUserMessageItem(message: CurrentUserMessageUIModel) {
         horizontalArrangement = Arrangement.End,
         verticalAlignment = Alignment.Bottom
     ) {
-
-        //todo replace with image
-        Text(text = if (message.isSent) "S" else "L", color = Color.Blue)
-
         Card(
             modifier = Modifier
                 .wrapContentWidth()
