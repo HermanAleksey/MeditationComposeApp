@@ -1,9 +1,14 @@
 package com.justparokq.feature.chat.api.data.web_socket
 
 import android.util.Log
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import okhttp3.Response
 import okhttp3.WebSocket
 import okhttp3.WebSocketListener
@@ -12,13 +17,15 @@ import javax.inject.Inject
 class ChatWebSocketListener @Inject constructor() : WebSocketListener() {
 
     private val TAG = "TAGG"
+    private val coroutineScope = CoroutineScope(Dispatchers.Default)
 
     private val _isWebSocketConnected: MutableStateFlow<WebSocketConnectionStatus> =
         MutableStateFlow(WebSocketConnectionStatus.Idle)
     val isWebSocketConnected = _isWebSocketConnected.asStateFlow()
 
-    private val _messagesFlow = MutableStateFlow("")
-    val messagesFlow = _messagesFlow.asStateFlow()
+    private val _messagesFlow = MutableSharedFlow<String>()
+    val messagesFlow = _messagesFlow.asSharedFlow()
+
 
     override fun onOpen(webSocket: WebSocket, response: Response) {
         super.onOpen(webSocket, response)
@@ -30,8 +37,10 @@ class ChatWebSocketListener @Inject constructor() : WebSocketListener() {
 
     override fun onMessage(webSocket: WebSocket, text: String) {
         super.onMessage(webSocket, text)
-        _messagesFlow.tryEmit(text)
         Log.d(TAG, "onMessage: $text")
+        coroutineScope.launch {
+            _messagesFlow.emit(text)
+        }
     }
 
     override fun onClosing(webSocket: WebSocket, code: Int, reason: String) {

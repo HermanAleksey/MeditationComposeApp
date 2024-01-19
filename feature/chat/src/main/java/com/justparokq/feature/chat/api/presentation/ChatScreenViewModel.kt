@@ -1,13 +1,17 @@
 package com.justparokq.feature.chat.api.presentation
 
+import android.annotation.SuppressLint
+import android.icu.text.SimpleDateFormat
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.justparokq.core.common.mvi.MviViewModel
+import com.justparokq.core.common.utils.emptyString
+import com.justparokq.feature.chat.api.data.mapper.ChatWSDataParser
 import com.justparokq.feature.chat.api.data.web_socket.ChatWebSocketListener
 import com.justparokq.feature.chat.api.data.web_socket.WebSocketConnectionStatus
 import com.justparokq.feature.chat.api.data.web_socket.WebSocketInteractor
-import com.justparokq.feature.chat.internal.presentation.model.CurrentUserMessageUIModel
+import com.justparokq.feature.chat.api.model.ChatWSData
 import com.justparokq.feature.chat.internal.presentation.model.OtherUserMessageUIModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -19,15 +23,17 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import okhttp3.WebSocket
+import java.util.Date
 import javax.inject.Inject
 
 @HiltViewModel
 class ChatScreenViewModel @Inject constructor(
     private val chatWSListener: ChatWebSocketListener,
     private val wsInteractor: WebSocketInteractor,
+    private val wsDataParser: ChatWSDataParser,
 ) : MviViewModel<ChatScreenState, ChatScreenAction>, ViewModel() {
 
-    private val webSocket: WebSocket? = null
+    private var webSocket: WebSocket? = null
 
     private val _uiState = MutableStateFlow<ChatScreenState>(ChatScreenState.Loading)
 
@@ -48,7 +54,7 @@ class ChatScreenViewModel @Inject constructor(
 
     private fun connectAndObserveWebSocket() {
         viewModelScope.launch {
-            wsInteractor.createWebSocket(chatWSListener)
+            webSocket = wsInteractor.createWebSocket(chatWSListener)
             observeWebSocketConnection()
             observeWebSocketMessages()
         }
@@ -61,7 +67,7 @@ class ChatScreenViewModel @Inject constructor(
                     WebSocketConnectionStatus.Connected -> {
                         _uiState.update {
                             ChatScreenState.Success(
-                                inputMessage = "",
+                                inputMessage = emptyString(),
                                 messagesList = listOf()
                             )
                         }
@@ -98,32 +104,33 @@ class ChatScreenViewModel @Inject constructor(
     private fun observeWebSocketMessages() {
         viewModelScope.launch(Dispatchers.Default) {
             chatWSListener.messagesFlow
-                .map { message -> //todo move mappeing to smwhere else
+                .map { message ->
                     if (message.isEmpty()) return@map null
-                    Log.e("TAGG", "connectAndObserveWebSocket map: $message")
-                    val firstCharEven = (message.first().digitToInt()) % 2 == 0
-                    if (firstCharEven)
-                        OtherUserMessageUIModel(
-                            text = message,
-                            time = "13:00",
-                            userName = "O"
-                        )
-                    else
-                        CurrentUserMessageUIModel(
-                            text = message,
-                            time = "13:01",
-                            isSent = true
-                        )
+
+                    try {
+                        val wsData = wsDataParser.mapFrom(message)
+
+                        //todo move
+                        when (wsData) {
+                            is ChatWSData.Message -> OtherUserMessageUIModel(
+                                text = wsData.text,
+                                time = wsData.time,
+                                userName = wsData.userName
+                            )
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                        null
+                    }
                 }
-                .collectLatest { message ->
+                .collectLatest { uiMessage ->
                     // todo each time recreate uiState? really? refactor it after testing
-                    Log.e("TAGG", "connectAndObserveWebSocket: ")
-                    if (message == null) return@collectLatest
+                    if (uiMessage == null) return@collectLatest
 
                     (_uiState.value as? ChatScreenState.Success)?.let { currentState ->
                         _uiState.update {
                             currentState.copy(
-                                messagesList = currentState.messagesList + message
+                                messagesList = currentState.messagesList + uiMessage
                             )
                         }
                     }
@@ -141,11 +148,25 @@ class ChatScreenViewModel @Inject constructor(
         }
     }
 
+    @SuppressLint("SimpleDateFormat")
     private fun sendMessage() {
         (_uiState.value as? ChatScreenState.Success)?.let { currentState ->
-            webSocket?.send(currentState.inputMessage)
-        }
+            val text = currentState.inputMessage
 
+            val sdf = SimpleDateFormat("HH:mm")
+            val date = Date()
+            val currentTime = sdf.format(date)
+
+            val message = ChatWSData.Message(
+                text = text,
+                userName = "O",
+                time = currentTime
+            )
+            val encodedMessage = wsDataParser.mapTo(message)
+            Log.e("TAGG", "sendMessage: $encodedMessage")
+            webSocket?.send(encodedMessage)
+            updateInputText(emptyString())
+        }
     }
 
     override fun onCleared() {

@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 private const val NORMAL_WS_CLOSURE_CODE = 1000
 private const val NORMAL_WS_CLOSURE_TEXT = "Canceled manually."
-private const val WEB_SOCKET_URL = "ws://192.168.100.22:8580/chartData"
+private const val WEB_SOCKET_URL = "ws://192.168.100.22:8580/chat"
 
 class WebSocketInteractor @Inject constructor(
     @Chat private val okHttpClient: OkHttpClient,
