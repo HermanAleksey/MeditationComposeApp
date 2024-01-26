@@ -142,7 +142,6 @@ fun MessageItemPreviewCurrentUser() {
             CurrentUserMessageUIModel(
                 text = "Message text",
                 time = "15:30",
-                isSent = false
             )
         )
     }
@@ -157,7 +156,6 @@ fun MessageItemPreviewCurrentUserSent() {
             CurrentUserMessageUIModel(
                 text = "Message text",
                 time = "15:30",
-                isSent = true
             )
         )
     }
@@ -172,7 +170,6 @@ fun MessageItemPreviewCurrentUserLongText() {
             CurrentUserMessageUIModel(
                 text = "Message text is very big. task (current target is 11) and 'kaptGenerateStubsDebugKotlin' task (current target is 1.8) jvm target compatibility should be set to the same Java version.",
                 time = "15:30",
-                isSent = false
             )
         )
     }

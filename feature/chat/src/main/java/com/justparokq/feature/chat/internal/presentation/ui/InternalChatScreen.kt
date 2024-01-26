@@ -105,9 +105,9 @@ fun ChatScreenPreview() {
                     CurrentUserMessageUIModel(
                         text = "HI!",
                         time = "13:01",
-                        isSent = true
                     )
-                )
+                ),
+                userName = ""
             ),
             processAction = {}
         )

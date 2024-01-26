@@ -18,5 +18,4 @@ data class OtherUserMessageUIModel(
 data class CurrentUserMessageUIModel(
     override val text: String,
     override val time: String,
-    val isSent: Boolean,
 ) : MessageUiModel

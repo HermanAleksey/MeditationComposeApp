@@ -13,8 +13,14 @@ enum class ChatWSDataType(
     val drivenClass: Class<out ChatWSDataDto>,
 ) {
 
+    @SerializedName("public_key")
+    PUBLIC_KEY("public_key", PublicKeyDataDto::class.java),
+
     @SerializedName("message")
-    MESSAGE("message", MessageDataDto::class.java);
+    MESSAGE("message", MessageDataDto::class.java),
+
+    @SerializedName("connected")
+    CONNECTED("connected", ConnectedDataDto::class.java);
 
     companion object {
 

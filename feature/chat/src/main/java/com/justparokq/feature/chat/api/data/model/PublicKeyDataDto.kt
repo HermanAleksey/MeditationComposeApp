@@ -3,17 +3,11 @@ package com.justparokq.feature.chat.api.data.model
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class MessageDataDto(
+data class PublicKeyDataDto(
     @Expose
     @SerializedName("dto_type")
     override val type: ChatWSDataType,
     @Expose
-    @SerializedName("text")
-    val text: String,
-    @Expose
-    @SerializedName("user_name")
-    val userName: String,
-    @Expose
-    @SerializedName("time")
-    val time: String,
+    @SerializedName("public_key")
+    val publicKey: String,
 ) : ChatWSDataDto(type)

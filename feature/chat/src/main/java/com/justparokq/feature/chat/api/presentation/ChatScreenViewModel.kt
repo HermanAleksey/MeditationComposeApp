@@ -6,13 +6,12 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.justparokq.core.common.mvi.MviViewModel
-import com.justparokq.core.common.utils.emptyString
-import com.justparokq.feature.chat.api.data.mapper.ChatWSDataParser
+import com.justparokq.feature.chat.api.data.mapper.ChatWSDataMapper
+import com.justparokq.feature.chat.api.data.mapper.MessageUiModelMapper
 import com.justparokq.feature.chat.api.data.web_socket.ChatWebSocketListener
 import com.justparokq.feature.chat.api.data.web_socket.WebSocketConnectionStatus
 import com.justparokq.feature.chat.api.data.web_socket.WebSocketInteractor
 import com.justparokq.feature.chat.api.model.ChatWSData
-import com.justparokq.feature.chat.internal.presentation.model.OtherUserMessageUIModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -30,12 +29,13 @@ import javax.inject.Inject
 class ChatScreenViewModel @Inject constructor(
     private val chatWSListener: ChatWebSocketListener,
     private val wsInteractor: WebSocketInteractor,
-    private val wsDataParser: ChatWSDataParser,
+    private val wsDataParser: ChatWSDataMapper,
+    private val messageUiModelMapper: MessageUiModelMapper,
 ) : MviViewModel<ChatScreenState, ChatScreenAction>, ViewModel() {
 
     private var webSocket: WebSocket? = null
-
     private val _uiState = MutableStateFlow<ChatScreenState>(ChatScreenState.Loading)
+    private var stateManager = StateManager(_uiState)
 
     override val uiState: StateFlow<ChatScreenState>
         get() = _uiState.asStateFlow()
@@ -46,7 +46,7 @@ class ChatScreenViewModel @Inject constructor(
 
     override fun processAction(action: ChatScreenAction) {
         when (action) {
-            is ChatScreenAction.OnTextInputChanged -> updateInputText(action.text)
+            is ChatScreenAction.OnTextInputChanged -> stateManager.updateInputText(action.text)
             ChatScreenAction.OnSendMessageClicked -> sendMessage()
             ChatScreenAction.OnTryReconnectButtonClicked -> connectAndObserveWebSocket()
         }
@@ -65,12 +65,7 @@ class ChatScreenViewModel @Inject constructor(
             chatWSListener.isWebSocketConnected.collectLatest { status ->
                 when (status) {
                     WebSocketConnectionStatus.Connected -> {
-                        _uiState.update {
-                            ChatScreenState.Success(
-                                inputMessage = emptyString(),
-                                messagesList = listOf()
-                            )
-                        }
+                        stateManager.setEmptySuccessState()
                     }
 
                     is WebSocketConnectionStatus.Disconnected -> {
@@ -108,42 +103,38 @@ class ChatScreenViewModel @Inject constructor(
                     if (message.isEmpty()) return@map null
 
                     try {
-                        val wsData = wsDataParser.mapFrom(message)
-
-                        //todo move
-                        when (wsData) {
-                            is ChatWSData.Message -> OtherUserMessageUIModel(
-                                text = wsData.text,
-                                time = wsData.time,
-                                userName = wsData.userName
-                            )
-                        }
+                        wsDataParser.mapFrom(message)
                     } catch (e: Exception) {
                         e.printStackTrace()
                         null
                     }
                 }
-                .collectLatest { uiMessage ->
-                    // todo each time recreate uiState? really? refactor it after testing
-                    if (uiMessage == null) return@collectLatest
+                .collectLatest { chatWsData ->
+                    Log.e("TAGG", "observeWebSocketMessages: uiMessage")
+                    chatWsData ?: return@collectLatest
 
-                    (_uiState.value as? ChatScreenState.Success)?.let { currentState ->
-                        _uiState.update {
-                            currentState.copy(
-                                messagesList = currentState.messagesList + uiMessage
-                            )
-                        }
-                    }
+                    processWSChatData(chatWsData)
                 }
         }
     }
 
-    private fun updateInputText(text: String) {
-        (_uiState.value as? ChatScreenState.Success)?.let { previousState ->
-            _uiState.update {
-                previousState.copy(
-                    inputMessage = text
+    private fun processWSChatData(chatWsData: ChatWSData) {
+        when (chatWsData) {
+            is ChatWSData.Message -> {
+                val currentUserName = stateManager.getCurrentUserName() ?: return
+                val uiMessage = messageUiModelMapper.mapFrom(
+                    message = chatWsData,
+                    currentUserName = currentUserName
                 )
+                stateManager.addMessageToChat(uiMessage)
+            }
+
+            is ChatWSData.Connected -> {
+                stateManager.updateUserName(chatWsData.userName)
+            }
+
+            is ChatWSData.PublicKey -> {
+                stateManager.updateServerPublicKey(chatWsData.publicKey)
             }
         }
     }
@@ -152,20 +143,17 @@ class ChatScreenViewModel @Inject constructor(
     private fun sendMessage() {
         (_uiState.value as? ChatScreenState.Success)?.let { currentState ->
             val text = currentState.inputMessage
-
-            val sdf = SimpleDateFormat("HH:mm")
-            val date = Date()
-            val currentTime = sdf.format(date)
+            val currentTime = SimpleDateFormat("HH:mm").format(Date())
 
             val message = ChatWSData.Message(
                 text = text,
-                userName = "O",
+                userName = currentState.userName,
                 time = currentTime
             )
             val encodedMessage = wsDataParser.mapTo(message)
             Log.e("TAGG", "sendMessage: $encodedMessage")
             webSocket?.send(encodedMessage)
-            updateInputText(emptyString())
+            stateManager.clearInputText()
         }
     }
 
