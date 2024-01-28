@@ -3,7 +3,7 @@ package com.justparokq.feature.chat.api.model
 sealed interface ChatWSData {
 
     data class PublicKey(
-        val publicKey: String,
+        val publicKey: java.security.PublicKey,
     ) : ChatWSData
 
     data class Message(
@@ -15,6 +15,4 @@ sealed interface ChatWSData {
     data class Connected(
         val userName: String,
     ) : ChatWSData
-
-
 }

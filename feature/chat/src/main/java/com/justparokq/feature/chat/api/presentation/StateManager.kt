@@ -4,6 +4,8 @@ import com.justparokq.core.common.utils.emptyString
 import com.justparokq.feature.chat.internal.presentation.model.MessageUiModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
+import java.security.PrivateKey
+import java.security.PublicKey
 
 class StateManager(
     private val uiState: MutableStateFlow<ChatScreenState>,
@@ -33,7 +35,7 @@ class StateManager(
         return (uiState.value as? ChatScreenState.Success)?.userName
     }
 
-    fun updateServerPublicKey(publicKey: String) {
+    fun updateServerPublicKey(publicKey: PublicKey) {
         (uiState.value as? ChatScreenState.Success)?.let { previousState ->
             uiState.update {
                 previousState.copy(
@@ -41,6 +43,10 @@ class StateManager(
                 )
             }
         }
+    }
+
+    fun getInputText(): String? {
+        return (uiState.value as? ChatScreenState.Success)?.inputMessage
     }
 
     fun updateInputText(text: String) {
@@ -69,8 +75,33 @@ class StateManager(
                 inputMessage = emptyString(),
                 messagesList = listOf(),
                 userName = emptyString(),
-                serverPublicKey = emptyString()
+                serverPublicKey = null,
+                clientPublicKey = null,
+                clientPrivateKey = null,
             )
         }
+    }
+
+    fun updateKeys(publicKey: PublicKey, privateKey: PrivateKey) {
+        (uiState.value as? ChatScreenState.Success)?.let { previousState ->
+            uiState.update {
+                previousState.copy(
+                    clientPublicKey = publicKey,
+                    clientPrivateKey = privateKey,
+                )
+            }
+        }
+    }
+
+    fun getClientPublicKey(): PublicKey? {
+        return (uiState.value as? ChatScreenState.Success)?.clientPublicKey
+    }
+
+    fun getServerPublicKey(): PublicKey? {
+        return (uiState.value as? ChatScreenState.Success)?.serverPublicKey
+    }
+
+    fun getClientPrivateKey(): PrivateKey? {
+        return (uiState.value as? ChatScreenState.Success)?.clientPrivateKey
     }
 }

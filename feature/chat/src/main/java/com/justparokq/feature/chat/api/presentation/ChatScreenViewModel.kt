@@ -6,8 +6,13 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.justparokq.core.common.mvi.MviViewModel
-import com.justparokq.feature.chat.api.data.mapper.ChatWSDataMapper
+import com.justparokq.feature.chat.api.data.mapper.ChatWsDataDtoMapper
+import com.justparokq.feature.chat.api.data.mapper.ChatWsDataDtoMapperFactory
+import com.justparokq.feature.chat.api.data.mapper.JsonChatWSDtoMapper
+import com.justparokq.feature.chat.api.data.mapper.MessageEncrypt
 import com.justparokq.feature.chat.api.data.mapper.MessageUiModelMapper
+import com.justparokq.feature.chat.api.data.mapper.PublicKeyStringEncrypt
+import com.justparokq.feature.chat.api.data.provider.KeyPairFactory
 import com.justparokq.feature.chat.api.data.web_socket.ChatWebSocketListener
 import com.justparokq.feature.chat.api.data.web_socket.WebSocketConnectionStatus
 import com.justparokq.feature.chat.api.data.web_socket.WebSocketInteractor
@@ -29,10 +34,15 @@ import javax.inject.Inject
 class ChatScreenViewModel @Inject constructor(
     private val chatWSListener: ChatWebSocketListener,
     private val wsInteractor: WebSocketInteractor,
-    private val wsDataParser: ChatWSDataMapper,
+    private val chatWsDataDtoMapperFactory: ChatWsDataDtoMapperFactory,
+    private val jsonChatWSDtoMapper: JsonChatWSDtoMapper,
+    private val keyPairFactory: KeyPairFactory,
     private val messageUiModelMapper: MessageUiModelMapper,
+    private val publicKeyStringEncrypt: PublicKeyStringEncrypt,
+    private val messageEncrypt: MessageEncrypt,
 ) : MviViewModel<ChatScreenState, ChatScreenAction>, ViewModel() {
 
+    private lateinit var chatWsDataDtoMapper: ChatWsDataDtoMapper
     private var webSocket: WebSocket? = null
     private val _uiState = MutableStateFlow<ChatScreenState>(ChatScreenState.Loading)
     private var stateManager = StateManager(_uiState)
@@ -41,13 +51,34 @@ class ChatScreenViewModel @Inject constructor(
         get() = _uiState.asStateFlow()
 
     init {
+        createAndSetClientKeyPair()
         connectAndObserveWebSocket()
     }
 
+    private fun createAndSetClientKeyPair() {
+        val (publicKey, privateKey) = keyPairFactory.generateKeyPair()
+        stateManager.updateKeys(publicKey, privateKey)
+    }
+
+
+    @SuppressLint("SimpleDateFormat")
     override fun processAction(action: ChatScreenAction) {
         when (action) {
             is ChatScreenAction.OnTextInputChanged -> stateManager.updateInputText(action.text)
-            ChatScreenAction.OnSendMessageClicked -> sendMessage()
+            ChatScreenAction.OnSendMessageClicked -> {
+                val inputTextMessage = stateManager.getInputText() ?: return
+                val userName = stateManager.getCurrentUserName() ?: return
+
+                val currentTime = SimpleDateFormat("HH:mm").format(Date())
+                val wsData = ChatWSData.Message(
+                    text = inputTextMessage,
+                    userName = userName,
+                    time = currentTime,
+                )
+                sendWSMessage(wsData)
+                stateManager.clearInputText()
+            }
+
             ChatScreenAction.OnTryReconnectButtonClicked -> connectAndObserveWebSocket()
         }
     }
@@ -65,6 +96,29 @@ class ChatScreenViewModel @Inject constructor(
             chatWSListener.isWebSocketConnected.collectLatest { status ->
                 when (status) {
                     WebSocketConnectionStatus.Connected -> {
+                        val publicClientKey = stateManager.getClientPublicKey()
+                        val privateClientKey = stateManager.getClientPrivateKey()
+                        val publicServerKeyString = stateManager.getServerPublicKey()
+                        if (
+                            privateClientKey == null
+                            || publicServerKeyString == null
+                            || publicClientKey == null
+                        ) return@collectLatest
+
+                        val publicServerKey = publicKeyStringEncrypt.decryptPublicKey(
+                            publicServerKeyString
+                        )
+
+                        chatWsDataDtoMapper = chatWsDataDtoMapperFactory.create(
+                            privateClientKey = privateClientKey,
+                            publicServerKey = publicServerKey,
+                        )
+                        //todo может быть проблема. Мы коннектимся и тут мы ещё не может надеясться на пбличный ключ сервера. Переделаь
+                        val clientPublicKeyWSData = ChatWSData.PublicKey(publicClientKey)
+                        val dto = chatWsDataDtoMapper.mapFrom(clientPublicKeyWSData)
+                        val message = jsonChatWSDtoMapper.mapFrom(dto)
+                        webSocket?.send(message)
+
                         stateManager.setEmptySuccessState()
                     }
 
@@ -103,7 +157,9 @@ class ChatScreenViewModel @Inject constructor(
                     if (message.isEmpty()) return@map null
 
                     try {
-                        wsDataParser.mapFrom(message)
+                        val dto = jsonChatWSDtoMapper.mapTo(message)
+                        val wsData = chatWsDataDtoMapper.mapTo(dto)
+                        wsData
                     } catch (e: Exception) {
                         e.printStackTrace()
                         null
@@ -140,20 +196,11 @@ class ChatScreenViewModel @Inject constructor(
     }
 
     @SuppressLint("SimpleDateFormat")
-    private fun sendMessage() {
-        (_uiState.value as? ChatScreenState.Success)?.let { currentState ->
-            val text = currentState.inputMessage
-            val currentTime = SimpleDateFormat("HH:mm").format(Date())
-
-            val message = ChatWSData.Message(
-                text = text,
-                userName = currentState.userName,
-                time = currentTime
-            )
-            val encodedMessage = wsDataParser.mapTo(message)
-            Log.e("TAGG", "sendMessage: $encodedMessage")
-            webSocket?.send(encodedMessage)
-            stateManager.clearInputText()
+    private fun sendWSMessage(wsData: ChatWSData) {
+        webSocket?.let { webSocket ->
+            val dto = chatWsDataDtoMapper.mapFrom(wsData)
+            val message = jsonChatWSDtoMapper.mapFrom(dto)
+            webSocket.send(message)
         }
     }
 

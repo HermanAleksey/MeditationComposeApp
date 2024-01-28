@@ -21,4 +21,8 @@ class MessageUiModelMapper @Inject constructor() {
                 userName = message.userName
             )
     }
+
+    fun mapTo(uiModel: MessageUiModel): ChatWSData {
+
+    }
 }

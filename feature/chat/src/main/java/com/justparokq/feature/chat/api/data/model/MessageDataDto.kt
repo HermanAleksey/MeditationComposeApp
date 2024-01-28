@@ -9,7 +9,7 @@ data class MessageDataDto(
     override val type: ChatWSDataType,
     @Expose
     @SerializedName("text")
-    val text: String,
+    val text: List<ByteArray>,
     @Expose
     @SerializedName("user_name")
     val userName: String,
