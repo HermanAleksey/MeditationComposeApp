@@ -10,4 +10,7 @@ data class PublicKeyDataDto(
     @Expose
     @SerializedName("public_key")
     val publicKey: String,
+    @Expose
+    @SerializedName("user_name")
+    val userName: String,
 ) : ChatWSDataDto(type)

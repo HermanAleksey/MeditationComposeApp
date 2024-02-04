@@ -8,7 +8,7 @@ import com.justparokq.feature.chat.api.data.model.ChatWSDataType
 import java.lang.reflect.Type
 
 
-private const val CONTENT_TYPE = "type"
+private const val CONTENT_TYPE = "dto_type"
 
 class WSDataDeserializer : JsonDeserializer<ChatWSDataDto> {
 

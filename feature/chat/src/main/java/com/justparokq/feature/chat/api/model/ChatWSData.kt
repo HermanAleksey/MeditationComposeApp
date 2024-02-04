@@ -4,6 +4,7 @@ sealed interface ChatWSData {
 
     data class PublicKey(
         val publicKey: java.security.PublicKey,
+        val userName: String,
     ) : ChatWSData
 
     data class Message(

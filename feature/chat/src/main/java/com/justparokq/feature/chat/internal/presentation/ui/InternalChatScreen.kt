@@ -107,7 +107,10 @@ fun ChatScreenPreview() {
                         time = "13:01",
                     )
                 ),
-                userName = ""
+                userName = "",
+                clientPrivateKey = null,
+                clientPublicKey = null,
+                serverPublicKey = null
             ),
             processAction = {}
         )
